@@ -1,0 +1,10 @@
+As a shopper, I want to browse products by category so that I can find items easily.
+As a buyer, I want to checkout using multiple payment methods so that I can complete my purchase.
+As a customer, I want to view my order history so that I can track past purchases.
+As an end user, I want to save delivery addresses so that I don’t need to re-enter them each time.
+As a seller, I want to list new products so that customers can buy them.
+As a merchant, I want to update product prices so that I can run promotions.
+As a vendor, I want to manage inventory levels so that products are not oversold.
+As an admin, I want to manage user accounts so that the system remains secure.
+As a system administrator, I want to configure tax rules so that orders comply with regulations.
+As a support agent, I want to view customer orders so that I can resolve issues faster.
