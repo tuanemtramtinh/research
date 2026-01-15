@@ -1,10 +1,21 @@
-As a shopper, I want to browse products by category so that I can find items easily.
-As a buyer, I want to checkout using multiple payment methods so that I can complete my purchase.
-As a customer, I want to view my order history so that I can track past purchases.
-As an end user, I want to save delivery addresses so that I don’t need to re-enter them each time.
-As a seller, I want to list new products so that customers can buy them.
-As a merchant, I want to update product prices so that I can run promotions.
-As a vendor, I want to manage inventory levels so that products are not oversold.
-As an admin, I want to manage user accounts so that the system remains secure.
-As a system administrator, I want to configure tax rules so that orders comply with regulations.
-As a support agent, I want to view customer orders so that I can resolve issues faster.
+As a shopper, I want to browse products by category, so that I can find items more easily.
+As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
+As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
+As a shopper, I want to add products to my cart, so that I can purchase multiple items at once.
+As a shopper, I want to checkout using multiple payment methods, so that I can choose the most convenient option.
+As a shopper, I want to track my orders, so that I know the delivery status.
+As a user, I want to register an account, so that I can access personalized features.
+As a user, I want to log in to the system, so that I can securely access my account.
+As a user, I want to update my profile information, so that my account details remain accurate.
+As a user, I want to reset my password, so that I can regain access if I forget it.
+As a user, I want to be able to download reports, so that I can analyze my data offline.
+As an admin, I want to be allowed to manage user accounts, so that I can control system access.
+As a manager, I want to be authorized to approve orders, so that business processes are not delayed.
+As a system operator, I want to be permitted to configure system settings, so that the system can be customized.
+As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently.
+As an admin, I want to create new products, so that they are available for customers to purchase.
+As an admin, I want to update product prices, so that pricing information stays current.
+As an admin, I want to manage inventory levels, so that products do not go out of stock.
+As an admin, I want to view sales reports, so that I can monitor business performance.
+As a system, I want to log user activities, so that security issues can be detected.
+As a system, I want to cache frequently accessed data, so that response time is improved.
