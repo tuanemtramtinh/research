@@ -12,31 +12,47 @@ from langchain_openai import ChatOpenAI
 # =============================================================================
 # DTO CLASSES (Data Transfer Objects for Actor)
 # =============================================================================
+
+
+class ActorItem(BaseModel):
+    actor: str = Field()
+    sentence_idx: List[int] = Field()
+
+    def __str__(self):
+        return f"{self.actor} (sentences: {self.sentence_idx})"
+
+    def __repr__(self):
+        return self.__str__()
+
+
 class ActorList(BaseModel):
     """List of actors extracted from user stories."""
-    actors: List[str] = Field(
+
+    actors: List[ActorItem] = Field(
         description="A list of actors who perform actions in the user stories."
     )
 
 
 class AliasItem(BaseModel):
     """Represents an alias for an actor with its sentence occurrences."""
+
     alias: str = Field(description="Name of the alias")
     sentences: List[int] = Field(
         description="List of sentence indices where THIS specific alias appears (starting from 0)"
     )
-    
+
     def __str__(self):
         return f"'{self.alias}' -> sentences: {self.sentences}"
 
 
 class ActorAlias(BaseModel):
     """Maps an actor to their aliases."""
-    actor: str = Field(description="The original actor's name")
+
+    actor: ActorItem = Field(description="The original actor's name")
     aliases: List[AliasItem] = Field(
         description="List of alternative names/references for this actor"
     )
-    
+
     def __str__(self):
         if not self.aliases:
             return f"Actor: {self.actor} (no aliases)"
@@ -46,9 +62,8 @@ class ActorAlias(BaseModel):
 
 class ActorAliasList(BaseModel):
     """Collection of actor-alias mappings."""
-    mappings: List[ActorAlias] = Field(
-        description="List of actor-alias mappings"
-    )
+
+    mappings: List[ActorAlias] = Field(description="List of actor-alias mappings")
 
 
 # =============================================================================
@@ -56,23 +71,40 @@ class ActorAliasList(BaseModel):
 # =============================================================================
 class ActorFinder:
     """Handles all actor-related operations including finding and alias detection."""
-    
+
     def __init__(self, llm: ChatOpenAI, sents: List[str]):
         self.llm = llm
         self.sents = sents
-    
+
     def find_actors(self, input_text: str) -> List[str]:
         """Extract actors from user stories using regex pattern."""
         pattern = r"As\s+(?:a|an|the)\s+([^,]+)"
-        actors = set(
-            map(lambda sent: re.search(pattern, sent).group(1).strip(), self.sents)
-        )
-        return list(actors)
-    
-    def synonym_actors_check(self, actors: List[str]) -> List[str]:
+
+        # Dictionary to group occurrences by actor
+        actor_occurrences = {}
+
+        for i, sent in enumerate(self.sents):
+            match = re.search(pattern, sent)
+            if match:
+                actor = match.group(1).strip()
+
+                if actor not in actor_occurrences:
+                    actor_occurrences[actor] = []
+
+                actor_occurrences[actor].append(i)
+
+        # Convert to list format
+        actors = [
+            ActorItem(actor=actor, sentence_idx=sent_indices)
+            for actor, sent_indices in actor_occurrences.items()
+        ]
+
+        return actors
+
+    def synonym_actors_check(self, actors: List[ActorItem]) -> List[ActorItem]:
         """Remove synonymous actors using LLM."""
         structured_llm = self.llm.with_structured_output(ActorList)
-        
+
         system_prompt = """
         You are a Business Analyst AI specializing in requirement analysis.
 
@@ -87,7 +119,7 @@ class ActorFinder:
         - Do NOT explain your reasoning.
         - Return only structured data according to the output schema.
         """
-        
+
         human_prompt = f"""
         The following is a list of actors extracted from user stories.
 
@@ -96,22 +128,17 @@ class ActorFinder:
 
         Remove synonymous actors and return a list of unique canonical actors.
         """
-        
-        messages = [
-            ("system", system_prompt),
-            ("human", human_prompt)
-        ]
-        
+
+        messages = [("system", system_prompt), ("human", human_prompt)]
+
         responses = structured_llm.invoke(messages)
         return responses.actors
-    
-    def find_actors_alias(self, actors: List[str]) -> List[ActorAlias]:
+
+    def find_actors_alias(self, actors: List[ActorItem]) -> List[ActorAlias]:
         """Find aliases for each canonical actor from sentences."""
         structured_llm = self.llm.with_structured_output(ActorAliasList)
-        indexed_sents = "\n".join(
-            f"{i}: {sent}" for i, sent in enumerate(self.sents)
-        )
-        
+        indexed_sents = "\n".join(f"{i}: {sent}" for i, sent in enumerate(self.sents))
+
         system_prompt = """
         You are a Business Analyst AI specializing in requirement analysis.
 
@@ -130,7 +157,7 @@ class ActorFinder:
         - Do NOT explain your reasoning.
         - Return only structured data according to the output schema.
         """
-        
+
         human_prompt = f"""
         Canonical actors:
         {actors}
@@ -140,11 +167,8 @@ class ActorFinder:
 
         For each canonical actor, find all aliases used in the sentences above and list the sentence indices where each alias appears.
         """
-        
-        messages = [
-            ("system", system_prompt),
-            ("human", human_prompt)
-        ]
-        
+
+        messages = [("system", system_prompt), ("human", human_prompt)]
+
         response = structured_llm.invoke(messages)
         return response.mappings
