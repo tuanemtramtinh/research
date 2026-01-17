@@ -76,6 +76,7 @@ class UsecaseFinder:
         exclude_tokens = set()
         for child in verb.children:
             if child.dep_ == "conj":  # login, swim, etc.
+                print(list(child.children))
                 exclude_tokens.update(child.subtree)
             if child.dep_ == "cc":  # and, or, but
                 exclude_tokens.add(child)

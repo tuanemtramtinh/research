@@ -106,26 +106,26 @@ if __name__ == "__main__":
     # print(actors_alias)
     
     # --- USECASES ---
-    # visualizer.print_dependency_table(
-    #     "As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently."
-    # )
+    visualizer.print_dependency_table(
+        "As a customer, I want to view and download reports so that I sleep"
+    )
     
     usecases = usecase_finder.find_usecases()
     print("=== Extracted Use Cases (NLP) ===")
     print(usecases)
     
-    print("\n=== Refined Use Cases (LLM) ===")
-    refined: List[UsecaseRefinementResponse] = usecase_finder.refine_usecases(usecases)
+    # print("\n=== Refined Use Cases (LLM) ===")
+    # refined: List[UsecaseRefinementResponse] = usecase_finder.refine_usecases(usecases)
     
     # Print detailed refinements
-    for r in refined:
-        print(f"\nSentence {r.sentence_idx}:")
-        print(f"  Original: {r.original}")
-        print(f"  Refined:  {r.refined}")
-        if r.added:
-            print(f"  Added:    {r.added}")
-        if r.reasoning:
-            print(f"  Reason:   {r.reasoning}")
+    # for r in refined:
+    #     print(f"\nSentence {r.sentence_idx}:")
+    #     print(f"  Original: {r.original}")
+    #     print(f"  Refined:  {r.refined}")
+    #     if r.added:
+    #         print(f"  Added:    {r.added}")
+    #     if r.reasoning:
+    #         print(f"  Reason:   {r.reasoning}")
     
     # Get simple dict format
     # print("\n=== Final Use Cases Dict ===")
