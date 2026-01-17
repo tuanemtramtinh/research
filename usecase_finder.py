@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 from spacy.language import Language
 from spacy.tokens import Token
 
-from actor_finder import ActorAlias
+from actor_finder import ActorAliasMapping, ActorResult
 
 
 # =============================================================================
@@ -300,7 +300,7 @@ Return the result strictly in the structured output format.
         return response.refinements
 
     def format_usecase_output(
-        self, usecases: List[UsecaseRefinement], actors: List[ActorAlias]
+        self, usecases: List[UsecaseRefinement], actors: List[ActorResult]
     ):
         formatted_usecases = []
 
@@ -308,6 +308,8 @@ Return the result strictly in the structured output format.
             usecase_list = usecase.refined + usecase.added
             actors_filter = set()
             for actor in actors:
+                if usecase.sentence_idx in actor.sentence_idx:
+                    actors_filter.add(actor.actor)
                 for actor_alias in actor.aliases:
                     if usecase.sentence_idx in actor_alias.sentences:
                         actors_filter.add(actor.actor)
@@ -320,5 +322,6 @@ Return the result strictly in the structured output format.
                 }
                 formatted_usecases = formatted_usecases + [new_usecase_format]
 
-        print(formatted_usecases)
+        print(json.dumps(formatted_usecases, indent=2, ensure_ascii=False))
+
         return

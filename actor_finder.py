@@ -25,11 +25,11 @@ class ActorItem(BaseModel):
         return self.__str__()
 
 
-class ActorList(BaseModel):
-    """List of actors extracted from user stories."""
+class CanonicalActorList(BaseModel):
+    """List of canonical actor names (used for synonym checking)."""
 
-    actors: List[ActorItem] = Field(
-        description="A list of actors who perform actions in the user stories."
+    actors: List[str] = Field(
+        description="A list of canonical actor names after removing synonyms."
     )
 
 
@@ -45,26 +45,36 @@ class AliasItem(BaseModel):
         return f"'{self.alias}' -> sentences: {self.sentences}"
 
 
-class ActorAlias(BaseModel):
-    """Maps an actor to their aliases."""
+class ActorAliasMapping(BaseModel):
+    """Maps an actor name to their aliases."""
 
-    actor: ActorItem = Field(description="The original actor's name")
+    actor: str = Field(description="The canonical actor's name")
     aliases: List[AliasItem] = Field(
         description="List of alternative names/references for this actor"
     )
 
     def __str__(self):
         if not self.aliases:
-            return f"Actor: {self.actor} (no aliases)"
+            return f"Actor: '{self.actor}' (no aliases)"
         aliases_str = ", ".join(str(alias) for alias in self.aliases)
-        return f"Actor: {self.actor} | Aliases: [{aliases_str}]"
+        return f"Actor: '{self.actor}' | Aliases: [{aliases_str}]"
 
 
 class ActorAliasList(BaseModel):
     """Collection of actor-alias mappings."""
+    mappings: List[ActorAliasMapping] = Field(description="List of actor-alias mappings")
 
-    mappings: List[ActorAlias] = Field(description="List of actor-alias mappings")
 
+class ActorResult(ActorAliasMapping):
+    """Final result combining actor, aliases, and sentence indices."""
+
+    sentence_idx: List[int] = Field(
+        description="List of sentence indices where the canonical actor appears"
+    )
+
+    def __str__(self):
+        aliases_str = ", ".join(str(alias) for alias in self.aliases) if self.aliases else "none"
+        return f"Actor: '{self.actor}' | Sentences: {self.sentence_idx} | Aliases: [{aliases_str}]"
 
 # =============================================================================
 # ACTOR FINDER CLASS
@@ -76,7 +86,7 @@ class ActorFinder:
         self.llm = llm
         self.sents = sents
 
-    def find_actors(self, input_text: str) -> List[str]:
+    def find_actors(self, input_text: str) -> List[ActorItem]:
         """Extract actors from user stories using regex pattern."""
         pattern = r"As\s+(?:a|an|the)\s+([^,]+)"
 
@@ -103,41 +113,61 @@ class ActorFinder:
 
     def synonym_actors_check(self, actors: List[ActorItem]) -> List[ActorItem]:
         """Remove synonymous actors using LLM."""
-        structured_llm = self.llm.with_structured_output(ActorList)
+        structured_llm = self.llm.with_structured_output(CanonicalActorList)
+
+        # Only send actor names to LLM (without sentence_idx)
+        actor_names = [item.actor for item in actors]
 
         system_prompt = """
         You are a Business Analyst AI specializing in requirement analysis.
 
-        Your task is to analyze a list of actors and remove synonymous or semantically equivalent actors.
+        Your task is to analyze a list of actor names and remove synonymous or semantically equivalent actors.
 
         Rules:
         - Actors that represent the same logical role MUST be merged.
         - Choose ONE clear and generic canonical name for each group.
         - Prefer business-level, role-based names over wording variants.
         - ALL returned actor names MUST be lowercase.
+        - IMPORTANT: The canonical actor name MUST be one of the existing actor names from the input list.
         - Do NOT invent new actors that are not implied by the list.
         - Do NOT explain your reasoning.
         - Return only structured data according to the output schema.
         """
 
         human_prompt = f"""
-        The following is a list of actors extracted from user stories.
+        The following is a list of actor names extracted from user stories.
 
-        Actors:
-        {actors}
+        Actor names:
+        {actor_names}
 
-        Remove synonymous actors and return a list of unique canonical actors.
+        Remove synonymous actors and return a list of unique canonical actor names.
         """
 
         messages = [("system", system_prompt), ("human", human_prompt)]
 
-        responses = structured_llm.invoke(messages)
-        return responses.actors
+        response = structured_llm.invoke(messages)
 
-    def find_actors_alias(self, actors: List[ActorItem]) -> List[ActorAlias]:
+        # Lookup sentence_idx from original actors
+        actor_lookup = {item.actor: item.sentence_idx for item in actors}
+
+        result = []
+        for canonical_name in response.actors:
+            if canonical_name in actor_lookup:
+                result.append(
+                    ActorItem(
+                        actor=canonical_name, sentence_idx=actor_lookup[canonical_name]
+                    )
+                )
+
+        return result
+
+    def find_actors_alias(self, actors: List[ActorItem]) -> List[ActorResult]:
         """Find aliases for each canonical actor from sentences."""
         structured_llm = self.llm.with_structured_output(ActorAliasList)
         indexed_sents = "\n".join(f"{i}: {sent}" for i, sent in enumerate(self.sents))
+
+        # Only send actor names to LLM (without sentence_idx)
+        actor_names = [item.actor for item in actors]
 
         system_prompt = """
         You are a Business Analyst AI specializing in requirement analysis.
@@ -159,8 +189,8 @@ class ActorFinder:
         """
 
         human_prompt = f"""
-        Canonical actors:
-        {actors}
+        Canonical actor names:
+        {actor_names}
 
         User story sentences (with indices):
         {indexed_sents}
@@ -170,5 +200,8 @@ class ActorFinder:
 
         messages = [("system", system_prompt), ("human", human_prompt)]
 
-        response = structured_llm.invoke(messages)
-        return response.mappings
+        response: ActorAliasList = structured_llm.invoke(messages)
+        lookup = {actor.actor: actor.sentence_idx for actor in actors}
+        result = [ActorResult(actor=actor.actor, aliases=actor.aliases, sentence_idx=lookup[actor.actor]) for actor in response.mappings if actor.actor in lookup]
+                        
+        return result

@@ -11,7 +11,7 @@ from typing import List
 from dotenv import load_dotenv
 import spacy
 from langchain_openai import ChatOpenAI
-from actor_finder import ActorAlias, ActorFinder, AliasItem
+from actor_finder import ActorAliasMapping, ActorFinder, ActorResult, AliasItem
 from usecase_finder import UsecaseFinder, UsecaseRefinement, UsecaseRefinementResponse
 
 
@@ -101,53 +101,59 @@ if __name__ == "__main__":
 
     # --- ACTORS ---
     actors: List[str] = actor_finder.find_actors(app.input_text)
+    print("\n=== Find Actors Manually ===")
     print(actors)
+
+    print("\n=== Remove Synonym Actors ===")
     synonym_actors = actor_finder.synonym_actors_check(actors)
     print(synonym_actors)
-    actors_alias = actor_finder.find_actors_alias(synonym_actors)
-    print(actors_alias)
+
+    print("\n=== Find the Alias of Actors ===")
+    actors_alias_result = actor_finder.find_actors_alias(synonym_actors)
+    print(actors_alias_result)
 
     # # --- USECASES ---
     # visualizer.print_dependency_table(
     #     "As a customer, I want to view and download reports so that I sleep"
     # )
 
-    # usecases = usecase_finder.find_usecases()
-    # print("=== Extracted Use Cases (NLP) ===")
-    # print(usecases)
+    usecases = usecase_finder.find_usecases()
+    print("\n=== Extracted Use Cases (NLP) ===")
+    print(usecases)
 
-    # print("\n=== Refined Use Cases (LLM) ===")
-    # refined: List[UsecaseRefinementResponse] = usecase_finder.refine_usecases(usecases)
-
-    # print(refined)
-
+    print("\n=== Refined Use Cases (LLM) ===")
+    refined_usecases_result: List[UsecaseRefinementResponse] = (
+        usecase_finder.refine_usecases(usecases)
+    )
     # Print detailed refinements
-    # for r in refined:
-    #     print(f"\nSentence {r.sentence_idx}:")
-    #     print(f"  Original: {r.original}")
-    #     print(f"  Refined:  {r.refined}")
-    #     if r.added:
-    #         print(f"  Added:    {r.added}")
-    #     if r.reasoning:
-    #         print(f"  Reason:   {r.reasoning}")
+    for r in refined_usecases_result:
+        print(f"\nSentence {r.sentence_idx}:")
+        print(f"  Original: {r.original}")
+        print(f"  Refined:  {r.refined}")
+        if r.added:
+            print(f"  Added:    {r.added}")
+        if r.reasoning:
+            print(f"  Reason:   {r.reasoning}")
 
     # linking
     # actor_input = [
-    #     ActorAlias(actor="system", aliases=[]),
-    #     ActorAlias(
-    #         actor="admin", aliases=[AliasItem(alias="system operator", sentences=[14])]
-    #     ),
-    #     ActorAlias(
+    #     ActorResult(
     #         actor="customer",
     #         aliases=[
     #             AliasItem(alias="shopper", sentences=[1, 2, 3, 4, 5, 6]),
     #             AliasItem(alias="customers", sentences=[16]),
     #         ],
+    #         sentence_idx=[0],
     #     ),
-    #     ActorAlias(actor="manager", aliases=[]),
-    #     ActorAlias(
-    #         actor="user", aliases=[AliasItem(alias="power user", sentences=[15])]
+    #     ActorResult(actor="user", aliases=[], sentence_idx=[7, 8, 9, 10, 11]),
+    #     ActorResult(
+    #         actor="admin",
+    #         aliases=[AliasItem(alias="system operator", sentences=[14])],
+    #         sentence_idx=[12, 16, 17, 18, 19],
     #     ),
+    #     ActorResult(actor="manager", aliases=[], sentence_idx=[13]),
+    #     ActorResult(actor="power user", aliases=[], sentence_idx=[15]),
+    #     ActorResult(actor="system", aliases=[], sentence_idx=[20, 21]),
     # ]
 
     # usecase_input = [
@@ -307,7 +313,10 @@ if __name__ == "__main__":
     #     ),
     # ]
 
-    # usecase_finder.format_usecase_output(usecase_input, actor_input)
+    print("\n=== Mapping Actor with Usecase ===")
+    usecase_finder.format_usecase_output(
+        usecases=refined_usecases_result, actors=actors_alias_result
+    )
 
     # Get simple dict format
     # print("\n=== Final Use Cases Dict ===")
