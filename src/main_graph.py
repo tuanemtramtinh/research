@@ -68,12 +68,14 @@ def map_to_workers(state: OrchestratorState):
 
     sends = []
     for uc in use_cases:
+        uc_actors = list(getattr(uc, "participating_actors", []) or [])
         sends.append(
             Send(
                 "worker",
                 {
                     "requirement_text": state.get("requirement_text", ""),
-                    "actors": state.get("actors", []),
+                    # IMPORTANT: pass only participating actors for this use case
+                    "actors": uc_actors,
                     "use_case": uc,
                 },
             )
@@ -83,10 +85,12 @@ def map_to_workers(state: OrchestratorState):
 
 def worker_node(state: dict):
     # State here is the payload produced by Send
+    use_case = state.get("use_case")
     result = run_sca_use_case(
-        use_case=state.get("use_case"),
+        use_case=use_case,
         requirement_text=str(state.get("requirement_text", "")),
-        actors=state.get("actors"),
+        # IMPORTANT: keep actors constrained to this use case
+        actors=state.get("actors") or (getattr(use_case, "participating_actors", None) or []),
     )
     return {"scenario_results_acc": [result]}
 
@@ -98,7 +102,8 @@ def sequential_worker_node(state: OrchestratorState):
             run_sca_use_case(
                 use_case=uc,
                 requirement_text=state.get("requirement_text", ""),
-                actors=state.get("actors"),
+                # IMPORTANT: pass only participating actors for this use case
+                actors=list(getattr(uc, "participating_actors", []) or []),
             )
         )
     return {"scenario_results_acc": results}
