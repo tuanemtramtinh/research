@@ -30,6 +30,7 @@ from ..state import (
 
 
 class GraphState(TypedDict, total=False):
+    llm: BaseChatModel
     requirement_text: str
     sentences: List[str]
 
@@ -296,7 +297,7 @@ def synonym_check_node(state: GraphState):
 
         return result
 
-    model = _get_model()
+    model = state.get("llm")
     raw_actors = state.get("raw_actors") or []
     actors = _synonym_actors_check(model, raw_actors)
     return {"actors": actors}
@@ -367,7 +368,7 @@ def find_aliases_node(state: GraphState):
 
         return result
 
-    model = _get_model()
+    model = state.get("llm")
     sentences = state.get("sentences") or []
     actors = state.get("actors") or []
     actor_results = _find_actors_alias(model, sentences, actors)
@@ -483,7 +484,7 @@ def refine_usecases_node(state: GraphState):
 
         return response.refinements
 
-    model: BaseChatModel = _get_model()
+    model: BaseChatModel = state.get("llm")
     sentences = state.get("sentences") or []
     raw_usecases = state.get("raw_usecases") or {}
     refined_usecases = _refine_usecases(model, sentences, raw_usecases)
@@ -588,8 +589,11 @@ def build_rpa_graph():
 def run_rpa(requirement_text: str) -> RpaState:
     """Run the RPA graph and return results."""
     sentences = requirement_text.split("\n")
+    llm = _get_model()
     app = build_rpa_graph()
-    out = app.invoke({"requirement_text": requirement_text, "sentences": sentences})
+    out = app.invoke(
+        {"llm": llm, "requirement_text": requirement_text, "sentences": sentences}
+    )
     return {
         "requirement_text": out.get("requirement_text", requirement_text),
         "actors": out.get("actors", []),
