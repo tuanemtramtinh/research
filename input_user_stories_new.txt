@@ -1,0 +1,2 @@
+As a customer, I want to view products, buy products and find reports and search for products so that I sleep.
+As a customer, I want to I want to be allowed to update profile so that I can sleep.

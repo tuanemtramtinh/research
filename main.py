@@ -92,7 +92,7 @@ class DependencyVisualizer:
 # =============================================================================
 if __name__ == "__main__":
     # Initialize Main class (loads all configuration and resources)
-    app = Main(input_file="./input_user_stories.txt")
+    app = Main(input_file="./input_user_stories_new.txt")
 
     # Get instances from factory methods
     actor_finder = app.get_actor_finder()
@@ -100,40 +100,40 @@ if __name__ == "__main__":
     visualizer = app.get_visualizer()
 
     # --- ACTORS ---
-    actors: List[str] = actor_finder.find_actors(app.input_text)
-    print("\n=== Find Actors Manually ===")
-    print(actors)
+    # actors: List[str] = actor_finder.find_actors(app.input_text)
+    # print("\n=== Find Actors Manually ===")
+    # print(actors)
 
-    print("\n=== Remove Synonym Actors ===")
-    synonym_actors = actor_finder.synonym_actors_check(actors)
-    print(synonym_actors)
+    # print("\n=== Remove Synonym Actors ===")
+    # synonym_actors = actor_finder.synonym_actors_check(actors)
+    # print(synonym_actors)
 
-    print("\n=== Find the Alias of Actors ===")
-    actors_alias_result = actor_finder.find_actors_alias(synonym_actors)
-    print(actors_alias_result)
+    # print("\n=== Find the Alias of Actors ===")
+    # actors_alias_result = actor_finder.find_actors_alias(synonym_actors)
+    # print(actors_alias_result)
 
     # # --- USECASES ---
-    # visualizer.print_dependency_table(
-    #     "As a customer, I want to view and download reports so that I sleep"
-    # )
+    visualizer.print_dependency_table(
+        "As a customer, I want to I want to be allowed to update profile so that I can sleep."
+    )
 
     usecases = usecase_finder.find_usecases()
     print("\n=== Extracted Use Cases (NLP) ===")
     print(usecases)
 
-    print("\n=== Refined Use Cases (LLM) ===")
-    refined_usecases_result: List[UsecaseRefinementResponse] = (
-        usecase_finder.refine_usecases(usecases)
-    )
-    # Print detailed refinements
-    for r in refined_usecases_result:
-        print(f"\nSentence {r.sentence_idx}:")
-        print(f"  Original: {r.original}")
-        print(f"  Refined:  {r.refined}")
-        if r.added:
-            print(f"  Added:    {r.added}")
-        if r.reasoning:
-            print(f"  Reason:   {r.reasoning}")
+    # print("\n=== Refined Use Cases (LLM) ===")
+    # refined_usecases_result: List[UsecaseRefinementResponse] = (
+    #     usecase_finder.refine_usecases(usecases)
+    # )
+    # # Print detailed refinements
+    # for r in refined_usecases_result:
+    #     print(f"\nSentence {r.sentence_idx}:")
+    #     print(f"  Original: {r.original}")
+    #     print(f"  Refined:  {r.refined}")
+    #     if r.added:
+    #         print(f"  Added:    {r.added}")
+    #     if r.reasoning:
+    #         print(f"  Reason:   {r.reasoning}")
 
     # linking
     # actor_input = [
@@ -313,10 +313,10 @@ if __name__ == "__main__":
     #     ),
     # ]
 
-    print("\n=== Mapping Actor with Usecase ===")
-    usecase_finder.format_usecase_output(
-        usecases=refined_usecases_result, actors=actors_alias_result
-    )
+    # print("\n=== Mapping Actor with Usecase ===")
+    # usecase_finder.format_usecase_output(
+    #     usecases=refined_usecases_result, actors=actors_alias_result
+    # )
 
     # Get simple dict format
     # print("\n=== Final Use Cases Dict ===")
