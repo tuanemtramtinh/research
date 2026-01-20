@@ -8,7 +8,7 @@ from langgraph.graph import END, START, StateGraph
 
 from .graphs.rpa_graph import run_rpa
 from .graphs.sca_graph import run_sca_use_case
-from .state import ActorAlias, ScenarioResult, TaskItem, UseCase
+from .state import ActorResult, ScenarioResult, UseCase
 
 
 def _import_send():
@@ -29,10 +29,10 @@ def _import_send():
 
 class OrchestratorState(TypedDict, total=False):
     requirement_text: str
-    tasks: List[TaskItem]
+    # tasks: List[TaskItem]
 
     actors: List[str]
-    actor_aliases: List[ActorAlias]
+    actor_aliases: List[ActorResult]
 
     # RPA output
     use_cases: List[UseCase]
@@ -44,14 +44,15 @@ class OrchestratorState(TypedDict, total=False):
     scenario_results: List[ScenarioResult]
 
     # Reduced view
-    merged_actors: List[str]
+    # merged_actors: List[str]
 
 
 def plan_tasks_node(state: OrchestratorState):
     out = run_rpa(state.get("requirement_text", ""))
     return {
-        "requirement_text": out.get("requirement_text", state.get("requirement_text", "")),
-        "tasks": out.get("tasks", []),
+        "requirement_text": out.get(
+            "requirement_text", state.get("requirement_text", "")
+        ),
         "actors": out.get("actors", []),
         "actor_aliases": out.get("actor_aliases", []),
         "use_cases": out.get("use_cases", []),
@@ -90,7 +91,8 @@ def worker_node(state: dict):
         use_case=use_case,
         requirement_text=str(state.get("requirement_text", "")),
         # IMPORTANT: keep actors constrained to this use case
-        actors=state.get("actors") or (getattr(use_case, "participating_actors", None) or []),
+        actors=state.get("actors")
+        or (getattr(use_case, "participating_actors", None) or []),
     )
     return {"scenario_results_acc": [result]}
 
@@ -142,47 +144,48 @@ def reduce_node(state: OrchestratorState):
     }
 
 
-def reduce_plan_node(state: OrchestratorState):
-    """Pre-reduce right after plan_tasks: merge actors + unique use cases."""
-    merged_actors: List[str] = []
-    seen_actor = set()
-    for a in state.get("actors") or []:
-        key = a.strip()
-        if key and key.lower() not in seen_actor:
-            seen_actor.add(key.lower())
-            merged_actors.append(key)
-
-    uniq_use_cases: List[UseCase] = []
-    seen_uc = set()
-    for uc in state.get("use_cases") or []:
-        k = (uc.name.strip().lower(), int(uc.sentence_id))
-        if k not in seen_uc:
-            seen_uc.add(k)
-            uniq_use_cases.append(uc)
-
-    return {
-        "merged_actors": merged_actors,
-        "use_cases": uniq_use_cases,
-    }
+# NOTE: reduce_plan_node is redundant - rpa_graph.synonym_check_node already
+# handles actor deduplication using LLM (more intelligent than simple string comparison)
+# def reduce_plan_node(state: OrchestratorState):
+#     """Pre-reduce right after plan_tasks: merge actors + unique use cases."""
+#     merged_actors: List[str] = []
+#     seen_actor = set()
+#     for a in state.get("actors") or []:
+#         key = a.strip()
+#         if key and key.lower() not in seen_actor:
+#             seen_actor.add(key.lower())
+#             merged_actors.append(key)
+#
+#     uniq_use_cases: List[UseCase] = []
+#     seen_uc = set()
+#     for uc in state.get("use_cases") or []:
+#         k = (uc.name.strip().lower(), int(uc.sentence_id))
+#         if k not in seen_uc:
+#             seen_uc.add(k)
+#             uniq_use_cases.append(uc)
+#
+#     return {
+#         "merged_actors": merged_actors,
+#         "use_cases": uniq_use_cases,
+#     }
 
 
 def build_main_graph():
     workflow = StateGraph(OrchestratorState)
 
     workflow.add_node("plan_tasks", plan_tasks_node)
-    workflow.add_node("reduce_plan", reduce_plan_node)
+    # workflow.add_node("reduce_plan", reduce_plan_node)
     workflow.add_node("worker", worker_node)
     workflow.add_node("sequential_worker", sequential_worker_node)
     workflow.add_node("reduce", reduce_node)
 
     workflow.add_edge(START, "plan_tasks")
 
-    # Run pre-reduce immediately after planning
-    workflow.add_edge("plan_tasks", "reduce_plan")
-
     # Map step (parallel if Send exists; otherwise go sequential)
+    # NOTE: reduce_plan_node is redundant since rpa_graph already does
+    # synonym checking with LLM in synonym_check_node
     workflow.add_conditional_edges(
-        "reduce_plan",
+        "plan_tasks",
         map_to_workers,
         {
             "sequential": "sequential_worker",
@@ -193,5 +196,6 @@ def build_main_graph():
     workflow.add_edge("worker", "reduce")
     workflow.add_edge("sequential_worker", "reduce")
     workflow.add_edge("reduce", END)
+    workflow.add_edge("plan_tasks", END)
 
     return workflow.compile()

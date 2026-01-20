@@ -2,429 +2,597 @@ from __future__ import annotations
 
 from typing import List, TypedDict
 
+import json
 import os
 import re
 
 import spacy
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
+from langchain.chat_models import BaseChatModel, init_chat_model
 from langgraph.graph import END, START, StateGraph
-from pydantic import BaseModel, Field
-from spacy.tokens import Doc
-from textacy import extract, preprocessing
+from spacy.language import Language
+from spacy.tokens import Token
 
-from ..state import ActorAlias, AliasItem, RpaState, TaskItem, UseCase
+from ..state import (
+    ActorAliasList,
+    ActorItem,
+    ActorResult,
+    CanonicalActorList,
+    RpaState,
+    UseCase,
+    UsecaseRefinement,
+    UsecaseRefinementResponse,
+)
 
-
-# Keep the same semantics as the notebook
-INTERNAL_SYSTEM_KEYWORDS = {"system", "software", "application", "app", "platform"}
-
-
-class ActorList(BaseModel):
-    actors: List[str] = Field(description="A list of actors who perform actions in the requirement.")
-
-
-class ActorAliasMapping(BaseModel):
-    mappings: List[ActorAlias] = Field(description="List of actor-alias mappings")
+# =============================================================================
+# GRAPH STATE
+# =============================================================================
 
 
 class GraphState(TypedDict, total=False):
     requirement_text: str
-    input_text: str
-    doc: Doc
-    actors: List[str]
-    actor_aliases: List[ActorAlias]
-    tasks: List[TaskItem]
+    sentences: List[str]
+
+    # Actor pipeline
+    raw_actors: List[ActorItem]  # After regex extraction
+    actors: List[ActorItem]  # After synonym check
+    actor_results: List[ActorResult]  # After alias detection
+
+    # UseCase pipeline
+    raw_usecases: dict  # {sentence_idx: [use_case_names]}
+    refined_usecases: List[UsecaseRefinement]
+
+    # Final outputs (for compatibility with main_graph)
     use_cases: List[UseCase]
+
+
+# =============================================================================
+# HELPER FUNCTIONS
+# =============================================================================
 
 
 def _get_model():
     load_dotenv()
-    # Match the notebook default; user can override via env if desired.
-    model_name = "gpt-5-mini"
+    model_name = os.getenv("LLM_MODEL", "gpt-4o-mini")
     if not os.getenv("OPENAI_API_KEY"):
         return None
     return init_chat_model(model_name, model_provider="openai")
 
 
 def _get_nlp():
-    # Same as notebook
     return spacy.load("en_core_web_lg")
 
 
-def _clean_np(text: str) -> str:
-    text = text.strip()
-    text = re.sub(r"^\b(the|a|an)\b\s+", "", text, flags=re.IGNORECASE)
-    return re.sub(r"\s+", " ", text).strip()
+# =============================================================================
+# USECASE FINDER FUNCTIONS
+# =============================================================================
 
 
-def _heuristic_actors_from_doc(doc: Doc) -> List[str]:
-    actors: List[str] = []
-    seen = set()
+def _find_main_verb(xcomp: Token) -> Token:
+    """Find the main verb from an xcomp token."""
+    # Handle case: "be Adjective to [VERB]"
+    for child in xcomp.children:
+        if child.dep_ == "acomp":
+            for subchild in child.children:
+                if subchild.dep_ == "xcomp" and subchild.pos_ == "VERB":
+                    return subchild
+            for subchild in child.children:
+                if subchild.dep_ == "prep" and subchild.text.lower() == "of":
+                    for grandchild in subchild.children:
+                        if (
+                            grandchild.dep_ in {"pcomp", "pobj"}
+                            and grandchild.pos_ == "VERB"
+                        ):
+                            return grandchild
 
-    # Prefer grammatical subjects as actors
-    for token in doc:
-        if token.dep_ in {"nsubj", "nsubjpass"} and token.pos_ in {"NOUN", "PROPN"}:
-            lemma = (token.lemma_ or token.text).strip()
-            if not lemma:
-                continue
-            if lemma.lower() in INTERNAL_SYSTEM_KEYWORDS:
-                continue
+    # Handle case: "be V_3 to [VERB]"
+    has_auxpass = any(
+        child.dep_ == "auxpass" and child.text == "be" for child in xcomp.children
+    )
+    if has_auxpass:
+        for child in xcomp.children:
+            if child.dep_ == "xcomp" and child.pos_ == "VERB":
+                return child
 
-            span_text = _clean_np(doc[token.left_edge.i : token.right_edge.i + 1].text)
-            # Use lemma if it's a single word; otherwise keep phrase text
-            candidate = lemma if " " not in span_text else span_text
-            key = candidate.lower()
-            if key not in seen:
-                seen.add(key)
-                actors.append(candidate)
-
-    # Fallback: any noun chunks in the doc
-    if not actors:
-        for chunk in doc.noun_chunks:
-            root = chunk.root
-            if root.pos_ == "PRON":
-                continue
-            lemma = (root.lemma_ or root.text).strip()
-            if not lemma or lemma.lower() in INTERNAL_SYSTEM_KEYWORDS:
-                continue
-            candidate = _clean_np(chunk.text)
-            if not candidate:
-                continue
-            key = candidate.lower()
-            if key not in seen:
-                seen.add(key)
-                actors.append(candidate)
-
-    return actors
+    return xcomp
 
 
-def _heuristic_aliases(doc: Doc, actors: List[str]) -> List[ActorAlias]:
-    sentences = [s.text.strip() for s in doc.sents]
-    out: List[ActorAlias] = []
-    for actor in actors:
-        if not actor:
-            continue
-        pattern = re.compile(rf"\b{re.escape(actor)}\b", flags=re.IGNORECASE)
-        hits = [i + 1 for i, s in enumerate(sentences) if pattern.search(s)]
-        out.append(ActorAlias(actor=actor, aliases=[AliasItem(alias=actor, sentences=hits)]))
-    return out
+def _get_verb_phrase(verb: Token) -> str:
+    """Extract verb phrase from a verb token."""
+    exclude_tokens = set()
+    has_dobj = any(child.dep_ == "dobj" for child in verb.children)
+
+    for child in verb.children:
+        if child.dep_ == "conj":
+            if not has_dobj:
+                exclude_list = [
+                    subchild for subchild in child.subtree if subchild.dep_ != "dobj"
+                ]
+            else:
+                exclude_list = list(child.subtree)
+            exclude_tokens.update(exclude_list)
+        if child.dep_ == "cc":
+            exclude_tokens.add(child)
+
+    tokens = [t for t in verb.subtree if t not in exclude_tokens]
+    tokens = tokens[tokens.index(verb) :]
+    tokens = sorted(tokens, key=lambda t: t.i)
+
+    # Remove "so that" clause if present
+    cut_index = -1
+    for i, token in enumerate(tokens):
+        if (
+            token.text.lower() == "so"
+            and i + 1 < len(tokens)
+            and tokens[i + 1].text.lower() == "that"
+        ):
+            cut_index = i
+            break
+
+    if cut_index != -1:
+        tokens = tokens[:cut_index]
+
+    EXCLUDE_DEPS = {"poss", "det", "nummod", "quantmod"}
+    relevant_tokens = []
+
+    for token in tokens[1:]:
+        if token.dep_ == "dobj" or token.head.dep_ == "dobj":
+            if token.dep_ not in EXCLUDE_DEPS:
+                relevant_tokens.append(token)
+        elif token.dep_ in {"prep", "pobj"} or token.head.dep_ in {"prep", "pobj"}:
+            if token.dep_ not in EXCLUDE_DEPS:
+                relevant_tokens.append(token)
+        elif token.dep_ == "prt":
+            relevant_tokens.append(token)
+        elif token.dep_ in {"acomp", "advmod"}:
+            relevant_tokens.append(token)
+        elif token.dep_ in {"compound", "amod"}:
+            relevant_tokens.append(token)
+
+    tokens = [tokens[0]] + sorted(relevant_tokens, key=lambda t: t.i)
+    result = [token.text for token in tokens]
+
+    return " ".join(result)
 
 
-def pre_process_node(state: GraphState):
-    text = state.get("requirement_text") or state.get("input_text") or ""
-    text = preprocessing.normalize.whitespace(text)
-    nlp = _get_nlp()
-    doc = nlp(text)
-
-    chunks = extract.noun_chunks(doc, min_freq=1)
-    chunks = [
-        chunk.text
-        for chunk in chunks
-        if chunk.root.pos_ != "PRON" and chunk.root.lemma_.lower() not in INTERNAL_SYSTEM_KEYWORDS
-    ]
-
-    return {"input_text": text, "doc": doc, "actors": chunks, "actor_aliases": [], "tasks": []}
+def _get_all_conj(verb: Token) -> List[Token]:
+    """Find all conjunctions of the root verb."""
+    result = []
+    for child in verb.children:
+        if child.dep_ == "conj" and child.pos_ == "VERB":
+            result.append(child)
+            result.extend(_get_all_conj(child))
+    return result
 
 
-def tasks_node(state: GraphState):
-    doc = state.get("doc")
-    sentences = list(doc.sents) if doc is not None else []
-    tasks = [TaskItem(id=i + 1, text=s.text.strip()) for i, s in enumerate(sentences) if s.text.strip()]
-    return {"tasks": tasks}
+def _find_usecases_nlp(nlp: Language, sentences: List[str]) -> dict:
+    """Extract usecases from all sentences using NLP pattern 'want to [verb]'."""
+    res = {}
+
+    for i, sent in enumerate(sentences):
+        doc = nlp(sent)
+        for token in doc:
+            if token.lemma_ == "want":
+                for children in token.children:
+                    if children.dep_ == "xcomp" and children.pos_ in {"VERB", "AUX"}:
+                        # Exclude V-ing case
+                        if children.tag_ == "VBG":
+                            continue
+
+                        main_verb = _find_main_verb(children)
+                        verb_phrase = _get_verb_phrase(main_verb)
+
+                        if str(i) not in res:
+                            res[str(i)] = []
+                        res[str(i)].append(verb_phrase)
+
+                        # Find ALL conj verbs (recursive)
+                        all_conj_verbs = _get_all_conj(main_verb)
+                        for conj in all_conj_verbs:
+                            conj_verb_phrase = _get_verb_phrase(conj)
+                            res[str(i)].append(conj_verb_phrase)
+
+    return res
 
 
-def _actors_in_sentence(sentence: str, actors: List[str]) -> List[str]:
-    s = sentence.lower()
-    found: List[str] = []
-    for a in actors:
-        if not a:
-            continue
-        if " " in a:
-            ok = a.lower() in s
-        else:
-            ok = re.search(rf"\b{re.escape(a.lower())}\b", s) is not None
-        if ok:
-            found.append(a)
-    return found
+# =============================================================================
+# GRAPH NODES
+# =============================================================================
 
 
-def _heuristic_usecases(task_id: int, sentence: str, actors: List[str]) -> List[UseCase]:
-    nlp = _get_nlp()
-    doc = nlp(sentence)
+# def pre_process_node(state: GraphState):
+#     """Preprocess input text and split into sentences."""
+#     # text = state.get("requirement_text") or state.get("input_text") or ""
+#     # text = re.sub(r"\s+", " ", text).strip()
 
-    participating = _actors_in_sentence(sentence, actors)
+#     sentences = state.get("requirement_text").split("\n")
 
-    verbs = []
-    root = next((t for t in doc if t.dep_ == "ROOT" and t.pos_ == "VERB"), None)
-    if root is not None:
-        verbs.append(root)
-        verbs.extend([t for t in root.conjuncts if t.pos_ == "VERB"])
-    else:
-        verbs = [t for t in doc if t.pos_ == "VERB"]
+#     # Create tasks (for compatibility)
+#     # tasks = [TaskItem(id=i, text=sent) for i, sent in enumerate(sentences)]
 
-    use_cases: List[UseCase] = []
-    seen = set()
-    for v in verbs:
-        verb = (v.lemma_ or v.text).strip()
-        if not verb:
-            continue
+#     return {
+#         "sentences": sentences,
+#         # "tasks": tasks,
+#     }
 
-        obj = None
-        for child in v.children:
-            if child.dep_ in {"dobj", "obj", "pobj"}:
-                obj = child
-                break
 
-        if obj is not None:
-            obj_text = doc[obj.left_edge.i : obj.right_edge.i + 1].text.strip()
-            name = f"{verb.title()} {obj_text.title()}".strip()
-        else:
-            name = f"{verb.title()}".strip()
+def find_actors_node(state: GraphState):
+    """Extract actors using regex pattern from user stories."""
 
-        key = (name.lower(), task_id)
-        if key in seen:
-            continue
-        seen.add(key)
+    def _find_actors_regex(sentences: List[str]) -> List[ActorItem]:
+        """Extract actors from user stories using regex pattern 'As a/an/the [actor]'."""
+        pattern = r"As\s+(?:a|an|the)\s+([^,]+)"
+        actor_occurrences = {}
 
-        if not participating:
-            # If no explicit actor mention, skip to avoid producing actor-less use cases.
-            continue
+        for i, sent in enumerate(sentences):
+            match = re.search(pattern, sent, re.IGNORECASE)
+            if match:
+                actor = match.group(1).strip().lower()
+                if actor not in actor_occurrences:
+                    actor_occurrences[actor] = []
+                actor_occurrences[actor].append(i)
 
-        use_cases.append(
-            UseCase(
-                name=name,
-                participating_actors=participating,
-                sentence_id=task_id,
-                sentence=sentence,
-                relationships=[],
-            )
+        return [
+            ActorItem(actor=actor, sentence_idx=sent_indices)
+            for actor, sent_indices in actor_occurrences.items()
+        ]
+
+    sentences = state.get("sentences") or []
+    raw_actors = _find_actors_regex(sentences)
+    return {"raw_actors": raw_actors}
+
+
+def synonym_check_node(state: GraphState):
+    """Remove synonymous actors using LLM."""
+
+    def _synonym_actors_check(model, actors: List[ActorItem]) -> List[ActorItem]:
+        """Remove synonymous actors using LLM."""
+        if model is None or not actors:
+            return actors
+
+        structured_llm = model.with_structured_output(CanonicalActorList)
+        actor_names = [item.actor for item in actors]
+
+        system_prompt = """
+    You are a Business Analyst AI specializing in requirement analysis.
+
+    Your task is to analyze a list of actor names and remove synonymous or semantically equivalent actors.
+
+    Rules:
+    - Actors that represent the same logical role MUST be merged.
+    - Choose ONE clear and generic canonical name for each group.
+    - Prefer business-level, role-based names over wording variants.
+    - ALL returned actor names MUST be lowercase.
+    - IMPORTANT: The canonical actor name MUST be one of the existing actor names from the input list.
+    - Do NOT invent new actors that are not implied by the list.
+    - Do NOT explain your reasoning.
+    - Return only structured data according to the output schema.
+    """
+
+        human_prompt = f"""
+    The following is a list of actor names extracted from user stories.
+
+    Actor names:
+    {actor_names}
+
+    Remove synonymous actors and return a list of unique canonical actor names.
+    """
+
+        response = structured_llm.invoke(
+            [("system", system_prompt), ("human", human_prompt)]
         )
 
-    return use_cases
+        # Lookup sentence_idx from original actors and merge if needed
+        actor_lookup = {item.actor: item.sentence_idx for item in actors}
 
+        result = []
+        for canonical_name in response.actors:
+            if canonical_name in actor_lookup:
+                result.append(
+                    ActorItem(
+                        actor=canonical_name, sentence_idx=actor_lookup[canonical_name]
+                    )
+                )
 
-class UseCaseList(BaseModel):
-    use_cases: List[UseCase] = Field(description="Use cases extracted from the sentence")
+        return result
 
-
-def _extract_use_cases_for_task(
-    *,
-    model,
-    task_id: int,
-    sentence: str,
-    requirement_text: str,
-    actors: List[str],
-    actor_aliases: List[ActorAlias],
-) -> List[UseCase]:
-    if model is None:
-        return _heuristic_usecases(task_id, sentence, actors)
-
-    structured_llm = model.with_structured_output(UseCaseList)
-
-    actors_list = ", ".join(actors)
-    aliases_str = "\n".join([f"- {aa.actor}: {[a.alias for a in aa.aliases]}" for aa in actor_aliases])
-
-    system_prompt = (
-        "You are a Senior Systems Analyst. Your task is to extract UML-style Use Cases "
-        "from a single requirement sentence. A use case should be an action/goal expressed "
-        "as a verb phrase and must have participating actors."
-    )
-
-    human_prompt = f"""
-Extract use cases from the sentence below.
-
-### CONTEXT
-- Full Requirement Text (for reference only):
-{requirement_text}
-
-### ACTORS (canonical list)
-{actors_list}
-
-### ACTOR ALIASES (for reference)
-{aliases_str}
-
-### SENTENCE
-- sentence_id: {task_id}
-- sentence: {sentence}
-
-### RULES
-1. Only output use cases that are supported by the sentence.
-2. UseCase.name should be a short verb phrase (e.g., "Search Book", "Borrow Book", "Generate Report").
-3. participating_actors must be chosen from the canonical ACTORS list.
-4. Always set sentence_id to {task_id} and sentence to the exact sentence string.
-5. relationships can be empty unless the sentence explicitly implies include/extend.
-6. Do not output a use case unless there is at least one participating actor.
-
-Return structured output only.
-"""
-
-    response: UseCaseList = structured_llm.invoke([("system", system_prompt), ("human", human_prompt)])
-    # Filter to guarantee each use case has actors.
-    return [uc for uc in (response.use_cases or []) if uc.participating_actors]
-
-
-def use_cases_node(state: GraphState):
     model = _get_model()
-    requirement_text = (state.get("input_text") or state.get("requirement_text") or "").strip()
-    tasks = state.get("tasks") or []
+    raw_actors = state.get("raw_actors") or []
+    actors = _synonym_actors_check(model, raw_actors)
+    return {"actors": actors}
+
+
+def find_aliases_node(state: GraphState):
+    """Find aliases for each canonical actor."""
+
+    def _find_actors_alias(
+        model, sentences: List[str], actors: List[ActorItem]
+    ) -> List[ActorResult]:
+        """Find aliases for each canonical actor from sentences."""
+        if model is None or not actors:
+            # Fallback: no aliases
+            return [
+                ActorResult(actor=a.actor, aliases=[], sentence_idx=a.sentence_idx)
+                for a in actors
+            ]
+
+        structured_llm = model.with_structured_output(ActorAliasList)
+        indexed_sents = "\n".join(f"{i}: {sent}" for i, sent in enumerate(sentences))
+        actor_names = [item.actor for item in actors]
+
+        system_prompt = """
+    You are a Business Analyst AI specializing in requirement analysis.
+
+    Your task is to identify aliases (alternative names or references) for each canonical actor
+    based on a list of user story sentences.
+
+    Rules:
+    - An alias is a different term that refers to the SAME logical actor.
+    - Canonical actor names MUST NOT be listed as aliases of themselves.
+    - Each alias MUST map to exactly one canonical actor.
+    - Aliases must be explicitly present in the provided sentences.
+    - Sentence indices are ZERO-BASED.
+    - If an actor has no aliases, return an empty alias list for that actor.
+    - ALL actor and alias names MUST be lowercase.
+    - Do NOT invent aliases.
+    - Do NOT explain your reasoning.
+    - Return only structured data according to the output schema.
+    """
+
+        human_prompt = f"""
+    Canonical actor names:
+    {actor_names}
+
+    User story sentences (with indices):
+    {indexed_sents}
+
+    For each canonical actor, find all aliases used in the sentences above and list the sentence indices where each alias appears.
+    """
+
+        response: ActorAliasList = structured_llm.invoke(
+            [("system", system_prompt), ("human", human_prompt)]
+        )
+
+        lookup = {actor.actor: actor.sentence_idx for actor in actors}
+        result = []
+        for mapping in response.mappings:
+            if mapping.actor in lookup:
+                result.append(
+                    ActorResult(
+                        actor=mapping.actor,
+                        aliases=mapping.aliases,
+                        sentence_idx=lookup[mapping.actor],
+                    )
+                )
+
+        return result
+
+    model = _get_model()
+    sentences = state.get("sentences") or []
     actors = state.get("actors") or []
-    actor_aliases = state.get("actor_aliases") or []
+    actor_results = _find_actors_alias(model, sentences, actors)
+    return {"actor_results": actor_results}
 
-    use_cases: List[UseCase] = []
-    for t in tasks:
-        sentence = (t.text or "").strip()
-        if not sentence:
-            continue
-        use_cases.extend(
-            _extract_use_cases_for_task(
-                model=model,
-                task_id=int(t.id),
-                sentence=sentence,
-                requirement_text=requirement_text,
-                actors=actors,
-                actor_aliases=actor_aliases,
-            )
+
+def find_usecases_node(state: GraphState):
+    """Extract use cases using NLP pattern."""
+    nlp = _get_nlp()
+    sentences = state.get("sentences") or []
+    raw_usecases = _find_usecases_nlp(nlp, sentences)
+    return {"raw_usecases": raw_usecases}
+
+
+def refine_usecases_node(state: GraphState):
+    """Refine extracted use cases using LLM."""
+
+    def _refine_usecases(
+        model: BaseChatModel, sentences: List[str], usecases: dict
+    ) -> List[UsecaseRefinement]:
+        """Use LLM to refine and complete extracted use cases."""
+        if model is None or not usecases:
+            # Fallback: return as-is without refinement
+            return [
+                UsecaseRefinement(
+                    sentence_idx=int(idx),
+                    original=ucs,
+                    refined=ucs,
+                    added=[],
+                    reasoning=None,
+                )
+                for idx, ucs in usecases.items()
+            ]
+
+        sents_text = "\n".join([f'{i}: "{sent}"' for i, sent in enumerate(sentences)])
+        usecase_text = json.dumps(usecases, indent=2, ensure_ascii=False)
+
+        system_prompt = """You are an expert in UML use case modeling and software requirements analysis.
+
+    Your task is to refine extracted use cases so that they can be used DIRECTLY
+    as use case names in a UML Use Case Diagram.
+
+    OBJECTIVES:
+    1. REVIEW
+    - Verify whether each extracted use case represents a true user goal
+        suitable for a UML use case.
+
+    2. REFINE
+    - Rewrite each use case into a concise UML-style use case name.
+    - Use clear verb–object structure (verb + noun phrase).
+    - Remove all implementation details, conditions, and variations.
+
+    3. COMPLETE
+    - Add missing use cases ONLY if they are explicitly stated in the sentence.
+    - Do NOT infer system behavior or business rules not written in the text.
+
+    UML USE CASE NAMING RULES:
+    - Start with an action verb in base form (e.g., Browse, View, Create, Update, Manage).
+    - Represent exactly ONE goal per use case.
+    - Be short and abstract (typically 2–5 words).
+    - Use business-level actions, not technical steps.
+    - Use lowercase for all use case names.
+    - Do NOT include:
+    - "so that", purposes, or outcomes
+    - constraints or options (e.g., payment methods, device types)
+    - UI actions (click, tap, select) unless explicitly stated
+
+    GOOD UML USE CASE NAMES:
+    - browse products
+    - view order history
+    - checkout order
+    - manage account
+    - update profile
+
+    BAD USE CASE NAMES:
+    - browse products by category for easier searching
+    - checkout using multiple payment methods
+    - view order history to track purchases
+
+    IMPORTANT CONSTRAINTS:
+    - Do NOT merge multiple user goals into one use case.
+    - Do NOT invent use cases not explicitly present in the sentence.
+    - If a sentence does not contain a valid UML use case, return empty lists.
+
+    OUTPUT REQUIREMENTS:
+    - Follow the provided structured output schema exactly.
+    - Populate:
+    - original: extracted use cases
+    - refined: UML-ready use case names
+    - added: only missing but explicitly stated use cases
+    - Provide brief reasoning for any change or addition.
+    """
+
+        human_prompt = f"""## User Stories:
+    {sents_text}
+
+    ## Extracted Use Cases (by sentence index):
+    {usecase_text}
+
+    TASK:
+    - Refine each extracted use case into a UML-ready use case name.
+    - Ensure each use case can be placed directly inside a Use Case Diagram.
+    - Add missing use cases ONLY if they are explicitly stated in the sentence.
+    - If no valid UML use case exists, return empty refined and added lists.
+
+    Return the result strictly in the structured output format.
+    """
+
+        structured_llm = model.with_structured_output(UsecaseRefinementResponse)
+        response: UsecaseRefinementResponse = structured_llm.invoke(
+            [("system", system_prompt), ("human", human_prompt)]
         )
 
-    return {"use_cases": use_cases}
+        return response.refinements
 
-
-def actors_node(state: GraphState):
-    model = _get_model()
-    doc = state.get("doc")
-    if model is None:
-        if doc is None:
-            return {"actors": []}
-        return {"actors": _heuristic_actors_from_doc(doc)}
-
-    structured_llm = model.with_structured_output(ActorList)
-    candidate_chunks = ", ".join(state.get("actors") or [])
-
-    system_prompt = (
-        "You are a Senior Systems Analyst and Linguistic Expert. Your task is to perform "
-        "Entity Extraction specifically for 'Actors' in a system description or user story. "
-        "An 'Actor' is defined as a person, organization, or external system that "
-        "performs actions, initiates processes, or interacts with the system described."
-    )
-
-    user_prompt = f"""
-I will provide you with a raw text and a list of potential 'Noun Chunks' extracted by a parser.
-
-### RULES:
-1. **Filtering**: From the 'Candidate Noun Chunks', select only those that function as an active agent (Actor) in the 'Raw Text'.
-2. **Standardization**: Convert all extracted actors to their **singular form** (e.g., 'customers' -> 'customer').
-3. **Cleaning**: Remove any unnecessary articles (a, an, the) and honorifics.
-4. **Context Check**: Ensure the noun chunk is actually performing an action in the text, not just being mentioned as an object.
-5. **Exclude Self-References**: Do NOT include 'the system', 'the software', or 'the application' as an Actor if it refers to the system being described. These are internal components, not external actors.
-6. **External Systems**: Only include other specific systems if they are external entities that your system interacts with (e.g., 'Payment Gateway', 'External Database').
-
-### INPUT DATA:
-- Raw Text: {state.get('input_text')}
-- Candidate Noun Chunks: {candidate_chunks}
-
-### OUTPUT INSTRUCTIONS:
-Return only the final list of singularized actors.
-"""
-
-    response: ActorList = structured_llm.invoke([("system", system_prompt), ("human", user_prompt)])
-    return {"actors": response.actors}
-
-
-def actors_alias_node(state: GraphState):
-    model = _get_model()
-    doc = state.get("doc")
-    if model is None:
-        if doc is None:
-            return {"actor_aliases": []}
-        return {"actor_aliases": _heuristic_aliases(doc, state.get("actors") or [])}
-
-    structured_llm = model.with_structured_output(ActorAliasMapping)
-
-    sentences = list(doc.sents) if doc is not None else []
-
-    input_sentences = [s.text.strip() for s in sentences]
-    input_sentences = "\n".join([f"{i + 1}. {s}" for i, s in enumerate(input_sentences)])
-
-    actors_list = ", ".join(state.get("actors") or [])
-
-    system_prompt = (
-        "You are an expert in Natural Language Processing and Entity Resolution. "
-        "Your task is to identify all alternative references (aliases) to specific actors "
-        "in a given text and map EACH UNIQUE ALIAS to the specific sentences where it appears."
-    )
-
-    user_prompt = f"""
-Analyze the following pre-segmented numbered sentences and identify all references to the given actors.
-
-### ACTORS TO TRACK:
-{actors_list}
-
-### PRE-SEGMENTED SENTENCES:
-{input_sentences}
-
-### CRITICAL INSTRUCTIONS:
-- **Each unique alias must be tracked separately** with its own sentence list
-- Even slight variations count as different aliases (e.g., "customer" vs "the customer" are TWO separate aliases)
-- DO NOT merge aliases together - keep them distinct
-- Each alias should map ONLY to sentences where that EXACT form appears
-
-### TASK:
-For each actor:
-1. Identify ALL distinct ways it is referenced (exact name, pronouns, role titles, variations)
-2. For EACH unique alias, list the sentence numbers where THAT SPECIFIC alias appears
-3. Treat each variation as a separate alias entry
-
-### OUTPUT REQUIREMENTS:
-- In the 'sentences' field, use ONLY the sentence number (integer starting from 1)
-- Each alias must appear as a separate AliasItem
-- Do NOT combine or merge similar aliases
-"""
-
-    response: ActorAliasMapping = structured_llm.invoke([("system", system_prompt), ("human", user_prompt)])
-    return {"actor_aliases": response.mappings}
+    model: BaseChatModel = _get_model()
+    sentences = state.get("sentences") or []
+    raw_usecases = state.get("raw_usecases") or {}
+    refined_usecases = _refine_usecases(model, sentences, raw_usecases)
+    return {"refined_usecases": refined_usecases}
 
 
 def finalize_node(state: GraphState):
+    """Format final output for compatibility with main_graph."""
+
+    def _format_usecase_output(
+        refined_usecases: List[UsecaseRefinement],
+        actor_results: List[ActorResult],
+        sentences: List[str],
+    ) -> List[UseCase]:
+        """Format refined use cases into UseCase objects with participating actors."""
+        formatted_usecases = []
+
+        for usecase in refined_usecases:
+            usecase_list = usecase.refined + usecase.added
+            actors_filter = set()
+
+            for actor in actor_results:
+                # Check if actor appears in this sentence
+                if usecase.sentence_idx in actor.sentence_idx:
+                    actors_filter.add(actor.actor)
+                # Check if any alias appears in this sentence
+                for actor_alias in actor.aliases:
+                    if usecase.sentence_idx in actor_alias.sentences:
+                        actors_filter.add(actor.actor)
+                        break
+
+            sentence_text = (
+                sentences[usecase.sentence_idx]
+                if usecase.sentence_idx < len(sentences)
+                else ""
+            )
+
+            for item in usecase_list:
+                formatted_usecases.append(
+                    UseCase(
+                        name=item,
+                        participating_actors=list(actors_filter),
+                        sentence_id=usecase.sentence_idx,
+                        sentence=sentence_text,
+                        relationships=[],
+                    )
+                )
+
+        return formatted_usecases
+
+    sentences = state.get("sentences") or []
+    actor_results = state.get("actor_results") or []
+    refined_usecases = state.get("refined_usecases") or []
+
+    # Format use cases with participating actors
+    use_cases = _format_usecase_output(refined_usecases, actor_results, sentences)
     return {
-        "requirement_text": state.get("input_text") or state.get("requirement_text") or "",
-        "tasks": state.get("tasks") or [],
-        "actors": state.get("actors") or [],
-        "actor_aliases": state.get("actor_aliases") or [],
-        "use_cases": state.get("use_cases") or [],
+        "use_cases": use_cases,
     }
 
 
+# =============================================================================
+# GRAPH BUILDER
+# =============================================================================
+
+
 def build_rpa_graph():
-    """Agent 1 (Generator): extract tasks (sentences) + actors + aliases from the requirement."""
+    """
+    RPA Graph (Requirement Processing Agent):
+    - Extract actors using regex pattern "As a [actor]"
+    - Remove synonymous actors with LLM
+    - Find actor aliases with LLM
+    - Extract use cases using NLP "want to [verb]" pattern
+    - Refine use cases with LLM
+    """
 
     workflow = StateGraph(GraphState)
 
-    workflow.add_node("pre_process", pre_process_node)
-    workflow.add_node("tasks", tasks_node)
-    workflow.add_node("actors", actors_node)
-    workflow.add_node("aliases", actors_alias_node)
-    workflow.add_node("use_cases", use_cases_node)
+    # Add nodes
+    # workflow.add_node("pre_process", pre_process_node)
+    workflow.add_node("find_actors", find_actors_node)
+    workflow.add_node("synonym_check", synonym_check_node)
+    workflow.add_node("find_aliases", find_aliases_node)
+    workflow.add_node("find_usecases", find_usecases_node)
+    workflow.add_node("refine_usecases", refine_usecases_node)
     workflow.add_node("finalize", finalize_node)
 
-    workflow.add_edge(START, "pre_process")
-    workflow.add_edge("pre_process", "tasks")
-    workflow.add_edge("tasks", "actors")
-    workflow.add_edge("actors", "aliases")
-    workflow.add_edge("aliases", "use_cases")
-    workflow.add_edge("use_cases", "finalize")
+    # Define edges
+    # workflow.add_edge(START, "pre_process")
+    # workflow.add_edge("pre_process", "find_actors")
+    workflow.add_edge(START, "find_actors")
+    workflow.add_edge("find_actors", "synonym_check")
+    workflow.add_edge("synonym_check", "find_aliases")
+    workflow.add_edge("find_aliases", "find_usecases")
+    workflow.add_edge("find_usecases", "refine_usecases")
+    workflow.add_edge("refine_usecases", "finalize")
     workflow.add_edge("finalize", END)
 
     return workflow.compile()
 
 
 def run_rpa(requirement_text: str) -> RpaState:
+    """Run the RPA graph and return results."""
+    sentences = requirement_text.split("\n")
     app = build_rpa_graph()
-    out = app.invoke({"requirement_text": requirement_text})
+    out = app.invoke({"requirement_text": requirement_text, "sentences": sentences})
     return {
         "requirement_text": out.get("requirement_text", requirement_text),
-        "tasks": out.get("tasks", []),
         "actors": out.get("actors", []),
-        "actor_aliases": out.get("actor_aliases", []),
+        "actor_aliases": out.get("actor_results", []),
         "use_cases": out.get("use_cases", []),
     }

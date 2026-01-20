@@ -1,15 +1,15 @@
 from __future__ import annotations
 
-from typing import Annotated, Dict, List, Literal, TypedDict
+from typing import Annotated, Dict, List, Literal, Optional, TypedDict
 
 import operator
 
 from pydantic import BaseModel, Field
 
 
-class TaskItem(BaseModel):
-    id: int = Field(description="Task id starting from 1")
-    text: str = Field(description="Task text (a chunk of the requirement)")
+# class TaskItem(BaseModel):
+#     id: int = Field(description="Task id starting from 1")
+#     text: str = Field(description="Task text (a chunk of the requirement)")
 
 
 class AliasItem(BaseModel):
@@ -19,16 +19,77 @@ class AliasItem(BaseModel):
     )
 
 
-class ActorAlias(BaseModel):
-    actor: str = Field(description="The original actor's name")
-    aliases: List[AliasItem] = Field(description="List of alternative names/references for this actor")
+class ActorItem(BaseModel):
+    """Actor with sentence indices where it appears."""
+
+    actor: str = Field(description="Actor name")
+    sentence_idx: List[int] = Field(description="Sentence indices (0-based)")
 
 
-class RpaResult(BaseModel):
-    task_id: int
-    input_text: str
-    actors: List[str]
-    actor_aliases: List[ActorAlias]
+class CanonicalActorList(BaseModel):
+    """List of canonical actor names after removing synonyms."""
+
+    actors: List[str] = Field(
+        description="A list of canonical actor names after removing synonyms."
+    )
+
+
+class ActorAliasItem(BaseModel):
+    """Represents an alias for an actor with its sentence occurrences."""
+
+    alias: str = Field(description="Name of the alias")
+    sentences: List[int] = Field(
+        description="List of sentence indices where THIS specific alias appears (0-based)"
+    )
+
+
+class ActorAliasMapping(BaseModel):
+    """Maps an actor name to their aliases."""
+
+    actor: str = Field(description="The canonical actor's name")
+    aliases: List[ActorAliasItem] = Field(
+        description="List of alternative names/references for this actor"
+    )
+
+
+class ActorAliasList(BaseModel):
+    """Collection of actor-alias mappings."""
+
+    mappings: List[ActorAliasMapping] = Field(
+        description="List of actor-alias mappings"
+    )
+
+
+class ActorResult(BaseModel):
+    """Final result combining actor, aliases, and sentence indices."""
+
+    actor: str = Field(description="The canonical actor's name")
+    aliases: List[ActorAliasItem] = Field(description="List of aliases")
+    sentence_idx: List[int] = Field(
+        description="Sentence indices where the actor appears"
+    )
+
+
+class UsecaseRefinement(BaseModel):
+    """Refinement result for a single sentence."""
+
+    sentence_idx: int = Field(description="Index of the original sentence")
+    original: List[str] = Field(description="Original extracted use cases")
+    refined: List[str] = Field(description="Refined/improved use cases")
+    added: List[str] = Field(
+        default_factory=list, description="Missing use cases that should be added"
+    )
+    reasoning: Optional[str] = Field(
+        default=None, description="Brief explanation of changes made"
+    )
+
+
+class UsecaseRefinementResponse(BaseModel):
+    """Complete response containing all refined use cases."""
+
+    refinements: List[UsecaseRefinement] = Field(
+        description="List of refinements for each sentence"
+    )
 
 
 class UseCaseRelationship(BaseModel):
@@ -38,20 +99,32 @@ class UseCaseRelationship(BaseModel):
 
 class UseCase(BaseModel):
     name: str = Field(description="Use case name (verb phrase), e.g. 'Borrow Book'")
-    participating_actors: List[str] = Field(default_factory=list, description="Actors participating in this use case")
-    sentence_id: int = Field(default=0, description="Which task/sentence produced this use case")
+    participating_actors: List[str] = Field(
+        default_factory=list, description="Actors participating in this use case"
+    )
+    sentence_id: int = Field(
+        default=0, description="Which task/sentence produced this use case"
+    )
     sentence: str = Field(default="", description="Original sentence text")
     relationships: List[UseCaseRelationship] = Field(default_factory=list)
 
 
 class Scenario(BaseModel):
-    use_case_name: str = Field(description="Use case name this scenario is derived from")
+    use_case_name: str = Field(
+        description="Use case name this scenario is derived from"
+    )
     actors: List[str] = Field(description="Actors involved in the scenario")
     preconditions: List[str] = Field(default_factory=list, description="Preconditions")
     trigger: str = Field(default="", description="Trigger that starts the scenario")
-    main_flow: List[str] = Field(default_factory=list, description="Main success flow steps")
-    alternate_flows: List[str] = Field(default_factory=list, description="Alternate/exception flows")
-    postconditions: List[str] = Field(default_factory=list, description="Postconditions")
+    main_flow: List[str] = Field(
+        default_factory=list, description="Main success flow steps"
+    )
+    alternate_flows: List[str] = Field(
+        default_factory=list, description="Alternate/exception flows"
+    )
+    postconditions: List[str] = Field(
+        default_factory=list, description="Postconditions"
+    )
 
 
 class ScenarioFieldCheck(BaseModel):
@@ -77,10 +150,14 @@ CriterionName = Literal["c1", "c2", "c3"]
 
 
 class ScenarioCriterionCheck(BaseModel):
-    criterion: CriterionName = Field(description="Criterion id/name shared across all detectors")
+    criterion: CriterionName = Field(
+        description="Criterion id/name shared across all detectors"
+    )
     score: float = Field(description="Criterion score (scale decided by detectors)")
     passed: bool = Field(description="Pass/fail for this criterion")
-    rationale: str = Field(default="", description="Rationale for this criterion result")
+    rationale: str = Field(
+        default="", description="Rationale for this criterion result"
+    )
 
 
 class ScenarioValidation(BaseModel):
@@ -101,7 +178,9 @@ class ScenarioResult(BaseModel):
     # Back-compat: older pipeline returned a structured Scenario.
     # New SCA pipeline returns a fully-dressed Use Case Specification string.
     scenario: Scenario | None = None
-    use_case_spec: str = Field(default="", description="Fully-dressed use case specification (template text)")
+    use_case_spec: str = Field(
+        default="", description="Fully-dressed use case specification (template text)"
+    )
     evaluation: UseCaseEvaluation | None = None
     validation: UseCaseSpecValidation | ScenarioValidation
 
@@ -137,22 +216,22 @@ class UseCaseSpecValidation(BaseModel):
     regen_rationale: str = Field(default="")
 
 
-class MainState(TypedDict, total=False):
-    requirement_text: str
-    tasks: List[TaskItem]
+# class MainState(TypedDict, total=False):
+#     requirement_text: str
+#     # tasks: List[TaskItem]
 
-    # Map-reduce: worker results are accumulated here
-    results: List[RpaResult]
+#     # Map-reduce: worker results are accumulated here
+#     results: List[RpaResult]
 
-    # Agent-2 output
-    use_cases: List[UseCase]
+#     # Agent-2 output
+#     use_cases: List[UseCase]
 
-    # Agent-3 output (scenario generation)
-    scenario_results: List[ScenarioResult]
+#     # Agent-3 output (scenario generation)
+#     scenario_results: List[ScenarioResult]
 
-    # Convenience: reduced/merged view
-    merged_actors: List[str]
-    merged_actor_aliases: List[ActorAlias]
+#     # Convenience: reduced/merged view
+#     merged_actors: List[str]
+#     merged_actor_aliases: List[ActorAlias]
 
 
 class ScaState(TypedDict, total=False):
@@ -174,9 +253,9 @@ class ScaState(TypedDict, total=False):
 
 class RpaState(TypedDict, total=False):
     requirement_text: str
-    tasks: List[TaskItem]
+    # tasks: List[TaskItem]
     actors: List[str]
-    actor_aliases: List[ActorAlias]
+    actor_aliases: List[ActorResult]
     use_cases: List[UseCase]
 
 
