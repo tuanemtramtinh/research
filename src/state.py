@@ -97,6 +97,47 @@ class UseCaseRelationship(BaseModel):
     target_use_case: str = Field(description="Target use case name")
 
 
+# =============================================================================
+# DOMAIN GROUPING & RELATIONSHIP DETECTION MODELS
+# =============================================================================
+
+
+class UseCaseDomainItem(BaseModel):
+    """A use case with its assigned domain."""
+
+    use_case_name: str = Field(description="Name of the use case")
+    domain: str = Field(description="Domain/category this use case belongs to")
+
+
+class UseCaseDomainGroupingResponse(BaseModel):
+    """Response containing use cases grouped by domain."""
+
+    groupings: List[UseCaseDomainItem] = Field(
+        description="List of use cases with their assigned domains"
+    )
+
+
+class UseCaseRelationshipItem(BaseModel):
+    """A single relationship between two use cases."""
+
+    source_use_case: str = Field(description="Use case that initiates the relationship")
+    relationship_type: Literal["include", "extend"] = Field(
+        description="Relationship type: 'include' (mandatory) or 'extend' (optional)"
+    )
+    target_use_case: str = Field(description="Target use case of the relationship")
+    reasoning: str = Field(
+        default="", description="Brief explanation why this relationship exists"
+    )
+
+
+class UseCaseRelationshipResponse(BaseModel):
+    """Response containing all identified relationships."""
+
+    relationships: List[UseCaseRelationshipItem] = Field(
+        default_factory=list, description="List of identified relationships"
+    )
+
+
 class UseCase(BaseModel):
     name: str = Field(description="Use case name (verb phrase), e.g. 'Borrow Book'")
     participating_actors: List[str] = Field(
