@@ -554,33 +554,44 @@ def finalize_node(state: GraphState):
 def build_rpa_graph():
     """
     RPA Graph (Requirement Processing Agent):
-    - Extract actors using regex pattern "As a [actor]"
-    - Remove synonymous actors with LLM
-    - Find actor aliases with LLM
-    - Extract use cases using NLP "want to [verb]" pattern
-    - Refine use cases with LLM
+    - Branch 1 (Actor pipeline):
+        - Extract actors using regex pattern "As a [actor]"
+        - Remove synonymous actors with LLM
+        - Find actor aliases with LLM
+    - Branch 2 (UseCase pipeline):
+        - Extract use cases using NLP "want to [verb]" pattern
+        - Refine use cases with LLM
+    - Both branches converge at finalize (waits for both to complete)
     """
 
     workflow = StateGraph(GraphState)
 
     # Add nodes
-    # workflow.add_node("pre_process", pre_process_node)
+    # Branch 1: Actor pipeline
     workflow.add_node("find_actors", find_actors_node)
     workflow.add_node("synonym_check", synonym_check_node)
     workflow.add_node("find_aliases", find_aliases_node)
+
+    # Branch 2: UseCase pipeline
     workflow.add_node("find_usecases", find_usecases_node)
     workflow.add_node("refine_usecases", refine_usecases_node)
+
+    # Finalize node (convergence point)
     workflow.add_node("finalize", finalize_node)
 
-    # Define edges
-    # workflow.add_edge(START, "pre_process")
-    # workflow.add_edge("pre_process", "find_actors")
+    # Define edges for parallel branches
+    # Branch 1: START -> find_actors -> synonym_check -> find_aliases -> finalize
     workflow.add_edge(START, "find_actors")
     workflow.add_edge("find_actors", "synonym_check")
     workflow.add_edge("synonym_check", "find_aliases")
-    workflow.add_edge("find_aliases", "find_usecases")
+    workflow.add_edge("find_aliases", "finalize")
+
+    # Branch 2: START -> find_usecases -> refine_usecases -> finalize
+    workflow.add_edge(START, "find_usecases")
     workflow.add_edge("find_usecases", "refine_usecases")
     workflow.add_edge("refine_usecases", "finalize")
+
+    # finalize -> END
     workflow.add_edge("finalize", END)
 
     return workflow.compile()
