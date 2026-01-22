@@ -988,7 +988,7 @@ def test_rpa_graph():
     """Test the RPA graph with sample user stories."""
 
     # Sample user stories for testing
-    sample_requirements = """As a customer, I want to view and download reports so that I sleep.
+    sample_requirements = """As a customer, I want to view and download reports so that I sleep
 As a shopper, I want to browse products by category, so that I can find items more easily.
 As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
 As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
@@ -1048,8 +1048,26 @@ As a system, I want to cache frequently accessed data, so that response time is 
     use_cases_json = [uc.model_dump() for uc in result.get("use_cases", [])]
     print(json.dumps(use_cases_json, indent=2, ensure_ascii=False))
 
+    # Save output to file
+    output_data = {
+        "actors": [
+            actor.model_dump() if hasattr(actor, "model_dump") else actor
+            for actor in result.get("actors", [])
+        ],
+        "actor_aliases": [
+            alias.model_dump() if hasattr(alias, "model_dump") else alias
+            for alias in result.get("actor_aliases", [])
+        ],
+        "use_cases": use_cases_json,
+    }
+
+    output_file = "rpa_output.json"
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(output_data, f, indent=2, ensure_ascii=False)
+
     print("\n" + "=" * 60)
     print("TEST COMPLETED")
+    print(f"✅ Output saved to: {output_file}")
     print("=" * 60)
 
     return result
