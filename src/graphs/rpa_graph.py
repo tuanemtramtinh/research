@@ -552,6 +552,18 @@ def finalize_node(state: GraphState):
     }
 
 
+def benefit_extract_node(state: GraphState):
+    # nlp = _get_nlp()
+
+    # sentences_nlp = [nlp(sent) for sent in state.get("sentences")]
+
+    benefits = [sent.split("so that")[-1].strip() for sent in state.get("sentences")]
+
+    print(benefits)
+
+    return {}
+
+
 # =============================================================================
 # RELATIONSHIP DETECTION NODES (3-STEP PIPELINE)
 # =============================================================================

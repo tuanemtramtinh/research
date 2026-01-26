@@ -498,9 +498,9 @@ All judgments MUST strictly follow the evaluation criteria and scoring rules def
 If any required field is missing, unclear, or weakly defined, you MUST treat it as a deficiency.
 
 You will evaluate the use case using EXACTLY THREE criteria:
-1. Completeness (Đầy đủ)
-2. Coherence (Mạch lạc)
-3. Relevance (Liên quan)
+1. Completeness
+2. Coherence
+3. Relevance
 
 You MUST output results in the specified JSON format ONLY.
 
@@ -516,7 +516,7 @@ EVALUATION CRITERIA
 --------------------------------
 
 ================================
-1. COMPLETENESS (Đầy đủ)
+1. COMPLETENESS
 ================================
 
 Evaluate whether the use case specification contains all REQUIRED fields
@@ -549,7 +549,7 @@ Provide rationale:
 - Which fields are missing or insufficient
 
 ================================
-2. COHERENCE (Mạch lạc)
+2. COHERENCE
 ================================
 
 Evaluate logical consistency ACROSS ALL FIELDS.
@@ -572,7 +572,7 @@ Scoring (0–100):
 PASS if score ≥ 70.
 
 ================================
-3. RELEVANCE (Liên quan)
+3. RELEVANCE
 ================================
 
 Evaluate whether all fields and flows focus on ONE use case goal.
