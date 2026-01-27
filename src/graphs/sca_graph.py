@@ -36,10 +36,14 @@ def _use_case_payload(use_case: UseCase) -> dict:
         return use_case.model_dump()
     except Exception:
         return {
+            "id": int(getattr(use_case, "id", 0) or 0),
             "name": getattr(use_case, "name", ""),
+            "description": getattr(use_case, "description", "") or "",
             "participating_actors": getattr(use_case, "participating_actors", []) or [],
-            "sentence_id": int(getattr(use_case, "sentence_id", 0) or 0),
-            "sentence": getattr(use_case, "sentence", ""),
+            "user_stories": [
+                getattr(s, "model_dump", lambda: s)()
+                for s in (getattr(use_case, "user_stories", []) or [])
+            ],
             "relationships": [
                 getattr(r, "model_dump", lambda: r)()
                 for r in (getattr(use_case, "relationships", []) or [])
@@ -52,12 +56,22 @@ def _heuristic_use_case_spec(
 ) -> str:
     # Minimal deterministic template output when no LLM is configured.
     uc = _use_case_payload(use_case)
-    uid = f"UC-{int(uc.get('sentence_id') or 0)}"
+    uid = f"UC-{int(uc.get('id') or 0)}"
     primary = ", ".join(use_case.participating_actors or [])
     all_actors = ", ".join(actors or (use_case.participating_actors or []))
-    trig = (
-        use_case.sentence or ""
-    ).strip() or f"A primary actor initiates '{use_case.name}'."
+    
+    # trig = (
+    #     use_case.sentence or ""
+    # ).strip() or f"A primary actor initiates '{use_case.name}'."
+    
+    trig_raw = (getattr(use_case, "description", "") or "").strip()
+    if not trig_raw and getattr(use_case, "user_stories", None):
+        parts = [
+            getattr(s, "original_sentence", "") or getattr(s, "action", "")
+            for s in (use_case.user_stories or [])[:3]
+        ]
+        trig_raw = " ".join(p for p in parts if p).strip()
+    trig = trig_raw or f"A primary actor initiates '{use_case.name}'."
 
     include_rels = [
         r
@@ -888,7 +902,7 @@ def run_sca(input_data: dict) -> List[ScenarioResult]:
         if not isinstance(raw, dict):
             continue
 
-        # Allow partial use case objects (sentence_id/sentence may be missing).
+        # Allow partial use case objects (id/description/user_stories may be missing).
         uc = UseCase.model_validate(raw)
         results.append(
             run_sca_use_case(

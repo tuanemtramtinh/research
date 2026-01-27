@@ -58,15 +58,24 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
 
     log("\n=== USE CASES ===")
     for uc in result.get("use_cases", []):
-        actors = ", ".join(uc.participating_actors)
-        log(f"[{uc.sentence_id}] {uc.name} (actors: {actors})")
-        log(f"  sentence: {uc.sentence}")
+        actors = ", ".join(getattr(uc, "participating_actors", []) or [])
+        uc_id = getattr(uc, "id", 0)
+        log(f"[{uc_id}] {uc.name} (actors: {actors})")
+        desc = getattr(uc, "description", "") or ""
+        if desc:
+            log(f"  description: {desc}")
+        us = getattr(uc, "user_stories", None) or []
+        if us:
+            for us_item in us[:3]:
+                orig = getattr(us_item, "original_sentence", "") or getattr(us_item, "action", "")
+                if orig:
+                    log(f"  - {orig}")
 
     log("\n=== SCENARIOS ===")
     for idx, sr in enumerate(result.get("scenario_results", []), 1):
         v = sr.validation
         log(f"\n--- SCENARIO {idx} ---")
-        log(f"Use case: [{sr.use_case.sentence_id}] {sr.use_case.name}")
+        log(f"Use case: [{getattr(sr.use_case, 'id', 0)}] {sr.use_case.name}")
         log("\n--- CONTENT ---")
         spec = (sr.use_case_spec or "").strip()
         if spec:
