@@ -124,7 +124,7 @@ def reduce_node(state: OrchestratorState):
     # uniq_use_cases: List[UseCase] = []
     # seen_uc = set()
     # for uc in state.get("use_cases") or []:
-    #     k = (uc.name.strip().lower(), int(uc.sentence_id))
+    #     k = (uc.name.strip().lower(), int(getattr(uc, "id", 0)))
     #     if k not in seen_uc:
     #         seen_uc.add(k)
     #         uniq_use_cases.append(uc)
@@ -132,7 +132,7 @@ def reduce_node(state: OrchestratorState):
     uniq_scenarios: List[ScenarioResult] = []
     seen_sr = set()
     for sr in state.get("scenario_results_acc") or []:
-        k = (sr.use_case.name.strip().lower(), int(sr.use_case.sentence_id))
+        k = (sr.use_case.name.strip().lower(), int(getattr(sr.use_case, "id", 0)))
         if k not in seen_sr:
             seen_sr.add(k)
             uniq_scenarios.append(sr)
@@ -159,7 +159,7 @@ def reduce_node(state: OrchestratorState):
 #     uniq_use_cases: List[UseCase] = []
 #     seen_uc = set()
 #     for uc in state.get("use_cases") or []:
-#         k = (uc.name.strip().lower(), int(uc.sentence_id))
+#         k = (uc.name.strip().lower(), int(getattr(uc, "id", 0)))
 #         if k not in seen_uc:
 #             seen_uc.add(k)
 #             uniq_use_cases.append(uc)
