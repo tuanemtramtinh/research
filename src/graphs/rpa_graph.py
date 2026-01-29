@@ -1028,6 +1028,7 @@ def group_usecases_by_domain_node(state: GraphState):
         """Use LLM to group use cases into domains."""
         if model is None or not use_cases:
             # Fallback: put all in single domain
+            print("⚠️  Fallback: No LLM model or empty use cases, grouping all into 'general' domain")
             return {"general": [uc.name for uc in use_cases]}
 
         structured_llm = model.with_structured_output(UseCaseDomainGroupingResponse)
@@ -1057,9 +1058,11 @@ USE CASES:
 
 Assign each use case to exactly one domain."""
 
+        print(f"\n🔄 Calling LLM to group {len(use_cases)} use cases into domains...")
         response: UseCaseDomainGroupingResponse = structured_llm.invoke(
             [("system", system_prompt), ("human", human_prompt)]
         )
+        print("✅ LLM grouping completed")
 
         # Convert to dict: {domain: [use_case_names]}
         domain_groups = {}
@@ -1071,10 +1074,27 @@ Assign each use case to exactly one domain."""
 
         return domain_groups
 
+    print("\n" + "=" * 60)
+    print("STEP 1: GROUPING USE CASES BY DOMAIN")
+    print("=" * 60)
+    
     model = state.get("llm")
     use_cases = state.get("use_cases") or []
+    
+    print(f"\n📋 Input: {len(use_cases)} use cases to group")
+    for i, uc in enumerate(use_cases, 1):
+        print(f"  {i}. {uc.name}")
+    
     domain_groupings = _group_by_domain(model, use_cases)
-
+    
+    print(f"\n✅ Grouped into {len(domain_groupings)} domain(s):")
+    for domain, uc_names in sorted(domain_groupings.items()):
+        print(f"\n  📁 Domain: {domain.upper()}")
+        for name in uc_names:
+            print(f"     - {name}")
+    
+    print("\n" + "-" * 60)
+    
     return {"domain_groupings": domain_groupings}
 
 
@@ -1102,14 +1122,24 @@ def find_within_domain_relationships_node(state: GraphState):
         for domain, uc_names in domain_groupings.items():
             if len(uc_names) < 2:
                 # Need at least 2 use cases to have relationships
+                print(f"  ⏭️  Skipping domain '{domain}': only {len(uc_names)} use case(s) (need at least 2)")
                 continue
+
+            print(f"\n  🔍 Analyzing domain '{domain}' ({len(uc_names)} use cases)...")
 
             # Get use case details for this domain
             uc_details = []
             for name in uc_names:
                 uc = uc_lookup.get(name.lower())
                 if uc:
-                    uc_details.append(f'- {uc.name}: "{uc.sentence}"')
+                    # Use description and sample user stories for context
+                    context_parts = [f'- {uc.name}']
+                    if uc.description:
+                        context_parts.append(f'  Description: {uc.description}')
+                    if uc.user_stories:
+                        samples = [s.original_sentence for s in uc.user_stories[:2]]
+                        context_parts.append(f'  Examples: {" | ".join(f"{s}" for s in samples)}')
+                    uc_details.append("\n".join(context_parts))
                 else:
                     uc_details.append(f"- {name}")
 
@@ -1150,6 +1180,8 @@ If no relationships exist, return an empty list."""
             response: UseCaseRelationshipResponse = structured_llm.invoke(
                 [("system", system_prompt), ("human", human_prompt)]
             )
+            
+            print(f"    ✅ Found {len(response.relationships)} relationship(s) in '{domain}'")
 
             for rel in response.relationships:
                 all_relationships.append(
@@ -1165,14 +1197,31 @@ If no relationships exist, return an empty list."""
 
         return all_relationships
 
+    print("\n" + "=" * 60)
+    print("STEP 2: FINDING WITHIN-DOMAIN RELATIONSHIPS")
+    print("=" * 60)
+    
     model = state.get("llm")
     domain_groupings = state.get("domain_groupings") or {}
     use_cases = state.get("use_cases") or []
+    
+    print(f"\n📋 Input: {len(domain_groupings)} domain(s) to analyze")
+    for domain, uc_names in sorted(domain_groupings.items()):
+        print(f"  📁 {domain}: {len(uc_names)} use case(s)")
 
     within_relationships = _find_within_domain_relationships(
         model, domain_groupings, use_cases
     )
-
+    
+    print(f"\n✅ Found {len(within_relationships)} within-domain relationship(s):")
+    if within_relationships:
+        for rel in within_relationships:
+            print(f"  • {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']} [{rel['domain']}]")
+    else:
+        print("  (No relationships found)")
+    
+    print("-" * 60)
+    
     return {"within_domain_relationships": within_relationships}
 
 
@@ -1213,7 +1262,14 @@ def find_cross_domain_relationships_node(state: GraphState):
         # Build detailed use case info
         uc_details = []
         for uc in use_cases:
-            uc_details.append(f'- {uc.name}: "{uc.sentence}"')
+            # Use description and sample user stories for context
+            context_parts = [f'- {uc.name}']
+            if uc.description:
+                context_parts.append(f'  Description: {uc.description}')
+            if uc.user_stories:
+                samples = [s.original_sentence for s in uc.user_stories[:2]]
+                context_parts.append(f'  Examples: {" | ".join(f"{s}" for s in samples)}')
+            uc_details.append("\n".join(context_parts))
         uc_details_text = "\n".join(uc_details)
 
         system_prompt = """You are a UML Use Case expert specializing in identifying CROSS-DOMAIN relationships between use cases.
@@ -1266,6 +1322,8 @@ If no cross-domain relationships exist, return an empty list."""
         response: UseCaseRelationshipResponse = structured_llm.invoke(
             [("system", system_prompt), ("human", human_prompt)]
         )
+        
+        print(f"✅ LLM returned {len(response.relationships)} potential relationship(s)")
 
         # Get domain for each use case
         uc_to_domain = {}
@@ -1274,6 +1332,7 @@ If no cross-domain relationships exist, return an empty list."""
                 uc_to_domain[name.lower()] = domain
 
         cross_relationships = []
+        filtered_out = 0
         for rel in response.relationships:
             source_domain = uc_to_domain.get(rel.source_use_case.lower(), "unknown")
             target_domain = uc_to_domain.get(rel.target_use_case.lower(), "unknown")
@@ -1291,18 +1350,47 @@ If no cross-domain relationships exist, return an empty list."""
                         "relationship_scope": "cross_domain",
                     }
                 )
+            else:
+                filtered_out += 1
+        
+        if filtered_out > 0:
+            print(f"  ⚠️  Filtered out {filtered_out} relationship(s) (same domain, already in within-domain)")
 
         return cross_relationships
 
+    print("\n" + "=" * 60)
+    print("STEP 3: FINDING CROSS-DOMAIN RELATIONSHIPS")
+    print("=" * 60)
+    
     model = state.get("llm")
     domain_groupings = state.get("domain_groupings") or {}
     use_cases = state.get("use_cases") or []
     within_relationships = state.get("within_domain_relationships") or []
+    
+    print(f"\n📋 Input:")
+    print(f"  • {len(domain_groupings)} domain(s)")
+    print(f"  • {len(use_cases)} total use case(s)")
+    print(f"  • {len(within_relationships)} existing within-domain relationship(s)")
+    
+    if len(domain_groupings) < 2:
+        print("\n⚠️  Skipping: Need at least 2 domains for cross-domain analysis")
+        return {"cross_domain_relationships": []}
+    
+    print(f"\n🔄 Calling LLM to find cross-domain relationships...")
 
     cross_relationships = _find_cross_domain_relationships(
         model, domain_groupings, use_cases, within_relationships
     )
-
+    
+    print(f"\n✅ Found {len(cross_relationships)} cross-domain relationship(s):")
+    if cross_relationships:
+        for rel in cross_relationships:
+            print(f"  • {rel['source_use_case']} ({rel['source_domain']}) --{rel['type']}--> {rel['target_use_case']} ({rel['target_domain']})")
+    else:
+        print("  (No relationships found)")
+    
+    print("-" * 60)
+    
     return {"cross_domain_relationships": cross_relationships}
 
 
@@ -1310,12 +1398,22 @@ def merge_relationships_node(state: GraphState):
     """
     Merge all relationships and update UseCase objects with their relationships.
     """
+    print("\n" + "=" * 60)
+    print("STEP 4: MERGING RELATIONSHIPS")
+    print("=" * 60)
+    
     use_cases = state.get("use_cases") or []
     within_rels = state.get("within_domain_relationships") or []
     cross_rels = state.get("cross_domain_relationships") or []
+    
+    print(f"\n📋 Input:")
+    print(f"  • {len(use_cases)} use case(s)")
+    print(f"  • {len(within_rels)} within-domain relationship(s)")
+    print(f"  • {len(cross_rels)} cross-domain relationship(s)")
 
     # Combine all relationships
     all_relationships = within_rels + cross_rels
+    print(f"\n🔄 Merging {len(all_relationships)} total relationship(s)...")
 
     # Build lookup: source_use_case -> list of relationships
     rel_lookup = {}
@@ -1330,20 +1428,37 @@ def merge_relationships_node(state: GraphState):
             )
         )
 
-    # Update use cases with their relationships
+    # Update use cases with their relationships (preserve new schema)
     updated_use_cases = []
+    use_cases_with_rels = 0
     for uc in use_cases:
         uc_name = uc.name.lower()
         relationships = rel_lookup.get(uc_name, [])
+        if relationships:
+            use_cases_with_rels += 1
         updated_use_cases.append(
             UseCase(
+                id=uc.id,
                 name=uc.name,
+                description=uc.description,
                 participating_actors=uc.participating_actors,
-                sentence_id=uc.sentence_id,
-                sentence=uc.sentence,
+                user_stories=uc.user_stories,
                 relationships=relationships,
             )
         )
+
+    # Print relationships summary
+    print(f"\n✅ Merged relationships into {use_cases_with_rels} use case(s):")
+    print("\n--- FINAL INCLUDE/EXTEND RELATIONSHIPS ---")
+    for uc in updated_use_cases:
+        if uc.relationships:
+            print(f"\n  📌 {uc.name}:")
+            for r in uc.relationships:
+                print(f"     --{r.type}--> {r.target_use_case}")
+    
+    print("\n" + "=" * 60)
+    print("RELATIONSHIP DETECTION COMPLETED")
+    print("=" * 60)
 
     return {"use_cases": updated_use_cases}
 
@@ -1362,7 +1477,11 @@ def build_rpa_graph():
     - grouping: Merge actor+usecase, cluster by semantic similarity (K-Means)
     - refine_clustering: LLM refines clusters (split/merge/move items)
     - name_usecases: LLM generates UseCase names for each cluster
-    - find_include_extend: One-step LLM to find all «include»/«extend» and attach to use_cases
+    - 3-Step Relationship Detection Pipeline:
+      * group_by_domain: Group use cases into business domains
+      * find_within_domain_rels: Find include/extend relationships within each domain
+      * find_cross_domain_rels: Find include/extend relationships across domains
+      * merge_relationships: Merge all relationships and attach to use_cases
     """
 
     workflow = StateGraph(GraphState)
@@ -1418,9 +1537,19 @@ def build_rpa_graph():
         },
     )
     workflow.add_edge("refine_clustering", "name_usecases")
-    # One-step include/extend after naming
-    workflow.add_edge("name_usecases", "find_include_extend")
-    workflow.add_edge("find_include_extend", END)
+    
+    # After naming usecases -> 3-Step Relationship Detection Pipeline
+    # This is more accurate than single-step approach, especially after clustering
+    workflow.add_edge("name_usecases", "group_by_domain")
+    workflow.add_edge("group_by_domain", "find_within_domain_rels")
+    workflow.add_edge("find_within_domain_rels", "find_cross_domain_rels")
+    workflow.add_edge("find_cross_domain_rels", "merge_relationships")
+    workflow.add_edge("merge_relationships", END)
+    
+    # Alternative: One-step approach (less accurate, but faster)
+    # workflow.add_edge("name_usecases", "find_include_extend")
+    # workflow.add_edge("find_include_extend", END)
+    
     return workflow.compile()
 
 
