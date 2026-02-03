@@ -67,7 +67,9 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
         us = getattr(uc, "user_stories", None) or []
         if us:
             for us_item in us[:3]:
-                orig = getattr(us_item, "original_sentence", "") or getattr(us_item, "action", "")
+                orig = getattr(us_item, "original_sentence", "") or getattr(
+                    us_item, "action", ""
+                )
                 if orig:
                     log(f"  - {orig}")
 

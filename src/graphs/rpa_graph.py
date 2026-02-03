@@ -1028,7 +1028,9 @@ def group_usecases_by_domain_node(state: GraphState):
         """Use LLM to group use cases into domains."""
         if model is None or not use_cases:
             # Fallback: put all in single domain
-            print("⚠️  Fallback: No LLM model or empty use cases, grouping all into 'general' domain")
+            print(
+                "⚠️  Fallback: No LLM model or empty use cases, grouping all into 'general' domain"
+            )
             return {"general": [uc.name for uc in use_cases]}
 
         structured_llm = model.with_structured_output(UseCaseDomainGroupingResponse)
@@ -1077,24 +1079,24 @@ Assign each use case to exactly one domain."""
     print("\n" + "=" * 60)
     print("STEP 1: GROUPING USE CASES BY DOMAIN")
     print("=" * 60)
-    
+
     model = state.get("llm")
     use_cases = state.get("use_cases") or []
-    
+
     print(f"\n📋 Input: {len(use_cases)} use cases to group")
     for i, uc in enumerate(use_cases, 1):
         print(f"  {i}. {uc.name}")
-    
+
     domain_groupings = _group_by_domain(model, use_cases)
-    
+
     print(f"\n✅ Grouped into {len(domain_groupings)} domain(s):")
     for domain, uc_names in sorted(domain_groupings.items()):
         print(f"\n  📁 Domain: {domain.upper()}")
         for name in uc_names:
             print(f"     - {name}")
-    
+
     print("\n" + "-" * 60)
-    
+
     return {"domain_groupings": domain_groupings}
 
 
@@ -1122,7 +1124,9 @@ def find_within_domain_relationships_node(state: GraphState):
         for domain, uc_names in domain_groupings.items():
             if len(uc_names) < 2:
                 # Need at least 2 use cases to have relationships
-                print(f"  ⏭️  Skipping domain '{domain}': only {len(uc_names)} use case(s) (need at least 2)")
+                print(
+                    f"  ⏭️  Skipping domain '{domain}': only {len(uc_names)} use case(s) (need at least 2)"
+                )
                 continue
 
             print(f"\n  🔍 Analyzing domain '{domain}' ({len(uc_names)} use cases)...")
@@ -1133,12 +1137,14 @@ def find_within_domain_relationships_node(state: GraphState):
                 uc = uc_lookup.get(name.lower())
                 if uc:
                     # Use description and sample user stories for context
-                    context_parts = [f'- {uc.name}']
+                    context_parts = [f"- {uc.name}"]
                     if uc.description:
-                        context_parts.append(f'  Description: {uc.description}')
+                        context_parts.append(f"  Description: {uc.description}")
                     if uc.user_stories:
                         samples = [s.original_sentence for s in uc.user_stories[:2]]
-                        context_parts.append(f'  Examples: {" | ".join(f"{s}" for s in samples)}')
+                        context_parts.append(
+                            f"  Examples: {' | '.join(f'{s}' for s in samples)}"
+                        )
                     uc_details.append("\n".join(context_parts))
                 else:
                     uc_details.append(f"- {name}")
@@ -1180,8 +1186,10 @@ If no relationships exist, return an empty list."""
             response: UseCaseRelationshipResponse = structured_llm.invoke(
                 [("system", system_prompt), ("human", human_prompt)]
             )
-            
-            print(f"    ✅ Found {len(response.relationships)} relationship(s) in '{domain}'")
+
+            print(
+                f"    ✅ Found {len(response.relationships)} relationship(s) in '{domain}'"
+            )
 
             for rel in response.relationships:
                 all_relationships.append(
@@ -1200,11 +1208,11 @@ If no relationships exist, return an empty list."""
     print("\n" + "=" * 60)
     print("STEP 2: FINDING WITHIN-DOMAIN RELATIONSHIPS")
     print("=" * 60)
-    
+
     model = state.get("llm")
     domain_groupings = state.get("domain_groupings") or {}
     use_cases = state.get("use_cases") or []
-    
+
     print(f"\n📋 Input: {len(domain_groupings)} domain(s) to analyze")
     for domain, uc_names in sorted(domain_groupings.items()):
         print(f"  📁 {domain}: {len(uc_names)} use case(s)")
@@ -1212,16 +1220,18 @@ If no relationships exist, return an empty list."""
     within_relationships = _find_within_domain_relationships(
         model, domain_groupings, use_cases
     )
-    
+
     print(f"\n✅ Found {len(within_relationships)} within-domain relationship(s):")
     if within_relationships:
         for rel in within_relationships:
-            print(f"  • {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']} [{rel['domain']}]")
+            print(
+                f"  • {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']} [{rel['domain']}]"
+            )
     else:
         print("  (No relationships found)")
-    
+
     print("-" * 60)
-    
+
     return {"within_domain_relationships": within_relationships}
 
 
@@ -1263,12 +1273,14 @@ def find_cross_domain_relationships_node(state: GraphState):
         uc_details = []
         for uc in use_cases:
             # Use description and sample user stories for context
-            context_parts = [f'- {uc.name}']
+            context_parts = [f"- {uc.name}"]
             if uc.description:
-                context_parts.append(f'  Description: {uc.description}')
+                context_parts.append(f"  Description: {uc.description}")
             if uc.user_stories:
                 samples = [s.original_sentence for s in uc.user_stories[:2]]
-                context_parts.append(f'  Examples: {" | ".join(f"{s}" for s in samples)}')
+                context_parts.append(
+                    f"  Examples: {' | '.join(f'{s}' for s in samples)}"
+                )
             uc_details.append("\n".join(context_parts))
         uc_details_text = "\n".join(uc_details)
 
@@ -1322,8 +1334,10 @@ If no cross-domain relationships exist, return an empty list."""
         response: UseCaseRelationshipResponse = structured_llm.invoke(
             [("system", system_prompt), ("human", human_prompt)]
         )
-        
-        print(f"✅ LLM returned {len(response.relationships)} potential relationship(s)")
+
+        print(
+            f"✅ LLM returned {len(response.relationships)} potential relationship(s)"
+        )
 
         # Get domain for each use case
         uc_to_domain = {}
@@ -1352,45 +1366,49 @@ If no cross-domain relationships exist, return an empty list."""
                 )
             else:
                 filtered_out += 1
-        
+
         if filtered_out > 0:
-            print(f"  ⚠️  Filtered out {filtered_out} relationship(s) (same domain, already in within-domain)")
+            print(
+                f"  ⚠️  Filtered out {filtered_out} relationship(s) (same domain, already in within-domain)"
+            )
 
         return cross_relationships
 
     print("\n" + "=" * 60)
     print("STEP 3: FINDING CROSS-DOMAIN RELATIONSHIPS")
     print("=" * 60)
-    
+
     model = state.get("llm")
     domain_groupings = state.get("domain_groupings") or {}
     use_cases = state.get("use_cases") or []
     within_relationships = state.get("within_domain_relationships") or []
-    
+
     print(f"\n📋 Input:")
     print(f"  • {len(domain_groupings)} domain(s)")
     print(f"  • {len(use_cases)} total use case(s)")
     print(f"  • {len(within_relationships)} existing within-domain relationship(s)")
-    
+
     if len(domain_groupings) < 2:
         print("\n⚠️  Skipping: Need at least 2 domains for cross-domain analysis")
         return {"cross_domain_relationships": []}
-    
+
     print(f"\n🔄 Calling LLM to find cross-domain relationships...")
 
     cross_relationships = _find_cross_domain_relationships(
         model, domain_groupings, use_cases, within_relationships
     )
-    
+
     print(f"\n✅ Found {len(cross_relationships)} cross-domain relationship(s):")
     if cross_relationships:
         for rel in cross_relationships:
-            print(f"  • {rel['source_use_case']} ({rel['source_domain']}) --{rel['type']}--> {rel['target_use_case']} ({rel['target_domain']})")
+            print(
+                f"  • {rel['source_use_case']} ({rel['source_domain']}) --{rel['type']}--> {rel['target_use_case']} ({rel['target_domain']})"
+            )
     else:
         print("  (No relationships found)")
-    
+
     print("-" * 60)
-    
+
     return {"cross_domain_relationships": cross_relationships}
 
 
@@ -1401,11 +1419,11 @@ def merge_relationships_node(state: GraphState):
     print("\n" + "=" * 60)
     print("STEP 4: MERGING RELATIONSHIPS")
     print("=" * 60)
-    
+
     use_cases = state.get("use_cases") or []
     within_rels = state.get("within_domain_relationships") or []
     cross_rels = state.get("cross_domain_relationships") or []
-    
+
     print(f"\n📋 Input:")
     print(f"  • {len(use_cases)} use case(s)")
     print(f"  • {len(within_rels)} within-domain relationship(s)")
@@ -1455,7 +1473,7 @@ def merge_relationships_node(state: GraphState):
             print(f"\n  📌 {uc.name}:")
             for r in uc.relationships:
                 print(f"     --{r.type}--> {r.target_use_case}")
-    
+
     print("\n" + "=" * 60)
     print("RELATIONSHIP DETECTION COMPLETED")
     print("=" * 60)
@@ -1537,7 +1555,7 @@ def build_rpa_graph():
         },
     )
     workflow.add_edge("refine_clustering", "name_usecases")
-    
+
     # After naming usecases -> 3-Step Relationship Detection Pipeline
     # This is more accurate than single-step approach, especially after clustering
     workflow.add_edge("name_usecases", "group_by_domain")
@@ -1545,11 +1563,11 @@ def build_rpa_graph():
     workflow.add_edge("find_within_domain_rels", "find_cross_domain_rels")
     workflow.add_edge("find_cross_domain_rels", "merge_relationships")
     workflow.add_edge("merge_relationships", END)
-    
+
     # Alternative: One-step approach (less accurate, but faster)
     # workflow.add_edge("name_usecases", "find_include_extend")
     # workflow.add_edge("find_include_extend", END)
-    
+
     return workflow.compile()
 
 
@@ -1586,28 +1604,29 @@ def test_rpa_graph():
     """Test the RPA graph with sample user stories."""
 
     # Sample user stories for testing
-    sample_requirements = """
-As a shopper, I want to browse products by category, so that I can find items more easily.
-As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
-As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
-As a shopper, I want to add products to my cart, so that I can purchase multiple items at once.
-As a shopper, I want to checkout using multiple payment methods, so that I can choose the most convenient option.
-As a shopper, I want to track my orders, so that I know the delivery status.
-As a user, I want to register an account, so that I can access personalized features.
-As a user, I want to log in to the system, so that I can securely access my account.
-As a user, I want to update my profile information, so that my account details remain accurate.
-As a user, I want to reset my password, so that I can regain access if I forget it.
-As a user, I want to be able to download reports, so that I can analyze my data offline.
-As an admin, I want to be allowed to manage user accounts, so that I can control system access.
-As a manager, I want to be authorized to approve orders, so that business processes are not delayed.
-As a system operator, I want to be permitted to configure system settings, so that the system can be customized.
-As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently.
-As an admin, I want to create new products, so that they are available for customers to purchase.
-As an admin, I want to update product prices, so that pricing information stays current.
-As an admin, I want to manage inventory levels, so that products do not go out of stock.
-As an admin, I want to view sales reports, so that I can monitor business performance.
-As a system, I want to log user activities, so that security issues can be detected.
-As a system, I want to cache frequently accessed data, so that response time is improved."""
+    sample_requirements = """As an urban mobility planner, I want to solutions model congestion so that I can validate urban mobility proposals.
+As an urban mobility planner, I want to adjust speed limits so that I can review the effects of the measure.
+As an urban mobility planner, I want to revertible lanes switch directions of so that I can review the effects of the measure.
+As an urban mobility planner, I want to model roundabouts so that I can review the effects of the measure.
+As an urban mobility planner, I want to model adaptive traffic lights so that I can review the effects of the measure.
+As an urban mobility planner, I want to close down roads so that I can review the effects of the measure.
+As an urban mobility planner, I want to increase traffic in certain spots so that I can simulate crowded events.
+As an urban mobility planner, I want to be notified if a measure leads to congestion so that I do not overlook the congestion.
+As an urban mobility planner, I want to be notified if a measure disadvantages a neighborhood so that fairness can be increased.
+As an urban mobility planner, I want to review the emission levels at a certain pollution sensor so that environmental effects are considered.
+As an urban mobility planner, I want to review the traffic levels at a certain traffic sensor so that traffic levels are considered.
+As an urban mobility planner, I want to see traffic situations at past dates so that I can analyze traffic scenarios on similar days.
+As an urban mobility planner, I want to get an estimation of the cost of a measure so that I can review the financial consequences of the measure.
+As an urban mobility planner, I want to know the estimated emission of a congestion, so that I can review the pollution effects of a measure or event.
+As an urban mobility planner, I want to know the estimated noise levels of traffic situations, so that I can review the environmental effects of a measure or event.
+As an urban mobility planner, I want to simulate crisis, so that I can aide emergency services.
+As an urban mobility planner, I want to report on the pollution effects of a measure, so that I can offer validation for my proposal.
+As an urban mobility planner, I want to report on the fairness of a measure, so that I can offer validation for my proposal.
+As an urban mobility planner, I want to report on the cost of a measure, so that I can offer validation for my proposal.
+As an urban mobility planner, I want to report on the congestion effects of a measure, so that I can offer validation for my proposal.
+As an urban mobility planner, I want to report an executive summary of a solution, so that I can inform the mayor of the consequences of a proposal.
+As an urban mobility planner, I want to make an extensive report on a solution, so that I can inform the consultancy company of the consequences of a proposal.
+As an urban mobility planner, I want to get suggested solutions for a traffic congestion, so that I can be inspired to solve the problem."""
 
     print("=" * 60)
     print("TESTING RPA GRAPH")
