@@ -1,0 +1,51 @@
+{
+  "use_case_name": "Configure System",
+  "unique_id": "UC-012",
+  "area": "System Configuration",
+  "context_of_use": "The admin modifies system-wide settings and configuration parameters to customize the system.",
+  "scope": "System Configuration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system access and customization"
+  ],
+  "description": "The admin modifies system-wide settings and configuration parameters.",
+  "triggering_event": "Admin requests to configure system settings.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to configure settings."
+  ],
+  "postconditions": [
+    "System settings are updated successfully.",
+    "Configuration changes are saved."
+  ],
+  "assumptions": [
+    "The admin has the required permissions to perform configuration."
+  ],
+  "requirements_met": [
+    "The system shall allow the admin to configure system settings."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Need to define specific configuration parameters that can be modified."
+  ],
+  "main_flow": [
+    "1. Admin requests to configure system settings → System displays configuration options.",
+    "2. Admin modifies desired settings → System validates changes.",
+    "3. Admin confirms changes → System saves the updated settings."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the changes are invalid, then the system displays an error message and prompts the admin to correct the input."
+  ],
+  "information_for_steps": [
+    "1. Configuration options",
+    "2. Modified settings",
+    "3. Confirmation of changes"
+  ]
+}

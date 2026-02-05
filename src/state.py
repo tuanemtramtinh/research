@@ -229,9 +229,21 @@ class SimpleCriterionEvaluation(BaseModel):
     rationale: str
 
 
+class CorrectnessEvaluation(BaseModel):
+    """Optional correctness check against a reference scenario/spec.
+
+    When no reference is provided, result should be "N/A".
+    """
+
+    score: Optional[int] = Field(default=None, description="0-100, or null when N/A")
+    result: Literal["PASS", "FAIL", "N/A"]
+    rationale: str
+    reference_path: Optional[str] = None
+
+
 class UseCaseEvaluation(BaseModel):
     Completeness: CompletenessEvaluation
-    Coherence: SimpleCriterionEvaluation
+    Correctness: CorrectnessEvaluation
     Relevance: SimpleCriterionEvaluation
 
 
@@ -272,6 +284,9 @@ class ScaState(TypedDict, total=False):
     # SCA output (new): structured JSON object for the spec
     use_case_spec_json: Dict[str, Any]
     spec_version: int
+
+    # Optional: per-use-case reference file for Correctness evaluation
+    reference_spec_path: str | None
 
     # New judging: 3 judge results then combiner
     judge_results: Annotated[List[UseCaseSpecJudgeResult], operator.add]

@@ -1,0 +1,54 @@
+{
+  "use_case_name": "Approve Orders",
+  "unique_id": "UC-011",
+  "area": "Order Management",
+  "context_of_use": "The manager authorizes or rejects orders as part of the order approval workflow.",
+  "scope": "Order Approval System",
+  "level": "User-goal",
+  "primary_actors": [
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "manager: Ensure timely order processing"
+  ],
+  "description": "Authorize or reject orders as part of the order approval workflow.",
+  "triggering_event": "Manager initiates the order approval process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Manager is logged into the system.",
+    "Orders are available for approval."
+  ],
+  "postconditions": [
+    "Orders are either approved or rejected.",
+    "Order status is updated in the system."
+  ],
+  "assumptions": [
+    "The manager has the necessary permissions to approve orders.",
+    "The system has a mechanism to display orders pending approval."
+  ],
+  "requirements_met": [
+    "The system shall allow the manager to approve or reject orders.",
+    "The system shall update the order status based on the manager's decision."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the criteria for approving or rejecting orders."
+  ],
+  "main_flow": [
+    "1. Manager selects an order to approve → System displays order details.",
+    "2. Manager reviews the order details → System allows manager to approve or reject the order.",
+    "3. Manager approves the order → System updates the order status to 'Approved'.",
+    "4. System notifies the customer of the order approval."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the order details are incomplete, then the system prompts the manager to review the missing information."
+  ],
+  "information_for_steps": [
+    "1. Order ID",
+    "2. Order details",
+    "3. Approval status"
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "use_case_name": "Approve Orders",
-  "unique_id": "UC-010",
+  "unique_id": "UC-012",
   "area": "Order Management",
-  "context_of_use": "This use case allows managers to review and approve or reject orders as part of the business workflow.",
+  "context_of_use": "This use case allows managers to review and approve or reject orders within the business workflow.",
   "scope": "Order Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -12,7 +12,7 @@
   "stakeholders_and_interests": [
     "manager: Ensure timely approval of orders to avoid delays in business processes."
   ],
-  "description": "This use case enables managers to approve or reject orders, facilitating efficient business operations.",
+  "description": "Enable managers to review and approve or reject orders as part of the business workflow.",
   "triggering_event": "Manager initiates the order approval process.",
   "trigger_type": "External",
   "preconditions": [
@@ -28,8 +28,8 @@
     "The system has a mechanism to display pending orders for approval."
   ],
   "requirements_met": [
-    "The system shall allow managers to approve orders.",
-    "The system shall update order status upon approval or rejection."
+    "The system shall allow managers to approve or reject orders.",
+    "The system shall update the order status based on manager's decision."
   ],
   "priority": "High",
   "risk": "Medium",
@@ -38,16 +38,16 @@
   ],
   "main_flow": [
     "1. Manager reviews pending orders → System displays order details.",
-    "2. Manager selects an order to approve → System updates the order status to approved.",
-    "3. Manager confirms the approval → System notifies the user of the approval."
+    "2. Manager selects an order to approve or reject → System updates the order status accordingly.",
+    "3. Manager confirms the approval or rejection → System notifies the manager of the successful update."
   ],
   "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 2): If the manager rejects the order, the system updates the order status to rejected and notifies the user."
+    "EF-1 (from Step 2): If the order cannot be updated due to system error, then the system displays an error message and prompts the manager to try again."
   ],
   "information_for_steps": [
     "1. Order details",
     "2. Selected order",
-    "3. Approval confirmation"
+    "3. Confirmation status"
   ]
 }

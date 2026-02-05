@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Browse Products",
+  "unique_id": "UC-004",
+  "area": "E-commerce",
+  "context_of_use": "The customer wants to browse, search, and view product listings to find items more easily.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to find and view products easily."
+  ],
+  "description": "The customer can browse, search, and view product listings and detailed product information.",
+  "triggering_event": "The customer initiates a product browsing session.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The customer is logged into the system."
+  ],
+  "postconditions": [
+    "The customer has viewed product listings and details."
+  ],
+  "assumptions": [
+    "The customer has an active account to log in."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to browse products by category.",
+    "The system shall allow customers to search for products by keyword.",
+    "The system shall allow customers to view product details."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None."
+  ],
+  "main_flow": [
+    "1. Customer browses products by category → System displays product listings by category.",
+    "2. Customer searches for products by keyword → System displays search results matching the keyword.",
+    "3. Customer views product details → System displays detailed information about the selected product."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Category selection data.",
+    "2. Search keyword data.",
+    "3. Product selection data."
+  ]
+}

@@ -2,7 +2,7 @@
   "use_case_name": "Manage Products",
   "unique_id": "UC-004",
   "area": "Product Management",
-  "context_of_use": "This use case allows admins to create and update products, including pricing and product details within the system.",
+  "context_of_use": "This use case allows admins to create and update product records, including pricing and inventory management.",
   "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -12,37 +12,38 @@
   "stakeholders_and_interests": [
     "admin: Control product availability and pricing"
   ],
-  "description": "This use case enables admins to create new products and update existing product prices to ensure accurate product information.",
-  "triggering_event": "Admin requests to manage products.",
+  "description": "Allows admins to create and update product records, including pricing and inventory management.",
+  "triggering_event": "Admin initiates product management actions.",
   "trigger_type": "External",
   "preconditions": [
     "Admin is authenticated and authorized to manage products."
   ],
   "postconditions": [
-    "New products are created and existing product prices are updated in the system."
+    "Products are created or updated successfully in the system."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to create and update products."
+    "Admin has the necessary permissions to manage products."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
-    "The system shall allow admins to update product prices."
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define the validation rules for product creation and updates."
+    "Clarification on the specific fields required for product creation and updates."
   ],
   "main_flow": [
-    "1. Admin creates a new product → System saves the new product details.",
-    "2. Admin updates an existing product price → System updates the product price."
+    "1. Admin creates a new product → System records the new product in the database.",
+    "2. Admin updates product prices → System updates the pricing information in the database.",
+    "3. Admin manages inventory levels → System adjusts inventory levels accordingly."
   ],
   "alternative_flows": [],
-  "exception_flows": [
-    "EF-1 (from Step 1): If the product creation fails due to validation errors, the system displays an error message and prompts the admin to correct the input."
-  ],
+  "exception_flows": [],
   "information_for_steps": [
     "1. Product details",
-    "2. Updated product price"
+    "2. Updated pricing information",
+    "3. Inventory level adjustments"
   ]
 }

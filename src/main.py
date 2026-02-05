@@ -80,7 +80,7 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
         ev = getattr(sr, "evaluation", None)
         if ev is not None:
             comp = getattr(ev, "Completeness", None)
-            coh = getattr(ev, "Coherence", None)
+            corr = getattr(ev, "Correctness", None)
             rel = getattr(ev, "Relevance", None)
 
             def _fmt_crit(name: str, crit) -> str:
@@ -96,9 +96,24 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
                     return f"- {name}: {score}/100"
                 return f"- {name}: {score}/100 ({result_txt})"
 
+            def _fmt_correctness(crit) -> str:
+                if crit is None:
+                    return "- Correctness: <no score>"
+                res = getattr(crit, "result", None)
+                score = getattr(crit, "score", None)
+                if res == "N/A":
+                    return "- Correctness: N/A"
+                if score is None and res is not None:
+                    return f"- Correctness: {res}"
+                if score is not None and res is not None:
+                    return f"- Correctness: {score}/100 ({res})"
+                if score is not None:
+                    return f"- Correctness: {score}/100"
+                return "- Correctness: <no score>"
+
             log("\n--- SCORES ---")
             log(_fmt_crit("Completeness", comp))
-            log(_fmt_crit("Coherence", coh))
+            log(_fmt_correctness(corr))
             log(_fmt_crit("Relevance", rel))
 
             missing = list(getattr(comp, "missing_or_weak_fields", []) or []) if comp else []

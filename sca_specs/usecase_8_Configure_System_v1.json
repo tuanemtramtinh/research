@@ -2,7 +2,7 @@
   "use_case_name": "Configure System",
   "unique_id": "UC-008",
   "area": "System Configuration",
-  "context_of_use": "The admin configures system settings to customize the system's behavior and features.",
+  "context_of_use": "This use case allows an admin to modify system-level settings and application configuration.",
   "scope": "System Configuration Module",
   "level": "User-goal",
   "primary_actors": [
@@ -10,36 +10,36 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Control system settings for customization"
+    "admin: Control system access and customization"
   ],
-  "description": "Allow administrators to change system settings and configuration options.",
+  "description": "Enable admins to modify system-level settings and application configuration.",
   "triggering_event": "Admin requests to configure system settings.",
   "trigger_type": "External",
   "preconditions": [
     "Admin is authenticated and authorized to configure system settings."
   ],
   "postconditions": [
-    "System settings are updated according to admin's configurations."
+    "System settings are updated according to admin specifications."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to access configuration options."
+    "The admin has the necessary permissions to access system configuration."
   ],
   "requirements_met": [
-    "The system shall allow administrators to configure system settings."
+    "The system shall allow admins to configure system settings."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define specific configuration options available to the admin."
+    "Clarification on specific settings available for configuration."
   ],
   "main_flow": [
-    "1. Admin requests to configure system settings → System presents configuration options.",
-    "2. Admin selects desired settings → System updates the settings.",
-    "3. Admin confirms changes → System saves the updated settings."
+    "1. Admin requests to configure system settings → System displays configuration options.",
+    "2. Admin selects desired settings to modify → System updates the selected settings.",
+    "3. Admin confirms the changes → System saves the updated settings."
   ],
   "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 1): If the admin is not authenticated, then the system denies access to configuration options."
+    "EF-1 (from Step 1): If the admin is not authenticated, the system denies access to configuration options."
   ],
   "information_for_steps": [
     "1. Admin credentials",

@@ -2,7 +2,7 @@
   "use_case_name": "Manage Products",
   "unique_id": "UC-006",
   "area": "Product Management",
-  "context_of_use": "This use case allows admins to create, update, and manage products within the system.",
+  "context_of_use": "This use case allows admins to create and update product information within the system.",
   "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,51 +10,46 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Ensure products are available and pricing is accurate."
+    "admin: Control product availability and pricing"
   ],
-  "description": "Enable admins to create products, update pricing, and maintain inventory levels.",
+  "description": "Allow admins to create products and update pricing and product details.",
   "triggering_event": "Admin initiates product management actions.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to manage products."
+    "Admin is authenticated and authorized to manage products."
   ],
   "postconditions": [
-    "Products are created, updated, or inventory levels are managed successfully."
+    "Products are created or updated successfully in the system."
   ],
   "assumptions": [
-    "Admin has access to the product management interface.",
-    "The system has a functioning database for product information."
+    "Admin has the necessary permissions to manage products."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
-    "The system shall allow admins to update product prices.",
-    "The system shall allow admins to manage inventory levels."
+    "The system shall allow admins to update product prices."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the approval process for new products."
+    "Clarification on the specific fields required for product creation."
   ],
   "main_flow": [
-    "1. Admin selects the option to manage products → System displays product management interface.",
-    "2. Admin chooses to create a new product → System prompts for product details.",
-    "3. Admin enters product details and submits → System saves the new product.",
-    "4. Admin chooses to update product prices → System displays current pricing information.",
-    "5. Admin updates the price and submits → System saves the updated price.",
-    "6. Admin chooses to manage inventory levels → System displays current inventory status.",
-    "7. Admin updates inventory levels and submits → System saves the updated inventory."
+    "1. Admin selects the option to create a new product → System prompts for product details.",
+    "2. Admin enters product details and submits → System creates the new product.",
+    "3. Admin selects a product to update → System displays current product information.",
+    "4. Admin updates product pricing and details → System saves the updated information."
   ],
-  "alternative_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the admin cancels the product creation, then the system returns to the main menu.",
+    "AF-2 (from Step 3): If the admin selects a product that does not exist, then the system displays an error message."
+  ],
   "exception_flows": [
-    "EF-1 (from Step 3): If product details are incomplete, System displays an error message and prompts for correction.",
-    "EF-2 (from Step 5): If the price update fails, System displays an error message indicating the failure."
+    "EF-1 (from Step 2): If the product details are incomplete, then the system prompts the admin to complete the required fields."
   ],
   "information_for_steps": [
-    "1. Admin credentials",
-    "2. Product details",
-    "3. Product ID",
-    "4. Updated price",
-    "5. Inventory levels"
+    "1. Product details",
+    "2. Confirmation of product creation",
+    "3. Selected product information",
+    "4. Updated product details"
   ]
 }

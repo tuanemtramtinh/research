@@ -2,7 +2,7 @@
   "use_case_name": "Purchase Products",
   "unique_id": "UC-005",
   "area": "E-commerce",
-  "context_of_use": "The customer wants to purchase products through the system by browsing, searching, viewing details, adding to cart, checking out, and tracking orders.",
+  "context_of_use": "This use case allows customers to browse, search, view product details, add items to their cart, and complete the checkout process.",
   "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,52 +10,46 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to efficiently purchase products"
+    "customer: wants to purchase products easily"
   ],
-  "description": "This use case supports the customer in purchasing products by enabling browsing, searching, viewing product details, adding items to the cart, checking out, and tracking orders.",
-  "triggering_event": "The customer initiates the purchase process.",
+  "description": "Enable customers to browse, search, view product details, add items to cart, and complete checkout.",
+  "triggering_event": "Customer initiates the purchase process.",
   "trigger_type": "External",
   "preconditions": [
-    "The customer is logged into the system.",
-    "The customer has access to the product catalog."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "The customer successfully completes the purchase.",
-    "The order is recorded in the system."
+    "Customer successfully completes the purchase and receives a confirmation."
   ],
   "assumptions": [
-    "The customer has a valid account.",
-    "The system has products available for purchase."
+    "The customer has a valid account to log in."
   ],
   "requirements_met": [
     "The system shall allow customers to browse products by category.",
     "The system shall allow customers to search for products by keyword.",
     "The system shall allow customers to view product details.",
     "The system shall allow customers to add products to their cart.",
-    "The system shall allow customers to checkout using multiple payment methods.",
-    "The system shall allow customers to track their orders."
+    "The system shall allow customers to checkout using multiple payment methods."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on payment methods supported during checkout."
+    "None identified."
   ],
   "main_flow": [
-    "1. customer browses products → system displays products by category.",
-    "2. customer searches for products → system returns search results.",
-    "3. customer views product details → system shows detailed information about the product.",
-    "4. customer adds product to cart → system updates the cart with the selected product.",
-    "5. customer checks out order → system processes the payment and confirms the order.",
-    "6. customer tracks orders → system provides the delivery status of the order."
+    "1. Customer browses products by category → System displays products in the selected category.",
+    "2. Customer searches for products by keyword → System displays search results matching the keyword.",
+    "3. Customer views product details → System shows detailed information about the selected product.",
+    "4. Customer adds product to cart → System updates the cart with the selected product.",
+    "5. Customer proceeds to checkout → System processes the payment and confirms the order."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. Product categories",
-    "2. Search keywords",
-    "3. Product details",
-    "4. Cart items",
-    "5. Payment information",
-    "6. Order status"
+    "1. Category selection",
+    "2. Search keyword",
+    "3. Product ID",
+    "4. Product ID",
+    "5. Payment information"
   ]
 }

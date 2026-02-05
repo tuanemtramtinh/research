@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from typing import Annotated, List, TypedDict
+from typing import Annotated, Dict, List, TypedDict
 
 import operator
+import sys
+from pathlib import Path
 
 from langgraph.graph import END, START, StateGraph
 
@@ -43,6 +45,10 @@ class OrchestratorState(TypedDict, total=False):
     # Final reduced view
     scenario_results: List[ScenarioResult]
 
+    # Optional per-usecase reference file path for correctness evaluation
+    # (keyed by UseCase.id)
+    reference_spec_paths: Dict[int, str | None]
+
     # Reduced view
     # merged_actors: List[str]
 
@@ -59,9 +65,61 @@ def plan_tasks_node(state: OrchestratorState):
     }
 
 
+def collect_reference_paths_node(state: OrchestratorState):
+    """Prompt for a reference file per use case (Enter => skip correctness).
+
+    This runs BEFORE the map step so parallel workers do not concurrently block on stdin.
+    """
+
+    use_cases = state.get("use_cases") or []
+    mapping: Dict[int, str | None] = {}
+
+    # Non-interactive mode: do not block.
+    try:
+        if not sys.stdin or not sys.stdin.isatty():
+            for uc in use_cases:
+                mapping[int(getattr(uc, "id", 0) or 0)] = None
+            return {"reference_spec_paths": mapping}
+    except Exception:
+        for uc in use_cases:
+            mapping[int(getattr(uc, "id", 0) or 0)] = None
+        return {"reference_spec_paths": mapping}
+
+    repo_root = Path(__file__).resolve().parents[1]
+
+    print("\n=== REFERENCE FILES (Correctness) ===")
+    print(
+        "Enter a reference file path for each use case, or press Enter to skip correctness (N/A).\n"
+    )
+
+    for uc in use_cases:
+        uc_id = int(getattr(uc, "id", 0) or 0)
+        uc_name = str(getattr(uc, "name", "") or "").strip() or "<unnamed use case>"
+
+        while True:
+            raw = input(f"Reference file for [{uc_id}] {uc_name}: ").strip()
+            if not raw:
+                mapping[uc_id] = None
+                break
+
+            p = Path(raw).expanduser()
+            if not p.is_absolute():
+                p = (repo_root / p).resolve()
+
+            if p.exists() and p.is_file():
+                mapping[uc_id] = str(p)
+                break
+
+            print(f"  Not found: {p}")
+            print("  Try again, or press Enter to skip.")
+
+    return {"reference_spec_paths": mapping}
+
+
 def map_to_workers(state: OrchestratorState):
     Send = _import_send()
     use_cases = state.get("use_cases") or []
+    ref_paths = state.get("reference_spec_paths") or {}
 
     if Send is None:
         # Fallback: no Send available, run sequentially by routing to a single worker.
@@ -70,6 +128,7 @@ def map_to_workers(state: OrchestratorState):
     sends = []
     for uc in use_cases:
         uc_actors = list(getattr(uc, "participating_actors", []) or [])
+        uc_id = int(getattr(uc, "id", 0) or 0)
         sends.append(
             Send(
                 "worker",
@@ -78,6 +137,7 @@ def map_to_workers(state: OrchestratorState):
                     # IMPORTANT: pass only participating actors for this use case
                     "actors": uc_actors,
                     "use_case": uc,
+                    "reference_spec_path": ref_paths.get(uc_id),
                 },
             )
         )
@@ -92,19 +152,23 @@ def worker_node(state: dict):
         requirement_text=state.get("requirement_text", []),
         # IMPORTANT: keep actors constrained to this use case
         actors=list(getattr(use_case, "participating_actors", []) or []),
+        reference_spec_path=state.get("reference_spec_path"),
     )
     return {"scenario_results_acc": [result]}
 
 
 def sequential_worker_node(state: OrchestratorState):
     results: List[ScenarioResult] = []
+    ref_paths = state.get("reference_spec_paths") or {}
     for uc in state.get("use_cases") or []:
+        uc_id = int(getattr(uc, "id", 0) or 0)
         results.append(
             run_sca_use_case(
                 use_case=uc,
                 requirement_text=state.get("requirement_text", ""),
                 # IMPORTANT: pass only participating actors for this use case
                 actors=list(getattr(uc, "participating_actors", []) or []),
+                reference_spec_path=ref_paths.get(uc_id),
             )
         )
     return {"scenario_results_acc": results}
@@ -173,6 +237,7 @@ def build_main_graph():
     workflow = StateGraph(OrchestratorState)
 
     workflow.add_node("plan_tasks", plan_tasks_node)
+    workflow.add_node("collect_references", collect_reference_paths_node)
     # workflow.add_node("reduce_plan", reduce_plan_node)
     workflow.add_node("worker", worker_node)
     workflow.add_node("sequential_worker", sequential_worker_node)
@@ -180,11 +245,13 @@ def build_main_graph():
 
     workflow.add_edge(START, "plan_tasks")
 
+    workflow.add_edge("plan_tasks", "collect_references")
+
     # Map step (parallel if Send exists; otherwise go sequential)
     # NOTE: reduce_plan_node is redundant since rpa_graph already does
     # synonym checking with LLM in synonym_check_node
     workflow.add_conditional_edges(
-        "plan_tasks",
+        "collect_references",
         map_to_workers,
         {
             "sequential": "sequential_worker",

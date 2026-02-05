@@ -2,56 +2,51 @@
   "use_case_name": "Manage Users",
   "unique_id": "UC-009",
   "area": "User Management",
-  "context_of_use": "The admin manages user accounts within the system to control access and roles.",
-  "scope": "User account management functionalities within the system.",
+  "context_of_use": "This use case allows administrators to create, update, and control user accounts and access within the system.",
+  "scope": "User Management System",
   "level": "User-goal",
   "primary_actors": [
     "admin"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin",
-    "system users"
+    "admin: Control system access through user account management."
   ],
-  "description": "Allow admins to create, update, deactivate, and manage user accounts and roles.",
-  "triggering_event": "Admin initiates a user management action.",
+  "description": "Enables administrators to create, update, and control user accounts and access.",
+  "triggering_event": "Admin requests to manage user accounts.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to manage user accounts."
+    "Admin is authenticated and authorized to manage user accounts."
   ],
   "postconditions": [
-    "User accounts are created, updated, or deactivated as per admin actions.",
-    "System access is controlled based on updated user roles."
+    "User accounts are successfully created, updated, or deleted as per admin actions."
   ],
   "assumptions": [
-    "The admin has the required knowledge to manage user accounts.",
-    "The system is operational and accessible to the admin."
+    "The admin has the necessary permissions to manage user accounts."
   ],
   "requirements_met": [
-    "Admin can create new user accounts.",
-    "Admin can update existing user account information.",
-    "Admin can deactivate user accounts."
+    "The system shall allow the admin to create new user accounts.",
+    "The system shall allow the admin to update existing user accounts.",
+    "The system shall allow the admin to delete user accounts."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "Clarification on the specific permissions required for different user roles."
   ],
   "main_flow": [
-    "1. Admin selects the option to manage user accounts → System displays user management interface.",
-    "2. Admin chooses to create, update, or deactivate a user account → System processes the request and updates the user account accordingly.",
-    "3. System confirms the action taken by the admin → Admin receives confirmation message."
+    "1. Admin requests to manage user accounts → System displays user management interface.",
+    "2. Admin selects to create, update, or delete a user account → System processes the request.",
+    "3. Admin confirms the action → System updates the user account information accordingly.",
+    "4. System displays confirmation of the action taken → User account management is complete."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 2): If the admin attempts to create a user account with an existing username, the system displays an error message."
-  ],
+  "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 1): If the admin is not logged in, the system prompts the admin to log in."
+    "EF-1 (from Step 1): If the admin is not authenticated, then the system denies access and prompts for login."
   ],
   "information_for_steps": [
-    "1. Admin credentials and permissions.",
-    "2. User account details (username, email, role).",
-    "3. Confirmation messages and error messages."
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Confirmation of action"
   ]
 }

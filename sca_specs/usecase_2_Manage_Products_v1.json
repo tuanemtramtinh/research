@@ -1,0 +1,47 @@
+{
+  "use_case_name": "Manage Products",
+  "unique_id": "UC-002",
+  "area": "Product Management",
+  "context_of_use": "The admin manages product records to ensure availability and accurate pricing.",
+  "scope": "Product Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Ensure products are available and priced correctly."
+  ],
+  "description": "Create and update product records including pricing and availability.",
+  "triggering_event": "Admin initiates product management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has permissions to manage products."
+  ],
+  "postconditions": [
+    "Product records are created or updated successfully."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to create and update products."
+  ],
+  "requirements_met": [
+    "The system shall allow the admin to create new products.",
+    "The system shall allow the admin to update product prices."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the process for handling product deletions."
+  ],
+  "main_flow": [
+    "1. Admin creates a new product → System records the new product.",
+    "2. Admin updates product prices → System updates the pricing information."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Updated pricing information"
+  ]
+}

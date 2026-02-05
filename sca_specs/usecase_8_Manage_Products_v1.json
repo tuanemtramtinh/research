@@ -2,60 +2,52 @@
   "use_case_name": "Manage Products",
   "unique_id": "UC-008",
   "area": "Product Management",
-  "context_of_use": "Admin users managing product-related tasks within the system.",
-  "scope": "The system allows admins to create, update, and manage products.",
+  "context_of_use": "This use case allows administrators to create, update, and manage products within the system.",
+  "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
     "admin"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin",
-    "customers"
+    "admin: Control product availability and pricing"
   ],
-  "description": "Enable admins to create products, update pricing, and manage inventory levels.",
+  "description": "Allow administrators to create products, update pricing, and manage inventory levels.",
   "triggering_event": "Admin initiates product management actions.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to manage products."
+    "Admin is authenticated and authorized to manage products."
   ],
   "postconditions": [
-    "Products are created or updated in the system.",
-    "Inventory levels are adjusted accordingly."
+    "Products are created, updated, or inventory levels are managed successfully."
   ],
   "assumptions": [
-    "Admin has access to the necessary product information.",
-    "The system is operational and accessible."
+    "Admin has the necessary permissions to perform product management tasks."
   ],
   "requirements_met": [
-    "Admin can create new products.",
-    "Admin can update product prices.",
-    "Admin can manage inventory levels."
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "Clarification on the approval process for product changes."
   ],
   "main_flow": [
-    "1. Admin selects the option to create a new product → System prompts for product details.",
-    "2. Admin enters product details and submits → System creates the product and confirms creation.",
-    "3. Admin selects a product to update → System displays current product information.",
-    "4. Admin updates product pricing and submits → System updates the pricing and confirms the update.",
-    "5. Admin selects inventory management option → System displays current inventory levels.",
-    "6. Admin adjusts inventory levels and submits → System updates inventory and confirms the adjustment."
+    "1. Admin creates a new product → System saves the product and confirms creation.",
+    "2. Admin updates product prices → System updates the pricing information and confirms the update.",
+    "3. Admin manages inventory levels → System adjusts inventory and confirms the changes."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the admin cancels the product creation, the system returns to the main menu without creating a product.",
-    "AF-2 (from Step 3): If the admin cannot find the product, the system prompts to search for another product."
-  ],
+  "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 2): If the product creation fails due to validation errors, the system displays error messages."
+    "EF-1 (from Step 1): If product creation fails due to validation errors, the system displays error messages.",
+    "EF-2 (from Step 2): If price update fails, the system displays an error message indicating the reason.",
+    "EF-3 (from Step 3): If inventory management fails, the system displays an error message."
   ],
   "information_for_steps": [
-    "1. Product details include name, description, price, and inventory level.",
-    "2. Confirmation messages indicate successful creation or updates.",
-    "3. Inventory levels must be a non-negative integer."
+    "1. Product details",
+    "2. Updated pricing information",
+    "3. Inventory level adjustments"
   ]
 }

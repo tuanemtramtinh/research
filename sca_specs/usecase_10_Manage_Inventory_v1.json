@@ -1,0 +1,51 @@
+{
+  "use_case_name": "Manage Inventory",
+  "unique_id": "UC-010",
+  "area": "Inventory Management",
+  "context_of_use": "This use case allows admins to monitor and update inventory levels to prevent stockouts.",
+  "scope": "Inventory Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control inventory levels to ensure product availability."
+  ],
+  "description": "Enable admins to monitor and update inventory levels to prevent stockouts.",
+  "triggering_event": "Admin initiates inventory management.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated.",
+    "Admin has access to inventory management features."
+  ],
+  "postconditions": [
+    "Inventory levels are updated successfully.",
+    "Stock availability is ensured."
+  ],
+  "assumptions": [
+    "Admin has the necessary permissions to manage inventory."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to manage inventory levels."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific inventory management features required."
+  ],
+  "main_flow": [
+    "1. Admin initiates inventory management → System displays current inventory levels.",
+    "2. Admin updates inventory levels → System saves the updated inventory levels.",
+    "3. Admin confirms changes → System displays a success message."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin is not authenticated, the system displays an error message and denies access."
+  ],
+  "information_for_steps": [
+    "1. Current inventory levels",
+    "2. Updated inventory levels",
+    "3. Confirmation status"
+  ]
+}

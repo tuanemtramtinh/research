@@ -1,56 +1,49 @@
 {
   "use_case_name": "Configure System",
-  "unique_id": "UC-11",
+  "unique_id": "UC-011",
   "area": "System Configuration",
-  "context_of_use": "The admin accesses the system to modify settings and preferences.",
-  "scope": "System-wide configuration settings and application preferences.",
+  "context_of_use": "The admin configures system-wide settings to customize the system's behavior.",
+  "scope": "System Configuration Module",
   "level": "User-goal",
   "primary_actors": [
     "admin"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin",
-    "system users"
+    "admin: Control system settings for customization"
   ],
-  "description": "Allow admins to configure system-wide settings and application preferences.",
-  "triggering_event": "Admin initiates configuration of system settings.",
+  "description": "Allows the admin to adjust system-wide settings and configuration parameters.",
+  "triggering_event": "Admin initiates the configuration process.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to configure settings."
+    "Admin is authenticated and authorized to configure system settings."
   ],
   "postconditions": [
-    "System settings are updated according to admin's configurations.",
-    "Changes are saved and applied to the system."
+    "System settings are updated according to the admin's configurations."
   ],
   "assumptions": [
-    "Admin has knowledge of system settings.",
-    "System is operational and accessible."
+    "The admin has the necessary permissions to configure system settings."
   ],
   "requirements_met": [
-    "Admin can access configuration options.",
-    "Admin can save changes to system settings."
+    "The system shall allow the admin to configure system settings."
   ],
-  "priority": "Medium",
+  "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Potential for misconfiguration leading to system issues."
+    "Clarification on specific settings available for configuration."
   ],
   "main_flow": [
-    "1. Admin navigates to system configuration settings → System displays configuration options.",
-    "2. Admin modifies desired settings → System accepts changes.",
-    "3. Admin saves changes → System confirms settings have been updated."
+    "1. Admin initiates the configuration process → System displays configuration options.",
+    "2. Admin selects desired settings → System updates the settings.",
+    "3. Admin confirms the changes → System saves the updated settings."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): Admin cancels configuration → System returns to previous screen without changes."
-  ],
+  "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 2): Admin inputs invalid data → System displays error message and prompts for valid input."
+    "EF-1 (from Step 1): If the admin is not authenticated, the system denies access to configuration options."
   ],
   "information_for_steps": [
-    "1. Configuration options available for modification.",
-    "2. Validations for input data.",
-    "3. Confirmation message upon successful update."
+    "1. Configuration options",
+    "2. Selected settings",
+    "3. Confirmation of changes"
   ]
 }

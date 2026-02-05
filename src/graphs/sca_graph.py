@@ -227,6 +227,18 @@ def _save_use_case_spec_json(*, use_case: UseCase, spec_version: int, spec_obj: 
     return str(out_path)
 
 
+def _resolve_reference_path(path_str: str) -> Path:
+    p = Path(path_str).expanduser()
+    if not p.is_absolute():
+        repo_root = Path(__file__).resolve().parents[2]
+        p = (repo_root / p).resolve()
+    return p
+
+
+def _read_reference_text(path_str: str) -> str:
+    p = _resolve_reference_path(path_str)
+    return p.read_text(encoding="utf-8")
+
 
 _WRITER_SYSTEM_PROMPT = "You are a professional, strict, and detail-oriented Use Case Specification Writer. You output ONLY a single JSON object and nothing else. You never leave any required field empty. You only infer information that is logically supported by the given Requirement Text. If information is implicit, you must state it explicitly using formal requirement language."
 
@@ -451,7 +463,7 @@ If any required field is missing, unclear, or weakly defined, you MUST treat it 
 
 You will evaluate the use case using EXACTLY THREE criteria:
 1. Completeness
-2. Coherence
+2. Correctness
 3. Relevance
 
 You MUST output results in the specified JSON format ONLY.
@@ -459,6 +471,10 @@ You MUST output results in the specified JSON format ONLY.
 --------------------------------
 INPUT
 --------------------------------
+<REFERENCE_SCENARIO>
+{{reference_scenario}}
+</REFERENCE_SCENARIO>
+
 <USE_CASE_SPEC>
 {{use_case_spec}}
 </USE_CASE_SPEC>
@@ -633,31 +649,115 @@ PASS if Total Score ≥ 70.
 FAIL if Total Score < 70.
 
 Provide rationale:
-- Which fields are weak, missing, or incorrect
+- Which required fields are weak, missing, or incorrect
 
 ================================
-2. COHERENCE
+2. CORRECTNESS
 ================================
 
-Evaluate logical consistency ACROSS ALL FIELDS.
+Your task is to evaluate the CORRECTNESS of the generated use case specification (Scenario B)
+by comparing it against the provided reference scenario/specification (Scenario A).
 
-Check:
-- Use Case Name matches Description and flows
-- Actor actions are consistent across all flows
-- Triggering Event logically leads to Main Flow
-- Preconditions are required by the flows
-- Postconditions are achieved by the flows
-- Alternative and Exception Flows clearly branch from Main Flow
-- No contradictions between fields
+Correctness is defined as the degree to which Scenario B preserves the semantic intent,
+logical execution order, and branching structure of Scenario A, even if the wording,
+number of steps, or level of detail differs.
 
-Scoring (0–100):
-- 90–100: Fully consistent and logical
-- 70–89: Minor inconsistencies
-- 50–69: Several logical mismatches
-- <50: Conflicting or illogical structure
+Scenario B may contain extra, merged, or missing steps.
+Such differences are acceptable only if they do not violate semantic meaning,
+logical prerequisites, or valid branching behavior defined by Scenario A.
 
-PASS if score ≥ 70.
+You must evaluate semantic and logical correspondence, not textual similarity,
+writing quality, or completeness.
 
+(No-reference rule: If no reference scenario is provided, you MUST NOT penalize the use case.
+You MUST follow the Correctness rule at the end of this prompt: set Correctness to N/A with score=null.)
+
+1. Semantic Step Alignment (40 points)
+
+Evaluate whether the steps in Scenario B are semantically equivalent to the steps in Scenario A.
+
+Semantic equivalence means that two steps express the same intent and functional action, even if they are phrased differently or represented at different levels of granularity.
+
+Scoring:
+
+40: All steps in Scenario B can be semantically mapped to steps in Scenario A.
+Differences in phrasing, step splitting, or merging do not alter the intended actions.
+
+25: Most steps are semantically aligned, but some steps are only partially equivalent or unclear in intent.
+
+10: Several steps in Scenario B perform actions that cannot be semantically matched to Scenario A.
+
+0: The majority of steps in Scenario B represent different intentions or unrelated behavior.
+
+--------------------------------
+
+2. Logical Order of Steps (30 points)
+
+Evaluate whether the sequence of steps in Scenario B follows a valid cause-effect order when compared to Scenario A.
+
+Extra or missing steps are acceptable only if all logical prerequisites and execution dependencies are preserved.
+
+Scoring:
+
+30: The order of steps in Scenario B preserves all logical prerequisites defined in Scenario A.
+Any reordering, insertion, or omission of steps remains logically valid.
+
+20: The overall order is valid, but some steps appear in less optimal positions, creating minor logical ambiguity.
+
+10: The sequence includes steps that occur before their required conditions are established.
+
+0: The step order violates fundamental cause-effect logic, making scenario execution invalid.
+
+--------------------------------
+
+3. Branching Point Correctness
+
+(Main Flow ↔ Alternative / Exception Flows) (30 points)
+
+Evaluate whether Alternative / Exception Flows in Scenario B branch from semantically appropriate points in the Main Flow, relative to Scenario A.
+
+A branching point is correct if:
+
+The triggering condition logically arises from the corresponding main flow step
+
+The branch does not introduce a new or unrelated use case goal
+
+Scoring:
+
+30: All Alternative / Exception Flows in Scenario B branch from steps that are semantically equivalent to the branching points in Scenario A, with reasonable and consistent conditions.
+
+20: Branching points are mostly appropriate, but some branches are linked only implicitly or with weaker semantic justification.
+
+10: Several Alternative / Exception Flows branch from unclear or semantically incorrect main flow steps.
+
+0: Branching points are invalid, unrelated to the main flow, or represent separate use cases.
+
+--------------------------------
+SCORING & DECISION
+--------------------------------
+
+Total Correctness Score = Semantic Step Alignment (0-40) + Logical Order of Steps (0-30) + Branching Point Correctness (0-30)
+= 0-100
+
+PASS if Total Correctness Score ≥ 70
+FAIL if Total Correctness Score < 70
+
+Your rationale must explicitly identify:
+- Which steps in Scenario B are not semantically aligned with Scenario A
+- Where logical execution order is weakened or violated
+- Which branching points are misplaced or unjustified
+- Whether extra or missing steps affect causal correctness
+
+Do NOT:
+- Compare wording or writing style
+
+- Require step-by-step textual identity
+
+- Penalize acceptable step merging or splitting
+
+- Infer missing behavior not explicitly stated
+
+- Evaluate completeness or system design quality
 ================================
 3. RELEVANCE
 ================================
@@ -782,11 +882,12 @@ OUTPUT FORMAT (STRICT JSON)
       "field name"
     ]
   },
-  "Coherence": {
-    "score": <0-100>,
-    "result": "PASS | FAIL",
-    "rationale": "..."
-  },
+    "Correctness": {
+        "score": <0-100 or null>,
+        "result": "PASS | FAIL | N/A",
+        "rationale": "...",
+        "reference_path": "<string or null>"
+    },
   "Relevance": {
     "score": <0-100>,
     "result": "PASS | FAIL",
@@ -798,6 +899,13 @@ Rules:
 - Do NOT assume missing fields
 - Judge only based on provided content
 - Be strict and consistent
+
+Correctness rule:
+- If <REFERENCE_SCENARIO> is empty or only whitespace, you MUST set:
+    - Correctness.result = "N/A"
+    - Correctness.score = null
+    - Correctness.rationale = a short explanation that correctness was skipped due to missing reference
+    - Correctness.reference_path = null
 """
 
 
@@ -807,6 +915,16 @@ def _judge_node(detector_name: str):
         spec_obj = state.get("use_case_spec_json") or {}
         spec = json.dumps(spec_obj, ensure_ascii=False, indent=2)
         spec_version = int(state.get("spec_version") or 0)
+        reference_spec_path = state.get("reference_spec_path")
+
+        # Load reference scenario text (if any) for correctness evaluation.
+        reference_text = ""
+        if isinstance(reference_spec_path, str) and reference_spec_path.strip():
+            try:
+                reference_text = _read_reference_text(reference_spec_path).strip()
+            except Exception as e:
+                # Keep as empty; judges will return N/A.
+                reference_text = ""
 
         if model is None:
             # Conservative fallback: fail if any required JSON fields are missing.
@@ -838,6 +956,12 @@ def _judge_node(detector_name: str):
                 missing = required_keys[:]
 
             completeness_pass = len(missing) == 0
+            correctness_obj = {
+                "score": None,
+                "result": "N/A",
+                "rationale": "No reference scenario was provided; correctness evaluation was skipped.",
+                "reference_path": (reference_spec_path.strip() if isinstance(reference_spec_path, str) else None),
+            }
             evaluation = UseCaseEvaluation(
                 Completeness={
                     "score": 80 if completeness_pass else 40,
@@ -847,13 +971,7 @@ def _judge_node(detector_name: str):
                     else "Missing required JSON fields.",
                     "missing_or_weak_fields": missing,
                 },
-                Coherence={
-                    "score": 70 if completeness_pass else 40,
-                    "result": "PASS" if completeness_pass else "FAIL",
-                    "rationale": "Cannot verify coherence without full content."
-                    if completeness_pass
-                    else "Insufficient content to verify coherence.",
-                },
+                Correctness=correctness_obj,
                 Relevance={
                     "score": 70 if completeness_pass else 40,
                     "result": "PASS" if completeness_pass else "FAIL",
@@ -868,10 +986,37 @@ def _judge_node(detector_name: str):
             return {"judge_results": [jr]}
 
         structured_llm = model.with_structured_output(UseCaseEvaluation)
-        prompt = _JUDGE_HUMAN_PROMPT_TEMPLATE.replace("{{use_case_spec}}", spec)
-        evaluation: UseCaseEvaluation = structured_llm.invoke(
+        prompt = (
+            _JUDGE_HUMAN_PROMPT_TEMPLATE.replace("{{use_case_spec}}", spec)
+            .replace("{{reference_scenario}}", reference_text)
+        )
+        evaluation = structured_llm.invoke(
             [("system", _JUDGE_SYSTEM_PROMPT), ("human", prompt)]
         )
+
+        # Hard guard: if no reference scenario was provided, correctness must be N/A.
+        if not (reference_text or "").strip():
+            try:
+                if getattr(evaluation, "Correctness", None) is not None:
+                    evaluation.Correctness.result = "N/A"
+                    evaluation.Correctness.score = None
+                    evaluation.Correctness.rationale = (
+                        "No reference scenario was provided; correctness evaluation was skipped."
+                    )
+                    evaluation.Correctness.reference_path = None
+            except Exception:
+                pass
+        # Ensure reference path is always captured.
+        try:
+            if getattr(evaluation, "Correctness", None) is not None:
+                if getattr(evaluation.Correctness, "reference_path", None) in (None, ""):
+                    evaluation.Correctness.reference_path = (
+                        reference_spec_path.strip()
+                        if isinstance(reference_spec_path, str)
+                        else None
+                    )
+        except Exception:
+            pass
         jr = UseCaseSpecJudgeResult(
             detector=detector_name, spec_version=spec_version, evaluation=evaluation
         )
@@ -894,7 +1039,7 @@ def combiner_node(state: ScaState):
 
         return max(1, int(math.ceil((2.0 * n) / 3.0)))
 
-    criteria_names = ["Completeness", "Coherence", "Relevance"]
+    criteria_names = ["Completeness", "Correctness", "Relevance"]
     failed: Dict[str, str] = {}
     missing_fields: List[str] = []
 
@@ -925,7 +1070,7 @@ def combiner_node(state: ScaState):
             failed[crit] = "No judge results produced."
             continue
 
-        fails = [(d, rat) for (d, res, rat) in rows if res != "PASS"]
+        fails = [(d, rat) for (d, res, rat) in rows if res not in ("PASS", "N/A")]
         if len(fails) >= _threshold(n):
             # Majority FAIL
             msgs = []
@@ -1012,7 +1157,11 @@ def build_sca_graph():
 
 
 def run_sca_use_case(
-    *, use_case: UseCase, requirement_text: List[str], actors: List[str] | None = None
+    *,
+    use_case: UseCase,
+    requirement_text: List[str],
+    actors: List[str] | None = None,
+    reference_spec_path: str | None = None,
 ) -> ScenarioResult:
     app = build_sca_graph()
     out = app.invoke(
@@ -1024,6 +1173,7 @@ def run_sca_use_case(
             "spec_version": 0,
             "judge_results": [],
             "validation": None,
+            "reference_spec_path": reference_spec_path,
         }
     )
     spec_json = out.get("use_case_spec_json") or {}
@@ -1048,9 +1198,11 @@ def run_sca_use_case(
             return None
 
         comp_scores: List[int] = []
-        coh_scores: List[int] = []
+        corr_scores: List[int] = []
         rel_scores: List[int] = []
         missing_fields: List[str] = []
+        corr_reference_path: str | None = None
+        corr_has_any: bool = False
 
         for r in matching:
             ev = getattr(r, "evaluation", None)
@@ -1065,9 +1217,15 @@ def run_sca_use_case(
                     if fs and fs not in missing_fields:
                         missing_fields.append(fs)
 
-            coh = getattr(ev, "Coherence", None)
-            if coh is not None:
-                coh_scores.append(int(getattr(coh, "score", 0) or 0))
+            corr = getattr(ev, "Correctness", None)
+            if corr is not None:
+                corr_has_any = True
+                s = getattr(corr, "score", None)
+                if isinstance(s, int):
+                    corr_scores.append(s)
+                rp = getattr(corr, "reference_path", None)
+                if corr_reference_path is None and isinstance(rp, str) and rp.strip():
+                    corr_reference_path = rp.strip()
 
             rel = getattr(ev, "Relevance", None)
             if rel is not None:
@@ -1075,8 +1233,24 @@ def run_sca_use_case(
 
         n = len(matching)
         avg_comp = _avg_int(comp_scores)
-        avg_coh = _avg_int(coh_scores)
+        avg_corr = _avg_int(corr_scores)
         avg_rel = _avg_int(rel_scores)
+
+        correctness_obj: dict
+        if not corr_has_any or not corr_scores:
+            correctness_obj = {
+                "score": None,
+                "result": "N/A",
+                "rationale": "No reference scenario was provided; correctness evaluation was skipped.",
+                "reference_path": corr_reference_path,
+            }
+        else:
+            correctness_obj = {
+                "score": avg_corr,
+                "result": "PASS" if avg_corr >= 70 else "FAIL",
+                "rationale": f"Average across {n} judge(s).",
+                "reference_path": corr_reference_path,
+            }
 
         return UseCaseEvaluation(
             Completeness={
@@ -1085,11 +1259,7 @@ def run_sca_use_case(
                 "rationale": f"Average across {n} judge(s).",
                 "missing_or_weak_fields": missing_fields,
             },
-            Coherence={
-                "score": avg_coh,
-                "result": "PASS" if avg_coh >= 70 else "FAIL",
-                "rationale": f"Average across {n} judge(s).",
-            },
+            Correctness=correctness_obj,
             Relevance={
                 "score": avg_rel,
                 "result": "PASS" if avg_rel >= 70 else "FAIL",

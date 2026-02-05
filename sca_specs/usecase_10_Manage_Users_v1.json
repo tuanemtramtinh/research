@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-010",
+  "area": "User Management",
+  "context_of_use": "The admin manages user accounts to control system access.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system access through user management."
+  ],
+  "description": "Create, update, and control user accounts and access permissions.",
+  "triggering_event": "Admin initiates user management.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "postconditions": [
+    "User accounts are created, updated, or deleted as per admin actions."
+  ],
+  "assumptions": [
+    "The admin has the required permissions to manage user accounts."
+  ],
+  "requirements_met": [
+    "The system shall allow the admin to create user accounts.",
+    "The system shall allow the admin to update user account information.",
+    "The system shall allow the admin to delete user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific permissions required for different user roles."
+  ],
+  "main_flow": [
+    "1. Admin selects the option to manage user accounts → System displays the user management interface.",
+    "2. Admin creates a new user account → System saves the new user account and confirms creation.",
+    "3. Admin updates an existing user account → System saves the updated user account and confirms the update.",
+    "4. Admin deletes a user account → System removes the user account and confirms deletion."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin lacks permissions, the system displays an error message indicating insufficient permissions."
+  ],
+  "information_for_steps": [
+    "1. User account details.",
+    "2. Updated user account information.",
+    "3. User account identifier for deletion."
+  ]
+}
