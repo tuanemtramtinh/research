@@ -28,7 +28,7 @@ def _import_send():
 
 
 class OrchestratorState(TypedDict, total=False):
-    requirement_text: str
+    requirement_text: List[str]
     # tasks: List[TaskItem]
 
     actors: List[str]
@@ -89,10 +89,9 @@ def worker_node(state: dict):
     use_case = state.get("use_case")
     result = run_sca_use_case(
         use_case=use_case,
-        requirement_text=str(state.get("requirement_text", "")),
+        requirement_text=state.get("requirement_text", []),
         # IMPORTANT: keep actors constrained to this use case
-        actors=state.get("actors")
-        or (getattr(use_case, "participating_actors", None) or []),
+        actors=list(getattr(use_case, "participating_actors", []) or []),
     )
     return {"scenario_results_acc": [result]}
 
@@ -196,6 +195,5 @@ def build_main_graph():
     workflow.add_edge("worker", "reduce")
     workflow.add_edge("sequential_worker", "reduce")
     workflow.add_edge("reduce", END)
-    workflow.add_edge("plan_tasks", END)
 
     return workflow.compile()
