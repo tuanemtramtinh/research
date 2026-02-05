@@ -1,0 +1,280 @@
+{
+  "requirement_text": "As an urban mobility planner, I want to solutions model congestion so that I can validate urban mobility proposals.\nAs an urban mobility planner, I want to adjust speed limits so that I can review the effects of the measure.\nAs an urban mobility planner, I want to revertible lanes switch directions of so that I can review the effects of the measure.\nAs an urban mobility planner, I want to model roundabouts so that I can review the effects of the measure.\nAs an urban mobility planner, I want to model adaptive traffic lights so that I can review the effects of the measure.\nAs an urban mobility planner, I want to close down roads so that I can review the effects of the measure.\nAs an urban mobility planner, I want to increase traffic in certain spots so that I can simulate crowded events.\nAs an urban mobility planner, I want to be notified if a measure leads to congestion so that I do not overlook the congestion.\nAs an urban mobility planner, I want to be notified if a measure disadvantages a neighborhood so that fairness can be increased.\nAs an urban mobility planner, I want to review the emission levels at a certain pollution sensor so that environmental effects are considered.\nAs an urban mobility planner, I want to review the traffic levels at a certain traffic sensor so that traffic levels are considered.\nAs an urban mobility planner, I want to see traffic situations at past dates so that I can analyze traffic scenarios on similar days.\nAs an urban mobility planner, I want to get an estimation of the cost of a measure so that I can review the financial consequences of the measure.\nAs an urban mobility planner, I want to know the estimated emission of a congestion, so that I can review the pollution effects of a measure or event.\nAs an urban mobility planner, I want to know the estimated noise levels of traffic situations, so that I can review the environmental effects of a measure or event.\nAs an urban mobility planner, I want to simulate crisis, so that I can aide emergency services.\nAs an urban mobility planner, I want to report on the pollution effects of a measure, so that I can offer validation for my proposal.\nAs an urban mobility planner, I want to report on the fairness of a measure, so that I can offer validation for my proposal.\nAs an urban mobility planner, I want to report on the cost of a measure, so that I can offer validation for my proposal.\nAs an urban mobility planner, I want to report on the congestion effects of a measure, so that I can offer validation for my proposal.\nAs an urban mobility planner, I want to report an executive summary of a solution, so that I can inform the mayor of the consequences of a proposal.\nAs an urban mobility planner, I want to make an extensive report on a solution, so that I can inform the consultancy company of the consequences of a proposal.\nAs an urban mobility planner, I want to get suggested solutions for a traffic congestion, so that I can be inspired to solve the problem.",
+  "actors": [
+    {
+      "actor": "urban mobility planner",
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "urban mobility planner",
+      "aliases": [],
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Receive Impact Alerts",
+      "description": "Notify the urban mobility planner about neighborhood disadvantages and congestion impacts caused by measures.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "receive neighborhood impact notifications",
+          "original_sentence": "As an urban mobility planner, I want to be notified if a measure disadvantages a neighborhood so that fairness can be increased.",
+          "sentence_idx": 8
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "receive congestion notifications",
+          "original_sentence": "As an urban mobility planner, I want to be notified if a measure leads to congestion so that I do not overlook the congestion.",
+          "sentence_idx": 7
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 2,
+      "name": "Generate Measure Reports",
+      "description": "Produce detailed and summary reports on the pollution, fairness, cost, congestion effects, and overall solution of a measure.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "report pollution effects of measure",
+          "original_sentence": "As an urban mobility planner, I want to report on the pollution effects of a measure so that I can offer validation for my proposal.",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "report fairness of measure",
+          "original_sentence": "As an urban mobility planner, I want to report on the fairness of a measure so that I can offer validation for my proposal.",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "report cost of measure",
+          "original_sentence": "As an urban mobility planner, I want to report on the cost of a measure so that I can offer validation for my proposal.",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "report congestion effects of measure",
+          "original_sentence": "As an urban mobility planner, I want to report on the congestion effects of a measure so that I can offer validation for my proposal.",
+          "sentence_idx": 19
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "report executive summary of solution",
+          "original_sentence": "As an urban mobility planner, I want to report an executive summary of a solution so that I can inform the mayor of the consequences of a proposal.",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "create detailed solution report",
+          "original_sentence": "As an urban mobility planner, I want to make an extensive report on a solution so that I can inform the consultancy company of the consequences of a proposal.",
+          "sentence_idx": 21
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "simulate traffic scenarios"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Configure Traffic Measures",
+      "description": "Define and adjust traffic control measures such as speed limits, reversible lanes, roundabouts, adaptive lights, and road closures.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "adjust speed limits",
+          "original_sentence": "As an urban mobility planner, I want to adjust speed limits so that I can review the effects of the measure.",
+          "sentence_idx": 1
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "switch reversible lane directions",
+          "original_sentence": "As an urban mobility planner, I want to switch directions of reversible lanes so that I can review the effects of the measure.",
+          "sentence_idx": 2
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "model roundabouts",
+          "original_sentence": "As an urban mobility planner, I want to model roundabouts so that I can review the effects of the measure.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "model adaptive traffic lights",
+          "original_sentence": "As an urban mobility planner, I want to model adaptive traffic lights so that I can review the effects of the measure.",
+          "sentence_idx": 4
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "close roads",
+          "original_sentence": "As an urban mobility planner, I want to close down roads so that I can review the effects of the measure.",
+          "sentence_idx": 5
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 4,
+      "name": "Simulate Traffic Scenarios",
+      "description": "Model and simulate congestion, high-traffic events, crises, and suggested congestion solutions.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "model congestion solutions",
+          "original_sentence": "As an urban mobility planner, I want to model solutions for congestion so that I can validate urban mobility proposals.",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "increase traffic at locations",
+          "original_sentence": "As an urban mobility planner, I want to increase traffic in certain spots so that I can simulate crowded events.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "simulate crises",
+          "original_sentence": "As an urban mobility planner, I want to simulate crises so that I can aid emergency services.",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "get suggested congestion solutions",
+          "original_sentence": "As an urban mobility planner, I want to get suggested solutions for a traffic congestion so that I can be inspired to solve the problem.",
+          "sentence_idx": 22
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 5,
+      "name": "View Traffic Analytics",
+      "description": "View historical traffic situations, estimated measure costs, and projected congestion-related emissions and noise levels.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "view historical traffic situations",
+          "original_sentence": "As an urban mobility planner, I want to see traffic situations at past dates so that I can analyze traffic scenarios on similar days.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "get measure cost estimation",
+          "original_sentence": "As an urban mobility planner, I want to get an estimation of the cost of a measure so that I can review the financial consequences of the measure.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "view estimated congestion emissions",
+          "original_sentence": "As an urban mobility planner, I want to know the estimated emission of a congestion so that I can review the pollution effects of a measure or event.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "view estimated traffic noise levels",
+          "original_sentence": "As an urban mobility planner, I want to know the estimated noise levels of traffic situations so that I can review the environmental effects of a measure or event.",
+          "sentence_idx": 14
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "view sensor data"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "View Sensor Data",
+      "description": "Review emission and traffic levels collected from individual sensors.",
+      "participating_actors": [
+        "urban mobility planner"
+      ],
+      "user_stories": [
+        {
+          "actor": "urban mobility planner",
+          "action": "review emission levels at sensor",
+          "original_sentence": "As an urban mobility planner, I want to review the emission levels at a certain pollution sensor so that environmental effects are considered.",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "urban mobility planner",
+          "action": "review traffic levels at sensor",
+          "original_sentence": "As an urban mobility planner, I want to review the traffic levels at a certain traffic sensor so that traffic levels are considered.",
+          "sentence_idx": 10
+        }
+      ],
+      "relationships": []
+    }
+  ]
+}

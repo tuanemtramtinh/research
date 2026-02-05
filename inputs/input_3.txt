@@ -1,0 +1,41 @@
+As a web application visitor, I want to create an account, so that I can have personal preferences in the web application.
+As an IFA administrator, I want to have a dashboard on the web application, so that I can easily check leagues and teams information.
+As an IFA administrator, I want to enable free access to all data regarding games, teams, and leagues, so that system transparency is improved.
+As an IFA administrator, I want to allow each visitor to register in the web application, so that they can use more features offered by the system.
+As a fan, I want to register for notifications related to players, teams, or leagues, so that I can follow my favourite entities regularly.
+As a web application visitor, I want to access the web application anywhere in the world, so that I do not depend on location.
+As an IFA administrator, I want each account to have a unique username and password, so that login issues are avoided.
+As a team, I want to post news on social media through the web application, so that I can keep my fans updated.
+As a fan, I want to add comments to social media content on the web application, so that I can express my opinions and thoughts online.
+As a fan, I want to be updated about my purchased tickets for matches, so that I am notified if a game is postponed.
+As a fan, I want to use the application in my native language, so that I can understand the provided information.
+As a fan, I want fast response time while using the system, so that I do not lose time waiting for answers.
+As a fan, I want to access match statistics, so that I am informed about what happened during a match.
+As a fan, I want to access analytics of my favourite team, so that I can predict upcoming matches.
+As a fan, I want to choose the topics I am interested in within the web application, so that I can instantly access relevant information.
+As an IFA administrator, I want the web application to support up to 50,000 concurrent users, so that accessibility problems are avoided.
+As a referee, I want to have an application containing a list of possible match events, so that I can instantly provide information to the system.
+As a referee, I want to use a small mobile device to report match events, so that the system can provide updates from each game.
+As a referee, I want match data to be reported automatically when events occur, so that information is updated continuously.
+As a referee, I want to provide information digitally, so that data transmission is faster.
+As an IFA administrator, I want to generate statistics from referees’ live updates, so that fans are informed efficiently.
+As an IFA administrator, I want to create a scheduling platform, so that schedules can be suggested to all stakeholders.
+As an IFA administrator, I want to handle scheduling digitally, so that the scheduling process is more efficient.
+As an IFA administrator, I want to define rules for scheduling games, so that bias can be avoided.
+As an IFA representative, I want to check and approve schedules, so that bias can be avoided.
+As a league, I want to make changes to the schedule, so that it can be adjusted to teams and referees.
+As an IFA representative, I want to receive explicit reasons for schedule changes, so that bias can be avoided.
+As an IFA representative, I want to confirm every change in the schedule, so that bias can be avoided.
+As a team, I want each match we play to be at least four days apart, so that the team has enough time to prepare.
+As a referee, I want the system to connect me with the games I am assigned to, so that I can easily follow information about my matches.
+As a referee, I want to be notified if a game is postponed, so that I can reschedule my plans.
+As an IFA administrator, I want each schedule to be adjusted to the league’s time zone, so that misunderstandings are avoided.
+As an IFA administrator, I want to define budgetary policies and rules, so that fraud in team budgeting systems is avoided.
+As an IFA administrator, I want to access teams’ budgets through the web application, so that I can continuously monitor them.
+As an IFA administrator, I want to receive reports of each team’s transactions, so that I have a clear overview of team budgets.
+As an IFA administrator, I want to restrict access to budgeting information to IFA administration and teams, so that budget confidentiality is maintained.
+As an IFA administrator, I want to be alerted about deviations from budget rules, so that fraud can be prevented.
+As an IFA administrator, I want to have a single communication medium for all stakeholders, so that communication is improved.
+As a team, I want to assign a responsible person to manage the team’s profile in the system, so that team needs are represented.
+As a CIO, I want to merge multiple existing systems into one, so that communication and transparency among stakeholders are improved.
+As a CIO, I want to have different user interfaces for different stakeholders, so that each stakeholder has an interface suited to their needs.

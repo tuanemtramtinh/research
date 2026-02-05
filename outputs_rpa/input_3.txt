@@ -1,0 +1,126 @@
+=== INPUT: input_3.txt ===
+User stories: 41
+
+=== ACTORS ===
+  - ifa administrator
+  - fan
+  - team
+  - referee
+  - ifa representative
+  - league
+  - cio
+
+=== USE CASES ===
+[1] Register Account (actors: ifa administrator)
+  User stories:
+    - As a web application visitor, I want to create an account so that I can have personal preferences in the web application.
+    - As an ifa administrator, I want to allow each visitor to register in the web application so that they can use more features offered by the system.
+
+[2] Access Web Application (actors: ifa administrator)
+  User stories:
+    - As a web application visitor, I want to access the web application anywhere in the world so that I do not depend on location.
+
+[3] Provide Competition Data Access (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to enable free access to all data regarding games, teams, and leagues so that system transparency is improved.
+    - As an ifa administrator, I want to enable free access to all data regarding games, teams, and leagues so that system transparency is improved.
+    - As an ifa administrator, I want to enable free access to all data regarding games, teams, and leagues so that system transparency is improved.
+
+[4] Engage via Dashboard and Social Feed (actors: team, fan, ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to have a dashboard on the web application so that I can easily check leagues and teams information.
+    - As a team, I want to post news on social media through the web application so that I can keep my fans updated.
+    - As a fan, I want to add comments to social media content on the web application so that I can express my opinions and thoughts online.
+    - As a fan, I want to choose the topics I am interested in within the web application so that I can instantly access relevant information.
+
+[5] Monitor Team Budgets (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to access teams’ budgets through the web application so that I can continuously monitor them.
+    - As an ifa administrator, I want to receive reports of each team’s transactions so that I have a clear overview of team budgets.
+  Relationships:
+    Monitor Team Budgets ──include──> define budget rules
+
+[6] Assign Profile Manager (actors: team)
+  User stories:
+    - As a team, I want to assign a responsible person to manage the team’s profile in the system so that team needs are represented.
+
+[7] Manage Game Schedules (actors: ifa representative, ifa administrator, league)
+  User stories:
+    - As an ifa administrator, I want to define rules for scheduling games so that bias can be avoided.
+    - As an ifa representative, I want to check and approve schedules so that bias can be avoided.
+    - As an ifa representative, I want to check and approve schedules so that bias can be avoided.
+    - As a league, I want to make changes to the schedule so that it can be adjusted to teams and referees.
+    - As an ifa representative, I want to receive explicit reasons for schedule changes so that bias can be avoided.
+    - As an ifa representative, I want to confirm every change in the schedule so that bias can be avoided.
+  Relationships:
+    Manage Game Schedules ──include──> provide scheduling platform
+
+[8] Notify Match Changes (actors: fan, referee)
+  User stories:
+    - As a fan, I want to be updated about my purchased tickets for matches so that I am notified if a game is postponed.
+    - As a referee, I want to be notified if a game is postponed so that I can reschedule my plans.
+  Relationships:
+    Notify Match Changes ··extend··> manage game schedules
+
+[9] Record Match Events (actors: referee)
+  User stories:
+    - As a referee, I want to have an application containing a list of possible match events so that I can instantly provide information to the system.
+    - As a referee, I want to use a small mobile device to report match events so that the system can provide updates from each game.
+    - As a referee, I want to provide information digitally so that data transmission is faster.
+
+[10] Integrate Stakeholder Systems (actors: cio)
+  User stories:
+    - As a cio, I want to merge multiple existing systems into one so that communication and transparency among stakeholders are improved.
+    - As a cio, I want to have different user interfaces for different stakeholders so that each stakeholder has an interface suited to their needs.
+
+[11] Define Budget Rules (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to define budgetary policies and rules so that fraud in team budgeting systems is avoided.
+    - As an ifa administrator, I want to define budgetary policies and rules so that fraud in team budgeting systems is avoided.
+
+[12] Control Budget Access (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to restrict access to budgeting information to ifa administration and teams so that budget confidentiality is maintained.
+  Relationships:
+    Control Budget Access ──include──> monitor team budgets
+
+[13] Alert Budget Deviations (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to be alerted about deviations from budget rules so that fraud can be prevented.
+  Relationships:
+    Alert Budget Deviations ──include──> define budget rules
+
+[14] Register for Notifications (actors: fan)
+  User stories:
+    - As a fan, I want to register for notifications related to players, teams, or leagues so that I can follow my favourite entities regularly.
+    - As a fan, I want to register for notifications related to players, teams, or leagues so that I can follow my favourite entities regularly.
+    - As a fan, I want to register for notifications related to players, teams, or leagues so that I can follow my favourite entities regularly.
+  Relationships:
+    Register for Notifications ··extend··> notify match changes
+
+[15] View Match Analytics (actors: fan, ifa administrator)
+  User stories:
+    - As a fan, I want to access match statistics so that I am informed about what happened during a match.
+    - As a fan, I want to access analytics of my favourite team so that I can predict upcoming matches.
+    - As an ifa administrator, I want to generate statistics from referees’ live updates so that fans are informed efficiently.
+
+[16] Use Native Language (actors: fan)
+  User stories:
+    - As a fan, I want to use the application in my native language so that I can understand the provided information.
+  Relationships:
+    Use Native Language ··extend··> access web application
+
+[17] Provide Scheduling Platform (actors: ifa administrator)
+  User stories:
+    - As an ifa administrator, I want to create a scheduling platform so that schedules can be suggested to all stakeholders.
+    - As an ifa administrator, I want to handle scheduling digitally so that the scheduling process is more efficient.
+    - As an ifa administrator, I want to have a single communication medium for all stakeholders so that communication is improved.
+
+=== USE CASE RELATIONSHIPS (summary) ===
+  Monitor Team Budgets ──include──> define budget rules
+  Manage Game Schedules ──include──> provide scheduling platform
+  Notify Match Changes ··extend··> manage game schedules
+  Control Budget Access ──include──> monitor team budgets
+  Alert Budget Deviations ──include──> define budget rules
+  Register for Notifications ··extend··> notify match changes
+  Use Native Language ··extend··> access web application
