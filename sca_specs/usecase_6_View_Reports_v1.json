@@ -1,0 +1,55 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-006",
+  "area": "Reporting",
+  "context_of_use": "The system allows users and customers to access and manage report data.",
+  "scope": "User and Customer Report Management",
+  "level": "User-goal",
+  "primary_actors": [
+    "user",
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "users want to analyze data offline",
+    "customers want to view reports for decision making"
+  ],
+  "description": "Allow users and customers to view and download available reports for analysis.",
+  "triggering_event": "User or customer requests to view or download reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User or customer must be logged into the system.",
+    "Reports must be available in the system."
+  ],
+  "postconditions": [
+    "User or customer successfully views or downloads the report.",
+    "User or customer can analyze the report offline."
+  ],
+  "assumptions": [
+    "Users and customers have the necessary permissions to access reports.",
+    "Reports are generated and stored in the system."
+  ],
+  "requirements_met": [
+    "The system must provide a user interface for viewing reports.",
+    "The system must allow downloading of reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. User or customer requests to view reports → System displays available reports.",
+    "2. User or customer selects a report to download → System initiates download of the selected report."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no reports are available, the system displays a message indicating unavailability."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the download fails, the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. List of available reports.",
+    "2. Selected report details for download."
+  ]
+}

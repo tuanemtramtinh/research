@@ -1,0 +1,52 @@
+{
+  "use_case_name": "Track Orders",
+  "unique_id": "UC-005",
+  "area": "Order Management",
+  "context_of_use": "The customer accesses the order tracking feature through the system interface.",
+  "scope": "The system allows customers to view the status of their orders and track shipments.",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer",
+    "business management"
+  ],
+  "description": "Allow customers to view order status and shipment tracking information for their purchases.",
+  "triggering_event": "Customer requests to track an order.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer must be logged into their account.",
+    "Customer must have at least one order placed."
+  ],
+  "postconditions": [
+    "Customer successfully views the status of their order.",
+    "Customer receives updated tracking information."
+  ],
+  "assumptions": [
+    "The system has access to real-time order status and tracking information.",
+    "The customer has internet access."
+  ],
+  "requirements_met": [
+    "The system must provide order tracking functionality.",
+    "The system must display accurate order status."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer selects the 'Track Orders' option → System displays a list of the customer's orders.",
+    "2. Customer selects a specific order → System retrieves and displays the order status and tracking information."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the customer has no orders, the system displays a message indicating no orders are available."
+  ],
+  "information_for_steps": [
+    "1. Customer's order history data.",
+    "2. Order status and tracking information from the system database."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "use_case_name": "Perform Bulk Operations",
+  "unique_id": "UC-010",
+  "area": "Bulk Operations Management",
+  "context_of_use": "This use case allows power users to execute bulk actions to improve their efficiency in handling data.",
+  "scope": "Bulk Operations System",
+  "level": "User-goal",
+  "primary_actors": [
+    "power user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: Improve efficiency in data handling."
+  ],
+  "description": "Enable power users to execute bulk actions (e.g., mass updates or imports) to improve efficiency.",
+  "triggering_event": "Power user initiates a request to perform bulk operations.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Power user is authenticated.",
+    "Power user has access to bulk operation features."
+  ],
+  "postconditions": [
+    "Bulk operations are successfully executed.",
+    "System reflects the changes made by the bulk operations."
+  ],
+  "assumptions": [
+    "The power user has the necessary permissions to perform bulk operations.",
+    "The system is capable of handling bulk operations without errors."
+  ],
+  "requirements_met": [
+    "The system shall allow power users to perform bulk operations.",
+    "The system shall ensure that bulk operations are executed efficiently."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of bulk operations supported by the system."
+  ],
+  "main_flow": [
+    "1. Power user initiates a request to perform bulk operations → System displays available bulk operation options.",
+    "2. Power user selects the desired bulk operation → System prompts for necessary data inputs.",
+    "3. Power user provides the required data → System processes the bulk operation.",
+    "4. System confirms the successful execution of the bulk operation → Power user receives confirmation message."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the provided data is invalid, then the system displays an error message and prompts the power user to correct the data."
+  ],
+  "information_for_steps": [
+    "1. Bulk operation options",
+    "2. Data inputs for the selected operation",
+    "3. Confirmation of operation execution"
+  ]
+}

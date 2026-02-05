@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Approve Orders",
+  "unique_id": "UC-10",
+  "area": "Order Management",
+  "context_of_use": "This use case is applicable in the context of managing customer orders within the system.",
+  "scope": "The scope includes the process of reviewing and approving customer orders by the manager.",
+  "level": "User-goal",
+  "primary_actors": [
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "manager",
+    "customers",
+    "business owners"
+  ],
+  "description": "Allow managers to review and approve orders to progress business workflows.",
+  "triggering_event": "A customer places an order that requires managerial approval.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The manager is logged into the system.",
+    "There are pending orders that require approval."
+  ],
+  "postconditions": [
+    "The order is approved and processed.",
+    "The customer is notified of the order status."
+  ],
+  "assumptions": [
+    "The manager has the necessary permissions to approve orders.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The manager can view pending orders.",
+    "The manager can approve or reject orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Manager logs into the system → System displays the dashboard with pending orders.",
+    "2. Manager selects an order to review → System displays order details.",
+    "3. Manager approves the order → System updates the order status and notifies the customer."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Manager rejects the order → System updates the order status and notifies the customer."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Manager fails to log in → System displays an error message."
+  ],
+  "information_for_steps": [
+    "1. User credentials for login.",
+    "2. Order details including items, customer information, and payment status.",
+    "3. Confirmation of order approval or rejection."
+  ]
+}

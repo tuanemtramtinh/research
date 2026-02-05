@@ -1,0 +1,58 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-001",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to view and download sales and other reports for analysis and offline use.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "user",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to analyze reports for personal use",
+    "user: wants to analyze data offline",
+    "admin: wants to monitor business performance"
+  ],
+  "description": "Allows users to view and download sales and other reports for analysis and offline use.",
+  "triggering_event": "User requests to view or download reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated.",
+    "User has permission to access reports."
+  ],
+  "postconditions": [
+    "User successfully views or downloads the requested reports."
+  ],
+  "assumptions": [
+    "Users have the necessary permissions to access the reports.",
+    "Reports are available in the system for viewing and downloading."
+  ],
+  "requirements_met": [
+    "The system shall allow users to view reports.",
+    "The system shall allow users to download reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Need to define the types of reports available for viewing and downloading."
+  ],
+  "main_flow": [
+    "1. Customer/user/admin requests to view reports → System displays available reports.",
+    "2. Customer/user/admin selects a report to download → System initiates the download process.",
+    "3. Customer/user/admin confirms the download → System completes the download and notifies the user."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no reports are available, then the system displays a message indicating that no reports are found."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the download fails, then the system displays an error message and suggests retrying."
+  ],
+  "information_for_steps": [
+    "1. Report list",
+    "2. Selected report",
+    "3. Download confirmation"
+  ]
+}

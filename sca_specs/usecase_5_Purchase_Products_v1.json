@@ -1,0 +1,61 @@
+{
+  "use_case_name": "Purchase Products",
+  "unique_id": "UC-005",
+  "area": "E-commerce",
+  "context_of_use": "The customer wants to purchase products through the system by browsing, searching, viewing details, adding to cart, checking out, and tracking orders.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to efficiently purchase products"
+  ],
+  "description": "This use case supports the customer in purchasing products by enabling browsing, searching, viewing product details, adding items to the cart, checking out, and tracking orders.",
+  "triggering_event": "The customer initiates the purchase process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The customer is logged into the system.",
+    "The customer has access to the product catalog."
+  ],
+  "postconditions": [
+    "The customer successfully completes the purchase.",
+    "The order is recorded in the system."
+  ],
+  "assumptions": [
+    "The customer has a valid account.",
+    "The system has products available for purchase."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to browse products by category.",
+    "The system shall allow customers to search for products by keyword.",
+    "The system shall allow customers to view product details.",
+    "The system shall allow customers to add products to their cart.",
+    "The system shall allow customers to checkout using multiple payment methods.",
+    "The system shall allow customers to track their orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on payment methods supported during checkout."
+  ],
+  "main_flow": [
+    "1. customer browses products → system displays products by category.",
+    "2. customer searches for products → system returns search results.",
+    "3. customer views product details → system shows detailed information about the product.",
+    "4. customer adds product to cart → system updates the cart with the selected product.",
+    "5. customer checks out order → system processes the payment and confirms the order.",
+    "6. customer tracks orders → system provides the delivery status of the order."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product categories",
+    "2. Search keywords",
+    "3. Product details",
+    "4. Cart items",
+    "5. Payment information",
+    "6. Order status"
+  ]
+}

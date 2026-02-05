@@ -1,0 +1,55 @@
+{
+  "use_case_name": "Download Reports",
+  "unique_id": "UC-004",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to download reports for offline analysis and record-keeping.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user",
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "user: access to offline data analysis",
+    "customer: ability to keep records"
+  ],
+  "description": "Allow users to download reports for offline analysis and record-keeping.",
+  "triggering_event": "User requests to download a report.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is logged in to the system.",
+    "User has permission to download reports."
+  ],
+  "postconditions": [
+    "User successfully downloads the report.",
+    "Report is saved in the user's device."
+  ],
+  "assumptions": [
+    "Users have access to the necessary reports to download.",
+    "Users are familiar with the download process."
+  ],
+  "requirements_met": [
+    "The system shall allow users to download reports.",
+    "The system shall ensure that downloaded reports are accessible offline."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for download."
+  ],
+  "main_flow": [
+    "1. User requests to download a report → System presents available reports for download.",
+    "2. User selects a report to download → System initiates the download process.",
+    "3. User confirms the download → System downloads the report to the user's device."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the report is not available, then the system displays an error message indicating unavailability."
+  ],
+  "information_for_steps": [
+    "1. Report selection data",
+    "2. Download confirmation data",
+    "3. Download status data"
+  ]
+}

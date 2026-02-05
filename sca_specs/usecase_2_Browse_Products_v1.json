@@ -1,0 +1,58 @@
+{
+  "use_case_name": "Browse Products",
+  "unique_id": "UC-002",
+  "area": "Product Management",
+  "context_of_use": "The customer interacts with the system to find and view products.",
+  "scope": "E-commerce platform",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customers want to find products easily",
+    "business wants to increase sales"
+  ],
+  "description": "Allow customers to search, browse, and view product details to find items of interest.",
+  "triggering_event": "Customer initiates a search or browsing action.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer has access to the e-commerce platform.",
+    "Customer is logged into their account."
+  ],
+  "postconditions": [
+    "Customer can view a list of products based on search or category.",
+    "Customer can view detailed information about selected products."
+  ],
+  "assumptions": [
+    "The system has a database of products categorized appropriately.",
+    "The customer has a stable internet connection."
+  ],
+  "requirements_met": [
+    "The system allows browsing by category.",
+    "The system allows searching by keyword.",
+    "The system displays product details."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer selects a category → System displays products in that category.",
+    "2. Customer enters a keyword → System displays products matching the keyword.",
+    "3. Customer selects a product → System displays detailed information about the product."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Customer refines the category selection → System updates the displayed products.",
+    "AF-2 (from Step 2): Customer modifies the search keyword → System updates the displayed products."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): No products found in the selected category → System displays a 'No products found' message."
+  ],
+  "information_for_steps": [
+    "1. Category list from the product database.",
+    "2. Search results based on the keyword from the product database.",
+    "3. Product details retrieved from the product database."
+  ]
+}

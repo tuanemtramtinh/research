@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Administer System",
+  "unique_id": "UC-004",
+  "area": "System Administration",
+  "context_of_use": "The system allows administrators and power users to manage user accounts, configure system settings, and perform bulk operations.",
+  "scope": "System Administration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin",
+    "power user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin",
+    "power user"
+  ],
+  "description": "Allow administrators and power users to manage user accounts, configure system settings, and perform bulk operations.",
+  "triggering_event": "An admin or power user initiates a request to manage system settings or user accounts.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The user must be authenticated.",
+    "The user must have the necessary permissions."
+  ],
+  "postconditions": [
+    "User accounts are managed as per the request.",
+    "System settings are configured as per the request.",
+    "Bulk operations are executed successfully."
+  ],
+  "assumptions": [
+    "The system is operational.",
+    "Users have the required roles to perform the actions."
+  ],
+  "requirements_met": [
+    "The system must allow user account management.",
+    "The system must allow configuration of system settings.",
+    "The system must support bulk operations."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Admin or power user requests to manage user accounts → System processes the request.",
+    "2. Admin or power user requests to configure system settings → System processes the request.",
+    "3. Power user requests to handle bulk operations → System processes the request."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the user lacks permissions, the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. User credentials and permissions.",
+    "2. Configuration settings to be applied.",
+    "3. Details of bulk operations to be performed."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-009",
+  "area": "Reporting",
+  "context_of_use": "The system allows users and customers to access and manage reports for review and offline analysis.",
+  "scope": "User and customer report management",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customers who need to analyze reports",
+    "users who require access to reports for data analysis"
+  ],
+  "description": "Allow users and customers to view and download reports for review and offline analysis.",
+  "triggering_event": "User or customer requests to view or download a report.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User or customer must be logged into the system.",
+    "User or customer must have the necessary permissions to access reports."
+  ],
+  "postconditions": [
+    "User or customer successfully views the report.",
+    "User or customer successfully downloads the report."
+  ],
+  "assumptions": [
+    "Users and customers have access to the necessary reports.",
+    "The system has reports available for viewing and downloading."
+  ],
+  "requirements_met": [
+    "The system must allow users and customers to view reports.",
+    "The system must allow users and customers to download reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer or user requests to view a report → System displays the report.",
+    "2. Customer or user selects the option to download the report → System initiates the download process."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the report is not available, the system displays an error message."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the download fails, the system notifies the user or customer of the failure."
+  ],
+  "information_for_steps": [
+    "1. Report data to be displayed.",
+    "2. Download link or file for the report."
+  ]
+}

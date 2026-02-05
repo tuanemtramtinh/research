@@ -1,0 +1,54 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-003",
+  "area": "Reporting",
+  "context_of_use": "This use case allows both customers and admins to view and download reports for monitoring performance.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: access to reports for personal analysis",
+    "admin: ability to monitor business performance through sales reports"
+  ],
+  "description": "Allow admins and customers to view sales and other reports to monitor performance.",
+  "triggering_event": "User requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated.",
+    "User has permission to view reports."
+  ],
+  "postconditions": [
+    "User successfully views the requested reports.",
+    "User can download reports if needed."
+  ],
+  "assumptions": [
+    "Users have valid accounts to access the reporting system.",
+    "Reports are available for viewing."
+  ],
+  "requirements_met": [
+    "The system shall allow users to view reports.",
+    "The system shall allow users to download reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for viewing."
+  ],
+  "main_flow": [
+    "1. Customer requests to view reports → System displays available reports.",
+    "2. Admin requests to view sales reports → System displays sales reports."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the user is not authenticated, then the system prompts the user to log in."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Report types",
+    "3. Report data"
+  ]
+}

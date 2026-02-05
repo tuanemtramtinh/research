@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Manage Cart",
+  "unique_id": "UC-003",
+  "area": "Shopping",
+  "context_of_use": "The customer interacts with the online shopping system to manage their shopping cart.",
+  "scope": "Online Shopping System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer",
+    "business owner"
+  ],
+  "description": "Enable customers to add, update, and remove products in their shopping cart prior to purchase.",
+  "triggering_event": "Customer decides to add a product to the cart.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into their account.",
+    "Customer is browsing products."
+  ],
+  "postconditions": [
+    "Products are successfully added to the cart.",
+    "Cart reflects the updated list of products."
+  ],
+  "assumptions": [
+    "Customer has selected products to add to the cart.",
+    "Customer has a valid account."
+  ],
+  "requirements_met": [
+    "The system allows adding products to the cart.",
+    "The system allows updating the cart."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer selects a product → System adds the product to the cart.",
+    "2. Customer views the cart → System displays the current items in the cart.",
+    "3. Customer updates the quantity of a product → System updates the cart with the new quantity.",
+    "4. Customer removes a product from the cart → System removes the product from the cart."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Customer attempts to add an out-of-stock product → System displays an out-of-stock message."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Customer views an empty cart → System displays a message indicating the cart is empty."
+  ],
+  "information_for_steps": [
+    "1. Product details including name, price, and availability.",
+    "2. Current items in the cart with their quantities.",
+    "3. Updated quantity and total price of the cart."
+  ]
+}

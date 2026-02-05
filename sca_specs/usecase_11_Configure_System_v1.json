@@ -1,0 +1,56 @@
+{
+  "use_case_name": "Configure System",
+  "unique_id": "UC-11",
+  "area": "System Configuration",
+  "context_of_use": "The admin accesses the system to modify settings and preferences.",
+  "scope": "System-wide configuration settings and application preferences.",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin",
+    "system users"
+  ],
+  "description": "Allow admins to configure system-wide settings and application preferences.",
+  "triggering_event": "Admin initiates configuration of system settings.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to configure settings."
+  ],
+  "postconditions": [
+    "System settings are updated according to admin's configurations.",
+    "Changes are saved and applied to the system."
+  ],
+  "assumptions": [
+    "Admin has knowledge of system settings.",
+    "System is operational and accessible."
+  ],
+  "requirements_met": [
+    "Admin can access configuration options.",
+    "Admin can save changes to system settings."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Potential for misconfiguration leading to system issues."
+  ],
+  "main_flow": [
+    "1. Admin navigates to system configuration settings → System displays configuration options.",
+    "2. Admin modifies desired settings → System accepts changes.",
+    "3. Admin saves changes → System confirms settings have been updated."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Admin cancels configuration → System returns to previous screen without changes."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Admin inputs invalid data → System displays error message and prompts for valid input."
+  ],
+  "information_for_steps": [
+    "1. Configuration options available for modification.",
+    "2. Validations for input data.",
+    "3. Confirmation message upon successful update."
+  ]
+}

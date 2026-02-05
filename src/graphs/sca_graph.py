@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Dict, List
 
+from pathlib import Path
+
 import json
 import os
 
@@ -53,12 +55,20 @@ def _use_case_payload(use_case: UseCase) -> dict:
 
 def _heuristic_use_case_spec(
     *, requirement_text: str, actors: List[str], use_case: UseCase
-) -> str:
-    # Minimal deterministic template output when no LLM is configured.
+) -> dict:
+    # Minimal deterministic JSON object when no LLM is configured.
     uc = _use_case_payload(use_case)
     uid = f"UC-{int(uc.get('id') or 0)}"
-    primary = ", ".join(use_case.participating_actors or [])
-    all_actors = ", ".join(actors or (use_case.participating_actors or []))
+    primary_actors = [
+        str(a)
+        for a in (getattr(use_case, "participating_actors", None) or [])
+        if str(a).strip()
+    ]
+    supporting_actors = [
+        str(a)
+        for a in (actors or [])
+        if str(a).strip() and str(a).strip() not in set(primary_actors)
+    ]
     
     # trig = (
     #     use_case.sentence or ""
@@ -120,176 +130,127 @@ def _heuristic_use_case_spec(
         "EF-1 (from Step 2): <system cannot process the request>\n1. Primary Actor submits the request → System displays an error and ends the use case."
     ]
 
-    return (
-        "\n".join(
-            [
-                "Use case name:",
-                f"{use_case.name}",
-                "Area:",
-                "",
-                "UniqueID:",
-                uid,
-                "Primary Actor(s):",
-                primary,
-                "Supporting Actor(s):",
-                "",
-                "Description:",
-                "",
-                "Triggering Event:",
-                trig,
-                "Trigger type: (External | Temporal)",
-                "External",
-                "",
-                "Preconditions:",
-                "",
-                "Postconditions:",
-                "",
-                "Assumptions:",
-                "",
-                "Requirements Met:",
-                "",
-                "Priority:",
-                "",
-                "Risk:",
-                "",
-                "Outstanding Issues:",
-                "",
-                "",
-                "-------------------------------------------------",
-                "MAIN FLOW (SUCCESS SCENARIO)",
-                "-------------------------------------------------",
-                *main_steps,
-                "",
-                "-------------------------------------------------",
-                "ALTERNATIVE FLOWS",
-                "-------------------------------------------------",
-                *(af_lines or [""]),
-                "",
-                "-------------------------------------------------",
-                "EXCEPTION FLOWS",
-                "-------------------------------------------------",
-                *ef_lines,
-                "",
-                "-------------------------------------------------",
-                "INFORMATION FOR STEPS (OPTIONAL BUT RECOMMENDED)",
-                "-------------------------------------------------",
-                "1. Request\n2. Input Data\n3. Confirmation",
-                "",
-                "---",
-                "INPUT (DO NOT MODIFY)",
-                "---",
-                "Requirement Text:",
-                requirement_text,
-                "",
-                "Actors:",
-                all_actors,
-                "",
-                "Target Use Case:",
-                json.dumps(_use_case_payload(use_case), ensure_ascii=False, indent=2),
-            ]
-        ).strip()
-        + "\n"
+    spec_obj = {
+        "use_case_name": str(getattr(use_case, "name", "") or "").strip(),
+        "unique_id": uid,
+        "area": "Requirements Domain",
+        "context_of_use": "The primary actor performs the use case within the normal operation of the system based on the provided requirement text.",
+        "scope": "The target system described by the requirement text.",
+        "level": "User-goal",
+        "primary_actors": primary_actors or ["Primary Actor"],
+        "supporting_actors": supporting_actors or ["System"],
+        "stakeholders_and_interests": [
+            "Primary Actor: Achieve the goal expressed by the use case with a verifiable outcome.",
+            "System Owner: Ensure the use case is executed consistently and traceably.",
+        ],
+        "description": (str(getattr(use_case, "description", "") or "").strip() or f"Enable the primary actor to complete '{use_case.name}' as described in the requirement text."),
+        "triggering_event": trig,
+        "trigger_type": "External",
+        "preconditions": [
+            "The system is available and able to accept requests.",
+            "The primary actor has access to the system interface required to initiate the use case.",
+        ],
+        "postconditions": [
+            f"The system records a completed outcome for '{use_case.name}'.",
+            "Any relevant system state changes are persisted.",
+        ],
+        "assumptions": [
+            "The requirement text provides sufficient context to identify actors and intended outcomes.",
+        ],
+        "requirements_met": [
+            f"The system shall support the use case '{use_case.name}'.",
+        ],
+        "priority": "Medium",
+        "risk": "Medium",
+        "outstanding_issues": [
+            "Confirm domain/area classification and any business policy constraints implied by the requirement text.",
+        ],
+        "main_flow": main_steps,
+        "alternative_flows": af_lines or ["AF-1 (from Step 2): <valid variation>"],
+        "exception_flows": ef_lines,
+        "information_for_steps": [
+            "1. Request",
+            "2. Input Data",
+            "3. Confirmation",
+        ],
+        "input": {
+            "requirement_text": requirement_text,
+            "actors": [str(a) for a in (actors or [])],
+            "target_use_case": _use_case_payload(use_case),
+        },
+    }
+    return spec_obj
+
+
+def _extract_json_object(text: str) -> dict:
+    """Best-effort extraction of a JSON object from model output."""
+    raw = (text or "").strip()
+    if not raw:
+        raise ValueError("Empty model output")
+
+    # Common case: already pure JSON
+    try:
+        obj = json.loads(raw)
+        if isinstance(obj, dict):
+            return obj
+    except Exception:
+        pass
+
+    # Best-effort: find first JSON object block
+    start = raw.find("{")
+    end = raw.rfind("}")
+    if start >= 0 and end > start:
+        candidate = raw[start : end + 1]
+        obj = json.loads(candidate)
+        if isinstance(obj, dict):
+            return obj
+
+    raise ValueError("Could not parse JSON object from model output")
+
+
+def _save_use_case_spec_json(*, use_case: UseCase, spec_version: int, spec_obj: dict) -> str:
+    repo_root = Path(__file__).resolve().parents[2]
+    out_dir = repo_root / "sca_specs"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    uc_id = int(getattr(use_case, "id", 0) or 0)
+    raw_name = str(getattr(use_case, "name", "") or "").strip()
+    safe_name = "".join(
+        ch for ch in raw_name if ch.isalnum() or ch in ("-", "_", " ")
+    ).strip()
+    safe_name = "_".join(safe_name.split())[:60] or f"usecase_{uc_id}"
+
+    out_path = out_dir / f"usecase_{uc_id}_{safe_name}_v{spec_version}.json"
+    out_path.write_text(
+        json.dumps(spec_obj, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    return str(out_path)
 
 
-# _WRITER_SYSTEM_PROMPT = "You are a professional and strict Use Case Specification Writer."
 
-# _WRITER_HUMAN_PROMPT_TEMPLATE = r"""
-# Your task is to generate ONE complete Use Case Scenario based on the given input.
-# You must strictly follow the Use Case Specification template defined below.
-# The output must be deterministic, unambiguous, and suitable for software requirement documentation.
+_WRITER_SYSTEM_PROMPT = "You are a professional, strict, and detail-oriented Use Case Specification Writer. You output ONLY a single JSON object and nothing else. You never leave any required field empty. You only infer information that is logically supported by the given Requirement Text. If information is implicit, you must state it explicitly using formal requirement language."
 
-# IMPORTANT RULES:
-# - Generate ONLY ONE use case per prompt.
-# - Do NOT invent actors, steps, or system behavior not supported by the input.
-# - Use formal, neutral, and system-oriented language.
-# - Use numbered steps.
-# - Clearly separate Main Path, Alternative Flows, and Exception Flows.
-# - Respect «include» and «extend» relationships semantically:
-#   - «include» = mandatory sub-flow
-#   - «extend» = optional or conditional flow
-# - Assume this is a fully-dressed use case.
+# Prompt reference (documentation): docs/sca_use_case_spec_json_prompt.md
 
-# ------------------------------------------------------------------
-# USE CASE SPECIFICATION TEMPLATE (YOU MUST FOLLOW EXACTLY)
-# ------------------------------------------------------------------
+_SCA_UC_PROMPT_PATH = Path(__file__).resolve().parents[2] / "docs" / "sca_use_case_spec_json_prompt.md"
+_SCA_UC_PROMPT_CACHE: str | None = None
 
-# Use case name:
-# Area:
-# UniqueID:
-# Primary Actor(s):
-# Supporting Actor(s):
-# Description:
-# Triggering Event:
-# Trigger type: (External | Temporal)
 
-# Preconditions:
-# Postconditions:
-# Assumptions:
-# Requirements Met:
-# Priority:
-# Risk:
-# Outstanding Issues:
+def _load_sca_uc_prompt() -> str:
+    """Load the field definitions + writing rules prompt block.
 
-# -------------------------------------------------
-# MAIN FLOW (SUCCESS SCENARIO)
-# -------------------------------------------------
-# Steps must:
-# - Be written as Actor action → System response
-# - Represent the happy path only
-# - Include all mandatory «include» use cases inline as steps
+    This content is sent to the LLM as additional system guidance so it
+    understands what each JSON field means and the rules for writing them.
+    """
 
-# Format:
-# 1. ...
-# 2. ...
-
-# -------------------------------------------------
-# ALTERNATIVE FLOWS
-# -------------------------------------------------
-# - Each alternative flow must:
-#   - Reference the step number it branches from
-#   - Clearly state the condition
-#   - Return to a specific step OR end the use case
-
-# Format:
-# AF-1 (from Step X): <condition>
-# AF-2 (from Step Y): <condition>
-
-# -------------------------------------------------
-# EXCEPTION FLOWS
-# -------------------------------------------------
-# - Exception flows represent errors or failures
-# - Must describe system handling behavior
-
-# Format:
-# EF-1 (from Step X): <failure condition>
-
-# -------------------------------------------------
-# INFORMATION FOR STEPS (OPTIONAL BUT RECOMMENDED)
-# -------------------------------------------------
-# - Map each main step to the data involved
-# - Use concise data names (e.g., Credentials, Cart, Payment Info)
-
-# ------------------------------------------------------------------
-# INPUT (DO NOT MODIFY)
-# ------------------------------------------------------------------
-# Requirement Text:
-# {{requirement_text}}
-
-# Actors:
-# {{actors}}
-
-# Target Use Case:
-# {{single_use_case_object}}
-
-# ------------------------------------------------------------------
-# OUTPUT RULE (STRICT)
-# ------------------------------------------------------------------
-# - Output ONLY the completed Use Case Specification using the template above.
-# - Do NOT output JSON.
-# """
-
-_WRITER_SYSTEM_PROMPT = "You are a professional, strict, and detail-oriented Use Case Specification Writer. You never leave any required field empty. You only infer information that is logically supported by the given Requirement Text. If information is implicit, you must state it explicitly using formal requirement language."
+    global _SCA_UC_PROMPT_CACHE
+    if _SCA_UC_PROMPT_CACHE is not None:
+        return _SCA_UC_PROMPT_CACHE
+    try:
+        _SCA_UC_PROMPT_CACHE = _SCA_UC_PROMPT_PATH.read_text(encoding="utf-8").strip()
+    except Exception:
+        _SCA_UC_PROMPT_CACHE = ""
+    return _SCA_UC_PROMPT_CACHE
 
 _WRITER_HUMAN_PROMPT_TEMPLATE = r"""
 Your task is to generate EXACTLY ONE complete and fully-dressed Use Case Specification
@@ -300,120 +261,51 @@ The output must be suitable for formal Software Requirement Specification (SRS) 
 ========================
 CRITICAL ENFORCEMENT RULES
 ========================
-1. EVERY field in the Use Case Specification template MUST be filled.
-2. NO field may be empty, omitted, or marked as:
-   - "N/A"
-   - "None"
-   - "Not specified"
-   - "-"
-3. If a field is not explicitly stated in the Requirement Text:
+1. You MUST output ONLY a single JSON object (no prose, no markdown, no code fences).
+2. EVERY field in the JSON schema below MUST be present and MUST be non-empty.
+3. Do NOT output placeholder values such as "N/A", "None", "Not specified", or "-".
+4. If a field is not explicitly stated in the Requirement Text:
    - You MUST infer it conservatively and logically.
    - The inference MUST NOT introduce new system functionality.
-4. If inference is required, ensure consistency by:
+5. If inference is required, ensure consistency by:
    - Reflecting it in Assumptions
    - Keeping it aligned with the Requirement Text
-5. Do NOT invent:
+6. Do NOT invent:
    - New actors
    - New system capabilities
    - New business rules
-6. Use only formal, neutral, system-oriented language.
-7. Generate ONLY ONE use case.
+7. Use only formal, neutral, system-oriented language.
+8. Generate ONLY ONE use case.
 
 ========================
-USE CASE SPECIFICATION TEMPLATE
-(MUST FOLLOW EXACTLY)
+OUTPUT JSON SCHEMA (MUST FOLLOW EXACTLY)
 ========================
 
-Use Case Name:
-(The name of the use case, expressed as a short active verb phrase that represents the goal of the primary actor and leads to an observable result when completed)
-Unique ID:
-(A unique identifier assigned to the use case for reference, traceability, and linkage with requirements, test cases, or other artifacts)
-Area:
-(The business domain or functional area to which the use case belongs, used for classification and organization)
-Context of Use:
-(A longer statement describing the goal of the use case within its normal operating context, including assumptions about the environment and typical conditions)
-Scope:
-(The design scope of the use case, specifying which system is considered as a black box and is responsible for the described behavior)
-Level:
-(The abstraction level of the use case, one of: Summary, User-goal, or Sub-function, indicating its role within the overall system behavior)
-Primary Actor(s):
-(The main external role that initiates the use case and whose goal is directly fulfilled by the successful execution of the use case)
-Supporting Actor(s):
-(Secondary actors that assist in the execution of the use case, such as external systems or services, but do not pursue the primary goal)
-Stakeholders and Interests:
-(A list of stakeholders involved in or affected by the use case, along with their key interests, expectations, or concerns regarding its outcome)
-Description:
-(A brief summary explaining the purpose of the use case and the value it provides to the primary actor)
-Triggering Event:
-(The event that initiates the use case, such as an action performed by an actor or a condition that requires the system to respond)
-Trigger Type (External | Temporal):
-(The classification of the trigger: External if initiated by an actor or external system; Temporal if initiated by time or a scheduled event)
-
-Preconditions:
-(Conditions that are assumed to be true before the use case begins; the use case does not establish these conditions itself)
-Postconditions:
-(Postconditions must be system-observable states)
-Assumptions:
-(Explicit assumptions derived from missing but necessary information)
-Requirements Met:
-(List concrete system requirements satisfied by this use case)
-Priority:
-(Low | Medium | High – must be justified implicitly by requirement context)
-Risk:
-(Low | Medium | High – based on system dependency or failure impact)
-Outstanding Issues:
-(Open questions or policy decisions implied but not resolved)
-
--------------------------------------------------
-MAIN FLOW (SUCCESS SCENARIO)
--------------------------------------------------
-Rules:
-- Each step MUST follow: Actor action → System response
-- Steps represent ONLY the successful (happy) path
-- System actions must be observable or verifiable
-- Do NOT mix errors or conditions here
-
-Format:
-1. <Actor> performs action → <System> responds
-2. ...
-
--------------------------------------------------
-ALTERNATIVE FLOWS
--------------------------------------------------
-Rules:
-- Alternative flows are valid, non-error variations
-- Each flow MUST:
-  - Reference a step number
-  - State a clear condition
-  - Explicitly state where it returns or that it ends
-
-Format:
-AF-1 (from Step X): <condition>
-AF-2 (from Step Y): <condition>
-
--------------------------------------------------
-EXCEPTION FLOWS
--------------------------------------------------
-Rules:
-- Exception flows represent failures or abnormal conditions
-- Each flow MUST describe system handling behavior
-- Each flow MUST clearly end the use case or stop progression
-
-Format:
-EF-1 (from Step X): <failure condition>
-
--------------------------------------------------
-INFORMATION FOR STEPS
--------------------------------------------------
-Rules:
-- Map EACH main step to the data involved
-- Use concise and consistent data names
-- Do NOT invent new data entities
-
-Format:
-1. <Data>
-2. <Data>
-3. <Data>
+{
+    "use_case_name": "<non-empty string>",
+    "unique_id": "<non-empty string>",
+    "area": "<non-empty string>",
+    "context_of_use": "<non-empty string>",
+    "scope": "<non-empty string>",
+    "level": "Summary | User-goal | Sub-function",
+    "primary_actors": ["<non-empty string>", "..."],
+    "supporting_actors": ["<non-empty string>", "..."],
+    "stakeholders_and_interests": ["<non-empty string>", "..."],
+    "description": "<non-empty string>",
+    "triggering_event": "<non-empty string>",
+    "trigger_type": "External | Temporal",
+    "preconditions": ["<non-empty string>", "..."],
+    "postconditions": ["<non-empty string>", "..."],
+    "assumptions": ["<non-empty string>", "..."],
+    "requirements_met": ["<non-empty string>", "..."],
+    "priority": "Low | Medium | High",
+    "risk": "Low | Medium | High",
+    "outstanding_issues": ["<non-empty string>", "..."],
+    "main_flow": ["1. <Actor action> → <System response>", "2. ..."],
+    "alternative_flows": ["AF-1 (from Step X): ...", "AF-2 (from Step Y): ..."],
+    "exception_flows": ["EF-1 (from Step X): ..."],
+    "information_for_steps": ["1. <Data>", "2. <Data>", "3. <Data>"]
+}
 
 ========================
 INPUT (DO NOT MODIFY)
@@ -430,9 +322,7 @@ Target Use Case:
 ========================
 OUTPUT RULE (ABSOLUTE)
 ========================
-- Output ONLY the completed Use Case Specification.
-- Do NOT output explanations, notes, JSON, or markdown.
-- The output MUST strictly follow the template structure above.
+- Output ONLY the JSON object.
 """
 
 
@@ -444,12 +334,16 @@ def generate_use_case_spec_node(state: ScaState):
     spec_version = int(state.get("spec_version") or 0) + 1
 
     if model is None:
+        spec_obj = _heuristic_use_case_spec(
+            requirement_text=requirement_text,
+            actors=[str(a) for a in (actors or [])],
+            use_case=use_case,
+        )
+        _save_use_case_spec_json(
+            use_case=use_case, spec_version=spec_version, spec_obj=spec_obj
+        )
         return {
-            "use_case_spec": _heuristic_use_case_spec(
-                requirement_text=requirement_text,
-                actors=[str(a) for a in (actors or [])],
-                use_case=use_case,
-            ),
+            "use_case_spec_json": spec_obj,
             "spec_version": spec_version,
         }
 
@@ -462,9 +356,20 @@ def generate_use_case_spec_node(state: ScaState):
         .replace("{{single_use_case_object}}", use_case_json)
     )
 
-    resp = model.invoke([("system", _WRITER_SYSTEM_PROMPT), ("human", prompt)])
+    sca_uc_prompt = _load_sca_uc_prompt()
+    messages = [("system", _WRITER_SYSTEM_PROMPT)]
+    if sca_uc_prompt:
+        messages.append(("system", sca_uc_prompt))
+    messages.append(("human", prompt))
+
+    resp = model.invoke(messages)
     content = str(getattr(resp, "content", "") or "").strip()
-    return {"use_case_spec": content, "spec_version": spec_version}
+    spec_obj = _extract_json_object(content)
+    _save_use_case_spec_json(use_case=use_case, spec_version=spec_version, spec_obj=spec_obj)
+    return {
+        "use_case_spec_json": spec_obj,
+        "spec_version": spec_version,
+    }
 
 
 def regenerate_use_case_spec_node(state: ScaState):
@@ -474,14 +379,17 @@ def regenerate_use_case_spec_node(state: ScaState):
     actors = state.get("actors") or (use_case.participating_actors or [])
     spec_version = int(state.get("spec_version") or 0) + 1
 
-    current_spec = str(state.get("use_case_spec") or "")
+    current_spec_obj = state.get("use_case_spec_json") or {}
     validation: UseCaseSpecValidation | None = state.get("validation")  # type: ignore[assignment]
     issues = (
         (getattr(validation, "regen_rationale", "") or "").strip() if validation else ""
     )
 
     if model is None:
-        return {"use_case_spec": current_spec, "spec_version": spec_version}
+        return {
+            "use_case_spec_json": dict(current_spec_obj) if isinstance(current_spec_obj, dict) else {},
+            "spec_version": spec_version,
+        }
 
     use_case_json = json.dumps(
         _use_case_payload(use_case), ensure_ascii=False, indent=2
@@ -493,26 +401,38 @@ def regenerate_use_case_spec_node(state: ScaState):
     )
 
     system_prompt = (
-        "You are a professional and strict Use Case Specification Writer. "
+        "You are a professional, strict Use Case Specification Writer. "
+        "You output ONLY a single JSON object and nothing else. "
         "Regenerate the use case specification to address the judge-identified deficiencies. "
-        "Only change what is necessary."
+        "Only change what is necessary and keep all content consistent with the Requirement Text."
     )
     human_prompt = f"""{prompt}
 
 ---
 CURRENT USE CASE SPECIFICATION:
-{current_spec}
+{json.dumps(current_spec_obj, ensure_ascii=False, indent=2)}
 
 ---
 DEFICIENCIES TO FIX (DO NOT IGNORE):
 {issues}
 
-Output ONLY the corrected use case specification in the exact template format.
+Output ONLY the corrected JSON object using the exact schema.
 """
 
-    resp = model.invoke([("system", system_prompt), ("human", human_prompt)])
+    sca_uc_prompt = _load_sca_uc_prompt()
+    messages = [("system", system_prompt)]
+    if sca_uc_prompt:
+        messages.append(("system", sca_uc_prompt))
+    messages.append(("human", human_prompt))
+
+    resp = model.invoke(messages)
     content = str(getattr(resp, "content", "") or "").strip()
-    return {"use_case_spec": content, "spec_version": spec_version}
+    spec_obj = _extract_json_object(content)
+    _save_use_case_spec_json(use_case=use_case, spec_version=spec_version, spec_obj=spec_obj)
+    return {
+        "use_case_spec_json": spec_obj,
+        "spec_version": spec_version,
+    }
 
 
 _JUDGE_SYSTEM_PROMPT = (
@@ -884,34 +804,47 @@ Rules:
 def _judge_node(detector_name: str):
     def _fn(state: ScaState):
         model = _get_model()
-        spec = str(state.get("use_case_spec") or "")
+        spec_obj = state.get("use_case_spec_json") or {}
+        spec = json.dumps(spec_obj, ensure_ascii=False, indent=2)
         spec_version = int(state.get("spec_version") or 0)
 
         if model is None:
-            # Conservative fallback: fail if any required text is missing.
+            # Conservative fallback: fail if any required JSON fields are missing.
             missing: List[str] = []
-            for required in [
-                "Use case name:",
-                "Primary Actor(s):",
-                "Description:",
-                "Triggering Event:",
-                "Preconditions:",
-                "Postconditions:",
-                "MAIN FLOW (SUCCESS SCENARIO)",
-                "ALTERNATIVE FLOWS",
-                "EXCEPTION FLOWS",
-            ]:
-                if required not in spec:
-                    missing.append(required)
+            required_keys = [
+                "use_case_name",
+                "primary_actors",
+                "stakeholders_and_interests",
+                "preconditions",
+                "postconditions",
+                "main_flow",
+                "alternative_flows",
+                "exception_flows",
+            ]
+            try:
+                spec_obj = _extract_json_object(spec)
+                for key in required_keys:
+                    val = spec_obj.get(key)
+                    if val is None:
+                        missing.append(key)
+                        continue
+                    if isinstance(val, str) and not val.strip():
+                        missing.append(key)
+                        continue
+                    if isinstance(val, list) and len([x for x in val if str(x).strip()]) == 0:
+                        missing.append(key)
+                        continue
+            except Exception:
+                missing = required_keys[:]
 
             completeness_pass = len(missing) == 0
             evaluation = UseCaseEvaluation(
                 Completeness={
                     "score": 80 if completeness_pass else 40,
                     "result": "PASS" if completeness_pass else "FAIL",
-                    "rationale": "All required structural sections are present."
+                    "rationale": "All required JSON fields are present."
                     if completeness_pass
-                    else "Missing required sections.",
+                    else "Missing required JSON fields.",
                     "missing_or_weak_fields": missing,
                 },
                 Coherence={
@@ -1087,14 +1020,13 @@ def run_sca_use_case(
             "requirement_text": requirement_text,
             "actors": actors or (use_case.participating_actors or []),
             "use_case": use_case,
-            "use_case_spec": "",
+            "use_case_spec_json": {},
             "spec_version": 0,
             "judge_results": [],
             "validation": None,
         }
     )
-
-    spec = str(out.get("use_case_spec") or "")
+    spec_json = out.get("use_case_spec_json") or {}
     validation = out.get("validation") or UseCaseSpecValidation(
         passed=True, failed_criteria={}, regen_rationale=""
     )
@@ -1109,7 +1041,7 @@ def run_sca_use_case(
 
     return ScenarioResult(
         use_case=use_case,
-        use_case_spec=spec,
+        use_case_spec_json=spec_json,
         evaluation=getattr(jr, "evaluation", None),
         validation=validation,
     )

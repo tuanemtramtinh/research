@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Annotated, Dict, List, Literal, Optional, TypedDict
+from typing import Annotated, Any, Dict, List, Literal, Optional, TypedDict
 
 import operator
 
@@ -208,9 +208,9 @@ class UseCase(BaseModel):
 
 class ScenarioResult(BaseModel):
     use_case: UseCase
-    # SCA pipeline output: fully-dressed Use Case Specification string.
-    use_case_spec: str = Field(
-        default="", description="Fully-dressed use case specification (template text)"
+    use_case_spec_json: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Structured Use Case Specification as a JSON object (one field per schema key)",
     )
     evaluation: UseCaseEvaluation | None = None
     validation: UseCaseSpecValidation
@@ -269,8 +269,8 @@ class ScaState(TypedDict, total=False):
     requirement_text: List[str]
     actors: List[str]
     use_case: UseCase
-    # SCA output (new): fully-dressed use case specification text
-    use_case_spec: str
+    # SCA output (new): structured JSON object for the spec
+    use_case_spec_json: Dict[str, Any]
     spec_version: int
 
     # New judging: 3 judge results then combiner

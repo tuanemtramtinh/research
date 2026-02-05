@@ -77,16 +77,13 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
         log(f"\n--- SCENARIO {idx} ---")
         log(f"Use case: [{getattr(sr.use_case, 'id', 0)}] {sr.use_case.name}")
         log("\n--- CONTENT ---")
-        spec = (sr.use_case_spec or "").strip()
-        if spec:
-            log(spec)
-        elif sr.scenario is not None:
-            sc = sr.scenario
-            log(f"trigger: {sc.trigger}")
-            for i, step in enumerate(sc.main_flow, 1):
-                log(f"{i}. {step}")
+        spec_obj = getattr(sr, "use_case_spec_json", None) or {}
+        if isinstance(spec_obj, dict) and spec_obj:
+            import json
+
+            log(json.dumps(spec_obj, ensure_ascii=False, indent=2))
         else:
-            log("<EMPTY SCENARIO>")
+            log("<EMPTY USE CASE SPEC JSON>")
 
         passed = bool(getattr(v, "passed", False))
         if not passed:

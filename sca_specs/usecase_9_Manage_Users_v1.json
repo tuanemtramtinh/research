@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-009",
+  "area": "User Management",
+  "context_of_use": "The admin manages user accounts within the system to control access and roles.",
+  "scope": "User account management functionalities within the system.",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin",
+    "system users"
+  ],
+  "description": "Allow admins to create, update, deactivate, and manage user accounts and roles.",
+  "triggering_event": "Admin initiates a user management action.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "postconditions": [
+    "User accounts are created, updated, or deactivated as per admin actions.",
+    "System access is controlled based on updated user roles."
+  ],
+  "assumptions": [
+    "The admin has the required knowledge to manage user accounts.",
+    "The system is operational and accessible to the admin."
+  ],
+  "requirements_met": [
+    "Admin can create new user accounts.",
+    "Admin can update existing user account information.",
+    "Admin can deactivate user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Admin selects the option to manage user accounts → System displays user management interface.",
+    "2. Admin chooses to create, update, or deactivate a user account → System processes the request and updates the user account accordingly.",
+    "3. System confirms the action taken by the admin → Admin receives confirmation message."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the admin attempts to create a user account with an existing username, the system displays an error message."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin is not logged in, the system prompts the admin to log in."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials and permissions.",
+    "2. User account details (username, email, role).",
+    "3. Confirmation messages and error messages."
+  ]
+}

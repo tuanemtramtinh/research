@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Manage Products",
+  "unique_id": "UC-006",
+  "area": "Product Management",
+  "context_of_use": "This use case allows admins to create, update, and manage products within the system.",
+  "scope": "Product Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [
+    "system"
+  ],
+  "stakeholders_and_interests": [
+    "admin: Ensure products are available and pricing is accurate."
+  ],
+  "description": "Enable admins to create products, update prices, and manage inventory levels.",
+  "triggering_event": "Admin initiates product management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to manage products."
+  ],
+  "postconditions": [
+    "Products are created, prices are updated, and inventory levels are managed."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to perform product management tasks."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the process for handling out-of-stock products."
+  ],
+  "main_flow": [
+    "1. Admin creates a new product → System saves the product and confirms creation.",
+    "2. Admin updates product prices → System updates the prices and confirms the change.",
+    "3. Admin manages inventory levels → System updates inventory and confirms the adjustment."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the product already exists, the system prompts the admin to update the existing product instead of creating a new one.",
+    "AF-2 (from Step 2): If the new price is invalid, the system displays an error message and requests a valid price."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the product creation fails due to a system error, the system logs the error and notifies the admin of the failure.",
+    "EF-2 (from Step 2): If the price update fails due to insufficient permissions, the system denies the action and informs the admin."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Updated price information",
+    "3. Inventory level adjustments"
+  ]
+}

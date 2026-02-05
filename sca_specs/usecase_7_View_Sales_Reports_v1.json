@@ -1,0 +1,53 @@
+{
+  "use_case_name": "View Sales Reports",
+  "unique_id": "UC-007",
+  "area": "Sales Management",
+  "context_of_use": "The admin accesses the system to view sales reports for monitoring business performance.",
+  "scope": "Sales Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin",
+    "business owners"
+  ],
+  "description": "Allow admins to access sales reports and dashboards to monitor business performance.",
+  "triggering_event": "Admin requests to view sales reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to view sales reports."
+  ],
+  "postconditions": [
+    "Sales reports are displayed to the admin.",
+    "Admin can analyze the data presented in the reports."
+  ],
+  "assumptions": [
+    "The system has up-to-date sales data available for reporting.",
+    "The admin has the required access rights."
+  ],
+  "requirements_met": [
+    "The system must provide access to sales reports.",
+    "The system must ensure data accuracy in reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Admin requests to view sales reports → System displays the sales reports."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Admin filters reports by date range → System updates the displayed reports accordingly."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Admin does not have permission → System displays an error message indicating insufficient permissions."
+  ],
+  "information_for_steps": [
+    "1. Admin's request for sales reports.",
+    "2. Sales data retrieved from the database."
+  ]
+}

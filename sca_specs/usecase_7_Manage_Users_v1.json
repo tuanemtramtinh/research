@@ -1,0 +1,51 @@
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-007",
+  "area": "User Management",
+  "context_of_use": "This use case allows admins to create, modify, and remove user accounts within the system.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system access through user account management."
+  ],
+  "description": "Allow admins to create, modify, and remove user accounts and control system access.",
+  "triggering_event": "Admin requests to manage user accounts.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to manage user accounts."
+  ],
+  "postconditions": [
+    "User accounts are successfully created, modified, or removed."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to manage user accounts."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create user accounts.",
+    "The system shall allow admins to modify user accounts.",
+    "The system shall allow admins to remove user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification needed on the specific permissions required for different admin roles."
+  ],
+  "main_flow": [
+    "1. Admin requests to manage user accounts → System displays user account management interface.",
+    "2. Admin selects to create, modify, or remove a user account → System processes the request.",
+    "3. System confirms the action taken on the user account → Admin receives confirmation of the action."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin is not authenticated, the system denies access and prompts for login."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Confirmation message"
+  ]
+}
