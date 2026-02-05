@@ -1,37 +1,34 @@
 {
   "use_case_name": "Browse Products",
   "unique_id": "UC-002",
-  "area": "Product Management",
-  "context_of_use": "The customer interacts with the system to find and view products.",
-  "scope": "E-commerce platform",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to search, browse categories, view product details, and add items to their shopping cart within the e-commerce platform.",
+  "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
     "customer"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customers want to find products easily",
-    "business wants to increase sales"
+    "customer: wants to easily find and purchase products"
   ],
-  "description": "Allow customers to search, browse, and view product details to find items of interest.",
-  "triggering_event": "Customer initiates a search or browsing action.",
+  "description": "Enable customers to search, browse categories, view product details, and add items to their shopping cart.",
+  "triggering_event": "Customer initiates a product browsing session.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer has access to the e-commerce platform.",
-    "Customer is logged into their account."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "Customer can view a list of products based on search or category.",
-    "Customer can view detailed information about selected products."
+    "Customer has successfully added products to the shopping cart."
   ],
   "assumptions": [
-    "The system has a database of products categorized appropriately.",
-    "The customer has a stable internet connection."
+    "The customer has an active account and is logged in."
   ],
   "requirements_met": [
-    "The system allows browsing by category.",
-    "The system allows searching by keyword.",
-    "The system displays product details."
+    "The system shall allow customers to browse products by category.",
+    "The system shall allow customers to search for products by keyword.",
+    "The system shall allow customers to view product details.",
+    "The system shall allow customers to add products to their cart."
   ],
   "priority": "High",
   "risk": "Medium",
@@ -39,20 +36,17 @@
     "None identified."
   ],
   "main_flow": [
-    "1. Customer selects a category → System displays products in that category.",
-    "2. Customer enters a keyword → System displays products matching the keyword.",
-    "3. Customer selects a product → System displays detailed information about the product."
+    "1. Customer browses products by category → System displays products in the selected category.",
+    "2. Customer searches for products by keyword → System displays search results matching the keyword.",
+    "3. Customer views product details → System displays detailed information about the selected product.",
+    "4. Customer adds products to cart → System confirms the product has been added to the shopping cart."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): Customer refines the category selection → System updates the displayed products.",
-    "AF-2 (from Step 2): Customer modifies the search keyword → System updates the displayed products."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 1): No products found in the selected category → System displays a 'No products found' message."
-  ],
+  "alternative_flows": [],
+  "exception_flows": [],
   "information_for_steps": [
-    "1. Category list from the product database.",
-    "2. Search results based on the keyword from the product database.",
-    "3. Product details retrieved from the product database."
+    "1. Category selection",
+    "2. Search keyword",
+    "3. Product ID",
+    "4. Product ID"
   ]
 }

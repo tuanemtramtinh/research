@@ -1,0 +1,50 @@
+{
+  "use_case_name": "Perform Bulk Operations",
+  "unique_id": "UC-008",
+  "area": "User Management",
+  "context_of_use": "This use case allows power users to execute bulk actions to improve their efficiency in managing data.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: improve efficiency in data management"
+  ],
+  "description": "Provide power users the ability to execute bulk actions (e.g., updates, imports, or deletions) to improve efficiency.",
+  "triggering_event": "User initiates a bulk operation.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated and has power user privileges."
+  ],
+  "postconditions": [
+    "Bulk operations are successfully executed and reflected in the system."
+  ],
+  "assumptions": [
+    "The user has the necessary permissions to perform bulk operations.",
+    "The system supports bulk operations functionality."
+  ],
+  "requirements_met": [
+    "The system shall allow power users to perform bulk operations to enhance efficiency."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of bulk operations supported by the system."
+  ],
+  "main_flow": [
+    "1. User selects bulk operation type → System displays available bulk operation options.",
+    "2. User specifies the data for the bulk operation → System validates the input data.",
+    "3. User confirms the bulk operation → System executes the bulk operation and updates the system."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the input data is invalid, then the system displays an error message and prompts the user to correct the data."
+  ],
+  "information_for_steps": [
+    "1. Operation type",
+    "2. Input data",
+    "3. Confirmation of operation"
+  ]
+}

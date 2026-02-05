@@ -263,7 +263,7 @@ CRITICAL ENFORCEMENT RULES
 ========================
 1. You MUST output ONLY a single JSON object (no prose, no markdown, no code fences).
 2. EVERY field in the JSON schema below MUST be present and MUST be non-empty.
-3. Do NOT output placeholder values such as "N/A", "None", "Not specified", or "-".
+3. Do NOT output placeholder values such as "N/A", "None", "Not specified", "-" or "".
 4. If a field is not explicitly stated in the Requirement Text:
    - You MUST infer it conservatively and logically.
    - The inference MUST NOT introduce new system functionality.
@@ -1031,18 +1031,78 @@ def run_sca_use_case(
         passed=True, failed_criteria={}, regen_rationale=""
     )
 
-    # If judge nodes ran with structured output, the combined evaluation is embedded in judge_results;
-    # store the first judge's evaluation as a representative snapshot.
-    jr = None
-    for r in out.get("judge_results") or []:
-        if int(getattr(r, "spec_version", 0)) == int(out.get("spec_version") or 0):
-            jr = r
-            break
+    def _avg_int(values: List[int]) -> int:
+        if not values:
+            return 0
+        return int(round(sum(values) / float(len(values))))
+
+    def _aggregate_evaluation() -> UseCaseEvaluation | None:
+        spec_version = int(out.get("spec_version") or 0)
+        matching: List[UseCaseSpecJudgeResult] = [
+            r
+            for r in (out.get("judge_results") or [])
+            if int(getattr(r, "spec_version", 0)) == spec_version
+        ]
+
+        if not matching:
+            return None
+
+        comp_scores: List[int] = []
+        coh_scores: List[int] = []
+        rel_scores: List[int] = []
+        missing_fields: List[str] = []
+
+        for r in matching:
+            ev = getattr(r, "evaluation", None)
+            if ev is None:
+                continue
+
+            comp = getattr(ev, "Completeness", None)
+            if comp is not None:
+                comp_scores.append(int(getattr(comp, "score", 0) or 0))
+                for f in (getattr(comp, "missing_or_weak_fields", None) or []):
+                    fs = str(f).strip()
+                    if fs and fs not in missing_fields:
+                        missing_fields.append(fs)
+
+            coh = getattr(ev, "Coherence", None)
+            if coh is not None:
+                coh_scores.append(int(getattr(coh, "score", 0) or 0))
+
+            rel = getattr(ev, "Relevance", None)
+            if rel is not None:
+                rel_scores.append(int(getattr(rel, "score", 0) or 0))
+
+        n = len(matching)
+        avg_comp = _avg_int(comp_scores)
+        avg_coh = _avg_int(coh_scores)
+        avg_rel = _avg_int(rel_scores)
+
+        return UseCaseEvaluation(
+            Completeness={
+                "score": avg_comp,
+                "result": "PASS" if avg_comp >= 70 else "FAIL",
+                "rationale": f"Average across {n} judge(s).",
+                "missing_or_weak_fields": missing_fields,
+            },
+            Coherence={
+                "score": avg_coh,
+                "result": "PASS" if avg_coh >= 70 else "FAIL",
+                "rationale": f"Average across {n} judge(s).",
+            },
+            Relevance={
+                "score": avg_rel,
+                "result": "PASS" if avg_rel >= 70 else "FAIL",
+                "rationale": f"Average across {n} judge(s).",
+            },
+        )
+
+    aggregated_evaluation = _aggregate_evaluation()
 
     return ScenarioResult(
         use_case=use_case,
         use_case_spec_json=spec_json,
-        evaluation=getattr(jr, "evaluation", None),
+        evaluation=aggregated_evaluation,
         validation=validation,
     )
 

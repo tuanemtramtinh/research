@@ -12,17 +12,19 @@
   "stakeholders_and_interests": [
     "admin: Ensure products are available and pricing is accurate."
   ],
-  "description": "Enable admins to create products, update prices, and manage inventory levels.",
+  "description": "Enable admins to create products, update pricing, and maintain inventory levels.",
   "triggering_event": "Admin initiates product management actions.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is authenticated and authorized to manage products."
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage products."
   ],
   "postconditions": [
-    "Products are created, prices are updated, and inventory levels are managed."
+    "Products are created, updated, or inventory levels are managed successfully."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to perform product management tasks."
+    "Admin has access to the product management interface.",
+    "The system has a functioning database for product information."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
@@ -32,18 +34,27 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the process for handling out-of-stock products."
+    "Clarification on the approval process for new products."
   ],
   "main_flow": [
-    "1. Admin creates a new product → System saves the product and confirms creation.",
-    "2. Admin updates product prices → System updates the prices and confirms the change.",
-    "3. Admin manages inventory levels → System updates inventory and confirms the adjustment."
+    "1. Admin selects the option to manage products → System displays product management interface.",
+    "2. Admin chooses to create a new product → System prompts for product details.",
+    "3. Admin enters product details and submits → System saves the new product.",
+    "4. Admin chooses to update product prices → System displays current pricing information.",
+    "5. Admin updates the price and submits → System saves the updated price.",
+    "6. Admin chooses to manage inventory levels → System displays current inventory status.",
+    "7. Admin updates inventory levels and submits → System saves the updated inventory."
   ],
   "alternative_flows": [],
-  "exception_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If product details are incomplete, System displays an error message and prompts for correction.",
+    "EF-2 (from Step 5): If the price update fails, System displays an error message indicating the failure."
+  ],
   "information_for_steps": [
-    "1. Product details",
-    "2. Updated price information",
-    "3. Inventory level adjustments"
+    "1. Admin credentials",
+    "2. Product details",
+    "3. Product ID",
+    "4. Updated price",
+    "5. Inventory levels"
   ]
 }

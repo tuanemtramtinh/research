@@ -76,6 +76,38 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
         v = sr.validation
         log(f"\n--- SCENARIO {idx} ---")
         log(f"Use case: [{getattr(sr.use_case, 'id', 0)}] {sr.use_case.name}")
+
+        ev = getattr(sr, "evaluation", None)
+        if ev is not None:
+            comp = getattr(ev, "Completeness", None)
+            coh = getattr(ev, "Coherence", None)
+            rel = getattr(ev, "Relevance", None)
+
+            def _fmt_crit(name: str, crit) -> str:
+                if crit is None:
+                    return f"- {name}: <no score>"
+                score = getattr(crit, "score", None)
+                result_txt = getattr(crit, "result", None)
+                if score is None and result_txt is None:
+                    return f"- {name}: <no score>"
+                if score is None:
+                    return f"- {name}: {result_txt}"
+                if result_txt is None:
+                    return f"- {name}: {score}/100"
+                return f"- {name}: {score}/100 ({result_txt})"
+
+            log("\n--- SCORES ---")
+            log(_fmt_crit("Completeness", comp))
+            log(_fmt_crit("Coherence", coh))
+            log(_fmt_crit("Relevance", rel))
+
+            missing = list(getattr(comp, "missing_or_weak_fields", []) or []) if comp else []
+            if missing:
+                log("- Missing/weak fields: " + ", ".join(str(x) for x in missing if str(x).strip()))
+        else:
+            log("\n--- SCORES ---")
+            log("<NO EVALUATION>")
+
         log("\n--- CONTENT ---")
         spec_obj = getattr(sr, "use_case_spec_json", None) or {}
         if isinstance(spec_obj, dict) and spec_obj:

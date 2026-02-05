@@ -2,7 +2,7 @@
   "use_case_name": "Authenticate",
   "unique_id": "UC-001",
   "area": "User Account Management",
-  "context_of_use": "This use case allows users to register, log in, and reset their passwords to securely access their accounts.",
+  "context_of_use": "This use case allows users to register, log in, and reset passwords to gain secure access to their accounts.",
   "scope": "User Account System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,10 +10,10 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "user: access personalized features",
-    "admin: manage user accounts"
+    "User: Access personalized features",
+    "Admin: Control system access"
   ],
-  "description": "This use case enables users to register, log in, and reset their passwords for secure account access.",
+  "description": "This use case enables users to register, log in, and reset passwords to securely access their accounts.",
   "triggering_event": "User initiates account registration, login, or password reset.",
   "trigger_type": "External",
   "preconditions": [
@@ -26,17 +26,18 @@
     "User can reset password if requested."
   ],
   "assumptions": [
-    "User has a valid email address for registration and password recovery."
+    "User has a valid email address for registration and password recovery.",
+    "User understands the need for secure access."
   ],
   "requirements_met": [
     "The system shall allow users to register an account.",
-    "The system shall allow users to log in to their account.",
-    "The system shall allow users to reset their password."
+    "The system shall allow users to log in to their accounts.",
+    "The system shall allow users to reset their passwords."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define password complexity requirements."
+    "Clarification needed on password complexity requirements."
   ],
   "main_flow": [
     "1. User registers account → System creates user account and confirms registration.",
@@ -48,7 +49,7 @@
     "AF-2 (from Step 2): If the user enters incorrect login credentials, the system notifies the user of the failure."
   ],
   "exception_flows": [
-    "EF-1 (from Step 3): If the user's email is not found, the system informs the user that the email is not registered."
+    "EF-1 (from Step 3): If the email provided for password reset is not associated with any account, the system informs the user that the email is not recognized."
   ],
   "information_for_steps": [
     "1. User registration details",

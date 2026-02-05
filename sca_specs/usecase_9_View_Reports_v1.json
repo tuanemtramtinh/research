@@ -2,54 +2,54 @@
   "use_case_name": "View Reports",
   "unique_id": "UC-009",
   "area": "Reporting",
-  "context_of_use": "The system allows users and customers to access and manage reports for review and offline analysis.",
-  "scope": "User and customer report management",
+  "context_of_use": "This use case allows customers and admins to view and download reports for monitoring and analysis.",
+  "scope": "Reporting System",
   "level": "User-goal",
   "primary_actors": [
     "customer",
-    "user"
+    "admin"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customers who need to analyze reports",
-    "users who require access to reports for data analysis"
+    "customer: Access to reports for personal analysis",
+    "admin: Ability to monitor business performance through reports"
   ],
-  "description": "Allow users and customers to view and download reports for review and offline analysis.",
-  "triggering_event": "User or customer requests to view or download a report.",
+  "description": "Allow customers and admins to view sales and other reports for monitoring and analysis.",
+  "triggering_event": "User requests to view reports.",
   "trigger_type": "External",
   "preconditions": [
-    "User or customer must be logged into the system.",
-    "User or customer must have the necessary permissions to access reports."
+    "User is authenticated",
+    "User has permission to view reports"
   ],
   "postconditions": [
-    "User or customer successfully views the report.",
-    "User or customer successfully downloads the report."
+    "User successfully views the requested reports",
+    "User can download reports if required"
   ],
   "assumptions": [
-    "Users and customers have access to the necessary reports.",
-    "The system has reports available for viewing and downloading."
+    "Users have the necessary permissions to access reports",
+    "Reports are available in the system"
   ],
   "requirements_met": [
-    "The system must allow users and customers to view reports.",
-    "The system must allow users and customers to download reports."
+    "The system shall allow customers to view and download reports.",
+    "The system shall allow admins to view sales reports."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None"
+    "Clarification on the types of reports available for viewing"
   ],
   "main_flow": [
-    "1. Customer or user requests to view a report → System displays the report.",
-    "2. Customer or user selects the option to download the report → System initiates the download process."
+    "1. Customer or admin requests to view reports → System displays available reports.",
+    "2. User selects a report to view → System presents the report details.",
+    "3. User opts to download the report → System initiates the download process."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the report is not available, the system displays an error message."
-  ],
+  "alternative_flows": [],
   "exception_flows": [
-    "EF-1 (from Step 2): If the download fails, the system notifies the user or customer of the failure."
+    "EF-1 (from Step 1): If the user does not have permission to view reports, then the system displays an error message."
   ],
   "information_for_steps": [
-    "1. Report data to be displayed.",
-    "2. Download link or file for the report."
+    "1. User credentials",
+    "2. Report selection",
+    "3. Download request"
   ]
 }

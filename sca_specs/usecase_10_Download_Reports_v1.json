@@ -1,0 +1,58 @@
+{
+  "use_case_name": "Download Reports",
+  "unique_id": "UC-010",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to download reports for offline analysis and record keeping.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to analyze data offline",
+    "user: wants to analyze data offline"
+  ],
+  "description": "Allow users to download reports for offline analysis and record keeping.",
+  "triggering_event": "User requests to download a report.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated",
+    "User has access to reports"
+  ],
+  "postconditions": [
+    "Report is downloaded successfully",
+    "User can access the report offline"
+  ],
+  "assumptions": [
+    "Users have the necessary permissions to download reports",
+    "Reports are available for download"
+  ],
+  "requirements_met": [
+    "The system shall allow users to download reports for offline analysis."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for download."
+  ],
+  "main_flow": [
+    "1. customer/user requests to download a report → System processes the request.",
+    "2. System verifies user permissions → System confirms permissions are valid.",
+    "3. System prepares the report for download → System generates the report file.",
+    "4. System provides the download link → User receives the download link.",
+    "5. User downloads the report → System confirms the download is successful."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the user is not authenticated, then the system prompts the user to log in."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. User permissions",
+    "3. Report data",
+    "4. Download link",
+    "5. Download status"
+  ]
+}
