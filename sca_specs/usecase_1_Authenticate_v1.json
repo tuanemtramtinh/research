@@ -3,7 +3,7 @@
   "unique_id": "UC-001",
   "area": "User Account Management",
   "context_of_use": "This use case allows users to register, log in, and reset passwords to securely access their accounts.",
-  "scope": "User Account Management System",
+  "scope": "User Account System",
   "level": "User-goal",
   "primary_actors": [
     "user"
@@ -11,22 +11,22 @@
   "supporting_actors": [],
   "stakeholders_and_interests": [
     "user: access personalized features",
-    "admin: manage user accounts"
+    "user: securely access account"
   ],
-  "description": "This use case enables users to register, log in, and reset passwords to securely access their accounts.",
+  "description": "Allow users to register, log in, and reset passwords to securely access their accounts.",
   "triggering_event": "User initiates account registration, login, or password reset.",
   "trigger_type": "External",
   "preconditions": [
-    "User must have internet access.",
-    "User must provide valid information for registration or login."
+    "User has internet access.",
+    "User is on the account management interface."
   ],
   "postconditions": [
-    "User account is created upon successful registration.",
-    "User is logged in upon successful authentication.",
-    "User can reset password and regain access."
+    "User account is created successfully.",
+    "User is logged in successfully.",
+    "User password is reset successfully."
   ],
   "assumptions": [
-    "User has a valid email address for registration and password reset."
+    "User has valid information for registration or password reset."
   ],
   "requirements_met": [
     "The system shall allow users to register an account.",
@@ -36,23 +36,18 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define password complexity requirements."
+    "None identified."
   ],
   "main_flow": [
-    "1. User registers account → System creates user account and confirms registration.",
-    "2. User logs in → System authenticates user and grants access to account.",
-    "3. User requests password reset → System sends password reset instructions to user's email."
+    "1. user registers account → system creates user account and confirms registration.",
+    "2. user logs in → system verifies credentials and grants access.",
+    "3. user resets password → system verifies identity and updates password."
   ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the user provides invalid registration information, the system prompts the user to correct the information.",
-    "AF-2 (from Step 2): If the user enters incorrect login credentials, the system notifies the user of the failure."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 3): If the email address is not associated with any account, the system informs the user that the email is invalid."
-  ],
+  "alternative_flows": [],
+  "exception_flows": [],
   "information_for_steps": [
-    "1. User registration details",
-    "2. User login credentials",
-    "3. User email for password reset"
+    "1. User registration details.",
+    "2. User login credentials.",
+    "3. User identity verification information."
   ]
 }

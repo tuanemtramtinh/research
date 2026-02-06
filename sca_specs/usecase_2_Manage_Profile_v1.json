@@ -2,8 +2,8 @@
   "use_case_name": "Manage Profile",
   "unique_id": "UC-002",
   "area": "User Account Management",
-  "context_of_use": "This use case allows users to view and update their personal profile information within the system.",
-  "scope": "User Account Management System",
+  "context_of_use": "This use case allows users to update and maintain their personal profile information within the system.",
+  "scope": "User Profile Management System",
   "level": "User-goal",
   "primary_actors": [
     "user"
@@ -12,7 +12,7 @@
   "stakeholders_and_interests": [
     "user: To maintain accurate account details"
   ],
-  "description": "Enable users to view and update their personal profile information.",
+  "description": "This use case enables users to update their profile information to ensure their account details remain accurate.",
   "triggering_event": "User initiates a request to update profile information.",
   "trigger_type": "External",
   "preconditions": [
@@ -22,7 +22,7 @@
     "User's profile information is updated successfully."
   ],
   "assumptions": [
-    "User has valid login credentials."
+    "User has valid login credentials to access the profile update feature."
   ],
   "requirements_met": [
     "The system shall allow users to update their profile information."
@@ -33,17 +33,18 @@
     "None"
   ],
   "main_flow": [
-    "1. User requests to view profile → System displays current profile information.",
-    "2. User updates profile information → System saves the updated information.",
-    "3. System confirms the update to the user."
+    "1. User requests to update profile information → System prompts for authentication.",
+    "2. User provides authentication credentials → System verifies credentials.",
+    "3. User submits updated profile information → System updates the profile information."
   ],
-  "alternative_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the user is not authenticated, the system redirects the user to the login page."
+  ],
   "exception_flows": [
-    "EF-1 (from Step 2): If the update fails, the system displays an error message."
+    "EF-1 (from Step 2): If the authentication fails, the system displays an error message and prompts the user to try again."
   ],
   "information_for_steps": [
-    "1. User's current profile information",
-    "2. Updated profile information",
-    "3. Confirmation message"
+    "1. User credentials",
+    "2. Updated profile information"
   ]
 }

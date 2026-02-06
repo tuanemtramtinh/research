@@ -288,6 +288,12 @@ CRITICAL ENFORCEMENT RULES
    - New business rules
 7. Use only formal, neutral, system-oriented language.
 8. Generate ONLY ONE use case.
+9. If the Target Use Case contains UML-like relationships (see `relationships` in the Target Use Case input object):
+    - For each relationship with type "include": you MUST represent it as a mandatory sub-flow in `main_flow`.
+      Add one or more explicit Actor→System steps that perform the included use case, before or during the primary goal execution.
+    - For each relationship with type "extend": you MUST represent it as an optional variation in `alternative_flows`.
+      Each alternative flow MUST branch from a specific `main_flow` step (e.g., "AF-1 (from Step 3): ...") and MUST return to a later main step or end successfully.
+    - You MUST NOT invent new relationships that are not present in the Target Use Case.
 
 ========================
 OUTPUT JSON SCHEMA (MUST FOLLOW EXACTLY)
