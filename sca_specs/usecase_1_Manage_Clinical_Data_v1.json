@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Manage Clinical Data",
+  "unique_id": "UC-001",
+  "area": "Clinical Data Management",
+  "context_of_use": "The system administrator manages clinical and administrative data to ensure centralized storage and integration with electronic medical records.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "system administrator"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "system administrator: Ensure data integrity and availability"
+  ],
+  "description": "This use case allows the system administrator to store clinical and administrative data centrally and integrate electronic medical records into the hospital management system.",
+  "triggering_event": "The system administrator initiates the management of clinical data.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The system administrator is logged into the hospital management system.",
+    "The central database is operational."
+  ],
+  "postconditions": [
+    "All clinical and administrative data is stored in the central database.",
+    "Electronic medical records are integrated with the management system."
+  ],
+  "assumptions": [
+    "The central database has sufficient capacity to store all required data.",
+    "The integration process does not introduce new system functionalities."
+  ],
+  "requirements_met": [
+    "The system shall store all data in a central database to reduce discrepancies between departments.",
+    "The system shall integrate electronic medical records with the management system to ensure digital availability of patient medical information."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on data migration procedures from old systems to the new system."
+  ],
+  "main_flow": [
+    "1. system administrator → The system stores all data in a central database.",
+    "2. system administrator → The system integrates electronic medical records with the management system."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Data to be stored in the central database.",
+    "2. Electronic medical records to be integrated."
+  ]
+}
