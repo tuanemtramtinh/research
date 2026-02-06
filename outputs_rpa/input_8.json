@@ -1,0 +1,675 @@
+{
+  "requirement_text": "As the IFA, I want to bring different existing systems together so that I can avoid having to save redundant data.\nAs the IFA, I want the system to be able to handle multiple languages so that I can service leagues in different countries.\nAs the IFA, I want the system to be reliable while being used by at least 50,000 people at the same time so that the user experience will be satisfactory.\nAs a fan, I want to access the system on my phone so that I can access it wherever I am.\nAs a match official, I want to access the system on my phone so that I can access it on the field or while I am traveling to the game.\nAs an IFA employee, I want to be able to access the system from a desktop so that I can more easily enter new data into the system.\nAs a team manager, I want to be able to access the system from a desktop so that I make fewer mistakes when managing my assets.\nAs a team staff member, I want to be able to access the system from a desktop so that I more easily work together with other staff members.\nAs the IFA, I want system users to only gain access to tools that are relevant for them so that the system is less confusing.\nAs the IFA, I want to manage leagues within the system so that I have one place to access all necessary data.\nAs the IFA, I want to be able to input different rulesets for different competitions so that no mistakes will be made in updating leaderboards, scheduling matches or auditing budgets.\nAs the IFA administrator, I want to be able to add new leagues to the system so that I can keep the system up to date.\nAs the IFA administrator, I want to be able to register new teams for the system so that I can keep the system up to date.\nAs the IFA manager, I want to be able to approve new teams that are registered in the IFA system so that I can maintain integrity.\nAs the IFA manager, I want to be able to approve new leagues that are added to the system so that I can maintain integrity.\nAs an IFA employee, I want the scheduling of games to be automated so that I can relieve some of my workload.\nAs the IFA, I want to avoid bias like giving teams a lighter schedule so that I can avoid any claims of unfair advantages.\nAs an IFA employee, I want to automate the allocating of match officials to games so that I can relieve some of my workload.\nAs the IFA, I want to automatically apply league rules like not allowing the same match officials to officiate the same team multiple times so that I can avoid claims about match officials causing an unfair advantage.\nAs the IFA, I want to avoid conflicts between the game schedules and the match officials’ personal schedules so that I will not have to reschedule games as a result of this.\nAs a match official, I want to have my preferred time slots, dates and locations for officiating games taken into consideration when making my schedule so that I will not have to work at a time that is inconvenient for me.\nAs the IFA, I want the overriding of a generated schedule to need at least two certified IFA employees so that I can avoid mistakes.\nAs an IFA budget auditor, I want to be able to control and audit a team’s budget management within the system so that I can reduce my workload.\nAs the IFA, I want the teams to input every transaction they make into the system so that I can make sure the team is following their league’s rules.\nAs an IFA budget auditor, I want to be able to quickly obtain a system-generated report about a team's budget management so that I can easily read up on their situation.\nAs a team manager, I want to manage my team’s finances directly within the system so that I will not have to do unnecessary work.\nAs a team manager, I want to be able to assign roles and system privileges to different members on my team so that I can delegate tasks and save time.\nAs a fan, I want to be notified as soon as possible about important schedule changes like a delayed kick-off so that I can plan accordingly.\nAs a match official, I want to be notified as soon as possible about important schedule changes like a delayed kick-off so that I can plan accordingly.\nAs the IFA, I want all different stakeholders of a game event to be notified in the same way and at the same time so that I can be more efficient.\nAs a fan, I want to be able to choose which game events I will be notified of so that I do not get too many notifications for my liking.\nAs a fan, I want to check statistics of different matches and statistics of different players so that I can be more engaged in their respective league.\nAs a team staff member, I want to access statistics about different matches and different players so that I can strategize better.\nAs a match official, I want to report on match events live during the match so that I do not have to register events twice.\nAs a fan, I want game events to be reported live so that I can keep track of what is happening as closely as possible.\nAs the IFA, I want the match officials to directly report on game events so that I can prevent unauthorized data sources being relevant.\nAs the IFA, I want player and match statistics to be derived directly from the reported match events so that no extra work needs to be done.",
+  "actors": [
+    {
+      "actor": "ifa",
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        9,
+        10,
+        16,
+        18,
+        19,
+        21,
+        36
+      ]
+    },
+    {
+      "actor": "fan",
+      "sentence_idx": [
+        3,
+        27,
+        30,
+        31,
+        34
+      ]
+    },
+    {
+      "actor": "match official",
+      "sentence_idx": [
+        4,
+        20,
+        28,
+        33,
+        35
+      ]
+    },
+    {
+      "actor": "ifa employee",
+      "sentence_idx": [
+        5,
+        15,
+        17
+      ]
+    },
+    {
+      "actor": "team manager",
+      "sentence_idx": [
+        6,
+        25,
+        26
+      ]
+    },
+    {
+      "actor": "team staff member",
+      "sentence_idx": [
+        7,
+        32
+      ]
+    },
+    {
+      "actor": "team",
+      "sentence_idx": [
+        23
+      ]
+    },
+    {
+      "actor": "stakeholder of a game event",
+      "sentence_idx": [
+        29
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "ifa",
+      "aliases": [
+        {
+          "alias": "the ifa",
+          "sentences": [
+            0,
+            9,
+            10,
+            16,
+            18,
+            19,
+            21,
+            36
+          ]
+        },
+        {
+          "alias": "ifa",
+          "sentences": [
+            1,
+            2
+          ]
+        },
+        {
+          "alias": "the ifa administrator",
+          "sentences": [
+            11,
+            12
+          ]
+        },
+        {
+          "alias": "the ifa manager",
+          "sentences": [
+            13,
+            14
+          ]
+        },
+        {
+          "alias": "an ifa budget auditor",
+          "sentences": [
+            22,
+            24
+          ]
+        }
+      ],
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        9,
+        10,
+        16,
+        18,
+        19,
+        21,
+        36
+      ]
+    },
+    {
+      "actor": "fan",
+      "aliases": [
+        {
+          "alias": "a fan",
+          "sentences": [
+            3,
+            27,
+            30,
+            31,
+            34
+          ]
+        }
+      ],
+      "sentence_idx": [
+        3,
+        27,
+        30,
+        31,
+        34
+      ]
+    },
+    {
+      "actor": "match official",
+      "aliases": [
+        {
+          "alias": "a match official",
+          "sentences": [
+            4,
+            20,
+            28,
+            33,
+            35
+          ]
+        }
+      ],
+      "sentence_idx": [
+        4,
+        20,
+        28,
+        33,
+        35
+      ]
+    },
+    {
+      "actor": "ifa employee",
+      "aliases": [
+        {
+          "alias": "an ifa employee",
+          "sentences": [
+            5,
+            15,
+            17
+          ]
+        }
+      ],
+      "sentence_idx": [
+        5,
+        15,
+        17
+      ]
+    },
+    {
+      "actor": "team manager",
+      "aliases": [
+        {
+          "alias": "a team manager",
+          "sentences": [
+            6,
+            25,
+            26
+          ]
+        }
+      ],
+      "sentence_idx": [
+        6,
+        25,
+        26
+      ]
+    },
+    {
+      "actor": "team staff member",
+      "aliases": [
+        {
+          "alias": "a team staff member",
+          "sentences": [
+            7,
+            32
+          ]
+        }
+      ],
+      "sentence_idx": [
+        7,
+        32
+      ]
+    },
+    {
+      "actor": "team",
+      "aliases": [
+        {
+          "alias": "a team",
+          "sentences": [
+            23
+          ]
+        }
+      ],
+      "sentence_idx": [
+        23
+      ]
+    },
+    {
+      "actor": "stakeholder of a game event",
+      "aliases": [
+        {
+          "alias": "a stakeholder of a game event",
+          "sentences": [
+            29
+          ]
+        }
+      ],
+      "sentence_idx": [
+        29
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Support Multiple Languages",
+      "description": "Provide multi-language capability so the system can be used by leagues in different countries.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "support multiple languages",
+          "original_sentence": "As the ifa, I want to be able to handle multiple languages so that I can service leagues in different countries.",
+          "sentence_idx": 1
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 2,
+      "name": "Manage Leagues",
+      "description": "Create, register, approve, and maintain leagues and their participating teams in the system.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "manage leagues",
+          "original_sentence": "As the IFA, I want to manage leagues within the system so that I have one place to access all necessary data.",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "ifa",
+          "action": "add leagues",
+          "original_sentence": "As the IFA administrator, I want to be able to add new leagues to the system so that I can keep the system up to date.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "ifa",
+          "action": "register teams",
+          "original_sentence": "As the IFA administrator, I want to be able to register new teams for the system so that I can keep the system up to date.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "ifa",
+          "action": "approve teams",
+          "original_sentence": "As the IFA manager, I want to be able to approve new teams that are registered in the IFA system so that I can maintain integrity.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "ifa",
+          "action": "approve leagues",
+          "original_sentence": "As the IFA manager, I want to be able to approve new leagues that are added to the system so that I can maintain integrity.",
+          "sentence_idx": 14
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 3,
+      "name": "Manage Competition Rulesets",
+      "description": "Define and maintain rulesets for different competitions to drive scheduling, leaderboards, and budget auditing.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "manage competition rulesets",
+          "original_sentence": "As the IFA, I want to be able to input different rulesets for different competitions so that no mistakes will be made in updating leaderboards, scheduling matches or auditing budgets.",
+          "sentence_idx": 10
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 4,
+      "name": "Enforce Fair Scheduling",
+      "description": "Apply league rules and constraints to generate unbiased schedules and avoid conflicts for matches and officials.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "avoid scheduling bias",
+          "original_sentence": "As the IFA, I want to avoid bias like giving teams a lighter schedule so that I can avoid any claims of unfair advantages.",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "ifa",
+          "action": "apply league rules",
+          "original_sentence": "As the IFA, I want to automatically apply league rules like not allowing the same match officials to officiate the same team multiple times so that I can avoid claims about match officials causing an unfair advantage.",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "ifa",
+          "action": "avoid schedule conflicts",
+          "original_sentence": "As the IFA, I want to avoid conflicts between the game schedules and the match officials’ personal schedules so that I will not have to reschedule games as a result of this.",
+          "sentence_idx": 19
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage competition rulesets"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Manage Team Finances",
+      "description": "Record and maintain financial transactions for teams to track and control their finances.",
+      "participating_actors": [
+        "team manager",
+        "team"
+      ],
+      "user_stories": [
+        {
+          "actor": "team",
+          "action": "record financial transactions",
+          "original_sentence": "As a team, I want to input every transaction I make into the system so that the ifa can make sure the team is following their league’s rules.",
+          "sentence_idx": 23
+        },
+        {
+          "actor": "team manager",
+          "action": "manage team finances",
+          "original_sentence": "As a team manager, I want to manage my team’s finances directly within the system so that I will not have to do unnecessary work.",
+          "sentence_idx": 25
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 6,
+      "name": "View Statistics",
+      "description": "View match and player statistics for analysis, strategy, and engagement.",
+      "participating_actors": [
+        "fan",
+        "team staff member"
+      ],
+      "user_stories": [
+        {
+          "actor": "team staff member",
+          "action": "view match statistics",
+          "original_sentence": "As a team staff member, I want to access statistics about different matches and different players so that I can strategize better.",
+          "sentence_idx": 32
+        },
+        {
+          "actor": "fan",
+          "action": "view match statistics",
+          "original_sentence": "As a fan, I want to check statistics of different matches and statistics of different players so that I can be more engaged in their respective league.",
+          "sentence_idx": 31
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage live match events"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Allocate Match Officials",
+      "description": "Automate the allocation of match officials to games while considering their availability preferences.",
+      "participating_actors": [
+        "match official",
+        "ifa employee"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa employee",
+          "action": "automate official allocation",
+          "original_sentence": "As an IFA employee, I want to automate the allocating of match officials to games so that I can relieve some of my workload.",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "match official",
+          "action": "record availability preferences",
+          "original_sentence": "As a match official, I want to have my preferred time slots, dates and locations for officiating games taken into consideration when making my schedule so that I will not have to work at a time that is inconvenient for me.",
+          "sentence_idx": 20
+        }
+      ],
+      "relationships": [
+        {
+          "type": "extend",
+          "target_use_case": "enforce fair scheduling"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Audit Team Budgets",
+      "description": "Control, audit, and review team budget management, including generating budget reports.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "control team budget",
+          "original_sentence": "As an IFA budget auditor, I want to be able to control and audit a team’s budget management within the system so that I can reduce my workload.",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "ifa",
+          "action": "view budget report",
+          "original_sentence": "As an IFA budget auditor, I want to be able to quickly obtain a system-generated report about a team's budget management so that I can easily read up on their situation.",
+          "sentence_idx": 24
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage team finances"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Access via Mobile",
+      "description": "Access system features through mobile devices for use on the go and at the field.",
+      "participating_actors": [
+        "fan",
+        "match official"
+      ],
+      "user_stories": [
+        {
+          "actor": "fan",
+          "action": "access system on mobile",
+          "original_sentence": "As a fan, I want to access the system on my phone so that I can access it wherever I am.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "match official",
+          "action": "access system on mobile",
+          "original_sentence": "As a match official, I want to access the system on my phone so that I can access it on the field or while I am traveling to the game.",
+          "sentence_idx": 4
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "ensure system reliability"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Manage Notifications",
+      "description": "Configure and send event and schedule change notifications to game stakeholders according to their preferences.",
+      "participating_actors": [
+        "stakeholder of a game event",
+        "fan",
+        "match official"
+      ],
+      "user_stories": [
+        {
+          "actor": "fan",
+          "action": "receive schedule change notifications",
+          "original_sentence": "As a fan, I want to be notified as soon as possible about important schedule changes like a delayed kick-off so that I can plan accordingly.",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "match official",
+          "action": "receive schedule change notifications",
+          "original_sentence": "As a match official, I want to be notified as soon as possible about important schedule changes like a delayed kick-off so that I can plan accordingly.",
+          "sentence_idx": 28
+        },
+        {
+          "actor": "stakeholder of a game event",
+          "action": "receive event notifications",
+          "original_sentence": "As a stakeholder of a game event, I want to be notified in the same way and at the same time as other stakeholders so that the ifa can be more efficient.",
+          "sentence_idx": 29
+        },
+        {
+          "actor": "fan",
+          "action": "manage notification preferences",
+          "original_sentence": "As a fan, I want to be able to choose which game events I will be notified of so that I do not get too many notifications for my liking.",
+          "sentence_idx": 30
+        }
+      ],
+      "relationships": [
+        {
+          "type": "extend",
+          "target_use_case": "enforce fair scheduling"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Manage Team Roles",
+      "description": "Assign team roles and corresponding system privileges to team members.",
+      "participating_actors": [
+        "team manager"
+      ],
+      "user_stories": [
+        {
+          "actor": "team manager",
+          "action": "assign team roles",
+          "original_sentence": "As a team manager, I want to be able to assign roles and system privileges to different members on my team so that I can delegate tasks and save time.",
+          "sentence_idx": 26
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 12,
+      "name": "Integrate Systems",
+      "description": "Connect and consolidate existing systems to reduce redundancy and centralize data.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "integrate existing systems",
+          "original_sentence": "As the IFA, I want to bring different existing systems together so that I can avoid having to save redundant data.",
+          "sentence_idx": 0
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 13,
+      "name": "Access via Desktop",
+      "description": "Access system functionality from desktop environments for efficient data entry and collaboration.",
+      "participating_actors": [
+        "team manager",
+        "team staff member",
+        "ifa employee"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa employee",
+          "action": "access system on desktop",
+          "original_sentence": "As an IFA employee, I want to be able to access the system from a desktop so that I can more easily enter new data into the system.",
+          "sentence_idx": 5
+        },
+        {
+          "actor": "team manager",
+          "action": "access system on desktop",
+          "original_sentence": "As a team manager, I want to be able to access the system from a desktop so that I make fewer mistakes when managing my assets.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "team staff member",
+          "action": "access system on desktop",
+          "original_sentence": "As a team staff member, I want to be able to access the system from a desktop so that I more easily work together with other staff members.",
+          "sentence_idx": 7
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "ensure system reliability"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Ensure System Reliability",
+      "description": "Maintain system performance and availability for large numbers of concurrent users.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "ensure system reliability",
+          "original_sentence": "As the ifa, I want to be reliable while being used by at least 50,000 people at the same time so that the user experience will be satisfactory.",
+          "sentence_idx": 2
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 15,
+      "name": "Manage Live Match Events",
+      "description": "Capture live match events, derive statistics from them, and provide real-time game event viewing.",
+      "participating_actors": [
+        "fan",
+        "match official",
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "match official",
+          "action": "report match events",
+          "original_sentence": "As a match official, I want to report on match events live during the match so that I do not have to register events twice.",
+          "sentence_idx": 33
+        },
+        {
+          "actor": "match official",
+          "action": "report game events",
+          "original_sentence": "As a match official, I want to directly report on game events so that the ifa can prevent unauthorized data sources being relevant.",
+          "sentence_idx": 35
+        },
+        {
+          "actor": "ifa",
+          "action": "derive statistics from match events",
+          "original_sentence": "As the ifa, I want player and match statistics to be derived directly from the reported match events so that no extra work needs to be done.",
+          "sentence_idx": 36
+        },
+        {
+          "actor": "fan",
+          "action": "view live game events",
+          "original_sentence": "As a fan, I want game events to be reported live so that I can keep track of what is happening as closely as possible.",
+          "sentence_idx": 34
+        }
+      ],
+      "relationships": []
+    }
+  ]
+}

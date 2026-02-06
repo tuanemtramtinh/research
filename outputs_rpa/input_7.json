@@ -1,0 +1,538 @@
+{
+  "requirement_text": "As a patient, I want to be able to access my medical record from my mobile device so that I can review measurement and test results.\nAs a patient, I want to be able to share data which is collected through my wearable device(s) with healthcare professionals.\nAs a patient, I want to be able to control who has access to my medical data so that I can restrict access to my data if necessary.\nAs a patient, I want to be able to review the status of laboratory tests so that I have an indication of when the results will be available.\nAs a patient, I want to be able to schedule appointments so that I can remotely schedule appointments using my customer account.\nAs a patient, I want to be able to renew my medication prescriptions.\nAs a doctor, I want to be able to share patient data with both internal as well external laboratories.\nAs a doctor, I want results of measurements to be imported into patients’ medical records automatically so that I don’t have to enter these manually.\nAs a doctor, I want to be able to access patients’ medical records so that I can view all their relevant medical data.\nAs a doctor, I want to be able to add data to patients’ medical records.\nAs a doctor, I want to be able to have an agenda so that I can see who and where my next patient appointment is.\nAs a doctor, I want to be able to request laboratory tests so I can review the results of these tests.\nAs a doctor, I want to be able to send out prescriptions to pharmacies.\nAs a doctor, I want to be able to review what medications the pharmacies have in stock.\nAs a doctor, I want to be able to review the intake prescriptions of medications so I can advise my patients on their medication intake.\nAs a doctor, I want to have an overview of external pharmacies including their names, address and contact numbers.\nAs a doctor, I want nurses to only have partial control over patient’s’ medical records so that they do not accidentally remove important data.\nAs a doctor, I want to be able to review the status of laboratory tests so that I have an indication of when the results will be available.\nAs a doctor, I want to be able to attach notes to laboratory tests so that I can supply laboratory personnel with additional information if needed.\nAs a doctor, I want to be able to log in to the system quickly so that I don’t have to waste any time during patient appointments.\nAs a nurse, I want to be able to edit patient's’ medical record so that I can enter measurement results.\nAs a nurse, I want to review patient’s’ relevant medical information so that I can prepare their room accordingly.\nAs a receptionist, I want to be able to identify patients through a unique number.\nAs a receptionist, I want to have access to doctors’ schedule so that I can schedule their appointments.\nAs a receptionist, I want to be able to match patients to doctors so that I can schedule appointments for them.\nAs a receptionist, I want to have an overview of available rooms so that I can assign patients to them.\nAs a laboratory technician, I want to be have an overview of all tests that need to be performed.\nAs a laboratory technician, I want to be able to review the type and level of urgency for each test to be performed, as well as the doctor who has requested the test.\nAs a laboratory technician, I want to be able to receive notifications regarding requests for tests to be done so that I can perform tests when needed.\nAs a laboratory technician, I want to be able to enter test results so that doctors are able to review them.\nAs a laboratory technician, I want to be able to attach notes to laboratory tests so that I can supply doctors with additional information if needed.\nAs a pharmacist, I want to be able to review a patient's’ ID number, medication dosage and prescribed medication.\nAs a system administrator, I want to be able to adjust users’ access rights.\nAs a system administrator, I want users to log in using two-step authentication so that system security is guaranteed.",
+  "actors": [
+    {
+      "actor": "patient",
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "actor": "doctor",
+      "sentence_idx": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "actor": "nurse",
+      "sentence_idx": [
+        16,
+        20,
+        21
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "sentence_idx": [
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "actor": "laboratory technician",
+      "sentence_idx": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "actor": "pharmacist",
+      "sentence_idx": [
+        31
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "sentence_idx": [
+        32
+      ]
+    },
+    {
+      "actor": "user",
+      "sentence_idx": [
+        33
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "patient",
+      "aliases": [],
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "actor": "doctor",
+      "aliases": [],
+      "sentence_idx": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "actor": "nurse",
+      "aliases": [],
+      "sentence_idx": [
+        16,
+        20,
+        21
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "aliases": [],
+      "sentence_idx": [
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "actor": "laboratory technician",
+      "aliases": [],
+      "sentence_idx": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "actor": "pharmacist",
+      "aliases": [],
+      "sentence_idx": [
+        31
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "aliases": [],
+      "sentence_idx": [
+        32
+      ]
+    },
+    {
+      "actor": "user",
+      "aliases": [],
+      "sentence_idx": [
+        33
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Manage Medical Records",
+      "description": "Create, update, import results into, and review patients’ medical records and related medical information.",
+      "participating_actors": [
+        "nurse",
+        "doctor",
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "access medical record",
+          "original_sentence": "As a patient, I want to be able to access my medical record from my mobile device so that I can review measurement and test results.",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "doctor",
+          "action": "import measurement results into medical records",
+          "original_sentence": "As a doctor, I want to have results of measurements imported into patients’ medical records automatically so that I don’t have to enter these manually.",
+          "sentence_idx": 7
+        },
+        {
+          "actor": "doctor",
+          "action": "access medical records",
+          "original_sentence": "As a doctor, I want to be able to access patients’ medical records so that I can view all their relevant medical data.",
+          "sentence_idx": 8
+        },
+        {
+          "actor": "doctor",
+          "action": "add data to medical records",
+          "original_sentence": "As a doctor, I want to be able to add data to patients’ medical records.",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "nurse",
+          "action": "control medical records",
+          "original_sentence": "As a nurse, I want to only have partial control over patients’ medical records so that I do not accidentally remove important data.",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "nurse",
+          "action": "edit medical record",
+          "original_sentence": "As a nurse, I want to be able to edit patient's’ medical record so that I can enter measurement results.",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "nurse",
+          "action": "review relevant medical information",
+          "original_sentence": "As a nurse, I want to review patient’s’ relevant medical information so that I can prepare their room accordingly.",
+          "sentence_idx": 21
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Manage Prescriptions",
+      "description": "Renew prescriptions, review prescribed medications and dosages, and send prescriptions to pharmacies while considering pharmacy stock and details.",
+      "participating_actors": [
+        "doctor",
+        "patient",
+        "pharmacist"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "renew medication prescriptions",
+          "original_sentence": "As a patient, I want to be able to renew my medication prescriptions.",
+          "sentence_idx": 5
+        },
+        {
+          "actor": "doctor",
+          "action": "send prescriptions to pharmacies",
+          "original_sentence": "As a doctor, I want to be able to send out prescriptions to pharmacies.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "doctor",
+          "action": "review medications in stock",
+          "original_sentence": "As a doctor, I want to be able to review what medications the pharmacies have in stock.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "doctor",
+          "action": "review medication intake prescriptions",
+          "original_sentence": "As a doctor, I want to be able to review the intake prescriptions of medications so I can advise my patients on their medication intake.",
+          "sentence_idx": 14
+        },
+        {
+          "actor": "doctor",
+          "action": "view external pharmacies",
+          "original_sentence": "As a doctor, I want to have an overview of external pharmacies including their names, address and contact numbers.",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "pharmacist",
+          "action": "review patient identification",
+          "original_sentence": "As a pharmacist, I want to be able to review a patient's’ ID number, medication dosage and prescribed medication.",
+          "sentence_idx": 31
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Share Wearable Data",
+      "description": "Allow patients to share health data collected from wearable devices with healthcare professionals.",
+      "participating_actors": [
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "share wearable data",
+          "original_sentence": "As a patient, I want to be able to share data which is collected through my wearable device(s) with healthcare professionals.",
+          "sentence_idx": 1
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "View Laboratory Worklist",
+      "description": "Provide laboratory technicians an overview of requested tests, including their details, urgency, and notifications for new test requests.",
+      "participating_actors": [
+        "laboratory technician"
+      ],
+      "user_stories": [
+        {
+          "actor": "laboratory technician",
+          "action": "view tests to be performed",
+          "original_sentence": "As a laboratory technician, I want to be have an overview of all tests that need to be performed.",
+          "sentence_idx": 26
+        },
+        {
+          "actor": "laboratory technician",
+          "action": "review test details",
+          "original_sentence": "As a laboratory technician, I want to be able to review the type and level of urgency for each test to be performed, as well as the doctor who has requested the test.",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "laboratory technician",
+          "action": "receive test request notifications",
+          "original_sentence": "As a laboratory technician, I want to be able to receive notifications regarding requests for tests to be done so that I can perform tests when needed.",
+          "sentence_idx": 28
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Manage Laboratory Results",
+      "description": "Enter laboratory test results and review the status of laboratory tests by doctors and patients.",
+      "participating_actors": [
+        "doctor",
+        "laboratory technician",
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "laboratory technician",
+          "action": "enter test results",
+          "original_sentence": "As a laboratory technician, I want to be able to enter test results so that doctors are able to review them.",
+          "sentence_idx": 29
+        },
+        {
+          "actor": "patient",
+          "action": "review laboratory test status",
+          "original_sentence": "As a patient, I want to be able to review the status of laboratory tests so that I have an indication of when the results will be available.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "doctor",
+          "action": "review laboratory test status",
+          "original_sentence": "As a doctor, I want to be able to review the status of laboratory tests so that I have an indication of when the results will be available.",
+          "sentence_idx": 17
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Manage Appointments",
+      "description": "Schedule and manage appointments, doctor agendas, patient identification, doctor-patient matching, and room availability.",
+      "participating_actors": [
+        "receptionist",
+        "doctor",
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "schedule appointments",
+          "original_sentence": "As a patient, I want to be able to schedule appointments so that I can remotely schedule appointments using my customer account.",
+          "sentence_idx": 4
+        },
+        {
+          "actor": "doctor",
+          "action": "manage agenda",
+          "original_sentence": "As a doctor, I want to be able to have an agenda so that I can see who and where my next patient appointment is.",
+          "sentence_idx": 10
+        },
+        {
+          "actor": "receptionist",
+          "action": "identify patients by unique number",
+          "original_sentence": "As a receptionist, I want to be able to identify patients through a unique number.",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "receptionist",
+          "action": "view doctors’ schedules",
+          "original_sentence": "As a receptionist, I want to have access to doctors’ schedule so that I can schedule their appointments.",
+          "sentence_idx": 23
+        },
+        {
+          "actor": "receptionist",
+          "action": "match patients to doctors",
+          "original_sentence": "As a receptionist, I want to be able to match patients to doctors so that I can schedule appointments for them.",
+          "sentence_idx": 24
+        },
+        {
+          "actor": "receptionist",
+          "action": "view available rooms",
+          "original_sentence": "As a receptionist, I want to have an overview of available rooms so that I can assign patients to them.",
+          "sentence_idx": 25
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Request Laboratory Tests",
+      "description": "Request laboratory tests, share necessary patient data with laboratories, and attach notes for laboratory personnel.",
+      "participating_actors": [
+        "doctor",
+        "laboratory technician"
+      ],
+      "user_stories": [
+        {
+          "actor": "doctor",
+          "action": "share patient data with laboratories",
+          "original_sentence": "As a doctor, I want to be able to share patient data with both internal as well external laboratories.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "doctor",
+          "action": "request laboratory tests",
+          "original_sentence": "As a doctor, I want to be able to request laboratory tests so I can review the results of these tests.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "doctor",
+          "action": "attach notes to laboratory tests",
+          "original_sentence": "As a doctor, I want to be able to attach notes to laboratory tests so that I can supply laboratory personnel with additional information if needed.",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "laboratory technician",
+          "action": "attach notes to laboratory tests",
+          "original_sentence": "As a laboratory technician, I want to be able to attach notes to laboratory tests so that I can supply doctors with additional information if needed.",
+          "sentence_idx": 30
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Authenticate",
+      "description": "Log in to the system, including support for two-step authentication for secure access.",
+      "participating_actors": [
+        "doctor",
+        "user"
+      ],
+      "user_stories": [
+        {
+          "actor": "doctor",
+          "action": "log in to system",
+          "original_sentence": "As a doctor, I want to be able to log in to the system quickly so that I don’t have to waste any time during patient appointments.",
+          "sentence_idx": 19
+        },
+        {
+          "actor": "user",
+          "action": "log in with two-step authentication",
+          "original_sentence": "As a user, I want to log in using two-step authentication so that system security is guaranteed.",
+          "sentence_idx": 33
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 9,
+      "name": "Control Data Access",
+      "description": "Allow patients to control and restrict who has access to their medical data.",
+      "participating_actors": [
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "control access to medical data",
+          "original_sentence": "As a patient, I want to be able to control who has access to my medical data so that I can restrict access to my data if necessary.",
+          "sentence_idx": 2
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        },
+        {
+          "type": "include",
+          "target_use_case": "manage user access rights"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Manage User Access Rights",
+      "description": "Adjust and maintain users’ access rights within the system.",
+      "participating_actors": [
+        "system administrator"
+      ],
+      "user_stories": [
+        {
+          "actor": "system administrator",
+          "action": "adjust user access rights",
+          "original_sentence": "As a system administrator, I want to be able to adjust users’ access rights.",
+          "sentence_idx": 32
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "authenticate"
+        }
+      ]
+    }
+  ]
+}

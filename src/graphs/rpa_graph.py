@@ -131,8 +131,34 @@ def normalize_sentences_node(state: GraphState):
     if llm is None:
         return {"sentences": cleaned}
 
+    # Only normalize sentences that are NOT already in standard form.
+    # Các câu đã đúng dạng "As a/an/the <actor>, I want to <goal> [so that <benefit>]" sẽ được giữ nguyên.
+
+    standard_pattern = re.compile(
+        r"^As\s+(?:a|an|the)\s+.+?,\s*I\s+want\s+to\s+.+?(?:\s+so\s+that\s+.+)?$",
+        re.IGNORECASE,
+    )
+
+    def _is_standard_form(sentence: str) -> bool:
+        return bool(standard_pattern.match(sentence))
+
+    standard_indices = {}
+    nonstandard_sentences: List[str] = []
+    nonstandard_map: List[int] = []  # map local index -> original index
+
+    for idx, sent in enumerate(cleaned):
+        if _is_standard_form(sent):
+            standard_indices[idx] = sent
+        else:
+            nonstandard_map.append(idx)
+            nonstandard_sentences.append(sent)
+
+    # Nếu tất cả câu đều đã đúng form thì trả về nguyên trạng
+    if not nonstandard_sentences:
+        return {"sentences": cleaned}
+
     structured_llm = llm.with_structured_output(NormalizedUserStoriesResponse)
-    indexed = "\n".join(f"{i}: {s}" for i, s in enumerate(cleaned))
+    indexed = "\n".join(f"{i}: {s}" for i, s in enumerate(nonstandard_sentences))
 
     system_prompt = """**System Prompt:**
 You are a Business Analyst AI. Your task is to normalize user story sentences into the STANDARD form:
@@ -161,21 +187,42 @@ RULES:
 Input sentences (index: sentence):
 {indexed}
 
-Return a list of normalized sentences: one string per input, in the same order. Output list length must be {len(cleaned)}.
+Return a list of normalized sentences: one string per input, in the same order. Output list length must be {len(nonstandard_sentences)}.
 """
 
     response: NormalizedUserStoriesResponse = structured_llm.invoke(
         [("system", system_prompt), ("human", human_prompt)]
     )
 
-    normalized = response.sentences
-    # Ensure same length as input (fallback to original if LLM returns fewer)
-    if len(normalized) < len(cleaned):
-        normalized = list(normalized) + cleaned[len(normalized) :]
-    elif len(normalized) > len(cleaned):
-        normalized = normalized[: len(cleaned)]
+    normalized_partial = list(response.sentences)
 
-    return {"sentences": normalized}
+    # Đảm bảo độ dài khớp số câu non-standard; nếu thiếu/thừa thì fallback một phần
+    if len(normalized_partial) < len(nonstandard_sentences):
+        normalized_partial += nonstandard_sentences[len(normalized_partial) :]
+    elif len(normalized_partial) > len(nonstandard_sentences):
+        normalized_partial = normalized_partial[: len(nonstandard_sentences)]
+
+    # Ghép lại theo thứ tự gốc: câu standard giữ nguyên, câu non-standard dùng bản normalized
+    final_sentences: List[str] = []
+    ns_idx = 0
+    ns_set = set(nonstandard_map)
+
+    for i in range(len(cleaned)):
+        if i in standard_indices:
+            final_sentences.append(standard_indices[i])
+        elif i in ns_set:
+            final_sentences.append(normalized_partial[ns_idx])
+            ns_idx += 1
+        else:
+            # Fallback an toàn (không nên xảy ra): dùng câu gốc
+            final_sentences.append(cleaned[i])
+
+    # DEBUG: in kết quả sau normalize
+    print("\n==== normalize_sentences_node ====")
+    for i, s in enumerate(final_sentences):
+        print(f"{i}: {s}")
+
+    return {"sentences": final_sentences}
 
 
 # =============================================================================
@@ -368,6 +415,12 @@ def find_actors_node(state: GraphState):
 
     sentences = state.get("sentences") or []
     raw_actors = _find_actors_regex(sentences)
+
+    # DEBUG: in danh sách actor raw
+    print("\n==== find_actors_node ====")
+    for a in raw_actors:
+        print(f"actor={a.actor}, sentence_idx={a.sentence_idx}")
+
     return {"raw_actors": raw_actors}
 
 
@@ -506,6 +559,15 @@ def find_aliases_node(state: GraphState):
     sentences = state.get("sentences") or []
     actors = state.get("actors") or []
     actor_results = _find_actors_alias(model, sentences, actors)
+
+    # DEBUG: in canonical actors và alias
+    print("\n==== find_aliases_node ====")
+    for ar in actor_results:
+        print(f"canonical={ar.actor}, sentence_idx={ar.sentence_idx}")
+        if ar.aliases:
+            for al in ar.aliases:
+                print(f"  alias={al.alias}, sentences={al.sentences}")
+
     return {"actor_results": actor_results}
 
 
@@ -537,7 +599,21 @@ def refine_goals_node(state: GraphState):
                 for idx, ucs in goals.items()
             ]
 
-        sents_text = "\n".join([f'{i}: "{sent}"' for i, sent in enumerate(sentences)])
+        # Chỉ dùng phần trước "so that" khi gửi cho LLM, tránh để benefit ảnh hưởng việc refine goal
+        def _strip_benefit_clause(sentence: str) -> str:
+            if not sentence:
+                return sentence
+            lower = sentence.lower()
+            idx = lower.find("so that")
+            if idx == -1:
+                return sentence
+            return sentence[:idx].strip()
+
+        sentences_no_benefit = [_strip_benefit_clause(sent) for sent in sentences]
+
+        sents_text = "\n".join(
+            [f'{i}: "{sent}"' for i, sent in enumerate(sentences_no_benefit)]
+        )
         goal_text = json.dumps(goals, indent=2, ensure_ascii=False)
 
         system_prompt = """You are an expert in UML use case modeling and software requirements analysis.
@@ -619,6 +695,16 @@ def refine_goals_node(state: GraphState):
     sentences = state.get("sentences") or []
     raw_goals = state.get("raw_goals") or {}
     refined_goals = _refine_goals(model, sentences, raw_goals)
+
+    # DEBUG: in goals trước và sau refine
+    print("\n==== refine_goals_node ====")
+    print("raw_goals:", json.dumps(raw_goals, indent=2, ensure_ascii=False))
+    for item in refined_goals:
+        print(f"- sentence_idx={item.sentence_idx}")
+        print(f"  original={item.original}")
+        print(f"  refined={item.refined}")
+        print(f"  added={item.added}")
+
     return {"refined_goals": refined_goals}
 
 
@@ -733,6 +819,19 @@ def grouping_node(state: GraphState):
         {"cluster_id": label, "user_stories": items}
         for label, items in sorted(clusters.items())
     ]
+
+    # DEBUG: in input_details và clusters cuối cùng
+    print("\n==== grouping_node ====")
+    print(">>> input_details:")
+    for d in input_details:
+        print(f"  - actor={d['actor']}, goal={d['goal']}, sent={d['sentence_idx']}")
+        print(f"    original={d['original_sentence']}")
+    print("\n>>> clusters_list:")
+    for c in clusters_list:
+        print(f"Cluster {c['cluster_id']}:")
+        for s in c["user_stories"]:
+            print(f"  - [{s['actor']}] {s['goal']} (sent={s['sentence_idx']})")
+            print(f'    "{s["original_sentence"]}"')
 
     return {"grouping_done": True, "user_story_clusters": clusters_list}
 
@@ -924,15 +1023,26 @@ For each cluster, provide:
         unique_actors = list(set(story["actor"] for story in stories))
 
         # Convert story dicts to UserStoryItem objects (action = goal phrase)
-        user_story_items = [
-            UserStoryItem(
-                actor=story["actor"],
-                action=story["goal"],
-                original_sentence=story["original_sentence"],
-                sentence_idx=story["sentence_idx"],
+        # Đồng thời loại bỏ duplicate theo (actor, câu gốc) trong cùng Use Case.
+        # Nghĩa là nếu cùng actor và cùng original_sentence nhưng có nhiều goal khác nhau,
+        # ta chỉ giữ lại một bản ghi để tránh lặp dòng trong output.
+        unique_story_items: List[UserStoryItem] = []
+        seen_story_keys = set()
+        for story in stories:
+            key = (story["actor"], story["original_sentence"].strip())
+            if key in seen_story_keys:
+                continue
+            seen_story_keys.add(key)
+            unique_story_items.append(
+                UserStoryItem(
+                    actor=story["actor"],
+                    action=story["goal"],
+                    original_sentence=story["original_sentence"],
+                    sentence_idx=story["sentence_idx"],
+                )
             )
-            for story in stories
-        ]
+
+        user_story_items = unique_story_items
 
         # Create UseCase object
         use_case = UseCase(
@@ -945,19 +1055,28 @@ For each cluster, provide:
         )
         use_cases.append(use_case)
 
-    # Print output
-    print("\n" + "=" * 60)
-    print("GENERATED USE CASES")
-    print("=" * 60)
-
+    # DEBUG: in toàn bộ use_cases trước khi in summary cuối
+    print("\n==== name_usecases_node (use_cases) ====")
     for uc in use_cases:
-        print(f"\n📌 UC-{uc.id}: [{uc.name}]")
-        print(f"   Description: {uc.description}")
-        print(f"   Actors: {', '.join(uc.participating_actors)}")
-        print(f"   User Stories ({len(uc.user_stories)}):")
-        for story in uc.user_stories:
-            print(f"     • [{story.actor}] {story.action}")
-            print(f'       └─ "{story.original_sentence}"')
+        print(f"UC-{uc.id}: {uc.name}")
+        print(f"  Actors: {uc.participating_actors}")
+        for s in uc.user_stories:
+            print(f"  - [{s.actor}] {s.action} (sent={s.sentence_idx})")
+            print(f'    "{s.original_sentence}"')
+
+    # # Print output
+    # print("\n" + "=" * 60)
+    # print("GENERATED USE CASES")
+    # print("=" * 60)
+
+    # for uc in use_cases:
+    #     print(f"\n📌 UC-{uc.id}: [{uc.name}]")
+    #     print(f"   Description: {uc.description}")
+    #     print(f"   Actors: {', '.join(uc.participating_actors)}")
+    #     print(f"   User Stories ({len(uc.user_stories)}):")
+    #     for story in uc.user_stories:
+    #         print(f"     • [{story.actor}] {story.action}")
+    #         print(f'       └─ "{story.original_sentence}"')
 
     return {"use_cases": use_cases}
 
@@ -1844,5 +1963,12 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
 
 if __name__ == "__main__":
     # paths = run_rpa_batch()
-    paths = run_rpa_batch(input_files=["inputs/input_4.txt"])
+    paths = run_rpa_batch(
+        input_files=[
+            "inputs/input_4.txt",  # HOS/g02
+            "inputs/input_6.txt",  # IFA/g08
+            "inputs/input_7.txt",  # HOS/g06
+            "inputs/input_8.txt",  # IFA/g14
+        ]
+    )
     # test_rpa_graph()
