@@ -10,7 +10,6 @@ def review_actors_node(state: GraphState):
 
     decision = interrupt(payload_to_user)
 
-    print(decision)
     if decision is True or decision is None:
         return {}
 
@@ -26,7 +25,6 @@ def review_actors_node(state: GraphState):
             ActorResult(**(a if isinstance(a, dict) else a.model_dump()))
             for a in raw_list
         ]
-        print(edited)
         return {"actor_results": edited}
 
     return {}

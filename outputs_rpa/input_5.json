@@ -82,6 +82,15 @@
       ]
     },
     {
+      "actor": "univitservice",
+      "sentence_idx": [
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    {
       "actor": "developer",
       "sentence_idx": [
         49
@@ -146,14 +155,29 @@
     },
     {
       "actor": "externalcollaborator",
-      "aliases": [],
+      "aliases": [
+        {
+          "alias": "externalcoordinator",
+          "sentences": [
+            31,
+            32
+          ]
+        }
+      ],
       "sentence_idx": [
         30
       ]
     },
     {
       "actor": "externalcoordinator",
-      "aliases": [],
+      "aliases": [
+        {
+          "alias": "externalcollaborator",
+          "sentences": [
+            30
+          ]
+        }
+      ],
       "sentence_idx": [
         31,
         32
@@ -168,7 +192,19 @@
     },
     {
       "actor": "bath data archive administrator",
-      "aliases": [],
+      "aliases": [
+        {
+          "alias": "bath data archive administrator",
+          "sentences": [
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ]
+        }
+      ],
       "sentence_idx": [
         34,
         35,
@@ -182,6 +218,28 @@
       "actor": "research information manager",
       "aliases": [
         {
+          "alias": "research information manager",
+          "sentences": [
+            40,
+            41,
+            42,
+            43,
+            44
+          ]
+        }
+      ],
+      "sentence_idx": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "actor": "univitservice",
+      "aliases": [
+        {
           "alias": "univitservice",
           "sentences": [
             45,
@@ -192,11 +250,10 @@
         }
       ],
       "sentence_idx": [
-        40,
-        41,
-        42,
-        43,
-        44
+        45,
+        46,
+        47,
+        48
       ]
     },
     {
@@ -225,29 +282,55 @@
   "use_cases": [
     {
       "id": 1,
-      "name": "Search Archive",
-      "description": "Allow users to search the data archive (including via Primo) to find relevant datasets.",
+      "name": "Integrate Archive Systems",
+      "description": "Integrate the archive with institutional and external systems to store, exchange, and include archived and externally held data consistently across platforms.",
       "participating_actors": [
-        "data reuser"
+        "research information manager",
+        "bath data archive administrator",
+        "univitservice"
       ],
       "user_stories": [
         {
-          "actor": "data reuser",
-          "action": "search archive",
-          "original_sentence": "As a data reuser, I want to search the archive through the web so that I can easily find data relevant to my needs.",
-          "sentence_idx": 22
+          "actor": "univitservice",
+          "action": "store archived data on existing systems",
+          "original_sentence": "As an UnivITservice, I want to store archived data on existing storage systems, so that university data storage is consistent and maintainable and future availability of data can be guaranteed.",
+          "sentence_idx": 45
         },
         {
-          "actor": "data reuser",
-          "action": "search archive",
-          "original_sentence": "As a data reuser, I want to search the archive through Primo so that I can search books, articles and data all in one place.",
-          "sentence_idx": 28
+          "actor": "univitservice",
+          "action": "integrate archive with university systems",
+          "original_sentence": "As an UnivITservice, I want to integrate the archive with existing university systems such as LDAP, so that the cost of administering the system can be kept low.",
+          "sentence_idx": 46
         },
         {
-          "actor": "data reuser",
-          "action": "use primo to search data",
-          "original_sentence": "As a data reuser, I want to search the archive through Primo so that I can search books, articles and data all in one place.",
-          "sentence_idx": 28
+          "actor": "univitservice",
+          "action": "store archived data on hcp object store",
+          "original_sentence": "As an UnivITservice, I want to store archived data directly on the HCP object store, so that features can be made.",
+          "sentence_idx": 47
+        },
+        {
+          "actor": "univitservice",
+          "action": "export data to another system",
+          "original_sentence": "As an UnivITservice, I want to be able to export all data to a different system, so that I am not tied into one system which may not be the most appropriate at some point in the future.",
+          "sentence_idx": 48
+        },
+        {
+          "actor": "bath data archive administrator",
+          "action": "import data from external centre",
+          "original_sentence": "As a Bath Data Archive administrator, I want to import Bath data from an external data centre wholesale, so that Bath data holdings in external archives are not lost if they close down.",
+          "sentence_idx": 38
+        },
+        {
+          "actor": "research information manager",
+          "action": "integrate archive with cris",
+          "original_sentence": "As a Research Information manager, I want to integrate the archive with CRIS, so that I can analyse impact of research data publication I can link funding to all of the outputs it produces.",
+          "sentence_idx": 40
+        },
+        {
+          "actor": "research information manager",
+          "action": "include records for externally held data",
+          "original_sentence": "As a Research Information manager, I want to include records for externally held data complete, so that the university's record of data holdings is complete.",
+          "sentence_idx": 41
         }
       ],
       "relationships": []
@@ -255,95 +338,380 @@
     {
       "id": 2,
       "name": "Manage Datasets",
-      "description": "Enable depositors to deposit, update, and maintain datasets and files, including large files and via virtual research environments.",
+      "description": "Deposit, maintain, version, link, and remotely share live and archived research datasets and files, including large and externally hosted data.",
       "participating_actors": [
+        "externalcollaborator",
+        "externalcoordinator",
+        "research facility manager",
         "depositor"
       ],
       "user_stories": [
         {
           "actor": "depositor",
           "action": "deposit datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.",
-          "sentence_idx": 0
-        },
-        {
-          "actor": "depositor",
-          "action": "maintain datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.",
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through a simple web interface, so that I don't need to install and learn new software to deposit.",
           "sentence_idx": 0
         },
         {
           "actor": "depositor",
           "action": "deposit datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.",
-          "sentence_idx": 3
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure, so that I have a single onestop shop for managing my research outputs.",
+          "sentence_idx": 2
         },
         {
           "actor": "depositor",
-          "action": "maintain datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.",
-          "sentence_idx": 3
-        },
-        {
-          "actor": "depositor",
-          "action": "use virtual research environments",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.",
+          "action": "deposit datasets",
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools, so that I can continue to work with tools with which I'm familiar.",
           "sentence_idx": 3
         },
         {
           "actor": "depositor",
           "action": "deposit files",
-          "original_sentence": "As a depositor, I want to deposit the files that I have so that I don't have to spend a lot of time finding the right version and converting to the right format.",
+          "original_sentence": "As a depositor, I want to deposit the files that I have, so that I don't have to spend a lot of time finding the right version and converting to the right format.",
           "sentence_idx": 4
         },
         {
           "actor": "depositor",
           "action": "deposit large files",
-          "original_sentence": "As a depositor, I want to deposit arbitrarily large files so that I am not limited in what files I can and cannot deposit.",
+          "original_sentence": "As a depositor, I want to deposit arbitrarily large files, so that I am not limited in what files I can and cannot deposit.",
           "sentence_idx": 8
+        },
+        {
+          "actor": "depositor",
+          "action": "link to external data",
+          "original_sentence": "As a depositor, I want to link to data stored in external repositories, so that I can store my data in an appropriate repository but still register it with the University and I don't have to deposit my data in multiple places.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "depositor",
+          "action": "manage live research data",
+          "original_sentence": "As a depositor, I want to manage and share �live� research data, so that whole project workflow is linked together.",
+          "sentence_idx": 19
+        },
+        {
+          "actor": "depositor",
+          "action": "manage dataset versions",
+          "original_sentence": "As a depositor, I want to manage multiple versions of the same dataset, so that changes to the dataset are transparent and do not compromise research integrity.",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "research facility manager",
+          "action": "deposit facility data into archive",
+          "original_sentence": "As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers, so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.",
+          "sentence_idx": 33
+        },
+        {
+          "actor": "externalcollaborator",
+          "action": "access collaborator data remotely",
+          "original_sentence": "AS an externalcoordinator, I want to access data from Bath collaborators off campus, so that I can collaborate effectively.",
+          "sentence_idx": 32
+        },
+        {
+          "actor": "externalcoordinator",
+          "action": "access collaborator data remotely",
+          "original_sentence": "AS an externalcoordinator, I want to access data from Bath collaborators off campus, so that I can collaborate effectively.",
+          "sentence_idx": 32
         }
       ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "streamline deposit interface"
-        }
-      ]
+      "relationships": []
     },
     {
       "id": 3,
-      "name": "Use System in Native Language",
-      "description": "Provide access to the archive user interface in the user’s native language.",
+      "name": "Use Accessible Interface",
+      "description": "Access the system through a simple, familiar, and language-appropriate web interface for depositing and reusing data.",
       "participating_actors": [
-        "data reuser"
+        "data reuser",
+        "depositor"
       ],
       "user_stories": [
         {
+          "actor": "depositor",
+          "action": "use web interface",
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through a simple web interface, so that I don't need to install and learn new software to deposit.",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "depositor",
+          "action": "use familiar interface",
+          "original_sentence": "As a depositor, I want to have a user interface that is familiar to me, so that I feel like all the University systems are joined up.",
+          "sentence_idx": 1
+        },
+        {
           "actor": "data reuser",
-          "action": "access system in native language",
-          "original_sentence": "As a data reuser, I want to access the system in my native language so that I am not put off reusing University of Bath data by language barriers.",
+          "action": "use system in native language",
+          "original_sentence": "As a data reuser, I want to access the system in my native language, so that I am not put off reusing University of Bath data by language barriers.",
           "sentence_idx": 23
         }
       ],
       "relationships": [
         {
-          "type": "extend",
-          "target_use_case": "search archive"
-        },
-        {
-          "type": "extend",
+          "type": "include",
           "target_use_case": "manage datasets"
-        },
-        {
-          "type": "extend",
-          "target_use_case": "streamline deposit interface"
         }
       ]
     },
     {
       "id": 4,
+      "name": "Integrate Deposit Workflows",
+      "description": "Deposit and maintain datasets via integrated systems such as Pure, workflow tools, and programmatic APIs.",
+      "participating_actors": [
+        "developer",
+        "depositor"
+      ],
+      "user_stories": [
+        {
+          "actor": "depositor",
+          "action": "use pure integration",
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure, so that I have a single onestop shop for managing my research outputs.",
+          "sentence_idx": 2
+        },
+        {
+          "actor": "depositor",
+          "action": "use workflow tool integration",
+          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools, so that I can continue to work with tools with which I'm familiar.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "developer",
+          "action": "deposit datasets",
+          "original_sentence": "As a developer, I want to deposit and maintain datasets via an API such as SWORD2, so that my service can interact with the archive.",
+          "sentence_idx": 49
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage datasets"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Manage Dataset Governance",
+      "description": "Apply governance controls to datasets, including embargoes, licenses, privileged access, metadata enrichment, links to publications and projects, and persistent identifiers.",
+      "participating_actors": [
+        "externalcollaborator",
+        "research information manager",
+        "academicpublisher",
+        "externalcoordinator",
+        "depositor"
+      ],
+      "user_stories": [
+        {
+          "actor": "depositor",
+          "action": "embargo data",
+          "original_sentence": "As a depositor, I want to place data under an embargo, so that my right of first use is protected, and I can fulfil my confidentiality responsibilities.",
+          "sentence_idx": 5
+        },
+        {
+          "actor": "depositor",
+          "action": "apply licenses to datasets",
+          "original_sentence": "As a depositor, I want to apply licenses to datasets, so that my IP rights are protected appropriately.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "depositor",
+          "action": "grant privileged access to datasets",
+          "original_sentence": "As a depositor, I want to allow my collaborators privileged access to datasets, so that we continue to have a productive relationship.",
+          "sentence_idx": 7
+        },
+        {
+          "actor": "depositor",
+          "action": "link datasets to publications",
+          "original_sentence": "As a depositor, I want to link datasets to publications in Opus, so that both my data and publications are more easily discovered.",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "depositor",
+          "action": "mint dois for data",
+          "original_sentence": "As a depositor, I want to mint DOIs for my data, so that it can be discovered and cited more easily and citations can be tracked so that I can receive credit.",
+          "sentence_idx": 10
+        },
+        {
+          "actor": "depositor",
+          "action": "auto-populate metadata",
+          "original_sentence": "As a depositor, I want to have metadata automatically filled from other University systems and remembered from previous deposits, so that I don't have to waste time reentering the same information.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "depositor",
+          "action": "specify data disposal policy",
+          "original_sentence": "As a depositor, I want to specify a disposal policy for my data, so that I do not accidentally breach laws or collaboration agreements.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "depositor",
+          "action": "attach subject metadata to records",
+          "original_sentence": "As a depositor, I want to attach subject specific discoverability metadata to records, so that researchers in my discipline can find my data more easily.",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "depositor",
+          "action": "link datasets to project dmps",
+          "original_sentence": "As a depositor, I want to link datasets with the project DMP, so that compliance with DMP can be demonstrated and whole project workflow is linked together.",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "depositor",
+          "action": "delegate deposit rights",
+          "original_sentence": "As a depositor, I want to allow others to deposit on my behalf, so that I can delegate research data management tasks appropriately.",
+          "sentence_idx": 21
+        },
+        {
+          "actor": "externalcollaborator",
+          "action": "gain privileged project data access",
+          "original_sentence": "As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved, so that I can collaborate effectively.",
+          "sentence_idx": 30
+        },
+        {
+          "actor": "externalcoordinator",
+          "action": "gain privileged project data access",
+          "original_sentence": "As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved, so that I can collaborate effectively.",
+          "sentence_idx": 30
+        },
+        {
+          "actor": "research information manager",
+          "action": "link datasets to project metadata",
+          "original_sentence": "As a Research Information manager, I want to have datasets linked to metadata about projects, so that I can report on projects depositing datasets in relation to funder requirements.",
+          "sentence_idx": 44
+        },
+        {
+          "actor": "academicpublisher",
+          "action": "create persistent links between articles and datasets",
+          "original_sentence": "As an academicpublisher, I want to make persistent web links between my articles and underlying datasets, so that my journals can be seen to be filled with robust, high quality research.",
+          "sentence_idx": 50
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 6,
+      "name": "View Dataset Impact",
+      "description": "Search the archive and view copies, versions, identifiers, and usage metrics such as downloads, citations, and segmentable statistics for datasets.",
+      "participating_actors": [
+        "research information manager",
+        "data reuser",
+        "fundingbody",
+        "depositor"
+      ],
+      "user_stories": [
+        {
+          "actor": "depositor",
+          "action": "track data downloads",
+          "original_sentence": "As a depositor, I want to track downloads of my data, so that I can demonstrate the impact of my work.",
+          "sentence_idx": 14
+        },
+        {
+          "actor": "depositor",
+          "action": "track data citations",
+          "original_sentence": "As a depositor, I want to track citations of my data, so that I can demonstrate the impact of my work",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "research information manager",
+          "action": "track citation counts for datasets",
+          "original_sentence": "As a Research Information manager, I want to track citation counts for published datasets, so that impact of datasets within academia can be demonstrated.",
+          "sentence_idx": 42
+        },
+        {
+          "actor": "research information manager",
+          "action": "segment usage statistics",
+          "original_sentence": "As a Research Information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.",
+          "sentence_idx": 43
+        },
+        {
+          "actor": "fundingbody",
+          "action": "harvest metadata on funded research outputs",
+          "original_sentence": "As a fundingbody, I want to harvest metadata on outputs from research I fund, so that I can analyse effectiveness of funding strategy and I can encourage cross fertilisation of research outputs.",
+          "sentence_idx": 52
+        },
+        {
+          "actor": "data reuser",
+          "action": "search archive",
+          "original_sentence": "As a data reuser, I want to search the archive through the web, so that I can easily find data relevant to my needs.",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "data reuser",
+          "action": "examine deposited files",
+          "original_sentence": "As a data reuser, I want to examine and identify deposited files, so that I can make a preliminary assessment of usefulness without downloading the whole dataset.",
+          "sentence_idx": 24
+        },
+        {
+          "actor": "data reuser",
+          "action": "view example dataset citation",
+          "original_sentence": "As a data reuser, I want to view an example citation for a dataset, so that I can reference it correctly.",
+          "sentence_idx": 25
+        },
+        {
+          "actor": "data reuser",
+          "action": "view dataset doi",
+          "original_sentence": "As a data reuser, I want to view a DOI for a dataset, so that I can get back to the data in future and I can import the dataset into my referencemanagement software automatically.",
+          "sentence_idx": 26
+        },
+        {
+          "actor": "data reuser",
+          "action": "obtain persistent dataset url",
+          "original_sentence": "As a data reuser, I want to get a persistent URL for a dataset, so that I can get back to the data in future.",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "data reuser",
+          "action": "search archive",
+          "original_sentence": "As a data reuser, I want to search the archive through Primo , so that I can search books, articles and data all in one place.",
+          "sentence_idx": 28
+        },
+        {
+          "actor": "data reuser",
+          "action": "view dataset versions",
+          "original_sentence": "As a data reuser, I want to see different versions of a dataset at a glance, so that I can be sure I'm using the right version of the dataset.",
+          "sentence_idx": 29
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 7,
+      "name": "Ensure Data Compliance",
+      "description": "Provide guarantees on data integrity, intellectual property protection, and robustness of archival plans to satisfy funders and collaborators.",
+      "participating_actors": [
+        "externalcollaborator",
+        "externalcoordinator",
+        "fundingbody",
+        "depositor"
+      ],
+      "user_stories": [
+        {
+          "actor": "depositor",
+          "action": "obtain data integrity guarantees",
+          "original_sentence": "As a depositor, I want to have guarantees about data integrity, so that I can use my data in the future and I can fulfil funder requirements for archival.",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "externalcollaborator",
+          "action": "obtain ip protection guarantees",
+          "original_sentence": "As an externalcoordinator, I want to have guarantees that my IP rights will not be breached, so that the risk of collaborating with Bath is acceptable to me.",
+          "sentence_idx": 31
+        },
+        {
+          "actor": "externalcoordinator",
+          "action": "obtain ip protection guarantees",
+          "original_sentence": "As an externalcoordinator, I want to have guarantees that my IP rights will not be breached, so that the risk of collaborating with Bath is acceptable to me.",
+          "sentence_idx": 31
+        },
+        {
+          "actor": "fundingbody",
+          "action": "verify robustness of data archival plans",
+          "original_sentence": "As a fundingbody, I want to be reassured that researchers I fund have robust archival plans for their data, so that I can be sure that funding them is a worthwhile investment.",
+          "sentence_idx": 51
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 8,
       "name": "Curate Deposited Data",
-      "description": "Allow administrators to review deposited datasets, enforce minimum metadata requirements, and approve scheduled data disposal.",
+      "description": "Review deposited datasets, enforce minimum metadata standards, approve data disposal, query the archive, and promote open deposit standards.",
       "participating_actors": [
         "bath data archive administrator"
       ],
@@ -351,614 +719,32 @@
         {
           "actor": "bath data archive administrator",
           "action": "review deposited datasets",
-          "original_sentence": "As a Bath Data Archive administrator, I want to make some checks on deposited datasets before they are made public so that consistent quality of metadata is maintained, compliance with policies can be checked and details of licensing can be checked.",
+          "original_sentence": "As a Bath Data Archive administrator, I want to make some checks on deposited datasets before they are made public, so that consistent quality of metadata is maintained, compliance with policies can be checked and details of licensing can be checked.",
           "sentence_idx": 34
         },
         {
           "actor": "bath data archive administrator",
-          "action": "enforce minimum metadata set",
-          "original_sentence": "As a Bath Data Archive administrator, I want to require a minimum set of metadata so that consistent quality of metadata is maintained.",
+          "action": "enforce minimum metadata",
+          "original_sentence": "As a Bath Data Archive administrator, I want to require a minimum set of metadata, so that consistent quality of metadata is maintained.",
           "sentence_idx": 35
         },
         {
           "actor": "bath data archive administrator",
-          "action": "approve scheduled data disposal",
-          "original_sentence": "As a Bath Data Archive administrator, I want to approve scheduled disposal of data so that data which is still required is not destroyed.",
+          "action": "approve data disposal",
+          "original_sentence": "As a Bath Data Archive administrator, I want to approve scheduled disposal of data, so that data which is still required is not destroyed.",
           "sentence_idx": 36
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 5,
-      "name": "Manage Research Data Lifecycle",
-      "description": "Enable depositors to link datasets to project DMPs, manage and share live research data, handle dataset versions, and allow deposit on behalf of others.",
-      "participating_actors": [
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "link datasets to project dmp",
-          "original_sentence": "As a depositor, I want to link datasets with the project DMP so that compliance with DMP can be demonstrated and whole project workflow is linked together.",
-          "sentence_idx": 18
         },
-        {
-          "actor": "depositor",
-          "action": "manage live research data",
-          "original_sentence": "As a depositor, I want to manage and share live research data so that whole project workflow is linked together.",
-          "sentence_idx": 19
-        },
-        {
-          "actor": "depositor",
-          "action": "share live research data",
-          "original_sentence": "As a depositor, I want to manage and share live research data so that whole project workflow is linked together.",
-          "sentence_idx": 19
-        },
-        {
-          "actor": "depositor",
-          "action": "manage dataset versions",
-          "original_sentence": "As a depositor, I want to manage multiple versions of the same dataset so that changes to the dataset are transparent and do not compromise research integrity.",
-          "sentence_idx": 20
-        },
-        {
-          "actor": "depositor",
-          "action": "allow deposit on behalf",
-          "original_sentence": "As a depositor, I want to allow others to deposit on my behalf so that I can delegate research data management tasks appropriately.",
-          "sentence_idx": 21
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 6,
-      "name": "Integrate with Research Information Systems",
-      "description": "Integrate the archive with CRIS and project metadata to link datasets to projects and harvest metadata on research outputs.",
-      "participating_actors": [
-        "fundingbody",
-        "research information manager"
-      ],
-      "user_stories": [
-        {
-          "actor": "research information manager",
-          "action": "integrate archive with cris",
-          "original_sentence": "As a research information manager, I want to integrate the archive with CRIS so that I can analyse impact of research data publication and I can link funding to all of the outputs it produces.",
-          "sentence_idx": 40
-        },
-        {
-          "actor": "research information manager",
-          "action": "link datasets to project metadata",
-          "original_sentence": "As a research information manager, I want to have datasets linked to metadata about projects so that I can report on projects depositing datasets in relation to funder requirements.",
-          "sentence_idx": 44
-        },
-        {
-          "actor": "fundingbody",
-          "action": "harvest metadata on research outputs",
-          "original_sentence": "As a fundingbody, I want to harvest metadata on outputs from research I fund so that I can analyse effectiveness of funding strategy and I can encourage cross fertilisation of research outputs.",
-          "sentence_idx": 52
-        }
-      ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "manage dataset impact and linking"
-        },
-        {
-          "type": "include",
-          "target_use_case": "manage research data lifecycle"
-        }
-      ]
-    },
-    {
-      "id": 7,
-      "name": "Deposit Facility Data",
-      "description": "Allow research facility managers to deposit facility-generated data directly into the archive, including on behalf of researchers.",
-      "participating_actors": [
-        "research facility manager"
-      ],
-      "user_stories": [
-        {
-          "actor": "research facility manager",
-          "action": "deposit facility data into archive",
-          "original_sentence": "As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.",
-          "sentence_idx": 33
-        },
-        {
-          "actor": "research facility manager",
-          "action": "deposit data on behalf of researchers",
-          "original_sentence": "As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.",
-          "sentence_idx": 33
-        }
-      ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "name": "Manage Datasets via API",
-      "description": "Provide an API for developers to deposit and maintain datasets programmatically.",
-      "participating_actors": [
-        "developer"
-      ],
-      "user_stories": [
-        {
-          "actor": "developer",
-          "action": "deposit datasets",
-          "original_sentence": "As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.",
-          "sentence_idx": 49
-        },
-        {
-          "actor": "developer",
-          "action": "maintain datasets",
-          "original_sentence": "As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.",
-          "sentence_idx": 49
-        },
-        {
-          "actor": "developer",
-          "action": "use api for dataset management",
-          "original_sentence": "As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.",
-          "sentence_idx": 49
-        }
-      ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "name": "View Dataset Citations",
-      "description": "Allow users to view citation examples, DOIs, persistent URLs, and versions for datasets.",
-      "participating_actors": [
-        "data reuser"
-      ],
-      "user_stories": [
-        {
-          "actor": "data reuser",
-          "action": "view example dataset citation",
-          "original_sentence": "As a data reuser, I want to view an example citation for a dataset so that I can reference it correctly.",
-          "sentence_idx": 25
-        },
-        {
-          "actor": "data reuser",
-          "action": "view dataset doi",
-          "original_sentence": "As a data reuser, I want to view a DOI for a dataset so that I can get back to the data in future and I can import the dataset into my referencemanagement software automatically.",
-          "sentence_idx": 26
-        },
-        {
-          "actor": "data reuser",
-          "action": "get persistent dataset url",
-          "original_sentence": "As a data reuser, I want to get a persistent URL for a dataset so that I can get back to the data in future.",
-          "sentence_idx": 27
-        },
-        {
-          "actor": "data reuser",
-          "action": "view dataset versions",
-          "original_sentence": "As a data reuser, I want to see different versions of a dataset at a glance so that I can be sure I'm using the right version of the dataset.",
-          "sentence_idx": 29
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "search archive"
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "name": "Manage Datasets in Pure",
-      "description": "Enable depositors to deposit and maintain datasets through Pure as part of managing their research outputs.",
-      "participating_actors": [
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "deposit datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.",
-          "sentence_idx": 2
-        },
-        {
-          "actor": "depositor",
-          "action": "maintain datasets",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.",
-          "sentence_idx": 2
-        },
-        {
-          "actor": "depositor",
-          "action": "manage research outputs",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.",
-          "sentence_idx": 2
-        },
-        {
-          "actor": "depositor",
-          "action": "use pure",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.",
-          "sentence_idx": 2
-        }
-      ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 11,
-      "name": "Manage Privileged Access",
-      "description": "Provide mechanisms to grant and use privileged access to project datasets for collaborators, including off-campus access.",
-      "participating_actors": [
-        "externalcollaborator",
-        "externalcoordinator",
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "grant privileged access to datasets",
-          "original_sentence": "As a depositor, I want to allow my collaborators privileged access to datasets so that we continue to have a productive relationship.",
-          "sentence_idx": 7
-        },
-        {
-          "actor": "externalcollaborator",
-          "action": "gain privileged access to project data",
-          "original_sentence": "As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved so that I can collaborate effectively.",
-          "sentence_idx": 30
-        },
-        {
-          "actor": "externalcoordinator",
-          "action": "access collaborator data off campus",
-          "original_sentence": "As an externalcoordinator, I want to access data from Bath collaborators off campus so that I can collaborate effectively.",
-          "sentence_idx": 32
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 12,
-      "name": "Manage Data Rights and Embargoes",
-      "description": "Allow users to protect IP rights by applying licenses, setting embargoes, and specifying data disposal policies.",
-      "participating_actors": [
-        "externalcoordinator",
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "externalcoordinator",
-          "action": "ensure protection of ip rights",
-          "original_sentence": "As an externalcoordinator, I want to have guarantees that my IP rights will not be breached so that the risk of collaborating with Bath is acceptable to me.",
-          "sentence_idx": 31
-        },
-        {
-          "actor": "depositor",
-          "action": "place data under embargo",
-          "original_sentence": "As a depositor, I want to place data under an embargo so that my right of first use is protected and I can fulfil my confidentiality responsibilities.",
-          "sentence_idx": 5
-        },
-        {
-          "actor": "depositor",
-          "action": "apply licenses to datasets",
-          "original_sentence": "As a depositor, I want to apply licenses to datasets so that my IP rights are protected appropriately.",
-          "sentence_idx": 6
-        },
-        {
-          "actor": "depositor",
-          "action": "specify data disposal policy",
-          "original_sentence": "As a depositor, I want to specify a disposal policy for my data so that I do not accidentally breach laws or collaboration agreements.",
-          "sentence_idx": 13
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 13,
-      "name": "Ensure Data Integrity",
-      "description": "Provide guarantees and controls to ensure the long-term integrity and reliability of archived data.",
-      "participating_actors": [
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "ensure data integrity",
-          "original_sentence": "As a depositor, I want to have guarantees about data integrity so that I can use my data in the future and I can fulfil funder requirements for archival.",
-          "sentence_idx": 16
-        }
-      ],
-      "relationships": [
-        {
-          "type": "include",
-          "target_use_case": "integrate archive with infrastructure"
-        }
-      ]
-    },
-    {
-      "id": 14,
-      "name": "Preview Deposited Files",
-      "description": "Allow users to examine and identify deposited files to assess their usefulness before downloading full datasets.",
-      "participating_actors": [
-        "data reuser"
-      ],
-      "user_stories": [
-        {
-          "actor": "data reuser",
-          "action": "examine deposited files",
-          "original_sentence": "As a data reuser, I want to examine and identify deposited files so that I can make a preliminary assessment of usefulness without downloading the whole dataset.",
-          "sentence_idx": 24
-        },
-        {
-          "actor": "data reuser",
-          "action": "identify deposited files",
-          "original_sentence": "As a data reuser, I want to examine and identify deposited files so that I can make a preliminary assessment of usefulness without downloading the whole dataset.",
-          "sentence_idx": 24
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "search archive"
-        }
-      ]
-    },
-    {
-      "id": 15,
-      "name": "Query Archive Holdings",
-      "description": "Enable administrators to query the entire archive to report on specific aspects of the holdings.",
-      "participating_actors": [
-        "bath data archive administrator"
-      ],
-      "user_stories": [
         {
           "actor": "bath data archive administrator",
           "action": "query archive",
-          "original_sentence": "As a Bath Data Archive administrator, I want to query the entire archive so that I can report on particular aspects of the archive holdings.",
+          "original_sentence": "As a Bath Data Archive administrator, I want to query the entire archive , so that I can report on particular aspects of the archive holdings.",
           "sentence_idx": 37
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 16,
-      "name": "Import and Export Archive Data",
-      "description": "Allow bulk import of data from external data centers and export of all archive data to other systems.",
-      "participating_actors": [
-        "bath data archive administrator",
-        "research information manager"
-      ],
-      "user_stories": [
-        {
-          "actor": "bath data archive administrator",
-          "action": "import data from external data centre",
-          "original_sentence": "As a Bath Data Archive administrator, I want to import Bath data from an external data centre wholesale so that Bath data holdings in external archives are not lost if they close down.",
-          "sentence_idx": 38
         },
         {
-          "actor": "research information manager",
-          "action": "export data to different system",
-          "original_sentence": "As a univitservice, I want to be able to export all data to a different system so that I am not tied into one system which may not be the most appropriate at some point in the future.",
-          "sentence_idx": 48
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 17,
-      "name": "Promote Open Standards",
-      "description": "Support and encourage the use of open standards for data deposit to maximize reusability.",
-      "participating_actors": [
-        "bath data archive administrator"
-      ],
-      "user_stories": [
-        {
           "actor": "bath data archive administrator",
-          "action": "encourage use of open standards",
-          "original_sentence": "As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit so that data is as reusable as possible.",
+          "action": "encourage use of open deposit standards",
+          "original_sentence": "As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit, so that data is as reusable as possible.",
           "sentence_idx": 39
-        },
-        {
-          "actor": "bath data archive administrator",
-          "action": "promote use of open standards",
-          "original_sentence": "As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit so that data is as reusable as possible.",
-          "sentence_idx": 39
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 18,
-      "name": "Manage Dataset Impact and Linking",
-      "description": "Support linking datasets to publications and external repositories, minting DOIs, adding subject metadata, and tracking usage and citation metrics.",
-      "participating_actors": [
-        "academicpublisher",
-        "research information manager",
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "link datasets to publications",
-          "original_sentence": "As a depositor, I want to link datasets to publications in Opus so that both my data and publications are more easily discovered.",
-          "sentence_idx": 9
-        },
-        {
-          "actor": "depositor",
-          "action": "mint dois for data",
-          "original_sentence": "As a depositor, I want to mint DOIs for my data so that it can be discovered and cited more easily and citations can be tracked so that I can receive credit.",
-          "sentence_idx": 10
-        },
-        {
-          "actor": "depositor",
-          "action": "link to externally stored data",
-          "original_sentence": "As a depositor, I want to link to data stored in external repositories so that I can store my data in an appropriate repository but still register it with the university and I don't have to deposit my data in multiple places.",
-          "sentence_idx": 12
-        },
-        {
-          "actor": "depositor",
-          "action": "track data downloads",
-          "original_sentence": "As a depositor, I want to track downloads of my data so that I can demonstrate the impact of my work.",
-          "sentence_idx": 14
-        },
-        {
-          "actor": "depositor",
-          "action": "track data citations",
-          "original_sentence": "As a depositor, I want to track citations of my data so that I can demonstrate the impact of my work.",
-          "sentence_idx": 15
-        },
-        {
-          "actor": "depositor",
-          "action": "attach subject-specific metadata to records",
-          "original_sentence": "As a depositor, I want to attach subject specific discoverability metadata to records so that researchers in my discipline can find my data more easily.",
-          "sentence_idx": 17
-        },
-        {
-          "actor": "academicpublisher",
-          "action": "create persistent links between articles and datasets",
-          "original_sentence": "As an academicpublisher, I want to make persistent web links between my articles and underlying datasets so that my journals can be seen to be filled with robust, high quality research.",
-          "sentence_idx": 50
-        },
-        {
-          "actor": "research information manager",
-          "action": "track citation counts for datasets",
-          "original_sentence": "As a research information manager, I want to track citation counts for published datasets so that impact of datasets within academia can be demonstrated.",
-          "sentence_idx": 42
-        },
-        {
-          "actor": "research information manager",
-          "action": "segment view statistics by country and sector",
-          "original_sentence": "As a research information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.",
-          "sentence_idx": 43
-        },
-        {
-          "actor": "research information manager",
-          "action": "segment download statistics by country and sector",
-          "original_sentence": "As a research information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.",
-          "sentence_idx": 43
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 19,
-      "name": "Streamline Deposit Interface",
-      "description": "Provide a familiar web interface that autofills and reuses metadata to simplify dataset deposit and maintenance.",
-      "participating_actors": [
-        "depositor"
-      ],
-      "user_stories": [
-        {
-          "actor": "depositor",
-          "action": "use web interface",
-          "original_sentence": "As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.",
-          "sentence_idx": 0
-        },
-        {
-          "actor": "depositor",
-          "action": "use familiar user interface",
-          "original_sentence": "As a depositor, I want to have a user interface that is familiar to me so that I feel like all the university systems are joined up.",
-          "sentence_idx": 1
-        },
-        {
-          "actor": "depositor",
-          "action": "autofill metadata from university systems",
-          "original_sentence": "As a depositor, I want to have metadata automatically filled from other university systems and remembered from previous deposits so that I don't have to waste time reentering the same information.",
-          "sentence_idx": 11
-        },
-        {
-          "actor": "depositor",
-          "action": "reuse metadata from previous deposits",
-          "original_sentence": "As a depositor, I want to have metadata automatically filled from other university systems and remembered from previous deposits so that I don't have to waste time reentering the same information.",
-          "sentence_idx": 11
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 20,
-      "name": "Register Externally Held Data",
-      "description": "Include records for datasets held in external repositories so the institution’s data holdings record is complete.",
-      "participating_actors": [
-        "research information manager"
-      ],
-      "user_stories": [
-        {
-          "actor": "research information manager",
-          "action": "include records for externally held data",
-          "original_sentence": "As a research information manager, I want to include records for externally held data complete so that the university's record of data holdings is complete.",
-          "sentence_idx": 41
-        }
-      ],
-      "relationships": [
-        {
-          "type": "extend",
-          "target_use_case": "manage datasets"
-        }
-      ]
-    },
-    {
-      "id": 21,
-      "name": "Integrate Archive with Infrastructure",
-      "description": "Store archived data on institutional storage (including HCP object store) and integrate the archive with existing university systems such as LDAP.",
-      "participating_actors": [
-        "research information manager"
-      ],
-      "user_stories": [
-        {
-          "actor": "research information manager",
-          "action": "store archived data on existing storage systems",
-          "original_sentence": "As a univitservice, I want to store archived data on existing storage systems so that university data storage is consistent and maintainable and future availability of data can be guaranteed.",
-          "sentence_idx": 45
-        },
-        {
-          "actor": "research information manager",
-          "action": "integrate archive with university systems",
-          "original_sentence": "As a univitservice, I want to integrate the archive with existing university systems such as LDAP so that the cost of administering the system can be kept low.",
-          "sentence_idx": 46
-        },
-        {
-          "actor": "research information manager",
-          "action": "store archived data on hcp object store",
-          "original_sentence": "As a univitservice, I want to store archived data directly on the HCP object store so that features can be made.",
-          "sentence_idx": 47
-        }
-      ],
-      "relationships": []
-    },
-    {
-      "id": 22,
-      "name": "Verify Archival Plans",
-      "description": "Allow funders to verify that researchers have robust archival plans for their data.",
-      "participating_actors": [
-        "fundingbody"
-      ],
-      "user_stories": [
-        {
-          "actor": "fundingbody",
-          "action": "verify robust archival plans for data",
-          "original_sentence": "As a fundingbody, I want to be reassured that researchers I fund have robust archival plans for their data so that I can be sure that funding them is a worthwhile investment.",
-          "sentence_idx": 51
         }
       ],
       "relationships": []

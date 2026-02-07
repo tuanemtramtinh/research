@@ -1,0 +1,825 @@
+{
+  "requirement_text": "As a patient, I want to access my own medical record, so that I can view my medical history\nAs a UHOPE employee, I want to enter patient information only once in the Electronic Medical Record Database, so that I do not have to enter it multiple times in different databases\nAs a UHOPE employee, I want to view patient information that I am allowed to access that a UHOPE employee from another department has entered into the Electronic Medical Record Database, so that information does not need to be manually exchanged between different databases\nAs a receptionist, I want to search for a patient’s file in the Electronic Medical Record Database, so I do not have to ask his or her information every time a patient calls for an appointment and enter it manually\nAs a receptionist, I want to edit information in a patient’s file in the Electronic Medical Record Database only once, so that I don’t have to edit it multiple times in different databases\nAs a doctor, I want to enter the appointment information into the system, so that I can check what I did the next time the same patient comes in\nAs a doctor, I want to only access medical files from my own patients, so that no other doctor can access the medical files of my patients\nAs a receptionist, I want to view the patient’s medical file, so that I can confirm that someone is the right person for the appointment\nAs a patient, I want to see the results of a test that was performed on me, so that I can look at it whenever I want\nAs a patient, I want to see what I have been treated for, so that I can get a better understanding of how the doctor helped me\nAs a doctor, I want to edit a patient’s medical file, so that I can make sure they get the right vaccine\nAs a UHOPE, I want to have an Electronic Medical Record Database that has access to the National Database for Medical Records, so that we can gather the medical files of new patients\nAs a UHOPE, I want to have a self-service center that holds the same data as the Electronic Medical Record Database, so that I can enable my employees to perform data analysis\nAs a UHOPE employee, I want to see all of the data in the self-service center, so that I can decide on which data to perform data analysis\nAs a UHOPE employee, I want to search for specific data in the self-service center by keyword, so that I can perform data analysis\nAs a UHOPE employee, I want to select which variables I want to use in the self-service center, so that I can perform data analysis\nAs a nurse, I want to view a patient’s medical record on my mobile phone, so that I can check his blood type quicker than using a computer\nAs a receptionist, I want to view a doctor’s schedule on a tablet, so that I can check his availability while walking somewhere\nAs a nurse, I want to have mobile hospital devices that automatically transfer the information it gathered to the patient’s medical file, so that I do not have to insert the information manually\nAs a nurse, I want to have mobile hospital devices that automatically transfer the data it measured to the patient’s medical file, so that I do not have to insert the data manually\nAs a receptionist, I want to manually change the start time of an appointment, so that I can provide the system with the correct information in case an appointment starts later than expected\nAs a receptionist, I want to manually change the end time of an appointment, so that I can provide the system with the correct information in case the appointment takes longer than expected\nAs a patient, I want to see my doctor’s available time slots, so that I can schedule an appointment myself\nAs a UHOPE, I want to have the scheduling system to automatically approve a patient’s appointment, so that the receptionist does not need to approve of this manually\nAs a receptionist, I want to manually disapprove of appointments, so that I can cancel an appointment in case doctor is ill\nAs a patient, I want to choose the reason for scheduling an appointment, so that I can enable my doctor to prepare for my appointment\nAs a receptionist, I want to have the scheduling system to automatically send out an email to the patient when I cancel the appointment, so that the patient is notified\nAs a receptionist, I want to have a scheduling system that shows me the room schedule, so that I can assign appointments to certain rooms\nAs a receptionist, I want to have a scheduling system that shows me the schedule of all nurses, so that I can assign a nurse to an appointment\nAs a receptionist, I want to have a scheduling system that shows me the schedule of all doctors, so that I can reschedule appointments if needed\nAs a receptionist, I want to manually choose a timeslot to schedule an appointment for a patient, so that I can help a patient when he or she calls for an appointment\nAs a patient, I want to cancel my appointment, so that I can notify the hospital in case I cannot make it\nAs a UHOPE, I want to enable patients to cancel their appointments up until 12 hours before their appointment through the scheduling system, so that the receptionist has enough time to reschedule the doctor\nAs a doctor, I want to view my schedule, so that I can see who my next patient is and I can prepare for the appointment\nAs a doctor, I want to see the reason for a patient coming in, so that I can prepare for the appointment\nAs a UHOPE, I want to enable the billing system to automatically create a bill based on the start and end time of an appointment, so that a billing department employee does not have to create it manually\nAs a UHOPE, I want to enable the billing system to automatically create a bill based the appointment information, so that a billing department employee does not have to create it manually\nAs a UHOPE, I want to enable the billing system to have a database of prices that are linked to specific treatments, so that the billing system can automatically create bills\nAs a billing department employee, I want to see the start and end time of an appointment, so that I can check if bill is correct\nAs a billing department employee, I want to see the date of an appointment, so that I can check if the bill is correct\nAs a UHOPE, I want to send a bill to the patient within 30 days after the appointment, so that the patient can come in for multiple appointments but only has to pay one bill\nAs a UHOPE, I want to bill the patient for the month they come in even though the bill is send out a month later, so that the bill corresponds to when the patient came in\nAs a billing department employee, I want to view the appointment information that the doctor entered into the system, so that I can check if the bill is correct\nAs a UHOPE, I want to have a hospital management system that is compliant with the GDPR regulations, so that we don’t get in trouble\nAs a patient, I want to change my address in my personal account, so that my information matches my real address\nAs a user, I want to have a unique identification number, so that I can identify myself to the system\nAs a user, I want to fill in my unique identification number and my password to log in, so that I can access the system\nAs a UHOPE employee, I want to log in with two-factor authentication using my phone only the first time I want to log into the system each day, so that the time to log in during the day is minimized\nAs a patient, I want to always log in with two-factor authentication using my phone, so that nobody else than me can access my personal information\nAs a system administrator, I want to change access rights for users, so that I can control what users can and can’t do\nAs a system administrator, I want to change access rights for user groups, so that I can control what user can and can’t do\nAs a UHOPE, I want to have a hospital management system that is online 24 hours per day and 7 days per week, so that UHOPE employees can always do their job\nAs a UHOPE, I want to have data in the Electronic Medical Record Database that is accessible 24 hours per day and 7 days per week, so that UHOPE employees can always do their job\nAs a UHOPE, I want to create access to the Hospital Management System for at least all 7600 employees at the same time, so that every employee can do their job\nAs a UHOPE, I want to have at least one back-up at all times of every piece of information in the entire system, so that the data is always available even if something happens to the system\nAs a patient, I want to view my underage children’s medical files, so that I can check their information\nAs a UHOPE, I want to duplicate the medical file of every patient, so that I can transfer it to the National Database for Medical Records",
+  "actors": [
+    {
+      "actor": "patient",
+      "sentence_idx": [
+        0,
+        8,
+        9,
+        22,
+        25,
+        31,
+        44,
+        48,
+        55
+      ]
+    },
+    {
+      "actor": "uhope employee",
+      "sentence_idx": [
+        1,
+        2,
+        13,
+        14,
+        15,
+        47
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "sentence_idx": [
+        3,
+        4,
+        7,
+        17,
+        20,
+        21,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "actor": "doctor",
+      "sentence_idx": [
+        5,
+        6,
+        10,
+        33,
+        34
+      ]
+    },
+    {
+      "actor": "uhope",
+      "sentence_idx": [
+        11,
+        12,
+        23,
+        32,
+        35,
+        36,
+        37,
+        40,
+        41,
+        43,
+        51,
+        52,
+        53,
+        54,
+        56
+      ]
+    },
+    {
+      "actor": "nurse",
+      "sentence_idx": [
+        16,
+        18,
+        19
+      ]
+    },
+    {
+      "actor": "billing department employee",
+      "sentence_idx": [
+        38,
+        39,
+        42
+      ]
+    },
+    {
+      "actor": "user",
+      "sentence_idx": [
+        45,
+        46
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "sentence_idx": [
+        49,
+        50
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "patient",
+      "aliases": [
+        {
+          "alias": "a patient",
+          "sentences": [
+            0,
+            8,
+            9,
+            22,
+            25,
+            31,
+            44,
+            48,
+            55
+          ]
+        }
+      ],
+      "sentence_idx": [
+        0,
+        8,
+        9,
+        22,
+        25,
+        31,
+        44,
+        48,
+        55
+      ]
+    },
+    {
+      "actor": "uhope employee",
+      "aliases": [
+        {
+          "alias": "a uhope employee",
+          "sentences": [
+            1,
+            2,
+            13,
+            14,
+            15,
+            47
+          ]
+        }
+      ],
+      "sentence_idx": [
+        1,
+        2,
+        13,
+        14,
+        15,
+        47
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "aliases": [
+        {
+          "alias": "a receptionist",
+          "sentences": [
+            3,
+            4,
+            7,
+            17,
+            20,
+            21,
+            24,
+            26,
+            27,
+            28,
+            29,
+            30
+          ]
+        }
+      ],
+      "sentence_idx": [
+        3,
+        4,
+        7,
+        17,
+        20,
+        21,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "actor": "doctor",
+      "aliases": [
+        {
+          "alias": "a doctor",
+          "sentences": [
+            5,
+            6,
+            10,
+            33,
+            34
+          ]
+        }
+      ],
+      "sentence_idx": [
+        5,
+        6,
+        10,
+        33,
+        34
+      ]
+    },
+    {
+      "actor": "uhope",
+      "aliases": [
+        {
+          "alias": "a uhope",
+          "sentences": [
+            11,
+            12,
+            23,
+            32,
+            35,
+            36,
+            37,
+            40,
+            41,
+            43,
+            51,
+            52,
+            53,
+            54,
+            56
+          ]
+        }
+      ],
+      "sentence_idx": [
+        11,
+        12,
+        23,
+        32,
+        35,
+        36,
+        37,
+        40,
+        41,
+        43,
+        51,
+        52,
+        53,
+        54,
+        56
+      ]
+    },
+    {
+      "actor": "nurse",
+      "aliases": [
+        {
+          "alias": "a nurse",
+          "sentences": [
+            16,
+            18,
+            19
+          ]
+        }
+      ],
+      "sentence_idx": [
+        16,
+        18,
+        19
+      ]
+    },
+    {
+      "actor": "billing department employee",
+      "aliases": [
+        {
+          "alias": "a billing department employee",
+          "sentences": [
+            38,
+            39,
+            42
+          ]
+        }
+      ],
+      "sentence_idx": [
+        38,
+        39,
+        42
+      ]
+    },
+    {
+      "actor": "user",
+      "aliases": [
+        {
+          "alias": "a user",
+          "sentences": [
+            45,
+            46
+          ]
+        }
+      ],
+      "sentence_idx": [
+        45,
+        46
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "aliases": [
+        {
+          "alias": "a system administrator",
+          "sentences": [
+            49,
+            50
+          ]
+        }
+      ],
+      "sentence_idx": [
+        49,
+        50
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Authenticate Users",
+      "description": "Allow patients, users, and employees to log in securely, including support for two-factor authentication.",
+      "participating_actors": [
+        "patient",
+        "user",
+        "uhope employee"
+      ],
+      "user_stories": [
+        {
+          "actor": "user",
+          "action": "log in with credentials",
+          "original_sentence": "As a user, I want to fill in my unique identification number and my password to log in, so that I can access the system",
+          "sentence_idx": 46
+        },
+        {
+          "actor": "uhope employee",
+          "action": "log in with two-factor authentication",
+          "original_sentence": "As a UHOPE employee, I want to log in with two-factor authentication using my phone only the first time I want to log into the system each day, so that the time to log in during the day is minimized",
+          "sentence_idx": 47
+        },
+        {
+          "actor": "patient",
+          "action": "log in with two-factor authentication",
+          "original_sentence": "As a patient, I want to always log in with two-factor authentication using my phone, so that nobody else than me can access my personal information",
+          "sentence_idx": 48
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 2,
+      "name": "Manage User Access",
+      "description": "Configure user and user-group access rights and assign unique identification numbers for system identification.",
+      "participating_actors": [
+        "user",
+        "system administrator"
+      ],
+      "user_stories": [
+        {
+          "actor": "system administrator",
+          "action": "manage user access rights",
+          "original_sentence": "As a system administrator, I want to change access rights for users, so that I can control what users can and can’t do",
+          "sentence_idx": 49
+        },
+        {
+          "actor": "system administrator",
+          "action": "manage user group access rights",
+          "original_sentence": "As a system administrator, I want to change access rights for user groups, so that I can control what user can and can’t do",
+          "sentence_idx": 50
+        },
+        {
+          "actor": "user",
+          "action": "assign unique identification number",
+          "original_sentence": "As a user, I want to have a unique identification number, so that I can identify myself to the system",
+          "sentence_idx": 45
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 3,
+      "name": "Manage Medical Records",
+      "description": "Create, view, and update patient information and medical records, including test results and treatment history.",
+      "participating_actors": [
+        "doctor",
+        "uhope employee",
+        "nurse",
+        "patient",
+        "receptionist"
+      ],
+      "user_stories": [
+        {
+          "actor": "receptionist",
+          "action": "edit patient information",
+          "original_sentence": "As a receptionist, I want to edit information in a patient’s file in the Electronic Medical Record Database only once, so that I don’t have to edit it multiple times in different databases",
+          "sentence_idx": 4
+        },
+        {
+          "actor": "patient",
+          "action": "view test results",
+          "original_sentence": "As a patient, I want to see the results of a test that was performed on me, so that I can look at it whenever I want",
+          "sentence_idx": 8
+        },
+        {
+          "actor": "patient",
+          "action": "view treatment history",
+          "original_sentence": "As a patient, I want to see what I have been treated for, so that I can get a better understanding of how the doctor helped me",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "doctor",
+          "action": "edit patient medical file",
+          "original_sentence": "As a doctor, I want to edit a patient’s medical file, so that I can make sure they get the right vaccine",
+          "sentence_idx": 10
+        },
+        {
+          "actor": "patient",
+          "action": "update personal address",
+          "original_sentence": "As a patient, I want to change my address in my personal account, so that my information matches my real address",
+          "sentence_idx": 44
+        },
+        {
+          "actor": "uhope employee",
+          "action": "enter patient information",
+          "original_sentence": "As a UHOPE employee, I want to enter patient information only once in the Electronic Medical Record Database, so that I do not have to enter it multiple times in different databases",
+          "sentence_idx": 1
+        },
+        {
+          "actor": "uhope employee",
+          "action": "view patient information",
+          "original_sentence": "As a UHOPE employee, I want to view patient information that I am allowed to access that a UHOPE employee from another department has entered into the Electronic Medical Record Database, so that information does not need to be manually exchanged between different databases",
+          "sentence_idx": 2
+        },
+        {
+          "actor": "nurse",
+          "action": "view medical record",
+          "original_sentence": "As a nurse, I want to view a patient’s medical record on my mobile phone, so that I can check his blood type quicker than using a computer",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "patient",
+          "action": "access medical record",
+          "original_sentence": "As a patient, I want to access my own medical record, so that I can view my medical history",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "doctor",
+          "action": "access patient medical files",
+          "original_sentence": "As a doctor, I want to only access medical files from my own patients, so that no other doctor can access the medical files of my patients",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "patient",
+          "action": "view children medical files",
+          "original_sentence": "As a patient, I want to view my underage children’s medical files, so that I can check their information",
+          "sentence_idx": 55
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 4,
+      "name": "View Appointment Details",
+      "description": "Allow billing employees to view appointment dates, times, and related information for billing verification.",
+      "participating_actors": [
+        "billing department employee"
+      ],
+      "user_stories": [
+        {
+          "actor": "billing department employee",
+          "action": "view appointment start time",
+          "original_sentence": "As a billing department employee, I want to see the start and end time of an appointment, so that I can check if bill is correct",
+          "sentence_idx": 38
+        },
+        {
+          "actor": "billing department employee",
+          "action": "view appointment date",
+          "original_sentence": "As a billing department employee, I want to see the date of an appointment, so that I can check if the bill is correct",
+          "sentence_idx": 39
+        },
+        {
+          "actor": "billing department employee",
+          "action": "view appointment information",
+          "original_sentence": "As a billing department employee, I want to view the appointment information that the doctor entered into the system, so that I can check if the bill is correct",
+          "sentence_idx": 42
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 5,
+      "name": "Search Patient Records",
+      "description": "Search and view patient medical files to identify patients and access their information when needed.",
+      "participating_actors": [
+        "receptionist"
+      ],
+      "user_stories": [
+        {
+          "actor": "receptionist",
+          "action": "search patient file",
+          "original_sentence": "As a receptionist, I want to search for a patient’s file in the Electronic Medical Record Database, so I do not have to ask his or her information every time a patient calls for an appointment and enter it manually",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "receptionist",
+          "action": "view patient medical file",
+          "original_sentence": "As a receptionist, I want to view the patient’s medical file, so that I can confirm that someone is the right person for the appointment",
+          "sentence_idx": 7
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 6,
+      "name": "Record Appointment Information",
+      "description": "Allow doctors to enter and store appointment information in the system for future reference.",
+      "participating_actors": [
+        "doctor"
+      ],
+      "user_stories": [
+        {
+          "actor": "doctor",
+          "action": "enter appointment information",
+          "original_sentence": "As a doctor, I want to enter the appointment information into the system, so that I can check what I did the next time the same patient comes in",
+          "sentence_idx": 5
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 7,
+      "name": "Manage Appointments",
+      "description": "Plan, schedule, modify, approve, and cancel appointments, including selecting reasons and viewing resource schedules.",
+      "participating_actors": [
+        "patient",
+        "receptionist",
+        "uhope",
+        "doctor"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "select appointment reason",
+          "original_sentence": "As a patient, I want to choose the reason for scheduling an appointment, so that I can enable my doctor to prepare for my appointment",
+          "sentence_idx": 25
+        },
+        {
+          "actor": "doctor",
+          "action": "view doctor schedule",
+          "original_sentence": "As a doctor, I want to view my schedule, so that I can see who my next patient is and I can prepare for the appointment",
+          "sentence_idx": 33
+        },
+        {
+          "actor": "doctor",
+          "action": "view appointment reason",
+          "original_sentence": "As a doctor, I want to see the reason for a patient coming in, so that I can prepare for the appointment",
+          "sentence_idx": 34
+        },
+        {
+          "actor": "uhope",
+          "action": "auto-approve appointments",
+          "original_sentence": "As a UHOPE, I want to have the scheduling system to automatically approve a patient’s appointment, so that the receptionist does not need to approve of this manually",
+          "sentence_idx": 23
+        },
+        {
+          "actor": "receptionist",
+          "action": "disapprove appointments",
+          "original_sentence": "As a receptionist, I want to manually disapprove of appointments, so that I can cancel an appointment in case doctor is ill",
+          "sentence_idx": 24
+        },
+        {
+          "actor": "receptionist",
+          "action": "send appointment cancellation email",
+          "original_sentence": "As a receptionist, I want to have the scheduling system to automatically send out an email to the patient when I cancel the appointment, so that the patient is notified",
+          "sentence_idx": 26
+        },
+        {
+          "actor": "patient",
+          "action": "cancel appointment",
+          "original_sentence": "As a patient, I want to cancel my appointment, so that I can notify the hospital in case I cannot make it",
+          "sentence_idx": 31
+        },
+        {
+          "actor": "uhope",
+          "action": "enable patient appointment cancellation",
+          "original_sentence": "As a UHOPE, I want to enable patients to cancel their appointments up until 12 hours before their appointment through the scheduling system, so that the receptionist has enough time to reschedule the doctor",
+          "sentence_idx": 32
+        },
+        {
+          "actor": "receptionist",
+          "action": "view doctor schedule",
+          "original_sentence": "As a receptionist, I want to view a doctor’s schedule on a tablet, so that I can check his availability while walking somewhere",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "receptionist",
+          "action": "change appointment start time",
+          "original_sentence": "As a receptionist, I want to manually change the start time of an appointment, so that I can provide the system with the correct information in case an appointment starts later than expected",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "receptionist",
+          "action": "change appointment end time",
+          "original_sentence": "As a receptionist, I want to manually change the end time of an appointment, so that I can provide the system with the correct information in case the appointment takes longer than expected",
+          "sentence_idx": 21
+        },
+        {
+          "actor": "patient",
+          "action": "view doctor available time slots",
+          "original_sentence": "As a patient, I want to see my doctor’s available time slots, so that I can schedule an appointment myself",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "receptionist",
+          "action": "view room schedule",
+          "original_sentence": "As a receptionist, I want to have a scheduling system that shows me the room schedule, so that I can assign appointments to certain rooms",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "receptionist",
+          "action": "view nurse schedule",
+          "original_sentence": "As a receptionist, I want to have a scheduling system that shows me the schedule of all nurses, so that I can assign a nurse to an appointment",
+          "sentence_idx": 28
+        },
+        {
+          "actor": "receptionist",
+          "action": "view doctor schedule",
+          "original_sentence": "As a receptionist, I want to have a scheduling system that shows me the schedule of all doctors, so that I can reschedule appointments if needed",
+          "sentence_idx": 29
+        },
+        {
+          "actor": "receptionist",
+          "action": "select appointment timeslot",
+          "original_sentence": "As a receptionist, I want to manually choose a timeslot to schedule an appointment for a patient, so that I can help a patient when he or she calls for an appointment",
+          "sentence_idx": 30
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 8,
+      "name": "Transfer Device Data",
+      "description": "Automatically transfer measurements and information from medical devices into the patient’s medical file.",
+      "participating_actors": [
+        "nurse"
+      ],
+      "user_stories": [
+        {
+          "actor": "nurse",
+          "action": "transfer device information to medical file",
+          "original_sentence": "As a nurse, I want to have mobile hospital devices that automatically transfer the information it gathered to the patient’s medical file, so that I do not have to insert the information manually",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "nurse",
+          "action": "transfer device measurements to medical file",
+          "original_sentence": "As a nurse, I want to have mobile hospital devices that automatically transfer the data it measured to the patient’s medical file, so that I do not have to insert the data manually",
+          "sentence_idx": 19
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage medical records"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Ensure System Reliability",
+      "description": "Maintain a compliant, highly available hospital system with accessible medical records and data backups.",
+      "participating_actors": [
+        "uhope"
+      ],
+      "user_stories": [
+        {
+          "actor": "uhope",
+          "action": "ensure system GDPR compliance",
+          "original_sentence": "As a UHOPE, I want to have a hospital management system that is compliant with the GDPR regulations, so that we don’t get in trouble",
+          "sentence_idx": 43
+        },
+        {
+          "actor": "uhope",
+          "action": "ensure system high availability",
+          "original_sentence": "As a UHOPE, I want to have a hospital management system that is online 24 hours per day and 7 days per week, so that UHOPE employees can always do their job",
+          "sentence_idx": 51
+        },
+        {
+          "actor": "uhope",
+          "action": "ensure medical record data availability",
+          "original_sentence": "As a UHOPE, I want to have data in the Electronic Medical Record Database that is accessible 24 hours per day and 7 days per week, so that UHOPE employees can always do their job",
+          "sentence_idx": 52
+        },
+        {
+          "actor": "uhope",
+          "action": "support concurrent employee access",
+          "original_sentence": "As a UHOPE, I want to create access to the Hospital Management System for at least all 7600 employees at the same time, so that every employee can do their job",
+          "sentence_idx": 53
+        },
+        {
+          "actor": "uhope",
+          "action": "maintain system data backups",
+          "original_sentence": "As a UHOPE, I want to have at least one back-up at all times of every piece of information in the entire system, so that the data is always available even if something happens to the system",
+          "sentence_idx": 54
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 10,
+      "name": "Manage Analytics Data",
+      "description": "Synchronize, access, and search self-service center data, including duplicating medical records for analysis.",
+      "participating_actors": [
+        "uhope employee",
+        "uhope"
+      ],
+      "user_stories": [
+        {
+          "actor": "uhope",
+          "action": "synchronize self-service center data",
+          "original_sentence": "As a UHOPE, I want to have a self-service center that holds the same data as the Electronic Medical Record Database, so that I can enable my employees to perform data analysis",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "uhope employee",
+          "action": "view all self-service center data",
+          "original_sentence": "As a UHOPE employee, I want to see all of the data in the self-service center, so that I can decide on which data to perform data analysis",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "uhope employee",
+          "action": "search self-service center data",
+          "original_sentence": "As a UHOPE employee, I want to search for specific data in the self-service center by keyword, so that I can perform data analysis",
+          "sentence_idx": 14
+        },
+        {
+          "actor": "uhope employee",
+          "action": "select variables in self-service center",
+          "original_sentence": "As a UHOPE employee, I want to select which variables I want to use in the self-service center, so that I can perform data analysis",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "uhope",
+          "action": "access national medical record database",
+          "original_sentence": "As a UHOPE, I want to have an Electronic Medical Record Database that has access to the National Database for Medical Records, so that we can gather the medical files of new patients",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "uhope",
+          "action": "duplicate patient medical file",
+          "original_sentence": "As a UHOPE, I want to duplicate the medical file of every patient, so that I can transfer it to the National Database for Medical Records",
+          "sentence_idx": 56
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 11,
+      "name": "Generate Patient Bills",
+      "description": "Automatically create and send patient bills based on appointment information, duration, and treatment price data.",
+      "participating_actors": [
+        "uhope"
+      ],
+      "user_stories": [
+        {
+          "actor": "uhope",
+          "action": "generate bill from appointment duration",
+          "original_sentence": "As a UHOPE, I want to enable the billing system to automatically create a bill based on the start and end time of an appointment, so that a billing department employee does not have to create it manually",
+          "sentence_idx": 35
+        },
+        {
+          "actor": "uhope",
+          "action": "generate bill from appointment information",
+          "original_sentence": "As a UHOPE, I want to enable the billing system to automatically create a bill based the appointment information, so that a billing department employee does not have to create it manually",
+          "sentence_idx": 36
+        },
+        {
+          "actor": "uhope",
+          "action": "maintain treatment price database",
+          "original_sentence": "As a UHOPE, I want to enable the billing system to have a database of prices that are linked to specific treatments, so that the billing system can automatically create bills",
+          "sentence_idx": 37
+        },
+        {
+          "actor": "uhope",
+          "action": "send patient bill",
+          "original_sentence": "As a UHOPE, I want to send a bill to the patient within 30 days after the appointment, so that the patient can come in for multiple appointments but only has to pay one bill",
+          "sentence_idx": 40
+        },
+        {
+          "actor": "uhope",
+          "action": "bill patient by visit month",
+          "original_sentence": "As a UHOPE, I want to bill the patient for the month they come in even though the bill is send out a month later, so that the bill corresponds to when the patient came in",
+          "sentence_idx": 41
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "view appointment details"
+        },
+        {
+          "type": "include",
+          "target_use_case": "manage medical records"
+        },
+        {
+          "type": "include",
+          "target_use_case": "manage appointments"
+        }
+      ]
+    }
+  ]
+}

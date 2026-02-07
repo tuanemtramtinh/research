@@ -15,109 +15,91 @@ User stories: 40
   User stories:
     - As a doctor, I want to be able to write prescriptions for patients so that I can provide appropriate medication.
     - As a doctor, I want to be able to automatically transfer prescriptions to pharmacy information systems so that prescriptions can be processed efficiently.
-    - As a pharmacist, I want to be able to view transferred prescriptions so that I know what medication patients need.
     - As a patient, I want to be able to view prescriptions written by doctors so that I can use them as a reference when visiting a pharmacy.
+    - As a pharmacist, I want to be able to view transferred prescriptions so that I know what medication patients need.
+    - As a patient, I want to be able to request new prescriptions through online appointment scheduling so that I can manage my medication remotely.
+    - As a patient, I want to be able to request new prescriptions on a mobile device so that I can manage my medication remotely.
     - As a patient, I want to be able to view prescriptions on a mobile device so that I can access them anywhere.
   Relationships:
     Manage Prescriptions ──include──> manage data security
 
-[2] Manage Clinical Data (actors: systems analyst)
+[2] Manage Clinical Data Integration (actors: doctor, nurse, system administrator)
   User stories:
-    - As a systems analyst, I want to collect clinical data so that prescriptive and predictive analytics can be performed.
+    - As a system administrator, I want to store all data in a central database, so that discrepancies between departments are reduced.
+    - As a system administrator, I want to integrate electronic medical records with the management system, so that patient medical information is digitally available.
+    - As a doctor, I want to sync data from mobile devices with electronic medical records, so that data collected on mobile devices is stored centrally.
+    - As a doctor, I want to migrate data from old management systems to the new system, so that no medical data is lost.
+    - As a nurse, I want to migrate data from old management systems to the new system, so that no medical data is lost.
+  Relationships:
+    Manage Clinical Data Integration ──include──> manage data security
+
+[3] Manage Data Security (actors: doctor, system administrator)
+  User stories:
+    - As a system administrator, I want to anonymize all data viewed by systems analysts, so that patient privacy is ensured.
+    - As a system administrator, I want to implement GDPR standards within the system, so that stored data is protected.
+    - As a doctor, I want to restrict patients from viewing information that is not intended for them, so that security risks are minimized.
+    - As a system administrator, I want to be able to restrict system components from being viewed by patients so that unauthorized access is prevented.
+    - As a system administrator, I want to be able to grant different access levels to system users so that functionalities can be restricted appropriately.
+    - As a system administrator, I want to limit system access to authorized users only, so that patient data is protected.
+    - As a system administrator, I want to require users to log in to personal accounts, so that access can be controlled.
+
+[4] Manage Medical Records (actors: patient, receptionist, nurse, doctor)
+  User stories:
+    - As a nurse, I want to be able to record notes about patients so that patient care information is documented.
+    - As a receptionist, I want to be able to view a patient’s electronic medical record so that I have the information needed to contact the patient.
+    - As a patient, I want to be able to access the parts of my electronic medical record that the hospital allows so that I can view my medical information.
+    - As a patient, I want to be able to access and view my electronic medical record on a mobile device so that I can view my data anywhere.
+    - As a doctor, I want to be able to view a patient’s medical history so that I can make informed medical decisions.
+    - As a nurse, I want to be able to view a patient’s medical history so that I can support medical treatment.
+  Relationships:
+    Manage Medical Records ──include──> manage data security
+
+[5] Manage Clinical Analytics Data (actors: systems analyst)
+  User stories:
+    - As a systems analyst, I want to collect clinical data, so that prescriptive and predictive analytics can be performed.
     - As a systems analyst, I want to have access to collected clinical data so that prescriptive and predictive analytics can be performed.
     - As a systems analyst, I want to be able to view bed occupancy data so that analytics can be performed on hospital capacity.
     - As a systems analyst, I want to be able to view room scheduling data so that analytics can be performed.
     - As a systems analyst, I want to be able to view employee schedules so that predictive analytics can be used to estimate staffing needs.
-    - As a systems analyst, I want to record appointment start and end times so that the average appointment duration can be calculated.
+    - As a systems analyst, I want to record appointment start and end times, so that the average appointment duration can be calculated.
   Relationships:
-    Manage Clinical Data ──include──> integrate medical systems
-    Manage Clinical Data ──include──> manage data security
+    Manage Clinical Analytics Data ──include──> manage data security
 
-[3] Integrate Medical Systems (actors: doctor, system administrator)
-  User stories:
-    - As a system administrator, I want to store all data in a central database so that discrepancies between departments are reduced.
-    - As a system administrator, I want to integrate electronic medical records with the management system so that patient medical information is digitally available.
-    - As a doctor, I want to integrate mobile devices with electronic medical records so that data collected on mobile devices is stored centrally.
-  Relationships:
-    Integrate Medical Systems ──include──> manage data security
-
-[4] Manage Data Security (actors: doctor, system administrator)
-  User stories:
-    - As a system administrator, I want to anonymize all data viewed by systems analysts so that patient privacy is ensured.
-    - As a system administrator, I want the system to comply with gdpr standards so that stored data is protected.
-    - As a doctor, I want to restrict patients from viewing information that is not intended for them so that security risks are minimized.
-    - As a system administrator, I want to be able to restrict system components from being viewed by patients so that unauthorized access is prevented.
-    - As a system administrator, I want to be able to grant different access levels to system users so that functionalities can be restricted appropriately.
-    - As a system administrator, I want the management system to be accessible only to authorized users so that patient data is protected.
-
-[5] Authenticate Users (actors: system administrator)
-  User stories:
-    - As a system administrator, I want the system to require users to log in to personal accounts so that access can be controlled.
-
-[6] Manage Personal Information (actors: patient)
-  User stories:
-    - As a patient, I want to be able to edit my personal information online so that my information is up to date.
-  Relationships:
-    Manage Personal Information ──include──> authenticate users
-
-[7] View Medical Records (actors: nurse, doctor, receptionist, patient)
-  User stories:
-    - As a doctor, I want to be able to view a patient’s medical history so that I can make informed medical decisions.
-    - As a doctor, I want to be able to view a patient’s personal information so that I can correctly identify and treat the patient.
-    - As a nurse, I want to be able to view a patient’s medical history so that I can support medical treatment.
-    - As a nurse, I want to be able to view a patient’s personal information so that I can correctly identify patients.
-    - As a receptionist, I want to be able to view a patient’s electronic medical record so that I have the information needed to contact the patient.
-    - As a patient, I want to be able to access the parts of my electronic medical record that the hospital allows so that I can view my medical information.
-    - As a patient, I want to be able to view my test results once they are available so that I am informed about my health status.
-    - As a patient, I want to be able to access and view my electronic medical record on a mobile device so that I can view my data anywhere.
-  Relationships:
-    View Medical Records ──include──> authenticate users
-    View Medical Records ──include──> manage data security
-
-[8] Record Patient Notes (actors: nurse)
-  User stories:
-    - As a nurse, I want to be able to record notes about patients so that patient care information is documented.
-  Relationships:
-    Record Patient Notes ──include──> authenticate users
-
-[9] Schedule Appointments (actors: receptionist, patient)
+[6] Schedule Appointments (actors: patient, receptionist)
   User stories:
     - As a receptionist, I want to be able to schedule appointments so that patient visits can be organized.
     - As a patient, I want to be able to schedule appointments online on a personal computer so that I can arrange visits conveniently.
     - As a patient, I want to be able to schedule appointments on a mobile device so that I can manage appointments conveniently.
   Relationships:
-    Schedule Appointments ──include──> authenticate users
+    Schedule Appointments ──include──> manage data security
 
-[10] Migrate Legacy Data (actors: nurse, doctor)
+[7] View Test Results (actors: patient)
   User stories:
-    - As a doctor, I want to migrate data from old management systems to the new system so that no medical data is lost.
-    - As a nurse, I want to migrate data from old management systems to the new system so that no medical data is lost.
-
-[11] Request Prescriptions (actors: patient)
-  User stories:
-    - As a patient, I want to be able to request new prescriptions through online appointment scheduling so that I can manage my medication remotely.
-    - As a patient, I want to be able to request new prescriptions on a mobile device so that I can manage my medication remotely.
+    - As a patient, I want to be able to view my test results once they are available so that I am informed about my health status.
   Relationships:
-    Request Prescriptions ──include──> authenticate users
+    View Test Results ──include──> manage data security
 
-[12] Access System Remotely (actors: doctor)
+[8] Access Hospital System (actors: doctor)
   User stories:
     - As a doctor, I want to be able to use the hospital management system on a mobile device so that I can access the system regardless of my location.
     - As a doctor, I want to have access to the same functionalities on a mobile device as on a personal computer so that my workflow is consistent.
   Relationships:
-    Access System Remotely ──include──> authenticate users
-    Access System Remotely ──include──> integrate medical systems
+    Access Hospital System ──include──> manage data security
+
+[9] Manage Personal Information (actors: patient, nurse, doctor)
+  User stories:
+    - As a patient, I want to be able to edit my personal information online so that my information is up to date.
+    - As a doctor, I want to be able to view a patient’s personal information so that I can correctly identify and treat the patient.
+    - As a nurse, I want to be able to view a patient’s personal information so that I can correctly identify patients.
+  Relationships:
+    Manage Personal Information ──include──> manage data security
 
 === USE CASE RELATIONSHIPS (summary) ===
   Manage Prescriptions ──include──> manage data security
-  Manage Clinical Data ──include──> integrate medical systems
-  Manage Clinical Data ──include──> manage data security
-  Integrate Medical Systems ──include──> manage data security
-  Manage Personal Information ──include──> authenticate users
-  View Medical Records ──include──> authenticate users
-  View Medical Records ──include──> manage data security
-  Record Patient Notes ──include──> authenticate users
-  Schedule Appointments ──include──> authenticate users
-  Request Prescriptions ──include──> authenticate users
-  Access System Remotely ──include──> authenticate users
-  Access System Remotely ──include──> integrate medical systems
+  Manage Clinical Data Integration ──include──> manage data security
+  Manage Medical Records ──include──> manage data security
+  Manage Clinical Analytics Data ──include──> manage data security
+  Schedule Appointments ──include──> manage data security
+  View Test Results ──include──> manage data security
+  Access Hospital System ──include──> manage data security
+  Manage Personal Information ──include──> manage data security

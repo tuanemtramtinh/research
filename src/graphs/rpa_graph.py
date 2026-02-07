@@ -367,7 +367,6 @@ SYSTEM_ACTOR_KEYWORDS = (
     "software",
     "application",
     "platform",
-    "service",
     "backend",
     "server",
 )
@@ -780,10 +779,11 @@ def grouping_node(state: GraphState):
 
     silhouette_scores = []
     # K = range(2, len(input_pairs))
-    K_min = max(3, math.floor(len(input_pairs) / 10))
-    K_max = math.ceil(len(input_pairs) / 3)
+    # K_min = max(3, math.floor(len(input_pairs) / 10))
+    # K_max = math.ceil(len(input_pairs) / 3)
 
-    K = range(K_min, K_max + 1)
+    # K = range(K_min, K_max + 1)
+    K = range(3, 11)
     X = np.array(embeddings_model.embed_documents(input_pairs))
 
     for k in K:
@@ -1963,12 +1963,13 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
 
 if __name__ == "__main__":
     # paths = run_rpa_batch()
-    paths = run_rpa_batch(
-        input_files=[
-            "inputs/input_4.txt",  # HOS/g02
-            "inputs/input_6.txt",  # IFA/g08
-            "inputs/input_7.txt",  # HOS/g06
-            "inputs/input_8.txt",  # IFA/g14
-        ]
-    )
+    # paths = run_rpa_batch(
+    #     input_files=[
+    #         "inputs/input_4.txt",  # HOS/g02
+    #         "inputs/input_6.txt",  # IFA/g08
+    #         "inputs/input_7.txt",  # HOS/g06
+    #         "inputs/input_8.txt",  # IFA/g14
+    #     ]
+    # )
+    paths = run_rpa_batch(input_files=["inputs/input_2.txt"])
     # test_rpa_graph()

@@ -1,102 +1,54 @@
 === INPUT: input_2.txt ===
-User stories: 32
+User stories: 31
 
 === ACTORS ===
   - umd employee
 
 === USE CASES ===
-[1] View Traffic Maps (actors: umd employee)
+[1] View Real-Time Traffic (actors: umd employee)
   User stories:
-    - As a UMD employee, I want to see a real-time simulation of the current traffic situation of Wonderland so that I can take more informed decisions.
-    - As a UMD employee, I want to have an up-to-date map of the streets of Wonderland, including different road types and obstacles, so that I have an accurate background for the traffic simulator.
-    - As a UMD employee, I want to see the current traffic on the map, gathered from the sensors in Wonderland, so that I know the current situation including busy areas and congestions.
-    - As a UMD employee, I want to be able to see a heat map of the traffic so that I can quickly see how the crowdedness is spread in Wonderland at the moment.
+    - As a UMD employee, I want to see a real-time simulation of the current traffic situation of Wonderland, so that I can take more informed decisions
+    - As a UMD employee, I want to have an up-to-date map of the streets of Wonderland (including different road types and obstacles), so that I have an accurate background for the traffic simulator.
+    - As a UMD employee, I want to see the current traffic on the map (gathered from the sensors in Wonderland), so that I can monitor the current situation including busy areas and congestions
+    - As a UMD employee, I want to be able to see a heat map of the traffic, so that I can quickly see how the crowdedness is spread in Wonderland at the moment
+    - As a UMD employee, I want to see environmental measures (taken at points in the city), real-time on the map, so that I know how the current traffic situation is affecting the environment
+    - As a UMD employee, I want to see the overall real-time co2 emissions, so that I know how harmful the traffic situation is to the environment
+    - As a UMD employee, I want to see the real-time level of noise per measure point in the map, so that I can see if the noise levels do not exceed the legal limits
+    - As a UMD employee, I want to see the real-time overall level of air pollution, so that I know how harmful the traffic situation is to the environment
+    - As a UMD employee, I want to see the real-time levels of air pollution per measure point in the map, so that I can see it when a certain area is getting too polluted
+
+[2] Predict Traffic Scenarios (actors: umd employee)
+  User stories:
+    - As a UMD employee, I want to be able to make predictions about future traffic situations based on similar situations in the past, so that I can take more informed decisions
+    - As a UMD employee, I want to know when an area is expected to be too crowded, so that i can work on a solution to avoid the problem
+    - As a UMD employee, I want to make predictions about the consequences of changing the urban planning of Wonderland, so that I can rely on data when making a decision
+    - As a UMD employee, I want to see the credibility of the prediction simulator, so that I know how much I can rely on the data of the system
+    - As a UMD employee, I want to compare the predicted environmental levels of the simulator to the actual levels measured by the sensors
+
+[3] Store Time-Series Data (actors: umd employee)
+  User stories:
+    - As a UMD employee, I want to save all historical data, so that I am able to create meaningful insights about this data at a later moment.
+    - As a UMD employee, I want to save the simulator data (map, traffic and heatmap) of every moment coupled to that specific time, so that I can look into them at a later moment
+    - As a UMD employee, I want to save the environmental measures of every moment coupled to that specific time, so that I can look into them at a later moment
+    - As a UMD employee, I want to be able to independently add more data sources later, so that I can keep up to date with the most complete data
+    - As a UMD employee, I want to add new sensor measurements to the map when they become available, so that my simulator is as accurate as possible
+    - As a UMD employee, I want to be able to take snapshots of specific days, or parts of the day, so that I can execute simulations against those scenarios.
+
+[4] Analyze Historical Traffic Data (actors: umd employee)
+  User stories:
+    - As a UMD employee, I want to be able to compare historical traffic data, so that I can use the data to create meaningful analyses
+    - As a UMD employee, I want to be able to select a specific period of time to see the “data” from
+    - As a UMD employee, I want to be able to see compare the data from 2 different times next to each other, so that I can compare the 2 situations with each other
+    - As a UMD employee, I want to use historic data to compare multiple situations to compare the results of 2 different solutions that we have built
+    - As a UMD employee, I want to be able to perform repeatable analysis for situations that are similar, so that the workflow is accelerated
+    - As a UMD employee, I want to use an intuitive system, so that I can quickly understand all the functions in the system.
+    - As a UMD employee, I want to use new data sources as they become available, so that my simulator is as accurate as possible.As a UMD employee, I want the system to always be available, so that I can access it whenever I need
+    - As a UMD employee, I want to be able to access the system 24/7, so that I can work flexible shifts
+    - As a UMD employee, I want to start up the system within 2 minutes, so that I can go to action fast when it is required.
+    - As a UMD employee, I want to operate the platform independently without needing an expert, so that I don’t have to ask for assistance.
+    - As a UMD employee, I want to use the system remotely, so that my employees can work from home.
   Relationships:
-    View Traffic Maps ──include──> access system
-    View Traffic Maps ──include──> manage data sources
-
-[2] View Environmental Data (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to see environmental measures taken at points in the city in real time on the map so that I know how the current traffic situation is affecting the environment.
-    - As a UMD employee, I want to see the overall real-time CO2 emissions so that I know how harmful the traffic situation is to the environment.
-    - As a UMD employee, I want to see the real-time level of noise per measurement point on the map so that I can see if the noise levels exceed the legal limits.
-    - As a UMD employee, I want to see the real-time overall level of air pollution so that I know how harmful the traffic situation is to the environment.
-    - As a UMD employee, I want to see the real-time levels of air pollution per measurement point on the map so that I can see when a certain area is getting too polluted.
-  Relationships:
-    View Environmental Data ──include──> access system
-    View Environmental Data ──include──> manage data sources
-
-[3] Predict Traffic Impact (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to be able to make predictions about future traffic situations based on similar situations in the past so that I can take more informed decisions.
-    - As a UMD employee, I want to know when an area is expected to be too crowded so that I can work on a solution to avoid the problem.
-    - As a UMD employee, I want to make predictions about the consequences of changing the urban planning of Wonderland so that I can rely on data when making a decision.
-  Relationships:
-    Predict Traffic Impact ──include──> access system
-    Predict Traffic Impact ──include──> manage data sources
-
-[4] Assess Prediction Accuracy (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to see the credibility of the prediction simulator so that I know how much I can rely on the data of the system.
-    - As a UMD employee, I want to compare the predicted environmental levels of the simulator to the actual levels measured by the sensors so that I can assess the accuracy of the predictions.
-  Relationships:
-    Assess Prediction Accuracy ──include──> access system
-    Assess Prediction Accuracy ──include──> view environmental data
-    Assess Prediction Accuracy ──include──> predict traffic impact
-
-[5] Capture Scenario Snapshots (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to be able to take snapshots of specific days or parts of the day so that I can execute simulations against those scenarios.
-  Relationships:
-    Capture Scenario Snapshots ──include──> access system
-    Capture Scenario Snapshots ──include──> store historical data
-
-[6] Store Historical Data (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want all historical data to be saved so that I am able to create meaningful insights about this data at a later moment.
-    - As a UMD employee, I want to save the simulator data, including the map, traffic, and heat map, of every moment coupled to that specific time so that I can look into it at a later moment.
-    - As a UMD employee, I want to save the environmental measures of every moment coupled to that specific time so that I can look into them at a later moment.
-  Relationships:
-    Store Historical Data ──include──> access system
-
-[7] Analyze Historical Data (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to be able to compare historical traffic data so that I can use the data to create meaningful analyses.
-    - As a UMD employee, I want to be able to select a specific period of time to see the data from so that I can focus on the relevant time frame.
-    - As a UMD employee, I want to be able to compare the data from two different times next to each other so that I can compare the two situations with each other.
-    - As a UMD employee, I want to use historical data to compare multiple situations so that I can compare the results of two different solutions that we have built.
-    - As a UMD employee, I want to be able to perform repeatable analysis for situations that are similar so that the workflow is accelerated.
-  Relationships:
-    Analyze Historical Data ──include──> access system
-    Analyze Historical Data ──include──> store historical data
-
-[8] Access System (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want the systems to be easy to use so that I can quickly understand all the functions in the system.
-    - As a UMD employee, I want the system to always be available so that I can access it whenever I need.
-    - As a UMD employee, I want to be able to access the system 24/7 so that I can work flexible shifts.
-    - As a UMD employee, I want the system to start up within two minutes so that I can go into action fast when it is required.
-    - As a UMD employee, I want a platform that can be operated independently by people in the department so that I don’t have to ask an expert.
-    - As a UMD employee, I want the software to be reachable from remote computers so that my employees can work from home.
-
-[9] Manage Data Sources (actors: umd employee)
-  User stories:
-    - As a UMD employee, I want to be able to independently add more data sources later so that I can keep up to date with the most complete data.
-    - As a UMD employee, I want to be able to add measurements from more sensors to the map when they become available so that my simulator is as accurate as possible.
-    - As a UMD employee, I want to use new sources of data when they become available so that my simulator is as accurate as possible.
+    Analyze Historical Traffic Data ──include──> store time-series data
 
 === USE CASE RELATIONSHIPS (summary) ===
-  View Traffic Maps ──include──> access system
-  View Traffic Maps ──include──> manage data sources
-  View Environmental Data ──include──> access system
-  View Environmental Data ──include──> manage data sources
-  Predict Traffic Impact ──include──> access system
-  Predict Traffic Impact ──include──> manage data sources
-  Assess Prediction Accuracy ──include──> access system
-  Assess Prediction Accuracy ──include──> view environmental data
-  Assess Prediction Accuracy ──include──> predict traffic impact
-  Capture Scenario Snapshots ──include──> access system
-  Capture Scenario Snapshots ──include──> store historical data
-  Store Historical Data ──include──> access system
-  Analyze Historical Data ──include──> access system
-  Analyze Historical Data ──include──> store historical data
+  Analyze Historical Traffic Data ──include──> store time-series data

@@ -9,189 +9,99 @@ User stories: 53
   - research facility manager
   - bath data archive administrator
   - research information manager
+  - univitservice
   - developer
   - academicpublisher
   - fundingbody
 
 === USE CASES ===
-[1] Search Archive (actors: data reuser)
+[1] Integrate Archive Systems (actors: research information manager, bath data archive administrator, univitservice)
   User stories:
-    - As a data reuser, I want to search the archive through the web so that I can easily find data relevant to my needs.
-    - As a data reuser, I want to search the archive through Primo so that I can search books, articles and data all in one place.
-    - As a data reuser, I want to search the archive through Primo so that I can search books, articles and data all in one place.
+    - As an UnivITservice, I want to store archived data on existing storage systems, so that university data storage is consistent and maintainable and future availability of data can be guaranteed.
+    - As an UnivITservice, I want to integrate the archive with existing university systems such as LDAP, so that the cost of administering the system can be kept low.
+    - As an UnivITservice, I want to store archived data directly on the HCP object store, so that features can be made.
+    - As an UnivITservice, I want to be able to export all data to a different system, so that I am not tied into one system which may not be the most appropriate at some point in the future.
+    - As a Bath Data Archive administrator, I want to import Bath data from an external data centre wholesale, so that Bath data holdings in external archives are not lost if they close down.
+    - As a Research Information manager, I want to integrate the archive with CRIS, so that I can analyse impact of research data publication I can link funding to all of the outputs it produces.
+    - As a Research Information manager, I want to include records for externally held data complete, so that the university's record of data holdings is complete.
 
-[2] Manage Datasets (actors: depositor)
+[2] Manage Datasets (actors: externalcollaborator, externalcoordinator, research facility manager, depositor)
   User stories:
-    - As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.
-    - As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.
-    - As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.
-    - As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.
-    - As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools so that I can continue to work with tools with which I'm familiar.
-    - As a depositor, I want to deposit the files that I have so that I don't have to spend a lot of time finding the right version and converting to the right format.
-    - As a depositor, I want to deposit arbitrarily large files so that I am not limited in what files I can and cannot deposit.
+    - As a depositor, I want to deposit and maintain datasets through a simple web interface, so that I don't need to install and learn new software to deposit.
+    - As a depositor, I want to deposit and maintain datasets through Pure, so that I have a single onestop shop for managing my research outputs.
+    - As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools, so that I can continue to work with tools with which I'm familiar.
+    - As a depositor, I want to deposit the files that I have, so that I don't have to spend a lot of time finding the right version and converting to the right format.
+    - As a depositor, I want to deposit arbitrarily large files, so that I am not limited in what files I can and cannot deposit.
+    - As a depositor, I want to link to data stored in external repositories, so that I can store my data in an appropriate repository but still register it with the University and I don't have to deposit my data in multiple places.
+    - As a depositor, I want to manage and share �live� research data, so that whole project workflow is linked together.
+    - As a depositor, I want to manage multiple versions of the same dataset, so that changes to the dataset are transparent and do not compromise research integrity.
+    - As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers, so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.
+    - AS an externalcoordinator, I want to access data from Bath collaborators off campus, so that I can collaborate effectively.
+    - AS an externalcoordinator, I want to access data from Bath collaborators off campus, so that I can collaborate effectively.
+
+[3] Use Accessible Interface (actors: data reuser, depositor)
+  User stories:
+    - As a depositor, I want to deposit and maintain datasets through a simple web interface, so that I don't need to install and learn new software to deposit.
+    - As a depositor, I want to have a user interface that is familiar to me, so that I feel like all the University systems are joined up.
+    - As a data reuser, I want to access the system in my native language, so that I am not put off reusing University of Bath data by language barriers.
   Relationships:
-    Manage Datasets ──include──> streamline deposit interface
+    Use Accessible Interface ──include──> manage datasets
 
-[3] Use System in Native Language (actors: data reuser)
+[4] Integrate Deposit Workflows (actors: developer, depositor)
   User stories:
-    - As a data reuser, I want to access the system in my native language so that I am not put off reusing University of Bath data by language barriers.
+    - As a depositor, I want to deposit and maintain datasets through Pure, so that I have a single onestop shop for managing my research outputs.
+    - As a depositor, I want to deposit and maintain datasets through Virtual Research Environments and other workflow tools, so that I can continue to work with tools with which I'm familiar.
+    - As a developer, I want to deposit and maintain datasets via an API such as SWORD2, so that my service can interact with the archive.
   Relationships:
-    Use System in Native Language ··extend··> search archive
-    Use System in Native Language ··extend··> manage datasets
-    Use System in Native Language ··extend··> streamline deposit interface
+    Integrate Deposit Workflows ──include──> manage datasets
 
-[4] Curate Deposited Data (actors: bath data archive administrator)
+[5] Manage Dataset Governance (actors: externalcollaborator, research information manager, academicpublisher, externalcoordinator, depositor)
   User stories:
-    - As a Bath Data Archive administrator, I want to make some checks on deposited datasets before they are made public so that consistent quality of metadata is maintained, compliance with policies can be checked and details of licensing can be checked.
-    - As a Bath Data Archive administrator, I want to require a minimum set of metadata so that consistent quality of metadata is maintained.
-    - As a Bath Data Archive administrator, I want to approve scheduled disposal of data so that data which is still required is not destroyed.
+    - As a depositor, I want to place data under an embargo, so that my right of first use is protected, and I can fulfil my confidentiality responsibilities.
+    - As a depositor, I want to apply licenses to datasets, so that my IP rights are protected appropriately.
+    - As a depositor, I want to allow my collaborators privileged access to datasets, so that we continue to have a productive relationship.
+    - As a depositor, I want to link datasets to publications in Opus, so that both my data and publications are more easily discovered.
+    - As a depositor, I want to mint DOIs for my data, so that it can be discovered and cited more easily and citations can be tracked so that I can receive credit.
+    - As a depositor, I want to have metadata automatically filled from other University systems and remembered from previous deposits, so that I don't have to waste time reentering the same information.
+    - As a depositor, I want to specify a disposal policy for my data, so that I do not accidentally breach laws or collaboration agreements.
+    - As a depositor, I want to attach subject specific discoverability metadata to records, so that researchers in my discipline can find my data more easily.
+    - As a depositor, I want to link datasets with the project DMP, so that compliance with DMP can be demonstrated and whole project workflow is linked together.
+    - As a depositor, I want to allow others to deposit on my behalf, so that I can delegate research data management tasks appropriately.
+    - As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved, so that I can collaborate effectively.
+    - As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved, so that I can collaborate effectively.
+    - As a Research Information manager, I want to have datasets linked to metadata about projects, so that I can report on projects depositing datasets in relation to funder requirements.
+    - As an academicpublisher, I want to make persistent web links between my articles and underlying datasets, so that my journals can be seen to be filled with robust, high quality research.
 
-[5] Manage Research Data Lifecycle (actors: depositor)
+[6] View Dataset Impact (actors: research information manager, data reuser, fundingbody, depositor)
   User stories:
-    - As a depositor, I want to link datasets with the project DMP so that compliance with DMP can be demonstrated and whole project workflow is linked together.
-    - As a depositor, I want to manage and share live research data so that whole project workflow is linked together.
-    - As a depositor, I want to manage and share live research data so that whole project workflow is linked together.
-    - As a depositor, I want to manage multiple versions of the same dataset so that changes to the dataset are transparent and do not compromise research integrity.
-    - As a depositor, I want to allow others to deposit on my behalf so that I can delegate research data management tasks appropriately.
+    - As a depositor, I want to track downloads of my data, so that I can demonstrate the impact of my work.
+    - As a depositor, I want to track citations of my data, so that I can demonstrate the impact of my work
+    - As a Research Information manager, I want to track citation counts for published datasets, so that impact of datasets within academia can be demonstrated.
+    - As a Research Information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.
+    - As a fundingbody, I want to harvest metadata on outputs from research I fund, so that I can analyse effectiveness of funding strategy and I can encourage cross fertilisation of research outputs.
+    - As a data reuser, I want to search the archive through the web, so that I can easily find data relevant to my needs.
+    - As a data reuser, I want to examine and identify deposited files, so that I can make a preliminary assessment of usefulness without downloading the whole dataset.
+    - As a data reuser, I want to view an example citation for a dataset, so that I can reference it correctly.
+    - As a data reuser, I want to view a DOI for a dataset, so that I can get back to the data in future and I can import the dataset into my referencemanagement software automatically.
+    - As a data reuser, I want to get a persistent URL for a dataset, so that I can get back to the data in future.
+    - As a data reuser, I want to search the archive through Primo , so that I can search books, articles and data all in one place.
+    - As a data reuser, I want to see different versions of a dataset at a glance, so that I can be sure I'm using the right version of the dataset.
 
-[6] Integrate with Research Information Systems (actors: fundingbody, research information manager)
+[7] Ensure Data Compliance (actors: externalcollaborator, externalcoordinator, fundingbody, depositor)
   User stories:
-    - As a research information manager, I want to integrate the archive with CRIS so that I can analyse impact of research data publication and I can link funding to all of the outputs it produces.
-    - As a research information manager, I want to have datasets linked to metadata about projects so that I can report on projects depositing datasets in relation to funder requirements.
-    - As a fundingbody, I want to harvest metadata on outputs from research I fund so that I can analyse effectiveness of funding strategy and I can encourage cross fertilisation of research outputs.
-  Relationships:
-    Integrate with Research Information Systems ──include──> manage dataset impact and linking
-    Integrate with Research Information Systems ──include──> manage research data lifecycle
+    - As a depositor, I want to have guarantees about data integrity, so that I can use my data in the future and I can fulfil funder requirements for archival.
+    - As an externalcoordinator, I want to have guarantees that my IP rights will not be breached, so that the risk of collaborating with Bath is acceptable to me.
+    - As an externalcoordinator, I want to have guarantees that my IP rights will not be breached, so that the risk of collaborating with Bath is acceptable to me.
+    - As a fundingbody, I want to be reassured that researchers I fund have robust archival plans for their data, so that I can be sure that funding them is a worthwhile investment.
 
-[7] Deposit Facility Data (actors: research facility manager)
+[8] Curate Deposited Data (actors: bath data archive administrator)
   User stories:
-    - As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.
-    - As a research facility manager, I want to deposit data from my facility directly into the archive on behalf of researchers so that I am no longer required to maintain my own archive of facility data and researchers can access their own data as needed.
-  Relationships:
-    Deposit Facility Data ──include──> manage datasets
-
-[8] Manage Datasets via API (actors: developer)
-  User stories:
-    - As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.
-    - As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.
-    - As a developer, I want to deposit and maintain datasets via an API such as SWORD2 so that my service can interact with the archive.
-  Relationships:
-    Manage Datasets via API ──include──> manage datasets
-
-[9] View Dataset Citations (actors: data reuser)
-  User stories:
-    - As a data reuser, I want to view an example citation for a dataset so that I can reference it correctly.
-    - As a data reuser, I want to view a DOI for a dataset so that I can get back to the data in future and I can import the dataset into my referencemanagement software automatically.
-    - As a data reuser, I want to get a persistent URL for a dataset so that I can get back to the data in future.
-    - As a data reuser, I want to see different versions of a dataset at a glance so that I can be sure I'm using the right version of the dataset.
-  Relationships:
-    View Dataset Citations ··extend··> search archive
-
-[10] Manage Datasets in Pure (actors: depositor)
-  User stories:
-    - As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.
-    - As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.
-    - As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.
-    - As a depositor, I want to deposit and maintain datasets through Pure so that I have a single onestop shop for managing my research outputs.
-  Relationships:
-    Manage Datasets in Pure ──include──> manage datasets
-
-[11] Manage Privileged Access (actors: externalcollaborator, externalcoordinator, depositor)
-  User stories:
-    - As a depositor, I want to allow my collaborators privileged access to datasets so that we continue to have a productive relationship.
-    - As an externalcollaborator, I want to gain privileged access to data for projects in which I am involved so that I can collaborate effectively.
-    - As an externalcoordinator, I want to access data from Bath collaborators off campus so that I can collaborate effectively.
-  Relationships:
-    Manage Privileged Access ··extend··> manage datasets
-
-[12] Manage Data Rights and Embargoes (actors: externalcoordinator, depositor)
-  User stories:
-    - As an externalcoordinator, I want to have guarantees that my IP rights will not be breached so that the risk of collaborating with Bath is acceptable to me.
-    - As a depositor, I want to place data under an embargo so that my right of first use is protected and I can fulfil my confidentiality responsibilities.
-    - As a depositor, I want to apply licenses to datasets so that my IP rights are protected appropriately.
-    - As a depositor, I want to specify a disposal policy for my data so that I do not accidentally breach laws or collaboration agreements.
-  Relationships:
-    Manage Data Rights and Embargoes ··extend··> manage datasets
-
-[13] Ensure Data Integrity (actors: depositor)
-  User stories:
-    - As a depositor, I want to have guarantees about data integrity so that I can use my data in the future and I can fulfil funder requirements for archival.
-  Relationships:
-    Ensure Data Integrity ──include──> integrate archive with infrastructure
-
-[14] Preview Deposited Files (actors: data reuser)
-  User stories:
-    - As a data reuser, I want to examine and identify deposited files so that I can make a preliminary assessment of usefulness without downloading the whole dataset.
-    - As a data reuser, I want to examine and identify deposited files so that I can make a preliminary assessment of usefulness without downloading the whole dataset.
-  Relationships:
-    Preview Deposited Files ··extend··> search archive
-
-[15] Query Archive Holdings (actors: bath data archive administrator)
-  User stories:
-    - As a Bath Data Archive administrator, I want to query the entire archive so that I can report on particular aspects of the archive holdings.
-
-[16] Import and Export Archive Data (actors: bath data archive administrator, research information manager)
-  User stories:
-    - As a Bath Data Archive administrator, I want to import Bath data from an external data centre wholesale so that Bath data holdings in external archives are not lost if they close down.
-    - As a univitservice, I want to be able to export all data to a different system so that I am not tied into one system which may not be the most appropriate at some point in the future.
-
-[17] Promote Open Standards (actors: bath data archive administrator)
-  User stories:
-    - As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit so that data is as reusable as possible.
-    - As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit so that data is as reusable as possible.
-
-[18] Manage Dataset Impact and Linking (actors: academicpublisher, research information manager, depositor)
-  User stories:
-    - As a depositor, I want to link datasets to publications in Opus so that both my data and publications are more easily discovered.
-    - As a depositor, I want to mint DOIs for my data so that it can be discovered and cited more easily and citations can be tracked so that I can receive credit.
-    - As a depositor, I want to link to data stored in external repositories so that I can store my data in an appropriate repository but still register it with the university and I don't have to deposit my data in multiple places.
-    - As a depositor, I want to track downloads of my data so that I can demonstrate the impact of my work.
-    - As a depositor, I want to track citations of my data so that I can demonstrate the impact of my work.
-    - As a depositor, I want to attach subject specific discoverability metadata to records so that researchers in my discipline can find my data more easily.
-    - As an academicpublisher, I want to make persistent web links between my articles and underlying datasets so that my journals can be seen to be filled with robust, high quality research.
-    - As a research information manager, I want to track citation counts for published datasets so that impact of datasets within academia can be demonstrated.
-    - As a research information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.
-    - As a research information manager, I want to segment the view and download statistics by country and sector so that impact of datasets outside academia can be demonstrated.
-  Relationships:
-    Manage Dataset Impact and Linking ··extend··> manage datasets
-
-[19] Streamline Deposit Interface (actors: depositor)
-  User stories:
-    - As a depositor, I want to deposit and maintain datasets through a simple web interface so that I don't need to install and learn new software to deposit.
-    - As a depositor, I want to have a user interface that is familiar to me so that I feel like all the university systems are joined up.
-    - As a depositor, I want to have metadata automatically filled from other university systems and remembered from previous deposits so that I don't have to waste time reentering the same information.
-    - As a depositor, I want to have metadata automatically filled from other university systems and remembered from previous deposits so that I don't have to waste time reentering the same information.
-
-[20] Register Externally Held Data (actors: research information manager)
-  User stories:
-    - As a research information manager, I want to include records for externally held data complete so that the university's record of data holdings is complete.
-  Relationships:
-    Register Externally Held Data ··extend··> manage datasets
-
-[21] Integrate Archive with Infrastructure (actors: research information manager)
-  User stories:
-    - As a univitservice, I want to store archived data on existing storage systems so that university data storage is consistent and maintainable and future availability of data can be guaranteed.
-    - As a univitservice, I want to integrate the archive with existing university systems such as LDAP so that the cost of administering the system can be kept low.
-    - As a univitservice, I want to store archived data directly on the HCP object store so that features can be made.
-
-[22] Verify Archival Plans (actors: fundingbody)
-  User stories:
-    - As a fundingbody, I want to be reassured that researchers I fund have robust archival plans for their data so that I can be sure that funding them is a worthwhile investment.
+    - As a Bath Data Archive administrator, I want to make some checks on deposited datasets before they are made public, so that consistent quality of metadata is maintained, compliance with policies can be checked and details of licensing can be checked.
+    - As a Bath Data Archive administrator, I want to require a minimum set of metadata, so that consistent quality of metadata is maintained.
+    - As a Bath Data Archive administrator, I want to approve scheduled disposal of data, so that data which is still required is not destroyed.
+    - As a Bath Data Archive administrator, I want to query the entire archive , so that I can report on particular aspects of the archive holdings.
+    - As a Bath Data Archive administrator, I want to encourage and promote the use of open standards for deposit, so that data is as reusable as possible.
 
 === USE CASE RELATIONSHIPS (summary) ===
-  Manage Datasets ──include──> streamline deposit interface
-  Use System in Native Language ··extend··> search archive
-  Use System in Native Language ··extend··> manage datasets
-  Use System in Native Language ··extend··> streamline deposit interface
-  Integrate with Research Information Systems ──include──> manage dataset impact and linking
-  Integrate with Research Information Systems ──include──> manage research data lifecycle
-  Deposit Facility Data ──include──> manage datasets
-  Manage Datasets via API ──include──> manage datasets
-  View Dataset Citations ··extend··> search archive
-  Manage Datasets in Pure ──include──> manage datasets
-  Manage Privileged Access ··extend··> manage datasets
-  Manage Data Rights and Embargoes ··extend··> manage datasets
-  Ensure Data Integrity ──include──> integrate archive with infrastructure
-  Preview Deposited Files ··extend··> search archive
-  Manage Dataset Impact and Linking ··extend··> manage datasets
-  Register Externally Held Data ··extend··> manage datasets
+  Use Accessible Interface ──include──> manage datasets
+  Integrate Deposit Workflows ──include──> manage datasets
