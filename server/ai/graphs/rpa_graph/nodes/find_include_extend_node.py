@@ -74,8 +74,8 @@ Identify all «include» and «extend» relationships. Return source_use_case, r
                 }
             )
 
-    print("\n--- FIND INCLUDE/EXTEND ---")
-    for rel in include_extend_relationships:
-        print(f"  {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']}")
+    # print("\n--- FIND INCLUDE/EXTEND ---")
+    # for rel in include_extend_relationships:
+    #     print(f"  {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']}")
 
     return {"include_extend_relationships": include_extend_relationships}

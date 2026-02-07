@@ -20,6 +20,9 @@ def grouping_node(state: GraphState):
         return {}
 
     actor_results = state.get("actor_results")
+
+    print(actor_results)
+
     refined_goals = state.get("refined_goals")
 
     # Skip if either branch hasn't completed yet
@@ -78,10 +81,11 @@ def grouping_node(state: GraphState):
 
     silhouette_scores = []
     # K = range(2, len(input_pairs))
-    K_min = max(3, math.floor(len(input_pairs) / 10))
-    K_max = math.ceil(len(input_pairs) / 3)
+    # K_min = max(3, math.floor(len(input_pairs) / 10))
+    # K_max = math.ceil(len(input_pairs) / 3)
 
-    K = range(K_min, K_max + 1)
+    # K = range(K_min, K_max + 1)
+    K = range(3, 11)
     X = np.array(embeddings_model.embed_documents(input_pairs))
 
     for k in K:
@@ -105,14 +109,14 @@ def grouping_node(state: GraphState):
         # Store detailed info instead of just string
         clusters[cid].append(input_details[i])
 
-    print(f"\n--- CHI TIẾT PHÂN CỤM (K={best_k}) ---")
-    for label, items in sorted(clusters.items()):
-        print(f"\nCụm {label + 1}:")
-        for item in items:
-            print(f"  - [{item['actor']}] {item['goal']}")
-            if item.get("benefit"):
-                print(f"    Benefit: {item['benefit']}")
-            print(f"    Original: {item['original_sentence']}")
+    # print(f"\n--- CHI TIẾT PHÂN CỤM (K={best_k}) ---")
+    # for label, items in sorted(clusters.items()):
+    #     print(f"\nCụm {label + 1}:")
+    #     for item in items:
+    #         print(f"  - [{item['actor']}] {item['goal']}")
+    #         if item.get("benefit"):
+    #             print(f"    Benefit: {item['benefit']}")
+    #         print(f"    Original: {item['original_sentence']}")
 
     # Convert clusters dict to list format for state.
     # IMPORTANT: keep cluster_id as plain Python int so that
@@ -122,17 +126,17 @@ def grouping_node(state: GraphState):
         for label, items in sorted(clusters.items())
     ]
 
-    # DEBUG: in input_details và clusters cuối cùng
-    print("\n==== grouping_node ====")
-    print(">>> input_details:")
-    for d in input_details:
-        print(f"  - actor={d['actor']}, goal={d['goal']}, sent={d['sentence_idx']}")
-        print(f"    original={d['original_sentence']}")
-    print("\n>>> clusters_list:")
-    for c in clusters_list:
-        print(f"Cluster {c['cluster_id']}:")
-        for s in c["user_stories"]:
-            print(f"  - [{s['actor']}] {s['goal']} (sent={s['sentence_idx']})")
-            print(f'    "{s["original_sentence"]}"')
+    # # DEBUG: in input_details và clusters cuối cùng
+    # print("\n==== grouping_node ====")
+    # print(">>> input_details:")
+    # for d in input_details:
+    #     print(f"  - actor={d['actor']}, goal={d['goal']}, sent={d['sentence_idx']}")
+    #     print(f"    original={d['original_sentence']}")
+    # print("\n>>> clusters_list:")
+    # for c in clusters_list:
+    #     print(f"Cluster {c['cluster_id']}:")
+    #     for s in c["user_stories"]:
+    #         print(f"  - [{s['actor']}] {s['goal']} (sent={s['sentence_idx']})")
+    #         print(f'    "{s["original_sentence"]}"')
 
     return {"grouping_done": True, "user_story_clusters": clusters_list}

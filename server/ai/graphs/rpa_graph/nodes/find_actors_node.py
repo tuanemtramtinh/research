@@ -7,7 +7,6 @@ SYSTEM_ACTOR_KEYWORDS = (
     "software",
     "application",
     "platform",
-    "service",
     "backend",
     "server",
 )
@@ -58,8 +57,8 @@ def find_actors_node(state: GraphState):
     raw_actors = _find_actors_regex(sentences)
 
     # DEBUG: in danh sách actor raw
-    print("\n==== find_actors_node ====")
-    for a in raw_actors:
-        print(f"actor={a.actor}, sentence_idx={a.sentence_idx}")
+    # print("\n==== find_actors_node ====")
+    # for a in raw_actors:
+    #     print(f"actor={a.actor}, sentence_idx={a.sentence_idx}")
 
     return {"raw_actors": raw_actors}

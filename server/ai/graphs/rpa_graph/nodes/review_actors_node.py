@@ -11,12 +11,22 @@ def review_actors_node(state: GraphState):
     decision = interrupt(payload_to_user)
 
     print(decision)
-    # if decision is True or decision is None:
-    #     return {}
+    if decision is True or decision is None:
+        return {}
 
-    # if isinstance(decision, dict) and "actors" in decision:
-    #     edited = [ActorResult(**a) for a in decision["actors"]]
+    # Resume có thể nhận list trực tiếp (Command(resume=req.actors)) hoặc dict {"actors": [...]}
+    raw_list = None
+    if isinstance(decision, dict) and "actors" in decision:
+        raw_list = decision["actors"]
+    elif isinstance(decision, list) and len(decision) > 0:
+        raw_list = decision
 
-    #     return {}
+    if raw_list is not None:
+        edited = [
+            ActorResult(**(a if isinstance(a, dict) else a.model_dump()))
+            for a in raw_list
+        ]
+        print(edited)
+        return {"actor_results": edited}
 
     return {}

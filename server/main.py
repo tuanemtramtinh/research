@@ -6,6 +6,7 @@ from core.config import settings
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+
     _ = settings
     print("Settings loaded & validated")
 

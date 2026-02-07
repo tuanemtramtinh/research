@@ -117,13 +117,13 @@ For each cluster, provide:
         use_cases.append(use_case)
 
     # DEBUG: in toàn bộ use_cases trước khi in summary cuối
-    print("\n==== name_usecases_node (use_cases) ====")
-    for uc in use_cases:
-        print(f"UC-{uc.id}: {uc.name}")
-        print(f"  Actors: {uc.participating_actors}")
-        for s in uc.user_stories:
-            print(f"  - [{s.actor}] {s.action} (sent={s.sentence_idx})")
-            print(f'    "{s.original_sentence}"')
+    # print("\n==== name_usecases_node (use_cases) ====")
+    # for uc in use_cases:
+    #     print(f"UC-{uc.id}: {uc.name}")
+    #     print(f"  Actors: {uc.participating_actors}")
+    #     for s in uc.user_stories:
+    #         print(f"  - [{s.actor}] {s.action} (sent={s.sentence_idx})")
+    #         print(f'    "{s.original_sentence}"')
 
     # # Print output
     # print("\n" + "=" * 60)

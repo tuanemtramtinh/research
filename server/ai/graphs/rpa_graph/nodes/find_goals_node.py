@@ -140,6 +140,8 @@ def _find_goals_nlp(nlp: Language, sentences: List[str]) -> dict:
 def find_goals_node(state: GraphState):
     """Extract user goals using NLP pattern (want to [verb])."""
     nlp = _get_nlp()
+
+    print(state.get("actor_results"))
     sentences = state.get("sentences") or []
     raw_goals = _find_goals_nlp(nlp, sentences)
     return {"raw_goals": raw_goals}

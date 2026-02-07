@@ -16,6 +16,7 @@ from ai.graphs.rpa_graph.nodes.find_include_extend_node import find_include_exte
 from ai.graphs.rpa_graph.nodes.merge_relationships_node import merge_relationships_node
 from ai.graphs.rpa_graph.nodes.name_usecases_node import name_usecases_node
 from ai.graphs.rpa_graph.nodes.review_actors_node import review_actors_node
+from ai.graphs.rpa_graph.nodes.review_usecases_node import review_usecases_node
 
 
 def _get_model():
@@ -35,49 +36,40 @@ def should_continue_to_clustering(state: GraphState):
 
 def build_rpa_graph():
     """
-    RPA Graph (Requirement Processing Agent):
+    RPA Graph (Requirement Processing Agent) - SEQUENCE:
 
-    - Branch 1: Extract actors, remove synonyms, find aliases
-    - Branch 2: Extract usecases with NLP, refine with LLM
-    - grouping: Merge actor+usecase, cluster by semantic similarity (K-Means)
-    - refine_clustering: LLM refines clusters (split/merge/move items)
-    - name_usecases: LLM generates UseCase names for each cluster
-    - find_include_extend: One-step find all include/extend relationships (LLM)
-    - merge_relationships: Attach relationships to use_cases
+    - Actor pipeline trước (có interrupt tại review_actors; sau khi user resume mới tiếp).
+    - Goals pipeline sau: find_goals → refine_goals.
+    - grouping: Merge actor+usecase (luôn dùng actor_results đã qua review).
+    - refine_clustering → name_usecases → find_include_extend → merge_relationships → review_usecases.
     """
 
     workflow = StateGraph(GraphState)
 
-    # Add nodes
-    # Chuẩn hóa câu thành "As a/an/the <actor>, I want to <goal> so that <benefit>"
-    # workflow.add_node("normalize_sentences", normalize_sentences_node)
-
-    # Branch 1: Actor pipeline
+    # Nodes
     workflow.add_node("find_actors", find_actors_node)
     workflow.add_node("synonym_check", synonym_check_node)
     workflow.add_node("find_aliases", find_aliases_node)
     workflow.add_node("review_actors", review_actors_node)
 
-    # Branch 2: UseCase pipeline
     workflow.add_node("find_goals", find_goals_node)
     workflow.add_node("refine_goals", refine_goals_node)
 
     workflow.add_node("grouping", grouping_node)
     workflow.add_node("refine_clustering", refine_clustering_node)
-
     workflow.add_node("name_usecases", name_usecases_node)
+    workflow.add_node("review_usecases", review_usecases_node)
     workflow.add_node("find_include_extend", find_include_extend_node)
     workflow.add_node("merge_relationships", merge_relationships_node)
 
+    # Sequence: Actor xong hết (kể cả resume) → Goals → grouping → ...
     workflow.add_edge(START, "find_actors")
     workflow.add_edge("find_actors", "synonym_check")
     workflow.add_edge("synonym_check", "find_aliases")
     workflow.add_edge("find_aliases", "review_actors")
 
-    workflow.add_edge(START, "find_goals")
+    workflow.add_edge("review_actors", "find_goals")
     workflow.add_edge("find_goals", "refine_goals")
-
-    workflow.add_edge("review_actors", "grouping")
     workflow.add_edge("refine_goals", "grouping")
 
     workflow.add_conditional_edges(
@@ -85,14 +77,15 @@ def build_rpa_graph():
         should_continue_to_clustering,
         {
             "continue": "refine_clustering",
-            "stop": END,  # Kết thúc luồng rác tại đây
+            "stop": END,
         },
     )
 
     workflow.add_edge("refine_clustering", "name_usecases")
     workflow.add_edge("name_usecases", "find_include_extend")
     workflow.add_edge("find_include_extend", "merge_relationships")
-    workflow.add_edge("merge_relationships", END)
+    workflow.add_edge("merge_relationships", "review_usecases")
+    workflow.add_edge("review_usecases", END)
 
     return workflow.compile()
 

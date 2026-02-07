@@ -126,12 +126,12 @@ def refine_goals_node(state: GraphState):
     refined_goals = _refine_goals(model, sentences, raw_goals)
 
     # DEBUG: in goals trước và sau refine
-    print("\n==== refine_goals_node ====")
-    print("raw_goals:", json.dumps(raw_goals, indent=2, ensure_ascii=False))
-    for item in refined_goals:
-        print(f"- sentence_idx={item.sentence_idx}")
-        print(f"  original={item.original}")
-        print(f"  refined={item.refined}")
-        print(f"  added={item.added}")
+    # print("\n==== refine_goals_node ====")
+    # print("raw_goals:", json.dumps(raw_goals, indent=2, ensure_ascii=False))
+    # for item in refined_goals:
+    #     print(f"- sentence_idx={item.sentence_idx}")
+    #     print(f"  original={item.original}")
+    #     print(f"  refined={item.refined}")
+    #     print(f"  added={item.added}")
 
     return {"refined_goals": refined_goals}

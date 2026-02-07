@@ -85,11 +85,11 @@ def find_aliases_node(state: GraphState):
     actor_results = _find_actors_alias(model, sentences, actors)
 
     # DEBUG: in canonical actors và alias
-    print("\n==== find_aliases_node ====")
-    for ar in actor_results:
-        print(f"canonical={ar.actor}, sentence_idx={ar.sentence_idx}")
-        if ar.aliases:
-            for al in ar.aliases:
-                print(f"  alias={al.alias}, sentences={al.sentences}")
+    # print("\n==== find_aliases_node ====")
+    # for ar in actor_results:
+    #     print(f"canonical={ar.actor}, sentence_idx={ar.sentence_idx}")
+    #     if ar.aliases:
+    #         for al in ar.aliases:
+    #             print(f"  alias={al.alias}, sentences={al.sentences}")
 
     return {"actor_results": actor_results}

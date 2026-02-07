@@ -104,10 +104,10 @@ def refine_clustering_node(state: GraphState):
         for cid, items in sorted(new_clusters.items())
     ]
 
-    print("\n--- REFINED CLUSTERS (after LLM) ---")
-    for c in clusters_list:
-        print(f"\nCluster {c['cluster_id']}:")
-        for s in c["user_stories"]:
-            print(f"  - [{s['actor']}] {s['goal']}")
+    # print("\n--- REFINED CLUSTERS (after LLM) ---")
+    # for c in clusters_list:
+    #     print(f"\nCluster {c['cluster_id']}:")
+    #     for s in c["user_stories"]:
+    #         print(f"  - [{s['actor']}] {s['goal']}")
 
     return {"user_story_clusters": clusters_list}
