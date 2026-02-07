@@ -5,7 +5,7 @@ As a patient, I want to be able to review the status of laboratory tests so that
 As a patient, I want to be able to schedule appointments so that I can remotely schedule appointments using my customer account.
 As a patient, I want to be able to renew my medication prescriptions.
 As a doctor, I want to be able to share patient data with both internal as well external laboratories.
-As a doctor, I want results of measurements to be imported into patients’ medical records automatically so that I don’t have to enter these manually.
+As a doctor, I want to import measurement results into patients' medical records automatically, so that I don't have to enter these manually.
 As a doctor, I want to be able to access patients’ medical records so that I can view all their relevant medical data.
 As a doctor, I want to be able to add data to patients’ medical records.
 As a doctor, I want to be able to have an agenda so that I can see who and where my next patient appointment is.
@@ -14,7 +14,7 @@ As a doctor, I want to be able to send out prescriptions to pharmacies.
 As a doctor, I want to be able to review what medications the pharmacies have in stock.
 As a doctor, I want to be able to review the intake prescriptions of medications so I can advise my patients on their medication intake.
 As a doctor, I want to have an overview of external pharmacies including their names, address and contact numbers.
-As a doctor, I want nurses to only have partial control over patient’s’ medical records so that they do not accidentally remove important data.
+As a doctor, I want to limit nurses' access to patient medical records, so that they do not accidentally remove important data.
 As a doctor, I want to be able to review the status of laboratory tests so that I have an indication of when the results will be available.
 As a doctor, I want to be able to attach notes to laboratory tests so that I can supply laboratory personnel with additional information if needed.
 As a doctor, I want to be able to log in to the system quickly so that I don’t have to waste any time during patient appointments.
@@ -31,4 +31,4 @@ As a laboratory technician, I want to be able to enter test results so that doct
 As a laboratory technician, I want to be able to attach notes to laboratory tests so that I can supply doctors with additional information if needed.
 As a pharmacist, I want to be able to review a patient's’ ID number, medication dosage and prescribed medication.
 As a system administrator, I want to be able to adjust users’ access rights.
-As a system administrator, I want users to log in using two-step authentication so that system security is guaranteed.
+As a system administrator, I want to enforce two-step authentication for all users, so that system security is guaranteed.
