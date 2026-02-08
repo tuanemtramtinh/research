@@ -17,7 +17,7 @@ As a depositor, I want to track citations of my data, so that I can demonstrate 
 As a depositor, I want to have guarantees about data integrity, so that I can use my data in the future and I can fulfil funder requirements for archival.
 As a depositor, I want to attach subject specific discoverability metadata to records, so that researchers in my discipline can find my data more easily.
 As a depositor, I want to link datasets with the project DMP, so that compliance with DMP can be demonstrated and whole project workflow is linked together.
-As a depositor, I want to manage and share �live� research data, so that whole project workflow is linked together.
+As a depositor, I want to manage and share live research data, so that whole project workflow is linked together.
 As a depositor, I want to manage multiple versions of the same dataset, so that changes to the dataset are transparent and do not compromise research integrity.
 As a depositor, I want to allow others to deposit on my behalf, so that I can delegate research data management tasks appropriately.
 As a data reuser, I want to search the archive through the web, so that I can easily find data relevant to my needs.

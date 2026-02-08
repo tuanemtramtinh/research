@@ -1971,5 +1971,5 @@ if __name__ == "__main__":
     #         "inputs/input_8.txt",  # IFA/g14
     #     ]
     # )
-    paths = run_rpa_batch(input_files=["inputs/input_2.txt"])
+    paths = run_rpa_batch(input_files=["inputs/input_5.txt"])
     # test_rpa_graph()
