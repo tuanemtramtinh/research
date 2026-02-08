@@ -1,0 +1,54 @@
+{
+  "use_case_name": "Manage Products",
+  "unique_id": "UC-006",
+  "area": "Product Management",
+  "context_of_use": "This use case allows admins to create and update products to ensure the catalog and prices remain current.",
+  "scope": "Product Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control product availability and pricing"
+  ],
+  "description": "Allow admins to create products and update pricing so catalog and prices remain current.",
+  "triggering_event": "Admin initiates product management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and logged into the system."
+  ],
+  "postconditions": [
+    "Products are created or updated in the system."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to manage products."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Admin initiates product management → System prompts for authentication.",
+    "2. Admin authenticates → System verifies credentials.",
+    "3. Admin selects to create a product → System prompts for product details.",
+    "4. Admin enters product details → System saves the new product.",
+    "5. Admin selects to update product prices → System prompts for product selection.",
+    "6. Admin selects a product and enters new price → System updates the product price."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. Authentication status",
+    "3. Product details",
+    "4. Product information",
+    "5. Selected product",
+    "6. New price"
+  ]
+}

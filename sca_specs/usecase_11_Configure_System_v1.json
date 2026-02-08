@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Configure System",
+  "unique_id": "UC-011",
+  "area": "System Configuration",
+  "context_of_use": "The admin configures system-wide settings to customize the system's behavior.",
+  "scope": "System Configuration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system settings for customization"
+  ],
+  "description": "Allows the admin to adjust system-wide settings and configuration parameters.",
+  "triggering_event": "Admin initiates the configuration process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to configure system settings."
+  ],
+  "postconditions": [
+    "System settings are updated according to the admin's configurations."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to configure system settings."
+  ],
+  "requirements_met": [
+    "The system shall allow the admin to configure system settings."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on specific settings available for configuration."
+  ],
+  "main_flow": [
+    "1. Admin initiates the configuration process → System displays configuration options.",
+    "2. Admin selects desired settings → System updates the settings.",
+    "3. Admin confirms the changes → System saves the updated settings."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin is not authenticated, the system denies access to configuration options."
+  ],
+  "information_for_steps": [
+    "1. Configuration options",
+    "2. Selected settings",
+    "3. Confirmation of changes"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-006",
+  "area": "User Management",
+  "context_of_use": "This use case allows admins to manage user accounts to control system access.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: control system access"
+  ],
+  "description": "Allows admins to create, update, deactivate, and delete user accounts and manage access.",
+  "triggering_event": "Admin initiates user management.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system."
+  ],
+  "postconditions": [
+    "User accounts are successfully managed."
+  ],
+  "assumptions": [
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create user accounts.",
+    "The system shall allow admins to update user accounts.",
+    "The system shall allow admins to deactivate user accounts.",
+    "The system shall allow admins to delete user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific user account attributes that can be managed."
+  ],
+  "main_flow": [
+    "1. Admin selects the option to manage user accounts → System displays user management interface.",
+    "2. Admin chooses to authenticate → System prompts for admin credentials.",
+    "3. Admin enters credentials → System verifies credentials.",
+    "4. Admin selects to create, update, deactivate, or delete a user account → System performs the selected action."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If credentials are invalid, System displays an error message and prompts for re-entry."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Action type (create, update, deactivate, delete)"
+  ]
+}

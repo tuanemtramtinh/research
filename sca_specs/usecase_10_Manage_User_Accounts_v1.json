@@ -1,0 +1,63 @@
+{
+  "use_case_name": "Manage User Accounts",
+  "unique_id": "UC-010",
+  "area": "User Management",
+  "context_of_use": "This use case allows admins to create, update, and control user accounts and access rights within the system.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system access through user account management."
+  ],
+  "description": "This use case enables admins to manage user accounts effectively to ensure proper access control.",
+  "triggering_event": "Admin initiates the management of user accounts.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "postconditions": [
+    "User accounts are created, updated, or deleted as per admin actions.",
+    "Access rights for users are modified as required."
+  ],
+  "assumptions": [
+    "The admin has valid credentials to access the user management functionalities."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create user accounts.",
+    "The system shall allow admins to update user account information.",
+    "The system shall allow admins to delete user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific permissions required for different user roles."
+  ],
+  "main_flow": [
+    "1. Admin initiates user account management → System displays user account management options.",
+    "2. Admin selects to create a new user account → System prompts for user details.",
+    "3. Admin enters user details and submits → System creates the user account and confirms creation.",
+    "4. Admin selects to update an existing user account → System displays current user account details.",
+    "5. Admin modifies user account details and submits → System updates the user account and confirms the update.",
+    "6. Admin selects to delete a user account → System prompts for confirmation.",
+    "7. Admin confirms deletion → System deletes the user account and confirms deletion."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Admin selects to authenticate before managing user accounts → System prompts for authentication → Admin enters credentials → System verifies credentials and grants access to user account management."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If user details are incomplete → System displays an error message indicating required fields."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Confirmation of user account creation",
+    "4. Existing user account details",
+    "5. Confirmation of user account update",
+    "6. User account to be deleted",
+    "7. Confirmation of user account deletion"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Manage Products",
+  "unique_id": "UC-004",
+  "area": "Product Management",
+  "context_of_use": "This use case allows admins to create and update product records, including pricing and inventory management.",
+  "scope": "Product Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control product availability and pricing"
+  ],
+  "description": "Allows admins to create and update product records, including pricing and inventory management.",
+  "triggering_event": "Admin initiates product management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to manage products."
+  ],
+  "postconditions": [
+    "Products are created or updated successfully in the system."
+  ],
+  "assumptions": [
+    "Admin has the necessary permissions to manage products."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific fields required for product creation and updates."
+  ],
+  "main_flow": [
+    "1. Admin creates a new product → System records the new product in the database.",
+    "2. Admin updates product prices → System updates the pricing information in the database.",
+    "3. Admin manages inventory levels → System adjusts inventory levels accordingly."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Updated pricing information",
+    "3. Inventory level adjustments"
+  ]
+}

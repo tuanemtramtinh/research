@@ -1,0 +1,58 @@
+{
+  "use_case_name": "Checkout Order",
+  "unique_id": "UC-004",
+  "area": "E-commerce",
+  "context_of_use": "The customer is completing a purchase through the online shopping platform.",
+  "scope": "The scope includes the checkout process where customers review their cart and provide payment and shipping details.",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer",
+    "business owner"
+  ],
+  "description": "Allow customers to review their cart, provide payment and shipping details, and complete an order.",
+  "triggering_event": "The customer initiates the checkout process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The customer has items in their cart.",
+    "The customer is logged into their account."
+  ],
+  "postconditions": [
+    "The order is successfully placed.",
+    "The customer receives an order confirmation."
+  ],
+  "assumptions": [
+    "The customer has a valid payment method.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system allows checkout using multiple payment methods."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer reviews the items in their cart → System displays the cart contents.",
+    "2. Customer selects a payment method → System processes the payment.",
+    "3. Customer provides shipping details → System confirms the shipping information.",
+    "4. Customer confirms the order → System places the order and sends confirmation."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Customer removes an item from the cart → System updates the cart contents.",
+    "AF-2 (from Step 2): Customer cancels the payment process → System returns to the cart review."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Payment fails → System notifies the customer and prompts for a different payment method."
+  ],
+  "information_for_steps": [
+    "1. Cart contents including product names, quantities, and prices.",
+    "2. Available payment methods.",
+    "3. Shipping options and costs.",
+    "4. Order summary including total cost and estimated delivery date."
+  ]
+}

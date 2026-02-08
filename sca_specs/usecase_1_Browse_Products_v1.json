@@ -1,0 +1,45 @@
+{
+  "use_case_name": "Browse Products",
+  "unique_id": "UC-001",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to browse product listings by category and other criteria to discover items.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to find items more easily"
+  ],
+  "description": "Allows customers to browse product listings by category and other criteria to discover items.",
+  "triggering_event": "Customer initiates a browsing session.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system."
+  ],
+  "postconditions": [
+    "Customer can view a list of products by category."
+  ],
+  "assumptions": [
+    "The customer has an active account to log in."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to browse products by category."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer selects a product category → System displays a list of products in that category.",
+    "2. Customer scrolls through the product listings → System updates the display with the selected products."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product category selection",
+    "2. Product listings"
+  ]
+}

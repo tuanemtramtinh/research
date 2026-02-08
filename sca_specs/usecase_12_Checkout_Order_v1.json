@@ -1,0 +1,51 @@
+{
+  "use_case_name": "Checkout Order",
+  "unique_id": "UC-012",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to complete purchases by selecting payment and delivery options and finalizing orders.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to choose the most convenient payment option"
+  ],
+  "description": "This use case enables customers to finalize their purchases by selecting payment and delivery options.",
+  "triggering_event": "Customer initiates the checkout process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer has items in the cart.",
+    "Customer is logged into the system."
+  ],
+  "postconditions": [
+    "Order is successfully placed.",
+    "Customer receives confirmation of the order."
+  ],
+  "assumptions": [
+    "Customer has a valid payment method available.",
+    "Customer has selected delivery options."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to checkout using multiple payment methods."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on supported payment methods."
+  ],
+  "main_flow": [
+    "1. Customer initiates checkout → System displays checkout options.",
+    "2. Customer selects payment method → System processes payment.",
+    "3. Customer selects delivery options → System confirms delivery details.",
+    "4. Customer finalizes order → System places the order and sends confirmation."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Payment method details",
+    "2. Delivery options",
+    "3. Order confirmation details"
+  ]
+}

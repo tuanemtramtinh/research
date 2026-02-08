@@ -1,0 +1,50 @@
+{
+  "use_case_name": "Browse Products",
+  "unique_id": "UC-005",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to search, browse by category, and view product details to find items.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to find items easily"
+  ],
+  "description": "Allow customers to search, browse by category, and view product details to find items.",
+  "triggering_event": "Customer initiates a product search or browsing action.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system."
+  ],
+  "postconditions": [
+    "Customer can view a list of products based on search or category."
+  ],
+  "assumptions": [
+    "The customer has access to the internet.",
+    "The product database is populated."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to browse products by category.",
+    "The system shall allow customers to search for products by keyword.",
+    "The system shall allow customers to view product details."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer browses products by category → System displays products in the selected category.",
+    "2. Customer searches for products by keyword → System displays search results matching the keyword.",
+    "3. Customer views product details → System displays detailed information about the selected product."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Category selection data",
+    "2. Search keyword data",
+    "3. Product ID for details"
+  ]
+}

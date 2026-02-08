@@ -1,0 +1,50 @@
+{
+  "use_case_name": "Track Orders",
+  "unique_id": "UC-005",
+  "area": "Order Management",
+  "context_of_use": "This use case allows customers to track the status and delivery progress of their orders within the system.",
+  "scope": "Order Tracking System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: To know the delivery status of their orders."
+  ],
+  "description": "Allow customers to track order status and delivery progress.",
+  "triggering_event": "Customer requests to track an order.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The customer must have placed an order.",
+    "The customer must be logged into their account."
+  ],
+  "postconditions": [
+    "The customer receives the current status and delivery progress of their order."
+  ],
+  "assumptions": [
+    "The system has access to the order tracking information.",
+    "The customer has a valid order to track."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to track their orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the format of order tracking information."
+  ],
+  "main_flow": [
+    "1. Customer requests to track an order → System retrieves the order status.",
+    "2. System displays the current status and delivery progress to the customer."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the order is not found, then the system displays an error message indicating that the order cannot be tracked."
+  ],
+  "information_for_steps": [
+    "1. Order ID",
+    "2. Order status",
+    "3. Delivery progress"
+  ]
+}

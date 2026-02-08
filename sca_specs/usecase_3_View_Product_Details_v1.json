@@ -1,0 +1,50 @@
+{
+  "use_case_name": "View Product Details",
+  "unique_id": "UC-003",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to view detailed product information to make informed purchasing decisions.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to make informed purchasing decisions"
+  ],
+  "description": "Allows customers to view detailed product information such as descriptions, images, and specifications.",
+  "triggering_event": "Customer selects a product to view details.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system.",
+    "Product exists in the system."
+  ],
+  "postconditions": [
+    "Customer views detailed product information."
+  ],
+  "assumptions": [
+    "The customer has access to the internet.",
+    "The product details are available in the system."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to view product details."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer selects a product → System displays detailed product information."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the customer browses products, then the customer selects a product from the list."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the product does not exist, then the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. Product ID",
+    "2. Customer ID"
+  ]
+}

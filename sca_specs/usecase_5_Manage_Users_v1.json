@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-005",
+  "area": "User Management",
+  "context_of_use": "This use case allows administrators to manage user accounts and access rights within the system.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system access through user account management."
+  ],
+  "description": "Allow administrators to create, update, deactivate, and manage user accounts and access rights.",
+  "triggering_event": "Admin requests to manage user accounts.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "postconditions": [
+    "User accounts are successfully created, updated, or deactivated as per admin actions."
+  ],
+  "assumptions": [
+    "The admin has the required permissions to perform user management tasks.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system shall allow administrators to create user accounts.",
+    "The system shall allow administrators to update user account information.",
+    "The system shall allow administrators to deactivate user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific permissions required for different user management actions."
+  ],
+  "main_flow": [
+    "1. Admin requests to manage user accounts → System displays user management interface.",
+    "2. Admin selects to create, update, or deactivate a user account → System processes the request.",
+    "3. System confirms the action taken on the user account → Admin receives confirmation of the successful action."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the admin lacks permissions, the system displays an error message indicating insufficient permissions."
+  ],
+  "information_for_steps": [
+    "1. User account management interface data.",
+    "2. User account details for creation or updates.",
+    "3. Confirmation message data."
+  ]
+}

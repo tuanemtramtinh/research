@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Update Profile",
+  "unique_id": "UC-006",
+  "area": "User Account Management",
+  "context_of_use": "This use case allows users to modify their personal and account information to keep details current.",
+  "scope": "User Account Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "user: To maintain accurate account details"
+  ],
+  "description": "Enables users to modify their personal and account information to keep details current.",
+  "triggering_event": "User initiates a request to update profile information.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User must be logged into the system."
+  ],
+  "postconditions": [
+    "User's profile information is updated successfully."
+  ],
+  "assumptions": [
+    "User has valid login credentials to access the system."
+  ],
+  "requirements_met": [
+    "The system shall allow users to update their profile information."
+  ],
+  "priority": "Medium",
+  "risk": "Low",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. User initiates a request to update profile information → System displays the profile update form.",
+    "2. User enters new profile information → System validates the input.",
+    "3. User submits the updated profile information → System updates the user's profile and confirms the update."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the input is invalid, then the system displays an error message and prompts the user to correct the input."
+  ],
+  "information_for_steps": [
+    "1. User's current profile information",
+    "2. New profile information provided by the user",
+    "3. Confirmation of profile update"
+  ]
+}

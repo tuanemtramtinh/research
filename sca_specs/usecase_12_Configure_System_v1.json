@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Configure System",
+  "unique_id": "UC-012",
+  "area": "System Configuration",
+  "context_of_use": "This use case allows administrators to modify system settings and configuration for customization.",
+  "scope": "System Configuration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system settings for effective management."
+  ],
+  "description": "Enable administrators to modify system settings and configuration for customization.",
+  "triggering_event": "Admin initiates the configuration process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to configure system settings."
+  ],
+  "postconditions": [
+    "System settings are successfully modified and saved."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to access the configuration settings."
+  ],
+  "requirements_met": [
+    "The system shall allow administrators to configure system settings."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on specific settings available for configuration."
+  ],
+  "main_flow": [
+    "1. Admin initiates the configuration process → System prompts for authentication.",
+    "2. Admin provides authentication credentials → System verifies credentials.",
+    "3. Admin accesses configuration settings → System displays available settings.",
+    "4. Admin modifies desired settings → System saves the changes."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the admin is not authenticated, the system prompts for login."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If authentication fails, the system displays an error message and denies access."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. Authentication status",
+    "3. Configuration settings",
+    "4. Modified settings"
+  ]
+}

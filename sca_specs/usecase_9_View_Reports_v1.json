@@ -1,0 +1,55 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-009",
+  "area": "Reporting",
+  "context_of_use": "This use case allows customers and admins to view and download reports for monitoring and analysis.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: Access to reports for personal analysis",
+    "admin: Ability to monitor business performance through reports"
+  ],
+  "description": "Allow customers and admins to view sales and other reports for monitoring and analysis.",
+  "triggering_event": "User requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated",
+    "User has permission to view reports"
+  ],
+  "postconditions": [
+    "User successfully views the requested reports",
+    "User can download reports if required"
+  ],
+  "assumptions": [
+    "Users have the necessary permissions to access reports",
+    "Reports are available in the system"
+  ],
+  "requirements_met": [
+    "The system shall allow customers to view and download reports.",
+    "The system shall allow admins to view sales reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for viewing"
+  ],
+  "main_flow": [
+    "1. Customer or admin requests to view reports → System displays available reports.",
+    "2. User selects a report to view → System presents the report details.",
+    "3. User opts to download the report → System initiates the download process."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the user does not have permission to view reports, then the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Report selection",
+    "3. Download request"
+  ]
+}

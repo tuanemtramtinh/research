@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Perform Bulk Operations",
+  "unique_id": "UC-007",
+  "area": "User Operations",
+  "context_of_use": "This use case allows power users to execute batch operations to improve their efficiency in handling tasks.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: improve efficiency in task handling"
+  ],
+  "description": "Provide power users the ability to execute batch operations to improve efficiency.",
+  "triggering_event": "User initiates a request to perform bulk operations.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is logged into the system.",
+    "User has power user privileges."
+  ],
+  "postconditions": [
+    "Bulk operations are successfully executed.",
+    "System reflects the changes made by the bulk operations."
+  ],
+  "assumptions": [
+    "The user has the necessary permissions to perform bulk operations.",
+    "The system is capable of processing bulk operations."
+  ],
+  "requirements_met": [
+    "The system shall allow power users to perform bulk operations."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of bulk operations allowed."
+  ],
+  "main_flow": [
+    "1. User initiates a request to perform bulk operations → System displays available bulk operation options.",
+    "2. User selects the desired bulk operation → System processes the selection.",
+    "3. User confirms the bulk operation details → System executes the bulk operation.",
+    "4. System displays a success message and updated data."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the user cancels the operation, then the system aborts the bulk operation and returns to the previous state."
+  ],
+  "information_for_steps": [
+    "1. User request details",
+    "2. Selected bulk operation",
+    "3. Confirmation details"
+  ]
+}

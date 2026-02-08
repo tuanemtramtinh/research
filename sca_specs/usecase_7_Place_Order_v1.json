@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Place Order",
+  "unique_id": "UC-007",
+  "area": "E-commerce",
+  "context_of_use": "The customer interacts with the e-commerce platform to add products to their cart and complete the checkout process.",
+  "scope": "The use case covers the process of selecting products, adding them to a cart, and completing the purchase through various payment methods.",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer",
+    "business owner"
+  ],
+  "description": "Enable customers to add products to a cart and complete checkout using available payment methods.",
+  "triggering_event": "Customer decides to purchase products.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into their account.",
+    "Customer has selected products to purchase."
+  ],
+  "postconditions": [
+    "Order is successfully placed.",
+    "Customer receives confirmation of the order."
+  ],
+  "assumptions": [
+    "Customer has a valid payment method.",
+    "Products are available for purchase."
+  ],
+  "requirements_met": [
+    "Customer can add products to the cart.",
+    "Customer can select a payment method during checkout."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer selects products → System adds products to the cart.",
+    "2. Customer proceeds to checkout → System displays payment options.",
+    "3. Customer selects payment method → System processes the payment.",
+    "4. System confirms order → Customer receives order confirmation."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Customer cancels the checkout process → System returns to the cart."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Payment fails → System notifies customer and prompts for a different payment method."
+  ],
+  "information_for_steps": [
+    "1. Product details including price and availability.",
+    "2. List of available payment methods.",
+    "3. Confirmation details including order number and estimated delivery."
+  ]
+}

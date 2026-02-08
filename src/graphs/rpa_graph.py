@@ -1753,7 +1753,7 @@ def run_rpa(requirement_text: str) -> RpaState:
         "actors": out.get("actors", []),
         "actor_aliases": out.get("actor_results", []),
         "use_cases": out.get("use_cases", []),
-    }
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 
 
 # =============================================================================

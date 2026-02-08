@@ -1,0 +1,48 @@
+{
+  "use_case_name": "Perform Bulk Operations",
+  "unique_id": "UC-008",
+  "area": "Bulk Operations Management",
+  "context_of_use": "This use case allows power users to execute bulk actions to process many records efficiently.",
+  "scope": "Bulk Operations System",
+  "level": "User-goal",
+  "primary_actors": [
+    "power user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: Efficient processing of records"
+  ],
+  "description": "Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.",
+  "triggering_event": "Power user initiates a bulk operation.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Power user is authenticated."
+  ],
+  "postconditions": [
+    "Bulk operations are successfully executed."
+  ],
+  "assumptions": [
+    "The power user has the necessary permissions to perform bulk operations."
+  ],
+  "requirements_met": [
+    "The system shall allow power users to perform bulk operations efficiently."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of bulk operations supported."
+  ],
+  "main_flow": [
+    "1. Power user initiates authentication → System verifies user credentials.",
+    "2. Power user selects bulk operation type → System displays available options.",
+    "3. Power user provides necessary data for the operation → System processes the data.",
+    "4. System confirms successful execution of the bulk operation."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Selected bulk operation type",
+    "3. Data for the operation"
+  ]
+}

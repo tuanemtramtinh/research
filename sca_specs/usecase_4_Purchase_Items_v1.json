@@ -1,0 +1,55 @@
+{
+  "use_case_name": "Purchase Items",
+  "unique_id": "UC-004",
+  "area": "E-commerce",
+  "context_of_use": "The customer wants to add products to their cart and complete the checkout process to place orders.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to purchase multiple items conveniently"
+  ],
+  "description": "Support adding products to a cart and completing checkout to place orders.",
+  "triggering_event": "Customer decides to purchase items.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into their account.",
+    "Customer has selected products to purchase."
+  ],
+  "postconditions": [
+    "Order is successfully placed.",
+    "Customer receives confirmation of the order."
+  ],
+  "assumptions": [
+    "Customer has a valid account.",
+    "Products are available for purchase."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart.",
+    "The system shall support multiple payment methods during checkout."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Need to define payment method options."
+  ],
+  "main_flow": [
+    "1. Customer adds product to cart → System updates cart with the selected product.",
+    "2. Customer proceeds to checkout → System displays checkout options.",
+    "3. Customer selects payment method → System processes payment.",
+    "4. Customer confirms order → System places the order and sends confirmation."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If payment fails, System notifies customer and prompts for a different payment method."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Cart contents",
+    "3. Payment information",
+    "4. Order confirmation details"
+  ]
+}

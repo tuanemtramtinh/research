@@ -1,0 +1,60 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-010",
+  "area": "Reporting",
+  "context_of_use": "This use case allows customers and users to view report content and download or export reports for offline use.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to access reports for personal use",
+    "user: wants to analyze data offline"
+  ],
+  "description": "This use case enables customers and users to view and download reports for offline analysis.",
+  "triggering_event": "The customer or user requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The customer or user is authenticated in the system.",
+    "Reports are available for viewing."
+  ],
+  "postconditions": [
+    "The customer or user has successfully viewed and downloaded the reports."
+  ],
+  "assumptions": [
+    "The system has the capability to generate and store reports.",
+    "The customer and user have the necessary permissions to access reports."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to view reports.",
+    "The system shall allow users to download reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for viewing and downloading."
+  ],
+  "main_flow": [
+    "1. customer → System displays available reports.",
+    "2. customer → System allows customer to select a report to view.",
+    "3. customer → System displays the selected report content.",
+    "4. customer → System provides an option to download the report.",
+    "5. customer → System downloads the report for offline use.",
+    "6. user → System allows user to select a report to download.",
+    "7. user → System downloads the report for offline analysis."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Report list",
+    "2. Selected report",
+    "3. Report content",
+    "4. Download option",
+    "5. Downloaded report",
+    "6. User request for report",
+    "7. Downloaded report for user"
+  ]
+}

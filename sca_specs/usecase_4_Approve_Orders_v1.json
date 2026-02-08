@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Approve Orders",
+  "unique_id": "UC-004",
+  "area": "Order Management",
+  "context_of_use": "This use case allows managers to review and authorize orders within the order management system.",
+  "scope": "Order Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "manager: Ensure timely approval of orders to avoid delays in business processes."
+  ],
+  "description": "Enable managers to review and authorize orders to ensure business workflows proceed.",
+  "triggering_event": "Manager initiates the order approval process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Manager is logged into the system.",
+    "Orders are available for approval."
+  ],
+  "postconditions": [
+    "Selected orders are approved by the manager.",
+    "Order status is updated to reflect approval."
+  ],
+  "assumptions": [
+    "The manager has the necessary permissions to approve orders.",
+    "Orders are correctly listed for approval."
+  ],
+  "requirements_met": [
+    "The system shall allow managers to approve orders.",
+    "The system shall update order status upon approval."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the criteria for order approval."
+  ],
+  "main_flow": [
+    "1. Manager selects an order to approve → System displays order details.",
+    "2. Manager reviews the order details → System allows manager to approve or reject the order.",
+    "3. Manager approves the order → System updates the order status to approved."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the order details are incomplete, then the system prompts the manager to complete the necessary information."
+  ],
+  "information_for_steps": [
+    "1. Order details",
+    "2. Approval status",
+    "3. Updated order status"
+  ]
+}

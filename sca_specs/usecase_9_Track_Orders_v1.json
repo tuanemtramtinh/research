@@ -1,0 +1,49 @@
+{
+  "use_case_name": "Track Orders",
+  "unique_id": "UC-009",
+  "area": "Order Management",
+  "context_of_use": "This use case allows customers to view the delivery status and tracking information for their orders within the e-commerce system.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: To know the delivery status of their orders."
+  ],
+  "description": "This use case enables customers to track their orders and view delivery status information.",
+  "triggering_event": "Customer requests to track their orders.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer must be logged into their account.",
+    "Customer must have placed at least one order."
+  ],
+  "postconditions": [
+    "Customer successfully views the delivery status and tracking information for their orders."
+  ],
+  "assumptions": [
+    "The customer has a valid account and has previously placed orders."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to track their orders.",
+    "The system shall provide delivery status information."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific tracking information to be displayed."
+  ],
+  "main_flow": [
+    "1. Customer requests to track orders → System verifies customer authentication.",
+    "2. System retrieves order tracking information → System displays delivery status and tracking details to the customer."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the customer is not authenticated, the system prompts the customer to log in."
+  ],
+  "information_for_steps": [
+    "1. Customer credentials",
+    "2. Order tracking information"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "use_case_name": "Manage Products",
+  "unique_id": "UC-008",
+  "area": "Product Management",
+  "context_of_use": "This use case allows administrators to create, update, and manage products within the system.",
+  "scope": "Product Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control product availability and pricing"
+  ],
+  "description": "Allow administrators to create products, update pricing, and manage inventory levels.",
+  "triggering_event": "Admin initiates product management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated and authorized to manage products."
+  ],
+  "postconditions": [
+    "Products are created, updated, or inventory levels are managed successfully."
+  ],
+  "assumptions": [
+    "Admin has the necessary permissions to perform product management tasks."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the approval process for product changes."
+  ],
+  "main_flow": [
+    "1. Admin creates a new product → System saves the product and confirms creation.",
+    "2. Admin updates product prices → System updates the pricing information and confirms the update.",
+    "3. Admin manages inventory levels → System adjusts inventory and confirms the changes."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If product creation fails due to validation errors, the system displays error messages.",
+    "EF-2 (from Step 2): If price update fails, the system displays an error message indicating the reason.",
+    "EF-3 (from Step 3): If inventory management fails, the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Updated pricing information",
+    "3. Inventory level adjustments"
+  ]
+}

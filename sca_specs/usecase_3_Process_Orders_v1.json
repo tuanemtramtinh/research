@@ -1,0 +1,56 @@
+{
+  "use_case_name": "Process Orders",
+  "unique_id": "UC-003",
+  "area": "Order Management",
+  "context_of_use": "This use case allows customers to complete checkout using multiple payment methods and track their order status and delivery.",
+  "scope": "Order Processing System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to complete purchases conveniently and track order status."
+  ],
+  "description": "Allow customers to complete checkout using payment methods and track order status and delivery.",
+  "triggering_event": "Customer initiates the checkout process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer has selected products to purchase.",
+    "Customer is logged into their account."
+  ],
+  "postconditions": [
+    "Customer successfully completes the checkout process.",
+    "Customer can view the status of their order."
+  ],
+  "assumptions": [
+    "Customer has a valid payment method available.",
+    "Customer has an active account."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to checkout using multiple payment methods.",
+    "The system shall provide order tracking functionality."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of payment methods supported."
+  ],
+  "main_flow": [
+    "1. Customer initiates the checkout process → System displays available payment options.",
+    "2. Customer selects a payment method → System processes the payment.",
+    "3. System confirms the order → System updates order status and provides tracking information."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the customer cancels the checkout process, then the system returns to the shopping cart.",
+    "AF-2 (from Step 2): If the payment fails, then the system notifies the customer and prompts for a different payment method."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the system encounters an error during payment processing, then the system logs the error and notifies the customer."
+  ],
+  "information_for_steps": [
+    "1. Selected products",
+    "2. Payment method",
+    "3. Order confirmation details"
+  ]
+}

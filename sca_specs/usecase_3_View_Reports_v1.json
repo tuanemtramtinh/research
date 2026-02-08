@@ -1,0 +1,58 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-003",
+  "area": "Reporting",
+  "context_of_use": "This use case allows both admins and customers to view and download reports for analysis and monitoring.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: Access to reports for personal analysis",
+    "admin: Ability to monitor business performance through sales reports"
+  ],
+  "description": "This use case enables customers and admins to view and download reports for analysis and monitoring purposes.",
+  "triggering_event": "The user requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The user must be authenticated."
+  ],
+  "postconditions": [
+    "The user successfully views and downloads the requested reports."
+  ],
+  "assumptions": [
+    "The user has the necessary permissions to view reports."
+  ],
+  "requirements_met": [
+    "The system shall allow users to view and download reports.",
+    "The system shall authenticate users before allowing access to reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for viewing."
+  ],
+  "main_flow": [
+    "1. customer/admin requests to view reports → System prompts for authentication.",
+    "2. customer/admin provides authentication credentials → System verifies credentials.",
+    "3. System grants access to reports → customer/admin views available reports.",
+    "4. customer/admin selects a report to download → System processes the download request.",
+    "5. System provides the report for download → customer/admin successfully downloads the report."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the user is not authenticated, the system redirects to the login page."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If authentication fails, the system displays an error message and prompts for re-entry of credentials."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Authentication status",
+    "3. List of available reports",
+    "4. Selected report",
+    "5. Download status"
+  ]
+}

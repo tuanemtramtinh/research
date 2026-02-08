@@ -1,0 +1,48 @@
+{
+  "use_case_name": "View Sales Reports",
+  "unique_id": "UC-004",
+  "area": "Sales Management",
+  "context_of_use": "The admin wants to view sales reports to monitor business performance.",
+  "scope": "Sales Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Monitor business performance"
+  ],
+  "description": "Enable admins to view sales reports to monitor business performance.",
+  "triggering_event": "Admin requests to view sales reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated.",
+    "Sales reports are available."
+  ],
+  "postconditions": [
+    "Admin successfully views the sales reports."
+  ],
+  "assumptions": [
+    "The admin has the necessary permissions to view sales reports.",
+    "Sales data is up-to-date."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to view sales reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the format of sales reports."
+  ],
+  "main_flow": [
+    "1. Admin requests to view sales reports → System retrieves and displays the sales reports."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the admin is not authenticated, the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. Sales report data"
+  ]
+}
