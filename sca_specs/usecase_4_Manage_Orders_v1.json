@@ -1,0 +1,67 @@
+{
+  "use_case_name": "Manage Orders",
+  "unique_id": "UC-004",
+  "area": "Order Management",
+  "context_of_use": "This use case allows customers and managers to manage orders effectively within the system.",
+  "scope": "Order Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to purchase items easily",
+    "manager: wants to ensure orders are processed efficiently"
+  ],
+  "description": "This use case enables customers to add products to their cart, checkout, track their orders, and allows managers to approve orders.",
+  "triggering_event": "Customer initiates order management actions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is authenticated.",
+    "Manager is authorized to approve orders."
+  ],
+  "postconditions": [
+    "Customer successfully adds products to cart.",
+    "Customer completes checkout.",
+    "Customer tracks order status.",
+    "Manager approves the order."
+  ],
+  "assumptions": [
+    "The customer has an account and is logged in.",
+    "The manager has the necessary permissions to approve orders."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart.",
+    "The system shall allow customers to checkout using multiple payment methods.",
+    "The system shall allow customers to track their orders.",
+    "The system shall allow managers to approve orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification needed on the types of payment methods supported."
+  ],
+  "main_flow": [
+    "1. Customer adds products to cart → System updates cart with selected products.",
+    "2. Customer proceeds to checkout → System displays checkout options.",
+    "3. Customer selects payment method and confirms order → System processes payment and confirms order.",
+    "4. Customer requests order tracking → System provides order status.",
+    "5. Manager reviews pending orders → System displays orders awaiting approval.",
+    "6. Manager approves order → System updates order status to approved."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the customer wants to change the payment method, they can select a different option and return to Step 3."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If payment fails, the system notifies the customer and prompts them to retry or select a different payment method."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Checkout options",
+    "3. Payment confirmation",
+    "4. Order status",
+    "5. Pending orders",
+    "6. Order approval status"
+  ]
+}

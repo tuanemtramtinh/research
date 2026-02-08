@@ -118,6 +118,29 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
             log(_fmt_correctness(corr))
             log(_fmt_crit("Relevance", rel))
 
+            def _log_sub_scores(label: str, crit) -> None:
+                if crit is None:
+                    return
+                sub = None
+                try:
+                    sub = crit.get("sub_scores")
+                except Exception:
+                    sub = getattr(crit, "sub_scores", None)
+
+                if not isinstance(sub, dict) or not sub:
+                    return
+
+                log(f"\n--- {label.upper()} SUB-SCORES ---")
+                for k, val in sub.items():
+                    ks = str(k).strip()
+                    if not ks:
+                        continue
+                    log(f"- {ks}: {val}")
+
+            _log_sub_scores("Completeness", comp)
+            _log_sub_scores("Correctness", corr)
+            _log_sub_scores("Relevance", rel)
+
             missing = list(getattr(comp, "missing_or_weak_fields", []) or []) if comp else []
             if missing:
                 log("- Missing/weak fields: " + ", ".join(str(x) for x in missing if str(x).strip()))
@@ -154,6 +177,21 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
                 log(regen)
         else:
             log("\n--- VALIDATION: PASSED ---")
+
+        # Full raw scenario result JSON (includes evaluation + sub_scores + validation)
+        try:
+            payload = sr.model_dump()  # pydantic v2
+        except Exception:
+            try:
+                payload = sr.dict()  # pydantic v1 fallback
+            except Exception:
+                payload = None
+
+        if payload is not None:
+            import json
+
+            log("\n--- RAW SCENARIO RESULT JSON ---")
+            log(json.dumps(payload, ensure_ascii=False, indent=2))
 
     # Write output to file if specified
     if output_file:

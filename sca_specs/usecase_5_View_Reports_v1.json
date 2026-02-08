@@ -1,0 +1,59 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-005",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to view and download reports for analysis.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "admin",
+    "power user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: access to reports",
+    "admin: monitor business performance",
+    "power user: analyze data offline"
+  ],
+  "description": "Allows users to view, download, and analyze general and sales reports.",
+  "triggering_event": "User requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User must be authenticated."
+  ],
+  "postconditions": [
+    "User successfully views and downloads reports."
+  ],
+  "assumptions": [
+    "Users have valid accounts to access the reporting system."
+  ],
+  "requirements_met": [
+    "The system shall allow users to view reports.",
+    "The system shall allow users to download reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on report types available for viewing and downloading."
+  ],
+  "main_flow": [
+    "1. User requests to view reports → System prompts for authentication.",
+    "2. User provides authentication credentials → System verifies credentials.",
+    "3. User is authenticated → System displays available reports.",
+    "4. User selects a report to view → System presents the report details.",
+    "5. User chooses to download the report → System initiates the download."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the user is not authenticated, the system redirects to the login page."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If authentication fails, the system displays an error message and prompts for re-entry of credentials."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Authentication status",
+    "3. List of available reports",
+    "4. Selected report details"
+  ]
+}

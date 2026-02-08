@@ -2,7 +2,7 @@
   "use_case_name": "Manage Products",
   "unique_id": "UC-002",
   "area": "Product Management",
-  "context_of_use": "The admin manages product records to ensure availability and accurate pricing.",
+  "context_of_use": "This use case allows an admin to manage product-related tasks within the system.",
   "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,38 +10,49 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Ensure products are available and priced correctly."
+    "admin: Control product availability and pricing"
   ],
-  "description": "Create and update product records including pricing and availability.",
-  "triggering_event": "Admin initiates product management actions.",
+  "description": "Enables admins to create products, update product prices, and manage inventory levels.",
+  "triggering_event": "Admin initiates product management tasks.",
   "trigger_type": "External",
   "preconditions": [
     "Admin is logged into the system.",
-    "Admin has permissions to manage products."
+    "Admin has the necessary permissions to manage products."
   ],
   "postconditions": [
-    "Product records are created or updated successfully."
+    "Products are created or updated successfully.",
+    "Inventory levels are managed appropriately."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to create and update products."
+    "The admin has access to the product management interface.",
+    "The system has the capability to create, update, and manage products."
   ],
   "requirements_met": [
-    "The system shall allow the admin to create new products.",
-    "The system shall allow the admin to update product prices."
+    "The system shall allow admins to create new products.",
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the process for handling product deletions."
+    "Clarification needed on the process for handling out-of-stock products."
   ],
   "main_flow": [
-    "1. Admin creates a new product → System records the new product.",
-    "2. Admin updates product prices → System updates the pricing information."
+    "1. Admin selects the option to create a product → System prompts for product details.",
+    "2. Admin enters product details and submits → System creates the product and confirms creation.",
+    "3. Admin selects the option to update product prices → System prompts for product selection and new price.",
+    "4. Admin selects a product and enters a new price → System updates the product price and confirms update.",
+    "5. Admin selects the option to manage inventory → System displays current inventory levels.",
+    "6. Admin adjusts inventory levels as needed → System updates inventory and confirms changes."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Product details",
-    "2. Updated pricing information"
+    "2. Confirmation of product creation",
+    "3. Product selection and new price",
+    "4. Confirmation of price update",
+    "5. Current inventory levels",
+    "6. Updated inventory levels"
   ]
 }

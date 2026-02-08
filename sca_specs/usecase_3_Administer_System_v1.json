@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Administer System",
+  "unique_id": "UC-003",
+  "area": "System Administration",
+  "context_of_use": "This use case allows admins to manage user accounts and configure system settings within the system.",
+  "scope": "System Administration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: control system access and customize system settings"
+  ],
+  "description": "This use case enables admins to manage user accounts and configure system settings to ensure proper access control and system customization.",
+  "triggering_event": "Admin initiates the administration process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage user accounts and configure settings."
+  ],
+  "postconditions": [
+    "User accounts are successfully managed.",
+    "System settings are successfully configured."
+  ],
+  "assumptions": [
+    "The admin has the required permissions to perform the actions.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to manage user accounts.",
+    "The system shall permit admins to configure system settings."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific settings that can be configured by the admin."
+  ],
+  "main_flow": [
+    "1. Admin initiates the user account management process → System displays user account management options.",
+    "2. Admin selects a user account to manage → System retrieves and displays user account details.",
+    "3. Admin makes changes to the user account → System updates the user account information.",
+    "4. Admin initiates the system settings configuration process → System displays configuration options.",
+    "5. Admin selects settings to configure → System retrieves and displays current settings.",
+    "6. Admin makes changes to the system settings → System updates the system settings."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Updated user account information",
+    "4. Configuration options",
+    "5. Current system settings",
+    "6. Updated system settings"
+  ]
+}

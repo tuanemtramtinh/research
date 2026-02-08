@@ -229,6 +229,10 @@ class CompletenessEvaluation(BaseModel):
     score: int = Field(description="0-100")
     result: Literal["PASS", "FAIL"]
     rationale: str
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion scores (e.g., 'Primary Actor': 15).",
+    )
     missing_or_weak_fields: List[str] = Field(default_factory=list)
 
 
@@ -236,6 +240,10 @@ class SimpleCriterionEvaluation(BaseModel):
     score: int = Field(description="0-100")
     result: Literal["PASS", "FAIL"]
     rationale: str
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion scores (e.g., 'Use Case Name ↔ Main Flow': 25).",
+    )
 
 
 class CorrectnessEvaluation(BaseModel):
@@ -248,6 +256,10 @@ class CorrectnessEvaluation(BaseModel):
     result: Literal["PASS", "FAIL", "N/A"]
     rationale: str
     reference_path: Optional[str] = None
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion correctness scores; empty when result is N/A.",
+    )
 
 
 class UseCaseEvaluation(BaseModel):
