@@ -1,0 +1,451 @@
+{
+  "requirement_text": "As the IFA, I want to be able to define and change policies of the leagues so that we can control how games run.\nAs the IFA, I want to be able to define budget policy per season so that we have authority over the specifications of budgets.\nAs the IFA, I want to be able to see the specifications of the budgets of the teams in real-time so that we can monitor that they fulfill the regulations and policies.\nAs the IFA, I want to be able to assign referees to different leagues so that we can plan the schedules.\nAs the IFA, I want to record game event data digitally in real-time through referees, so that all the information we get is accurate, reliable, and true.\nAs the IFA, I want to automate match scheduling based on policies and stakeholder restrictions, so that we avoid biases and do not have to do rescheduling.\nAs the IFA, I want to be able to monitor the use of different resources by the stakeholders so that there is constant transparency.\nAs the IFA, I want to expand the system's capacity for new users, so that more users can be added to the system.\nAs the IFA, I want to support at least 50,000 users concurrently, so that the system does not crash during peak times.\nAs the IFA, I want to be able to communicate with all stakeholders through the system about things such as game cancellations so that everyone knows immediately at the same time what is happening.\nAs a team, I want to be able to manage our own resources so that we can make the decisions related to our resources.\nAs a team, I want to be able to create our own social media page for the team so that we can create personal content.\nAs a team, I want to be able to create social media pages for our different players so that they can keep in touch with the fans.\nAs a team, I want to be able to create social media pages for our different coaches so that they can keep in touch with the fans.\nAs a team, I want to be able to manage our own social media page so that we can update our fans about what they find important.\nAs a team, I want to be able to record every transaction, income and expenditure in the system so that we do not have to send separate reports to the IFA.\nAs a team, I want to be able to pick a manager for a social media so that we are able to handle the management of our content.\nAs a team, I want to be able to communicate with other stakeholders through the system so that we do not have to use external communication methods.\nAs a referee, I want to be able to record game events efficiently in real-time so that I do not have to waste any time.\nAs a referee, I want to sync my schedule and restrictions with the system, so that I am not double-booked.\nAs a referee, I want to receive notifications about cancellations and rescheduling so that I can reschedule my plans.\nAs a referee, I want to be able to communicate with other stakeholders in the system so that I do not have to waste time finding how to contact different people.\nAs a fan, I want to be able to register in the system so that I can follow different teams.\nAs a fan, I want to be able to access the system through a mobile app so that I can access it anywhere.\nAs a fan, I want to be able to follow my favorite teams so that I can keep up to date on what’s happening.\nAs a fan, I want to be able to follow my favorite players so that I can keep up to date on what’s happening.\nAs a fan, I want to be able to see the game schedules in the system so that I know when games are on.\nAs a fan, I want to receive notifications so that I know if something is rescheduled.\nAs a fan, I want to be updated about events during the games so that I know exactly what is happening now.\nAs a fan, I want to use the system in my local language and currency, so that I do not have to translate or convert anything.",
+  "actors": [
+    {
+      "actor": "ifa",
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "actor": "team",
+      "sentence_idx": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "actor": "referee",
+      "sentence_idx": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "actor": "fan",
+      "sentence_idx": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "ifa",
+      "aliases": [
+        {
+          "alias": "the ifa",
+          "sentences": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "sentence_idx": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "actor": "team",
+      "aliases": [
+        {
+          "alias": "a team",
+          "sentences": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ]
+        }
+      ],
+      "sentence_idx": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "actor": "referee",
+      "aliases": [
+        {
+          "alias": "a referee",
+          "sentences": [
+            18,
+            19,
+            20,
+            21
+          ]
+        }
+      ],
+      "sentence_idx": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "actor": "fan",
+      "aliases": [
+        {
+          "alias": "a fan",
+          "sentences": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
+          ]
+        }
+      ],
+      "sentence_idx": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Scale System Capacity",
+      "description": "Ensure the system can be expanded to support high numbers of concurrent users without performance degradation.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "expand system capacity",
+          "original_sentence": "As the IFA, I want to expand the system's capacity for new users, so that more users can be added to the system.",
+          "sentence_idx": 7
+        },
+        {
+          "actor": "ifa",
+          "action": "support concurrent users",
+          "original_sentence": "As the IFA, I want to support at least 50,000 users concurrently, so that the system does not crash during peak times.",
+          "sentence_idx": 8
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 2,
+      "name": "Access System",
+      "description": "Allow fans to register and use the system via mobile with localized language and currency support.",
+      "participating_actors": [
+        "fan"
+      ],
+      "user_stories": [
+        {
+          "actor": "fan",
+          "action": "register in system",
+          "original_sentence": "As a fan, I want to be able to register in the system so that I can follow different teams.",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "fan",
+          "action": "access system via mobile",
+          "original_sentence": "As a fan, I want to be able to access the system through a mobile app so that I can access it anywhere.",
+          "sentence_idx": 23
+        },
+        {
+          "actor": "fan",
+          "action": "use system in local settings",
+          "original_sentence": "As a fan, I want to use the system in my local language and currency, so that I do not have to translate or convert anything.",
+          "sentence_idx": 29
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 3,
+      "name": "Follow Teams and Players",
+      "description": "Enable fans to follow teams and players and receive notifications and live game updates.",
+      "participating_actors": [
+        "fan"
+      ],
+      "user_stories": [
+        {
+          "actor": "fan",
+          "action": "follow teams",
+          "original_sentence": "As a fan, I want to be able to follow my favorite teams so that I can keep up to date on what’s happening.",
+          "sentence_idx": 24
+        },
+        {
+          "actor": "fan",
+          "action": "follow players",
+          "original_sentence": "As a fan, I want to be able to follow my favorite players so that I can keep up to date on what’s happening.",
+          "sentence_idx": 25
+        },
+        {
+          "actor": "fan",
+          "action": "receive notifications",
+          "original_sentence": "As a fan, I want to receive notifications so that I know if something is rescheduled.",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "fan",
+          "action": "receive live game updates",
+          "original_sentence": "As a fan, I want to be updated about events during the games so that I know exactly what is happening now.",
+          "sentence_idx": 28
+        }
+      ],
+      "relationships": [
+        {
+          "type": "extend",
+          "target_use_case": "manage stakeholder communication"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Manage League Policies",
+      "description": "Define and modify league and seasonal budget policies to control how games and finances are governed.",
+      "participating_actors": [
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "define league policies",
+          "original_sentence": "As the IFA, I want to be able to define and change policies of the leagues so that we can control how games run.",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "ifa",
+          "action": "define seasonal budget policies",
+          "original_sentence": "As the IFA, I want to be able to define budget policy per season so that we have authority over the specifications of budgets.",
+          "sentence_idx": 1
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 5,
+      "name": "Manage Team Finances",
+      "description": "Record financial transactions, manage team resources, and view team budget details for transparent monitoring.",
+      "participating_actors": [
+        "team",
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "view team budget details",
+          "original_sentence": "As the IFA, I want to be able to see the specifications of the budgets of the teams in real-time so that we can monitor that they fulfill the regulations and policies.",
+          "sentence_idx": 2
+        },
+        {
+          "actor": "ifa",
+          "action": "monitor stakeholder resource usage",
+          "original_sentence": "As the IFA, I want to be able to monitor the use of different resources by the stakeholders so that there is constant transparency.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "team",
+          "action": "record financial transactions",
+          "original_sentence": "As a team, I want to be able to record every transaction, income and expenditure in the system so that we do not have to send separate reports to the IFA.",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "team",
+          "action": "manage team resources",
+          "original_sentence": "As a team, I want to be able to manage our own resources so that we can make the decisions related to our resources.",
+          "sentence_idx": 10
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 6,
+      "name": "Schedule Matches and Referees",
+      "description": "Assign referees to leagues and automate match scheduling while synchronizing referee availability and restrictions.",
+      "participating_actors": [
+        "referee",
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "assign referees to leagues",
+          "original_sentence": "As the IFA, I want to be able to assign referees to different leagues so that we can plan the schedules.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "ifa",
+          "action": "automate match scheduling",
+          "original_sentence": "As the IFA, I want to automate match scheduling based on policies and stakeholder restrictions, so that we avoid biases and do not have to do rescheduling.",
+          "sentence_idx": 5
+        },
+        {
+          "actor": "referee",
+          "action": "synchronize referee schedule",
+          "original_sentence": "As a referee, I want to sync my schedule and restrictions with the system, so that I am not double-booked.",
+          "sentence_idx": 19
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 7,
+      "name": "Manage Game Schedules and Events",
+      "description": "Provide access to game schedules and support real-time recording of game events by referees.",
+      "participating_actors": [
+        "referee",
+        "fan",
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "fan",
+          "action": "view game schedules",
+          "original_sentence": "As a fan, I want to be able to see the game schedules in the system so that I know when games are on.",
+          "sentence_idx": 26
+        },
+        {
+          "actor": "ifa",
+          "action": "record game events",
+          "original_sentence": "As the IFA, I want to record game event data digitally in real-time through referees, so that all the information we get is accurate, reliable, and true.",
+          "sentence_idx": 4
+        },
+        {
+          "actor": "referee",
+          "action": "record game events",
+          "original_sentence": "As a referee, I want to be able to record game events efficiently in real-time so that I do not have to waste any time.",
+          "sentence_idx": 18
+        }
+      ],
+      "relationships": [
+        {
+          "type": "extend",
+          "target_use_case": "schedule matches and referees"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Manage Stakeholder Communication",
+      "description": "Support system-based communication and notifications among stakeholders and manage team-related social media presence.",
+      "participating_actors": [
+        "team",
+        "referee",
+        "ifa"
+      ],
+      "user_stories": [
+        {
+          "actor": "ifa",
+          "action": "communicate with stakeholders",
+          "original_sentence": "As the IFA, I want to be able to communicate with all stakeholders through the system about things such as game cancellations so that everyone knows immediately at the same time what is happening.",
+          "sentence_idx": 9
+        },
+        {
+          "actor": "team",
+          "action": "communicate with stakeholders",
+          "original_sentence": "As a team, I want to be able to communicate with other stakeholders through the system so that we do not have to use external communication methods.",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "referee",
+          "action": "receive match notifications",
+          "original_sentence": "As a referee, I want to receive notifications about cancellations and rescheduling so that I can reschedule my plans.",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "referee",
+          "action": "communicate with stakeholders",
+          "original_sentence": "As a referee, I want to be able to communicate with other stakeholders in the system so that I do not have to waste time finding how to contact different people.",
+          "sentence_idx": 21
+        },
+        {
+          "actor": "team",
+          "action": "create team social media page",
+          "original_sentence": "As a team, I want to be able to create our own social media page for the team so that we can create personal content.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "team",
+          "action": "create player social media pages",
+          "original_sentence": "As a team, I want to be able to create social media pages for our different players so that they can keep in touch with the fans.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "team",
+          "action": "create coach social media pages",
+          "original_sentence": "As a team, I want to be able to create social media pages for our different coaches so that they can keep in touch with the fans.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "team",
+          "action": "manage team social media page",
+          "original_sentence": "As a team, I want to be able to manage our own social media page so that we can update our fans about what they find important.",
+          "sentence_idx": 14
+        },
+        {
+          "actor": "team",
+          "action": "assign social media manager",
+          "original_sentence": "As a team, I want to be able to pick a manager for a social media so that we are able to handle the management of our content.",
+          "sentence_idx": 16
+        }
+      ],
+      "relationships": []
+    }
+  ]
+}

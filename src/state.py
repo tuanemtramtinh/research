@@ -92,6 +92,15 @@ class UsecaseRefinementResponse(BaseModel):
     )
 
 
+class NormalizedUserStoriesResponse(BaseModel):
+    """Response from LLM normalizing user stories to standard form."""
+
+    sentences: List[str] = Field(
+        description="List of normalized sentences in order. Each must be: "
+        "'As a/an/the <actor>, I want to <goal> so that <benefit>'."
+    )
+
+
 class UseCaseRelationship(BaseModel):
     type: str = Field(description="Relationship type, e.g. 'include' or 'extend'")
     target_use_case: str = Field(description="Target use case name")

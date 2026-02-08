@@ -1,0 +1,556 @@
+{
+  "requirement_text": "As a doctor, I want to be able to write prescriptions for patients so that I can provide appropriate medication.\nAs a doctor, I want to be able to automatically transfer prescriptions to pharmacy information systems so that prescriptions can be processed efficiently.\nAs a patient, I want to be able to view prescriptions written by doctors so that I can use them as a reference when visiting a pharmacy.\nAs a pharmacist, I want to be able to view transferred prescriptions so that I know what medication patients need.\nAs a patient, I want to be able to edit my personal information online so that my information is up to date.\nAs a system administrator, I want to store all data in a central database, so that discrepancies between departments are reduced.\nAs a system administrator, I want to integrate electronic medical records with the management system, so that patient medical information is digitally available.\nAs a doctor, I want to be able to view a patient’s medical history so that I can make informed medical decisions.\nAs a doctor, I want to be able to view a patient’s personal information so that I can correctly identify and treat the patient.\nAs a nurse, I want to be able to view a patient’s medical history so that I can support medical treatment.\nAs a nurse, I want to be able to view a patient’s personal information so that I can correctly identify patients.\nAs a nurse, I want to be able to record notes about patients so that patient care information is documented.\nAs a receptionist, I want to be able to view a patient’s electronic medical record so that I have the information needed to contact the patient.\nAs a receptionist, I want to be able to schedule appointments so that patient visits can be organized.\nAs a patient, I want to be able to schedule appointments online on a personal computer so that I can arrange visits conveniently.\nAs a doctor, I want to sync data from mobile devices with electronic medical records, so that data collected on mobile devices is stored centrally.\nAs a patient, I want to be able to request new prescriptions through online appointment scheduling so that I can manage my medication remotely.\nAs a systems analyst, I want to collect clinical data, so that prescriptive and predictive analytics can be performed.\nAs a systems analyst, I want to have access to collected clinical data so that prescriptive and predictive analytics can be performed.\nAs a systems analyst, I want to be able to view bed occupancy data so that analytics can be performed on hospital capacity.\nAs a systems analyst, I want to be able to view room scheduling data so that analytics can be performed.\nAs a systems analyst, I want to be able to view employee schedules so that predictive analytics can be used to estimate staffing needs.\nAs a system administrator, I want to anonymize all data viewed by systems analysts, so that patient privacy is ensured.\nAs a system administrator, I want to implement GDPR standards within the system, so that stored data is protected.\nAs a doctor, I want to restrict patients from viewing information that is not intended for them, so that security risks are minimized.\nAs a system administrator, I want to be able to restrict system components from being viewed by patients so that unauthorized access is prevented.\nAs a system administrator, I want to be able to grant different access levels to system users so that functionalities can be restricted appropriately.\nAs a patient, I want to be able to access the parts of my electronic medical record that the hospital allows so that I can view my medical information.\nAs a patient, I want to be able to view my test results once they are available so that I am informed about my health status.\nAs a patient, I want to be able to access and view my electronic medical record on a mobile device so that I can view my data anywhere.\nAs a patient, I want to be able to schedule appointments on a mobile device so that I can manage appointments conveniently.\nAs a patient, I want to be able to request new prescriptions on a mobile device so that I can manage my medication remotely.\nAs a patient, I want to be able to view prescriptions on a mobile device so that I can access them anywhere.\nAs a doctor, I want to be able to use the hospital management system on a mobile device so that I can access the system regardless of my location.\nAs a doctor, I want to have access to the same functionalities on a mobile device as on a personal computer so that my workflow is consistent.\nAs a systems analyst, I want to record appointment start and end times, so that the average appointment duration can be calculated.\nAs a system administrator, I want to limit system access to authorized users only, so that patient data is protected.\nAs a system administrator, I want to require users to log in to personal accounts, so that access can be controlled.\nAs a doctor, I want to migrate data from old management systems to the new system, so that no medical data is lost.\nAs a nurse, I want to migrate data from old management systems to the new system, so that no medical data is lost.",
+  "actors": [
+    {
+      "actor": "doctor",
+      "sentence_idx": [
+        0,
+        1,
+        7,
+        8,
+        15,
+        24,
+        33,
+        34,
+        38
+      ]
+    },
+    {
+      "actor": "patient",
+      "sentence_idx": [
+        2,
+        4,
+        14,
+        16,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "actor": "pharmacist",
+      "sentence_idx": [
+        3
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "sentence_idx": [
+        5,
+        6,
+        22,
+        23,
+        25,
+        26,
+        36,
+        37
+      ]
+    },
+    {
+      "actor": "nurse",
+      "sentence_idx": [
+        9,
+        10,
+        11,
+        39
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "sentence_idx": [
+        12,
+        13
+      ]
+    },
+    {
+      "actor": "systems analyst",
+      "sentence_idx": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        35
+      ]
+    }
+  ],
+  "actor_aliases": [
+    {
+      "actor": "doctor",
+      "aliases": [],
+      "sentence_idx": [
+        0,
+        1,
+        7,
+        8,
+        15,
+        24,
+        33,
+        34,
+        38
+      ]
+    },
+    {
+      "actor": "patient",
+      "aliases": [],
+      "sentence_idx": [
+        2,
+        4,
+        14,
+        16,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "actor": "pharmacist",
+      "aliases": [],
+      "sentence_idx": [
+        3
+      ]
+    },
+    {
+      "actor": "system administrator",
+      "aliases": [],
+      "sentence_idx": [
+        5,
+        6,
+        22,
+        23,
+        25,
+        26,
+        36,
+        37
+      ]
+    },
+    {
+      "actor": "nurse",
+      "aliases": [],
+      "sentence_idx": [
+        9,
+        10,
+        11,
+        39
+      ]
+    },
+    {
+      "actor": "receptionist",
+      "aliases": [],
+      "sentence_idx": [
+        12,
+        13
+      ]
+    },
+    {
+      "actor": "systems analyst",
+      "aliases": [],
+      "sentence_idx": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        35
+      ]
+    }
+  ],
+  "use_cases": [
+    {
+      "id": 1,
+      "name": "Manage Prescriptions",
+      "description": "Create, transfer, request, and view patient prescriptions across doctors, patients, and pharmacists.",
+      "participating_actors": [
+        "doctor",
+        "patient",
+        "pharmacist"
+      ],
+      "user_stories": [
+        {
+          "actor": "doctor",
+          "action": "write prescriptions",
+          "original_sentence": "As a doctor, I want to be able to write prescriptions for patients so that I can provide appropriate medication.",
+          "sentence_idx": 0
+        },
+        {
+          "actor": "doctor",
+          "action": "transfer prescriptions",
+          "original_sentence": "As a doctor, I want to be able to automatically transfer prescriptions to pharmacy information systems so that prescriptions can be processed efficiently.",
+          "sentence_idx": 1
+        },
+        {
+          "actor": "patient",
+          "action": "view prescriptions",
+          "original_sentence": "As a patient, I want to be able to view prescriptions written by doctors so that I can use them as a reference when visiting a pharmacy.",
+          "sentence_idx": 2
+        },
+        {
+          "actor": "pharmacist",
+          "action": "view prescriptions",
+          "original_sentence": "As a pharmacist, I want to be able to view transferred prescriptions so that I know what medication patients need.",
+          "sentence_idx": 3
+        },
+        {
+          "actor": "patient",
+          "action": "request new prescriptions",
+          "original_sentence": "As a patient, I want to be able to request new prescriptions through online appointment scheduling so that I can manage my medication remotely.",
+          "sentence_idx": 16
+        },
+        {
+          "actor": "patient",
+          "action": "request new prescriptions",
+          "original_sentence": "As a patient, I want to be able to request new prescriptions on a mobile device so that I can manage my medication remotely.",
+          "sentence_idx": 31
+        },
+        {
+          "actor": "patient",
+          "action": "view prescriptions",
+          "original_sentence": "As a patient, I want to be able to view prescriptions on a mobile device so that I can access them anywhere.",
+          "sentence_idx": 32
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Manage Clinical Data Integration",
+      "description": "Store, integrate, synchronize, and migrate medical and system data into a central database.",
+      "participating_actors": [
+        "doctor",
+        "nurse",
+        "system administrator"
+      ],
+      "user_stories": [
+        {
+          "actor": "system administrator",
+          "action": "store system data",
+          "original_sentence": "As a system administrator, I want to store all data in a central database, so that discrepancies between departments are reduced.",
+          "sentence_idx": 5
+        },
+        {
+          "actor": "system administrator",
+          "action": "integrate electronic medical records",
+          "original_sentence": "As a system administrator, I want to integrate electronic medical records with the management system, so that patient medical information is digitally available.",
+          "sentence_idx": 6
+        },
+        {
+          "actor": "doctor",
+          "action": "synchronize device data",
+          "original_sentence": "As a doctor, I want to sync data from mobile devices with electronic medical records, so that data collected on mobile devices is stored centrally.",
+          "sentence_idx": 15
+        },
+        {
+          "actor": "doctor",
+          "action": "migrate legacy system data",
+          "original_sentence": "As a doctor, I want to migrate data from old management systems to the new system, so that no medical data is lost.",
+          "sentence_idx": 38
+        },
+        {
+          "actor": "nurse",
+          "action": "migrate legacy system data",
+          "original_sentence": "As a nurse, I want to migrate data from old management systems to the new system, so that no medical data is lost.",
+          "sentence_idx": 39
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Manage Data Security",
+      "description": "Enforce privacy, access control, GDPR compliance, and login requirements for patient and system data.",
+      "participating_actors": [
+        "doctor",
+        "system administrator"
+      ],
+      "user_stories": [
+        {
+          "actor": "system administrator",
+          "action": "anonymize analyst data",
+          "original_sentence": "As a system administrator, I want to anonymize all data viewed by systems analysts, so that patient privacy is ensured.",
+          "sentence_idx": 22
+        },
+        {
+          "actor": "system administrator",
+          "action": "implement gdpr standards",
+          "original_sentence": "As a system administrator, I want to implement GDPR standards within the system, so that stored data is protected.",
+          "sentence_idx": 23
+        },
+        {
+          "actor": "doctor",
+          "action": "restrict patient information access",
+          "original_sentence": "As a doctor, I want to restrict patients from viewing information that is not intended for them, so that security risks are minimized.",
+          "sentence_idx": 24
+        },
+        {
+          "actor": "system administrator",
+          "action": "restrict patient access to system components",
+          "original_sentence": "As a system administrator, I want to be able to restrict system components from being viewed by patients so that unauthorized access is prevented.",
+          "sentence_idx": 25
+        },
+        {
+          "actor": "system administrator",
+          "action": "manage user access levels",
+          "original_sentence": "As a system administrator, I want to be able to grant different access levels to system users so that functionalities can be restricted appropriately.",
+          "sentence_idx": 26
+        },
+        {
+          "actor": "system administrator",
+          "action": "limit system access",
+          "original_sentence": "As a system administrator, I want to limit system access to authorized users only, so that patient data is protected.",
+          "sentence_idx": 36
+        },
+        {
+          "actor": "system administrator",
+          "action": "require user login",
+          "original_sentence": "As a system administrator, I want to require users to log in to personal accounts, so that access can be controlled.",
+          "sentence_idx": 37
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": 4,
+      "name": "Manage Medical Records",
+      "description": "Record notes and access or view electronic medical records and patient medical history.",
+      "participating_actors": [
+        "patient",
+        "receptionist",
+        "nurse",
+        "doctor"
+      ],
+      "user_stories": [
+        {
+          "actor": "nurse",
+          "action": "record patient notes",
+          "original_sentence": "As a nurse, I want to be able to record notes about patients so that patient care information is documented.",
+          "sentence_idx": 11
+        },
+        {
+          "actor": "receptionist",
+          "action": "view electronic medical record",
+          "original_sentence": "As a receptionist, I want to be able to view a patient’s electronic medical record so that I have the information needed to contact the patient.",
+          "sentence_idx": 12
+        },
+        {
+          "actor": "patient",
+          "action": "access electronic medical record",
+          "original_sentence": "As a patient, I want to be able to access the parts of my electronic medical record that the hospital allows so that I can view my medical information.",
+          "sentence_idx": 27
+        },
+        {
+          "actor": "patient",
+          "action": "access electronic medical record",
+          "original_sentence": "As a patient, I want to be able to access and view my electronic medical record on a mobile device so that I can view my data anywhere.",
+          "sentence_idx": 29
+        },
+        {
+          "actor": "doctor",
+          "action": "view medical history",
+          "original_sentence": "As a doctor, I want to be able to view a patient’s medical history so that I can make informed medical decisions.",
+          "sentence_idx": 7
+        },
+        {
+          "actor": "nurse",
+          "action": "view medical history",
+          "original_sentence": "As a nurse, I want to be able to view a patient’s medical history so that I can support medical treatment.",
+          "sentence_idx": 9
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Manage Clinical Analytics Data",
+      "description": "Collect, access, and view clinical, occupancy, scheduling, and staffing data for analytics purposes.",
+      "participating_actors": [
+        "systems analyst"
+      ],
+      "user_stories": [
+        {
+          "actor": "systems analyst",
+          "action": "collect clinical data",
+          "original_sentence": "As a systems analyst, I want to collect clinical data, so that prescriptive and predictive analytics can be performed.",
+          "sentence_idx": 17
+        },
+        {
+          "actor": "systems analyst",
+          "action": "access clinical data",
+          "original_sentence": "As a systems analyst, I want to have access to collected clinical data so that prescriptive and predictive analytics can be performed.",
+          "sentence_idx": 18
+        },
+        {
+          "actor": "systems analyst",
+          "action": "view bed occupancy data",
+          "original_sentence": "As a systems analyst, I want to be able to view bed occupancy data so that analytics can be performed on hospital capacity.",
+          "sentence_idx": 19
+        },
+        {
+          "actor": "systems analyst",
+          "action": "view room scheduling data",
+          "original_sentence": "As a systems analyst, I want to be able to view room scheduling data so that analytics can be performed.",
+          "sentence_idx": 20
+        },
+        {
+          "actor": "systems analyst",
+          "action": "view employee schedules",
+          "original_sentence": "As a systems analyst, I want to be able to view employee schedules so that predictive analytics can be used to estimate staffing needs.",
+          "sentence_idx": 21
+        },
+        {
+          "actor": "systems analyst",
+          "action": "record appointment times",
+          "original_sentence": "As a systems analyst, I want to record appointment start and end times, so that the average appointment duration can be calculated.",
+          "sentence_idx": 35
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Schedule Appointments",
+      "description": "Create and manage patient appointments via receptionist and patient interfaces.",
+      "participating_actors": [
+        "patient",
+        "receptionist"
+      ],
+      "user_stories": [
+        {
+          "actor": "receptionist",
+          "action": "schedule appointments",
+          "original_sentence": "As a receptionist, I want to be able to schedule appointments so that patient visits can be organized.",
+          "sentence_idx": 13
+        },
+        {
+          "actor": "patient",
+          "action": "schedule appointments",
+          "original_sentence": "As a patient, I want to be able to schedule appointments online on a personal computer so that I can arrange visits conveniently.",
+          "sentence_idx": 14
+        },
+        {
+          "actor": "patient",
+          "action": "schedule appointments",
+          "original_sentence": "As a patient, I want to be able to schedule appointments on a mobile device so that I can manage appointments conveniently.",
+          "sentence_idx": 30
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "View Test Results",
+      "description": "Allow patients to access and view their medical test results.",
+      "participating_actors": [
+        "patient"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "view test results",
+          "original_sentence": "As a patient, I want to be able to view my test results once they are available so that I am informed about my health status.",
+          "sentence_idx": 28
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Access Hospital System",
+      "description": "Allow doctors to use hospital management system functionalities across devices.",
+      "participating_actors": [
+        "doctor"
+      ],
+      "user_stories": [
+        {
+          "actor": "doctor",
+          "action": "use hospital management system",
+          "original_sentence": "As a doctor, I want to be able to use the hospital management system on a mobile device so that I can access the system regardless of my location.",
+          "sentence_idx": 33
+        },
+        {
+          "actor": "doctor",
+          "action": "access hospital management functionalities",
+          "original_sentence": "As a doctor, I want to have access to the same functionalities on a mobile device as on a personal computer so that my workflow is consistent.",
+          "sentence_idx": 34
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Manage Personal Information",
+      "description": "View and update patient personal information for identification and care purposes.",
+      "participating_actors": [
+        "patient",
+        "nurse",
+        "doctor"
+      ],
+      "user_stories": [
+        {
+          "actor": "patient",
+          "action": "edit personal information",
+          "original_sentence": "As a patient, I want to be able to edit my personal information online so that my information is up to date.",
+          "sentence_idx": 4
+        },
+        {
+          "actor": "doctor",
+          "action": "view personal information",
+          "original_sentence": "As a doctor, I want to be able to view a patient’s personal information so that I can correctly identify and treat the patient.",
+          "sentence_idx": 8
+        },
+        {
+          "actor": "nurse",
+          "action": "view personal information",
+          "original_sentence": "As a nurse, I want to be able to view a patient’s personal information so that I can correctly identify patients.",
+          "sentence_idx": 10
+        }
+      ],
+      "relationships": [
+        {
+          "type": "include",
+          "target_use_case": "manage data security"
+        }
+      ]
+    }
+  ]
+}

@@ -9,8 +9,6 @@ if not ENV_FILE.exists():
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
-    PORT: int
     OPENAI_API_KEY: str
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")

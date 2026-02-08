@@ -1,0 +1,57 @@
+{
+  "use_case_name": "Record Clinical Encounter Data",
+  "unique_id": "UC-008",
+  "area": "Clinical Data Management",
+  "context_of_use": "This use case allows systems analysts and nurses to document clinical encounters effectively.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "systems analyst",
+    "nurse"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "systems analyst: Ensure accurate data for analytics",
+    "nurse: Document patient care information"
+  ],
+  "description": "Capture appointment times and patient notes to document care and support analytics.",
+  "triggering_event": "A clinical encounter occurs requiring documentation.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The systems analyst and nurse are logged into the hospital management system.",
+    "The patient encounter is scheduled."
+  ],
+  "postconditions": [
+    "Appointment times and patient notes are recorded in the system.",
+    "Data is available for analytics."
+  ],
+  "assumptions": [
+    "The hospital management system has the capability to record appointment times and patient notes.",
+    "The included use case 'manage clinical data collection' is implemented."
+  ],
+  "requirements_met": [
+    "The system shall allow appointment times to be recorded.",
+    "The system shall allow patient notes to be recorded."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on data retention policies for recorded notes."
+  ],
+  "main_flow": [
+    "1. systems analyst records appointment start and end times → system stores appointment duration data.",
+    "2. nurse records patient notes → system stores patient care information.",
+    "3. system confirms data has been successfully recorded."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the appointment times cannot be recorded, the system prompts the user to retry or cancel the action."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system fails to store appointment times, an error message is displayed and the user is notified."
+  ],
+  "information_for_steps": [
+    "1. appointment start time",
+    "2. appointment end time",
+    "3. patient notes"
+  ]
+}

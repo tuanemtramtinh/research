@@ -1,0 +1,56 @@
+{
+  "use_case_name": "Schedule Appointments",
+  "unique_id": "UC-011",
+  "area": "Appointment Management",
+  "context_of_use": "This use case allows patients and receptionists to create and manage patient appointments via various devices.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "receptionist",
+    "patient"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "Receptionist: Organize patient visits",
+    "Patient: Arrange visits conveniently"
+  ],
+  "description": "Allow patients and receptionists to create and manage patient appointments via various devices.",
+  "triggering_event": "A receptionist or patient initiates the appointment scheduling process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The user is logged into the system.",
+    "The user has the necessary permissions to schedule appointments."
+  ],
+  "postconditions": [
+    "An appointment is successfully scheduled and recorded in the system."
+  ],
+  "assumptions": [
+    "Patients have access to the system via personal computers or mobile devices.",
+    "Receptionists have the necessary training to use the scheduling system."
+  ],
+  "requirements_met": [
+    "The system shall allow receptionists to schedule appointments.",
+    "The system shall allow patients to schedule appointments online."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on appointment scheduling rules and constraints."
+  ],
+  "main_flow": [
+    "1. Receptionist selects 'Schedule Appointment' → System displays appointment scheduling interface.",
+    "2. Receptionist enters patient details and appointment time → System confirms appointment details.",
+    "3. Receptionist submits the appointment → System records the appointment and notifies the patient.",
+    "4. Patient selects 'Schedule Appointment' → System displays appointment scheduling interface.",
+    "5. Patient enters appointment details → System confirms appointment details.",
+    "6. Patient submits the appointment → System records the appointment and notifies the receptionist."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. User role (receptionist or patient)",
+    "2. Patient details (name, ID, etc.)",
+    "3. Appointment time and date",
+    "4. Confirmation of appointment details"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "use_case_name": "View Prescriptions",
+  "unique_id": "UC-005",
+  "area": "Prescription Management",
+  "context_of_use": "This use case allows patients and pharmacists to access and review electronic prescriptions and transferred prescription data.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "patient",
+    "pharmacist"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "patients want to access their prescriptions for reference",
+    "pharmacists want to know what medication patients need"
+  ],
+  "description": "This use case enables patients and pharmacists to view and review prescriptions to ensure proper medication management.",
+  "triggering_event": "A patient or pharmacist requests to view prescriptions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The user must be authenticated",
+    "The prescriptions must be available in the system"
+  ],
+  "postconditions": [
+    "The user successfully views the relevant prescriptions"
+  ],
+  "assumptions": [
+    "The system has a functioning database of prescriptions",
+    "Users have the necessary permissions to view prescriptions"
+  ],
+  "requirements_met": [
+    "The system shall allow patients to view their prescriptions",
+    "The system shall allow pharmacists to view transferred prescriptions"
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on data privacy measures for prescription viewing"
+  ],
+  "main_flow": [
+    "1. patient → System displays the list of prescriptions for the patient",
+    "2. pharmacist → System displays the list of transferred prescriptions for the pharmacist",
+    "3. patient → System allows the patient to select a prescription to view details",
+    "4. pharmacist → System allows the pharmacist to select a prescription to view details"
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the patient is using a mobile device, then the system displays the mobile-friendly version of the prescription list."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the user is not authenticated, then the system prompts the user to log in."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Prescription data",
+    "3. Selected prescription details"
+  ]
+}

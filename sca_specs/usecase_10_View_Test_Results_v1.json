@@ -1,0 +1,53 @@
+{
+  "use_case_name": "View Test Results",
+  "unique_id": "UC-010",
+  "area": "Patient Management",
+  "context_of_use": "This use case allows patients to access and review their laboratory and diagnostic test results online.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "patient"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "patient: access and review test results for health awareness"
+  ],
+  "description": "Enable patients to access and review their laboratory and diagnostic test results online.",
+  "triggering_event": "Patient requests to view test results.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Patient is logged into their account.",
+    "Test results are available in the system."
+  ],
+  "postconditions": [
+    "Patient successfully views their test results."
+  ],
+  "assumptions": [
+    "The patient has the necessary permissions to view their test results.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system shall allow patients to view their test results once they are available."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of test results available for viewing."
+  ],
+  "main_flow": [
+    "1. Patient requests to view test results → System displays available test results.",
+    "2. Patient selects a specific test result → System shows detailed information about the selected test result.",
+    "3. Patient reviews the test result → System allows patient to navigate back to the list of test results."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no test results are available, then the system informs the patient that no results are currently available."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the patient is not logged in, then the system prompts the patient to log in before accessing test results."
+  ],
+  "information_for_steps": [
+    "1. Patient ID",
+    "2. Test result ID",
+    "3. Test result details"
+  ]
+}
