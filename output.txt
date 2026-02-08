@@ -6,102 +6,98 @@ Loaded 22 user stories
 [ActorResult(actor='customer', aliases=[ActorAliasItem(alias='shopper', sentences=[1, 2, 3, 4, 5, 6])], sentence_idx=[0]), ActorResult(actor='user', aliases=[], sentence_idx=[7, 8, 9, 10, 11]), ActorResult(actor='admin', aliases=[ActorAliasItem(alias='system operator', sentences=[14])], sentence_idx=[12, 16, 17, 18, 19]), ActorResult(actor='manager', aliases=[], sentence_idx=[13]), ActorResult(actor='power user', aliases=[], sentence_idx=[15])]
 
 === USE CASES ===
-[1] Authenticate (actors: user)
-  description: Allow users to register, log in, and reset passwords to securely access their accounts.
+[1] Browse Products (actors: customer)
+  description: Allows customers to browse product listings by category and other criteria to discover items.
+  - As a shopper, I want to browse products by category, so that I can find items more easily.
+[2] Search Products (actors: customer)
+  description: Allows customers to search for products using keywords and filters to quickly locate items.
+  - As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
+[3] View Product Details (actors: customer)
+  description: Allows customers to view detailed product information such as descriptions, images, and specifications.
+  - As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
+[4] Manage Cart (actors: customer)
+  description: Allows customers to add, update, and remove products in their shopping cart prior to checkout.
+  - As a shopper, I want to add products to my cart, so that I can purchase multiple items at once.
+[5] Manage Profile (actors: user)
+  description: Allows users to update and maintain their account profile information and preferences.
+  - As a user, I want to update my profile information, so that my account details remain accurate.
+[6] Manage Users (actors: admin)
+  description: Allows admins to create, update, deactivate, and delete user accounts and manage access.
+  - As an admin, I want to be allowed to manage user accounts, so that I can control system access.
+[7] Configure System (actors: admin)
+  description: Allows admins to configure application settings and system parameters for customization and operation.
+  - As a system operator, I want to be permitted to configure system settings, so that the system can be customized.
+[8] Perform Bulk Operations (actors: power user)
+  description: Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.
+  - As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently.
+[9] Manage Products (actors: admin)
+  description: Allows admins to create and maintain the product catalog, including inventory levels and pricing.
+  - As an admin, I want to manage inventory levels, so that products do not go out of stock.
+  - As an admin, I want to create new products, so that they are available for customers to purchase.
+  - As an admin, I want to update product prices, so that pricing information stays current.
+[10] View Reports (actors: customer, user)
+  description: Allows customers and users to view report content and download or export reports for offline use.
+  - As a customer, I want to view and download reports so that I sleep
+  - As a customer, I want to view and download reports so that I sleep
+  - As a user, I want to be able to download reports, so that I can analyze my data offline.
+[11] View Sales Reports (actors: admin)
+  description: Allows admins to view sales performance reports and analytics to monitor business metrics.
+  - As an admin, I want to view sales reports, so that I can monitor business performance.
+[12] Checkout Order (actors: customer)
+  description: Allows customers to complete purchases by selecting payment and delivery options and finalizing orders.
+  - As a shopper, I want to checkout using multiple payment methods, so that I can choose the most convenient option.
+[13] Track Orders (actors: customer)
+  description: Allows customers to view order status and shipment tracking information until delivery.
+  - As a shopper, I want to track my orders, so that I know the delivery status.
+[14] Approve Orders (actors: manager)
+  description: Allows managers to review, approve, or reject orders as part of the order approval workflow.
+  - As a manager, I want to be authorized to approve orders, so that business processes are not delayed.
+[15] Authenticate (actors: user)
+  description: Allows users to register, log in, and reset passwords to securely access the system.
   - As a user, I want to register an account, so that I can access personalized features.
   - As a user, I want to log in to the system, so that I can securely access my account.
   - As a user, I want to reset my password, so that I can regain access if I forget it.
-[2] Manage Profile (actors: user)
-  description: Enable users to update and maintain their personal profile information.
-  - As a user, I want to update my profile information, so that my account details remain accurate.
-[3] View Reports (actors: admin, customer)
-  description: Allow admins and customers to view sales and other reports for analysis and monitoring.
-  - As a customer, I want to view and download reports so that I sleep
-  - As an admin, I want to view sales reports, so that I can monitor business performance.
-[4] Download Reports (actors: user, customer)
-  description: Enable users to download reports for offline review and analysis.
-  - As a customer, I want to view and download reports so that I sleep
-  - As a user, I want to be able to download reports, so that I can analyze my data offline.
-[5] Browse Products (actors: customer)
-  description: Allow customers to search, browse by category, and view product details to find items.
-  - As a shopper, I want to browse products by category, so that I can find items more easily.
-  - As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
-  - As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
-[6] Manage Products (actors: admin)
-  description: Allow admins to create products and update pricing so catalog and prices remain current.
-  - As an admin, I want to create new products, so that they are available for customers to purchase.
-  - As an admin, I want to update product prices, so that pricing information stays current.
-[7] Manage Cart (actors: customer)
-  description: Enable customers to add products to their shopping cart in preparation for purchase.
-  - As a shopper, I want to add products to my cart, so that I can purchase multiple items at once.
-[8] Checkout Order (actors: customer)
-  description: Allow customers to complete purchases using available payment and shipping options.
-  - As a shopper, I want to checkout using multiple payment methods, so that I can choose the most convenient option.
-[9] Track Orders (actors: customer)
-  description: Enable customers to view the delivery status and tracking information for their orders.
-  - As a shopper, I want to track my orders, so that I know the delivery status.
-[10] Manage User Accounts (actors: admin)
-  description: Allow admins to create, update, and control user accounts and access rights.
-  - As an admin, I want to be allowed to manage user accounts, so that I can control system access.
-[11] Approve Orders (actors: manager)
-  description: Allow managers to review and approve orders to progress business workflows.
-  - As a manager, I want to be authorized to approve orders, so that business processes are not delayed.
-[12] Configure System (actors: admin)
-  description: Enable administrators to modify system settings and configuration for customization.
-  - As a system operator, I want to be permitted to configure system settings, so that the system can be customized.
-[13] Manage Bulk Operations (actors: power user)
-  description: Allow power users to perform bulk actions (e.g., updates, imports) to increase efficiency.
-  - As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently.
-[14] Manage Inventory (actors: admin)
-  description: Allow admins to monitor and adjust inventory levels to prevent stockouts.
-  - As an admin, I want to manage inventory levels, so that products do not go out of stock.
 
 === SCENARIOS ===
 
 --- SCENARIO 1 ---
-Use case: [1] Authenticate
+Use case: [1] Browse Products
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
-- Missing/weak fields: alternative_flows, exception_flows, Alternative Flows, Exception Flows
+- Missing/weak fields: alternative_flows, exception_flows
 
 --- CONTENT ---
 {
-  "use_case_name": "Authenticate",
+  "use_case_name": "Browse Products",
   "unique_id": "UC-001",
-  "area": "User Account Management",
-  "context_of_use": "This use case allows users to register, log in, and reset passwords to securely access their accounts.",
-  "scope": "User Account System",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to browse product listings by category and other criteria to discover items.",
+  "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
-    "user"
+    "customer"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "user: access personalized features",
-    "user: securely access account"
+    "customer: wants to find items more easily"
   ],
-  "description": "Allow users to register, log in, and reset passwords to securely access their accounts.",
-  "triggering_event": "User initiates account registration, login, or password reset.",
+  "description": "Allows customers to browse product listings by category and other criteria to discover items.",
+  "triggering_event": "Customer initiates a browsing session.",
   "trigger_type": "External",
   "preconditions": [
-    "User has internet access.",
-    "User is on the account management interface."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "User account is created successfully.",
-    "User is logged in successfully.",
-    "User password is reset successfully."
+    "Customer can view a list of products by category."
   ],
   "assumptions": [
-    "User has valid information for registration or password reset."
+    "The customer has an active account to log in."
   ],
   "requirements_met": [
-    "The system shall allow users to register an account.",
-    "The system shall allow users to log in to their accounts.",
-    "The system shall allow users to reset their passwords."
+    "The system shall allow customers to browse products by category."
   ],
   "priority": "High",
   "risk": "Medium",
@@ -109,37 +105,216 @@ Use case: [1] Authenticate
     "None identified."
   ],
   "main_flow": [
-    "1. user registers account → system creates user account and confirms registration.",
-    "2. user logs in → system verifies credentials and grants access.",
-    "3. user resets password → system verifies identity and updates password."
+    "1. Customer selects a product category → System displays a list of products in that category.",
+    "2. Customer scrolls through the product listings → System updates the display with the selected products."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. User registration details.",
-    "2. User login credentials.",
-    "3. User identity verification information."
+    "1. Product category selection",
+    "2. Product listings"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
 --- SCENARIO 2 ---
-Use case: [2] Manage Profile
+Use case: [2] Search Products
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
-- Relevance: 82/100 (PASS)
-- Missing/weak fields: supporting_actors
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: alternative_flows, exception_flows
+
+--- CONTENT ---
+{
+  "use_case_name": "Search Products",
+  "unique_id": "UC-002",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to search for products using keywords and filters to quickly locate items within the e-commerce platform.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to quickly locate specific items"
+  ],
+  "description": "This use case enables customers to search for products by keyword to facilitate quick item location.",
+  "triggering_event": "Customer initiates a search for products.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the e-commerce system."
+  ],
+  "postconditions": [
+    "Customer receives a list of products matching the search criteria."
+  ],
+  "assumptions": [
+    "The customer has access to the internet and the e-commerce platform."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to search for products using keywords."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer enters a keyword into the search bar → System processes the search query.",
+    "2. System retrieves matching products from the database → System displays the list of products to the customer."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Search keyword",
+    "2. List of matching products"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 3 ---
+Use case: [3] View Product Details
+
+--- SCORES ---
+- Completeness: 85/100 (PASS)
+- Correctness: N/A
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: Alternative Flows, alternative_flows
+
+--- CONTENT ---
+{
+  "use_case_name": "View Product Details",
+  "unique_id": "UC-003",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to view detailed product information to make informed purchasing decisions.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to make informed purchasing decisions"
+  ],
+  "description": "Allows customers to view detailed product information such as descriptions, images, and specifications.",
+  "triggering_event": "Customer selects a product to view details.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system.",
+    "Product exists in the system."
+  ],
+  "postconditions": [
+    "Customer views detailed product information."
+  ],
+  "assumptions": [
+    "The customer has access to the internet.",
+    "The product details are available in the system."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to view product details."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None"
+  ],
+  "main_flow": [
+    "1. Customer selects a product → System displays detailed product information."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the customer browses products, then the customer selects a product from the list."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the product does not exist, then the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. Product ID",
+    "2. Customer ID"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 4 ---
+Use case: [4] Manage Cart
+
+--- SCORES ---
+- Completeness: 85/100 (PASS)
+- Correctness: N/A
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: alternative_flows, exception_flows
+
+--- CONTENT ---
+{
+  "use_case_name": "Manage Cart",
+  "unique_id": "UC-004",
+  "area": "Shopping",
+  "context_of_use": "This use case allows customers to manage their shopping cart by adding products before proceeding to checkout.",
+  "scope": "Shopping Cart System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to purchase multiple items easily"
+  ],
+  "description": "Allows customers to add products to their shopping cart prior to checkout.",
+  "triggering_event": "Customer decides to add a product to the cart.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into their account.",
+    "Customer is browsing products."
+  ],
+  "postconditions": [
+    "The selected product is added to the customer's shopping cart."
+  ],
+  "assumptions": [
+    "The customer has access to the product catalog.",
+    "The system is operational and can process cart updates."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer selects a product → System displays product details.",
+    "2. Customer clicks 'Add to Cart' → System adds the product to the shopping cart and confirms the action."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Confirmation message"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 5 ---
+Use case: [5] Manage Profile
+
+--- SCORES ---
+- Completeness: 85/100 (PASS)
+- Correctness: N/A
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: Alternative Flows, Exception Flows
 
 --- CONTENT ---
 {
   "use_case_name": "Manage Profile",
-  "unique_id": "UC-002",
+  "unique_id": "UC-005",
   "area": "User Account Management",
-  "context_of_use": "This use case allows users to update and maintain their personal profile information within the system.",
-  "scope": "User Profile Management System",
+  "context_of_use": "This use case allows users to update and maintain their account profile information and preferences within the system.",
+  "scope": "User Account Management System",
   "level": "User-goal",
   "primary_actors": [
     "user"
@@ -152,262 +327,253 @@ Use case: [2] Manage Profile
   "triggering_event": "User initiates a request to update profile information.",
   "trigger_type": "External",
   "preconditions": [
-    "User is logged into the system."
+    "User is logged into the system.",
+    "User has valid account credentials."
   ],
   "postconditions": [
-    "User's profile information is updated successfully."
+    "User's profile information is updated successfully.",
+    "User receives confirmation of the update."
   ],
   "assumptions": [
-    "User has valid login credentials to access the profile update feature."
+    "User has previously authenticated their account."
   ],
   "requirements_met": [
-    "The system shall allow users to update their profile information."
+    "The system shall allow users to update their profile information.",
+    "The system shall authenticate users before allowing profile updates."
   ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "None"
-  ],
-  "main_flow": [
-    "1. User requests to update profile information → System prompts for authentication.",
-    "2. User provides authentication credentials → System verifies credentials.",
-    "3. User submits updated profile information → System updates the profile information."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the user is not authenticated, the system redirects the user to the login page."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If the authentication fails, the system displays an error message and prompts the user to try again."
-  ],
-  "information_for_steps": [
-    "1. User credentials",
-    "2. Updated profile information"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 3 ---
-Use case: [3] View Reports
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 87/100 (PASS)
-- Missing/weak fields: Clarification on the types of reports available for viewing.
-
---- CONTENT ---
-{
-  "use_case_name": "View Reports",
-  "unique_id": "UC-003",
-  "area": "Reporting",
-  "context_of_use": "This use case allows both admins and customers to view and download reports for analysis and monitoring.",
-  "scope": "Reporting System",
-  "level": "User-goal",
-  "primary_actors": [
-    "customer",
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "customer: Access to reports for personal analysis",
-    "admin: Ability to monitor business performance through sales reports"
-  ],
-  "description": "This use case enables customers and admins to view and download reports for analysis and monitoring purposes.",
-  "triggering_event": "The user requests to view reports.",
-  "trigger_type": "External",
-  "preconditions": [
-    "The user must be authenticated."
-  ],
-  "postconditions": [
-    "The user successfully views and downloads the requested reports."
-  ],
-  "assumptions": [
-    "The user has the necessary permissions to view reports."
-  ],
-  "requirements_met": [
-    "The system shall allow users to view and download reports.",
-    "The system shall authenticate users before allowing access to reports."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of reports available for viewing."
-  ],
-  "main_flow": [
-    "1. customer/admin requests to view reports → System prompts for authentication.",
-    "2. customer/admin provides authentication credentials → System verifies credentials.",
-    "3. System grants access to reports → customer/admin views available reports.",
-    "4. customer/admin selects a report to download → System processes the download request.",
-    "5. System provides the report for download → customer/admin successfully downloads the report."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the user is not authenticated, the system redirects to the login page."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If authentication fails, the system displays an error message and prompts for re-entry of credentials."
-  ],
-  "information_for_steps": [
-    "1. User credentials",
-    "2. Authentication status",
-    "3. List of available reports",
-    "4. Selected report",
-    "5. Download status"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 4 ---
-Use case: [4] Download Reports
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: outstanding_issues
-
---- CONTENT ---
-{
-  "use_case_name": "Download Reports",
-  "unique_id": "UC-004",
-  "area": "Reporting",
-  "context_of_use": "This use case allows users to download reports for offline review and analysis.",
-  "scope": "Report Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "user",
-    "customer"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "user: access to reports",
-    "customer: ability to analyze data offline"
-  ],
-  "description": "Enable users to download reports for offline review and analysis.",
-  "triggering_event": "User requests to download a report.",
-  "trigger_type": "External",
-  "preconditions": [
-    "User is authenticated.",
-    "User has access to reports."
-  ],
-  "postconditions": [
-    "Report is downloaded successfully.",
-    "User can access the report offline."
-  ],
-  "assumptions": [
-    "Users have the necessary permissions to download reports.",
-    "Reports are available for download."
-  ],
-  "requirements_met": [
-    "The system shall allow users to download reports.",
-    "The system shall ensure that only authenticated users can download reports."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of reports available for download."
-  ],
-  "main_flow": [
-    "1. user → System requests authentication → System responds with authentication prompt.",
-    "2. user → System provides credentials → System verifies credentials.",
-    "3. user → System requests to download a report → System processes the request.",
-    "4. System → user confirms download → System initiates download.",
-    "5. System → user report is downloaded successfully."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 3): If the user chooses to view reports instead, the system displays the available reports."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If authentication fails, the system displays an error message and prompts the user to re-enter credentials."
-  ],
-  "information_for_steps": [
-    "1. User credentials",
-    "2. Report selection",
-    "3. Download status"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 5 ---
-Use case: [5] Browse Products
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
-
---- CONTENT ---
-{
-  "use_case_name": "Browse Products",
-  "unique_id": "UC-005",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to search, browse by category, and view product details to find items.",
-  "scope": "E-commerce System",
-  "level": "User-goal",
-  "primary_actors": [
-    "customer"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "customer: wants to find items easily"
-  ],
-  "description": "Allow customers to search, browse by category, and view product details to find items.",
-  "triggering_event": "Customer initiates a product search or browsing action.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Customer is logged into the system."
-  ],
-  "postconditions": [
-    "Customer can view a list of products based on search or category."
-  ],
-  "assumptions": [
-    "The customer has access to the internet.",
-    "The product database is populated."
-  ],
-  "requirements_met": [
-    "The system shall allow customers to browse products by category.",
-    "The system shall allow customers to search for products by keyword.",
-    "The system shall allow customers to view product details."
-  ],
-  "priority": "High",
-  "risk": "Medium",
+  "priority": "Medium",
+  "risk": "Low",
   "outstanding_issues": [
     "None identified."
   ],
   "main_flow": [
-    "1. Customer browses products by category → System displays products in the selected category.",
-    "2. Customer searches for products by keyword → System displays search results matching the keyword.",
-    "3. Customer views product details → System displays detailed information about the selected product."
+    "1. User requests to update profile information → System prompts for authentication.",
+    "2. User provides authentication credentials → System verifies credentials.",
+    "3. System confirms authentication → User submits updated profile information.",
+    "4. User submits updated profile information → System updates the profile and confirms the update."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. Category selection data",
-    "2. Search keyword data",
-    "3. Product ID for details"
+    "1. User credentials",
+    "2. Updated profile information",
+    "3. Confirmation of update"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
 --- SCENARIO 6 ---
-Use case: [6] Manage Products
+Use case: [6] Manage Users
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
+- Missing/weak fields: Alternative Flows
+
+--- CONTENT ---
+{
+  "use_case_name": "Manage Users",
+  "unique_id": "UC-006",
+  "area": "User Management",
+  "context_of_use": "This use case allows admins to manage user accounts to control system access.",
+  "scope": "User Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: control system access"
+  ],
+  "description": "Allows admins to create, update, deactivate, and delete user accounts and manage access.",
+  "triggering_event": "Admin initiates user management.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system."
+  ],
+  "postconditions": [
+    "User accounts are successfully managed."
+  ],
+  "assumptions": [
+    "Admin has the necessary permissions to manage user accounts."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to create user accounts.",
+    "The system shall allow admins to update user accounts.",
+    "The system shall allow admins to deactivate user accounts.",
+    "The system shall allow admins to delete user accounts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the specific user account attributes that can be managed."
+  ],
+  "main_flow": [
+    "1. Admin selects the option to manage user accounts → System displays user management interface.",
+    "2. Admin chooses to authenticate → System prompts for admin credentials.",
+    "3. Admin enters credentials → System verifies credentials.",
+    "4. Admin selects to create, update, deactivate, or delete a user account → System performs the selected action."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [
+    "EF-1 (from Step 3): If credentials are invalid, System displays an error message and prompts for re-entry."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. User account details",
+    "3. Action type (create, update, deactivate, delete)"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 7 ---
+Use case: [7] Configure System
+
+--- SCORES ---
+- Completeness: 90/100 (PASS)
+- Correctness: N/A
+- Relevance: 85/100 (PASS)
+- Missing/weak fields: outstanding_issues
+
+--- CONTENT ---
+{
+  "use_case_name": "Configure System",
+  "unique_id": "UC-007",
+  "area": "System Configuration",
+  "context_of_use": "This use case allows an admin to configure application settings and system parameters for customization and operation.",
+  "scope": "System Configuration Module",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Control system settings for effective operation."
+  ],
+  "description": "This use case enables admins to configure application settings and system parameters for customization and operation.",
+  "triggering_event": "Admin initiates the configuration process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to configure system settings."
+  ],
+  "postconditions": [
+    "System settings are updated according to admin specifications."
+  ],
+  "assumptions": [
+    "The admin has valid credentials to access the system.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to configure system settings.",
+    "The system shall authenticate admins before allowing configuration."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on specific settings available for configuration."
+  ],
+  "main_flow": [
+    "1. Admin initiates the configuration process → System prompts for authentication.",
+    "2. Admin provides authentication credentials → System verifies credentials.",
+    "3. System confirms successful authentication → Admin accesses configuration settings.",
+    "4. Admin modifies system settings → System saves the updated settings.",
+    "5. System confirms settings have been updated → Admin receives confirmation message."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the admin fails to authenticate, the system displays an error message and prompts for re-entry of credentials."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the system fails to verify credentials, the system displays an error message and denies access to configuration settings."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. Authentication status",
+    "3. Configuration settings data"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 8 ---
+Use case: [8] Perform Bulk Operations
+
+--- SCORES ---
+- Completeness: 82/100 (PASS)
+- Correctness: N/A
+- Relevance: 83/100 (PASS)
+- Missing/weak fields: Alternative Flows, Exception Flows
+
+--- CONTENT ---
+{
+  "use_case_name": "Perform Bulk Operations",
+  "unique_id": "UC-008",
+  "area": "Bulk Operations Management",
+  "context_of_use": "This use case allows power users to execute bulk actions to process many records efficiently.",
+  "scope": "Bulk Operations System",
+  "level": "User-goal",
+  "primary_actors": [
+    "power user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: Efficient processing of records"
+  ],
+  "description": "Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.",
+  "triggering_event": "Power user initiates a bulk operation.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Power user is authenticated."
+  ],
+  "postconditions": [
+    "Bulk operations are successfully executed."
+  ],
+  "assumptions": [
+    "The power user has the necessary permissions to perform bulk operations."
+  ],
+  "requirements_met": [
+    "The system shall allow power users to perform bulk operations efficiently."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of bulk operations supported."
+  ],
+  "main_flow": [
+    "1. Power user initiates authentication → System verifies user credentials.",
+    "2. Power user selects bulk operation type → System displays available options.",
+    "3. Power user provides necessary data for the operation → System processes the data.",
+    "4. System confirms successful execution of the bulk operation."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Selected bulk operation type",
+    "3. Data for the operation"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 9 ---
+Use case: [9] Manage Products
+
+--- SCORES ---
+- Completeness: 80/100 (PASS)
+- Correctness: N/A
+- Relevance: 82/100 (PASS)
 - Missing/weak fields: Alternative Flows, Exception Flows
 
 --- CONTENT ---
 {
   "use_case_name": "Manage Products",
-  "unique_id": "UC-006",
+  "unique_id": "UC-009",
   "area": "Product Management",
-  "context_of_use": "This use case allows admins to create and update products to ensure the catalog and prices remain current.",
+  "context_of_use": "This use case allows admins to manage the product catalog, including inventory levels and pricing.",
   "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -417,114 +583,191 @@ Use case: [6] Manage Products
   "stakeholders_and_interests": [
     "admin: Control product availability and pricing"
   ],
-  "description": "Allow admins to create products and update pricing so catalog and prices remain current.",
+  "description": "This use case enables admins to create and maintain the product catalog, ensuring accurate inventory levels and pricing.",
   "triggering_event": "Admin initiates product management actions.",
   "trigger_type": "External",
   "preconditions": [
     "Admin is authenticated and logged into the system."
   ],
   "postconditions": [
-    "Products are created or updated in the system."
+    "Product catalog is updated with new products, prices, and inventory levels."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to manage products."
+    "Admin has the necessary permissions to manage products."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
-    "The system shall allow admins to update product prices."
+    "The system shall allow admins to update product prices.",
+    "The system shall allow admins to manage inventory levels."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "Clarification on the specific fields required for product creation and updates."
   ],
   "main_flow": [
-    "1. Admin initiates product management → System prompts for authentication.",
-    "2. Admin authenticates → System verifies credentials.",
-    "3. Admin selects to create a product → System prompts for product details.",
-    "4. Admin enters product details → System saves the new product.",
-    "5. Admin selects to update product prices → System prompts for product selection.",
-    "6. Admin selects a product and enters new price → System updates the product price."
+    "1. Admin initiates authentication → System verifies admin credentials.",
+    "2. Admin creates a new product → System adds the product to the catalog.",
+    "3. Admin updates product prices → System updates the pricing information.",
+    "4. Admin manages inventory levels → System adjusts inventory accordingly."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Admin credentials",
-    "2. Authentication status",
-    "3. Product details",
-    "4. Product information",
-    "5. Selected product",
-    "6. New price"
+    "2. Product details",
+    "3. Price information",
+    "4. Inventory levels"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 7 ---
-Use case: [7] Manage Cart
+--- SCENARIO 10 ---
+Use case: [10] View Reports
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
-- Relevance: 82/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: Alternative Flows, Exception Flows
 
 --- CONTENT ---
 {
-  "use_case_name": "Manage Cart",
-  "unique_id": "UC-007",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to add products to their shopping cart in preparation for purchase.",
-  "scope": "Shopping Cart System",
+  "use_case_name": "View Reports",
+  "unique_id": "UC-010",
+  "area": "Reporting",
+  "context_of_use": "This use case allows customers and users to view report content and download or export reports for offline use.",
+  "scope": "Reporting System",
   "level": "User-goal",
   "primary_actors": [
-    "customer"
+    "customer",
+    "user"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to purchase multiple items easily"
+    "customer: wants to access reports for personal use",
+    "user: wants to analyze data offline"
   ],
-  "description": "Enable customers to add products to their shopping cart in preparation for purchase.",
-  "triggering_event": "Customer selects a product to add to the cart.",
+  "description": "This use case enables customers and users to view and download reports for offline analysis.",
+  "triggering_event": "The customer or user requests to view reports.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into their account.",
-    "Customer has selected at least one product."
+    "The customer or user is authenticated in the system.",
+    "Reports are available for viewing."
   ],
   "postconditions": [
-    "The selected product is added to the customer's shopping cart."
+    "The customer or user has successfully viewed and downloaded the reports."
   ],
   "assumptions": [
-    "The customer has a valid account.",
-    "The product is available for purchase."
+    "The system has the capability to generate and store reports.",
+    "The customer and user have the necessary permissions to access reports."
   ],
   "requirements_met": [
-    "The system shall allow customers to add products to their cart."
+    "The system shall allow customers to view reports.",
+    "The system shall allow users to download reports."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "Clarification on the types of reports available for viewing and downloading."
   ],
   "main_flow": [
-    "1. Customer selects a product → System adds the product to the shopping cart.",
-    "2. Customer views the shopping cart → System displays the updated cart contents."
+    "1. customer → System displays available reports.",
+    "2. customer → System allows customer to select a report to view.",
+    "3. customer → System displays the selected report content.",
+    "4. customer → System provides an option to download the report.",
+    "5. customer → System downloads the report for offline use.",
+    "6. user → System allows user to select a report to download.",
+    "7. user → System downloads the report for offline analysis."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. Product details",
-    "2. Shopping cart contents"
+    "1. Report list",
+    "2. Selected report",
+    "3. Report content",
+    "4. Download option",
+    "5. Downloaded report",
+    "6. User request for report",
+    "7. Downloaded report for user"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 8 ---
-Use case: [8] Checkout Order
+--- SCENARIO 11 ---
+Use case: [11] View Sales Reports
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
+- Correctness: N/A
+- Relevance: 90/100 (PASS)
+- Missing/weak fields: outstanding_issues
+
+--- CONTENT ---
+{
+  "use_case_name": "View Sales Reports",
+  "unique_id": "UC-011",
+  "area": "Sales Management",
+  "context_of_use": "This use case allows an admin to view sales performance reports and analytics to monitor business metrics.",
+  "scope": "Sales Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "admin: Monitor business performance"
+  ],
+  "description": "This use case enables admins to view sales reports to analyze business performance.",
+  "triggering_event": "Admin requests to view sales reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Admin is authenticated.",
+    "Admin has permission to view sales reports."
+  ],
+  "postconditions": [
+    "Admin successfully views the sales reports."
+  ],
+  "assumptions": [
+    "The admin has a valid account.",
+    "The system has up-to-date sales data."
+  ],
+  "requirements_met": [
+    "The system shall allow admins to view sales reports.",
+    "The system shall authenticate admins before accessing reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on report formats and data granularity."
+  ],
+  "main_flow": [
+    "1. Admin requests to view sales reports → System authenticates the admin.",
+    "2. Admin is authenticated → System retrieves sales reports.",
+    "3. Admin views sales reports → System displays the sales performance reports."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the admin is not authenticated, the system prompts for login credentials."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the system fails to retrieve sales reports, the system displays an error message."
+  ],
+  "information_for_steps": [
+    "1. Admin credentials",
+    "2. Sales report data",
+    "3. Display format for sales reports"
+  ]
+}
+
+--- VALIDATION: PASSED ---
+
+--- SCENARIO 12 ---
+Use case: [12] Checkout Order
+
+--- SCORES ---
+- Completeness: 83/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
 - Missing/weak fields: alternative_flows, exception_flows
@@ -532,9 +775,9 @@ Use case: [8] Checkout Order
 --- CONTENT ---
 {
   "use_case_name": "Checkout Order",
-  "unique_id": "UC-008",
+  "unique_id": "UC-012",
   "area": "E-commerce",
-  "context_of_use": "This use case allows customers to complete purchases using available payment and shipping options.",
+  "context_of_use": "This use case allows customers to complete purchases by selecting payment and delivery options and finalizing orders.",
   "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
@@ -542,22 +785,22 @@ Use case: [8] Checkout Order
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to complete purchases conveniently"
+    "customer: wants to choose the most convenient payment option"
   ],
-  "description": "Allow customers to complete purchases using available payment and shipping options.",
+  "description": "This use case enables customers to finalize their purchases by selecting payment and delivery options.",
   "triggering_event": "Customer initiates the checkout process.",
   "trigger_type": "External",
   "preconditions": [
     "Customer has items in the cart.",
-    "Customer is logged into their account."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "Customer successfully completes the purchase.",
-    "Order is recorded in the system."
+    "Order is successfully placed.",
+    "Customer receives confirmation of the order."
   ],
   "assumptions": [
-    "Customer has selected items to purchase.",
-    "Customer has a valid payment method."
+    "Customer has a valid payment method available.",
+    "Customer has selected delivery options."
   ],
   "requirements_met": [
     "The system shall allow customers to checkout using multiple payment methods."
@@ -568,174 +811,98 @@ Use case: [8] Checkout Order
     "Clarification on supported payment methods."
   ],
   "main_flow": [
-    "1. Customer initiates checkout → System displays available payment and shipping options.",
-    "2. Customer selects payment method → System processes the payment.",
-    "3. Customer confirms shipping details → System finalizes the order."
+    "1. Customer initiates checkout → System displays checkout options.",
+    "2. Customer selects payment method → System processes payment.",
+    "3. Customer selects delivery options → System confirms delivery details.",
+    "4. Customer finalizes order → System places the order and sends confirmation."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Payment method details",
-    "2. Shipping address",
-    "3. Order summary"
+    "2. Delivery options",
+    "3. Order confirmation details"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 9 ---
-Use case: [9] Track Orders
+--- SCENARIO 13 ---
+Use case: [13] Track Orders
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows
+- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
 
 --- CONTENT ---
 {
   "use_case_name": "Track Orders",
-  "unique_id": "UC-009",
+  "unique_id": "UC-013",
   "area": "Order Management",
-  "context_of_use": "This use case allows customers to view the delivery status and tracking information for their orders within the e-commerce system.",
-  "scope": "E-commerce System",
+  "context_of_use": "This use case allows customers to view order status and shipment tracking information until delivery.",
+  "scope": "Order Tracking System",
   "level": "User-goal",
   "primary_actors": [
     "customer"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: To know the delivery status of their orders."
+    "customer wants to know the delivery status of their orders."
   ],
-  "description": "This use case enables customers to track their orders and view delivery status information.",
-  "triggering_event": "Customer requests to track their orders.",
+  "description": "This use case enables customers to track their orders and view shipment status.",
+  "triggering_event": "Customer requests to track an order.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer must be logged into their account.",
-    "Customer must have placed at least one order."
+    "Customer has placed an order.",
+    "Customer is logged into their account."
   ],
   "postconditions": [
-    "Customer successfully views the delivery status and tracking information for their orders."
+    "Customer successfully views the order status and tracking information."
   ],
   "assumptions": [
-    "The customer has a valid account and has previously placed orders."
+    "The customer has access to the internet.",
+    "The order tracking system is operational."
   ],
   "requirements_met": [
-    "The system shall allow customers to track their orders.",
-    "The system shall provide delivery status information."
+    "The system shall allow customers to track their orders."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the specific tracking information to be displayed."
+    "Clarification on the types of tracking information provided."
   ],
   "main_flow": [
-    "1. Customer requests to track orders → System verifies customer authentication.",
-    "2. System retrieves order tracking information → System displays delivery status and tracking details to the customer."
+    "1. Customer requests to track an order → System displays the order tracking interface.",
+    "2. Customer selects the order to track → System retrieves and displays the current status and tracking information."
   ],
   "alternative_flows": [],
-  "exception_flows": [
-    "EF-1 (from Step 1): If the customer is not authenticated, the system prompts the customer to log in."
-  ],
+  "exception_flows": [],
   "information_for_steps": [
-    "1. Customer credentials",
-    "2. Order tracking information"
+    "1. Order ID",
+    "2. Customer account information",
+    "3. Tracking information"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 10 ---
-Use case: [10] Manage User Accounts
-
---- SCORES ---
-- Completeness: 90/100 (PASS)
-- Correctness: N/A
-- Relevance: 85/100 (PASS)
-- Missing/weak fields: outstanding_issues, outstanding issues
-
---- CONTENT ---
-{
-  "use_case_name": "Manage User Accounts",
-  "unique_id": "UC-010",
-  "area": "User Management",
-  "context_of_use": "This use case allows admins to create, update, and control user accounts and access rights within the system.",
-  "scope": "User Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: Control system access through user account management."
-  ],
-  "description": "This use case enables admins to manage user accounts effectively to ensure proper access control.",
-  "triggering_event": "Admin initiates the management of user accounts.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to manage user accounts."
-  ],
-  "postconditions": [
-    "User accounts are created, updated, or deleted as per admin actions.",
-    "Access rights for users are modified as required."
-  ],
-  "assumptions": [
-    "The admin has valid credentials to access the user management functionalities."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to create user accounts.",
-    "The system shall allow admins to update user account information.",
-    "The system shall allow admins to delete user accounts."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the specific permissions required for different user roles."
-  ],
-  "main_flow": [
-    "1. Admin initiates user account management → System displays user account management options.",
-    "2. Admin selects to create a new user account → System prompts for user details.",
-    "3. Admin enters user details and submits → System creates the user account and confirms creation.",
-    "4. Admin selects to update an existing user account → System displays current user account details.",
-    "5. Admin modifies user account details and submits → System updates the user account and confirms the update.",
-    "6. Admin selects to delete a user account → System prompts for confirmation.",
-    "7. Admin confirms deletion → System deletes the user account and confirms deletion."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): Admin selects to authenticate before managing user accounts → System prompts for authentication → Admin enters credentials → System verifies credentials and grants access to user account management."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 3): If user details are incomplete → System displays an error message indicating required fields."
-  ],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. User account details",
-    "3. Confirmation of user account creation",
-    "4. Existing user account details",
-    "5. Confirmation of user account update",
-    "6. User account to be deleted",
-    "7. Confirmation of user account deletion"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 11 ---
-Use case: [11] Approve Orders
+--- SCENARIO 14 ---
+Use case: [14] Approve Orders
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
-- Relevance: 83/100 (PASS)
-- Missing/weak fields: Clarification on the specific criteria for order approval., Outstanding issues
+- Relevance: 80/100 (PASS)
+- Missing/weak fields: Outstanding issues
 
 --- CONTENT ---
 {
   "use_case_name": "Approve Orders",
-  "unique_id": "UC-011",
+  "unique_id": "UC-014",
   "area": "Order Management",
-  "context_of_use": "This use case allows managers to review and approve orders to progress business workflows.",
+  "context_of_use": "This use case allows managers to review and approve or reject orders within the order approval workflow.",
   "scope": "Order Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -745,239 +912,110 @@ Use case: [11] Approve Orders
   "stakeholders_and_interests": [
     "manager: Ensure timely approval of orders to avoid delays in business processes."
   ],
-  "description": "This use case enables managers to approve orders, ensuring that business processes are not delayed.",
+  "description": "This use case enables managers to approve or reject orders, facilitating the order approval workflow.",
   "triggering_event": "Manager initiates the order approval process.",
   "trigger_type": "External",
   "preconditions": [
     "Manager is logged into the system.",
-    "Orders are available for approval."
+    "Orders are available for review."
   ],
   "postconditions": [
-    "Selected orders are approved and processed.",
-    "Order status is updated in the system."
+    "Selected orders are approved or rejected.",
+    "Order status is updated accordingly."
   ],
   "assumptions": [
-    "The manager has the necessary permissions to approve orders.",
-    "The system includes an authentication process."
+    "The manager has the necessary permissions to approve orders."
   ],
   "requirements_met": [
     "The system shall allow managers to approve orders.",
-    "The system shall authenticate managers before allowing order approval."
+    "The system shall update order status upon approval or rejection."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the specific criteria for order approval."
+    "Clarification needed on the criteria for order approval or rejection."
   ],
   "main_flow": [
-    "1. Manager initiates the order approval process → System displays pending orders for approval.",
-    "2. Manager selects an order to approve → System highlights the selected order details.",
-    "3. Manager confirms the approval of the order → System updates the order status to approved."
+    "1. Manager initiates the order approval process → System displays pending orders for review.",
+    "2. Manager selects an order to review → System presents order details.",
+    "3. Manager approves or rejects the order → System updates the order status accordingly."
   ],
   "alternative_flows": [
-    "AF-1 (from Step 1): If the manager is not authenticated, the system prompts for authentication before displaying pending orders."
+    "AF-1 (from Step 1): If no pending orders are available, the system informs the manager that there are no orders to review."
   ],
   "exception_flows": [
-    "EF-1 (from Step 3): If the order approval fails, the system displays an error message and retains the order status."
+    "EF-1 (from Step 3): If the system encounters an error while updating the order status, it notifies the manager of the failure."
   ],
   "information_for_steps": [
-    "1. Order details",
-    "2. Selected order",
-    "3. Approval confirmation"
+    "1. Order list",
+    "2. Selected order details",
+    "3. Order status"
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 12 ---
-Use case: [12] Configure System
+--- SCENARIO 15 ---
+Use case: [15] Authenticate
 
 --- SCORES ---
 - Completeness: 85/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
-- Missing/weak fields: outstanding_issues
+- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
 
 --- CONTENT ---
 {
-  "use_case_name": "Configure System",
-  "unique_id": "UC-012",
-  "area": "System Configuration",
-  "context_of_use": "This use case allows administrators to modify system settings and configuration for customization.",
-  "scope": "System Configuration Module",
+  "use_case_name": "Authenticate",
+  "unique_id": "UC-015",
+  "area": "User Management",
+  "context_of_use": "This use case allows users to securely access the system by registering, logging in, and resetting passwords.",
+  "scope": "User Authentication System",
   "level": "User-goal",
   "primary_actors": [
-    "admin"
+    "user"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Control system settings for effective management."
+    "user: access personalized features"
   ],
-  "description": "Enable administrators to modify system settings and configuration for customization.",
-  "triggering_event": "Admin initiates the configuration process.",
+  "description": "Allows users to register, log in, and reset passwords to securely access the system.",
+  "triggering_event": "User initiates account registration, login, or password reset.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is authenticated and authorized to configure system settings."
+    "User must have internet access.",
+    "User must have valid information for registration or login."
   ],
   "postconditions": [
-    "System settings are successfully modified and saved."
+    "User account is created successfully.",
+    "User is logged in to the system.",
+    "User password is reset successfully."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to access the configuration settings."
+    "User has a device capable of accessing the system.",
+    "User understands the registration and login process."
   ],
   "requirements_met": [
-    "The system shall allow administrators to configure system settings."
+    "The system shall allow users to register an account.",
+    "The system shall allow users to log in to their accounts.",
+    "The system shall allow users to reset their passwords."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on specific settings available for configuration."
+    "Clarification on password complexity requirements."
   ],
   "main_flow": [
-    "1. Admin initiates the configuration process → System prompts for authentication.",
-    "2. Admin provides authentication credentials → System verifies credentials.",
-    "3. Admin accesses configuration settings → System displays available settings.",
-    "4. Admin modifies desired settings → System saves the changes."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the admin is not authenticated, the system prompts for login."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If authentication fails, the system displays an error message and denies access."
-  ],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. Authentication status",
-    "3. Configuration settings",
-    "4. Modified settings"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 13 ---
-Use case: [13] Manage Bulk Operations
-
---- SCORES ---
-- Completeness: 75/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows
-
---- CONTENT ---
-{
-  "use_case_name": "Manage Bulk Operations",
-  "unique_id": "UC-013",
-  "area": "Bulk Operations Management",
-  "context_of_use": "This use case allows power users to perform bulk actions to increase efficiency in their operations.",
-  "scope": "Bulk Operations System",
-  "level": "User-goal",
-  "primary_actors": [
-    "power user"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "power user: Increase efficiency in handling operations."
-  ],
-  "description": "Allow power users to perform bulk actions (e.g., updates, imports) to increase efficiency.",
-  "triggering_event": "Power user initiates a request to manage bulk operations.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Power user is authenticated."
-  ],
-  "postconditions": [
-    "Bulk operations are successfully executed."
-  ],
-  "assumptions": [
-    "The power user has the necessary permissions to perform bulk operations.",
-    "The system has the capability to handle bulk operations."
-  ],
-  "requirements_met": [
-    "The system shall allow power users to manage bulk operations efficiently."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of bulk operations supported."
-  ],
-  "main_flow": [
-    "1. Power user requests to manage bulk operations → System verifies authentication.",
-    "2. System prompts power user to select bulk operation type → Power user selects the desired operation.",
-    "3. Power user submits the bulk operation request → System processes the request and executes the operation.",
-    "4. System confirms successful execution of the bulk operation → Power user receives confirmation."
+    "1. user registers account → system creates user account and confirms registration.",
+    "2. user logs in → system verifies credentials and grants access.",
+    "3. user resets password → system updates password and confirms reset."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. User credentials",
-    "2. Selected operation type",
-    "3. Operation request details"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 14 ---
-Use case: [14] Manage Inventory
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Clarification on specific inventory management features, outstanding_issues
-
---- CONTENT ---
-{
-  "use_case_name": "Manage Inventory",
-  "unique_id": "UC-014",
-  "area": "Inventory Management",
-  "context_of_use": "This use case allows admins to monitor and adjust inventory levels to prevent stockouts.",
-  "scope": "Inventory Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: Control inventory levels to prevent stockouts."
-  ],
-  "description": "Allow admins to monitor and adjust inventory levels to prevent stockouts.",
-  "triggering_event": "Admin initiates inventory management.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is authenticated."
-  ],
-  "postconditions": [
-    "Inventory levels are updated successfully."
-  ],
-  "assumptions": [
-    "Admin has the necessary permissions to manage inventory."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to manage inventory levels."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the specific inventory management features required."
-  ],
-  "main_flow": [
-    "1. Admin initiates inventory management → System prompts for authentication.",
-    "2. Admin provides authentication credentials → System verifies credentials.",
-    "3. Admin accesses inventory management interface → System displays current inventory levels.",
-    "4. Admin adjusts inventory levels → System updates inventory records."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If admin is not authenticated, then system denies access and prompts for login."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If authentication fails, then system displays an error message and prompts for re-entry of credentials."
-  ],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. Authentication status",
-    "3. Current inventory levels",
-    "4. Updated inventory levels"
+    "1. User registration details",
+    "2. User login credentials",
+    "3. User password reset information"
   ]
 }
 

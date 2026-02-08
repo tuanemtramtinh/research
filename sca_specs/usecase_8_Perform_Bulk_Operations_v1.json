@@ -1,50 +1,48 @@
 {
   "use_case_name": "Perform Bulk Operations",
   "unique_id": "UC-008",
-  "area": "User Management",
-  "context_of_use": "This use case allows power users to execute bulk actions to improve their efficiency in managing data.",
-  "scope": "User Management System",
+  "area": "Bulk Operations Management",
+  "context_of_use": "This use case allows power users to execute bulk actions to process many records efficiently.",
+  "scope": "Bulk Operations System",
   "level": "User-goal",
   "primary_actors": [
-    "user"
+    "power user"
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "power user: improve efficiency in data management"
+    "power user: Efficient processing of records"
   ],
-  "description": "Provide power users the ability to execute bulk actions (e.g., updates, imports, or deletions) to improve efficiency.",
-  "triggering_event": "User initiates a bulk operation.",
+  "description": "Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.",
+  "triggering_event": "Power user initiates a bulk operation.",
   "trigger_type": "External",
   "preconditions": [
-    "User is authenticated and has power user privileges."
+    "Power user is authenticated."
   ],
   "postconditions": [
-    "Bulk operations are successfully executed and reflected in the system."
+    "Bulk operations are successfully executed."
   ],
   "assumptions": [
-    "The user has the necessary permissions to perform bulk operations.",
-    "The system supports bulk operations functionality."
+    "The power user has the necessary permissions to perform bulk operations."
   ],
   "requirements_met": [
-    "The system shall allow power users to perform bulk operations to enhance efficiency."
+    "The system shall allow power users to perform bulk operations efficiently."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the types of bulk operations supported by the system."
+    "Clarification on the types of bulk operations supported."
   ],
   "main_flow": [
-    "1. User selects bulk operation type → System displays available bulk operation options.",
-    "2. User specifies the data for the bulk operation → System validates the input data.",
-    "3. User confirms the bulk operation → System executes the bulk operation and updates the system."
+    "1. Power user initiates authentication → System verifies user credentials.",
+    "2. Power user selects bulk operation type → System displays available options.",
+    "3. Power user provides necessary data for the operation → System processes the data.",
+    "4. System confirms successful execution of the bulk operation."
   ],
   "alternative_flows": [],
-  "exception_flows": [
-    "EF-1 (from Step 2): If the input data is invalid, then the system displays an error message and prompts the user to correct the data."
-  ],
+  "exception_flows": [],
   "information_for_steps": [
-    "1. Operation type",
-    "2. Input data",
-    "3. Confirmation of operation"
+    "1. User credentials",
+    "2. Selected bulk operation type",
+    "3. Data for the operation"
   ]
 }

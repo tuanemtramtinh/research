@@ -2,7 +2,7 @@
   "use_case_name": "Configure System",
   "unique_id": "UC-007",
   "area": "System Configuration",
-  "context_of_use": "This use case allows administrators to change system settings and configuration parameters to customize the system.",
+  "context_of_use": "This use case allows an admin to configure application settings and system parameters for customization and operation.",
   "scope": "System Configuration Module",
   "level": "User-goal",
   "primary_actors": [
@@ -10,42 +10,47 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Control system settings for customization"
+    "admin: Control system settings for effective operation."
   ],
-  "description": "Allow administrators to change system settings and configuration parameters.",
-  "triggering_event": "Admin requests to configure system settings.",
+  "description": "This use case enables admins to configure application settings and system parameters for customization and operation.",
+  "triggering_event": "Admin initiates the configuration process.",
   "trigger_type": "External",
   "preconditions": [
     "Admin is logged into the system.",
-    "Admin has the necessary permissions to configure settings."
+    "Admin has the necessary permissions to configure system settings."
   ],
   "postconditions": [
-    "System settings are updated according to the admin's configuration."
+    "System settings are updated according to admin specifications."
   ],
   "assumptions": [
-    "The admin has the required permissions to access configuration settings.",
+    "The admin has valid credentials to access the system.",
     "The system is operational and accessible."
   ],
   "requirements_met": [
-    "The system shall allow administrators to configure system settings."
+    "The system shall allow admins to configure system settings.",
+    "The system shall authenticate admins before allowing configuration."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define specific configuration parameters that can be modified."
+    "Clarification on specific settings available for configuration."
   ],
   "main_flow": [
-    "1. Admin requests to configure system settings → System displays configuration options.",
-    "2. Admin selects desired settings to change → System presents confirmation prompt.",
-    "3. Admin confirms changes → System updates the configuration settings."
+    "1. Admin initiates the configuration process → System prompts for authentication.",
+    "2. Admin provides authentication credentials → System verifies credentials.",
+    "3. System confirms successful authentication → Admin accesses configuration settings.",
+    "4. Admin modifies system settings → System saves the updated settings.",
+    "5. System confirms settings have been updated → Admin receives confirmation message."
   ],
-  "alternative_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the admin fails to authenticate, the system displays an error message and prompts for re-entry of credentials."
+  ],
   "exception_flows": [
-    "EF-1 (from Step 2): If the admin cancels the configuration request, then the system returns to the previous state without changes."
+    "EF-1 (from Step 3): If the system fails to verify credentials, the system displays an error message and denies access to configuration settings."
   ],
   "information_for_steps": [
-    "1. Configuration options",
-    "2. Selected settings",
-    "3. Confirmation status"
+    "1. Admin credentials",
+    "2. Authentication status",
+    "3. Configuration settings data"
   ]
 }

@@ -285,6 +285,10 @@ class ScaState(TypedDict, total=False):
     use_case_spec_json: Dict[str, Any]
     spec_version: int
 
+    # Optional: per-node model configuration (writer/judges/combiner)
+    # Example keys: "writer", "judge_1", "judge_2", "judge_3", "summarizer"
+    model_configs: Dict[str, Dict[str, Any]]
+
     # Optional: per-use-case reference file for Correctness evaluation
     reference_spec_path: str | None
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Any, Dict, List, Optional, Tuple
 
 from pathlib import Path
 
@@ -21,16 +21,63 @@ from ..state import (
 )
 
 
-def _get_model():
+_DEFAULT_MODEL_CONFIG: Dict[str, Any] = {
+    "provider": "openai",
+    "name": "gpt-4o-mini",
+    "temperature": 0,
+}
+
+# Cache initialized models so multiple nodes can reuse them.
+_MODEL_CACHE: Dict[Tuple[str, str, float], Any] = {}
+
+
+def _get_model(model_config: Optional[dict] = None):
+    """Return an initialized chat model, or None if not configured.
+
+    This is intentionally generic so different nodes (writer/judges/combiner)
+    can use different model configurations later.
+    """
+
     load_dotenv()
-    model_name = "gpt-4o-mini"
-    if not os.getenv("OPENAI_API_KEY"):
+
+    cfg: Dict[str, Any] = dict(_DEFAULT_MODEL_CONFIG)
+    if isinstance(model_config, dict):
+        # Allow per-node overrides like {"name": "gpt-4o", "temperature": 0.2}
+        cfg.update({k: v for k, v in model_config.items() if v is not None})
+
+    provider = str(cfg.get("provider") or "openai")
+    model_name = str(cfg.get("name") or "gpt-4o-mini")
+    temperature = float(
+        cfg.get("temperature") if cfg.get("temperature") is not None else 0
+    )
+
+    # Gate on required credentials for known providers.
+    if provider == "openai" and not os.getenv("OPENAI_API_KEY"):
         return None
+
+    cache_key = (provider, model_name, temperature)
+    cached = _MODEL_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+
     # Bias toward determinism.
     try:
-        return init_chat_model(model_name, model_provider="openai", temperature=0)
+        model = init_chat_model(model_name, model_provider=provider, temperature=temperature)
     except TypeError:
-        return init_chat_model(model_name, model_provider="openai")
+        model = init_chat_model(model_name, model_provider=provider)
+
+    _MODEL_CACHE[cache_key] = model
+    return model
+
+
+def _get_model_for(state: ScaState, key: str):
+    """Get model config from state['model_configs'][key], otherwise default."""
+
+    model_configs = state.get("model_configs")
+    cfg = None
+    if isinstance(model_configs, dict):
+        cfg = model_configs.get(key)
+    return _get_model(cfg)
 
 
 def _use_case_payload(use_case: UseCase) -> dict:
@@ -345,7 +392,7 @@ OUTPUT RULE (ABSOLUTE)
 
 
 def generate_use_case_spec_node(state: ScaState):
-    model = _get_model()
+    model = _get_model_for(state, "writer")
     use_case: UseCase = state.get("use_case")  # type: ignore[assignment]
     requirement_text = str(state.get("requirement_text") or "")
     actors = state.get("actors") or (use_case.participating_actors or [])
@@ -391,7 +438,7 @@ def generate_use_case_spec_node(state: ScaState):
 
 
 def regenerate_use_case_spec_node(state: ScaState):
-    model = _get_model()
+    model = _get_model_for(state, "writer")
     use_case: UseCase = state.get("use_case")  # type: ignore[assignment]
     requirement_text = str(state.get("requirement_text") or "")
     actors = state.get("actors") or (use_case.participating_actors or [])
@@ -915,9 +962,9 @@ Correctness rule:
 """
 
 
-def _judge_node(detector_name: str):
+def _judge_node(detector_name: str, *, model_key: str | None = None):
     def _fn(state: ScaState):
-        model = _get_model()
+        model = _get_model_for(state, model_key or detector_name)
         spec_obj = state.get("use_case_spec_json") or {}
         spec = json.dumps(spec_obj, ensure_ascii=False, indent=2)
         spec_version = int(state.get("spec_version") or 0)
@@ -1032,7 +1079,7 @@ def _judge_node(detector_name: str):
 
 
 def combiner_node(state: ScaState):
-    model = _get_model()
+    model = _get_model_for(state, "summarizer")
     spec_version = int(state.get("spec_version") or 0)
     judge_results = [
         r
@@ -1132,9 +1179,9 @@ def build_sca_graph():
 
     workflow = StateGraph(ScaState)
     workflow.add_node("generate_spec", generate_use_case_spec_node)
-    workflow.add_node("judge_1", _judge_node("judge_1"))
-    workflow.add_node("judge_2", _judge_node("judge_2"))
-    workflow.add_node("judge_3", _judge_node("judge_3"))
+    workflow.add_node("judge_1", _judge_node("judge_1", model_key="judge_1"))
+    workflow.add_node("judge_2", _judge_node("judge_2", model_key="judge_2"))
+    workflow.add_node("judge_3", _judge_node("judge_3", model_key="judge_3"))
     workflow.add_node("combine", combiner_node)
     workflow.add_node("regen_spec", regenerate_use_case_spec_node)
 
@@ -1168,6 +1215,7 @@ def run_sca_use_case(
     requirement_text: List[str],
     actors: List[str] | None = None,
     reference_spec_path: str | None = None,
+    model_configs: dict | None = None,
 ) -> ScenarioResult:
     app = build_sca_graph()
     out = app.invoke(
@@ -1180,6 +1228,14 @@ def run_sca_use_case(
             "judge_results": [],
             "validation": None,
             "reference_spec_path": reference_spec_path,
+            "model_configs": model_configs
+            or {
+                "writer": dict(_DEFAULT_MODEL_CONFIG),
+                "judge_1": dict(_DEFAULT_MODEL_CONFIG),
+                "judge_2": dict(_DEFAULT_MODEL_CONFIG),
+                "judge_3": dict(_DEFAULT_MODEL_CONFIG),
+                "summarizer": dict(_DEFAULT_MODEL_CONFIG),
+            },
         }
     )
     spec_json = out.get("use_case_spec_json") or {}
@@ -1307,6 +1363,8 @@ def run_sca(input_data: dict) -> List[ScenarioResult]:
                 actors_list.append(str(a.get("name")))
 
     results: List[ScenarioResult] = []
+    model_configs = input_data.get("model_configs")
+    model_configs_dict = model_configs if isinstance(model_configs, dict) else None
     for raw in raw_use_cases:
         if not isinstance(raw, dict):
             continue
@@ -1318,6 +1376,7 @@ def run_sca(input_data: dict) -> List[ScenarioResult]:
                 use_case=uc,
                 requirement_text=requirement_text,
                 actors=actors_list or None,
+                model_configs=model_configs_dict,
             )
         )
 

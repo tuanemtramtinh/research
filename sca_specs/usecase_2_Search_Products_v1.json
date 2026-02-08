@@ -1,0 +1,45 @@
+{
+  "use_case_name": "Search Products",
+  "unique_id": "UC-002",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to search for products using keywords and filters to quickly locate items within the e-commerce platform.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to quickly locate specific items"
+  ],
+  "description": "This use case enables customers to search for products by keyword to facilitate quick item location.",
+  "triggering_event": "Customer initiates a search for products.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the e-commerce system."
+  ],
+  "postconditions": [
+    "Customer receives a list of products matching the search criteria."
+  ],
+  "assumptions": [
+    "The customer has access to the internet and the e-commerce platform."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to search for products using keywords."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer enters a keyword into the search bar → System processes the search query.",
+    "2. System retrieves matching products from the database → System displays the list of products to the customer."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Search keyword",
+    "2. List of matching products"
+  ]
+}

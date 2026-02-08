@@ -1,0 +1,54 @@
+{
+  "use_case_name": "Approve Orders",
+  "unique_id": "UC-014",
+  "area": "Order Management",
+  "context_of_use": "This use case allows managers to review and approve or reject orders within the order approval workflow.",
+  "scope": "Order Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "manager: Ensure timely approval of orders to avoid delays in business processes."
+  ],
+  "description": "This use case enables managers to approve or reject orders, facilitating the order approval workflow.",
+  "triggering_event": "Manager initiates the order approval process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Manager is logged into the system.",
+    "Orders are available for review."
+  ],
+  "postconditions": [
+    "Selected orders are approved or rejected.",
+    "Order status is updated accordingly."
+  ],
+  "assumptions": [
+    "The manager has the necessary permissions to approve orders."
+  ],
+  "requirements_met": [
+    "The system shall allow managers to approve orders.",
+    "The system shall update order status upon approval or rejection."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification needed on the criteria for order approval or rejection."
+  ],
+  "main_flow": [
+    "1. Manager initiates the order approval process → System displays pending orders for review.",
+    "2. Manager selects an order to review → System presents order details.",
+    "3. Manager approves or rejects the order → System updates the order status accordingly."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no pending orders are available, the system informs the manager that there are no orders to review."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the system encounters an error while updating the order status, it notifies the manager of the failure."
+  ],
+  "information_for_steps": [
+    "1. Order list",
+    "2. Selected order details",
+    "3. Order status"
+  ]
+}
