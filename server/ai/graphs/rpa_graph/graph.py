@@ -102,6 +102,7 @@ def run_rpa(requirement_text: str) -> RpaState:
     """
     # sentences = requirement_text.split("\n")
     sentences = requirement_text
+    requirement_text = "\n".join(requirement_text)
     llm = _get_model()
     app = build_rpa_graph()
     out = app.invoke(
