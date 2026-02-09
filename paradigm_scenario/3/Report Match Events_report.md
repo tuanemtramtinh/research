@@ -1,0 +1,50 @@
+## 1. Use Case Name
+**Report Match Events**
+
+## 2. Description
+Facilitates referees to submit match event data via mobile, which updates the system automatically.
+
+## 3. Primary Actor
+**Referee**
+
+## 4. Problem Domain Context
+The IT system must enable secure user registration and authentication for all stakeholders, provide a role‑based dashboard for IFA administrators to view and manage leagues, teams, schedules, budgets, and referee assignments, support public, real‑time access to game, team, and league data, allow users to subscribe to and receive notifications about matches, tickets, and social media events, support multilingual interfaces and fast response times, facilitate referees’ mobile reporting of match events and automatic data updates, enable teams to post and comment on social media content within the application, allow IFA administrators to generate and view analytics from live referee data, and maintain a single, secure communication channel for all stakeholders while ensuring budgetary rules and scheduling constraints are enforced.
+
+## 5. Preconditions
+- Referee is registered and authenticated in the system.  
+- Referee has been assigned to the match via the scheduler.  
+- The mobile application is installed, connected to the internet, and has the latest version.  
+- Match is in a state that allows event reporting (e.g., not yet finished or paused).  
+
+## 6. Postconditions
+- Match event data is stored in the database with a timestamp and referee identifier.  
+- Live match data is refreshed for all subscribed stakeholders (fans, teams, administrators).  
+- Analytics dashboards are updated with new event metrics.  
+- Referee receives a confirmation notification.  
+
+## 7. Main Flow
+1. **Referee** opens the mobile application and navigates to the “Report Match Events” screen.  
+2. The system **authenticates** the referee’s session and verifies the current match assignment.  
+3. **Referee** selects the type of event (e.g., goal, card, substitution) from a predefined list.  
+4. **Referee** enters any additional details (player names, minute, description) and confirms the submission.  
+5. The mobile app **transmits** the event data to the backend via a secure REST/GraphQL API.  
+6. The backend **validates** the data, checks against schedule and rule constraints, and stores it in the database.  
+7. The system **broadcasts** the new event to all subscribed stakeholders using push notifications, websockets, and/or email.  
+8. **Referee** receives a visual confirmation and the event appears in the local match log.  
+
+## 8. Alternative Flows
+- **3a** *(Event type not applicable)*  
+  3a. **Referee** selects “Other” and provides a custom description.  
+- **4a** *(Missing mandatory details)*  
+  4a. The system prompts **Referee** to fill in the missing fields before allowing submission.  
+- **5a** *(Offline mode)*  
+  5a. The mobile app queues the event locally and retries transmission when connectivity is restored.  
+- **6a** *(Rule violation detected)*  
+  6a. The backend rejects the event, returns an error code, and the app displays a warning to the referee.  
+
+## 9. Exceptions
+1. **Authentication Failure** – If the session has expired, the system redirects the referee to the login screen and aborts the reporting process.  
+2. **Network Failure** – If the device cannot reach the backend, the event is stored locally and retried automatically; the referee is notified of the offline status.  
+3. **Validation Error** – If required data is missing or violates league rules, the system returns a detailed error message; the referee must correct the input.  
+4. **Duplicate Submission** – If the referee attempts to submit the same event twice (e.g., double tap), the system ignores the second request and logs a warning.  
+5. **Data Corruption** – If the backend detects corrupted data, it discards the event and logs the incident for audit purposes.

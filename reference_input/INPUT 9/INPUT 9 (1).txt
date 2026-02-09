@@ -1,0 +1,22 @@
+﻿{
+"use_case_name": "Manage Medical Record",
+"primary_actors": ["Patient", "Nurse", "UHOPE_Employee", "Doctor"],
+"preconditions": ["Actor is authenticated.", "Electronic Medical Record Database is accessible."],
+"postconditions": ["Medical record is viewed, updated, or synchronized."],
+"main_flow": [
+"1. Actor searches for a patient record.",
+"2. System retrieves and displays the medical file (history, test results, treatments).",
+"3. Actor views the shared patient information.",
+"4. Actor enters new patient information or medical data.",
+"5. System validates the data.",
+"6. System saves the updated record to the Electronic Medical Record Database (and synchronizes with National Database)."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Nurse Mobile View. 1. Nurse accesses the system via mobile phone. 2. Nurse scans patient ID. 3. System displays quick view (e.g., blood type). 4. Resume Step 4.",
+"AF-2 (from Step 4): Mobile Device Transfer. 1. Nurse uses a mobile hospital device. 2. Device automatically transfers gathered data to the patient's file. 3. System saves the data without manual entry. 4. Use Case ends.",
+"AF-3 (from Step 4): Doctor Edit. 1. Doctor selects to edit medical file (e.g., vaccine info). 2. Doctor inputs treatment details. 3. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Access Denied. 1. Doctor attempts to view a file of a patient not assigned to them. 2. System restricts access. 3. Use Case ends."
+]
+}

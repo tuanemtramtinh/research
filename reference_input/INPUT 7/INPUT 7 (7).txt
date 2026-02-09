@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Control Access to Medical Data",
+"primary_actors": ["Doctor", "Patient"],
+"preconditions": ["Actor has ownership or management rights over the data."],
+"postconditions": ["Access restrictions are applied."],
+"main_flow": [
+"1. Patient accesses settings to control data privacy.",
+"2. Patient specifies which healthcare professionals or roles can view their data.",
+"3. System updates the access control list for the patient's records.",
+"4. System confirms the restriction is active."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Doctor Limits Nurse Access. 1. Doctor selects a patient record. 2. Doctor restricts Nurse access to prevent accidental removal of important data. 3. Resume Step 3."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Conflict. 1. System detects a restriction that prevents essential care (e.g., blocking the treating doctor). 2. System warns the Actor. 3. Actor confirms or cancels."
+]
+}

@@ -2,7 +2,7 @@
   "use_case_name": "Approve Orders",
   "unique_id": "UC-006",
   "area": "Order Management",
-  "context_of_use": "This use case allows managers to review and authorize orders within the order management system.",
+  "context_of_use": "This use case allows managers to review and approve pending orders in the system to ensure timely processing.",
   "scope": "Order Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -12,41 +12,41 @@
   "stakeholders_and_interests": [
     "manager: Ensure timely approval of orders to avoid delays in business processes."
   ],
-  "description": "Enable managers to review and authorize orders to progress business workflow.",
+  "description": "This use case enables managers to approve pending orders, facilitating efficient business operations.",
   "triggering_event": "Manager initiates the order approval process.",
   "trigger_type": "External",
   "preconditions": [
-    "Manager is logged into the system.",
-    "Orders are available for approval."
+    "The manager is logged into the system.",
+    "There are pending orders awaiting approval."
   ],
   "postconditions": [
-    "Selected orders are approved and processed for fulfillment."
+    "The selected orders are approved and updated in the system."
   ],
   "assumptions": [
-    "The manager has the necessary permissions to approve orders.",
-    "The system has a mechanism to display orders pending approval."
+    "The manager has the necessary permissions to approve orders."
   ],
   "requirements_met": [
-    "The system shall allow managers to approve orders.",
-    "The system shall notify relevant parties upon order approval."
+    "The system shall allow managers to approve orders to prevent delays in business processes."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the notification process for order approvals."
+    "Clarification on the criteria for order approval."
   ],
   "main_flow": [
-    "1. Manager selects an order to approve → System displays order details.",
-    "2. Manager reviews the order details → System allows manager to approve or reject the order.",
-    "3. Manager approves the order → System updates order status to approved and notifies relevant parties."
+    "1. Manager selects pending orders → System displays the list of pending orders.",
+    "2. Manager reviews order details → System shows detailed information for the selected order.",
+    "3. Manager approves the order → System updates the order status to approved."
   ],
-  "alternative_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the manager finds issues with the order, they can reject the order, and the system updates the order status to rejected."
+  ],
   "exception_flows": [
-    "EF-1 (from Step 2): If the order details are incomplete, then the system prompts the manager to complete the required information."
+    "EF-1 (from Step 1): If there are no pending orders, the system displays a message indicating no orders are available for approval."
   ],
   "information_for_steps": [
-    "1. Order ID",
-    "2. Order details",
-    "3. Approval status"
+    "1. Pending orders list",
+    "2. Selected order details",
+    "3. Order status"
   ]
 }

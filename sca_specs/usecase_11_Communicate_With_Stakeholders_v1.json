@@ -1,0 +1,94 @@
+{
+  "use_case_name": "Communicate With Stakeholders",
+  "unique_id": "UC-011",
+  "area": "Stakeholder Communication and Collaboration",
+  "context_of_use": "Stakeholders use the system to exchange timely messages and information related to league activities so that all relevant parties are informed simultaneously through an internal communication channel.",
+  "scope": "IFA Stakeholder Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa",
+    "team",
+    "referee"
+  ],
+  "supporting_actors": [
+    "System Messaging Service"
+  ],
+  "stakeholders_and_interests": [
+    "IFA: Ensures that all stakeholders receive consistent and timely information about matters such as game cancellations and other league-related updates.",
+    "Teams: Want a centralized communication channel to contact other stakeholders without relying on external communication methods.",
+    "Referees: Want efficient access to stakeholder contacts and timely information without spending time searching for communication channels.",
+    "System Operator: Wants the communication functionality to operate reliably and scale with the number of users.",
+    "Fans: Indirectly benefit from accurate and timely information being communicated among stakeholders, which affects schedules and events."
+  ],
+  "description": "This use case describes how an authenticated stakeholder (IFA, team, or referee) sends and receives messages and information to and from other stakeholders through the system, ensuring that league-related communications such as game cancellations and other updates are distributed efficiently and simultaneously.",
+  "triggering_event": "A stakeholder decides to send information or a message to one or more other stakeholders through the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The stakeholder has valid access credentials registered in the system.",
+    "The system is online and capable of authenticating users.",
+    "The stakeholder has successfully established a network connection to the system."
+  ],
+  "postconditions": [
+    "The message composed by the initiating stakeholder is stored by the system.",
+    "The message is associated with the selected recipients within the system.",
+    "The identified recipients can access the sent message through the system.",
+    "A communication record exists in the system for potential auditing and traceability."
+  ],
+  "assumptions": [
+    "It is assumed that the system already provides an authentication capability referred to by the included use case \"authenticate\" and that this capability verifies user identity before access to communication features.",
+    "It is assumed that the term \"communicate\" refers to text-based messaging and system-delivered information exchange and does not imply voice or video capabilities.",
+    "It is assumed that all stakeholders who participate in this use case (ifa, team, referee) are represented as user accounts within the system.",
+    "It is assumed that basic message delivery status (such as availability of messages to recipients) is provided by the system, without guaranteeing real-time delivery confirmations.",
+    "It is assumed that recipient selection is limited to stakeholders that are already registered and visible in the system directory.",
+    "It is assumed that the system enforces existing access control and visibility rules that determine which stakeholders can communicate with each other; this use case does not introduce new authorization rules."
+  ],
+  "requirements_met": [
+    "The system shall allow the IFA user to send messages through the system to all relevant stakeholders, including content such as game cancellations, so that all stakeholders are informed at the same time.",
+    "The system shall allow a team user to send messages through the system to other stakeholders so that the team does not need to rely on external communication methods.",
+    "The system shall allow a referee user to send messages through the system to other stakeholders so that the referee does not have to spend additional time finding contact information.",
+    "The system shall provide a communication interface that enables authorized stakeholders to compose, address, and send messages to one or more other stakeholders within the system.",
+    "The system shall store messages and associate them with the sender and recipients so that they can be accessed later by the respective users.",
+    "The system shall ensure that only authenticated users can access the stakeholder communication functionality.",
+    "The system shall make newly sent messages available to the specified recipients without requiring the recipients to use external communication tools."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Policies governing which stakeholder roles are permitted to contact which other roles have not been specified.",
+    "Retention period and archival rules for stored communication records have not been defined.",
+    "Maximum allowed size and content type of messages have not been specified.",
+    "Requirements regarding encryption, privacy, and regulatory compliance for stakeholder communications are not yet defined.",
+    "Rules for handling system-wide broadcast messages versus targeted messages are not yet clarified."
+  ],
+  "main_flow": [
+    "1. Stakeholder (ifa, team, or referee) initiates access to the system → System invokes the included \"authenticate\" use case to verify the stakeholder's credentials and grants access upon successful authentication.",
+    "2. Authenticated stakeholder selects the communication function from the system interface → System displays the communication interface for composing and managing messages.",
+    "3. Stakeholder chooses to create a new message → System displays a message composition form including fields for recipients and message content.",
+    "4. Stakeholder selects one or more stakeholders as message recipients from the available list or search function → System records the selected recipients for the new message.",
+    "5. Stakeholder enters the message content related to league activities, such as game cancellations or other updates → System captures and temporarily holds the entered message content for confirmation.",
+    "6. Stakeholder reviews the recipients and message content and confirms sending → System validates the message data and prepares it for distribution.",
+    "7. System stores the message with its sender, recipients, timestamp, and content in the communication repository → System ensures the message is logically associated with each selected recipient's inbox or equivalent view.",
+    "8. System makes the message available in the appropriate message view for all specified recipients → Recipients, upon accessing their communication interface, can view the newly received message."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): Stakeholder chooses to send a message to all stakeholders of a given type (for example, all teams or all referees) where such a grouping is permitted by existing system rules → System selects all stakeholders that match the chosen group criteria as recipients, displays the expanded recipient list to the stakeholder for review, and then continues with Step 5.",
+    "AF-2 (from Step 5): Stakeholder decides to modify previously selected recipients while composing the message → System allows the stakeholder to update the recipient list, reflects the changes in the composition form, and then the flow continues with Step 6.",
+    "AF-3 (from Step 6): Stakeholder decides to save the composed message as a draft instead of sending it immediately → System stores the message as a draft associated with the stakeholder account and returns the stakeholder to the communication overview without executing Steps 7 and 8."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Authentication fails due to invalid credentials → System denies access to the communication functionality, displays an authentication error message, logs the failed attempt, and the use case terminates without further steps.",
+    "EF-2 (from Step 4): The stakeholder attempts to select recipients, but the system cannot retrieve the stakeholder list due to a system error or unavailable directory data → System displays an error notification indicating that recipients cannot be loaded, does not allow the message to be sent, and the stakeholder may cancel the operation; the use case instance ends without a sent message.",
+    "EF-3 (from Step 6): System validation detects missing required data, such as no recipients or empty message content, when the stakeholder attempts to send the message → System informs the stakeholder of the validation errors, highlights the missing or invalid fields, and returns the flow to Step 5 for correction without storing or distributing the message.",
+    "EF-4 (from Step 7): A storage failure occurs while the system attempts to persist the message → System reports that the message could not be saved, logs the failure for diagnostic purposes, does not make the message available to recipients, and the use case instance ends without successful communication."
+  ],
+  "information_for_steps": [
+    "1. User credentials, authentication token, user role.",
+    "2. User role, available communication options, navigation state.",
+    "3. Message identifier (temporary), message type, user session information.",
+    "4. Recipient identifiers, stakeholder roles, recipient selection criteria.",
+    "5. Message content text, optional subject or title, contextual information such as game or league identifiers when applicable.",
+    "6. Final recipient list, finalized message content, confirmation flag.",
+    "7. Persistent message identifier, sender identifier, recipient identifiers, timestamp, stored message content.",
+    "8. Recipient inbox references, message delivery metadata, message read-availability status."
+  ]
+}

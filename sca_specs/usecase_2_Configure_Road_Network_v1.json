@@ -1,0 +1,108 @@
+{
+  "use_case_name": "Configure Road Network",
+  "unique_id": "UC-002",
+  "area": "Urban Mobility Planning and Traffic Simulation Configuration",
+  "context_of_use": "The use case occurs when an urban mobility planner configures elements of the road network in a traffic simulation environment to modify speed limits, lane directions, reversible lanes, roundabouts, adaptive traffic lights, and road closures in order to review the effects of such measures on urban mobility.",
+  "scope": "Urban Mobility Planning Simulation System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Urban Mobility Planning Department",
+    "City Administration"
+  ],
+  "stakeholders_and_interests": [
+    "urban mobility planner: Wants to configure the road network efficiently and accurately in order to review and validate the effects of proposed measures on traffic and urban mobility.",
+    "Urban Mobility Planning Department: Requires consistent and traceable configuration of road network measures to support internal analysis and long-term planning.",
+    "City Administration: Requires that proposed road network measures can be simulated and evaluated prior to implementation to support informed decision-making.",
+    "Citizens and Road Users: Are indirectly affected by configured measures and therefore have an interest that the configuration reflects realistic and fair traffic management.",
+    "Environmental Stakeholders: Have an interest that configured road network measures can later be evaluated for environmental impacts such as emissions and noise."
+  ],
+  "description": "This use case allows the urban mobility planner to configure the simulated road network by adjusting speed limits, defining or modifying lane directions including reversible lanes, modeling roundabouts, configuring adaptive traffic lights, and closing roads, so that the planner can later review the effects of these measures within the Urban Mobility Planning Simulation System.",
+  "triggering_event": "The urban mobility planner decides to modify the simulated road network configuration to apply one or more traffic management measures.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Urban Mobility Planning Simulation System is operational and accessible.",
+    "The urban mobility planner is authenticated and authorized to modify road network configuration.",
+    "A base road network dataset is loaded into the Urban Mobility Planning Simulation System.",
+    "The road network elements to be configured are available in the current simulation scenario."
+  ],
+  "postconditions": [
+    "The selected road network elements are updated with the configured measures such as modified speed limits, lane directions, reversible lanes, roundabouts, adaptive traffic lights, and road closures.",
+    "The updated road network configuration is stored in the Urban Mobility Planning Simulation System and associated with the current simulation scenario.",
+    "The configured measures are available for subsequent simulation runs and analysis of their effects."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Simulation System already contains a digital representation of the road network including roads, lanes, intersections, and signalization compatible with configuration operations.",
+    "It is assumed that adjusting speed limits is performed by assigning numeric speed values to existing road segments or lane groups within the simulation system.",
+    "It is assumed that configuring reversible lanes is performed by specifying allowed traffic directions and direction-switching properties for defined lanes.",
+    "It is assumed that modeling roundabouts is performed by defining roundabout geometry and connections using existing junctions and road segments in the road network representation.",
+    "It is assumed that modeling adaptive traffic lights is performed by configuring control parameters and logic on existing traffic signal objects in the simulation system.",
+    "It is assumed that closing down roads is implemented by marking road segments or connections as unavailable for traffic within the simulation scenario.",
+    "It is assumed that the effects of the configured measures on congestion, emissions, or fairness are computed by other use cases or simulation processes and are not part of this configuration use case.",
+    "It is assumed that the urban mobility planner has the domain expertise to determine appropriate configuration values and that the system only validates them syntactically and structurally.",
+    "It is assumed that there is at least one active simulation scenario or solution context into which the configuration changes are saved.",
+    "It is assumed that relationships for this use case are empty, so no include or extend relationships need to be explicitly represented in the flows."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to adjust speed limits on selected road segments or lanes within the simulated road network so that the effects of the measure can be reviewed.",
+    "The system shall allow the urban mobility planner to configure reversible lanes including their traffic directions within the simulated road network so that the effects of the measure can be reviewed.",
+    "The system shall allow the urban mobility planner to model roundabouts in the simulated road network so that the effects of the measure can be reviewed.",
+    "The system shall allow the urban mobility planner to configure adaptive traffic lights within the simulated road network so that the effects of the measure can be reviewed.",
+    "The system shall allow the urban mobility planner to close down selected roads or road segments in the simulated road network so that the effects of the measure can be reviewed.",
+    "The system shall store all road network configuration changes as part of the current simulation scenario so that the resulting configuration can be used in subsequent analyses."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The level of spatial granularity for configuration operations (for example per road segment, lane, or corridor) is not specified and requires clarification.",
+    "The validation rules and permissible ranges for speed limit values, lane directions, and adaptive traffic light parameters are not defined and require policy and domain rule specification.",
+    "The required versioning or change-tracking behavior for road network configurations, including rollback or comparison of different configurations, is not specified and requires clarification.",
+    "The expected behavior when multiple planners attempt to modify the same road network elements concurrently is not defined and requires decision on concurrency handling.",
+    "The linkage between configured road network measures and subsequent simulation runs, including whether configurations are scenario-specific or global, requires explicit definition."
+  ],
+  "main_flow": [
+    "1. urban mobility planner selects the current simulation scenario and opens the road network configuration workspace → System displays the road network for the selected scenario with available configuration tools for roads, lanes, roundabouts, and traffic lights.",
+    "2. urban mobility planner selects one or more road segments or lane groups for which speed limits should be modified → System highlights the selected elements and displays the current speed limit values and editable input controls.",
+    "3. urban mobility planner enters new speed limit values and confirms the modification for the selected elements → System validates the entered values against basic format and range rules and updates the speed limits in the scenario configuration.",
+    "4. urban mobility planner selects one or more lanes to configure or adjust traffic directions, including potential reversible lanes → System highlights the selected lanes and displays their current direction configuration and related properties.",
+    "5. urban mobility planner specifies the desired lane directions and, where applicable, defines reversible lane properties and confirms the configuration → System validates the lane direction settings and updates the lane direction and reversible lane configuration in the scenario.",
+    "6. urban mobility planner selects an intersection area where a roundabout is to be modeled or modified → System displays the selected intersection area with current layout and provides roundabout modeling tools.",
+    "7. urban mobility planner defines or edits the roundabout layout and connections and confirms the roundabout configuration → System validates the topology of the roundabout and stores the updated roundabout structure in the road network configuration.",
+    "8. urban mobility planner selects one or more controlled intersections with traffic lights to apply adaptive traffic light behavior → System displays the current signal control settings and provides options to configure adaptive control parameters.",
+    "9. urban mobility planner defines adaptive traffic light parameters and control logic and confirms the configuration → System validates the adaptive traffic light configuration and stores the updated signal control parameters in the scenario.",
+    "10. urban mobility planner selects one or more roads or road segments to be closed for traffic → System highlights the selected roads and shows their current accessibility status.",
+    "11. urban mobility planner sets the closure status for the selected roads and confirms the change → System updates the accessibility status of the selected roads to closed within the scenario configuration.",
+    "12. urban mobility planner reviews a summary of all configured road network changes for the scenario and confirms saving the configuration → System saves the complete road network configuration changes to the current scenario and confirms successful completion of the configuration operation."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): The urban mobility planner decides to configure only lane directions and not speed limits at this time. The planner skips the selection of road segments for speed limit modification and proceeds directly to Step 4 to configure lane directions. The flow continues from Step 4 onward.",
+    "AF-2 (from Step 4): The urban mobility planner configures only reversible lane properties without changing existing fixed lane directions. The planner selects lanes already marked as reversible, adjusts only their reversible properties, and confirms. The system validates and updates the reversible lane configuration and the flow continues at Step 6.",
+    "AF-3 (from Step 6): The urban mobility planner decides to keep the existing roundabout or intersection layout unchanged. After viewing the intersection area, the planner cancels the roundabout editing operation. The system leaves the roundabout configuration unchanged and the flow continues at Step 8.",
+    "AF-4 (from Step 8): The urban mobility planner decides to leave existing fixed-time traffic lights unchanged. After opening the traffic light configuration, the planner closes the configuration dialog without changes. The system retains the existing traffic light configuration and the flow continues at Step 10.",
+    "AF-5 (from Step 10): The urban mobility planner decides to reopen a previously closed road instead of closing an open road. The planner selects the closed road and sets its status to open. The system updates the road accessibility status to open, and the flow continues at Step 12."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): The entered speed limit value violates system-defined validation rules such as allowed numeric range or format. The system rejects the modification, displays a validation error message, retains the previous speed limit values, and prompts the urban mobility planner to correct the input or cancel the speed limit modification before continuing with other configuration steps.",
+    "EF-2 (from Step 5): The configured lane directions or reversible lane settings result in an invalid or contradictory traffic flow topology. The system detects the inconsistency, displays an error description to the urban mobility planner, and does not apply the invalid lane configuration. The planner must adjust the configuration or cancel the lane configuration step before proceeding.",
+    "EF-3 (from Step 7): The defined roundabout layout results in an incomplete or disconnected network configuration, such as missing connections to required approach roads. The system identifies the invalid topology, informs the urban mobility planner, and discards the invalid roundabout modification while retaining the previous intersection configuration. The planner may correct the layout or cancel the roundabout editing before continuing.",
+    "EF-4 (from Step 9): The adaptive traffic light parameters fail system validation, for example due to inconsistent timing or rule definitions. The system reports the validation errors, does not apply the invalid adaptive configuration, and keeps the previous traffic light configuration. The planner must adjust the parameters or cancel the adaptive configuration step.",
+    "EF-5 (from Step 11): Closing the selected roads would isolate parts of the network in a way that violates predefined connectivity constraints. The system warns the urban mobility planner, prevents application of the closure to the affected roads, and maintains their previous status. The planner must adjust the closure selection or cancel the road closure operation before proceeding.",
+    "EF-6 (from Step 12): A system storage or connectivity error occurs while saving the road network configuration. The system reports that saving failed, leaves the scenario configuration in its last consistent stored state, and logs the error. The use case ends without successfully storing the latest configuration changes."
+  ],
+  "information_for_steps": [
+    "1. Simulation scenario identifier; road network overview data; user authorization context.",
+    "2. Selected road segment or lane identifiers; current speed limit values; selection metadata.",
+    "3. New speed limit values; validation rules; updated speed limit configuration records.",
+    "4. Selected lane identifiers; current direction and reversible properties.",
+    "5. Desired lane directions; reversible lane parameters; validated lane configuration data.",
+    "6. Intersection or junction identifiers; geometric layout data for potential roundabouts.",
+    "7. Roundabout geometry definition; connection mappings; topology validation results.",
+    "8. Traffic light or signal group identifiers; current control program parameters.",
+    "9. Adaptive control parameters; logic rules; updated signal control configuration.",
+    "10. Selected road or segment identifiers; current accessibility status values.",
+    "11. Road closure status flags; effective closure attributes within the scenario.",
+    "12. Summary list of configuration changes; timestamp; scenario configuration version or commit identifier."
+  ]
+}

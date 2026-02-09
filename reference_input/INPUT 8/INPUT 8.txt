@@ -1,0 +1,5 @@
+﻿check ứng với từng usecase => có tương ứng 1 scenario cho nó ko
+có đúng actor, usecae name ko ( CÓ THỂ CÓ NHÌU PRIMARY ACTOR)
+main flow có include ko
+alternative có extend ko
+pre, post,main,alternative, exception flow HOP LY ko

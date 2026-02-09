@@ -12,7 +12,7 @@
   "stakeholders_and_interests": [
     "admin: Control product availability and pricing"
   ],
-  "description": "Enables admins to create products, update product prices, and manage inventory levels.",
+  "description": "Enables admins to create products, update product prices, and maintain inventory levels.",
   "triggering_event": "Admin initiates product management tasks.",
   "trigger_type": "External",
   "preconditions": [
@@ -21,11 +21,11 @@
   ],
   "postconditions": [
     "Products are created or updated successfully.",
-    "Inventory levels are managed appropriately."
+    "Inventory levels are maintained."
   ],
   "assumptions": [
     "The admin has access to the product management interface.",
-    "The system has the capability to create, update, and manage products."
+    "The system is operational and accessible."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
@@ -35,24 +35,18 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification needed on the process for handling out-of-stock products."
+    "None identified."
   ],
   "main_flow": [
-    "1. Admin selects the option to create a product → System prompts for product details.",
-    "2. Admin enters product details and submits → System creates the product and confirms creation.",
-    "3. Admin selects the option to update product prices → System prompts for product selection and new price.",
-    "4. Admin selects a product and enters a new price → System updates the product price and confirms update.",
-    "5. Admin selects the option to manage inventory → System displays current inventory levels.",
-    "6. Admin adjusts inventory levels as needed → System updates inventory and confirms changes."
+    "1. Admin creates a new product → System saves the product and confirms creation.",
+    "2. Admin updates product prices → System updates the prices and confirms the update.",
+    "3. Admin manages inventory levels → System updates inventory and confirms the changes."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Product details",
-    "2. Confirmation of product creation",
-    "3. Product selection and new price",
-    "4. Confirmation of price update",
-    "5. Current inventory levels",
-    "6. Updated inventory levels"
+    "2. Price information",
+    "3. Inventory levels"
   ]
 }

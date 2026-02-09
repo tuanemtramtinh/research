@@ -1,0 +1,96 @@
+## Use Case Name
+**Generate Billing Data**
+
+---
+
+## Description
+Automatically generates billing data from appointment times and treatment codes, and sends invoices to patients within a specified window.
+
+---
+
+## Primary Actor
+**Staff** (UHOPE administrative or billing personnel)
+
+---
+
+## Problem Domain Context
+The system must provide a unified Electronic Medical Record Database that allows patients to securely view their own medical histories, test results and treatment details, while enabling authorized UHOPE staff, doctors, nurses, and receptionists to enter, edit, and search patient information only once and see only the records they are permitted to access; it must support appointment scheduling, including automatic approvals, cancellations, time‑adjustments, and integration with room and staff calendars; it must generate billing data automatically from appointment start/end times and treatment codes, and send invoices to patients within a specified window; it must offer a self‑service analytics portal for employees to query and analyze aggregated patient data; it must support mobile device integration for nurses to receive and upload measurements directly to the record; and it must provide secure authentication (unique ID/password plus optional two‑factor) and role‑based access control for all users.
+
+---
+
+## Preconditions
+1. The appointment has been scheduled and finalized (status = **Confirmed**).  
+2. All treatment codes and associated costs are defined in the system.  
+3. The patient’s billing contact information (email/phone) is up‑to‑date.  
+4. The system’s billing module is active and licensed.  
+5. Staff has the required **Billing** role permission.
+
+*If none, state “None.”*
+
+---
+
+## Postconditions
+1. A new billing record is created and stored in the database.  
+2. The invoice is queued for delivery within the configured billing window.  
+3. Audit logs record the generation event and the staff responsible.  
+4. The patient’s account balance is updated accordingly.
+
+*If none, state “None.”*
+
+---
+
+## Main Flow
+1. **Staff** logs into the system with valid credentials.  
+2. **Staff** navigates to the **Billing** module and selects **Generate Billing Data**.  
+3. The system retrieves all **Confirmed** appointments that have not yet been billed and fall within the current billing cycle.  
+4. For each appointment, the system calculates the duration (start → end) and applies the appropriate treatment code rates.  
+5. The system aggregates charges per patient, adding any applicable taxes, discounts, or insurance adjustments.  
+6. A detailed invoice is generated in PDF format and stored in the patient’s billing history.  
+7. The system schedules the invoice to be sent to the patient’s preferred contact method (email/SMS) within the configured billing window.  
+8. The system updates the appointment status to **Billed** and logs the event.  
+9. **Staff** receives a confirmation message listing the number of invoices generated and any pending actions.
+
+---
+
+## Alternative Flows
+1. **(Step 3)** *No pending appointments*:  
+   1.1. The system displays a message: “No appointments pending billing.”  
+   1.2. **Staff** may choose to **Refresh** or **Exit**.
+
+2. **(Step 4)** *Appointment duration cannot be determined*:  
+   2.1. The system flags the appointment as **Inconsistent Timing**.  
+   2.2. **Staff** is prompted to **Edit Timing** or **Skip** the appointment.  
+   2.3. If edited, recalculation proceeds; if skipped, the appointment remains unbilled.
+
+3. **(Step 6)** *Treatment code missing or invalid*:  
+   3.1. The system prompts **Staff** to **Assign Code** or **Skip**.  
+   3.2. Upon assignment, recalculation proceeds; on skip, the appointment is logged for review.
+
+4. **(Step 7)** *Invoice delivery fails (e.g., email bounce)*:  
+   4.1. The system queues a retry after a configurable interval.  
+   4.2. **Staff** is notified of the failure and can manually resend.
+
+---
+
+## Exceptions
+1. **(Step 1)** *Authentication failure*:  
+   1.1. The system denies access and logs the attempt.  
+   1.2. **Staff** is prompted to retry or use password recovery.
+
+2. **(Step 3)** *Database connectivity loss*:  
+   2.1. The system aborts the billing operation and displays an error.  
+   2.2. **Staff** is advised to retry later; an audit trail records the incident.
+
+3. **(Step 6)** *PDF generation error*:  
+   3.1. The system attempts a retry; if it fails again, the invoice is marked **Failed**.  
+   3.2. **Staff** receives a notification and can manually generate the invoice.
+
+4. **(Step 7)** *External email/SMS gateway timeout*:  
+   4.1. The system logs the failure and schedules a retry.  
+   4.2. **Staff** is alerted to potential delivery issues.
+
+5. **(Step 8)** *Insufficient permissions to update appointment status*:  
+   5.1. The system rolls back the billing record creation.  
+   5.2. **Staff** receives an error message and a request for elevated privileges.
+
+*If none, state “None.”*

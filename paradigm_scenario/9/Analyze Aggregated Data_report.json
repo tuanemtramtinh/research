@@ -1,0 +1,79 @@
+{
+  "use_case_name": "Analyze Aggregated Data",
+  "unique_id": "UC-001",
+  "area": "Healthcare",
+  "context_of_use": "The system must provide a unified Electronic Medical Record Database that allows patients to securely view their own medical histories, test results and treatment details, while enabling authorized UHOPE staff, doctors, nurses, and receptionists to enter, edit, and search patient information only once and see only the records they are permitted to access; it must support appointment scheduling, including automatic approvals, cancellations, time‑adjustments, and integration with room and staff calendars; it must generate billing data automatically from appointment start/end times and treatment codes, and send invoices to patients within a specified window; it must offer a self‑service analytics portal for employees to query and analyze aggregated patient data; it must support mobile device integration for nurses to receive and upload measurements directly to the record; and it must provide secure authentication (unique ID/password plus optional two‑factor) and role‑based access control for all users.",
+  "scope": "Target System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Staff"
+  ],
+  "supporting_actors": [
+    "System"
+  ],
+  "stakeholders_and_interests": [
+    "Staff: Achieve the goal described in the use case."
+  ],
+  "description": "Provides a self‑service analytics portal for employees to query and analyze aggregated patient data.",
+  "triggering_event": "Staff initiates 'Analyze Aggregated Data'.",
+  "trigger_type": "External",
+  "preconditions": [
+    "None"
+  ],
+  "postconditions": [
+    "System state after successful completion of the use case:",
+    "- Aggregated patient data is refreshed and available for analysis.",
+    "- Analytical reports are stored in the user’s dashboard and/or exported as requested.",
+    "- Audit logs record query parameters and results for compliance."
+  ],
+  "assumptions": [
+    "The actor has appropriate access to the system."
+  ],
+  "requirements_met": [
+    "Provides a self‑service analytics portal for employees to query and analyze aggregated patient data."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. **Staff** logs into the analytics portal using secure authentication.",
+    "2. The system verifies **Staff** role and grants access to the analytics module.",
+    "3. **Staff** selects a predefined analytical query or creates a custom query by specifying filters (e.g., date range, diagnosis, treatment code).",
+    "4. The system validates query parameters for syntax and access permissions.",
+    "5. The system executes the query against the aggregated patient data store.",
+    "6. Results are displayed in a tabular format and visualized through charts (bar, line, heatmap).",
+    "7. **Staff** reviews the results and may adjust filters or export the data (CSV, PDF).",
+    "8. If exporting, the system generates the requested file and prompts **Staff** to download or email it.",
+    "9. The system logs the query execution, parameters, and outcome for audit purposes.",
+    "10. **Staff** logs out of the portal or continues with additional analyses."
+  ],
+  "alternative_flows": [
+    "- **Alt 1 (Query parameter validation fails)** – *Occurs at step 4* 1. System displays error message indicating invalid parameters.",
+    "2. **Staff** corrects the input and re‑submits the query (return to step 4).",
+    "- **Alt 2 (No data matches query)** – *Occurs at step 5* 1. System displays “No records found” notification.",
+    "2. **Staff** may modify filters (return to step 3) or terminate the session.",
+    "- **Alt 3 (Export fails due to file size limit)** – *Occurs at step 8* 1. System informs **Staff** that the export exceeds size limits.",
+    "2. **Staff** may choose to download a subset of data or use pagination."
+  ],
+  "exception_flows": [
+    "- **Ex 1 (Authentication failure)** – *Occurs at step 1* - System rejects login, logs attempt, and prompts for re‑authentication or password reset.",
+    "- **Ex 2 (Database connection lost)** – *Occurs during step 5* - System displays “Data service unavailable. Please retry later.” and logs the incident.",
+    "- **Ex 3 (Unauthorized access attempt)** – *Occurs at steps 2 or 4* - System blocks the action, logs the attempt, and notifies the security admin.",
+    "- **Ex 4 (Export timeout)** – *Occurs at step 8* - System aborts export, informs **Staff** of the timeout, and suggests retrying or reducing data scope.",
+    "- **Ex 5 (Audit log write failure)** – *Occurs at step 9* - System alerts **Staff** that the audit trail could not be updated but continues operation; a background job attempts to retry logging."
+  ],
+  "information_for_steps": [
+    "1. **Staff** logs into the analytics portal using secure authentication.",
+    "2. The system verifies **Staff** role and grants access to the analytics module.",
+    "3. **Staff** selects a predefined analytical query or creates a custom query by specifying filters (e.g., date range, diagnosis, treatment code).",
+    "4. The system validates query parameters for syntax and access permissions.",
+    "5. The system executes the query against the aggregated patient data store.",
+    "6. Results are displayed in a tabular format and visualized through charts (bar, line, heatmap).",
+    "7. **Staff** reviews the results and may adjust filters or export the data (CSV, PDF).",
+    "8. If exporting, the system generates the requested file and prompts **Staff** to download or email it.",
+    "9. The system logs the query execution, parameters, and outcome for audit purposes.",
+    "10. **Staff** logs out of the portal or continues with additional analyses."
+  ]
+}

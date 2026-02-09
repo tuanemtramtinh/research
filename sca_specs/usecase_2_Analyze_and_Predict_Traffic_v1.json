@@ -1,0 +1,116 @@
+{
+  "use_case_name": "Analyze and Predict Traffic",
+  "unique_id": "UC-002",
+  "area": "Traffic Analysis and Prediction",
+  "context_of_use": "UMD employees use the traffic simulation platform to analyze historical and current traffic and environmental data in order to generate predictions, compare situations, and assess expected impacts on traffic conditions and environmental measures in Wonderland.",
+  "scope": "Wonderland Traffic Simulation and Analysis Platform",
+  "level": "User-goal",
+  "primary_actors": [
+    "umd employee"
+  ],
+  "supporting_actors": [
+    "traffic data management subsystem",
+    "simulation access subsystem"
+  ],
+  "stakeholders_and_interests": [
+    "UMD employee: Wants to efficiently analyze and compare traffic and environmental situations to support informed operational and planning decisions.",
+    "UMD traffic management department: Wants reliable predictions of traffic conditions and crowding to proactively manage congestion and public safety.",
+    "UMD urban planning department: Wants data-driven insight into the consequences of urban planning changes on traffic and environmental quality.",
+    "UMD environmental monitoring department: Wants accurate comparison of predicted and actual environmental levels to assess the impact of traffic and planned interventions.",
+    "UMD IT operations: Wants the platform to operate reliably and support analysis and prediction tasks without service interruptions.",
+    "UMD management: Wants decisions regarding traffic policies and urban planning to be based on traceable analyses and predictions."
+  ],
+  "description": "This use case describes how a UMD employee accesses the simulation platform, retrieves and manages relevant traffic and environmental data, performs comparative and repeatable analyses, generates traffic and impact predictions, evaluates prediction credibility, and compares predicted environmental levels with actual measured levels to support informed decision-making.",
+  "triggering_event": "A UMD employee decides to analyze past traffic and environmental data in order to understand patterns and generate predictions for future or planned situations.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Wonderland Traffic Simulation and Analysis Platform is operational and reachable by the UMD employee.",
+    "The UMD employee has valid access credentials and authorization to use analysis and prediction functionality.",
+    "Historical traffic and environmental data relevant to Wonderland have been collected and stored by the system.",
+    "The simulation and prediction models have been configured and are available in the platform."
+  ],
+  "postconditions": [
+    "A traffic and environmental analysis has been performed for the selected time periods and scenarios.",
+    "Predictions for future or hypothetical traffic situations and their environmental impacts have been generated and presented to the UMD employee.",
+    "If the UMD employee chooses to do so, the results of the analysis and predictions have been retained in the platform in association with the executed scenario and time period parameters.",
+    "The UMD employee has been shown information about the credibility of the prediction simulator for the executed predictions.",
+    "If comparison is requested, the system has displayed differences between predicted and actual environmental levels for the analyzed periods or scenarios."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication and authorization are handled by the platform and are part of the included 'access simulation platform' use case, and this use case starts after the employee initiates access.",
+    "It is assumed that the 'manage traffic data' use case provides functionality to retrieve, store, and organize historical traffic and environmental data but does not define new analysis or prediction algorithms.",
+    "It is assumed that the prediction simulator and its models are already implemented within the platform and that this use case only invokes those existing capabilities rather than defining new predictive methods.",
+    "It is assumed that the term 'data' referred to in the user stories includes traffic flow data, congestion indicators, environmental measures (including CO2, air pollution, and noise levels), and any directly related time-series information already stored by the platform.",
+    "It is assumed that selecting a period of time involves specifying one continuous time range with a start and end timestamp within the bounds of available data.",
+    "It is assumed that comparing data from two different times means presenting the two selected periods or points in time in a side-by-side or otherwise clearly differentiated visual or tabular form within the same session.",
+    "It is assumed that 'multiple situations' for comparing results of different solutions refers to different previously recorded or simulated traffic and environmental scenarios already stored as historical data or simulation snapshots.",
+    "It is assumed that repeatable analysis is achieved by allowing the UMD employee to reuse previously defined analysis parameters such as selected time ranges, areas, metrics, and comparison configurations.",
+    "It is assumed that predictions about the consequences of changing urban planning are made by applying existing prediction models to modified scenario parameters, such as altered road layouts or capacity values, as supported by the simulation platform.",
+    "It is assumed that the credibility of the prediction simulator is expressed through quantitative or qualitative indicators, such as accuracy metrics or confidence levels, computed by the platform based on historical comparisons of predictions with actual outcomes.",
+    "It is assumed that comparison of predicted and actual environmental levels is limited to those environmental measures that are both predicted by the simulator and measured by the sensors and stored in the platform.",
+    "It is assumed that the UMD employee operates the platform via a graphical user interface that supports time selection, scenario configuration, and visualization of analysis and prediction results, but the exact user interface design is outside the scope of this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a UMD employee to select a specific period of time for which traffic and environmental data are to be displayed and analyzed.",
+    "The system shall allow a UMD employee to compare historical traffic data to support the creation of meaningful analyses.",
+    "The system shall allow a UMD employee to view data from two different times next to each other in order to compare the two situations.",
+    "The system shall allow a UMD employee to use historical data to compare multiple situations to compare the results of different solutions that have been implemented.",
+    "The system shall support repeatable analysis by allowing a UMD employee to reuse or reapply the same analysis configuration to similar situations.",
+    "The system shall allow a UMD employee to generate predictions about future traffic situations based on similar situations in the past.",
+    "The system shall allow a UMD employee to identify when an area is expected to be too crowded based on prediction results.",
+    "The system shall allow a UMD employee to generate predictions about the consequences of changing the urban planning of Wonderland.",
+    "The system shall provide a UMD employee with information about the credibility of the prediction simulator for the generated predictions.",
+    "The system shall allow a UMD employee to compare predicted environmental levels with actual environmental levels measured by sensors for corresponding locations and times.",
+    "The system shall ensure that all analysis and prediction functions operate on traffic and environmental data managed by the included data management functionality.",
+    "The system shall require that the UMD employee has successfully accessed the simulation platform before performing traffic analysis and prediction."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact metrics and methods for calculating the credibility of the prediction simulator (for example, statistical accuracy measures or confidence intervals) have not been specified and require definition.",
+    "The required spatial granularity for areas that are expected to be too crowded (for example, street segment, neighborhood, or sensor zone) has not been specified.",
+    "The performance expectations and maximum acceptable response times for complex comparative and predictive analyses have not been defined.",
+    "The rules for retention, versioning, and reuse of analysis configurations and prediction scenarios require clarification.",
+    "The precise set of environmental measures that must be supported for prediction and comparison, and how they are prioritized, has not been formally specified."
+  ],
+  "main_flow": [
+    "1. UMD employee initiates access to the simulation platform → System authenticates the UMD employee and establishes an authorized analysis session in accordance with the included 'access simulation platform' use case.",
+    "2. UMD employee requests access to historical traffic and environmental data for analysis → System invokes the included 'manage traffic data' functionality to retrieve available historical traffic and environmental data and presents an overview of accessible datasets and time ranges.",
+    "3. UMD employee selects one or more time periods and, if supported by configuration, relevant geographic areas or scenarios for analysis → System records the selected time periods and any associated spatial or scenario filters and loads the corresponding traffic and environmental data into the analysis workspace.",
+    "4. UMD employee requests comparative analysis of historical traffic data for the selected periods or scenarios → System processes the underlying data and displays comparative views of historical traffic data, including indicators such as congestion or flow levels, for the chosen periods or scenarios.",
+    "5. UMD employee configures and executes repeatable analysis parameters for similar situations, such as reusing or saving the current analysis configuration → System applies the repeatable analysis configuration to the selected similar situations and presents consistent analysis results, enabling accelerated workflow.",
+    "6. UMD employee requests side-by-side comparison of data from two different selected times or scenarios → System displays the data from the two selected times or scenarios next to each other, clearly distinguishing them to facilitate direct comparison.",
+    "7. UMD employee selects historical situations and associated solution scenarios to compare the results of different implemented solutions → System processes and displays comparative results, showing differences in traffic and environmental outcomes between the selected solution scenarios.",
+    "8. UMD employee configures prediction parameters based on selected historical data, situations, or planned changes (including possible urban planning modifications) → System validates the configuration, prepares the input for the prediction simulator, and confirms the prediction setup to the UMD employee.",
+    "9. UMD employee initiates the prediction run for future traffic situations and potential urban planning change scenarios → System executes the prediction simulator, generates predicted traffic conditions and associated environmental levels for the configured scenarios, and presents the prediction results.",
+    "10. UMD employee requests information about the credibility of the prediction simulator for the executed prediction results → System calculates or retrieves credibility indicators associated with the prediction results and displays them together with appropriate explanatory information.",
+    "11. UMD employee requests comparison between predicted environmental levels and actual measured environmental levels for corresponding locations and timeframes where available → System aligns the predicted environmental levels with the actual measured sensor data and presents a comparison view showing similarities and deviations.",
+    "12. UMD employee reviews the analysis, comparisons, and prediction results and chooses to retain the current analysis and prediction configuration and outputs for future reference within the session context → System stores references to the executed analysis and prediction configuration and associated output in the session or persistent storage as supported by the platform and confirms completion of the analysis and prediction task."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): UMD employee adjusts selected time periods or geographic areas after reviewing initial data availability. Condition: The employee decides that the initially selected periods or areas are not suitable. The system allows the employee to modify the selections, reloads the corresponding data into the analysis workspace, and then the flow continues with Step 4.",
+    "AF-2 (from Step 5): UMD employee applies a previously saved repeatable analysis configuration without redefining parameters. Condition: An earlier analysis configuration exists and is appropriate for the current situation. The system loads the stored configuration, applies it directly to the selected data, presents the results, and then the flow continues with Step 6.",
+    "AF-3 (from Step 8): UMD employee focuses prediction only on future traffic situations without including urban planning changes. Condition: The employee does not wish to evaluate alternative planning scenarios. The system configures prediction parameters solely based on historical patterns and current network configuration, confirms the prediction setup, and then the flow continues with Step 9.",
+    "AF-4 (from Step 8): UMD employee focuses prediction only on the consequences of urban planning changes without generating baseline future traffic predictions. Condition: The employee is analyzing hypothetical planning options only. The system configures prediction parameters for the modified planning scenarios using existing models, confirms the prediction setup, and then the flow continues with Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Authentication or authorization fails. Condition: The UMD employee provides invalid credentials or lacks required permissions for analysis and prediction functions. The system denies access, displays an authorization failure message, logs the event, and terminates the use case without granting access to analysis or prediction features.",
+    "EF-2 (from Step 2): Required historical data are unavailable or incomplete for the requested scope. Condition: The system cannot retrieve sufficient traffic or environmental data for the requested analysis range. The system informs the UMD employee that data for some or all of the requested periods or areas are unavailable or incomplete, provides details on the missing data, and allows the employee to return to Step 3 to adjust selections or to terminate the use case.",
+    "EF-3 (from Step 9): Prediction processing fails. Condition: The prediction simulator encounters an error or cannot complete the computation. The system notifies the UMD employee of the failure, logs diagnostic information for support, and allows the employee to either revise prediction parameters and return to Step 8 or terminate the prediction part of the use case.",
+    "EF-4 (from Step 11): Comparison between predicted and actual environmental levels cannot be fully performed. Condition: Corresponding actual sensor measurements are missing for some predicted locations or times. The system indicates which parts of the comparison lack actual data, displays available partial comparisons, and allows the employee to continue reviewing partial results or adjust the comparison scope and repeat Step 11."
+  ],
+  "information_for_steps": [
+    "1. User identity credentials, authorization profile, analysis session identifier.",
+    "2. Historical traffic datasets, historical environmental datasets, available time range metadata, dataset identifiers.",
+    "3. Selected start and end timestamps, selected geographic areas or zones, selected scenarios, applied filters.",
+    "4. Processed traffic metrics (for example, flow, speed, congestion indicators), comparative statistics, visualization configuration parameters.",
+    "5. Analysis configuration parameters (time periods, areas, metrics, filters), stored analysis templates or profiles, references to similar situations.",
+    "6. Two sets of time or scenario identifiers, corresponding traffic and environmental data subsets, side-by-side visualization parameters.",
+    "7. Solution scenario identifiers, associated historical or simulated outcome datasets, comparison metrics between solution scenarios.",
+    "8. Prediction parameters (selected historical periods, reference scenarios, planned changes, model options), validated model input datasets.",
+    "9. Prediction results for traffic conditions (for example, predicted flows and congestion) and environmental levels, scenario identifiers, predicted time horizons.",
+    "10. Credibility indicators (for example, accuracy metrics, confidence scores, validation results), mapping of indicators to specific predictions or scenarios.",
+    "11. Predicted environmental level values, actual environmental sensor measurements, alignment mappings between predicted and actual data by time and location, computed differences or error measures.",
+    "12. Analysis session summary, stored configuration references, output report or visualization references, timestamps of completion."
+  ]
+}

@@ -2,7 +2,7 @@
   "use_case_name": "Browse Products",
   "unique_id": "UC-001",
   "area": "E-commerce",
-  "context_of_use": "This use case allows customers to browse, search, and view detailed information about products within the e-commerce platform.",
+  "context_of_use": "This use case allows customers to search, browse, and view detailed information about products and add them to their cart.",
   "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,24 +10,25 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to find and evaluate products easily."
+    "customer: wants to find and purchase products easily."
   ],
-  "description": "This use case enables customers to browse, search, and view detailed information about products to facilitate their purchasing decisions.",
+  "description": "This use case enables customers to browse products by category, search for products by keyword, view product details, and add products to their cart.",
   "triggering_event": "Customer initiates a product browsing session.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into the e-commerce system."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "Customer has successfully browsed, searched, and viewed product details."
+    "Customer has successfully added products to their cart."
   ],
   "assumptions": [
-    "The customer has an active account and is familiar with the e-commerce platform."
+    "The customer has an active account to log in."
   ],
   "requirements_met": [
     "The system shall allow customers to browse products by category.",
     "The system shall allow customers to search for products by keyword.",
-    "The system shall allow customers to view product details."
+    "The system shall allow customers to view product details.",
+    "The system shall allow customers to add products to their cart."
   ],
   "priority": "High",
   "risk": "Medium",
@@ -37,13 +38,15 @@
   "main_flow": [
     "1. Customer browses products by category → System displays products in the selected category.",
     "2. Customer searches for products by keyword → System displays search results matching the keyword.",
-    "3. Customer views product details → System presents detailed information about the selected product."
+    "3. Customer views product details → System shows detailed information about the selected product.",
+    "4. Customer adds products to cart → System confirms the product has been added to the cart."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Category selection",
     "2. Search keyword",
-    "3. Product selection"
+    "3. Product selection",
+    "4. Product details"
   ]
 }

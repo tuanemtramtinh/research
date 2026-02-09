@@ -222,6 +222,14 @@ class ScenarioResult(BaseModel):
         description="Structured Use Case Specification as a JSON object (one field per schema key)",
     )
     evaluation: UseCaseEvaluation | None = None
+    comparison_spec_path: Optional[str] = Field(
+        default=None,
+        description="Optional path to an external use case spec to evaluate with the same rubric.",
+    )
+    comparison_evaluation: UseCaseEvaluation | None = Field(
+        default=None,
+        description="Scores for comparison_spec_path (content is not stored).",
+    )
     validation: UseCaseSpecValidation
 
 
@@ -312,6 +320,9 @@ class ScaState(TypedDict, total=False):
 
     # Optional: per-use-case reference file for Correctness evaluation
     reference_spec_path: str | None
+
+    # Optional: per-use-case comparison spec path for additional evaluation
+    comparison_spec_path: str | None
 
     # New judging: 3 judge results then combiner
     judge_results: Annotated[List[UseCaseSpecJudgeResult], operator.add]

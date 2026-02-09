@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+
+' Define primary actors (outside system boundary)
+actor User
+actor "IFA Administrator" as IFA
+actor Referee
+actor "Public User" as Pub
+
+' Define system and use cases
+rectangle "IFA Sports System" {
+
+  ' Base use cases (light blue)
+  usecase "Register and Authenticate User" as UC1 #ADD8E6
+  usecase "Manage Leagues and Teams" as UC2 #ADD8E6
+  usecase "Report Match Events" as UC3 #ADD8E6
+  usecase "View Live Game Data" as UC4 #ADD8E6
+  usecase "Subscribe to Notifications" as UC5 #ADD8E6
+  usecase "Receive Match Alerts" as UC6 #ADD8E6
+  usecase "Post Social Media Content" as UC7 #ADD8E6
+  usecase "Comment on Social Media Content" as UC8 #ADD8E6
+  usecase "Generate Live Analytics" as UC9 #ADD8E6
+  usecase "Enforce Budget & Scheduling Rules" as UC10 #ADD8E6
+  usecase "Maintain Secure Communication Channel" as UC11 #ADD8E6
+  usecase "Multilingual Interface Access" as UC12 #ADD8E6
+  usecase "Fast Response Time" as UC13 #ADD8E6
+
+  ' Included / Extended use cases (gray)
+  usecase "Validate Credentials" as UC14 #EAEAEA
+  usecase "Notify Stakeholders" as UC15 #EAEAEA
+}
+
+' Actor → Use case relationships
+User -- UC1
+User -- UC5
+User -- UC6
+User -- UC12
+User -- UC13
+
+IFA -- UC2
+IFA -- UC4
+IFA -- UC9
+IFA -- UC10
+IFA -- UC11
+IFA -- UC12
+IFA -- UC13
+
+Referee -- UC3
+Referee -- UC4
+Referee -- UC14
+Referee -- UC13
+
+Pub -- UC4
+Pub -- UC5
+Pub -- UC6
+Pub -- UC12
+
+' Use case relationships (inside rectangle)
+UC1 <.. UC14 : "<<includes>>"
+UC5 ..> UC15 : "<<extends>>"
+
+@enduml

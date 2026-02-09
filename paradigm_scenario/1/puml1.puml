@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+' Define primary actors
+actor "Urban Mobility Planner" as UMP
+actor "Emergency Services Officer" as ESO
+
+' Define system and use cases
+rectangle "Urban Mobility Simulation System" {
+
+    ' Base use cases (light blue)
+    usecase "Model traffic congestion" as UC1 #ADD8E6
+    usecase "Adjust traffic measures" as UC2 #ADD8E6
+    usecase "View predictive analytics" as UC3 #ADD8E6
+    usecase "Trigger congestion alerts" as UC4 #ADD8E6
+    usecase "Analyze historical data" as UC5 #ADD8E6
+    usecase "Estimate financial and environmental impacts" as UC6 #ADD8E6
+    usecase "Simulate crisis scenarios" as UC7 #ADD8E6
+    usecase "Generate customizable reports" as UC8 #ADD8E6
+    usecase "Recommend congestion‑mitigation solutions" as UC9 #ADD8E6
+
+    ' New use cases for includes / extends (light gray)
+    usecase "Validate measure feasibility" as UC10 #EAEAEA
+    usecase "Refine recommendation based on feedback" as UC11 #EAEAEA
+}
+
+' Actor–use case relationships
+UMP -- UC1
+UMP -- UC2
+UMP -- UC3
+UMP -- UC4
+UMP -- UC5
+UMP -- UC6
+UMP -- UC8
+UMP -- UC9
+ESO -- UC7
+
+' Use case relationships (inside rectangle)
+UC2 <.. UC10 : "<<includes>>"
+UC9 ..> UC11 : "<<extends>>"
+
+@enduml

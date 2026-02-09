@@ -49,6 +49,14 @@ class OrchestratorState(TypedDict, total=False):
     # (keyed by UseCase.id)
     reference_spec_paths: Dict[int, str | None]
 
+    # Optional per-usecase comparison spec path for extra evaluation
+    # (keyed by UseCase.id)
+    comparison_spec_paths: Dict[int, str | None]
+
+    # Optional directory paths for auto-discovery of reference/comparison files
+    reference_dir: str | None
+    comparison_dir: str | None
+
     # Reduced view
     # merged_actors: List[str]
 
@@ -65,14 +73,69 @@ def plan_tasks_node(state: OrchestratorState):
     }
 
 
+def _fuzzy_match_file(uc_name: str, dir_path: Path) -> str | None:
+    """Find the best matching JSON file in dir_path for a use case name.
+
+    Tries exact stem match first, then fuzzy substring matching.
+    """
+    import difflib
+
+    if not dir_path.is_dir():
+        return None
+
+    json_files = list(dir_path.glob("*_report.json")) + list(dir_path.glob("*.json"))
+    if not json_files:
+        return None
+
+    # Normalize the use case name for comparison
+    uc_lower = uc_name.strip().lower().replace("_", " ").replace("-", " ")
+
+    # Build a list of (file, stem_normalised) pairs
+    candidates: list[tuple[Path, str]] = []
+    for f in json_files:
+        stem = f.stem.replace("_report", "").replace("_", " ").replace("-", " ").lower()
+        candidates.append((f, stem))
+
+    # Exact match first
+    for f, stem in candidates:
+        if stem == uc_lower:
+            return str(f)
+
+    # Fuzzy match – pick closest above 0.4 threshold
+    stems = [c[1] for c in candidates]
+    matches = difflib.get_close_matches(uc_lower, stems, n=1, cutoff=0.4)
+    if matches:
+        idx = stems.index(matches[0])
+        return str(candidates[idx][0])
+
+    return None
+
+
 def collect_reference_paths_node(state: OrchestratorState):
     """Prompt for a reference file per use case (Enter => skip correctness).
 
+    If reference_dir is provided in state, auto-discover files by fuzzy matching
+    use case names to JSON files in that directory.
     This runs BEFORE the map step so parallel workers do not concurrently block on stdin.
     """
 
     use_cases = state.get("use_cases") or []
     mapping: Dict[int, str | None] = {}
+    ref_dir = state.get("reference_dir")
+
+    # Auto-discovery from reference_dir
+    if isinstance(ref_dir, str) and ref_dir.strip():
+        ref_dir_path = Path(ref_dir.strip())
+        print("\n=== AUTO-DISCOVERING REFERENCE FILES ===")
+        print(f"Directory: {ref_dir_path}\n")
+        for uc in use_cases:
+            uc_id = int(getattr(uc, "id", 0) or 0)
+            uc_name = str(getattr(uc, "name", "") or "").strip()
+            matched = _fuzzy_match_file(uc_name, ref_dir_path)
+            mapping[uc_id] = matched
+            status = matched or "<no match>"
+            print(f"  [{uc_id}] {uc_name} => {status}")
+        return {"reference_spec_paths": mapping}
 
     # Non-interactive mode: do not block.
     try:
@@ -116,10 +179,82 @@ def collect_reference_paths_node(state: OrchestratorState):
     return {"reference_spec_paths": mapping}
 
 
+def collect_comparison_paths_node(state: OrchestratorState):
+    """Prompt for an optional comparison spec per use case (Enter => skip).
+
+    If comparison_dir is provided in state, auto-discover files by fuzzy matching
+    use case names to JSON files in that directory.
+    This runs BEFORE the map step so parallel workers do not concurrently block on stdin.
+    """
+
+    use_cases = state.get("use_cases") or []
+    mapping: Dict[int, str | None] = {}
+    cmp_dir = state.get("comparison_dir")
+
+    # Auto-discovery from comparison_dir
+    if isinstance(cmp_dir, str) and cmp_dir.strip():
+        cmp_dir_path = Path(cmp_dir.strip())
+        print("\n=== AUTO-DISCOVERING COMPARISON FILES ===")
+        print(f"Directory: {cmp_dir_path}\n")
+        for uc in use_cases:
+            uc_id = int(getattr(uc, "id", 0) or 0)
+            uc_name = str(getattr(uc, "name", "") or "").strip()
+            matched = _fuzzy_match_file(uc_name, cmp_dir_path)
+            mapping[uc_id] = matched
+            status = matched or "<no match>"
+            print(f"  [{uc_id}] {uc_name} => {status}")
+        return {"comparison_spec_paths": mapping}
+
+    # Non-interactive mode: do not block.
+    try:
+        if not sys.stdin or not sys.stdin.isatty():
+            for uc in use_cases:
+                mapping[int(getattr(uc, "id", 0) or 0)] = None
+            return {"comparison_spec_paths": mapping}
+    except Exception:
+        for uc in use_cases:
+            mapping[int(getattr(uc, "id", 0) or 0)] = None
+        return {"comparison_spec_paths": mapping}
+
+    repo_root = Path(__file__).resolve().parents[1]
+
+    print("\n=== OPTIONAL COMPARISON SCENARIO (Scores Only) ===")
+    print(
+        "Optionally enter a file path to an existing use case scenario/spec JSON to score with the same rubric."
+    )
+    print("Press Enter to skip (comparison scores will be N/A).\n")
+
+    for uc in use_cases:
+        uc_id = int(getattr(uc, "id", 0) or 0)
+        uc_name = str(getattr(uc, "name", "") or "").strip() or "<unnamed use case>"
+
+        while True:
+            raw = input(
+                f"Comparison scenario/spec file for [{uc_id}] {uc_name} (optional): "
+            ).strip()
+            if not raw:
+                mapping[uc_id] = None
+                break
+
+            p = Path(raw).expanduser()
+            if not p.is_absolute():
+                p = (repo_root / p).resolve()
+
+            if p.exists() and p.is_file():
+                mapping[uc_id] = str(p)
+                break
+
+            print(f"  Not found: {p}")
+            print("  Try again, or press Enter to skip.")
+
+    return {"comparison_spec_paths": mapping}
+
+
 def map_to_workers(state: OrchestratorState):
     Send = _import_send()
     use_cases = state.get("use_cases") or []
     ref_paths = state.get("reference_spec_paths") or {}
+    cmp_paths = state.get("comparison_spec_paths") or {}
 
     if Send is None:
         # Fallback: no Send available, run sequentially by routing to a single worker.
@@ -138,6 +273,7 @@ def map_to_workers(state: OrchestratorState):
                     "actors": uc_actors,
                     "use_case": uc,
                     "reference_spec_path": ref_paths.get(uc_id),
+                    "comparison_spec_path": cmp_paths.get(uc_id),
                 },
             )
         )
@@ -153,6 +289,7 @@ def worker_node(state: dict):
         # IMPORTANT: keep actors constrained to this use case
         actors=list(getattr(use_case, "participating_actors", []) or []),
         reference_spec_path=state.get("reference_spec_path"),
+        comparison_spec_path=state.get("comparison_spec_path"),
     )
     return {"scenario_results_acc": [result]}
 
@@ -160,6 +297,7 @@ def worker_node(state: dict):
 def sequential_worker_node(state: OrchestratorState):
     results: List[ScenarioResult] = []
     ref_paths = state.get("reference_spec_paths") or {}
+    cmp_paths = state.get("comparison_spec_paths") or {}
     for uc in state.get("use_cases") or []:
         uc_id = int(getattr(uc, "id", 0) or 0)
         results.append(
@@ -169,6 +307,7 @@ def sequential_worker_node(state: OrchestratorState):
                 # IMPORTANT: pass only participating actors for this use case
                 actors=list(getattr(uc, "participating_actors", []) or []),
                 reference_spec_path=ref_paths.get(uc_id),
+                comparison_spec_path=cmp_paths.get(uc_id),
             )
         )
     return {"scenario_results_acc": results}
@@ -238,6 +377,7 @@ def build_main_graph():
 
     workflow.add_node("plan_tasks", plan_tasks_node)
     workflow.add_node("collect_references", collect_reference_paths_node)
+    workflow.add_node("collect_comparisons", collect_comparison_paths_node)
     # workflow.add_node("reduce_plan", reduce_plan_node)
     workflow.add_node("worker", worker_node)
     workflow.add_node("sequential_worker", sequential_worker_node)
@@ -246,12 +386,13 @@ def build_main_graph():
     workflow.add_edge(START, "plan_tasks")
 
     workflow.add_edge("plan_tasks", "collect_references")
+    workflow.add_edge("collect_references", "collect_comparisons")
 
     # Map step (parallel if Send exists; otherwise go sequential)
     # NOTE: reduce_plan_node is redundant since rpa_graph already does
     # synonym checking with LLM in synonym_check_node
     workflow.add_conditional_edges(
-        "collect_references",
+        "collect_comparisons",
         map_to_workers,
         {
             "sequential": "sequential_worker",

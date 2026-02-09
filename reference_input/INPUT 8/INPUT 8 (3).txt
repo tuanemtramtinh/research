@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Automate Schedule",
+"primary_actors": ["IFA Employee"],
+"preconditions": ["Teams, Leagues, and Match Officials are registered.", "Policies are defined."],
+"postconditions": ["Match schedule is generated.", "Officials are allocated."],
+"main_flow": [
+"1. IFA Employee initiates the automated scheduling process.",
+"2. System retrieves league policies, team lists, and match official preferences (time slots, locations).",
+"3. System generates matches while applying rules to avoid bias (e.g., spread of opponents).",
+"4. System allocates match officials, ensuring no conflicts with personal schedules and applying rules (e.g., not officiating same team repeatedly).",
+"5. System presents the generated schedule for review.",
+"6. System saves and publishes the schedule."
+],
+"alternative_flows": [
+"AF-1 (from Step 5): Manual Override. 1. IFA Employee identifies a need to change a slot. 2. System requires authorization from a second certified IFA employee. 3. Second Employee confirms the change. 4. System updates the schedule. 5. Resume Step 6."
+],
+"exception_flows": [
+"EF-1 (from Step 4): Unresolvable Conflict. 1. System cannot find available officials for a specific match slot due to constraints. 2. System flags the conflict for manual resolution. 3. IFA Employee resolves the conflict. 4. Resume Step 6."
+]
+}

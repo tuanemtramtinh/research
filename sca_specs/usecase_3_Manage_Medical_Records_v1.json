@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Manage Medical Records",
+  "unique_id": "UC-003",
+  "area": "Electronic Health Records Management",
+  "context_of_use": "The use case describes how doctors and nurses manage existing patient medical records by accessing, reviewing, importing measurement results, adding new data, and editing relevant medical information within the electronic health record system.",
+  "scope": "Healthcare Information System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor",
+    "nurse"
+  ],
+  "supporting_actors": [
+    "access medical records"
+  ],
+  "stakeholders_and_interests": [
+    "doctor: Requires efficient access to and updating of patient medical records to support accurate diagnosis and treatment decisions while minimizing manual data entry effort.",
+    "nurse: Requires the ability to review and update relevant medical information and measurement results in patient records to support daily care tasks and room preparation.",
+    "patient: Expects that their medical records are accurate, up to date, and properly maintained by healthcare professionals.",
+    "healthcare organization: Requires consistent, complete, and reliable medical records to support clinical operations, legal compliance, and quality of care."
+  ],
+  "description": "This use case specifies how doctors and nurses access existing patient medical records and then import measurement results, add new medical data, edit information, and review relevant medical information as part of ongoing patient care.",
+  "triggering_event": "A doctor or nurse decides to manage a patient’s medical record in the system for clinical or care-related purposes.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor or nurse has an active user account in the Healthcare Information System.",
+    "The doctor or nurse is authenticated and authorized to access the targeted patient’s medical record according to their role.",
+    "A medical record exists for the targeted patient in the Healthcare Information System.",
+    "The Healthcare Information System is operational and reachable by the doctor or nurse."
+  ],
+  "postconditions": [
+    "The patient’s medical record contains any newly imported measurement results that were confirmed by the doctor or nurse during the use case.",
+    "The patient’s medical record contains any newly added or edited medical data entered by the doctor or nurse during the use case.",
+    "All changes made during the use case are stored persistently in the Healthcare Information System and are available for subsequent authorized access.",
+    "If no modifications were performed, the patient’s medical record remains unchanged and accessible."
+  ],
+  "assumptions": [
+    "The included use case \"access medical records\" represents existing system functionality that authenticates the user and retrieves the selected patient medical record for viewing.",
+    "User roles and associated permissions determining whether a doctor or nurse may view or modify a given patient’s medical record are already defined and enforced by the Healthcare Information System.",
+    "Automatic import of measurement results is supported by existing interfaces or data sources, and this use case only covers initiating and confirming that import into a specific patient record.",
+    "The system maintains an audit log of changes to patient medical records, but the explicit viewing or management of audit logs is handled by other use cases.",
+    "Measurement results to be imported are already available in a structured form associated with the correct patient within the Healthcare Information System or connected subsystems.",
+    "The doctor or nurse knows which patient’s record should be managed before initiating this use case.",
+    "Resolution of conflicting or duplicate data resulting from imports or edits is limited in this use case to simple confirmation or cancellation actions by the doctor or nurse.",
+    "Network connectivity and device hardware used by the doctor or nurse to access the Healthcare Information System are functioning correctly for the duration of the use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a doctor to import available measurement results automatically into a patient’s medical record so that the doctor does not have to enter these results manually.",
+    "The system shall allow a doctor to add new medical data to a patient’s medical record.",
+    "The system shall allow a nurse to edit a patient’s medical record to enter measurement results.",
+    "The system shall allow a nurse to review a patient’s relevant medical information in the medical record.",
+    "The system shall provide doctors and nurses with the ability to access an existing patient medical record before performing import, add, edit, or review operations.",
+    "The system shall persist all confirmed imports, additions, and edits performed by doctors and nurses in the patient’s medical record."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific types and formats of measurement results that can be imported into the medical record are not defined.",
+    "The rules determining which medical record fields may be edited by nurses versus doctors are not specified.",
+    "The expected behavior when imported measurement results conflict with existing data in the medical record is not defined.",
+    "The required performance constraints for importing measurement results into medical records are not specified.",
+    "The granularity and content of any audit trail related to medical record modifications are not described."
+  ],
+  "main_flow": [
+    "1. doctor or nurse → System executes the included \"access medical records\" functionality to authenticate the user, allow selection of a patient, and display the selected patient’s existing medical record.",
+    "2. doctor or nurse → System displays the current contents of the patient’s medical record, including existing measurement results and relevant medical information.",
+    "3. doctor → System presents available external or preloaded measurement results associated with the selected patient and provides an option to automatically import these results into the patient’s medical record.",
+    "4. doctor → System imports the selected measurement results into the appropriate sections of the patient’s medical record and updates the record view to reflect the newly imported data.",
+    "5. doctor or nurse → System provides data entry and editing controls for allowed sections of the patient’s medical record, enabling the actor to add or modify medical information such as notes, observations, or measurement results.",
+    "6. doctor or nurse → System validates the newly entered or edited data for required formats and fields and temporarily marks these changes as pending until confirmation.",
+    "7. doctor or nurse → System saves all confirmed additions, edits, and imported measurement results to the patient’s medical record in persistent storage and confirms successful completion to the actor."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): The doctor chooses not to import any available measurement results. Condition: The doctor reviews the presented list of available measurement results and decides that no import is necessary. Flow: The doctor skips the import option, and the system retains the patient’s existing measurement results without change and returns the doctor to the standard medical record view. The use case continues at Step 5.",
+    "AF-2 (from Step 5): The doctor or nurse only reviews the medical record without adding or editing data. Condition: The actor determines that no modifications are required after reviewing the information. Flow: The actor performs no data entry or edits, and the system maintains the existing data without pending changes. The actor exits the medical record view. The use case ends with the patient medical record unchanged and accessible."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The system cannot access the selected patient medical record. Condition: The record is missing, locked, or the actor lacks sufficient authorization. Flow: The system displays an error message indicating that the medical record cannot be accessed and does not display any medical record content. No changes are made to any records. The use case terminates unsuccessfully.",
+    "EF-2 (from Step 4): Import of measurement results fails. Condition: A technical error occurs while importing selected measurement results into the medical record. Flow: The system notifies the doctor that the import operation failed, rolls back any partial import for the affected measurement results, and leaves the medical record in its previous consistent state. The doctor may retry the import by returning to Step 3 or choose to continue without importing and proceed to Step 5.",
+    "EF-3 (from Step 6): Validation of added or edited data fails. Condition: Newly entered or edited data does not comply with required formats or mandatory fields. Flow: The system rejects the invalid data, highlights the fields with errors, provides an explanation of the validation issues, and does not save the invalid changes. The actor may correct the data and repeat Step 6 or abandon the changes and exit the medical record view, leaving the record unchanged.",
+    "EF-4 (from Step 7): Saving changes to the medical record fails. Condition: A system or storage error occurs during the save operation. Flow: The system displays an error message, does not commit any of the pending changes to persistent storage, and maintains the previously stored version of the medical record. The actor may attempt to save again by repeating Step 7 or exit, in which case all new additions, edits, and imports from the current session are discarded."
+  ],
+  "information_for_steps": [
+    "1. User identity, authentication status, patient identifier, access rights, patient medical record reference.",
+    "2. Patient demographics, existing diagnoses, existing measurement results, existing notes, existing medications, other relevant medical information.",
+    "3. Patient identifier, list of available external or preloaded measurement results, measurement timestamps, measurement types, measurement values.",
+    "4. Selected measurement results, target medical record sections, updated measurement result entries, update timestamps.",
+    "5. Editable medical record fields, newly entered measurement results, clinical notes, observations, other medical information entered or modified by the actor.",
+    "6. Validation rules, field formats, mandatory field indicators, pending changes set, validation error messages if applicable.",
+    "7. Confirmed changes set, updated medical record snapshot, persistence status, confirmation message to the actor."
+  ]
+}

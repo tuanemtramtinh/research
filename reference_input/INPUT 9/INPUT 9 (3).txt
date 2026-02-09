@@ -1,0 +1,22 @@
+﻿{
+"use_case_name": "Manage Appointment",
+"primary_actors": ["Patient", "Receptionist"],
+"preconditions": ["Scheduling system is active.", "Actors are authenticated."],
+"postconditions": ["Appointment is scheduled, modified, or cancelled."],
+"main_flow": [
+"1. Actor initiates the appointment management process.",
+"2. Include Use Case: View Appointment Slot.",
+"3. Actor selects an available time slot.",
+"4. Actor specifies the reason for the appointment.",
+"5. System automatically approves the appointment.",
+"6. System records the start and end time of the appointment.",
+"7. System assigns available resources (Doctor, Room, Nurse)."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Cancel Appointment. 1. Actor selects an existing appointment. 2. Actor requests cancellation (Patient must be >12 hours before). 3. System removes the appointment. 4. System sends email notification (if initiated by Receptionist). 5. Use Case ends.",
+"AF-2 (from Step 6): Manual Time Adjustment. 1. Receptionist manually changes the start or end time to reflect actual duration. 2. System updates the record. 3. Resume Step 7."
+],
+"exception_flows": [
+"EF-1 (from Step 1): Disapprove Appointment. 1. Receptionist manually disapproves an appointment (e.g., doctor ill). 2. System cancels the slot. 3. Resume AF-1 Step 4."
+]
+}

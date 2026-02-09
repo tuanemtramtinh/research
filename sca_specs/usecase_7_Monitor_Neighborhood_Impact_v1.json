@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Monitor Neighborhood Impact",
+  "unique_id": "UC-007",
+  "area": "Urban Mobility Planning and Impact Monitoring",
+  "context_of_use": "The use case is performed when an urban mobility planner evaluates a planned traffic measure and requires automated monitoring of its neighborhood-level impacts to ensure that no neighborhood is disproportionately disadvantaged.",
+  "scope": "Urban Mobility Planning Decision Support System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Internal Impact Estimation Module"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Wants to be promptly informed when a planned measure leads to disproportionate negative impacts on any neighborhood to support fairness in decision making.",
+    "Residents of affected neighborhoods: Want mobility measures to be fair and to avoid being disproportionately disadvantaged by congestion, pollution, or restricted access.",
+    "City administration: Wants assurance that proposed measures comply with fairness and equity objectives across neighborhoods.",
+    "Environmental and social advocacy groups: Want transparency and evidence that neighborhood impacts of mobility measures are monitored and addressed.",
+    "System owner: Wants the system to reliably detect and communicate neighborhood disadvantages to support compliant and defensible planning decisions."
+  ],
+  "description": "This use case describes how the Urban Mobility Planning Decision Support System monitors the impact of a planned mobility measure on individual neighborhoods and notifies the urban mobility planner when the measure disadvantages a neighborhood, thereby supporting fairness considerations in the planning process.",
+  "triggering_event": "The urban mobility planner requests monitoring of neighborhood impacts for a specific planned mobility measure whose impacts have been estimated by the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is authenticated and authorized to access the Urban Mobility Planning Decision Support System.",
+    "The planned mobility measure to be evaluated is defined and stored in the system.",
+    "The system has neighborhood definitions and associated spatial boundaries configured.",
+    "Required baseline data for evaluating neighborhood impacts is available in the system.",
+    "The system is able to execute the included use case \"estimate measure impacts\" for the selected measure."
+  ],
+  "postconditions": [
+    "The system has evaluated the impact of the selected measure at neighborhood level using the available impact estimation results.",
+    "If at least one neighborhood is determined to be disadvantaged by the measure according to the system's configured criteria, a corresponding notification has been presented to the urban mobility planner, including identification of the disadvantaged neighborhoods.",
+    "If no neighborhood is determined to be disadvantaged by the measure according to the system's configured criteria, the system has confirmed to the urban mobility planner that no disadvantaged neighborhood was detected for the evaluated measure.",
+    "The outcome of the neighborhood impact evaluation for the measure is stored in the system for later review by the urban mobility planner."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Decision Support System already contains an internal capability referred to as the included use case \"estimate measure impacts\" and that this capability computes measure impacts required for neighborhood evaluation without adding new functionality beyond the requirement text.",
+    "It is assumed that neighborhood disadvantage is determined based on internal system criteria or thresholds derived from existing impact indicators, even though the specific fairness rules and thresholds are not defined in the requirement text.",
+    "It is assumed that notifications to the urban mobility planner are presented through the system's user interface as on-screen messages, alerts, or indicators, because no alternative communication channel is described in the requirement text.",
+    "It is assumed that only planned measures managed within the system can be monitored for neighborhood impact, as the requirement text refers to measures in the context of solution and proposal validation.",
+    "It is assumed that the monitoring and notification are executed on demand for a selected measure by the urban mobility planner rather than being executed automatically on a schedule, since only the desire to be notified for a measure is explicitly stated.",
+    "It is assumed that the same impact estimations used for congestion, fairness, and other measure assessments are reused for neighborhood impact monitoring, and no additional external data sources are introduced beyond those implied by the requirement text.",
+    "It is assumed that the urban mobility planner can view details about which neighborhoods are flagged as disadvantaged as part of the notification content, even though the level of detail is not explicitly stated in the requirement text."
+  ],
+  "requirements_met": [
+    "The system shall notify the urban mobility planner if a planned mobility measure disadvantages a neighborhood so that fairness can be increased.",
+    "The system shall use the results of the included use case \"estimate measure impacts\" when determining whether a planned mobility measure disadvantages any neighborhood.",
+    "The system shall allow the urban mobility planner to select a specific planned measure for neighborhood impact monitoring.",
+    "The system shall evaluate the estimated impacts of the selected measure at the neighborhood level using configured neighborhood definitions.",
+    "The system shall present a notification to the urban mobility planner identifying any neighborhoods determined to be disadvantaged by the selected measure.",
+    "The system shall confirm to the urban mobility planner when no disadvantaged neighborhood is detected for the selected measure according to the configured criteria.",
+    "The system shall store the neighborhood impact evaluation outcome associated with the evaluated measure for later review by the urban mobility planner."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise criteria and thresholds for determining when a neighborhood is considered disadvantaged by a measure have not been defined and require policy or domain expert input.",
+    "The method for parametrizing fairness objectives across neighborhoods (for example, weighting of congestion, pollution, and accessibility) is not yet specified.",
+    "The required level of detail in notifications (such as quantitative impact metrics versus qualitative flags) remains to be clarified with stakeholders.",
+    "The persistence policy for neighborhood impact evaluation results, including retention duration and versioning when measures are modified, has not been defined.",
+    "The expected response time for producing neighborhood impact notifications after the planner initiates the evaluation has not been specified."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner selects a planned mobility measure for neighborhood impact monitoring → System displays the selected measure details and confirms readiness to evaluate neighborhood impacts.",
+    "2. Urban mobility planner initiates neighborhood impact monitoring for the selected measure → System invokes the included use case \"estimate measure impacts\" for the selected measure and obtains the corresponding impact estimation results.",
+    "3. System automatically maps the obtained impact estimation results to configured neighborhoods → System derives neighborhood-level impact indicators for the selected measure.",
+    "4. System evaluates the neighborhood-level impact indicators against configured fairness and disadvantage criteria → System determines whether any neighborhood is disadvantaged by the selected measure.",
+    "5. System prepares a neighborhood impact summary for the selected measure → System identifies all neighborhoods determined to be disadvantaged and compiles the relevant impact information.",
+    "6. System presents the neighborhood impact summary to the urban mobility planner → System displays a clear notification indicating whether one or more neighborhoods are disadvantaged by the measure and lists any such neighborhoods.",
+    "7. Urban mobility planner acknowledges the displayed notification and impact summary → System records the acknowledgment and stores the neighborhood impact evaluation outcome associated with the selected measure."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): The system already has valid and up-to-date impact estimation results for the selected measure. Condition: The selected measure has been previously evaluated and its impact results remain valid according to system rules. Flow: Instead of re-invoking the included use case \"estimate measure impacts\", the system reuses the existing valid estimation results, proceeds directly to mapping the results to neighborhoods as in Step 3, and then continues with Steps 4 to 7.",
+    "AF-2 (from Step 6): No neighborhood is determined to be disadvantaged. Condition: The evaluation in Step 4 indicates that none of the neighborhoods meets the configured disadvantage criteria. Flow: In Step 6, the system displays a notification stating that no disadvantaged neighborhood was detected for the selected measure and presents a concise confirmation of compliance with fairness criteria. The flow then continues with Step 7 where the planner acknowledges the notification and the system stores the neutral evaluation outcome."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Impact estimation cannot be completed. Condition: The system cannot successfully execute the included use case \"estimate measure impacts\" due to missing required input data or an internal processing error. Flow: The system stops the neighborhood impact monitoring process for the selected measure, displays an error message to the urban mobility planner indicating that impact estimation failed and that neighborhood impact cannot be evaluated, logs the failure for diagnostic purposes, and terminates the use case without storing an evaluation outcome.",
+    "EF-2 (from Step 3): Neighborhood configuration is incomplete or inconsistent. Condition: During the mapping of impact estimation results to neighborhoods, the system detects missing or inconsistent neighborhood definitions or boundaries. Flow: The system aborts further evaluation for the selected measure, displays a message to the urban mobility planner explaining that neighborhood impact cannot be assessed due to configuration issues, logs the configuration problem, and ends the use case without generating or storing a neighborhood impact summary.",
+    "EF-3 (from Step 6): Notification delivery to the user interface fails. Condition: A technical error prevents the system from rendering or updating the notification in the planner's user interface. Flow: The system records the neighborhood impact evaluation outcome internally, logs the notification delivery error, and presents a generic error indicator if possible; the use case ends without confirmed planner acknowledgment."
+  ],
+  "information_for_steps": [
+    "1. Measure identifier, measure description, measure configuration parameters, planner identifier.",
+    "2. Measure identifier, invocation parameters for included use case \"estimate measure impacts\", impact estimation request timestamp.",
+    "3. Impact estimation results, neighborhood identifiers, neighborhood spatial boundaries, mapping rules between impact data and neighborhoods.",
+    "4. Neighborhood-level impact indicators, fairness and disadvantage criteria, configured threshold values.",
+    "5. List of neighborhoods, flags indicating disadvantaged status, summarized impact metrics per neighborhood.",
+    "6. Neighborhood impact summary, notification message text, list of disadvantaged neighborhoods, planner user interface session context.",
+    "7. Planner acknowledgment flag, acknowledgment timestamp, stored neighborhood impact evaluation outcome, linkage between measure identifier and evaluation record."
+  ]
+}

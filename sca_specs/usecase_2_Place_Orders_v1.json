@@ -1,0 +1,58 @@
+{
+  "use_case_name": "Place Orders",
+  "unique_id": "UC-002",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to add products to their cart, checkout, and track the status of their orders within the e-commerce system.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to efficiently purchase multiple items and track their orders."
+  ],
+  "description": "This use case enables customers to add products to their cart, proceed to checkout, and track their order status.",
+  "triggering_event": "Customer decides to purchase products.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system.",
+    "Customer has selected products to purchase."
+  ],
+  "postconditions": [
+    "Customer's order is successfully placed and tracked.",
+    "Customer can view the order status."
+  ],
+  "assumptions": [
+    "The customer has a valid account to log in.",
+    "Products are available for purchase."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart.",
+    "The system shall enable customers to checkout using multiple payment methods.",
+    "The system shall provide order tracking functionality."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on payment methods available during checkout."
+  ],
+  "main_flow": [
+    "1. Customer adds products to cart → System updates cart with selected products.",
+    "2. Customer proceeds to checkout → System displays checkout options.",
+    "3. Customer selects payment method → System processes payment.",
+    "4. System confirms order placement → System provides order confirmation and tracking information."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Customer decides to browse products → System redirects customer to product browsing interface."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Payment processing fails → System notifies customer of payment failure and prompts for a different payment method."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Checkout options",
+    "3. Payment information",
+    "4. Order confirmation details"
+  ]
+}

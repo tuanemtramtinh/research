@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Import Medical Records",
+"primary_actors": ["Doctor"],
+"preconditions": ["Doctor has external digital records."],
+"postconditions": ["External records are consolidated in the system."],
+"main_flow": [
+"1. Doctor initiates the import function.",
+"2. Doctor selects the source of the digital medical records.",
+"3. Doctor transfers the data to the system.",
+"4. System maps the data to the patient's internal profile.",
+"5. System consolidates the info in one place.",
+"6. System confirms successful import."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 4): Format Incompatibility. 1. System cannot parse the external file. 2. System rejects import and reports error. 3. Use Case ends."
+]
+}

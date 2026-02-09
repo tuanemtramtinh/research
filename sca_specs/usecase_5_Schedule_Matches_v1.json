@@ -1,0 +1,110 @@
+{
+  "use_case_name": "Schedule Matches",
+  "unique_id": "UC-005",
+  "area": "Match Scheduling and Referee Assignment",
+  "context_of_use": "This use case describes how the IFA uses the system to automatically generate match schedules based on predefined league policies and stakeholder restrictions, assign referees to leagues and matches, and ensure that referee availability and restrictions are synchronized with the system so that double-booking is avoided and scheduling bias is minimized.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa"
+  ],
+  "supporting_actors": [
+    "referee"
+  ],
+  "stakeholders_and_interests": [
+    "IFA: Requires automated, unbiased, and policy-compliant match schedules that minimize the need for rescheduling and support long-term planning.",
+    "Referee: Requires accurate reflection of personal schedule and restrictions in the system so that no double-bookings or conflicts occur.",
+    "Teams: Require fair and transparent match schedules that respect league policies and stakeholder restrictions.",
+    "Fans: Require stable and predictable match schedules to follow games and related events.",
+    "System Administrator: Requires predictable system load and consistent data to maintain reliability and performance during scheduling operations."
+  ],
+  "description": "The IFA initiates automated match scheduling, during which the system authenticates the IFA, retrieves league policies, stakeholder restrictions, and referee availability, assigns referees to leagues and matches, and generates a policy-compliant match schedule that avoids double-booking and minimizes bias.",
+  "triggering_event": "The IFA requests the system to generate or update match schedules.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA has an active and valid user account in the IFA League Management System.",
+    "The referee has an active and valid user account in the IFA League Management System.",
+    "League policies relevant to match scheduling have been defined and stored in the system.",
+    "Stakeholder restrictions relevant to match scheduling have been defined and stored in the system.",
+    "Referee personal schedules and restrictions that are already known have been stored or are available to be synchronized.",
+    "The system is online and connected to its data repositories required for scheduling."
+  ],
+  "postconditions": [
+    "A set of match schedules has been created or updated by the system according to league policies and stakeholder restrictions.",
+    "Referees have been assigned to appropriate leagues and corresponding matches according to their availability and restrictions.",
+    "The system stores the generated match schedules and referee assignments in a persistent manner.",
+    "No referee is double-booked for overlapping matches according to the data held in the system at scheduling time."
+  ],
+  "assumptions": [
+    "It is assumed that authentication for the IFA is required before accessing any match scheduling functionality, as implied by the include relationship with the \"authenticate\" use case.",
+    "It is assumed that league policies relevant to match scheduling already exist within the system and are accessible as configuration data when scheduling is initiated.",
+    "It is assumed that stakeholder restrictions (including team and venue constraints) are already stored in the system and are available for the scheduling algorithm to consider.",
+    "It is assumed that referees can manage and update their own schedules and restrictions in the system via separate use cases, and this use case only consumes that information.",
+    "It is assumed that the system contains or can derive league structures and the list of matches or match slots that need to be scheduled.",
+    "It is assumed that the automated scheduling mechanism aims to minimize bias by using objective, rule-based allocation driven by policies and restrictions, without manual interference during the main flow.",
+    "It is assumed that time-related constraints such as match dates, times, and season ranges are already configured in the system before the IFA initiates scheduling.",
+    "It is assumed that the same actor role \"ifa\" covers any authorized IFA staff member responsible for scheduling operations.",
+    "It is assumed that notification of stakeholders about the resulting schedules, if any, is handled by separate communication-related use cases, and this use case focuses only on creating and storing the schedule."
+  ],
+  "requirements_met": [
+    "The system shall allow the IFA to initiate automated match scheduling based on predefined league policies and stakeholder restrictions.",
+    "The system shall use league policies and stakeholder restrictions as constraints when generating match schedules.",
+    "The system shall allow the IFA to assign referees to different leagues as part of the scheduling process.",
+    "The system shall automatically assign referees to scheduled matches in alignment with their synchronized availability and restrictions.",
+    "The system shall allow referees to synchronize their schedules and restrictions with the system so that double-booking is prevented during scheduling.",
+    "The system shall ensure that no referee is assigned to overlapping matches based on the schedule and restriction data known at scheduling time.",
+    "The system shall generate match schedules in a manner intended to reduce bias by relying on stored policies and restrictions instead of arbitrary manual allocation.",
+    "The system shall persistently store the generated match schedules and referee assignments for later retrieval and use by other use cases.",
+    "The system shall require successful authentication of the IFA before access to the match scheduling functionality.",
+    "The system shall provide the IFA with a summary of the generated match schedule and referee assignments after scheduling is completed."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact algorithm or criteria for determining and measuring scheduling bias has not been specified and must be defined.",
+    "The conflict-resolution strategy when stakeholder restrictions or policies make scheduling infeasible has not been specified.",
+    "The frequency and method of updating league policies and stakeholder restrictions used in scheduling have not been defined.",
+    "The required level of detail for referee schedule synchronization (e.g., time granularity, blackout periods) has not been specified.",
+    "The handling of last-minute changes in referee availability or stakeholder restrictions after schedules have been generated remains undefined."
+  ],
+  "main_flow": [
+    "1. IFA initiates the match scheduling function in the system → System displays the match scheduling interface and available scheduling options.",
+    "2. IFA provides authentication credentials as part of accessing the scheduling function → System verifies the IFA credentials according to the included \"authenticate\" use case and confirms authenticated access.",
+    "3. IFA selects the target league or leagues and defines the scheduling scope (such as season or date range) → System records the selected league or leagues and scheduling scope for the scheduling operation.",
+    "4. IFA requests automated scheduling using existing league policies and stakeholder restrictions → System retrieves relevant league policies and stakeholder restrictions for the selected scheduling scope.",
+    "5. System retrieves the list of matches or match slots that need to be scheduled within the selected scope → System validates that the list of matches or match slots is complete and ready for scheduling.",
+    "6. System retrieves the list of registered referees and their league assignments relevant to the selected leagues → System confirms availability of referee data required for scheduling.",
+    "7. System retrieves stored referee schedules and restrictions that have been previously synchronized by referees → System consolidates referee availability and restriction data for conflict checking.",
+    "8. System automatically allocates match dates and times to unscheduled matches or match slots within the defined scope → System ensures generated allocations comply with league policies and stakeholder restrictions.",
+    "9. System automatically assigns referees to leagues and corresponding matches based on their availability, restrictions, and league assignments → System checks for and avoids any double-booking of referees across overlapping matches.",
+    "10. System compiles the full set of generated match schedules and referee assignments for the selected scope → System stores the generated match schedules and referee assignments in persistent storage.",
+    "11. System presents a summary of the generated match schedules and referee assignments to the IFA → IFA reviews the summary and accepts the generated schedule.",
+    "12. System confirms successful completion of the scheduling operation and makes the stored schedules and referee assignments available for subsequent use by other use cases."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): If the IFA selects only a subset of available leagues or a custom date range for scheduling, the system records the narrowed scope and proceeds with Steps 4 through 12 using only the selected leagues and date range.",
+    "AF-2 (from Step 11): If the IFA requests a regeneration of the schedule instead of immediately accepting it, the system retains the existing input parameters, re-executes Steps 4 through 10 to generate a new schedule, and then returns to Step 11 for review and acceptance."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If authentication of the IFA fails due to invalid credentials or access denial, the system rejects access to the scheduling function, displays an appropriate error message, and terminates the use case without performing any scheduling operations.",
+    "EF-2 (from Step 5): If the system detects that the list of matches or match slots for the selected scope is empty or incomplete, the system informs the IFA that scheduling cannot proceed until match data is defined, logs the issue, and terminates the use case without generating schedules.",
+    "EF-3 (from Step 7): If the system is unable to retrieve referee schedule or restriction data due to data access failure, the system notifies the IFA of the data retrieval problem, marks the scheduling attempt as failed, and terminates the use case without storing any partial schedule.",
+    "EF-4 (from Step 8): If league policies and stakeholder restrictions make it impossible to allocate dates and times for one or more matches, the system identifies unschedulable matches, informs the IFA of the conflicts, and terminates the use case without committing any schedule changes for the failed operation.",
+    "EF-5 (from Step 9): If no conflict-free referee assignment can be found for one or more matches due to availability and restriction constraints, the system lists the affected matches, notifies the IFA of the inability to complete assignments, and terminates the use case without storing the incomplete schedule.",
+    "EF-6 (from Step 11): If the IFA explicitly rejects the generated schedule and cancels the operation rather than regenerating it, the system discards the newly generated schedule data for this operation and terminates the use case without modifying existing stored schedules."
+  ],
+  "information_for_steps": [
+    "1. IFA identity, requested function identifier.",
+    "2. IFA authentication credentials, authentication status token.",
+    "3. Selected leagues, selected season or date range, scheduling scope parameters.",
+    "4. League policy identifiers, stakeholder restriction identifiers, scheduling request parameters.",
+    "5. Match or match slot identifiers, match dates, tentative times, league associations.",
+    "6. Referee identifiers, referee league assignment data.",
+    "7. Referee availability time slots, referee restrictions, synchronized schedule metadata.",
+    "8. Proposed match date and time allocations, policy compliance checks, restriction compliance checks.",
+    "9. Referee-to-match assignment mappings, conflict detection results for overlapping assignments.",
+    "10. Consolidated schedule dataset, referee assignment dataset, persistence status indicators.",
+    "11. Schedule summary view, referee assignment summary, IFA acceptance or regeneration decision.",
+    "12. Confirmation message, schedule accessibility metadata for other system components."
+  ]
+}

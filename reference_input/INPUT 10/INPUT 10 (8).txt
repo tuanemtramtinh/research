@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Manage Medical Notes",
+"primary_actors": ["Doctor"],
+"preconditions": ["Doctor has access to the medical record."],
+"postconditions": ["Note is added or edited in the record."],
+"main_flow": [
+"1. Include Use Case: Edit Medical Records.",
+"2. Doctor selects the notes section of the record.",
+"3. Doctor adds a new note or edits an existing one to assess the situation.",
+"4. System saves the note.",
+"5. System logs the author and timestamp."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

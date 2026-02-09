@@ -1,0 +1,54 @@
+{
+  "use_case_name": "Download Reports",
+  "unique_id": "UC-006",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to download report files for offline access and analysis.",
+  "scope": "Report Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "user"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to access reports for personal use",
+    "user: wants to analyze data offline"
+  ],
+  "description": "Allows users to download report files for offline access and analysis.",
+  "triggering_event": "User requests to download a report.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated",
+    "User has access to reports"
+  ],
+  "postconditions": [
+    "Report file is downloaded successfully"
+  ],
+  "assumptions": [
+    "Users have the necessary permissions to download reports."
+  ],
+  "requirements_met": [
+    "The system shall allow users to download reports for offline access."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for download."
+  ],
+  "main_flow": [
+    "1. customer/user requests to download a report → System verifies user permissions.",
+    "2. System retrieves the requested report → System prepares the report for download.",
+    "3. System initiates the download of the report file → User receives the report file."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the user does not have permission, then System displays an error message and denies the download."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the report is not available, then System displays an error message indicating the report is unavailable."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Report request details",
+    "3. Report file"
+  ]
+}

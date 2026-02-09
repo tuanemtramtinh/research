@@ -1,0 +1,86 @@
+{
+  "use_case_name": "Access Medical Records",
+  "unique_id": "UC-005",
+  "area": "Electronic Health Records Access Management",
+  "context_of_use": "The use case describes how patients and doctors access patient medical records through the healthcare information system, under controlled access based on the patient’s access control preferences and mandatory authentication.",
+  "scope": "Healthcare Information System",
+  "level": "User-goal",
+  "primary_actors": [
+    "patient",
+    "doctor"
+  ],
+  "supporting_actors": [
+    "authentication service"
+  ],
+  "stakeholders_and_interests": [
+    "Patient: Wants convenient and secure access to personal medical records and control over who can view their medical data.",
+    "Doctor: Wants quick and reliable access to relevant patient medical records while respecting patient access restrictions.",
+    "Healthcare organization: Wants compliance with privacy regulations, protection of medical data, and efficient clinical workflows.",
+    "System administrator: Wants the access control and authentication mechanisms to support enforcement of user access rights and two-step authentication.",
+    "Regulatory bodies: Require that medical record access is authenticated, authorized, auditable, and privacy-compliant."
+  ],
+  "description": "This use case specifies how authenticated patients and doctors access patient medical records and how access is controlled according to patient-defined access preferences and system-enforced authorization rules.",
+  "triggering_event": "A patient or doctor initiates a request to view a specific patient medical record through the system interface.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The healthcare information system is operational and reachable by clients.",
+    "The requesting user holds a valid user account in the system.",
+    "The requesting user has successfully completed the required authentication steps as part of the included authentication and access control use case.",
+    "The patient medical record to be accessed exists in the system’s data store."
+  ],
+  "postconditions": [
+    "The system has provided the authorized user with view access to the requested patient medical record data according to the applicable access control settings.",
+    "The system has recorded an access log entry for the medical record access, including user identity, accessed record, and timestamp.",
+    "Patient-defined access control preferences remain enforced for subsequent access attempts."
+  ],
+  "assumptions": [
+    "It is assumed that the included use case \"authenticate and control access\" provides user identity verification and evaluation of access rights before any medical record content is displayed.",
+    "It is assumed that the system has a data model that can represent measurement results, test results, and other relevant medical information within a patient medical record.",
+    "It is assumed that doctors are granted access to patient medical records only in accordance with patient access control settings and organizational policies, even though the detailed policies are not described in the given requirements.",
+    "It is assumed that the doctor’s ability to limit nurses’ access to patient medical records is implemented via the same underlying access control mechanisms that enforce patient access preferences and that this configuration is already performed outside the main flow of this use case.",
+    "It is assumed that patients use a mobile-capable client to access their medical records, but the specific device and platform details do not change the functional behavior of this use case.",
+    "It is assumed that any two-step authentication required by the system administrator is executed within the included authentication use case and is completed before this use case’s main flow begins."
+  ],
+  "requirements_met": [
+    "The system shall allow an authenticated patient to access their own medical record from a mobile-capable client so that they can review measurement and test results.",
+    "The system shall allow an authenticated patient to configure and manage who can access their medical data so that they can restrict access to their data if necessary.",
+    "The system shall allow an authenticated doctor to access patients’ medical records so that the doctor can view all relevant medical data for those patients, subject to access control.",
+    "The system shall enforce access restrictions on patient medical records in accordance with doctor-configured limitations on nurses’ access to prevent accidental removal of important data.",
+    "The system shall require successful completion of the included authentication and access control process before displaying any patient medical record content to a user."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific access control policies determining under which conditions a doctor may override or bypass patient restrictions on record access are not defined.",
+    "The granularity of access control (e.g., entire record versus specific sections such as test results or medications) is not specified.",
+    "The retention and content requirements for access logs, including who may view them and for how long they must be stored, are not detailed.",
+    "The exact interaction by which doctors configure limitations on nurses’ access to patient medical records is not described in the provided requirements."
+  ],
+  "main_flow": [
+    "1. Patient or doctor initiates access → The system displays an option to access a patient medical record.",
+    "2. Patient or doctor selects the patient record to access → The system identifies the requested patient medical record and prepares to apply authentication and authorization checks.",
+    "3. Patient or doctor submits the access request → The system executes the included \"authenticate and control access\" use case to verify the user’s identity and evaluate their authorization to access the selected medical record.",
+    "4. System completes authentication and authorization → The system confirms that the user is authenticated and has sufficient access rights to view the requested patient medical record.",
+    "5. System retrieves medical record data → The system loads the patient’s medical record data, including relevant medical information such as measurements and test results, according to the user’s access rights.",
+    "6. System presents medical record → The system displays the accessible portions of the patient medical record to the user in a structured view suitable for review.",
+    "7. User reviews medical record content → The system maintains the display of the medical record data and allows the user to navigate within the accessible information without altering access control settings."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Patient accessing own record by default — Condition: The actor is a patient who has already been associated with exactly one personal medical record. The patient selects the option to access their own medical record without specifying additional patient identification. The system directly identifies the patient’s own medical record as the target of the access request and continues with Step 3.",
+    "AF-2 (from Step 5): Restricted-view access for doctor — Condition: The actor is a doctor whose access to the selected patient’s record is partially restricted by patient-defined access preferences or by doctor-configured limitations for certain roles. The system retrieves only those sections of the patient medical record that the doctor is authorized to view and omits restricted sections. The system then continues with Step 6, presenting a partial but consistent view of the record."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Authentication failure — Condition: The user fails the authentication process required by the included \"authenticate and control access\" use case, for example due to invalid credentials or unsuccessful two-step authentication. The system denies access to the patient medical record, informs the user that authentication has failed, does not display any medical data, and terminates the use case.",
+    "EF-2 (from Step 4): Authorization denied — Condition: The user is successfully authenticated but does not have sufficient authorization to access the selected patient medical record according to access control settings. The system denies access, informs the user that they are not authorized to view the requested medical record, does not retrieve or display any medical data, and terminates the use case.",
+    "EF-3 (from Step 5): Medical record unavailable — Condition: The requested patient medical record cannot be retrieved due to it not existing or due to a data retrieval failure. The system displays a message indicating that the medical record is unavailable, does not display medical data, records the failure event, and terminates the use case."
+  ],
+  "information_for_steps": [
+    "1. User identity reference, user role information, user interface options for accessing medical records.",
+    "2. Patient identifier, association between user account and patient record, selection of target patient medical record.",
+    "3. Authentication credentials, two-step authentication tokens, access control rules, user role permissions.",
+    "4. Authorization decision result, mapping of user to permitted patients and record sections.",
+    "5. Patient medical record data, including measurements, test results, and other relevant medical information filtered by access rights.",
+    "6. Structured medical record view data, presentation layout, navigation metadata for accessible sections.",
+    "7. User navigation parameters within the medical record, view state of displayed medical information."
+  ]
+}

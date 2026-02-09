@@ -1,0 +1,52 @@
+{
+  "use_case_name": "Place Order",
+  "unique_id": "UC-002",
+  "area": "E-commerce",
+  "context_of_use": "This use case allows customers to add products to their cart and complete the checkout process to create an order.",
+  "scope": "E-commerce System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to purchase multiple items conveniently"
+  ],
+  "description": "This use case enables customers to add products to their cart and complete the checkout process to create an order.",
+  "triggering_event": "Customer decides to purchase products.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer is logged into the system.",
+    "Customer has selected products to purchase."
+  ],
+  "postconditions": [
+    "An order is created successfully.",
+    "The customer's cart is emptied."
+  ],
+  "assumptions": [
+    "The customer has a valid payment method available.",
+    "The system is operational and accessible."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart.",
+    "The system shall enable customers to checkout using multiple payment methods."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. Customer adds products to cart → System updates cart with selected products.",
+    "2. Customer initiates checkout → System displays checkout options.",
+    "3. Customer selects payment method → System processes payment.",
+    "4. System confirms order creation → System notifies customer of successful order."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Cart contents",
+    "3. Payment information"
+  ]
+}

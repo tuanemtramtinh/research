@@ -37,21 +37,25 @@
     "Clarification on the specific settings that can be configured by the admin."
   ],
   "main_flow": [
-    "1. Admin initiates the user account management process → System displays user account management options.",
-    "2. Admin selects a user account to manage → System retrieves and displays user account details.",
-    "3. Admin makes changes to the user account → System updates the user account information.",
-    "4. Admin initiates the system settings configuration process → System displays configuration options.",
-    "5. Admin selects settings to configure → System retrieves and displays current settings.",
-    "6. Admin makes changes to the system settings → System updates the system settings."
+    "1. admin → System displays user account management options.",
+    "2. admin → System allows admin to select a user account to manage.",
+    "3. admin → System processes the management action on the selected user account.",
+    "4. admin → System confirms the successful management of the user account.",
+    "5. admin → System displays system settings configuration options.",
+    "6. admin → System allows admin to select settings to configure.",
+    "7. admin → System processes the configuration action on the selected settings.",
+    "8. admin → System confirms the successful configuration of system settings."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
-    "1. Admin credentials",
-    "2. User account details",
-    "3. Updated user account information",
-    "4. Configuration options",
-    "5. Current system settings",
-    "6. Updated system settings"
+    "1. User account management options",
+    "2. Selected user account",
+    "3. Management action details",
+    "4. Confirmation of management action",
+    "5. System settings configuration options",
+    "6. Selected settings",
+    "7. Configuration action details",
+    "8. Confirmation of configuration action"
   ]
 }

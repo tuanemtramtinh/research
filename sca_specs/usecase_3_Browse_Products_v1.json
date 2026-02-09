@@ -2,7 +2,7 @@
   "use_case_name": "Browse Products",
   "unique_id": "UC-003",
   "area": "E-commerce",
-  "context_of_use": "This use case allows customers to search, filter, and view product details to find items of interest.",
+  "context_of_use": "This use case allows customers to browse, search, and view detailed information about products within the e-commerce platform.",
   "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,10 +10,10 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to find items easily"
+    "customer: wants to find and evaluate products easily"
   ],
-  "description": "Enable shoppers to search, filter, and view product details to find items of interest.",
-  "triggering_event": "Customer initiates a product browsing session.",
+  "description": "This use case enables customers to browse products by category, search for products by keyword, and view detailed information about products.",
+  "triggering_event": "Customer initiates a browsing session.",
   "trigger_type": "External",
   "preconditions": [
     "Customer is logged into the system."
@@ -22,7 +22,7 @@
     "Customer can view a list of products and their details."
   ],
   "assumptions": [
-    "The customer has an active account."
+    "The customer has an active account to log in."
   ],
   "requirements_met": [
     "The system shall allow customers to browse products by category.",
@@ -32,7 +32,7 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Need to define the categories for product browsing."
+    "None identified."
   ],
   "main_flow": [
     "1. Customer browses products by category → System displays a list of products in the selected category.",

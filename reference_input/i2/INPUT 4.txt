@@ -1,0 +1,30 @@
+﻿{
+    "use_case_name": "Analyze Historical Data (Comparative & Repeatable Analysis)",
+    "primary_actors": [
+      "UMD Employee"
+    ],
+    "preconditions": [
+      "Historical data or snapshots exist in the database.",
+      "The UMD Employee has access to the analysis module."
+    ],
+    "postconditions": [
+      "A comparison of traffic/environmental situations is displayed.",
+      "The analysis configuration is saved for repeatability."
+    ],
+    "main_flow": [
+      "1. UMD Employee selects 'Comparative Analysis'. → System prompts to select the datasets (Time A and Time B).",
+      "2. UMD Employee selects two different timestamps or snapshots. → System retrieves the stored simulator and environmental data for both times.",
+      "3. System displays the data side-by-side for comparison. → UMD Employee analyzes the differences in traffic and pollution.",
+      "4. UMD Employee chooses to save this comparison setup for future use. → System executes 'Store Time-based Data (Snapshots & Logs)' to save the analysis configuration.",
+      "5. System confirms the analysis is saved. → UMD Employee concludes the review."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Compare Solutions.",
+      "1. At step 2, UMD Employee selects a historical baseline and a 'Proposed Solution' result. → System aligns the data.",
+      "2. Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Data Corrupt.",
+      "1. At step 2, System detects one of the selected snapshots is incomplete. → System displays an error and asks the user to select a different source."
+    ]
+  },

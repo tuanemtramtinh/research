@@ -1,0 +1,61 @@
+{
+  "use_case_name": "Manage Orders",
+  "unique_id": "UC-004",
+  "area": "Order Management",
+  "context_of_use": "This use case allows customers to track their order status and managers to review and approve orders within the system.",
+  "scope": "Order Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to track order status to stay informed about delivery.",
+    "manager: wants to approve orders to ensure timely processing and avoid delays."
+  ],
+  "description": "Enables customers to track order status and managers to review and approve orders.",
+  "triggering_event": "Customer requests to track an order or manager receives an order for approval.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer has placed an order.",
+    "Manager has access to the order management system."
+  ],
+  "postconditions": [
+    "Customer can view the current status of their order.",
+    "Manager has either approved or rejected the order, updating its status accordingly."
+  ],
+  "assumptions": [
+    "Customers have accounts to track their orders.",
+    "Managers have the necessary permissions to approve orders."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to track their orders.",
+    "The system shall allow managers to approve orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the process for order approval and notification to customers."
+  ],
+  "main_flow": [
+    "1. Customer requests to track an order → System displays the current status of the order.",
+    "2. Manager reviews the order details → System presents order information for approval.",
+    "3. Manager approves the order → System updates the order status to approved and notifies the customer.",
+    "4. Manager rejects the order → System updates the order status to rejected and notifies the customer."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the customer enters an invalid order ID, the system displays an error message and prompts for a valid ID, returning to Step 1.",
+    "AF-2 (from Step 2): If the manager needs more information, they can request additional details before making a decision, returning to Step 2."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system is down, the customer receives a notification that the order tracking service is unavailable and is advised to try again later.",
+    "EF-2 (from Step 2): If the order details cannot be retrieved, the system informs the manager of the error and suggests checking the order ID."
+  ],
+  "information_for_steps": [
+    "1. Order ID",
+    "2. Order details",
+    "3. Approval status",
+    "4. Error message"
+  ]
+}

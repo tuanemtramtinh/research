@@ -1,0 +1,97 @@
+{
+  "use_case_name": "Estimate Measure Impacts",
+  "unique_id": "UC-004",
+  "area": "Urban Mobility Impact Analysis",
+  "context_of_use": "The system is used by an urban mobility planner to estimate the financial, emission, and noise impacts of a traffic-related measure or event based on existing traffic and environmental sensor data.",
+  "scope": "Urban Mobility Planning Decision Support System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Traffic and Environmental Sensor Data Repository"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Requires reliable quantitative impact estimates of measures and events to support planning decisions.",
+    "Municipal government: Requires traceable impact estimations to justify policy and infrastructure decisions.",
+    "Citizens and neighborhoods: Are affected by financial, environmental, and noise impacts of mobility measures and expect fair and transparent assessments.",
+    "Environmental agencies: Require accurate emission and noise estimations to ensure environmental standards are respected.",
+    "Financial controllers: Require cost estimations of measures for budgeting and financial planning."
+  ],
+  "description": "This use case enables an urban mobility planner to estimate the cost, emission, and noise impacts of a specific traffic-related measure or event by using existing traffic and pollution data obtained via the included review of sensor data.",
+  "triggering_event": "The urban mobility planner decides to assess the potential impacts of a specific traffic-related measure or event.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is authenticated and authorized to use the decision support functions of the system.",
+    "The traffic-related measure or event to be analyzed is defined or identifiable within the system.",
+    "Relevant traffic and environmental sensor data are available in the Traffic and Environmental Sensor Data Repository.",
+    "The system has access to configured impact estimation models or parameters for cost, emissions, and noise calculations."
+  ],
+  "postconditions": [
+    "The system has produced estimated cost values for the selected measure or event.",
+    "The system has produced estimated emission impact values for the selected measure or event.",
+    "The system has produced estimated noise impact values for the selected measure or event.",
+    "The impact estimation results are displayed to the urban mobility planner and are stored or made available for subsequent reporting or analysis within the system."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Decision Support System includes or can access a Traffic and Environmental Sensor Data Repository as a supporting data source, without introducing new functionality beyond data retrieval.",
+    "It is assumed that the included relationship to the use case \"review sensor data\" implies that sensor data must be consulted before impact estimations can be calculated.",
+    "It is assumed that the system already has predefined models or algorithms for calculating cost, emission, and noise estimations and that this use case only triggers their execution.",
+    "It is assumed that the urban mobility planner selects exactly one specific measure or event context for each execution of this use case.",
+    "It is assumed that the estimation results are persisted or at least remain accessible during the planner's session for use in other existing reporting or analysis functions.",
+    "It is assumed that review of sensor data is limited to viewing and selecting relevant sensor readings and does not include modifying the underlying sensor data."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to obtain an estimation of the cost of a selected traffic-related measure or event so that the financial consequences of the measure can be reviewed.",
+    "The system shall allow the urban mobility planner to obtain an estimation of emissions related to congestion or traffic situations caused by a selected measure or event so that the pollution effects of the measure or event can be reviewed.",
+    "The system shall allow the urban mobility planner to obtain an estimation of noise levels related to traffic situations caused by a selected measure or event so that the environmental effects of the measure or event can be reviewed.",
+    "The system shall allow the urban mobility planner, as part of the estimation process, to review relevant sensor data from pollution and traffic sensors via the included \"review sensor data\" functionality.",
+    "The system shall present the estimated cost, emission, and noise impacts in a form that can be interpreted by the urban mobility planner for subsequent validation and reporting of proposals."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific mathematical models, coefficients, and thresholds to be used for cost, emission, and noise estimations have not been defined.",
+    "The required level of temporal and spatial granularity for sensor data used in the estimations is not specified.",
+    "The acceptable accuracy and confidence level of the estimations, and how uncertainty should be represented to the planner, are not specified.",
+    "The policy for storing, versioning, and potentially revising past estimation results has not been defined.",
+    "The exact structure and units of measure (e.g., currency, emission units, decibel scales) to be used in displaying estimation results remain to be clarified."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner selects the option to estimate measure impacts → System displays an input interface for defining or selecting a traffic-related measure or event for impact estimation.",
+    "2. Urban mobility planner specifies or selects the measure or event context, including relevant parameters such as location, time frame, and type of measure → System records the selected context and parameters for the estimation session.",
+    "3. Urban mobility planner initiates review of sensor data as part of the estimation process → System invokes the included \"review sensor data\" functionality and displays relevant traffic and pollution sensor data associated with the selected context.",
+    "4. Urban mobility planner examines the displayed sensor data and confirms the selection of sensor data sets to be used for impact estimation → System stores the reference to the confirmed sensor data sets for subsequent calculations.",
+    "5. Urban mobility planner requests estimation of the cost impact for the selected measure or event → System applies the configured cost estimation model using the selected context and sensor data and calculates the estimated cost impact.",
+    "6. Urban mobility planner requests estimation of the emission impact for the selected measure or event → System applies the configured emission estimation model using the selected context and sensor data and calculates the estimated emission impact.",
+    "7. Urban mobility planner requests estimation of the noise impact for the selected measure or event → System applies the configured noise estimation model using the selected context and sensor data and calculates the estimated noise impact.",
+    "8. Urban mobility planner requests to view the combined impact estimation results → System aggregates the calculated cost, emission, and noise impacts and presents the estimation results to the urban mobility planner in a consolidated view.",
+    "9. Urban mobility planner confirms completion of the estimation session → System finalizes the session and makes the estimation results available for subsequent use by other existing reporting or analysis functions within the system."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 5): Urban mobility planner decides to skip explicit cost estimation. Condition: The planner is only interested in environmental impacts for the current session. The planner does not perform Step 5 and proceeds directly to Step 6. The use case then continues with environmental impact estimations and still completes successfully.",
+    "AF-2 (from Step 6): Urban mobility planner decides to skip explicit emission estimation. Condition: The planner is only interested in cost and noise impacts for the current session. The planner does not perform Step 6 and proceeds directly to Step 7. The use case then continues and still completes successfully.",
+    "AF-3 (from Step 7): Urban mobility planner decides to skip explicit noise estimation. Condition: The planner is only interested in cost and emission impacts for the current session. The planner does not perform Step 7 and proceeds directly to Step 8. The use case then continues and still completes successfully.",
+    "AF-4 (from Step 3): Urban mobility planner narrows the review of sensor data. Condition: The planner chooses to filter sensor data by additional criteria such as specific sensors or dates. The planner applies filters and confirms the filtered sensor data in Step 4. The use case then continues with Step 5.",
+    "AF-5 (from Step 8): Urban mobility planner requests separate detailed views. Condition: After the combined results are displayed, the planner chooses to view detailed breakdowns of cost, emission, or noise estimations individually. The system displays the requested detailed view(s) and then returns to the consolidated view before proceeding to Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Missing or invalid measure context. If the urban mobility planner provides incomplete or invalid measure or event parameters, the system detects the issue, displays an error message indicating the missing or invalid information, and prompts the planner to correct the input. The use case resumes at Step 2 after correction; if the planner cancels, the use case terminates without producing impact estimations.",
+    "EF-2 (from Step 3): Sensor data unavailable. If relevant sensor data for the selected context cannot be retrieved from the Traffic and Environmental Sensor Data Repository, the system notifies the planner that no suitable sensor data are available and logs the incident. The planner may choose to modify the context (returning to Step 2) or cancel the operation, in which case the use case ends without estimations.",
+    "EF-3 (from Step 5): Cost estimation calculation failure. If the cost estimation model cannot be executed due to internal calculation errors or missing configuration, the system displays a message indicating that cost estimation is currently unavailable, records the error, and allows the planner to proceed with Steps 6 and 7 for environmental estimations. The use case then continues with the available results and completes at Step 9, with cost values marked as unavailable.",
+    "EF-4 (from Step 6): Emission estimation calculation failure. If the emission estimation model cannot be executed due to internal calculation errors or missing configuration, the system displays a message indicating that emission estimation is currently unavailable, records the error, and allows the planner to proceed with Step 7 and subsequent steps. The use case completes at Step 9 with emission values marked as unavailable.",
+    "EF-5 (from Step 7): Noise estimation calculation failure. If the noise estimation model cannot be executed due to internal calculation errors or missing configuration, the system displays a message indicating that noise estimation is currently unavailable, records the error, and allows the planner to proceed with Step 8 and Step 9. The use case completes with noise values marked as unavailable.",
+    "EF-6 (from Step 1): Loss of system availability. If the system becomes unavailable after the planner has initiated the use case, the system stops processing, any unsaved session data may be lost, and the planner is informed upon reconnection that the estimation session did not complete. The use case terminates without valid estimation results."
+  ],
+  "information_for_steps": [
+    "1. Measure impact estimation option identifier, user session identifier.",
+    "2. Measure or event identifier, measure type, geographic area, time frame, configuration parameters selected by the urban mobility planner.",
+    "3. Sensor data request parameters, including selected locations, time intervals, and sensor types (traffic, pollution, noise).",
+    "4. References to selected sensor data sets, sensor identifiers, data time ranges confirmed by the urban mobility planner.",
+    "5. Cost estimation input parameters, including measure context, selected sensor data references, and cost model parameters; cost estimation results.",
+    "6. Emission estimation input parameters, including measure context, selected sensor data references, and emission model parameters; emission estimation results.",
+    "7. Noise estimation input parameters, including measure context, selected sensor data references, and noise model parameters; noise estimation results.",
+    "8. Aggregated impact estimation dataset, including cost, emission, and noise results; presentation configuration for consolidated view.",
+    "9. Final impact estimation record, including timestamp, user identifier, measure or event context, and references for subsequent reporting or analysis."
+  ]
+}

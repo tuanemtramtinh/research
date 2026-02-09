@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Search/Edit Patient Info",
+"primary_actors": ["Receptionist"],
+"preconditions": ["Receptionist is authenticated."],
+"postconditions": ["Patient information is updated in the central database."],
+"main_flow": [
+"1. Receptionist initiates a search for a patient's file.",
+"2. System queries the Electronic Medical Record Database.",
+"3. System displays the patient's demographic and contact information.",
+"4. Receptionist verifies the patient identity.",
+"5. Receptionist edits the patient information (e.g., contact details).",
+"6. System saves the changes once to the central database."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): View for Appointment. 1. Receptionist views file to confirm identity for an appointment. 2. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 2): Patient Not Found. 1. System yields no results. 2. System prompts to register new patient. 3. Use Case ends."
+]
+}

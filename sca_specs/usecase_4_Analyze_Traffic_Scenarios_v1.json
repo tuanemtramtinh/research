@@ -1,0 +1,97 @@
+{
+  "use_case_name": "Analyze Traffic Scenarios",
+  "unique_id": "UC-004",
+  "area": "Urban Mobility Planning and Traffic Analysis",
+  "context_of_use": "The use case enables an urban mobility planner to analyze traffic scenarios by viewing historical traffic situations for past dates and simulating traffic crisis scenarios to support planning and emergency services.",
+  "scope": "Urban Mobility Planning Decision Support System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Historical traffic data repository",
+    "Simulation engine"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Requires accurate historical and simulated traffic scenarios to validate and improve urban mobility proposals.",
+    "City administration: Requires that traffic analyses support informed decisions on mobility measures and crisis preparedness.",
+    "Emergency services: Require realistic crisis traffic simulations to assess accessibility and response feasibility.",
+    "Citizens: Require that traffic planning and crisis preparedness preserve mobility, safety, and fairness across neighborhoods."
+  ],
+  "description": "This use case describes how an urban mobility planner analyzes traffic scenarios by selecting past dates to view historical traffic situations and by configuring and executing crisis simulations to understand potential traffic impacts and support emergency services planning.",
+  "triggering_event": "The urban mobility planner decides to analyze traffic scenarios for planning or emergency preparedness purposes.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner has authenticated access to the Urban Mobility Planning Decision Support System.",
+    "Historical traffic data for the relevant road network is available in the system for at least some past dates.",
+    "The simulation engine is operational and configured with a valid traffic network model.",
+    "The urban mobility planner has sufficient permissions to access historical data and execute traffic simulations."
+  ],
+  "postconditions": [
+    "The system has presented at least one historical traffic situation or crisis simulation result to the urban mobility planner.",
+    "Any configured scenario parameters used for viewing or simulating traffic scenarios are stored or remain available for subsequent review within the current session.",
+    "The urban mobility planner has access to analyzed traffic information that can be used to support validation of mobility proposals or crisis preparedness."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Decision Support System integrates or has access to a historical traffic data repository that contains time-stamped traffic measurements or reconstructed traffic states for past dates.",
+    "It is assumed that the simulation engine can generate traffic scenarios, including crisis scenarios, based on configurable parameters such as date, time, and event characteristics, without requiring additional capabilities beyond those implied by the ability to simulate crisis.",
+    "It is assumed that the urban mobility planner interacts with the system via a graphical user interface that allows selection of dates, times, locations, and crisis scenario parameters.",
+    "It is assumed that viewing historical traffic situations includes displaying traffic indicators such as traffic levels or congestion states in a spatial and temporal representation consistent with existing system capabilities.",
+    "It is assumed that simulating a crisis scenario does not modify the underlying real-world data and that simulation results are treated as separate analytical outputs.",
+    "It is assumed that the system time and stored timestamps use a consistent time zone and format for selecting and presenting past dates.",
+    "It is assumed that the system provides default simulation parameters for crisis scenarios when the urban mobility planner does not specify all configuration details explicitly."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to select a past date to see the corresponding traffic situation so that the planner can analyze traffic scenarios on similar days.",
+    "The system shall display historical traffic situations for the selected past date in a form that allows the urban mobility planner to review traffic conditions over time.",
+    "The system shall allow the urban mobility planner to configure and initiate a traffic crisis simulation so that the planner can assess traffic behavior during crisis situations.",
+    "The system shall present the results of a traffic crisis simulation in a form that supports analysis of network performance and accessibility for emergency services.",
+    "The system should allow the urban mobility planner to adjust basic scenario parameters, such as time period and affected area, before running a crisis simulation.",
+    "The system shall ensure that running a crisis simulation does not alter stored historical traffic data.",
+    "The system shall maintain consistency between selected dates and displayed historical traffic data, using a uniform time reference."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The required temporal resolution and spatial granularity for historical traffic situations (e.g., 5-minute intervals, per road segment) need to be specified.",
+    "Policies regarding data retention and the maximum historical look-back period for traffic data must be defined.",
+    "The exact set of configurable parameters for crisis simulations (e.g., type of crisis, duration, closure of roads, demand changes) needs clarification.",
+    "Performance expectations for crisis simulations, including maximum acceptable execution time and size of the simulated area, remain to be determined.",
+    "The required visualization formats for historical and simulated scenarios (e.g., maps, time series charts, heat maps) must be agreed upon."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner selects the traffic scenario analysis function → System displays options to view historical traffic situations or simulate a traffic crisis.",
+    "2. Urban mobility planner chooses to view a historical traffic situation → System displays a date and time selection interface, including available historical periods.",
+    "3. Urban mobility planner selects a past date and optionally a time range and area of interest → System validates the selection against available historical traffic data.",
+    "4. Urban mobility planner confirms the historical scenario request → System retrieves and processes the corresponding historical traffic data for the selected date, time range, and area.",
+    "5. Urban mobility planner views the historical traffic situation presented by the system → System renders the historical traffic situation with relevant traffic indicators for the specified period.",
+    "6. Urban mobility planner chooses to simulate a traffic crisis scenario within the analysis function → System displays a crisis simulation configuration interface with default scenario parameters.",
+    "7. Urban mobility planner configures crisis simulation parameters such as time frame and affected area and confirms the simulation request → System validates the simulation parameters for completeness and feasibility.",
+    "8. Urban mobility planner initiates the crisis simulation execution → System runs the crisis simulation using the validated parameters and generates traffic scenario results.",
+    "9. Urban mobility planner reviews the crisis simulation results displayed by the system → System presents the simulated traffic situation, highlighting traffic conditions relevant to emergency services and planning.",
+    "10. Urban mobility planner optionally compares insights from historical and simulated traffic scenarios within the analysis session → System maintains both historical and simulation results accessible for concurrent review during the session."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Urban mobility planner starts with crisis simulation. Condition: The planner chooses to simulate a traffic crisis before viewing any historical situation. The planner selects the crisis simulation option on the initial analysis screen. The system bypasses Steps 3–5 and proceeds directly to display the crisis simulation configuration interface as described in Step 6, then continues with Steps 7–9 and ends successfully.",
+    "AF-2 (from Step 3): Historical time range refinement. Condition: The urban mobility planner wishes to refine the initially selected time range. After the system validates the initial date and time range, the planner adjusts the time range or area of interest. The system revalidates the updated selection and, upon success, continues with Step 4 and the flow ends successfully.",
+    "AF-3 (from Step 7): Use of default crisis parameters. Condition: The urban mobility planner accepts all default crisis simulation parameters. The planner directly confirms the simulation request without changing any values. The system validates the default parameters as complete and feasible and then proceeds directly to Step 8 and completes the flow successfully."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Selected historical period has no data. Condition: The system determines that no historical traffic data exists for the selected date, time range, or area. The system displays an error message indicating that the selected period is unsupported and prompts the urban mobility planner to choose another date or adjust the time range. The flow returns to Step 3 upon a new selection; if the planner cancels, the use case ends without displaying historical traffic situations.",
+    "EF-2 (from Step 7): Invalid or infeasible crisis simulation parameters. Condition: The system detects that one or more configured crisis simulation parameters are invalid or infeasible (for example, time frame outside simulation horizon or area outside the modeled network). The system informs the urban mobility planner of the invalid parameters and highlights the fields requiring correction. The flow returns to Step 7 for parameter correction; if the planner cancels, the use case ends without running a simulation.",
+    "EF-3 (from Step 8): Simulation execution failure. Condition: The crisis simulation cannot be completed due to internal processing errors or resource limitations. The system logs the error, notifies the urban mobility planner that the simulation has failed, and advises retrying later or reducing scenario size. The use case ends without presenting crisis simulation results.",
+    "EF-4 (from Step 4): Historical data retrieval failure. Condition: The system encounters an error while retrieving historical traffic data for the requested period. The system logs the error, displays a notification that historical data cannot be loaded for the selected period, and offers the urban mobility planner the option to select another period. If the planner selects another period, the flow returns to Step 3; otherwise, the use case ends without displaying historical traffic situations."
+  ],
+  "information_for_steps": [
+    "1. Analysis function selection options, user session information.",
+    "2. Historical analysis mode selection, available historical date list.",
+    "3. Selected past date, optional time range, selected area of interest, available data coverage metadata.",
+    "4. Historical traffic dataset identifiers, retrieval query parameters (date, time range, area).",
+    "5. Historical traffic indicators (e.g., traffic levels, congestion states), visualization configuration settings.",
+    "6. Crisis simulation mode selection, default crisis scenario template parameters.",
+    "7. Configured crisis parameters (time frame, affected area, crisis type if supported), validation rules.",
+    "8. Simulation input dataset references, simulation run identifier, simulation execution status.",
+    "9. Simulated traffic indicators, visualization layers, summary of key metrics relevant to emergency access and congestion.",
+    "10. References to displayed historical and simulated scenarios, comparison view configuration, user notes or observations if provided."
+  ]
+}

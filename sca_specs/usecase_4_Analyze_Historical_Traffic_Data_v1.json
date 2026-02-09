@@ -1,0 +1,94 @@
+{
+  "use_case_name": "Analyze Historical Traffic Data",
+  "unique_id": "UC-004",
+  "area": "Traffic Monitoring and Analysis",
+  "context_of_use": "UMD employees use the traffic analysis platform to select historical time periods and compare stored traffic-related datasets in order to perform consistent, repeatable analyses and evaluate different traffic management solutions for Wonderland.",
+  "scope": "Wonderland Traffic Analysis Platform",
+  "level": "User-goal",
+  "primary_actors": [
+    "umd employee"
+  ],
+  "supporting_actors": [
+    "managed traffic data sources"
+  ],
+  "stakeholders_and_interests": [
+    "umd employee: Wants to efficiently compare historical traffic situations and solutions to derive meaningful insights and accelerate analytical workflows.",
+    "UMD management: Wants data-driven evidence from historical analyses to support strategic decisions and evaluation of implemented solutions.",
+    "Urban planning department: Wants reliable comparative analyses of different planning and traffic management solutions using historical data.",
+    "Environmental oversight bodies: Want historical analysis outputs that relate traffic patterns to environmental impact for compliance and planning."
+  ],
+  "description": "This use case describes how a UMD employee interacts with the traffic analysis platform to select specific historical time periods, load the corresponding stored traffic data, and compare multiple historical datasets side by side in a structured, repeatable manner in order to generate meaningful traffic analyses and evaluate different implemented solutions.",
+  "triggering_event": "The umd employee decides to analyze and compare historical traffic data for one or more time periods or solutions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Wonderland Traffic Analysis Platform is operational and accessible to the umd employee.",
+    "The umd employee is authenticated and authorized to access historical traffic data within the platform.",
+    "Historical traffic data, including simulator data and environmental measures, has been previously stored and associated with timestamps in the platform.",
+    "Managed traffic data sources are available and have successfully provided historical data to the platform prior to the analysis session."
+  ],
+  "postconditions": [
+    "The platform has presented selected historical traffic datasets for the chosen time periods to the umd employee.",
+    "The platform has displayed side-by-side comparisons of historical traffic datasets according to the umd employee’s selections.",
+    "The umd employee has the ability to reuse the defined comparison parameters and analysis setup to perform repeatable analyses for similar situations.",
+    "Any analysis configurations created during the session, such as selected time ranges and comparison criteria, are stored for later reuse by the umd employee."
+  ],
+  "assumptions": [
+    "It is assumed that the Wonderland Traffic Analysis Platform provides a user interface through which the umd employee can select time periods and comparison options, even though the specific interface details are not described in the requirement text.",
+    "It is assumed that historical traffic data, simulator data, and environmental measures are already persisted in a unified storage that associates each record with a specific time, consistent with the related user stories about saving historical data.",
+    "It is assumed that the included use case \"manage traffic data sources\" handles the configuration and maintenance of data sources such that the analysis platform can access consistent and complete historical data, without introducing any additional analysis capabilities.",
+    "It is assumed that side-by-side comparison of data from two or more times is presented visually or in a structured format that allows the umd employee to interpret differences, although no particular visualization technique is mandated.",
+    "It is assumed that repeatable analysis is achieved by allowing the umd employee to reuse or reapply previously defined analysis parameters (such as time ranges and selected metrics) to similar situations, without implying automatic or autonomous decision making by the system."
+  ],
+  "requirements_met": [
+    "The system shall allow the umd employee to compare historical traffic data so that the data can be used to create meaningful analyses.",
+    "The system shall allow the umd employee to select a specific period of time from which historical traffic-related data is retrieved and displayed.",
+    "The system shall allow the umd employee to view and compare data from two different times next to each other in order to compare the two situations.",
+    "The system shall allow the umd employee to use historical data to compare multiple situations in order to compare the results of two different solutions that have been built.",
+    "The system shall support performing repeatable analysis for situations that are similar, by allowing the umd employee to reuse analysis configurations, so that the workflow is accelerated.",
+    "The system shall rely on managed traffic data sources to provide the historical traffic and related datasets required for analysis and comparison."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The required level of temporal granularity for historical data selection (e.g., minutes, hours, days) has not been specified and must be defined.",
+    "The maximum number of different times or situations that can be compared side by side in a single analysis session has not been specified and must be decided.",
+    "The specific types of traffic-related metrics and environmental indicators to be included in historical comparisons are not explicitly defined and require clarification.",
+    "Policies for access control and data retention regarding historical traffic data and analysis configurations must be specified.",
+    "The exact behavior and persistence rules for repeatable analysis configurations, such as naming, sharing, and versioning, remain to be defined."
+  ],
+  "main_flow": [
+    "1. umd employee initiates historical analysis → System displays an overview page for historical traffic data analysis, including available selection and comparison options.",
+    "2. umd employee requests to work with historical traffic data sources → System invokes managed traffic data sources configurations to determine which historical datasets are available for analysis.",
+    "3. umd employee reviews the list of available historical datasets and time ranges → System retrieves and displays available time periods and associated historical traffic datasets obtained from the managed traffic data sources.",
+    "4. umd employee selects a primary time period for analysis → System loads and prepares the historical traffic data for the selected primary time period.",
+    "5. umd employee selects one or more comparison time periods or situations → System loads and prepares the historical traffic data for each selected comparison time period or situation.",
+    "6. umd employee confirms the selected time periods and situations for comparison → System generates a comparison view that presents the loaded historical datasets for all confirmed selections.",
+    "7. umd employee specifies comparison criteria, such as which traffic-related indicators to include in the analysis → System applies the specified comparison criteria to the loaded datasets and updates the comparison view accordingly.",
+    "8. umd employee reviews the side-by-side comparison of the historical traffic datasets → System maintains the comparison view and allows continued inspection of the presented differences between the selected situations.",
+    "9. umd employee defines the analysis configuration as a repeatable analysis setup for similar situations → System stores the current selection of time periods, situations, and comparison criteria as a reusable analysis configuration associated with the umd employee.",
+    "10. umd employee completes the analysis session → System confirms that the comparison results and any defined reusable analysis configuration remain accessible for future use."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 5): The umd employee chooses to compare only one additional time period instead of multiple periods. Condition: The umd employee selects exactly one comparison time period. System behavior: The system loads and prepares the historical traffic data for the single selected comparison period, then proceeds directly to Step 6 with a comparison view containing the primary and the single comparison time period.",
+    "AF-2 (from Step 7): The umd employee accepts default comparison criteria instead of specifying custom criteria. Condition: The umd employee does not modify the default comparison indicators. System behavior: The system applies predefined default comparison criteria to the loaded datasets and proceeds to Step 8, where the comparison view reflects these default criteria.",
+    "AF-3 (from Step 9): The umd employee opts not to save the current setup as a repeatable analysis configuration. Condition: The umd employee explicitly skips or declines the option to define a reusable analysis configuration. System behavior: The system does not create a new stored analysis configuration but retains the current comparison view for the ongoing session and proceeds to Step 10, ending the use case with only transient analysis settings."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): No historical datasets are available for the selected scope. Condition: Managed traffic data sources indicate that no historical data exists for the requested area or timeframe. System behavior: The system displays a message indicating that no historical traffic data is available for analysis and prompts the umd employee to adjust the requested scope or end the session; the use case terminates without performing comparison.",
+    "EF-2 (from Step 4): Loading historical data for the primary time period fails. Condition: The system encounters an error when retrieving historical data for the selected primary time period. System behavior: The system displays an error notification explaining that the primary dataset could not be loaded, discards the incomplete selection, and returns the umd employee to the time period selection step to choose a different primary time period.",
+    "EF-3 (from Step 5): Loading historical data for one or more comparison periods fails. Condition: The system cannot retrieve data for one or more selected comparison time periods. System behavior: The system notifies the umd employee about the failed comparison period load, excludes the unavailable periods from the comparison set, and allows the umd employee to either proceed with the remaining successfully loaded comparison periods or select alternative periods.",
+    "EF-4 (from Step 9): Storing the repeatable analysis configuration fails. Condition: The system cannot persist the analysis configuration due to a storage or validation error. System behavior: The system informs the umd employee that the configuration could not be saved and keeps the current comparison view active for the ongoing session only; the use case then continues with Step 10 without a stored configuration."
+  ],
+  "information_for_steps": [
+    "1. User identity, analysis overview parameters.",
+    "2. Managed traffic data source configurations, list of accessible historical datasets.",
+    "3. Available time ranges, dataset metadata (e.g., start time, end time, data completeness).",
+    "4. Primary time period selection, associated historical traffic dataset references.",
+    "5. Comparison time period selections, associated historical traffic dataset references.",
+    "6. Confirmed set of primary and comparison time periods, mapping of datasets to each period.",
+    "7. Comparison criteria such as selected traffic and environmental indicators, filtering and aggregation parameters.",
+    "8. Generated comparison results, including aligned historical metrics and visual or tabular representations.",
+    "9. Analysis configuration details including selected time periods, comparison situations, chosen criteria, and user association.",
+    "10. Persistent references to comparison results where applicable, stored analysis configuration identifier, session end state."
+  ]
+}

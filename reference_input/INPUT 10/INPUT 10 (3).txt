@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Edit Medical Records",
+"primary_actors": ["Patient", "Doctor", "Lab Specialist"],
+"preconditions": ["Actor has write access to the record."],
+"postconditions": ["Medical record is updated."],
+"main_flow": [
+"1. Include Use Case: Access Medical Records.",
+"2. Actor selects specific parts of the medical record to edit.",
+"3. System unlocks the fields for editing.",
+"4. Actor updates the information.",
+"5. System validates the input.",
+"6. System saves the changes and updates the record history."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 5): Validation Error. 1. System detects invalid data format. 2. System prompts Actor to correct the input. 3. Resume Step 4."
+]
+}

@@ -8,7 +8,12 @@ from dotenv import load_dotenv
 from .main_graph import build_main_graph
 
 
-def main(input_file: str = "input_user_stories.txt", output_file: str | None = None):
+def main(
+    input_file: str = "input_user_stories.txt",
+    output_file: str | None = None,
+    reference_dir: str | None = None,
+    comparison_dir: str | None = None,
+):
     # Load environment variables from .env if present (OPENAI_API_KEY, etc.)
     load_dotenv()
 
@@ -46,6 +51,8 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
             "requirement_text": requirement_text,
             "use_cases": [],
             "scenario_results_acc": [],
+            "reference_dir": reference_dir,
+            "comparison_dir": comparison_dir,
         }
     )
 
@@ -85,6 +92,23 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
             corr = getattr(ev, "Correctness", None)
             rel = getattr(ev, "Relevance", None)
 
+            def _avg_overall_score(*criteria) -> str:
+                scores: list[float] = []
+                for c in criteria:
+                    if c is None:
+                        continue
+                    try:
+                        if str(getattr(c, "result", "") or "").strip().upper() == "N/A":
+                            continue
+                    except Exception:
+                        pass
+                    s = getattr(c, "score", None)
+                    if isinstance(s, (int, float)):
+                        scores.append(float(s))
+                if not scores:
+                    return "N/A"
+                return f"{int(round(sum(scores) / float(len(scores))))}/100"
+
             def _fmt_crit(name: str, crit) -> str:
                 if crit is None:
                     return f"- {name}: <no score>"
@@ -117,6 +141,26 @@ def main(input_file: str = "input_user_stories.txt", output_file: str | None = N
             log(_fmt_crit("Completeness", comp))
             log(_fmt_correctness(corr))
             log(_fmt_crit("Relevance", rel))
+            log(f"- Overall (avg): {_avg_overall_score(comp, corr, rel)}")
+
+            cmp_path = getattr(sr, "comparison_spec_path", None)
+            cmp_ev = getattr(sr, "comparison_evaluation", None)
+            if cmp_path:
+                log("\n--- COMPARISON SCENARIO SCORES (FILE) ---")
+                log(str(cmp_path))
+                if cmp_ev is None:
+                    log("<NO COMPARISON EVALUATION>")
+                else:
+                    cmp_comp = getattr(cmp_ev, "Completeness", None)
+                    cmp_corr = getattr(cmp_ev, "Correctness", None)
+                    cmp_rel = getattr(cmp_ev, "Relevance", None)
+                    log(_fmt_crit("Completeness", cmp_comp))
+                    log(_fmt_correctness(cmp_corr))
+                    log(_fmt_crit("Relevance", cmp_rel))
+                    log(f"- Overall (avg): {_avg_overall_score(cmp_comp, cmp_corr, cmp_rel)}")
+            else:
+                log("\n--- COMPARISON SCENARIO SCORES ---")
+                log("N/A")
 
             def _log_sub_scores(label: str, crit) -> None:
                 if crit is None:
@@ -220,6 +264,23 @@ if __name__ == "__main__":
         default="output.txt",
         help="Output file to save results (default: output.txt)",
     )
+    parser.add_argument(
+        "--reference-dir",
+        type=str,
+        default=None,
+        help="Directory containing reference JSON files for correctness evaluation (auto-matched to use cases by name)",
+    )
+    parser.add_argument(
+        "--comparison-dir",
+        type=str,
+        default=None,
+        help="Directory containing comparison JSON files to score alongside generated specs (auto-matched to use cases by name)",
+    )
     args = parser.parse_args()
 
-    main(input_file=args.input, output_file=args.output)
+    main(
+        input_file=args.input,
+        output_file=args.output,
+        reference_dir=args.reference_dir,
+        comparison_dir=args.comparison_dir,
+    )

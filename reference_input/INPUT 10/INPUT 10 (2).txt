@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Access Medical Records",
+"primary_actors": ["Patient", "Doctor", "Lab Specialist"],
+"preconditions": ["User is registered."],
+"postconditions": ["Medical record details are displayed to the Actor."],
+"main_flow": [
+"1. Include Use Case: Authenticate.",
+"2. Actor searches for a specific medical record (or selects their own profile).",
+"3. System retrieves the medical record.",
+"4. System checks access permissions (e.g., Doctor assignment or Patient ownership).",
+"5. System displays the medical record details."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 4): Access Denied. 1. System determines Actor is not assigned to or owner of the record. 2. System restricts view. 3. System displays 'Access Denied' message. 4. Use Case ends."
+]
+}

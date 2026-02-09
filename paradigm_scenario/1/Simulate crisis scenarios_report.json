@@ -1,0 +1,69 @@
+{
+  "use_case_name": "Simulate crisis scenarios",
+  "unique_id": "UC-007",
+  "area": "Urban Mobility",
+  "context_of_use": "The IT system must provide urban mobility planners with a dynamic simulation platform that: 1. Models traffic congestion under various scenarios. 2. Allows real‑time adjustment of speed limits, reversible lane directions, roundabouts, adaptive traffic lights, road closures, and event‑induced traffic surges. 3. Supplies predictive analytics on congestion, emissions, noise, and neighborhood impact. 4. Triggers alerts when a measure creates congestion or inequity. 5. Incorporates historical sensor data for scenario analysis. 6. Estimates financial costs and environmental impacts. 7. Supports crisis simulation for emergency services. 8. Generates customizable reports (executive summaries, detailed analyses, fairness, cost, emission, and congestion metrics). 9. Offers a recommendation engine for congestion‑mitigation solutions.",
+  "scope": "Target System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Emergency Services Officer"
+  ],
+  "supporting_actors": [
+    "System"
+  ],
+  "stakeholders_and_interests": [
+    "Emergency Services Officer: Achieve the goal described in the use case."
+  ],
+  "description": "Support crisis simulation for emergency services to test response plans.",
+  "triggering_event": "Emergency Services Officer initiates 'Simulate crisis scenarios'.",
+  "trigger_type": "External",
+  "preconditions": [
+    "- The simulation engine is initialized and connected to real‑time traffic data feeds. - The Emergency Services Officer is authenticated and authorized to access the crisis simulation module. - Historical sensor data for the target area is available in the data lake. - The system’s alerting and recommendation components are operational."
+  ],
+  "postconditions": [
+    "- The crisis scenario is executed and the simulation results are stored in the system. - All relevant reports and analytics are generated and accessible to the actor. - Any alerts or recommendations triggered during the simulation are logged and notified to the appropriate stakeholders."
+  ],
+  "assumptions": [
+    "The actor has appropriate access to the system."
+  ],
+  "requirements_met": [
+    "Support crisis simulation for emergency services to test response plans."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. **Emergency Services Officer** selects the *Simulate crisis scenarios* function from the dashboard.",
+    "2. The system presents a scenario template library; the officer chooses a predefined crisis scenario or creates a custom one.",
+    "3. The officer configures scenario parameters (e.g., accident location, road closure extent, event surge intensity).",
+    "4. The system validates the input against data integrity and policy constraints.",
+    "5. The system loads the relevant historical sensor data for the selected area and time window.",
+    "6. The simulation engine initializes the traffic model with the configured parameters and historical base state.",
+    "7. The simulation runs iteratively, updating traffic flow, speed limits, lane directions, and adaptive lights in real time.",
+    "8. During each iteration, the system monitors congestion, emissions, noise, and neighborhood impact metrics.",
+    "9. If any metric exceeds predefined thresholds, the system triggers an alert and logs the incident.",
+    "10. Concurrently, the recommendation engine evaluates mitigation actions and suggests options to the officer.",
+    "11. Once the simulation completes, the system aggregates results and generates customizable reports (executive summary, detailed analysis, fairness, cost, emission, congestion).",
+    "12. The officer reviews the reports and, if desired, exports them or shares them with stakeholders.",
+    "13. The system archives the simulation run and updates the scenario library with any new insights."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. **Emergency Services Officer** selects the *Simulate crisis scenarios* function from the dashboard.",
+    "2. The system presents a scenario template library; the officer chooses a predefined crisis scenario or creates a custom one.",
+    "3. The officer configures scenario parameters (e.g., accident location, road closure extent, event surge intensity).",
+    "4. The system validates the input against data integrity and policy constraints.",
+    "5. The system loads the relevant historical sensor data for the selected area and time window.",
+    "6. The simulation engine initializes the traffic model with the configured parameters and historical base state.",
+    "7. The simulation runs iteratively, updating traffic flow, speed limits, lane directions, and adaptive lights in real time.",
+    "8. During each iteration, the system monitors congestion, emissions, noise, and neighborhood impact metrics.",
+    "9. If any metric exceeds predefined thresholds, the system triggers an alert and logs the incident.",
+    "10. Concurrently, the recommendation engine evaluates mitigation actions and suggests options to the officer.",
+    "11. Once the simulation completes, the system aggregates results and generates customizable reports (executive summary, detailed analysis, fairness, cost, emission, congestion).",
+    "12. The officer reviews the reports and, if desired, exports them or shares them with stakeholders.",
+    "13. The system archives the simulation run and updates the scenario library with any new insights."
+  ]
+}

@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Upload Data",
+"primary_actors": ["Patient", "Doctor"],
+"preconditions": ["Data exists (on device or manually)."],
+"postconditions": ["Data is added to the medical record."],
+"main_flow": [
+"1. Include Use Case: Authenticate.",
+"2. Actor selects the option to upload data.",
+"3. Actor uploads fitness data (Patient) or manually enters result data (Doctor).",
+"4. System verifies the data format.",
+"5. System stores the data in the medical record."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Manual Entry by Doctor. 1. Doctor identifies a malfunction in linking. 2. Doctor manually inputs the result from the external device. 3. Resume Step 4."
+],
+"exception_flows": []
+}

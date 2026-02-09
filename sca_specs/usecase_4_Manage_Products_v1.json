@@ -2,7 +2,7 @@
   "use_case_name": "Manage Products",
   "unique_id": "UC-004",
   "area": "Product Management",
-  "context_of_use": "This use case allows admins to create and update product records, including pricing and inventory management.",
+  "context_of_use": "This use case allows admins to manage product-related tasks within the system.",
   "scope": "Product Management System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,19 +10,23 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Control product availability and pricing"
+    "admin: Ensure products are available and pricing is accurate."
   ],
-  "description": "Allows admins to create and update product records, including pricing and inventory management.",
-  "triggering_event": "Admin initiates product management actions.",
+  "description": "Allows admins to create products, update prices, and maintain inventory levels.",
+  "triggering_event": "Admin initiates product management tasks.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is authenticated and authorized to manage products."
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to manage products."
   ],
   "postconditions": [
-    "Products are created or updated successfully in the system."
+    "New products are created and available for purchase.",
+    "Product prices are updated successfully.",
+    "Inventory levels are managed to prevent stockouts."
   ],
   "assumptions": [
-    "Admin has the necessary permissions to manage products."
+    "The admin has access to the product management interface.",
+    "The system is operational and accessible."
   ],
   "requirements_met": [
     "The system shall allow admins to create new products.",
@@ -32,18 +36,18 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the specific fields required for product creation and updates."
+    "Clarification on the process for handling product creation errors."
   ],
   "main_flow": [
-    "1. Admin creates a new product → System records the new product in the database.",
-    "2. Admin updates product prices → System updates the pricing information in the database.",
-    "3. Admin manages inventory levels → System adjusts inventory levels accordingly."
+    "1. Admin creates a new product → System saves the product and confirms creation.",
+    "2. Admin updates product prices → System updates the prices and confirms the changes.",
+    "3. Admin manages inventory levels → System updates inventory and confirms the changes."
   ],
   "alternative_flows": [],
   "exception_flows": [],
   "information_for_steps": [
     "1. Product details",
-    "2. Updated pricing information",
-    "3. Inventory level adjustments"
+    "2. Price information",
+    "3. Inventory levels"
   ]
 }

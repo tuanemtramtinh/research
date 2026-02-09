@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Follow Teams and Players",
+"primary_actors": ["Fan"],
+"preconditions": ["Fan is registered and logged in."],
+"postconditions": ["Fan's following list is updated."],
+"main_flow": [
+"1. Fan searches for a specific Team or Player.",
+"2. System displays a list of matching results.",
+"3. Fan selects an entity to follow.",
+"4. System updates the Fan's subscription settings.",
+"5. System confirms that the Fan is now following the selected Team or Player."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): View Profile. 1. Fan views the social media page of the Team/Player. 2. Resume Step 3."
+],
+"exception_flows": [
+"EF-1 (from Step 2): No Results. 1. System finds no Team or Player matching the search. 2. System notifies Fan. 3. Use Case ends."
+]
+}

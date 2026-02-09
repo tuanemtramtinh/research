@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Authentication",
+"primary_actors": ["Patient", "Nurse"],
+"preconditions": ["User has a registered account with a Unique Identification Number."],
+"postconditions": ["User is logged in."],
+"main_flow": [
+"1. Actor enters Unique Identification Number and password.",
+"2. System validates credentials.",
+"3. System prompts for Two-Factor Authentication (2FA) code via phone.",
+"4. Actor enters the code.",
+"5. System grants access to the system."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Employee Daily Login. 1. System detects Actor is a UHOPE Employee (e.g., Nurse). 2. System checks if this is the first login of the day. 3. If yes, proceed to Step 3. 4. If no, skip to Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 2): Invalid Login. 1. System rejects credentials. 2. System displays error. 3. Use Case ends."
+]
+}

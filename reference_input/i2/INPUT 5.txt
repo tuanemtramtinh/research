@@ -1,0 +1,31 @@
+﻿{
+    "use_case_name": "Predict Future Scenarios (AI Forecasts)",
+    "primary_actors": [
+      "UMD Employee"
+    ],
+    "preconditions": [
+      "Historical data is available for pattern matching.",
+      "The AI prediction module is calibrated."
+    ],
+    "postconditions": [
+      "A forecast of traffic and environmental levels is displayed.",
+      "A credibility score is assigned to the prediction."
+    ],
+    "main_flow": [
+      "1. UMD Employee initiates a prediction request. → System prompts for the input scenario (e.g., specific future time or urban planning change).",
+      "2. UMD Employee specifies a change (e.g., 'Close Road X'). → System executes 'Analyze Historical Data (Comparative & Repeatable Analysis)' to identify similar past situations.",
+      "3. System uses the identified patterns to simulate the future traffic and environmental state. → System calculates the credibility of the prediction.",
+      "4. System displays the predicted heatmap, CO2 levels, and noise levels. → System highlights areas expected to be too crowded.",
+      "5. UMD Employee reviews the credibility score and data. → Goal Achieved."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 5): Compare to Actuals.",
+      "1. At step 5, UMD Employee chooses to validate the prediction against incoming real-time sensor data. → System displays the deviation between predicted and actual levels.",
+      "2. Proceed to Goal Achieved."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): No Similar History.",
+      "1. At step 2, The included analysis fails to find sufficient similar historical data. → System warns the user that the prediction will have low credibility.",
+      "2. System proceeds to Step 3 with a 'Low Confidence' flag."
+    ]
+  }

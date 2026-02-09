@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+' Primary actors
+actor Patient
+actor Doctor
+actor Administrator
+
+' System and its use cases
+rectangle "Integrated Patient‑Care Platform" {
+
+    ' Base use cases (standard color)
+    usecase "View Medical Record" as UC1 #ADD8E6
+    usecase "Share Wearable Data" as UC2 #ADD8E6
+    usecase "Renew Prescription" as UC3 #ADD8E6
+    usecase "Edit Patient Record" as UC4 #ADD8E6
+    usecase "Schedule Appointment" as UC5 #ADD8E6
+    usecase "Request Lab Test" as UC6 #ADD8E6
+    usecase "Issue Prescription" as UC7 #ADD8E6
+    usecase "Configure System Roles" as UC8 #ADD8E6
+    usecase "Audit User Permissions" as UC9 #ADD8E6
+    usecase "Manage Access Control" as UC10 #ADD8E6
+
+    ' Include / Extend use cases (light grey)
+    usecase "Validate Prescription" as UC11 #EAEAEA
+    usecase "Check Lab Results" as UC12 #EAEAEA
+}
+
+' Actor – use case relationships
+Patient -- UC1
+Patient -- UC2
+Patient -- UC3
+
+Doctor -- UC4
+Doctor -- UC5
+Doctor -- UC6
+Doctor -- UC7
+
+Administrator -- UC8
+Administrator -- UC9
+Administrator -- UC10
+
+' Include / Extend relationships (inside rectangle)
+UC7 <.. UC11 : "<<includes>>"
+UC6 ..> UC12 : "<<extends>>"
+
+@enduml

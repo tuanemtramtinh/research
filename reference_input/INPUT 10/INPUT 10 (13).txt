@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Link External Devices",
+"primary_actors": ["Patient", "Doctor", "Nurse"],
+"preconditions": ["Device is compatible.", "Authorization is granted (if Patient device)."],
+"postconditions": ["Device is linked for automatic data upload."],
+"main_flow": [
+"1. Include Use Case: Authorize External Devices.",
+"2. Actor connects the external device (e.g., fitness band, medical monitor) to the system.",
+"3. System establishes a connection.",
+"4. System confirms the link.",
+"5. System enables automatic data upload from the device."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 3): Connection Failed. 1. System cannot pair with the device. 2. System prompts retry. 3. Use Case ends."
+]
+}

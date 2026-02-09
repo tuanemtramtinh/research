@@ -1,0 +1,87 @@
+{
+  "use_case_name": "Estimate Measure Impacts",
+  "unique_id": "UC-008",
+  "area": "Urban Mobility Impact Assessment",
+  "context_of_use": "The use case supports an urban mobility planner in estimating the financial, environmental, and noise impacts of proposed traffic measures or events in order to assess their consequences before implementation.",
+  "scope": "Urban Mobility Planning Decision Support System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Impact Estimation Engine"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Wants reliable estimates of measure costs, emissions, and noise levels to evaluate and compare proposals.",
+    "City administration: Wants decisions on traffic measures to be supported by quantitative impact estimates for accountability and budgeting.",
+    "Citizens: Want traffic measures that consider financial feasibility and environmental impacts such as emissions and noise.",
+    "Environmental agencies: Want estimated emissions and noise levels to comply with environmental and public health objectives.",
+    "Emergency services: Want scenarios and measures to be evaluated with realistic impact estimates to avoid adverse side effects during crises."
+  ],
+  "description": "This use case allows an urban mobility planner to request and obtain estimated financial costs, emissions, and noise levels associated with a specified traffic measure or event, enabling quantitative impact assessment of proposed mobility interventions.",
+  "triggering_event": "The urban mobility planner decides to assess the impacts of a specific traffic measure or event and requests impact estimation in the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is authenticated and authorized to use the Urban Mobility Planning Decision Support System.",
+    "The traffic measure or event to be assessed is defined in the system with sufficient parameters for impact estimation.",
+    "The system has access to the configuration and data required by the impact estimation engine, such as baseline traffic and cost parameters."
+  ],
+  "postconditions": [
+    "The system has produced and stored an estimated financial cost for the selected measure or event.",
+    "The system has produced and stored estimated emissions associated with the selected measure or event.",
+    "The system has produced and stored estimated noise levels associated with the selected measure or event.",
+    "The estimated measure impacts are available for subsequent review and reporting by the urban mobility planner."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Decision Support System includes an internal or integrated component referred to as the Impact Estimation Engine that performs cost, emission, and noise calculations.",
+    "It is assumed that the traffic measure or event to be evaluated has already been modeled or configured elsewhere in the system prior to starting this use case.",
+    "It is assumed that the system maintains or accesses baseline traffic data, emission factors, noise models, and cost parameters necessary to perform estimations without further user input during this use case.",
+    "It is assumed that emitting estimates for cost, emissions, and noise levels based on the current configuration of a measure or event is within the capability of the described system and does not introduce new functionality beyond the requirement text.",
+    "It is assumed that the urban mobility planner can view all three types of estimates (cost, emissions, noise) together in one consolidated result screen for the selected measure or event."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to request an estimation of the cost of a selected traffic measure so that the financial consequences of the measure can be reviewed.",
+    "The system shall calculate and present an estimated financial cost for the selected traffic measure or event.",
+    "The system shall allow the urban mobility planner to request an estimation of emissions caused by congestion or a traffic situation associated with a selected measure or event so that pollution effects can be reviewed.",
+    "The system shall calculate and present estimated emissions for the congestion or traffic situation related to the selected measure or event.",
+    "The system shall allow the urban mobility planner to request an estimation of noise levels for traffic situations associated with a selected measure or event so that environmental effects can be reviewed.",
+    "The system shall calculate and present estimated noise levels for the traffic situation related to the selected measure or event.",
+    "The system should present the estimated cost, emissions, and noise levels for the selected measure or event in a form that can be used for later reporting and validation of proposals."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific cost model parameters (e.g., unit costs for infrastructure, operation, and maintenance) used in estimations are not defined and require policy decisions.",
+    "The level of spatial and temporal granularity required for emission and noise estimates (e.g., per road segment, per hour) is not specified.",
+    "Acceptable accuracy thresholds and validation methods for cost, emission, and noise estimations are not defined.",
+    "It is unclear whether the planner can selectively request only one type of estimate (cost, emissions, or noise) or whether all three must always be calculated together.",
+    "The retention period and versioning rules for stored estimation results are not specified."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner selects a previously defined traffic measure or event for impact assessment → System retrieves the configuration and parameters of the selected measure or event.",
+    "2. Urban mobility planner initiates the impact estimation for the selected measure or event → System validates that sufficient input data for cost, emission, and noise estimation is available for the selected measure or event.",
+    "3. Urban mobility planner confirms the estimation request and any shown estimation parameters → System submits the selected measure or event parameters to the impact estimation engine.",
+    "4. Impact estimation engine performs cost, emission, and noise calculations for the selected measure or event → System receives the calculated estimated cost, emissions, and noise levels from the impact estimation engine.",
+    "5. Urban mobility planner waits for the estimation results → System stores the estimated cost, emissions, and noise levels associated with the selected measure or event in the system.",
+    "6. Urban mobility planner views the estimation results for the selected measure or event → System displays the estimated financial cost, estimated emissions, and estimated noise levels in a consolidated impact summary for the measure or event.",
+    "7. Urban mobility planner finishes reviewing the estimation results → System keeps the estimation results available for subsequent review and reporting related to the selected measure or event."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the urban mobility planner adjusts optional estimation parameters (such as analysis period or scenario selection) before initiating the impact estimation, the system updates the displayed estimation parameters accordingly and then continues with Step 3.",
+    "AF-2 (from Step 6): If the urban mobility planner requests a refreshed estimation after modifying the configuration of the selected measure or event in a separate use case, the system treats the refreshed request as a new estimation instance and restarts the main flow from Step 2 for the updated configuration."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If required input data for cost, emission, or noise estimation is missing or invalid, the system notifies the urban mobility planner that estimation cannot be completed due to incomplete data, identifies the missing or invalid data categories, and aborts the use case without producing new estimation results.",
+    "EF-2 (from Step 4): If the impact estimation engine fails to complete the calculations due to a technical error, the system logs the error, informs the urban mobility planner that the estimation request has failed, and terminates the use case without updating any existing estimation results.",
+    "EF-3 (from Step 6): If the system cannot display the estimation results due to a presentation or retrieval error, the system informs the urban mobility planner of the display failure, keeps any successfully stored results unchanged, and ends the use case without confirming successful review."
+  ],
+  "information_for_steps": [
+    "1. Selected measure or event identifier; measure configuration parameters; scenario identifier.",
+    "2. Availability flags for cost, emission, and noise input data; validation status of measure parameters.",
+    "3. Estimation parameters such as analysis period, congestion assumptions, and selected scenario; confirmation indicator from planner.",
+    "4. Input payload to impact estimation engine; estimated cost values; estimated emission values; estimated noise level values.",
+    "5. Estimation result set; association between result set and measure or event identifier.",
+    "6. Consolidated impact summary including cost estimate, emission estimate, and noise level estimate; presentation format settings.",
+    "7. Persistent storage reference to estimation results; linkage for later reporting and proposal validation."
+  ]
+}

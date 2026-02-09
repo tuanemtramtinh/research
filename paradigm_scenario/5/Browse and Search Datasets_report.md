@@ -1,0 +1,44 @@
+## Use Case Name  
+**Browse and Search Datasets**
+
+## Description  
+Reusers search the multilingual catalogue, view previews, compare versions, and retrieve citation information.
+
+## Primary Actor  
+Reuser
+
+## Problem Domain Context  
+Create a unified, web‑based research data archive that allows depositors to upload, version, and manage datasets—integrating with Pure, VREs, and external repositories—while automatically harvesting and synchronising metadata, applying licenses, embargoes, and disposal policies; provide depositors with DOI minting, persistent URLs, and analytics (downloads, citations), and enable privileged access for collaborators and external users; expose a multilingual, searchable interface (via web and Primo) for data reusers to browse, preview, and cite datasets, including version comparison; enforce quality checks and required metadata for administrators, support bulk import/export and API (SWORD2) access, and integrate seamlessly with university systems (LDAP, CRIS, HCP storage) to support reporting, impact analysis, and compliance with funder and institutional policies.
+
+## Preconditions  
+None.
+
+## Postconditions  
+None.
+
+## Main Flow  
+1. **Actor initiates action.** The Reuser opens the web portal and navigates to the *Browse & Search* section.  
+2. **System presents search interface.** The portal displays a multilingual search bar, advanced filters (discipline, dataset type, license, embargo status), and a map of available repositories.  
+3. **Actor enters search criteria.** The Reuser types keywords, selects filters, and clicks *Search*.  
+4. **System queries catalogue.** The backend performs a full‑text and metadata query across all integrated repositories, aggregating results.  
+5. **System returns results list.** Search results are paginated, each entry showing title, owner, abstract, language, version count, and citation metrics.  
+6. **Actor selects a dataset.** The Reuser clicks on a dataset title to view its landing page.  
+7. **System displays dataset landing page.** The page shows metadata (title, authors, institution, DOI, license, embargo dates), a preview pane (table of contents, sample files), and version history.  
+8. **Actor requests preview.** The Reuser clicks *Preview* on a specific file.  
+9. **System streams preview.** The file is rendered in‑browser (PDF, CSV, image) or a download link is provided.  
+10. **Actor compares versions.** The Reuser selects *Compare Versions* from the version history menu.  
+11. **System presents version comparison.** A side‑by‑side diff of metadata and file changes is shown.  
+12. **Actor retrieves citation.** The Reuser clicks *Cite Dataset* to view citation options (APA, MLA, Chicago, RIS).  
+13. **System generates citation.** The portal displays the formatted citation and offers a copy button.  
+14. **Actor copies or exports citation.** The Reuser copies the citation to clipboard or downloads a citation file (BibTeX, EndNote).  
+15. **System logs interaction.** Analytics capture the search query, dataset views, previews, and citation exports for reporting.  
+
+## Alternative Flows  
+None.
+
+## Exceptions  
+1. **Search query returns no results.** The system displays a friendly message: “No datasets found for your criteria. Try adjusting filters or keywords.”  
+2. **Metadata retrieval fails for a dataset.** The system shows a placeholder with “Metadata currently unavailable. Please try again later.” and logs the error for administrators.  
+3. **Preview file is not supported.** The system informs the Reuser: “This file type cannot be previewed. Download it directly.”  
+4. **License or embargo prevents access.** The system displays the embargo date and license restrictions, offering an *Request Access* button if the Reuser has the necessary privileges.  
+5. **Network or server error during search.** The system shows “An error occurred while processing your request. Please refresh the page or try again later.” and records the exception.

@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Generate Patient Bill",
+"primary_actors": ["UHOPE_Employee"],
+"preconditions": ["Appointment has concluded.", "Prices database is available."],
+"postconditions": ["Bill is created and notification process is triggered."],
+"main_flow": [
+"1. System identifies completed appointments for the billing period.",
+"2. UHOPE_Employee views appointment info (date, start/end time) to verify accuracy.",
+"3. System retrieves specific treatment prices from the database.",
+"4. System calculates the total cost based on time and treatments.",
+"5. System generates the bill.",
+"6. System triggers the notification process (Extend Use Case: Notify Patient of Invoice)."
+],
+"alternative_flows": [
+"AF-1 (from Step 5): Monthly Billing. 1. System aggregates all appointments for the month. 2. System generates a single bill sent 30 days later. 3. Resume Step 6."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Price Missing. 1. System cannot find a price for a recorded treatment. 2. System flags the record for manual review. 3. Use Case ends."
+]
+}

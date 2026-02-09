@@ -1,0 +1,52 @@
+{
+  "use_case_name": "Receive Fairness Alerts",
+  "unique_id": "UC-006",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "The urban mobility planner receives notifications regarding the impact of mobility measures on neighborhoods.",
+  "scope": "Urban Mobility Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "urban mobility planner: increase fairness in urban mobility measures"
+  ],
+  "description": "Get notified when a mobility measure disproportionately disadvantages a neighborhood.",
+  "triggering_event": "A mobility measure is implemented that may affect neighborhood fairness.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is logged into the Urban Mobility Management System.",
+    "A mobility measure has been implemented."
+  ],
+  "postconditions": [
+    "The urban mobility planner receives a notification regarding the neighborhood impact."
+  ],
+  "assumptions": [
+    "The system has the capability to analyze the impact of mobility measures on neighborhoods.",
+    "Notifications are configured and operational."
+  ],
+  "requirements_met": [
+    "The system shall notify the urban mobility planner if a measure disadvantages a neighborhood."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the criteria for determining neighborhood disadvantage."
+  ],
+  "main_flow": [
+    "1. urban mobility planner → System detects a mobility measure that may disadvantage a neighborhood.",
+    "2. System → System sends a notification to the urban mobility planner regarding the neighborhood impact."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the measure does not disadvantage any neighborhood, then no notification is sent."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the notification fails to send, then the system logs the error and alerts the urban mobility planner."
+  ],
+  "information_for_steps": [
+    "1. Mobility measure details",
+    "2. Neighborhood impact assessment",
+    "3. Notification content"
+  ]
+}

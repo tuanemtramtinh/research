@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage User Permissions",
+"primary_actors": ["System Administrator"],
+"preconditions": ["Administrator is logged in."],
+"postconditions": ["User access rights are updated."],
+"main_flow": [
+"1. System Administrator searches for a system user.",
+"2. System Administrator selects the user account.",
+"3. System Administrator adjusts the access rights.",
+"4. System Administrator saves the changes.",
+"5. System updates the user's profile permissions."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Reset Access. 1. Administrator resets permissions to default role settings. 2. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 4): Policy Violation. 1. System prevents removing a mandatory permission for a role. 2. System displays warning. 3. Use Case ends."
+]
+}

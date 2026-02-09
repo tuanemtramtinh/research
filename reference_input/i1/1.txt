@@ -1,0 +1,41 @@
+﻿{
+    "use_case_name": "Control Traffic Measures",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "The Planner is logged into the Urban Mobility Management System.",
+      "The system is running a simulation or displaying the current city model."
+    ],
+    "postconditions": [
+      "The traffic network configuration is updated with the selected measures.",
+      "The simulation environment reflects the new constraints (e.g., speed limits, road closures)."
+    ],
+    "main_flow": [
+      "1. Planner selects a specific road or area on the map. → System displays the configuration options.",
+      "2. Planner selects the type of measure to apply (e.g., Adjust Speed Limits). → System prompts for parameter input (e.g., new speed value).",
+      "3. Planner enters the parameters and confirms. → System validates the input.",
+      "4. Planner commands the system to apply the measure. → System updates the traffic model and displays the change visually on the map."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Model Roundabouts.",
+      "1. At step 2, Planner selects 'Model Roundabouts'. → System highlights eligible intersections.",
+      "2. Planner selects an intersection to convert. → Proceed to Step 4.",
+      "AF-2 (from Step 2): Switch Revertible Lanes.",
+      "1. At step 2, Planner selects 'Switch Revertible Lanes'. → System indicates current direction.",
+      "2. Planner toggles the direction. → Proceed to Step 4.",
+      "AF-3 (from Step 2): Configure Adaptive Traffic Lights.",
+      "1. At step 2, Planner selects 'Model Adaptive Traffic Lights'. → System requests timing parameters.",
+      "2. Planner inputs adaptive rules. → Proceed to Step 3.",
+      "AF-4 (from Step 2): Simulate Crisis or Event.",
+      "1. At step 2, Planner selects 'Simulate Crisis' or 'Increase Traffic' for an event. → System requests location and intensity.",
+      "2. Planner specifies the crisis type or crowd density. → Proceed to Step 3.",
+      "AF-5 (from Step 2): Close Roads.",
+      "1. At step 2, Planner selects 'Close Road'. → System prompts for duration.",
+      "2. Planner confirms closure. → Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Invalid Parameter.",
+      "1. At step 3, Planner enters a value outside supported ranges (e.g., negative speed). → System displays an error message 'Invalid Input' and requests re-entry."
+    ]
+  },

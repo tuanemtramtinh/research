@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Report Measure Impacts",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "A traffic measure has been proposed or simulated.",
+      "The Planner is authenticated."
+    ],
+    "postconditions": [
+      "A specific validation report (Pollution, Fairness, Cost, or Congestion) is generated."
+    ],
+    "main_flow": [
+      "1. Planner selects a specific measure to validate. → System prompts for the type of impact report required.",
+      "2. Planner selects the impact category (Pollution, Fairness, Cost, or Congestion). → System initiates the data gathering process.",
+      "3. System triggers the 'Analyze Traffic Conditions' use case to compute the specific impact data. → (Include Use Case: Analyze Traffic Conditions).",
+      "4. System compiles the analyzed data into a validation format. → System displays the impact report."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Report Fairness.",
+      "1. At step 2, Planner selects 'Fairness Report'. → System focuses analysis on travel time distribution across neighborhoods.",
+      "2. Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Incomplete Data.",
+      "1. At step 3, The analysis returns partial data. → System generates a report marked as 'Preliminary/Incomplete' and warns the Planner."
+    ]
+  },

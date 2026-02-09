@@ -1,0 +1,89 @@
+{
+  "use_case_name": "View Game Schedules",
+  "unique_id": "UC-003",
+  "area": "Fan Game Information Access",
+  "context_of_use": "A registered fan uses the system to view upcoming game schedules in order to know when games are played.",
+  "scope": "IFA Integrated League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "fan"
+  ],
+  "supporting_actors": [
+    "authentication service"
+  ],
+  "stakeholders_and_interests": [
+    "Fan: Wants to quickly and reliably see accurate game schedules to know when games are on.",
+    "IFA: Wants game schedules to be accessed in a controlled, authenticated manner and to reflect the official, up-to-date schedule.",
+    "Teams: Want their game schedules to be accurately presented to fans to maximize attendance and engagement.",
+    "Referees: Want fans to see correct schedules that are consistent with assigned matches and any rescheduling.",
+    "System Administrator: Wants schedule queries to be efficient, secure, and not to degrade system performance for up to at least 50,000 concurrent users."
+  ],
+  "description": "This use case enables a fan to authenticate and then view upcoming game schedules in the system so that they can know when games are on.",
+  "triggering_event": "The fan decides to check the system for upcoming game schedules.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA Integrated League Management System is operational and reachable by the fan.",
+    "The fan has a valid user account registered in the system.",
+    "Game schedule data has been created and stored in the system by the relevant IFA processes.",
+    "The authentication service is available for validating fan credentials."
+  ],
+  "postconditions": [
+    "The fan has been authenticated for the current session.",
+    "The system has presented the fan with a list or view of upcoming game schedules according to the fan’s request parameters.",
+    "The fan is able to determine when selected games are scheduled to be played."
+  ],
+  "assumptions": [
+    "It is assumed that viewing game schedules is available only to authenticated fans, consistent with the included \"authenticate\" relationship.",
+    "It is assumed that the system already maintains up-to-date game schedules based on separate scheduling and rescheduling processes not described in this use case.",
+    "It is assumed that the fan can access the system through supported platforms, including a mobile app, but the viewing behavior is identical from the use case perspective.",
+    "It is assumed that the system automatically applies the fan’s preferred local language and currency settings, where relevant, when rendering the schedule information.",
+    "It is assumed that the authentication service is an internal subsystem or integrated external service that validates fan credentials without requiring the fan to reauthenticate for each schedule query within a single session.",
+    "It is assumed that the system can handle at least 50,000 concurrent users, including fans viewing game schedules, without performance degradation that would prevent completion of this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a fan to authenticate before accessing protected functionalities, including viewing game schedules.",
+    "The system shall allow an authenticated fan to view upcoming game schedules in the system so that the fan knows when games are on.",
+    "The system shall present game schedule information that reflects the current official schedule stored in the system.",
+    "The system shall support fan access to game schedules via a mobile app so that fans can access schedules from anywhere.",
+    "The system shall present schedule-related information to the fan in the fan’s local language and currency settings where applicable.",
+    "The system shall support at least 50,000 concurrent users, including fans viewing game schedules, without causing the system to crash during peak times."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact filtering and sorting options for game schedules (e.g., by team, date range, league) have not been defined.",
+    "The required time granularity and time zone handling for displaying game start times have not been specified.",
+    "The access control policy for unauthenticated users (e.g., whether limited schedule information may be visible without login) has not been clarified.",
+    "The required maximum response time for returning schedule results under peak load conditions has not been specified."
+  ],
+  "main_flow": [
+    "1. Fan initiates access to the system to view game schedules → System displays an option to log in and access fan functionalities.",
+    "2. Fan selects the login option and enters authentication credentials → System sends the credentials to the authentication service for validation.",
+    "3. Authentication service validates the fan credentials → System establishes an authenticated session for the fan and confirms successful login.",
+    "4. Fan navigates to the game schedules feature → System displays the game schedules view interface with default schedule parameters (e.g., upcoming games).",
+    "5. Fan requests to view upcoming game schedules using the default or currently selected parameters → System retrieves the corresponding game schedule data from its schedule repository.",
+    "6. Fan waits while the request is processed → System formats and presents the list of upcoming game schedules to the fan, including at least date, time, and participating teams for each game.",
+    "7. Fan optionally selects a specific game entry from the displayed list → System displays detailed schedule information for the selected game using the fan’s language and regional settings.",
+    "8. Fan finishes reviewing the game schedules → System keeps the game schedules view available for further navigation or logout within the authenticated session."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): Fan adjusts schedule viewing parameters.\nCondition: After reaching the game schedules feature, the fan wants to refine which games are shown (for example, by choosing a particular team or date range) without changing the core functionality of viewing schedules.\nFlow:\n1) Fan modifies the schedule view parameters (such as selecting a specific team or time window) from the game schedules interface.\n2) System updates the request parameters and retrieves the corresponding game schedule data matching the new criteria.\n3) System presents the updated list of upcoming game schedules according to the fan’s selected parameters.\nReturn: The flow returns to Main Flow Step 6 for further review of schedules.",
+    "AF-2 (from Step 7): Fan chooses not to view detailed information.\nCondition: The fan only needs a high-level list of game schedules and does not select any specific game for detailed viewing.\nFlow:\n1) Fan reviews the list of upcoming game schedules without selecting an individual game entry.\n2) System maintains the current list view, allowing the fan to scroll or adjust parameters.\nReturn: The flow continues at Main Flow Step 8 when the fan finishes reviewing the schedules."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Invalid credentials provided.\nCondition: The fan enters incorrect or invalid authentication credentials when attempting to log in.\nFlow:\n1) System receives invalid credentials from the fan and forwards them to the authentication service.\n2) Authentication service determines that the credentials are invalid → System displays an error message indicating that authentication failed and prompts the fan to re-enter credentials.\n3) Fan may choose to retry login or abandon the process.\nEnd: If the fan abandons the process, the use case ends without the fan viewing any game schedules.",
+    "EF-2 (from Step 5): Schedule data temporarily unavailable.\nCondition: The system cannot retrieve game schedule data due to a temporary internal error or connectivity issue with the schedule repository.\nFlow:\n1) System attempts to retrieve game schedule data using the fan’s request parameters.\n2) System detects that the schedule repository is unavailable or returns an error.\n3) System informs the fan that game schedules cannot be displayed at this time and suggests trying again later.\nEnd: The use case terminates without successfully displaying game schedules.",
+    "EF-3 (from Step 3): Authentication service unavailable.\nCondition: The authentication service cannot be reached or does not respond when the fan attempts to log in.\nFlow:\n1) System sends the fan’s credentials to the authentication service for validation.\n2) System does not receive a valid response from the authentication service within a defined timeout.\n3) System informs the fan that login cannot be completed due to a technical issue and prevents access to the game schedules feature.\nEnd: The use case ends without establishing an authenticated session or viewing schedules.",
+    "EF-4 (from Step 6): Performance degradation under high load.\nCondition: Under very high concurrent load, the system cannot respond to a schedule viewing request within an acceptable timeframe.\nFlow:\n1) System attempts to retrieve and present game schedules for the fan’s request.\n2) System detects that the operation exceeds the configured performance threshold or times out.\n3) System displays a message to the fan indicating that the request could not be completed due to load and advises the fan to retry later.\nEnd: The use case terminates without successfully presenting the requested schedule list."
+  ],
+  "information_for_steps": [
+    "1. Fan identifier (implicit until login), system entry point, navigation context.",
+    "2. Fan authentication credentials (e.g., username, password or equivalent), session initiation data.",
+    "3. Authentication token or session identifier, authentication status result.",
+    "4. Navigation state, fan profile settings, localization preferences, default schedule parameters.",
+    "5. Schedule query parameters (e.g., date range, league, team), reference to schedule repository.",
+    "6. Retrieved schedule entries including game identifier, date, time, venue, participating teams; localized presentation attributes.",
+    "7. Selected game identifier, detailed schedule information such as exact kickoff time, venue details, and participating teams; fan localization settings.",
+    "8. Session state, navigation history, any updated view preferences for subsequent schedule queries."
+  ]
+}

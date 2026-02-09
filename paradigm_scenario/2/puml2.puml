@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+' Define primary actors (outside system boundary)
+actor "System Admin" as SA
+actor "Regular User" as RU
+actor "Traffic Analyst" as TA
+
+' Define system and use cases
+rectangle "Wonderland Traffic Simulator" {
+
+  ' Base use cases (light blue)
+  usecase "Ingest Sensor Data" as UC1 #ADD8E6
+  usecase "Display Traffic and Environmental Heat Maps" as UC2 #ADD8E6
+  usecase "Run Predictive Modeling" as UC3 #ADD8E6
+
+  ' New use cases for includes / extends (light grey)
+  usecase "Store Simulation State" as UC4 #EAEAEA
+  usecase "Compare Data Points" as UC5 #EAEAEA
+}
+
+' Actor – use case relationships
+SA -- UC1
+RU -- UC2
+TA -- UC3
+
+' Include/extend relationships (inside the rectangle)
+UC1 <.. UC4 : "<<includes>>"   ' Data ingestion automatically stores state
+UC3 ..> UC5 : "<<extends>>"    ' Predictive modeling can be extended with side‑by‑side comparison
+
+' Note: UC4 and UC5 are not directly tied to any actor, they are internal system operations
+@enduml

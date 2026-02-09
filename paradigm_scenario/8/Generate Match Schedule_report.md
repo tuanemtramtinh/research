@@ -1,0 +1,59 @@
+# Use Case: Generate Match Schedule
+
+## 1. Use Case Name
+**Generate Match Schedule**
+
+## 2. Description
+Automatically create unbiased schedules and match‑official allocations respecting preferences, rules, and conflicts, with a double‑certified override.
+
+## 3. Primary Actor
+**IFA employee**
+
+## 4. Problem Domain Context
+The system must enable the IFA to integrate existing data sources so that data duplication is eliminated, support multilingual interfaces for leagues across multiple countries, and guarantee reliability for at least 50 000 concurrent users while offering mobile access for fans and match officials and desktop access for IFA employees, team managers, and staff. It must enforce role‑based access controls that expose only relevant tools to each user type, provide centralized management of leagues, teams, and competition rules, and automatically generate unbiased schedules and match‑official allocations that respect personal preferences, rule constraints, and conflict avoidance, with a required double‑certified override mechanism. The platform must capture and audit all team financial transactions, generate real‑time budget reports, and allow teams to manage finances and delegate roles internally. It must deliver instant, uniform notifications of schedule changes to all stakeholders, with customizable notification preferences for fans, and expose live match event reporting that feeds directly into player and match statistics generation.
+
+## 5. Preconditions
+- IFA employee is authenticated and has “Schedule Generation” role.  
+- All relevant leagues, teams, venues, and official pools are loaded in the system.  
+- Current season rules and constraints are published.  
+- No pending unapproved schedule changes exist.
+
+## 6. Postconditions
+- A new match schedule is published and stored.  
+- Match‑official allocations are finalized and assigned.  
+- Notifications are queued for all stakeholders.  
+- Audit trail records the schedule generation event and any overrides.
+
+## 7. Main Flow
+1. **Actor initiates action** – IFA employee selects “Generate Match Schedule” from the dashboard.  
+2. **System validates permissions** – Checks the employee’s role and existing schedule locks.  
+3. **System retrieves data** – Pulls league, team, venue, and official availability data from integrated sources.  
+4. **System applies constraints** – Enforces competition rules, venue capacities, travel restrictions, and conflict avoidance.  
+5. **System runs scheduling algorithm** – Uses weighted optimization to produce unbiased match pairings and dates.  
+6. **System proposes official assignments** – Allocates referees, assistant referees, and fourth officials based on preferences and availability.  
+7. **System presents draft schedule** – Displays the generated schedule and official assignments to the employee for review.  
+8. **Employee reviews and approves** – Confirms the draft; if necessary, makes manual adjustments.  
+9. **System performs double‑certified override check** – If any assignment conflicts with policy, requires a second authorized IFA employee to approve the override.  
+10. **System finalizes schedule** – Commits the approved schedule and official allocations to the database.  
+11. **System triggers notifications** – Sends schedule updates to fans, teams, officials, and vendors according to their notification preferences.  
+12. **System updates audit log** – Records the generation event, approvals, and any overrides.  
+13. **System displays confirmation** – Shows a success message and summary to the employee.
+
+## 8. Alternative Flows
+- **A1 – Manual adjustment required**  
+  5a. After step 5, the system detects a conflict that cannot be resolved automatically.  
+  6a. System prompts the employee to manually adjust the affected match or official.  
+  7a. Employee makes adjustments and re‑runs the algorithm in step 5.  
+
+- **A2 – Override approval required**  
+  9a. If the system flags a policy conflict, it sends a request to a second authorized employee.  
+  9b. The second employee reviews the override request and either approves or rejects it.  
+  10a. On approval, the system proceeds to finalize; on rejection, it returns to step 6 for re‑allocation.
+
+## 9. Exceptions
+- **E1 – Permission denied (step 2)** – System displays an error message and logs the attempt.  
+- **E2 – Data retrieval failure (step 3)** – System aborts the process, notifies the employee, and logs the source of the failure.  
+- **E3 – Constraint violation (step 5)** – System lists unsatisfied constraints and suggests corrective actions.  
+- **E4 – Duplicate schedule exists (step 10)** – System prompts the employee to confirm overwrite or abort.  
+- **E5 – Notification failure (step 11)** – System queues failed messages for retry and logs recipients.  
+- **E6 – Audit log write failure (step 12)** – System alerts the administrator and preserves the event in a local buffer for later sync.
