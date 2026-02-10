@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Manage Account",
+"primary_actors": ["IFA Administrator"],
+"preconditions": ["Administrator is logged in."],
+"postconditions": ["User account is updated."],
+"main_flow": [
+"1. IFA Administrator searches for a registered user account.",
+"2. IFA Administrator selects the account to manage.",
+"3. IFA Administrator updates account details (e.g., username, password, or access rights).",
+"4. System saves the changes.",
+"5. System confirms the account update."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

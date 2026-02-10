@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Register Account",
+"primary_actors": ["Visitor"],
+"preconditions": ["Visitor is on the web application login/registration page."],
+"postconditions": ["A new user account is created with a unique username and password."],
+"main_flow": [
+"1. Visitor requests to create a new account.",
+"2. System prompts for user details.",
+"3. Visitor provides registration information.",
+"4. System validates the input and ensures the username is unique.",
+"5. System assigns a unique username and password to the account.",
+"6. System confirms successful registration and grants access to registered features."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 4): Username Taken. 1. System detects if the username already exists. 2. System prompts Visitor to choose a different username. 3. Resume Step 3."
+]
+}

@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Report Match Events",
+  "unique_id": "UC-009",
+  "area": "Match Event Reporting and Game Data Management",
+  "context_of_use": "During an official match, the match official records live match events in the system so that the IFA receives authoritative, real-time game event reports originating directly from authorized officials.",
+  "scope": "IFA Match and League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "match official"
+  ],
+  "supporting_actors": [
+    "ifa"
+  ],
+  "stakeholders_and_interests": [
+    "Match official: Wants to report match events live during the match to avoid duplicate registration work.",
+    "IFA: Wants to receive game event reports directly from match officials to ensure that only authorized data sources provide official match data.",
+    "League organizers within the IFA: Want consistent, complete, and authoritative event data for standings, discipline, and historical records.",
+    "System operations staff: Want stable and reliable capture and storage of live match event data.",
+    "Teams and players (represented via IFA interests): Want accurate reflection of in-match events in official statistics and outcomes."
+  ],
+  "description": "This use case describes how the match official records live match events in the IFA system during an ongoing match so that the system captures authoritative game event data and delivers official game event reports directly to the IFA without requiring the match official to register events multiple times.",
+  "triggering_event": "The match official initiates live event reporting for a scheduled match at or shortly before the start of the match.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The match is registered and scheduled in the IFA Match and League Management System.",
+    "The match official is registered as a match official in the IFA Match and League Management System.",
+    "The match official is authenticated in the IFA Match and League Management System.",
+    "The match official has authorization to report events for the specific match.",
+    "The IFA Match and League Management System is operational and reachable by the match official."
+  ],
+  "postconditions": [
+    "All match events reported by the match official during the match are stored in the IFA Match and League Management System as official game event data.",
+    "An official game event report for the match, derived from the reported events, is available to the IFA within the system.",
+    "The reported match events can be used by the IFA for downstream processes such as statistics derivation and auditing, subject to other use cases."
+  ],
+  "assumptions": [
+    "It is assumed that the match official uses a system-supported client (such as a mobile or web interface) to access the IFA Match and League Management System, even though the specific client technology is not described in the Target Use Case.",
+    "It is assumed that the scheduled match and its participating teams are already configured in the IFA Match and League Management System before the match official starts reporting events.",
+    "It is assumed that the match official has already been assigned to the match in the IFA Match and League Management System before starting the use case.",
+    "It is assumed that the IFA is treated as an organizational stakeholder and possible administrative user within the same IFA Match and League Management System boundary.",
+    "It is assumed that network connectivity is normally available during the match so that events can be reported live, and any handling of long-term offline reporting is outside the scope of this use case.",
+    "It is assumed that defining the detailed structure and categories of match events (such as goals, fouls, cards, substitutions, and time stamps) is handled as part of system configuration and is not introduced as new functionality by this use case.",
+    "It is assumed that access control rules ensuring that only authorized match officials can report events for a given match are defined elsewhere and enforced by the IFA Match and League Management System.",
+    "It is assumed that the generation of an official game event report from stored match events is an internal capability of the IFA Match and League Management System and does not require additional user interaction beyond the steps of this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a match official to report match events live during an ongoing match so that the match official does not have to register events twice.",
+    "The system shall allow the IFA to receive game event reports directly from match officials as the authoritative source of match event data.",
+    "The system shall associate reported match events with the corresponding scheduled match and the reporting match official.",
+    "The system shall persist each reported match event in a manner that supports generation of an official game event report for the match.",
+    "The system shall provide the IFA with access to an official game event report for a match based on the events reported by the match official.",
+    "The system shall restrict the capability to report match events for a given match to authenticated and authorized match officials assigned to that match."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The required level of event detail (e.g., event categories, sub-types, and required attributes) for official reporting has not been specified.",
+    "The required maximum latency between a real-world match event and its appearance in the official game event report is not defined.",
+    "The policy for correcting or amending previously reported events (for example when a mistake is discovered) is not defined.",
+    "The retention period and archival rules for stored match events and official game event reports have not been specified.",
+    "The specific format and structure of the official game event report to be consumed by IFA processes remains to be defined."
+  ],
+  "main_flow": [
+    "1. Match official selects the scheduled match in the system to start live event reporting → System displays the selected match context and confirms that the match official is authorized to report events for this match.",
+    "2. Match official initiates the live reporting session for the selected match → System marks the match as being in live reporting state for that match official and presents the match event input interface.",
+    "3. Match official records a match event by entering the relevant event details (such as event type and time) and submits the event → System validates the provided event details and accepts the event input.",
+    "4. Match official confirms the submitted event → System stores the event as part of the official match event record and updates the current view of match events for the reporting session.",
+    "5. Match official continues to record subsequent match events as they occur using the event input interface → System repeats validation and storage of each additional event and maintains an ordered list of all reported match events for the match.",
+    "6. Match official ends the live reporting session at the end of the match → System finalizes the match event record for the match and confirms that all reported events have been recorded.",
+    "7. System compiles the stored match events into an official game event report for the match → System makes the official game event report available to the IFA within the IFA Match and League Management System."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 5): Match official reviews previously reported events during the live reporting session. Condition: The match official wishes to verify earlier event entries while continuing to report live events. The match official navigates to the list of previously stored events for the match → System displays the ordered list of recorded match events for that match only. The match official returns to the event input interface and continues with Step 5 to record additional events.",
+    "AF-2 (from Step 6): Match official pauses and resumes live reporting before the match is finished. Condition: The match official temporarily stops reporting events but intends to continue later in the same match. The match official exits the event input interface without ending the match in the system → System preserves the current state of the reporting session without finalizing the match event record. Later, the match official reopens the same scheduled match for reporting → System restores the live reporting state and allows the match official to continue from Step 5. The flow eventually proceeds to Step 6 when the match official explicitly ends the live reporting session."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Match official is not authorized for the selected match. Condition: The match official selects a scheduled match for which they do not have reporting authorization. System determines that the match official is not assigned or not permitted to report for the selected match and denies access to the reporting interface → System displays an authorization error message and does not start a live reporting session for that match. The use case terminates without any events being recorded for this match by this match official.",
+    "EF-2 (from Step 3): Submitted event data is invalid or incomplete. Condition: The match official submits an event with missing or inconsistent required data. System detects validation errors in the event details → System displays an error indication and explains which fields need correction, and the event is not stored. Control returns to the match official to correct the event data, after which the flow resumes at Step 3 upon resubmission.",
+    "EF-3 (from Step 5): System becomes unavailable during live reporting. Condition: A technical failure occurs while the match official is reporting events. System loses availability or cannot accept new event submissions → System stops accepting further events and displays an error indicating loss of service when possible. The match official cannot continue reporting events until the system is restored. Once service is restored, the match official must re-establish the reporting session as in Step 1, and any events submitted successfully before the failure remain stored; unrecovered events must be re-entered if needed. The use case for the failed session ends when the system becomes unavailable.",
+    "EF-4 (from Step 6): Finalization of match event record fails. Condition: A system error occurs while finalizing the match event record at the end of the match. System attempts to finalize but encounters an internal error and cannot complete finalization → System logs the error and informs the match official that finalization did not complete successfully. The system keeps the previously stored events but marks the match as not fully finalized. Administrative intervention by IFA support personnel is required to resolve the incomplete finalization outside the scope of this use case, and the use case ends in an error state."
+  ],
+  "information_for_steps": [
+    "1. Match identifier, match schedule data, match official identifier, authorization status.",
+    "2. Match identifier, reporting session state, timestamp indicating start of live reporting, match official identifier.",
+    "3. Event type, event timestamp, involved team identifier, involved player identifier where applicable, match time reference, match identifier, match official identifier.",
+    "4. Validated event record, event unique identifier, event storage confirmation status, updated event list for the match.",
+    "5. Sequence of event records, running ordered list of events, incremental storage confirmations, session state for ongoing match reporting.",
+    "6. Match identifier, final event list snapshot, reporting session end timestamp, finalization request status.",
+    "7. Complete set of validated match event records for the match, compiled official game event report, report identifier, IFA access permissions for the report."
+  ]
+}

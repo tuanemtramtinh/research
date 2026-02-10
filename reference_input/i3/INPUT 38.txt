@@ -1,0 +1,16 @@
+﻿{
+"use_case_name": "Manage Social Media Posts",
+"primary_actors": ["Fan", "Team"],
+"preconditions": ["Actor is logged in."],
+"postconditions": ["Content is posted to the social media feed."],
+"main_flow": [
+"1. Actor navigates to the social media section of the application.",
+"2. Actor chooses to create a new post or view existing content.",
+"3. Actor inputs the content (e.g., Team posts news, Fan adds a comment).",
+"4. System validates the content.",
+"5. System publishes the post/comment to the platform.",
+"6. System updates the feed for followers."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

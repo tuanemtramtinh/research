@@ -1,0 +1,90 @@
+{
+  "use_case_name": "Integrate Existing Systems",
+  "unique_id": "UC-005",
+  "area": "System Integration and Data Management",
+  "context_of_use": "The IFA integrates existing external systems with the IFA system to centralize data and minimize redundant data storage across systems.",
+  "scope": "IFA Integrated Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa"
+  ],
+  "supporting_actors": [
+    "External Existing System"
+  ],
+  "stakeholders_and_interests": [
+    "IFA: Seeks to reduce redundant data storage and operational complexity by consolidating multiple existing systems.",
+    "IFA Administrator: Seeks consistent and maintainable integration configurations to ensure reliable data exchange.",
+    "IFA IT Operations: Seeks a stable and monitorable integration mechanism to maintain system reliability and performance.",
+    "External Existing System Owners: Seek predictable and non-disruptive integration with the IFA system.",
+    "End Users of Integrated Systems: Seek accurate, up-to-date, and non-duplicated data during normal use of the IFA system."
+  ],
+  "description": "This use case allows the IFA to configure and establish integrations between the IFA system and existing external systems so that data can be consolidated and redundant data storage is reduced.",
+  "triggering_event": "The IFA decides to connect an existing external system to the IFA system to consolidate data.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA system is operational and accessible to the IFA actor.",
+    "The external existing system to be integrated is operational and accessible via an integration interface.",
+    "The IFA actor is authenticated in the IFA system.",
+    "The IFA actor has the necessary authorization in the IFA system to configure and initiate system integrations."
+  ],
+  "postconditions": [
+    "A valid integration configuration between the IFA system and the selected external system is stored in the IFA system.",
+    "The IFA system has established a data exchange mechanism with the external system according to the defined configuration.",
+    "The IFA system is prepared to minimize redundant data storage by using data from the integrated external system according to the configured mappings."
+  ],
+  "assumptions": [
+    "It is assumed that at least one external existing system exposes an interface suitable for integration (for example, an API or data export mechanism), but the integration use case does not define or change the capabilities of that external system.",
+    "It is assumed that the IFA actor represents a role with system administration or equivalent privileges authorized to perform integration configuration tasks.",
+    "It is assumed that network connectivity between the IFA system and the external existing system is available during the integration setup and verification steps.",
+    "It is assumed that the IFA system already supports the technical capability to store integration configurations and to perform basic data mapping definitions without introducing new business functions beyond consolidating existing data.",
+    "It is assumed that data redundancy is reduced by configuring which system is the primary source for specific data elements; this assumption is limited to configuration and does not introduce new automated data deduplication algorithms beyond what is implied by using a single authoritative data source.",
+    "It is assumed that any authentication credentials or access tokens required to connect to external systems are available to the IFA actor and are managed within the IFA system according to existing security mechanisms."
+  ],
+  "requirements_met": [
+    "The system shall allow the IFA to configure integration with different existing external systems for the purpose of consolidating data.",
+    "The system shall allow the IFA to select which external system to integrate from a configurable list or by providing connection parameters.",
+    "The system shall allow the IFA to define or select how data from the external system is mapped to corresponding data entities in the IFA system.",
+    "The system shall store integration configurations so that they can be reused without re-entering all connection and mapping details.",
+    "The system shall establish a connection to the external system using the provided integration configuration to verify connectivity.",
+    "The system shall validate the integration configuration and notify the IFA of success or failure, including any detected configuration errors.",
+    "The system shall use the configured integration to rely on data from the external system as an authoritative source where configured, in order to minimize redundant data storage in the IFA system.",
+    "The system shall allow the IFA to activate or deactivate a configured integration without deleting its configuration.",
+    "The system shall restrict access to integration configuration functions to authenticated IFA actors with appropriate authorization."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific types and interfaces of the external existing systems to be integrated have not been defined and must be clarified.",
+    "The detailed rules for conflict resolution when data differs between the IFA system and an external system have not been specified.",
+    "The required security policies and encryption standards for storing external system credentials within the IFA system must be defined.",
+    "The frequency and direction of data synchronization between the IFA system and external systems (one-way or two-way) remain to be specified.",
+    "Error logging, monitoring, and alerting requirements for integration failures have not been fully described."
+  ],
+  "main_flow": [
+    "1. IFA → The system presents an option to manage integrations with existing external systems.",
+    "2. IFA selects the option to add a new integration with an existing external system → The system displays a list of supported external systems or a form to define a new external system connection.",
+    "3. IFA selects or specifies the external system to integrate and provides required connection parameters (such as endpoint addresses and access credentials) → The system captures the provided connection parameters.",
+    "4. IFA defines or selects data mapping rules between the external system data elements and the IFA system data entities → The system records the specified data mappings for the integration.",
+    "5. IFA submits the integration configuration for validation → The system validates the connection parameters and data mappings and attempts to establish a test connection to the external system.",
+    "6. IFA confirms the validated integration setup → The system stores the finalized integration configuration and marks the integration as ready for activation.",
+    "7. IFA activates the configured integration → The system enables the integration and prepares to use data from the external system according to the configured mappings to minimize redundant data storage."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the IFA chooses to modify an existing integration instead of adding a new one, the system displays the list of existing integrations, the IFA selects an existing integration to modify, and the system shows the current connection parameters and data mappings for that integration. The main flow then continues from Step 3 with the existing configuration pre-populated.",
+    "AF-2 (from Step 4): If the IFA chooses to use predefined standard mapping templates for a known external system, the system presents available mapping templates for that external system, the IFA selects a template, and the system applies the selected template as the data mapping rules. The main flow then continues from Step 5."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 5): If the system cannot establish a test connection to the external system using the provided connection parameters, the system displays an error message describing the connection failure and marks the integration configuration as invalid. The use case ends without storing an active integration configuration.",
+    "EF-2 (from Step 5): If the system detects inconsistent or incomplete data mapping rules during validation, the system displays validation error messages identifying the problematic mappings and requests correction by the IFA. The flow returns to Step 4 after the IFA acknowledges the errors.",
+    "EF-3 (from Step 7): If the system encounters an internal error while activating the integration, the system rolls back the attempted activation, logs the error, notifies the IFA that activation failed, and leaves the integration configuration in a non-active state. The use case ends without an active integration."
+  ],
+  "information_for_steps": [
+    "1. Integration management menu options",
+    "2. External system selection list or connection definition form metadata",
+    "3. External system identifier, endpoint URL or address, authentication credentials, connection parameters",
+    "4. Data mapping rules between external system fields and IFA system entities and attributes",
+    "5. Integration configuration object, connection test results, mapping validation results",
+    "6. Finalized integration configuration record, integration status flag (configured)",
+    "7. Integration activation request, active integration status, flags indicating data source precedence to reduce redundant storage"
+  ]
+}

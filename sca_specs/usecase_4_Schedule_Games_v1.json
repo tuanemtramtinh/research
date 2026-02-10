@@ -1,0 +1,111 @@
+{
+  "use_case_name": "Schedule Games",
+  "unique_id": "UC-004",
+  "area": "Game Scheduling and Notifications",
+  "context_of_use": "The use case supports the IFA in generating game schedules with allocated match officials while avoiding conflicts and in distributing schedule-related notifications to relevant stakeholders.",
+  "scope": "IFA Game Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa"
+  ],
+  "supporting_actors": [
+    "fan",
+    "match official"
+  ],
+  "stakeholders_and_interests": [
+    "ifa: Requires automated, conflict-free game schedules and consistent notifications to reduce workload and avoid claims of unfairness.",
+    "ifa employee: Seeks reduced manual effort for scheduling games and allocating match officials.",
+    "match official: Wants allocated games to respect personal time, date, and location preferences and to receive timely schedule change notifications.",
+    "fan: Wants to receive timely schedule change notifications according to personal notification preferences.",
+    "ifa manager: Has an interest in maintaining integrity and fairness in schedule generation and assignment of match officials.",
+    "ifa administrator: Has an interest in ensuring that schedules align with configured leagues, competitions, and rulesets in the system."
+  ],
+  "description": "This use case describes how the IFA uses the system to automatically generate game schedules, allocate match officials in a way that respects their stated preferences and avoids conflicts, and notify fans and match officials about schedule changes in accordance with notification preferences and IFA policies.",
+  "triggering_event": "The IFA initiates a request to generate or update a game schedule for a defined competition period.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA user is authenticated and authorized to perform game scheduling operations in the system.",
+    "Leagues, competitions, and teams relevant to the schedule period have already been configured in the system.",
+    "Registered match officials exist in the system with available personal schedules and officiating preferences recorded.",
+    "Game event definitions and notification channels have been configured in the system according to IFA policies.",
+    "Fans and match officials who are to receive notifications have valid system accounts with reachable contact information stored."
+  ],
+  "postconditions": [
+    "A game schedule is generated or updated by the system for the requested competition period.",
+    "Each scheduled game has assigned match officials that do not conflict with the match officials’ stored personal schedules for the scheduled time slots.",
+    "The generated schedule is stored persistently and is available for subsequent review and potential override according to IFA procedures.",
+    "Notifications about schedule changes are dispatched by the system to relevant fans and match officials, taking stakeholder notification preferences into account.",
+    "An audit trail of schedule generation and notifications sent is recorded in the system for later review."
+  ],
+  "assumptions": [
+    "It is assumed that configuration of leagues, competitions, rulesets, and teams occurs in separate use cases and that the resulting data is available to this use case.",
+    "It is assumed that the personal schedules, time slot preferences, dates, and locations for match officials are already maintained in the system before schedule generation starts.",
+    "It is assumed that fan notification preferences for game events are captured and maintained in the system via a separate use case.",
+    "It is assumed that the system already enforces business rules to avoid biased schedules, such as avoiding giving teams a lighter schedule, and that this enforcement is part of the scheduling algorithm used in this use case.",
+    "It is assumed that the requirement for at least two certified IFA employees to override a generated schedule is enforced in a related overriding use case and that this use case only produces the initial schedule subject to later override.",
+    "It is assumed that all relevant stakeholders (fans and match officials) have consented to receive notifications through the channels configured in the system.",
+    "It is assumed that the system can access up-to-date personal schedule data for match officials at the time of scheduling to accurately detect conflicts.",
+    "It is assumed that only IFA users with scheduling privileges can initiate schedule generation or update operations described in this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow an authorized IFA employee to initiate automated scheduling of games for a selected competition period.",
+    "The system shall automatically allocate match officials to scheduled games as part of the game scheduling process.",
+    "The system shall detect and avoid conflicts between scheduled games and the assigned match officials’ stored personal schedules for corresponding time slots.",
+    "The system shall take stored match official preferences for time slots, dates, and locations into account when allocating match officials to games.",
+    "The system shall generate a persistent representation of the game schedule that can be reviewed and, in other processes, overridden under IFA control.",
+    "The system shall notify all relevant stakeholders of schedule changes for a game event simultaneously and through a consistent notification method defined by the IFA.",
+    "The system shall send schedule change notifications to subscribed fans as soon as possible after a schedule change is applied.",
+    "The system shall send schedule change notifications to affected match officials as soon as possible after a schedule change is applied.",
+    "The system shall respect fans’ stored notification preferences by notifying them only for game events they have chosen to be notified about.",
+    "The system shall record an audit trail of each schedule generation operation and the notifications sent as a result of schedule changes."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific algorithm and constraints for avoiding biased schedules (for example, what constitutes a lighter schedule) are not defined and require clarification from IFA.",
+    "The exact criteria for determining which stakeholders are to be notified for each type of schedule change (for example, minor versus major changes) are not specified and must be defined.",
+    "The acceptable time window for satisfying the \"as soon as possible\" requirement for schedule change notifications needs to be formally defined as a measurable performance requirement.",
+    "The detailed structure and management of match officials’ personal schedules and preferences, including how conflicts between preference and availability are resolved, must be clarified.",
+    "Policies regarding how fans and match officials opt in or opt out of different notification channels and event types need to be specified.",
+    "The relationship between this scheduling use case and the override process that requires at least two certified IFA employees needs to be documented, including when and how overrides are initiated."
+  ],
+  "main_flow": [
+    "1. IFA → System: The IFA selects a competition or set of games and initiates automated schedule generation for a defined period.",
+    "2. System → System: The system retrieves existing configuration data for the selected competition, including teams, venues, and applicable scheduling rules.",
+    "3. System → System: The system retrieves stored personal schedules and officiating preferences for all available match officials relevant to the selected competition.",
+    "4. System → System: The system automatically generates proposed game time slots and venues for all required games according to the configured scheduling rules.",
+    "5. System → System: The system automatically allocates match officials to each proposed game, taking into account their stored availability, time slot preferences, dates, and locations.",
+    "6. System → System: The system verifies that generated game assignments do not conflict with match officials’ stored personal schedules and resolves any detected conflicts according to the scheduling rules.",
+    "7. System → IFA: The system presents the generated schedule, including game dates, times, venues, and assigned match officials, for IFA review.",
+    "8. IFA → System: The IFA confirms acceptance of the generated schedule for the selected competition period.",
+    "9. System → System: The system stores the accepted schedule as the active schedule for the selected competition period.",
+    "10. System → System: When a schedule change is applied to any game covered by the active schedule, the system identifies all affected fans and match officials based on their association with the game and configured notification preferences.",
+    "11. System → fan, match official: The system dispatches schedule change notifications for the affected game to the identified fans and match officials using the notification method configured by the IFA."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): The IFA selects only a subset of games within a competition period for scheduling. The system limits schedule generation to the selected subset of games and continues with Steps 2 through 11 using only those games.",
+    "AF-2 (from Step 8): The IFA requests regeneration of the schedule before acceptance. The system discards the previously generated proposal, returns to Step 2, and regenerates the schedule using the same selection criteria.",
+    "AF-3 (from Step 10): Some fans have configured notification preferences that exclude the specific type of schedule change event. The system filters out such fans from the recipient list and continues to notify only the remaining eligible fans and all affected match officials, then proceeds with Step 11.",
+    "AF-4 (from Step 5): Multiple valid match official allocations satisfy availability and preference constraints. The system selects one allocation according to configured scheduling rules (for example, rotation policies) and proceeds with Step 6."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The IFA user lacks scheduling privileges. The system rejects the scheduling request, displays an authorization error message, logs the attempt, and the use case terminates without generating or modifying any schedule.",
+    "EF-2 (from Step 2): Required configuration data for the selected competition, such as teams or venues, is incomplete or missing. The system notifies the IFA of the missing information, does not proceed with schedule generation, and the use case ends after presenting the error message.",
+    "EF-3 (from Step 3): No match officials with valid availability data are found for the selected competition period. The system informs the IFA that scheduling cannot be completed due to insufficient officiating resources, logs the condition, and terminates the use case without generating a schedule.",
+    "EF-4 (from Step 6): The system cannot resolve conflicts between proposed games and match officials’ personal schedules under the configured rules. The system marks the affected games as unschedulable, informs the IFA of the unresolved conflicts, and allows the IFA to exit the use case without accepting a complete schedule.",
+    "EF-5 (from Step 11): A technical failure prevents notifications from being sent to one or more recipients. The system records the failed notification attempts, informs the IFA that some notifications did not succeed, and stops further notification attempts for the current change while keeping the active schedule unchanged."
+  ],
+  "information_for_steps": [
+    "1. Competition identifier, season or date range, selection of games, IFA user identifier.",
+    "2. Competition configuration data, league rules, team identifiers, venue identifiers.",
+    "3. Match official identifiers, personal availability data, time slot preferences, preferred dates and locations.",
+    "4. Game identifiers, candidate time slots, venue availability, scheduling rules.",
+    "5. Game identifiers with proposed time slots, match official availability and preference data, allocation constraints.",
+    "6. Conflict detection results, personal schedule data, scheduling rule parameters for conflict resolution.",
+    "7. Generated schedule data including games, dates, times, venues, and assigned match officials.",
+    "8. IFA acceptance decision, reference to the proposed schedule version.",
+    "9. Active schedule record, schedule version identifier, persistence metadata.",
+    "10. Updated game schedule details, list of affected games, stakeholder associations, fan notification preferences, match official assignments.",
+    "11. Notification content describing schedule changes, recipient contact information for fans and match officials, notification channel configuration."
+  ]
+}

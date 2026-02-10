@@ -1,0 +1,120 @@
+{
+  "use_case_name": "Manage Patient Records",
+  "unique_id": "UC-001",
+  "area": "Electronic Medical Record Management",
+  "context_of_use": "This use case describes how authorized users search, view, and update patient demographic and medical record information within the Electronic Medical Record Database, including controlled access for different user types and patients’ access to their own and their underage children’s medical files.",
+  "scope": "UHOPE Hospital Management System – Electronic Medical Record Database",
+  "level": "User-goal",
+  "primary_actors": [
+    "patient",
+    "doctor",
+    "nurse",
+    "receptionist",
+    "uhope employee"
+  ],
+  "supporting_actors": [
+    "system administrator"
+  ],
+  "stakeholders_and_interests": [
+    "Patient: Wants to securely access and review own medical record, medical history, test results, treatment history, and underage children’s medical files, and keep personal address information accurate.",
+    "Doctor: Wants to view and edit only the medical files of own patients to support treatment decisions while preventing access to other doctors’ patients.",
+    "Nurse: Wants to quickly view a patient’s medical record using a mobile device to obtain critical information such as blood type.",
+    "Receptionist: Wants to search and edit patient demographic information once in a single system to avoid repeated manual data entry and to confirm patient identity.",
+    "UHOPE employee: Wants to enter and view patient information only once in the Electronic Medical Record Database with access limited to authorized data to avoid duplication across multiple databases.",
+    "System administrator: Wants to configure and maintain access rights so that only authorized users can view or edit specific patient records and data elements.",
+    "UHOPE organization: Wants a single Electronic Medical Record Database that maintains accurate, accessible, and compliant patient records to support clinical and administrative processes."
+  ],
+  "description": "Manage Patient Records enables authorized users to search, view, and update patient demographic and medical record information in the Electronic Medical Record Database, ensuring that each data item is entered and edited only once and that access to records is controlled according to user roles and allowed permissions.",
+  "triggering_event": "An authorized user initiates an action to search, view, or update patient record information in the Electronic Medical Record Database.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Electronic Medical Record Database is operational and reachable by the Hospital Management System.",
+    "The actor is authenticated in the Hospital Management System according to the configured login and two-factor authentication rules for that user type.",
+    "The actor has been granted access rights to use the patient record management functions exposed to that role.",
+    "A corresponding user account is linked to each patient whose record is to be accessed through a personal account interface.",
+    "The patient record to be managed exists in the Electronic Medical Record Database when the use case involves viewing or editing an existing record."
+  ],
+  "postconditions": [
+    "If new patient information was entered, the patient record is created or updated in the Electronic Medical Record Database with the provided demographic and/or medical data stored exactly once in that database.",
+    "If existing patient information was edited, the Electronic Medical Record Database reflects the updated demographic and/or medical data and no conflicting duplicate copies are created in other databases by this use case.",
+    "If patient or child records were only viewed, no modifications are made to the underlying records, and access is logged according to configured security policies.",
+    "Access to medical files remains restricted so that users can only view or edit patient information they are allowed to access as defined by their access rights configuration."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication, including password-based login and two-factor authentication, is handled by separate login use cases and is completed before this use case begins, even though related requirements are described in the Requirement Text.",
+    "It is assumed that access control rules that determine which specific patient records and data fields each actor may view or edit are configured outside this use case by the system administrator, and this use case only enforces those preconfigured rules.",
+    "It is assumed that the concept of a \"patient file\" and \"medical record\" refers to a single logical record for each patient within the Electronic Medical Record Database, even if physically distributed or duplicated for backup or integration purposes.",
+    "It is assumed that when a patient views underage children’s medical files, the parental or guardian relationship is already recorded in the system and associated access rights are already granted by configuration, and this use case only checks those rights.",
+    "It is assumed that mobile phone and tablet access used by nurses and receptionists are client interfaces to the same Electronic Medical Record Database and do not change the underlying behavior of this use case.",
+    "It is assumed that any connections to external databases such as the National Database for Medical Records or self-service data analysis systems are managed by other use cases and are not part of the behavior of this Manage Patient Records use case.",
+    "It is assumed that changes to patient address information by the patient occur within a personal account interface that writes directly to the same Electronic Medical Record Database, ensuring a single source of truth for demographic data.",
+    "It is assumed that the user stories mentioning multiple databases describe a prior situation and that in the target system this use case writes only to the Electronic Medical Record Database, which is then reused by other subsystems.",
+    "It is assumed that all read and write operations performed in this use case are subject to applicable GDPR and hospital privacy policies, which are defined elsewhere and not altered by this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a patient to access their own medical record in order to view their medical history.",
+    "The system shall allow a UHOPE employee to enter patient information only once in the Electronic Medical Record Database so that additional manual entry into other databases is not required by that employee.",
+    "The system shall allow a UHOPE employee to view patient information in the Electronic Medical Record Database that the employee is allowed to access, including information entered by UHOPE employees from other departments.",
+    "The system shall allow a receptionist to search for a patient’s file in the Electronic Medical Record Database using available identifying data so that the receptionist does not need to ask and enter the patient’s information repeatedly.",
+    "The system shall allow a receptionist to edit information in a patient’s file in the Electronic Medical Record Database in a single place so that the receptionist does not need to edit the same information in multiple databases.",
+    "The system shall restrict a doctor’s access so that a doctor can only access medical files belonging to that doctor’s own patients.",
+    "The system shall allow a doctor to edit a patient’s medical file to record medical information necessary for treatment decisions such as vaccinations.",
+    "The system shall allow a patient to change their address in their personal account and shall update the corresponding demographic information in the Electronic Medical Record Database.",
+    "The system shall allow a patient to see the results of tests that were performed on them through access to their medical record.",
+    "The system shall allow a patient to see what they have been treated for by viewing treatment-related information in their medical record.",
+    "The system shall allow a patient to view the medical files of their underage children when the patient has the appropriate guardian access rights configured in the system.",
+    "The system shall allow a nurse to view a patient’s medical record using a mobile device while enforcing the same access control rules as for other interfaces."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The precise authorization rules that define which UHOPE employees may view or edit which categories of patient information from other departments need to be formally specified.",
+    "The exact criteria and process for determining and maintaining which patients are considered underage and which users are recognized as their guardians require clarification.",
+    "The detailed behavior for concurrent updates to the same patient record by multiple users (e.g., doctor and receptionist) is not defined and must be decided.",
+    "The required level of audit logging for viewing and editing patient records, including retention duration and data elements to be logged, needs to be determined to satisfy GDPR compliance.",
+    "The exact search criteria and matching rules (e.g., by name, date of birth, unique identification number) for searching patient files must be specified.",
+    "The policy for which data fields patients themselves are allowed to edit (e.g., address only, or additional contact details) needs to be confirmed.",
+    "The behavior when access control denies a user from viewing or editing a particular patient record (e.g., error messaging and escalation procedure) needs to be defined."
+  ],
+  "main_flow": [
+    "1. Actor (authorized user: patient, doctor, nurse, receptionist, or uhope employee) selects the option to manage patient records in the system interface → System displays the patient record management dashboard appropriate to the actor’s role, including available search and navigation options.",
+    "2. Actor initiates a search or selection of a patient record (e.g., by choosing own record, a known patient, or an associated child) → System validates the actor’s access rights and displays the patient search interface or directly selects the relevant patient record according to the actor’s role.",
+    "3. Actor enters search criteria or selects from an allowed patient list (for example, receptionist enters identifying data, doctor selects from own patients, nurse selects assigned patient, patient selects self or underage child) → System retrieves matching patient records from the Electronic Medical Record Database within the scope of the actor’s permissions and presents the selectable results.",
+    "4. Actor selects a specific patient record from the presented list or direct selection → System fetches the full patient record that the actor is authorized to access and displays demographic and medical information in a structured view.",
+    "5. Actor reviews the displayed patient demographic information and medical record details (such as medical history, treatments, and test results) as permitted by their role → System maintains a read-only view for any data elements for which the actor does not have edit rights and ensures that confidential sections remain hidden if not authorized.",
+    "6. Actor decides to update allowed information in the patient record, such as demographic data by a receptionist or uhope employee, medical data by a doctor, or address data by a patient in their personal account → System presents editable fields only for data elements the actor is authorized to modify and indicates which data are non-editable.",
+    "7. Actor enters or modifies the patient information in the provided editable fields, ensuring that data is entered once in the Electronic Medical Record Database interface → System validates the entered data for completeness and format and shows any validation messages that must be resolved before saving.",
+    "8. Actor confirms the changes to the patient record and submits the update request → System applies the validated changes to the corresponding patient record in the Electronic Medical Record Database, overwriting the previous values for those fields while preserving other data.",
+    "9. System records that the patient record has been viewed or updated, including actor identity and timestamp according to configured logging rules → System refreshes the displayed patient record with the updated information and shows a confirmation that the record has been successfully saved.",
+    "10. Actor optionally continues to view additional sections of the patient record or closes the patient record management interface → System closes the patient record view on request and returns the actor to the general dashboard or home screen while keeping the updated patient information available for subsequent authorized access."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Patient accesses own record directly – Condition: The actor is a patient who has successfully logged into their personal account and selects to view their own medical record. The system, instead of displaying a general search interface, directly selects the patient’s own record, applies access checks for self-access, and proceeds as if Step 4 has been completed. The flow then continues at Step 4.",
+    "AF-2 (from Step 2): Patient accesses underage child’s medical file – Condition: The actor is a patient who has logged into their personal account and chooses to view an underage child’s medical file from a list of associated children. The system verifies guardian access rights for the selected child, retrieves the child’s record if permitted, and proceeds to show the record as in Step 4, after which the flow continues at Step 4.",
+    "AF-3 (from Step 3): Doctor selects from own patient list without entering free-text search – Condition: The actor is a doctor who chooses to navigate via a list of their own patients instead of entering explicit search criteria. The system retrieves and displays only those patients assigned to that doctor, the doctor selects a patient, and the flow then continues at Step 4.",
+    "AF-4 (from Step 3): Nurse selects patient assigned for current task – Condition: The actor is a nurse accessing the system on a mobile device and selects a patient from a list of patients assigned to the nurse. The system restricts the list according to task assignment, the nurse selects a patient, and the flow continues at Step 4.",
+    "AF-5 (from Step 6): Actor performs view-only access – Condition: The actor intends only to review patient information and does not choose to modify any fields. The system keeps all fields in read-only mode, no edit operation is initiated, and after completing review the actor closes the record, causing the flow to proceed directly to Step 10 without executing Steps 7 and 8.",
+    "AF-6 (from Step 6): Patient updates address only – Condition: The actor is a patient using their personal account and chooses to update only the address information. The system shows editable address fields while leaving all other fields read-only, the patient updates and submits the new address, the system validates and saves the address change as in Steps 7 and 8, and the flow then continues at Step 9.",
+    "AF-7 (from Step 3): Receptionist finds a single unique match – Condition: The receptionist enters search criteria that uniquely identify a single patient. The system automatically opens that patient’s record without presenting a list, and the flow continues at Step 4."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Actor not authorized to access patient record management – Condition: The actor attempts to open the patient record management functionality but does not have sufficient access rights. The system denies access, displays an authorization error message, logs the attempt according to security policy, and terminates the use case without exposing any patient data.",
+    "EF-2 (from Step 3): No matching patient records found – Condition: The actor enters search criteria that do not match any patient in the Electronic Medical Record Database. The system displays a message indicating that no records were found, allows the actor to revise the search criteria or cancel the operation, and the flow either returns to Step 3 upon new input or terminates the use case if the actor cancels.",
+    "EF-3 (from Step 3): Actor attempts to access a patient outside permitted scope – Condition: The system identifies that a selected or matched patient record is outside the actor’s allowed scope (for example, a doctor selects a patient who is not assigned to that doctor). The system blocks access to that record, displays an appropriate error message, logs the denied access attempt, and returns the actor to the patient selection step at Step 3.",
+    "EF-4 (from Step 7): Data validation failure on update – Condition: The actor enters new or updated data that fails system validation rules (for example, required fields missing or invalid format). The system rejects the attempted save, highlights the invalid fields, shows validation messages, and returns the flow to Step 7 to allow the actor to correct the input or cancel the changes.",
+    "EF-5 (from Step 8): Database update error – Condition: A technical error occurs while saving the updated patient record to the Electronic Medical Record Database. The system does not commit any partial changes, displays an error notification to the actor indicating that the save operation failed, logs the technical error for further investigation, and ends the use case with the patient record remaining in its previous consistent state.",
+    "EF-6 (from Step 2): Session expired before record access – Condition: The actor’s authenticated session expires before or during the attempt to access the patient record management interface. The system invalidates the session, redirects the actor to the login interface, informs the actor that the session has expired, and terminates the current instance of the use case without displaying any patient data."
+  ],
+  "information_for_steps": [
+    "1. Actor role identifier, authenticated user identifier, accessible functions list by role.",
+    "2. Actor role, selected operation type (search own record, search another patient, access child record), initial access rights profile.",
+    "3. Patient search criteria (such as name, date of birth, unique identification number), doctor’s assigned patient list, nurse’s assigned patient list, mapping between guardian and underage child records.",
+    "4. Selected patient identifier, patient demographic data (e.g., name, address, contact information), patient medical record summary.",
+    "5. Patient medical history entries, treatments history, test results, role-based view permissions for each data section.",
+    "6. Editable field set per role (e.g., address fields for patient, demographic fields for receptionist or uhope employee, medical fields for doctor), field-level access control rules.",
+    "7. Updated patient information values entered by the actor, validation rules and constraints for each field, error messages for invalid data.",
+    "8. Update request payload containing patient identifier and changed fields, Electronic Medical Record Database transaction details for applying changes.",
+    "9. Audit log entries including patient identifier, actor identifier, action type (view or update), timestamp, and affected data categories.",
+    "10. Session state information, navigation context for returning to dashboard or previous screen, updated patient record snapshot available for subsequent authorized use."
+  ]
+}

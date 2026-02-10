@@ -1,0 +1,93 @@
+{
+  "use_case_name": "Manage User Roles and Privileges",
+  "unique_id": "UC-008",
+  "area": "User Access Control Management",
+  "context_of_use": "An authorized IFA representative manages system user roles and privileges so that access to tools and data within the system is restricted to what is relevant for each user.",
+  "scope": "IFA Competition Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa"
+  ],
+  "supporting_actors": [
+    "Authentication Service",
+    "Authorization Service"
+  ],
+  "stakeholders_and_interests": [
+    "IFA: Wants user access to be restricted to only relevant tools so that the system is less confusing and more secure.",
+    "IFA Budget Auditors: Want users to have appropriate access so that financial and transaction data is protected and regulatory obligations are met.",
+    "Team Managers and Staff: Want team members to have clearly defined roles and system privileges to delegate tasks efficiently without exposing unnecessary functionality.",
+    "Fans: Want their access limited to fan-facing features, ensuring privacy and protection of internal competition and financial data.",
+    "System Operations: Want a clear, auditable mechanism for assigning and changing user roles in order to maintain system integrity."
+  ],
+  "description": "This use case describes how an authorized IFA actor manages user roles and associated system privileges to restrict each user’s access to only the tools and functions relevant to their responsibilities.",
+  "triggering_event": "The authorized IFA actor decides to review or change the roles and privileges assigned to a specific system user.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA actor is authenticated in the IFA Competition Management System.",
+    "The IFA actor has the required authorization to manage user roles and privileges.",
+    "The target user account for which roles will be managed exists in the system directory or user registry."
+  ],
+  "postconditions": [
+    "The target user’s roles and associated privileges are updated in the system according to the IFA actor’s changes.",
+    "The system’s authorization data reflects the updated roles so that the user’s access to tools and functions is restricted to those permitted by their roles.",
+    "An audit record of the role and privilege changes, including who made the change and when, is stored by the system."
+  ],
+  "assumptions": [
+    "It is assumed that the single listed actor identifier \"ifa\" represents an authorized IFA role with administrative capabilities for managing user access rights within the system.",
+    "It is assumed that the system maintains a predefined catalog of roles and their corresponding privileges, aligned with the different kinds of users implied in the requirements (e.g., IFA employees, team managers, team staff, match officials, fans, budget auditors).",
+    "It is assumed that the user accounts for these different kinds of users are created and maintained by other use cases, and that this use case focuses on assigning and modifying their roles and associated privileges.",
+    "It is assumed that changes to user roles and privileges take effect immediately for subsequent authorization checks performed by the system.",
+    "It is assumed that the system’s authentication and authorization services are available and integrated so that role changes can be enforced at access-time.",
+    "It is assumed that the level of detail for privileges (e.g., access to specific tools or screens) is managed through configuration associated with each role, and that this use case does not define new tools or business functions."
+  ],
+  "requirements_met": [
+    "The system shall allow an authorized IFA actor to view and manage user roles and associated privileges so that user access is restricted to only relevant tools.",
+    "The system shall provide a means for an authorized IFA actor to search for and select an existing user account whose roles are to be managed.",
+    "The system shall display the currently assigned roles and high-level privileges for the selected user to support informed access control decisions.",
+    "The system shall allow an authorized IFA actor to assign additional roles to a user from the catalog of available roles.",
+    "The system shall allow an authorized IFA actor to remove roles from a user so that unnecessary or inappropriate access is revoked.",
+    "The system shall validate proposed role changes against configured access control rules and shall prevent saving role combinations deemed invalid or conflicting.",
+    "The system shall persist any valid role and privilege changes and immediately apply them to subsequent authorization checks.",
+    "The system shall record an audit trail entry for each change of user roles or privileges, including the acting IFA user, the affected user, the changes made, and a timestamp."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The detailed catalog of roles and their associated privileges (e.g., which tools each role may access) remains to be formally defined.",
+    "Policies for resolving conflicts when multiple roles assigned to a single user grant overlapping or contradictory privileges have not yet been specified.",
+    "The required retention period and level of detail for the audit trail of role and privilege changes have not been clarified.",
+    "The specific authorization model (e.g., strictly role-based or role-based with additional attribute conditions) has not been finalized.",
+    "The workflow and escalation process, if any, for approving certain high-impact role changes (such as granting administrative privileges) have not been determined."
+  ],
+  "main_flow": [
+    "1. IFA selects the user role management function → System displays the user role and privilege management interface and required search fields.",
+    "2. IFA searches for a target user by specifying search criteria such as user identifier, name, or role-related attributes → System locates matching user accounts and displays a list of results.",
+    "3. IFA selects the intended target user from the search results → System displays the target user’s profile, including currently assigned roles and a summary of associated privileges.",
+    "4. IFA reviews the target user’s existing roles and determines the desired role changes to ensure access is restricted to relevant tools → System highlights the currently active roles and available roles that can be assigned.",
+    "5. IFA adds or removes roles for the target user by selecting roles to assign and deselecting roles to revoke → System updates the pending role selection for the user and prepares to validate the proposed changes.",
+    "6. IFA confirms the proposed role and privilege changes for the target user → System validates the changes against configured access control rules and identifies any conflicts or policy violations.",
+    "7. IFA submits the validated changes for saving → System saves the updated roles and associated privileges for the target user, updates authorization data, and records an audit entry of the change.",
+    "8. IFA reviews the confirmation message and updated role summary for the target user → System presents a confirmation that the user’s roles and effective access have been updated and are now restricted to tools permitted by the assigned roles."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the IFA provides broad or partial search criteria that return multiple matching users, the system displays a paginated list of candidate users along with key identifiers; the IFA refines the search or selects the correct target user from the list, after which the flow continues at Step 3.",
+    "AF-2 (from Step 4): If the IFA decides that the user should temporarily retain certain broader access while still restricting some tools, the IFA adjusts the combination of roles accordingly; the system updates the pending role selection and the flow continues at Step 5.",
+    "AF-3 (from Step 7): If the system identifies non-critical warnings during validation (such as role combinations that are uncommon but allowed), the system displays the warnings and asks the IFA to confirm whether to proceed; if the IFA confirms, the system proceeds to save the changes and the flow continues at Step 8."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the IFA actor does not have sufficient authorization to access the user role and privilege management function, the system displays an authorization error message, does not allow entry to the role management interface, logs the incident, and the use case terminates without any role changes.",
+    "EF-2 (from Step 2): If the search criteria entered by the IFA do not match any existing user accounts, the system displays a message indicating that no users were found and prompts the IFA to revise the criteria; no role changes are made and the flow returns to Step 2.",
+    "EF-3 (from Step 6): If validation of the proposed role changes fails due to configured access control policies or role conflicts, the system displays specific error messages describing the invalid or conflicting role assignments, prevents the changes from being saved, and returns to Step 5 for the IFA to correct the selection.",
+    "EF-4 (from Step 7): If the system encounters an error while saving the updated roles and privileges (such as a persistence or connectivity failure), the system displays an error message indicating that the changes could not be saved, logs the failure, retains the user’s previous roles and privileges, and the use case terminates without activating the new configuration."
+  ],
+  "information_for_steps": [
+    "1. IFA user identifier, Session authentication token, Access control permissions for role management, Role management interface layout.",
+    "2. Search criteria (e.g., user identifier, user name, role filters), User account metadata for matching, Search result list.",
+    "3. Target user identifier, User profile data, Currently assigned roles, Summary of privileges derived from current roles.",
+    "4. Target user’s role list, Catalog of available roles, Role-to-privilege mappings, Indicators of tools associated with each role.",
+    "5. Selected roles to assign, Selected roles to revoke, Pending role change set for the target user, Role selection constraints.",
+    "6. Pending role change set, Access control validation rules, Conflict detection results, Validation status and messages.",
+    "7. Finalized role assignments, Authorization data structures linking user to roles, Audit record data (acting IFA user, target user, timestamp, before-and-after role states).",
+    "8. Confirmation message details, Updated role and privilege summary for the target user, Effective access description for relevant tools."
+  ]
+}

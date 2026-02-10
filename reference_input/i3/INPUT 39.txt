@@ -1,0 +1,16 @@
+﻿{
+"use_case_name": "Generate Statistics",
+"primary_actors": ["IFA Administrator"],
+"preconditions": ["Matches are active or completed.", "Referees are ready to report."],
+"postconditions": ["Statistics are generated and available for fans."],
+"main_flow": [
+"1. IFA Administrator initiates the live statistics generation process.",
+"2. System connects to active matches to aggregate data.",
+"3. Include Use Case: Report Match Event.",
+"4. System processes the live updates from referees.",
+"5. System generates statistical reports and analytics.",
+"6. System publishes the statistics for public access."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

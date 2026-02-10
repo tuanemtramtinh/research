@@ -1,0 +1,27 @@
+﻿{
+    "use_case_name": "Dispense medication",
+    "primary_actors": ["Pharmacist"],
+    "preconditions": [
+      "Pharmacist is logged into the pharmacy module.",
+      "A prescription has been transferred from a Doctor."
+    ],
+    "postconditions": [
+      "Medication is marked as dispensed in the system.",
+      "Inventory levels are updated."
+    ],
+    "main_flow": [
+      "1. Pharmacist views the 'Incoming Prescriptions' list. → System displays prescriptions transferred from Doctors.",
+      "2. Pharmacist selects a specific prescription. → System displays medication details, patient info, and dosage.",
+      "3. Pharmacist retrieves the physical medication and verifies it against the screen. → Pharmacist marks the item as 'Filled'.",
+      "4. System updates the status to 'Dispensed'. → System deducts the item from inventory."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): Generic Substitution.",
+      "1. At step 3, Pharmacist substitutes the prescribed brand with a generic equivalent. → Pharmacist records the substitution in the system.",
+      "2. System updates the record with the dispensed medication details. → Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Prescription Recall.",
+      "1. At step 2, System detects the prescription was cancelled by the Doctor. → System alerts the Pharmacist and blocks dispensing."
+    ]
+  },

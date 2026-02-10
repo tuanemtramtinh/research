@@ -1,0 +1,32 @@
+﻿{
+    "use_case_name": "Discover and Access Datasets",
+    "primary_actors": [
+      "Depositor",
+      "Data Reuser",
+      "External Collaborator",
+      "Academic Publisher"
+    ],
+    "preconditions": [
+      "The System is online and accessible via Web or Primo."
+    ],
+    "postconditions": [
+      "The Primary Actor views dataset details or downloads the content.",
+      "The access is logged."
+    ],
+    "main_flow": [
+      "1. Primary Actor accesses the search interface (Web or Primo). → System provides search fields (keywords, subject, etc.).",
+      "2. Primary Actor executes a search. → System returns a list of matching datasets relevant to the user's language preferences.",
+      "3. Primary Actor selects a specific dataset. → System displays the dataset landing page with metadata, DOI, and citation examples.",
+      "4. Primary Actor examines the file list and requests a download. → System checks access permissions (Open or Privileged).",
+      "5. System delivers the file or persistent URL to the Actor. → Goal Achieved."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 4): Privileged Access.",
+      "1. At step 4, External Collaborator requests access to a restricted dataset. → System verifies the user's specific privileges granted by the Depositor.",
+      "2. System allows access. → Proceed to Step 5."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Access Denied.",
+      "1. At step 4, Primary Actor tries to access an embargoed or closed dataset without permission. → System denies access and displays the embargo details."
+    ]
+  },

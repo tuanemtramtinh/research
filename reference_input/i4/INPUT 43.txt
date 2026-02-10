@@ -1,0 +1,27 @@
+﻿{
+    "use_case_name": "Request new prescription",
+    "primary_actors": ["Patient"],
+    "preconditions": [
+      "The Patient is logged into the system via a mobile device or PC.",
+      "The Patient has a history of previous prescriptions suitable for refill/request."
+    ],
+    "postconditions": [
+      "A prescription request is submitted to the relevant Doctor for review.",
+      "The request status is set to 'Pending'."
+    ],
+    "main_flow": [
+      "1. Patient selects 'Request Prescription' from the dashboard. → System displays a list of the Patient's eligible current and past medications.",
+      "2. Patient selects the specific medication and dosage to request. → System prompts for any additional comments or symptoms.",
+      "3. Patient submits the request. → System validates the request against refill intervals.",
+      "4. System notifies the responsible Doctor of the new request. → System displays a confirmation receipt to the Patient."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Requesting a new medication not in history.",
+      "1. At step 2, Patient selects 'Other/New Medication'. → System prompts for a description of the need.",
+      "2. Patient enters details and submits. → System routes the request as a 'New Consultation Request' instead of a simple refill. → Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Too early for refill.",
+      "1. At step 3, System determines the refill interval has not passed. → System blocks the request and displays the earliest available refill date."
+    ]
+  },

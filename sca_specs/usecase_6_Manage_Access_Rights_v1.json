@@ -1,0 +1,105 @@
+{
+  "use_case_name": "Manage Access Rights",
+  "unique_id": "UC-006",
+  "area": "Access Control Management",
+  "context_of_use": "The system administrator configures and modifies access permissions for individual users and user groups in the hospital management system to control what actions users are allowed to perform.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "system administrator"
+  ],
+  "supporting_actors": [
+    "Hospital Management System"
+  ],
+  "stakeholders_and_interests": [
+    "System Administrator: Needs to configure and adjust access rights for users and user groups to enforce organizational access policies.",
+    "UHOPE: Requires that access to the hospital management system and its sub-systems is properly controlled to protect data and comply with regulations such as GDPR.",
+    "UHOPE Employees: Need appropriate permissions to perform their job functions without unnecessary restrictions.",
+    "Patients: Require that their personal and medical information is only accessible to authorized users.",
+    "Regulatory Authorities: Require that access control complies with relevant data protection and healthcare regulations."
+  ],
+  "description": "This use case describes how a system administrator manages access rights for individual users and user groups in the hospital management system in order to control what users can and cannot do.",
+  "triggering_event": "The system administrator decides to configure or modify access permissions for a user or a user group.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The hospital management system is operational and accessible.",
+    "The system administrator is authenticated in the hospital management system.",
+    "The system administrator has access rights that allow managing access permissions for users and user groups.",
+    "The target user accounts and user groups to be managed already exist in the hospital management system."
+  ],
+  "postconditions": [
+    "The selected user or user group has updated access rights stored in the hospital management system.",
+    "Subsequent authorization decisions for the affected user or user group are based on the updated access rights.",
+    "An audit-relevant record of the access rights change is stored by the hospital management system."
+  ],
+  "assumptions": [
+    "It is assumed that user accounts and user groups are created and maintained by a separate use case and are available when this use case is executed.",
+    "It is assumed that the hospital management system enforces authorization based on the access rights configured by the system administrator but the enforcement mechanism is outside the scope of this use case.",
+    "It is assumed that the system administrator role is uniquely authorized to manage access rights for users and user groups.",
+    "It is assumed that access rights are represented in the system as a configurable set of permissions that can be assigned to users and user groups.",
+    "It is assumed that the hospital management system provides an interface that allows the system administrator to search for and select users and user groups.",
+    "It is assumed that the hospital management system records configuration changes, including access rights changes, for accountability and auditing purposes.",
+    "It is assumed that the relevant data protection regulations, including GDPR, impose requirements on how access rights are managed and that this use case contributes to fulfilling those requirements without defining them in detail."
+  ],
+  "requirements_met": [
+    "The system shall allow a system administrator to view the current access rights of an individual user.",
+    "The system shall allow a system administrator to modify access rights for an individual user.",
+    "The system shall allow a system administrator to save updated access rights for an individual user.",
+    "The system shall allow a system administrator to view the current access rights of a user group.",
+    "The system shall allow a system administrator to modify access rights for a user group.",
+    "The system shall allow a system administrator to save updated access rights for a user group.",
+    "The system shall apply updated access rights to subsequent authorization decisions for affected users and user groups.",
+    "The system shall log each change to access rights, including the administrator identity, timestamp, and details of the changes."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The policy specifying which permissions may be assigned to which user roles and user groups is not defined in the requirement text.",
+    "The structure and granularity of access rights and permissions (e.g., role-based, attribute-based) are not specified.",
+    "The required retention period and content of access rights change logs for auditing and GDPR compliance are not specified.",
+    "The handling of concurrent updates to access rights for the same user or user group by multiple administrators is not specified.",
+    "The rollback or versioning policy for reverting access rights to a previous configuration is not defined."
+  ],
+  "main_flow": [
+    "1. System administrator selects access management function → Hospital management system displays options to manage access rights for users and user groups.",
+    "2. System administrator chooses to manage individual user access rights → Hospital management system displays a searchable list of user accounts with their identifiers.",
+    "3. System administrator selects a specific user whose access rights are to be configured or modified → Hospital management system displays the current access rights associated with the selected user.",
+    "4. System administrator reviews the displayed access rights for the selected user and determines required changes → Hospital management system remains ready to accept modifications to the user’s access rights.",
+    "5. System administrator updates the access rights for the selected user by adding, changing, or removing permissions in accordance with organizational policy → Hospital management system updates the in-session representation of the user’s access rights and displays the pending configuration.",
+    "6. System administrator confirms the updated access rights for the selected user → Hospital management system validates the updates and stores the new access rights configuration for the user.",
+    "7. System administrator chooses to manage user group access rights → Hospital management system displays a searchable list of user groups with their identifiers.",
+    "8. System administrator selects a specific user group whose access rights are to be configured or modified → Hospital management system displays the current access rights associated with the selected user group.",
+    "9. System administrator reviews the displayed access rights for the selected user group and determines required changes → Hospital management system remains ready to accept modifications to the user group’s access rights.",
+    "10. System administrator updates the access rights for the selected user group by adding, changing, or removing permissions in accordance with organizational policy → Hospital management system updates the in-session representation of the user group’s access rights and displays the pending configuration.",
+    "11. System administrator confirms the updated access rights for the selected user group → Hospital management system validates the updates and stores the new access rights configuration for the user group.",
+    "12. System administrator completes access rights management activities → Hospital management system confirms that the changes have been saved and ensures that future authorization decisions use the updated access rights while recording the changes for auditing."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the system administrator chooses to manage user group access rights first instead of individual user access rights, the system administrator selects the option to manage user group access rights and the system displays the list of user groups (continue at Step 7).",
+    "AF-2 (from Step 3): If the system administrator wants to manage access rights for a different user after viewing the current user’s access rights, the system administrator selects another user from the list and the system displays the access rights for the newly selected user, after which the system administrator may proceed with reviewing and updating access rights as in Steps 4 to 6.",
+    "AF-3 (from Step 8): If the system administrator wants to manage access rights for a different user group after viewing the current group’s access rights, the system administrator selects another user group from the list and the system displays the access rights for the newly selected user group, after which the system administrator may proceed with reviewing and updating access rights as in Steps 9 to 11.",
+    "AF-4 (from Step 6): If, after confirming the updated access rights for a user, the system administrator decides not to modify any user group access rights, the system administrator exits the access rights management function and the system records the updates already confirmed and terminates the use case successfully.",
+    "AF-5 (from Step 11): If, after confirming the updated access rights for a user group, the system administrator decides to perform additional user access rights changes, the system administrator returns to the option to manage individual user access rights and continues as in Steps 2 to 6 before completing the use case at Step 12."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the selected user account no longer exists in the system at the time of selection, the system displays an error message indicating that the user account is unavailable, returns the system administrator to the user list, and no access rights changes are applied.",
+    "EF-2 (from Step 6): If validation of the updated user access rights fails due to violation of internal consistency rules, the system displays a validation error describing the problem, does not store the invalid configuration, and prompts the system administrator to correct the configuration before reattempting confirmation.",
+    "EF-3 (from Step 8): If the selected user group no longer exists in the system at the time of selection, the system displays an error message indicating that the user group is unavailable, returns the system administrator to the user group list, and no access rights changes are applied.",
+    "EF-4 (from Step 11): If validation of the updated user group access rights fails due to violation of internal consistency rules, the system displays a validation error describing the problem, does not store the invalid configuration, and prompts the system administrator to correct the configuration before reattempting confirmation.",
+    "EF-5 (from Step 12): If a system failure occurs before the changes can be fully persisted, the system attempts to roll back to the last consistent access rights configuration, logs the failure event, informs the system administrator that the update could not be completed, and terminates the use case without partial application of access rights changes."
+  ],
+  "information_for_steps": [
+    "1. Access management menu options, system administrator session data.",
+    "2. User list, user identifiers, search criteria.",
+    "3. Selected user identifier, current user access rights configuration.",
+    "4. Current user access rights details, organizational access policy references (conceptual).",
+    "5. Updated user permissions set, interim access rights configuration for the user.",
+    "6. Validated user access rights configuration, audit data for user access rights change.",
+    "7. User group list, user group identifiers, search criteria.",
+    "8. Selected user group identifier, current user group access rights configuration.",
+    "9. Current user group access rights details, organizational access policy references (conceptual).",
+    "10. Updated user group permissions set, interim access rights configuration for the user group.",
+    "11. Validated user group access rights configuration, audit data for user group access rights change.",
+    "12. Final stored access rights configurations for affected users and user groups, confirmation status, audit log entries."
+  ]
+}

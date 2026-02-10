@@ -1,0 +1,87 @@
+{
+  "use_case_name": "Import Medical Records",
+  "unique_id": "UC-012",
+  "area": "Electronic Medical Record Management",
+  "context_of_use": "A doctor who is using the medical record system needs to transfer existing external digital medical records into the system so that the patient’s information is consolidated in one place.",
+  "scope": "Hospital Medical Record System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor"
+  ],
+  "supporting_actors": [
+    "Authentication Service"
+  ],
+  "stakeholders_and_interests": [
+    "Doctor: Wants to consolidate all relevant digital medical records for each patient in a single system to support clinical decision-making.",
+    "Patient: Wants their medical information to be complete, accurate, and securely stored in a single medical record.",
+    "Hospital Administration: Wants consistent, complete electronic records to support clinical operations, billing, and compliance.",
+    "IT Security Management: Wants imported medical records to be accessed only by authenticated and authorized doctors.",
+    "Regulatory Bodies: Require that handling and consolidation of medical records comply with confidentiality and data protection regulations."
+  ],
+  "description": "This use case describes how a doctor imports existing external digital medical records into the medical record system in order to consolidate all information related to a patient in one place.",
+  "triggering_event": "The doctor decides to transfer external digital medical records into the system for a patient.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor has a registered user account in the system.",
+    "The doctor is assigned to at least one patient medical record in the system.",
+    "The external digital medical records to be imported are available in an accessible digital format.",
+    "The medical record system is operational and reachable from the doctor’s device."
+  ],
+  "postconditions": [
+    "The selected external digital medical records are stored in the system and associated with the appropriate patient medical record.",
+    "The imported medical records are available for viewing to the doctor and other users who are authorized to access that patient’s medical record.",
+    "An audit trail entry exists indicating that a doctor has imported external digital medical records for the patient."
+  ],
+  "assumptions": [
+    "It is assumed that the doctor is already assigned to the patient’s medical record before initiating the import, as the requirements specify that doctors should have access restricted to assigned patient medical records.",
+    "It is assumed that authentication is required before any doctor can perform import operations, based on the presence of an \"authenticate\" included use case and user stories about secure access and unique login.",
+    "It is assumed that the system provides a user interface through which the doctor can select a patient medical record and initiate the import of digital medical records, although the detailed user interface is not described in the requirements.",
+    "It is assumed that the external digital medical records are provided in formats that the system can accept without requiring additional transformation by the doctor, since the requirements only mention transferring digital medical records and not data conversion.",
+    "It is assumed that the doctor has the necessary authorization, as determined by hospital policy, to import external medical records into the chosen patient medical record.",
+    "It is assumed that the import operation does not create or modify doctor assignments for the patient; it only consolidates external information into the existing medical record."
+  ],
+  "requirements_met": [
+    "The system shall allow a doctor to transfer external digital medical records into the system so that information is consolidated in one place.",
+    "The system shall require the doctor to be authenticated before allowing the import of external digital medical records.",
+    "The system shall allow an authenticated doctor to select the target patient medical record to which the external digital medical records will be linked.",
+    "The system shall store the imported digital medical records in association with the selected patient medical record.",
+    "The system shall make imported digital medical records available for viewing to the doctor and other actors who are authorized to access that patient’s medical record.",
+    "The system shall record an audit entry each time a doctor imports external digital medical records for a patient."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The acceptable file formats and size limits for external digital medical records to be imported need to be defined.",
+    "The method for resolving conflicts or duplicates when the same medical record information is already present in the system needs to be specified.",
+    "The retention and deletion policies for imported digital medical records need to be clarified in accordance with regulatory requirements.",
+    "The detailed authorization rules determining which doctors may import records for which patients need to be defined by hospital policy.",
+    "Error handling behavior for partially imported or corrupted external digital medical records needs to be specified more precisely."
+  ],
+  "main_flow": [
+    "1. Doctor initiates access to the system → System prompts the doctor to authenticate.",
+    "2. Doctor provides authentication credentials → System verifies the credentials and establishes an authenticated session for the doctor.",
+    "3. Doctor selects the patient whose medical record will receive imported records → System displays the selected patient’s existing medical record overview to the doctor.",
+    "4. Doctor chooses the option to import external digital medical records → System displays an interface for importing external digital medical records.",
+    "5. Doctor specifies the source of the external digital medical records and selects one or more digital medical record files for import → System receives the selected digital medical record files and prepares them for import.",
+    "6. Doctor confirms the import of the selected digital medical records into the chosen patient medical record → System imports the digital medical record files and associates them with the selected patient medical record.",
+    "7. Doctor views the patient medical record including the newly imported digital medical records → System presents an updated view of the patient medical record, indicating that the external digital medical records have been successfully imported and are available for authorized viewing."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): If the doctor has access to multiple patients and needs to change the initially selected patient, the doctor selects a different patient from the available list before proceeding with import → System updates the display to show the newly selected patient’s medical record overview and the use case continues at Step 4.",
+    "AF-2 (from Step 5): If the doctor decides to adjust the selection of external digital medical record files before confirming the import, the doctor modifies the selection of files in the import interface → System updates the list of selected files and the use case continues at Step 6 with the revised selection."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the authentication credentials provided by the doctor are invalid or cannot be verified, the system rejects the login attempt, displays an authentication error message, and does not allow access to import functionality. The use case terminates without importing any records.",
+    "EF-2 (from Step 5): If the external digital medical record files cannot be accessed or uploaded due to technical issues (such as unsupported format or transmission failure), the system notifies the doctor of the failure, identifies the affected files, and does not proceed with importing those files. The doctor may retry Step 5 or cancel the import, and no partial import is committed for failed files.",
+    "EF-3 (from Step 6): If the system encounters an internal error while importing or associating the digital medical records with the patient medical record, the system rolls back the current import operation for the involved files, records the failure in an error log, informs the doctor that the import was not completed, and leaves the existing patient medical record unchanged."
+  ],
+  "information_for_steps": [
+    "1. Doctor identifier, authentication prompt parameters.",
+    "2. Username, password or equivalent credentials, authentication token, session identifier.",
+    "3. Patient identifier list, selected patient identifier, existing patient medical record summary.",
+    "4. Import action command, import interface configuration parameters.",
+    "5. External source location, selected digital medical record file names, file metadata (such as size and type).",
+    "6. Confirmation of import action, mapping between selected files and patient identifier, association parameters.",
+    "7. Updated patient medical record content, references or links to imported digital medical record files, audit trail entry identifier."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "use_case_name": "Manage Competitions",
+  "unique_id": "UC-004",
+  "area": "Competition Management and Scheduling",
+  "context_of_use": "The competition management system is used by the IFA and IFA employees to configure competition rules, generate unbiased and conflict-free game schedules with allocated match officials, and support live match event reporting and stakeholder notifications during competition operation.",
+  "scope": "IFA Competition Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa",
+    "ifa employee",
+    "match official"
+  ],
+  "supporting_actors": [
+    "time service",
+    "notification delivery infrastructure"
+  ],
+  "stakeholders_and_interests": [
+    "ifa: Wants competitions to be configured with correct rulesets, unbiased scheduling, adherence to league rules, and proper notification and reporting to maintain fairness and integrity.",
+    "ifa employee: Wants to reduce manual workload by automating game scheduling and allocation of match officials while still being able to correct issues under controlled override conditions.",
+    "match official: Wants their personal preferences and availability for time, date, and location of games to be considered and wants to report match events live without duplicate effort.",
+    "fans and other game stakeholders: Want to receive timely and consistent notifications about relevant game events to stay informed.",
+    "ifa management: Wants to minimize claims of unfair advantage or bias related to scheduling and match official allocation.",
+    "system operations: Wants the competition management processes to execute reliably at scale without degrading user experience."
+  ],
+  "description": "This use case describes how the IFA and IFA employees configure competition rulesets, automatically generate unbiased and rule-compliant game schedules, allocate match officials while avoiding conflicts and honoring stated preferences, control schedule overrides, and support live match event reporting and stakeholder notification for competitions.",
+  "triggering_event": "The IFA or an IFA employee initiates competition setup or scheduling activities within the competition management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA Competition Management System is operational and reachable by authorized actors.",
+    "The initiating actor (ifa or ifa employee) is authenticated by the system.",
+    "The initiating actor has the necessary authorization to manage competitions and schedules according to configured access control rules.",
+    "Relevant leagues and competitions exist in the system and are available for configuration and scheduling.",
+    "Registered teams and match officials exist in the system with their basic data available."
+  ],
+  "postconditions": [
+    "Competition rulesets for the selected competition are stored and associated with the competition in the system.",
+    "An unbiased game schedule is generated for the competition according to the configured rules and constraints.",
+    "Match officials are allocated to scheduled games in a manner that applies league rules and avoids personal schedule conflicts as far as possible.",
+    "Any schedule overrides performed during the use case have been authorized by at least two certified IFA employees and have been recorded by the system.",
+    "The system is able to receive live game event reports from match officials for games within the managed competitions.",
+    "The system is able to notify all defined stakeholders of game events simultaneously and in a consistent manner for games within the managed competitions.",
+    "All generated schedules, allocations, and reported events are persistently stored and are available for subsequent processing by other use cases such as leaderboard updates or budget auditing."
+  ],
+  "assumptions": [
+    "Authentication and general access control are provided by existing system security components and are not defined in this use case.",
+    "The IFA defines what constitutes a certified IFA employee and manages their certification status outside the scope of this use case; this use case only checks a certification attribute that already exists.",
+    "Definitions of bias, such as giving teams a lighter schedule, are captured as formal constraints or parameters that can be represented in the system’s competition rulesets without adding new types of constraints beyond those implied by the requirements.",
+    "Match officials’ personal schedules and preferences (time slots, dates, locations) are stored in the system before scheduling is executed, through processes that are outside the scope of this use case.",
+    "Stakeholders of a game event are already known to the system for each game (for example, fans who subscribed, relevant team members, match officials), and this use case only uses the existing stakeholder lists to send notifications.",
+    "Live match event reporting by match officials occurs through an existing user interface that allows selection or entry of pre-defined event types and associated game context, without defining new event categories beyond those implied by deriving statistics.",
+    "Notification delivery infrastructure (such as push, SMS, or email delivery mechanisms) is already integrated with the system; this use case only triggers notification dispatches and records that notifications were sent.",
+    "Time and date information used for scheduling, conflict detection, and preferences is based on a reliable system time service that is considered authoritative.",
+    "Budget auditing, leaderboard updating, and other downstream processing of rulesets and match events are handled by separate use cases; this use case ensures that required inputs for those processes are produced and stored.",
+    "The system will apply league rules like limiting repeated officiation of the same team by the same official only to the extent that such rules can be expressed in the stored ruleset configuration for the relevant competition."
+  ],
+  "requirements_met": [
+    "The system shall allow the IFA to input and store different rulesets for different competitions so that leaderboards, scheduling of matches, and budget auditing can rely on correct competition rules.",
+    "The system shall allow an IFA employee to initiate automatic scheduling of games for a competition to reduce manual scheduling workload.",
+    "The system shall generate game schedules in a way that avoids bias, including avoiding giving particular teams systematically lighter or heavier schedules, according to constraints provided by the IFA.",
+    "The system shall automatically apply configured league rules when generating schedules, including rules that prevent the same match officials from officiating the same team multiple times within a defined scope.",
+    "The system shall detect and avoid conflicts between generated game schedules and match officials’ stored personal schedules when allocating match officials to games.",
+    "The system shall consider each match official’s stored preferred time slots, dates, and locations when allocating that official to games, within the limits of other constraints.",
+    "The system shall require approval by at least two certified IFA employees before any generated schedule can be overridden or modified in a way defined as an override by the IFA.",
+    "The system shall allow match officials to report game events live during a match so that no later duplicate registration of the same events is required by the match official.",
+    "The system shall receive game event reports directly from authenticated match officials and shall reject event data from unauthorized sources for competitions managed by the IFA.",
+    "The system shall be capable of using reported game events as the authoritative basis for deriving player and match statistics in related processes.",
+    "The system shall notify all configured stakeholders of a game event simultaneously and using a consistent notification method for a given event when game event notifications are triggered.",
+    "The system shall maintain an auditable record of generated schedules, applied rules, match official allocations, overrides, and received match event reports for later review by authorized stakeholders."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The precise formal definition of an unbiased schedule, including acceptable metrics and thresholds for fairness, must be specified by the IFA.",
+    "The exact scope and configuration of league rules that the system must automatically apply, beyond the example of limiting repeated officiation by the same match official, must be fully enumerated.",
+    "The criteria for what constitutes a schedule override that requires approval by at least two certified IFA employees must be clearly defined.",
+    "The policy for conflict resolution when match officials’ preferences conflict with competition constraints or fairness rules must be documented.",
+    "The list of game event types that match officials can report live and the mapping of those event types to derived statistics must be defined.",
+    "The definition of stakeholders for each game event, including how fans and other parties are associated with a game for notification purposes, must be clarified.",
+    "The policies for handling scheduling and allocation failures when no conflict-free assignment is possible under given rules and constraints must be decided."
+  ],
+  "main_flow": [
+    "1. ifa or ifa employee initiates competition management for a selected competition → System displays the competition overview including existing rulesets, teams, and scheduling status.",
+    "2. ifa configures or updates the competition ruleset for the selected competition → System records the configured ruleset, validates it against allowed rule structures, and associates it with the competition.",
+    "3. ifa employee requests automatic generation of a game schedule for the competition → System reads the competition ruleset, registered teams, and competition structure and prepares to generate a schedule.",
+    "4. System-generated process (on behalf of ifa employee) analyzes scheduling constraints derived from the ruleset, including fairness constraints to avoid biased schedules → System produces an unbiased draft schedule of games for the competition and stores the draft schedule.",
+    "5. ifa employee requests automatic allocation of match officials to games in the drafted schedule → System retrieves match officials’ eligibility, league rules on officiation, and match officials’ stored preferences and personal schedules.",
+    "6. System-generated process (on behalf of ifa employee) applies league rules, including rules that limit the number of times a match official may officiate the same team, and checks match officials’ personal schedules and preferences for conflicts → System produces and stores an allocation of match officials to each scheduled game that respects rules and avoids schedule conflicts where possible.",
+    "7. ifa employee reviews the generated schedule and match official allocations → System displays the schedule and allocations with indicators of applied rules and constraint satisfaction.",
+    "8. ifa employee proposes modifications to the generated schedule or allocations that are classified as overrides by IFA policy → System records the proposed overrides and marks them as pending approval.",
+    "9. two certified ifa employees independently review the pending overrides → System verifies their certification status and records their approvals for each override.",
+    "10. System-generated process (on behalf of ifa) applies all overrides that have received approval from at least two certified IFA employees → System updates the competition schedule and allocations accordingly and records an audit trail of the changes.",
+    "11. match official accesses the system before or during a scheduled game and selects the relevant game for reporting → System presents the live match event reporting interface for the selected game.",
+    "12. match official records live match events during the game through the reporting interface → System validates each reported event, associates it with the game and related participants, and stores the event in real time.",
+    "13. System-generated process (on behalf of ifa) monitors stored match events for notification-relevant events according to configured notification rules → System determines the stakeholders associated with the game and prepares notification messages for each relevant event.",
+    "14. System-generated process (on behalf of ifa) triggers notifications for a notification-relevant game event → System sends notifications simultaneously and in a consistent manner to all identified stakeholders and records that notifications were dispatched.",
+    "15. System-generated process (on behalf of ifa) makes stored match events for the competition available as the authoritative input for deriving player and match statistics in downstream processes → System confirms that relevant data is complete and accessible for subsequent statistics derivation."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the ifa decides to reuse an existing competition ruleset without modification, the ifa selects an existing ruleset template and associates it with the current competition → System validates compatibility of the selected ruleset with the competition and then proceeds directly to Step 3.",
+    "AF-2 (from Step 4): If strict enforcement of all fairness and ruleset constraints results in no feasible unbiased schedule, the system relaxes clearly marked non-critical constraints according to IFA-configured priority while still avoiding obviously biased patterns → System generates the best-effort schedule under the relaxed constraints, records which constraints were relaxed, and then continues at Step 5.",
+    "AF-3 (from Step 6): If no conflict-free allocation of match officials is possible that satisfies both league rules and all stated preferences, the system prioritizes compliance with league rules and avoidance of personal schedule conflicts over preferences → System generates allocations that may not satisfy all preferences, flags affected assignments for review, and then continues at Step 7.",
+    "AF-4 (from Step 7): If the reviewing ifa employee accepts the generated schedule and allocations without proposing any overrides, the ifa employee confirms acceptance → System marks the schedule and allocations as final and proceeds directly to Step 11 when match officials start reporting events.",
+    "AF-5 (from Step 9): If more than two certified ifa employees review the pending overrides, the system accepts approvals from all certified reviewers but only requires at least two approvals to authorize the override → System records all approvals, authorizes the override after the second approval, and then continues at Step 10.",
+    "AF-6 (from Step 13): If the configured notification rules specify that certain game events do not require stakeholder notification, the system identifies those events as non-notification events → System records the events without generating notifications and continues monitoring for subsequent notification-relevant events at Step 13."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the configured competition ruleset fails validation because it violates allowed rule structures or required parameters are missing, the system rejects the ruleset configuration and displays validation errors to the ifa → The use case returns to Step 2 for the ifa to correct and resubmit the ruleset; no scheduling can proceed until a valid ruleset is stored.",
+    "EF-2 (from Step 4): If the scheduling algorithm fails due to a system error or data inconsistency, the system logs the failure, marks the scheduling attempt as failed, and informs the ifa employee that scheduling could not be completed → The use case terminates with no schedule generated until the underlying issue is resolved.",
+    "EF-3 (from Step 6): If the system cannot allocate match officials because necessary official data (such as eligibility or availability) is missing or inconsistent, the system stops the allocation process, logs the issue, and informs the ifa employee → The generated schedule remains without assigned officials for affected games until the data is corrected and Step 5 is re-initiated.",
+    "EF-4 (from Step 9): If fewer than two certified ifa employees approve a proposed override within an IFA-defined review period, the system marks the override as rejected due to insufficient approval and keeps the original generated schedule and allocations in effect → The use case continues at Step 7 if further review is desired or ends for override processing.",
+    "EF-5 (from Step 11): If the match official is not authorized for the selected game or fails authentication during access, the system denies access to the live reporting interface and displays an authorization error → No live match event reporting is accepted for that official and game combination during this use case instance.",
+    "EF-6 (from Step 12): If a reported match event fails validation due to missing mandatory information or inconsistency, the system rejects the event and prompts the match official to correct the data → The event is not stored until it passes validation, and subsequent valid events continue to be processed normally.",
+    "EF-7 (from Step 14): If notification delivery to one or more stakeholders fails due to communication errors, the system records the failed deliveries and may optionally retry delivery according to system-wide notification policies → The use case continues for other stakeholders, and failed deliveries remain logged for later review.",
+    "EF-8 (from Step 1): If the initiating actor cannot be authenticated or does not have sufficient authorization to manage competitions, the system denies access to competition management functions and logs the failed attempt → The use case terminates without performing any further steps."
+  ],
+  "information_for_steps": [
+    "1. Competition identifier, actor identity, competition status, list of existing rulesets, list of registered teams, current scheduling status.",
+    "2. Competition ruleset parameters, league rules, scheduling constraints, budget-related rule parameters, validation rules for rulesets.",
+    "3. Competition identifier, selected ruleset reference, competition structure (such as rounds, groups), list of participating teams.",
+    "4. Team identifiers, configured fairness constraints, competition calendar, venue constraints, generated game list with dates and times.",
+    "5. Generated game list, list of match officials, officials’ eligibility attributes, league rules relevant to official assignments, officials’ preference and availability data.",
+    "6. League officiation rules, match official identifiers, officials’ personal schedules, officials’ preferred time slots, dates, and locations, resulting official-to-game allocation records.",
+    "7. Generated schedule details, allocation details, indicators of fairness and rule compliance, actor review comments or observations.",
+    "8. Proposed schedule changes, proposed allocation changes, override classification flags, rationale for overrides, timestamp of proposals.",
+    "9. Reviewer identities, reviewer certification status, override items under review, approval or rejection decisions, timestamps of decisions.",
+    "10. Finalized overrides, updated schedule records, updated allocation records, override audit trail entries including approvers and changes applied.",
+    "11. Match official identity, game identifier, game start time, list of scheduled games for the official, selection of game for reporting.",
+    "12. Match event type, event timestamp, involved player and team identifiers, game context (score, period), validation rules for events, stored event records.",
+    "13. Notification rule definitions, event-to-notification mapping, stakeholder lists for the game, event significance indicators.",
+    "14. Notification message content, stakeholder contact or channel data, notification delivery method, delivery status records, dispatch timestamps.",
+    "15. Stored match event repository, game identifiers, player identifiers, competition identifiers, data access interfaces for downstream statistics derivation."
+  ]
+}

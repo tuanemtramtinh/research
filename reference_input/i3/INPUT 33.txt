@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Manage Notifications",
+"primary_actors": ["Fan"],
+"preconditions": ["Fan is logged in and accessing notification settings."],
+"postconditions": ["Notification subscriptions are updated."],
+"main_flow": [
+"1. Fan requests to register for notifications.",
+"2. Fan selects entities to follow (players, teams, or leagues).",
+"3. Fan specifies the type of updates to receive (e.g., ticket updates, postponed games).",
+"4. System registers the subscriptions.",
+"5. System confirms that the Fan will be notified of relevant events."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "Manage system security",
+    "primary_actors": ["System Administrator"],
+    "preconditions": [
+      "SysAdmin is logged in with administrative root privileges."
+    ],
+    "postconditions": [
+      "Security configurations (GDPR compliance, anonymization rules) are updated.",
+      "System components are restricted based on new rules."
+    ],
+    "main_flow": [
+      "1. SysAdmin accesses the 'Security Settings' dashboard. → System displays current configurations for data privacy and access control.",
+      "2. SysAdmin configures data anonymization rules for analyst views. → System validates the rules against GDPR templates.",
+      "3. SysAdmin restricts specific system components (e.g., backend logs) from public/patient view. → System applies the restrictions.",
+      "4. SysAdmin saves the configuration. → System updates the global security policy."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Audit Log Review.",
+      "1. At step 2, SysAdmin chooses to review access logs instead of changing rules. → System displays a history of login attempts and data access.",
+      "2. SysAdmin exports the log for compliance reporting. → Proceed to Postcondition."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Policy Conflict.",
+      "1. At step 4, System detects a conflict between new rules and existing critical workflows. → System prevents saving and highlights the conflict."
+    ]
+  },

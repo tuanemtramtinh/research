@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "View medical records",
+    "primary_actors": ["Patient", "Nurse", "Receptionist"],
+    "preconditions": [
+      "The Actor is authenticated.",
+      "The Actor has the appropriate access permissions for the specific record."
+    ],
+    "postconditions": [
+      "The Patient's medical history or test results are displayed to the Actor.",
+      "An access log entry is created for security auditing."
+    ],
+    "main_flow": [
+      "1. Actor searches for a patient (or views own record if Patient). → System verifies the existence of the patient.",
+      "2. Actor requests to view the Electronic Medical Record (EMR). → System checks the Actor's access level (e.g., Patient sees limited view, Nurse sees clinical view).",
+      "3. System retrieves the medical history, test results, and notes from the central database. → System displays the data."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Viewing specific test results.",
+      "1. At step 2, Actor selects 'View Test Results' specifically. → System checks for available finalized results.",
+      "2. System displays the list of recent test results. → Proceed to Step 3 (Display)."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Access Denied.",
+      "1. At step 2, System determines the Actor is not authorized to view the specific component (e.g., Receptionist trying to view sensitive clinical notes). → System denies access and displays an 'Unauthorized' message."
+    ]
+  },

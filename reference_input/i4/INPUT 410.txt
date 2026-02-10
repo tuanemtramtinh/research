@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "View System Data",
+    "primary_actors": ["Systems Analyst"],
+    "preconditions": [
+      "Analyst is logged in.",
+      "Data anonymization protocols are active in the system."
+    ],
+    "postconditions": [
+      "Clinical, scheduling, or occupancy data is displayed for analysis.",
+      "All patient identifiable information is stripped from the view."
+    ],
+    "main_flow": [
+      "1. Analyst selects a data category (Clinical, Bed Occupancy, Room Scheduling, or Staffing). → System queries the central database.",
+      "2. System applies anonymization filters to protect patient privacy. → System aggregates the data.",
+      "3. System displays the dataset or visualization (e.g., average appointment duration). → Analyst views the data for prescriptive/predictive analytics."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): View Employee Schedules.",
+      "1. At step 1, Analyst selects 'Employee Schedules'. → System retrieves shift data without accessing personal HR files.",
+      "2. System displays staffing density. → Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Insufficient Data.",
+      "1. At step 2, System finds no records for the selected time range. → System displays a 'No Data Available' message."
+    ]
+  }

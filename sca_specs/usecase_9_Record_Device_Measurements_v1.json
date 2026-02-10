@@ -1,0 +1,84 @@
+{
+  "use_case_name": "Record Device Measurements",
+  "unique_id": "UC-009",
+  "area": "Electronic Medical Record Management",
+  "context_of_use": "The use case supports nurses in ensuring that information and measurements gathered by mobile hospital devices are recorded in the patient’s electronic medical record without requiring manual data entry.",
+  "scope": "Hospital Management System – Electronic Medical Record Subsystem",
+  "level": "User-goal",
+  "primary_actors": [
+    "nurse"
+  ],
+  "supporting_actors": [
+    "mobile hospital device"
+  ],
+  "stakeholders_and_interests": [
+    "Nurse: Wants device-gathered information and measurements to be transferred automatically into the patient’s medical record to avoid manual data entry workload and potential transcription errors.",
+    "Patient: Wants accurate and up-to-date recording of device information and measurements in the medical record to support correct treatment and care decisions.",
+    "UHOPE: Wants efficient and reliable integration between mobile hospital devices and the electronic medical record database to improve data quality and reduce manual work.",
+    "Doctor: Wants timely and accurate access to device information and measurements in the patient’s medical record to support diagnosis and treatment decisions.",
+    "System Administrator: Wants device-to-record data transfer to operate reliably and securely in accordance with access and security policies."
+  ],
+  "description": "This use case describes how the system records information and measurements gathered by mobile hospital devices into a patient’s electronic medical record so that nurses do not have to manually insert this information.",
+  "triggering_event": "A mobile hospital device completes a measurement for a patient and the nurse initiates or confirms the transfer of the gathered data to the patient’s medical record through the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The nurse is authenticated in the Hospital Management System with valid access rights to the patient’s medical record.",
+    "The mobile hospital device is registered in the system and connected to the Hospital Management System.",
+    "A patient context has been established on the mobile hospital device and in the system, linking the device session to a specific patient’s medical record.",
+    "The mobile hospital device has successfully gathered at least one piece of patient-related information or measurement that is available for transfer."
+  ],
+  "postconditions": [
+    "The information and measurements gathered by the mobile hospital device are stored in the corresponding patient’s medical record in the Electronic Medical Record Database.",
+    "The nurse can view the newly recorded device information and measurements as part of the patient’s medical record.",
+    "The system maintains an auditable record of the device data transfer, including timestamp, source device, and responsible nurse."
+  ],
+  "assumptions": [
+    "It is assumed that the Hospital Management System already supports user authentication and authorization for nurses, even though these mechanisms are described in other requirements.",
+    "It is assumed that mobile hospital devices are capable of communicating electronically with the Hospital Management System using an established interface, because the requirement text refers to automatic transfer.",
+    "It is assumed that the patient to whom the device data applies is already registered in the Electronic Medical Record Database before data transfer occurs.",
+    "It is assumed that device data formats are compatible with or can be translated into the data structures used in the patient’s medical record without requiring additional manual transformation by the nurse.",
+    "It is assumed that network connectivity between mobile hospital devices and the Hospital Management System is available at the time of data transfer.",
+    "It is assumed that the nurse can select or confirm the target patient record associated with the measurement on the device or within the system, but no additional patient search or identification capabilities beyond those implied by the requirement are introduced."
+  ],
+  "requirements_met": [
+    "The system shall allow mobile hospital devices to automatically transfer the information they gathered to the correct patient’s medical file, so that the nurse does not have to insert the information manually.",
+    "The system shall allow mobile hospital devices to automatically transfer the data they measured to the correct patient’s medical file, so that the nurse does not have to insert the data manually.",
+    "The system shall store device-transferred information and measurements in the Electronic Medical Record Database as part of the patient’s medical record.",
+    "The system shall make the device-transferred information and measurements available for viewing by authorized users as part of the patient’s medical record.",
+    "The system shall log the transfer of information and measurements from mobile hospital devices to patient medical records with at least timestamp, source device identifier, and responsible nurse identifier."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The method for resolving conflicts when multiple devices send overlapping or contradictory measurements for the same patient at similar times is not defined.",
+    "The policy for handling late or repeated transfers of the same measurement data from a device is not specified.",
+    "The exact interface standards and communication protocols between mobile hospital devices and the Hospital Management System are not specified.",
+    "The behavior when the network is temporarily unavailable during an attempted device data transfer, such as queuing and retry strategies, is not defined.",
+    "The retention and access control policies for detailed device-origin metadata (e.g., raw device logs) associated with transferred measurements are not described."
+  ],
+  "main_flow": [
+    "1. Nurse selects the patient on the mobile hospital device or within the system to associate upcoming measurements with the patient’s medical record → System confirms the selected patient context and links the device session to the corresponding patient’s medical record.",
+    "2. Nurse initiates or confirms the measurement process on the mobile hospital device → System on the device gathers the required information and measurements from the patient and prepares them for transfer.",
+    "3. Mobile hospital device, under the nurse’s supervision, sends the gathered information and measurements to the Hospital Management System → System receives the transmitted device data and validates that it is associated with the selected patient and an authorized nurse.",
+    "4. Nurse confirms the transfer of the gathered device data to the patient’s medical record if confirmation is required by configuration → System records the validated information and measurements into the patient’s medical record in the Electronic Medical Record Database.",
+    "5. Nurse requests to view the updated patient medical record after the transfer → System displays the patient’s medical record including the newly recorded device information and measurements and logs the successful completion of the data transfer."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the nurse changes the selected patient before any measurements are performed, the nurse selects a different patient on the mobile hospital device or within the system → System updates the patient context to the newly selected patient’s medical record and the flow continues with Step 2.",
+    "AF-2 (from Step 3): If the system configuration allows fully automatic transfer without nurse confirmation, the mobile hospital device sends the gathered information and measurements to the Hospital Management System → System validates and immediately records the device data into the patient’s medical record without executing Step 4, and the flow continues with Step 5.",
+    "AF-3 (from Step 5): If the nurse does not request to view the updated patient medical record after transfer, the nurse ends interaction with the device and the system after measurements are performed → System completes recording the device data into the patient’s medical record in the background and logs completion, and the use case ends successfully after Step 4."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system cannot confirm the selected patient context because the patient record cannot be found, the system notifies the nurse that the patient cannot be identified and does not allow association of device data → Nurse cancels the device measurement session or establishes a correct patient record through other authorized processes, and the use case terminates without recording any device data.",
+    "EF-2 (from Step 3): If the system cannot receive device data due to a communication failure, the system notifies the nurse that the transfer failed and indicates that no device data has been recorded in the patient’s medical record → Nurse may retry the transfer once communication is restored, or end the session, and the use case terminates without recording any device data if the retry is not performed or fails.",
+    "EF-3 (from Step 3): If the received device data cannot be validated against the selected patient or nurse authorization, the system rejects the device data, does not record it in the patient’s medical record, and displays an error message to the nurse → Nurse may correct the patient selection or authorization context using other authorized processes and attempt the measurement and transfer again, or end the session, and the use case terminates without recording invalid data.",
+    "EF-4 (from Step 4): If the recording of validated device data into the Electronic Medical Record Database fails due to an internal system error, the system logs the error, does not mark the device data as successfully stored, and informs the nurse that the data has not been recorded → Nurse may attempt the transfer again after the error is resolved, and the use case terminates without successful recording if the retry is not successful."
+  ],
+  "information_for_steps": [
+    "1. Patient identifier; nurse identifier; device session identifier; patient medical record reference.",
+    "2. Measurement type; measurement parameters; measurement timestamp; preliminary measurement values.",
+    "3. Device data package; patient identifier; nurse identifier; device identifier; transfer timestamp.",
+    "4. Validated measurement values; patient medical record fields; storage timestamp; audit log entry.",
+    "5. Updated patient medical record; newly added device measurement entries; display parameters; confirmation of successful recording."
+  ]
+}

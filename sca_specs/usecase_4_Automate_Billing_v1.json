@@ -1,0 +1,107 @@
+{
+  "use_case_name": "Automate Billing",
+  "unique_id": "UC-004",
+  "area": "Billing and Invoicing",
+  "context_of_use": "The hospital management system automatically generates, consolidates, and sends patient bills based on appointment times, appointment information, and treatment price data while ensuring that billing corresponds to the month of the visit and is issued within the required time frame.",
+  "scope": "Hospital Management System – Billing Subsystem",
+  "level": "User-goal",
+  "primary_actors": [
+    "uhope"
+  ],
+  "supporting_actors": [
+    "Billing System",
+    "Scheduling System",
+    "Electronic Medical Record Database",
+    "Patient"
+  ],
+  "stakeholders_and_interests": [
+    "UHOPE: Wants bills to be created and sent automatically so that manual work by billing employees is minimized and billing is accurate and timely.",
+    "Patient: Wants to receive a clear and accurate bill that corresponds to the month of treatment, preferably consolidated for multiple appointments within that month.",
+    "Billing Department Employee: Wants automatically generated bills to be correct and based on reliable appointment and treatment information to reduce manual corrections.",
+    "Hospital Management: Wants consistent, compliant, and efficient billing processes that reduce administrative costs and errors."
+  ],
+  "description": "This use case describes how the hospital management system automatically generates, maintains, and sends patient bills based on appointment start and end times, appointment information, and treatment prices, ensuring that bills are consolidated and correspond to the month in which the patient received care.",
+  "triggering_event": "Completion of one or more patient appointments within a billing period that requires the system to generate and send a bill.",
+  "trigger_type": "Temporal",
+  "preconditions": [
+    "The patient has at least one completed appointment recorded in the system.",
+    "Appointment start and end times are stored in the scheduling system for all completed appointments.",
+    "Appointment information including treatments performed is stored and accessible to the billing system.",
+    "The billing system has access to a database of prices that are linked to specific treatments.",
+    "The hospital management system and its billing subsystem are operational.",
+    "The patient has sufficient identification and contact information stored in the system to receive a bill."
+  ],
+  "postconditions": [
+    "A bill is automatically generated for the patient that covers all relevant appointments for the billed month.",
+    "The bill amount is calculated using the treatment price database and the appointment information and/or duration.",
+    "The bill corresponds to the calendar month in which the patient’s appointments occurred, regardless of the later send date.",
+    "The bill is sent to the patient within 30 days after the last relevant appointment in the billed period.",
+    "The generated bill is stored in the billing system for future reference and auditing."
+  ],
+  "assumptions": [
+    "It is assumed that the term \"billing system\" refers to a subsystem within the overall hospital management system.",
+    "It is assumed that appointment start and end times are accurate and available to the billing subsystem at the time of bill generation.",
+    "It is assumed that appointment information includes sufficient detail to identify all treatments performed during the appointment.",
+    "It is assumed that the treatment price database is preconfigured and maintained outside the scope of this use case, and that prices are current at the time of bill generation.",
+    "It is assumed that a patient may have multiple appointments in the same month and that the system is required to consolidate these into a single bill for that month.",
+    "It is assumed that the system uses the appointment date to determine the month to which the bill should be assigned, independent of the billing or sending date.",
+    "It is assumed that communication of the bill to the patient (e.g., by email or postal mail) is performed by the system using existing patient contact data, and that the specific communication channel is configured elsewhere.",
+    "It is assumed that automatically approving a patient’s appointment in the scheduling system ensures that appointment data is complete and confirmed before being used for billing, but the detailed approval process itself is outside the scope of this use case.",
+    "It is assumed that this use case does not cover payment processing, only the generation and sending of bills.",
+    "It is assumed that if multiple months of appointments exist without prior billing, the system will generate separate bills per month in accordance with the requirement to bill for the month in which the patient came in."
+  ],
+  "requirements_met": [
+    "The system shall enable the billing subsystem to automatically create a bill based on the start and end time of an appointment so that a billing department employee does not have to create it manually.",
+    "The system shall enable the billing subsystem to automatically create a bill based on the appointment information so that a billing department employee does not have to create it manually.",
+    "The system shall enable the billing subsystem to have and use a database of prices that are linked to specific treatments so that the billing subsystem can automatically create bills.",
+    "The system shall send a bill to the patient within 30 days after the appointment so that the patient can come in for multiple appointments but only has to pay one bill.",
+    "The system shall bill the patient for the calendar month in which the patient’s appointments occurred, even if the bill is sent in a later month, so that the bill corresponds to when the patient came in.",
+    "The system shall support the automatic consolidation of multiple appointments within the same calendar month into a single bill for that month.",
+    "The system shall use automatically approved and recorded appointments as the basis for automated billing calculations."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The policy for handling corrections when appointment times or treatment information are updated after a bill has been generated is not specified.",
+    "The rules for partial billing when a patient has appointments that span multiple months and overlapping 30-day periods are not specified.",
+    "The exact aggregation rule for multiple appointments (for example, whether all appointments in a month are always combined into one bill or may be split) is not fully defined.",
+    "The mechanism and format for sending bills to patients (e.g., electronic vs. paper) and related legal or compliance constraints are not described.",
+    "The behavior when treatment prices change between appointment date and bill generation date is not defined.",
+    "The error handling and escalation process when the billing system cannot access appointment information or the treatment price database at bill generation time is not specified."
+  ],
+  "main_flow": [
+    "1. UHOPE (through configured billing policies) schedules automatic billing for completed appointments → The system prepares a billing run based on the configured billing period and policy for consolidating appointments by month.",
+    "2. System (billing subsystem) retrieves all completed and automatically approved appointments for each patient within the relevant billing period → System identifies, for each patient, the set of appointments that occurred in each calendar month and are not yet billed.",
+    "3. System (billing subsystem) retrieves detailed appointment information for each identified appointment → System associates each appointment with the treatments and services recorded for that appointment.",
+    "4. System (billing subsystem) retrieves the current price entries from the treatment price database for each treatment associated with the identified appointments → System matches each treatment to its configured unit price and applicable quantity or duration rules.",
+    "5. System (billing subsystem) calculates the billable amount for each appointment using the start and end times and the treatment price information where applicable → System derives per-appointment cost details including time-based and treatment-based components.",
+    "6. System (billing subsystem) aggregates the calculated amounts for all appointments belonging to the same patient and the same calendar month → System composes a consolidated monthly bill amount for each patient and month.",
+    "7. System (billing subsystem) generates a bill record for each patient and calendar month with detailed appointment and treatment breakdowns → System stores the generated bill with its associated appointment references and billing month in the billing database.",
+    "8. System (billing subsystem) determines the send date for each generated bill ensuring it is within 30 days after the latest appointment included in that bill → System marks the bill as ready to be sent and schedules its dispatch.",
+    "9. On the scheduled send date, System (billing subsystem) retrieves the patient’s contact information → System formats the bill for delivery and sends the bill to the patient using the configured communication channel.",
+    "10. System (billing subsystem) updates the status of the bill to indicate that it has been sent and records a timestamp for auditing → System makes the sent bill and its status available to authorized stakeholders for verification and reporting."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): If a specific treatment in an appointment does not have a direct price entry in the treatment price database but the appointment time is available, then the system calculates the cost for that treatment solely based on the appointment start and end times and any applicable time-based pricing rules, and then proceeds to Step 5.",
+    "AF-2 (from Step 6): If a patient has completed appointments in multiple calendar months that fall within the same overall billing period, then the system creates separate aggregated bill amounts per calendar month for that patient, generates one bill per month in Step 7, and then continues with Steps 8–10 for each separate bill.",
+    "AF-3 (from Step 8): If the system performs billing continuously rather than in a single batch at month end, then upon completion of each appointment the system evaluates whether all appointments for that patient in the corresponding calendar month are complete according to configured policies, calculates and updates the bill as needed, and still ensures that the final bill is sent within 30 days after the last appointment before proceeding to Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If detailed appointment information for a completed appointment cannot be retrieved due to data access failure, then the system logs the failure, excludes the affected appointment from the current billing run, flags the appointment and the patient record for manual review by authorized staff, and completes billing only for the remaining appointments.",
+    "EF-2 (from Step 4): If the treatment price database is unavailable or no price can be determined for one or more treatments and no time-based pricing rule is applicable, then the system logs the issue, excludes the affected treatments from automated calculation, marks the corresponding appointments as requiring manual billing intervention, and continues billing for other unaffected appointments.",
+    "EF-3 (from Step 9): If sending the bill to the patient fails (for example, due to invalid or missing contact data or delivery channel failure), then the system records the failure, sets the bill status to \"send failed\", triggers an alert for authorized staff to correct the contact information or delivery channel, and does not mark the bill as successfully sent until a subsequent successful send attempt is completed.",
+    "EF-4 (from Step 2): If no completed appointments are found for any patient in the relevant billing period, then the system records that no bills are due for that period and terminates the billing run without generating any bills."
+  ],
+  "information_for_steps": [
+    "1. Billing policy configuration, billing period parameters.",
+    "2. Patient identifiers, appointment identifiers, appointment status, appointment start time, appointment end time, appointment date, appointment approval status.",
+    "3. Appointment details, list of treatments and services, treatment codes, quantities, associated appointment identifiers.",
+    "4. Treatment price database entries, treatment codes, unit prices, time-based pricing rules.",
+    "5. Appointment start and end times, treatment lists, unit prices, calculation rules, intermediate cost calculations.",
+    "6. Patient identifiers, appointment cost details, calendar month derived from appointment dates, aggregated monthly amounts.",
+    "7. Bill identifiers, patient identifiers, billing month, itemized appointment and treatment details, total bill amount, bill creation timestamp.",
+    "8. Latest appointment date per bill, configured maximum of 30 days to send bills, calculated send date, bill status.",
+    "9. Patient contact information, preferred communication channel, bill document data, formatted bill output.",
+    "10. Bill identifier, bill status, send timestamp, audit log entries, references to related appointments and patient records."
+  ]
+}

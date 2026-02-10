@@ -1,0 +1,99 @@
+{
+  "use_case_name": "Register League and Team Records",
+  "unique_id": "UC-002",
+  "area": "League and Team Administration",
+  "context_of_use": "The use case enables the ifa administrator to register new leagues and teams in the IFA League Management System so that the system remains up to date, while allowing the system to reflect their approval status as determined by an ifa manager to maintain integrity.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa administrator"
+  ],
+  "supporting_actors": [
+    "ifa manager"
+  ],
+  "stakeholders_and_interests": [
+    "ifa administrator: Needs to add new leagues and register new teams in the system to ensure that the league and team data remains current.",
+    "ifa manager: Needs the system to support the approval of newly added leagues and registered teams in order to maintain the integrity and trustworthiness of the data in the system.",
+    "IFA organization: Requires that all active leagues and teams are accurately represented and controlled in a single system while ensuring governance and integrity.",
+    "Registered teams: Depend on timely and correct registration and subsequent approval to participate in competitions under the IFA’s governance.",
+    "Leagues: Depend on accurate representation, registration, and subsequent approval to be officially managed within the IFA system."
+  ],
+  "description": "This use case defines how an ifa administrator registers new leagues and teams in the IFA League Management System and how the system records their approval status based on ifa manager decisions so that the system remains up to date and consistent with IFA integrity requirements.",
+  "triggering_event": "An ifa administrator decides that a new league or team must be recorded in the IFA League Management System.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA League Management System is operational and accessible.",
+    "The ifa administrator is authenticated and authorized to register new leagues and teams.",
+    "The ifa manager is authenticated and authorized to make approval decisions for leagues and teams.",
+    "Required league and team information needed for registration is available to the ifa administrator prior to data entry."
+  ],
+  "postconditions": [
+    "All newly registered leagues are stored in the system with a status that clearly indicates whether they are pending approval or approved.",
+    "All newly registered teams are stored in the system with a status that clearly indicates whether they are pending approval or approved.",
+    "Leagues and teams that have been reviewed and rejected by an ifa manager are stored in the system with a status that clearly indicates rejection and they are not treated as active.",
+    "The system’s league and team records reflect the latest set of registered entities and their approval statuses according to IFA integrity requirements."
+  ],
+  "assumptions": [
+    "It is assumed that only individuals in the role of ifa administrator can initiate the registration of new leagues and teams in the system.",
+    "It is assumed that only individuals in the role of ifa manager can perform final approval or rejection of leagues and teams registered by ifa administrators.",
+    "It is assumed that the system maintains internal status values to distinguish between pending, approved, and rejected leagues and teams, even though these statuses are not explicitly described in the requirement text.",
+    "It is assumed that the system validates that mandatory league and team data fields are provided before allowing the ifa administrator to complete registration.",
+    "It is assumed that the system prevents an ifa administrator from overriding an approval or rejection decision made by an ifa manager.",
+    "It is assumed that the reference to keeping the system up to date pertains to the correctness and completeness of league and team registrations and not to integration with external systems.",
+    "It is assumed that any audit logging of registration or approval actions is an internal system mechanism that does not introduce additional externally visible capabilities.",
+    "It is assumed that there is no automatic approval; every league and team must be explicitly approved by an ifa manager before being considered active for competition purposes.",
+    "It is assumed that the same use case is applied each time the ifa administrator registers additional leagues or teams in the system."
+  ],
+  "requirements_met": [
+    "The system shall allow an authenticated ifa administrator to register new leagues in the system so that the league data remains up to date.",
+    "The system shall allow an authenticated ifa administrator to register new teams in the system so that the team data remains up to date.",
+    "The system shall retain each registered league with a status indicating that an approval decision by an ifa manager is required before it becomes fully valid in the system.",
+    "The system shall retain each registered team with a status indicating that an approval decision by an ifa manager is required before it becomes fully valid in the system.",
+    "The system shall store the relationship between each registered team and its associated league so that participation can be managed under the IFA system.",
+    "The system shall record the outcome of each approval decision for a registered league or team, including whether it was approved or rejected, so that administrative integrity is maintained."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The business rules for what specific criteria an ifa manager should apply when approving or rejecting a league are not defined.",
+    "The business rules for what specific criteria an ifa manager should apply when approving or rejecting a team are not defined.",
+    "Policies for naming conventions, uniqueness constraints, and identifiers for leagues and teams are not described.",
+    "It is unclear whether a previously approved league or team can later be revoked or deactivated and, if so, how this should be handled within or outside this use case.",
+    "The maximum allowed number of leagues and teams in the system, if any, is not specified.",
+    "The required data fields and validation rules for leagues and teams (for example, contact information, geographic region, or competition level) are not specified.",
+    "The expected timeframes or service-level targets for completing manager approvals of registered leagues and teams are not defined."
+  ],
+  "main_flow": [
+    "1. ifa administrator identifies the need to add a new league or team to the IFA League Management System → System makes the league and team registration functionality available to the ifa administrator.",
+    "2. ifa administrator initiates the registration of a new league → System enables the ifa administrator to provide the necessary information for the new league.",
+    "3. ifa administrator provides the required league information and confirms the registration request → System verifies the completeness and basic validity of the league information and creates a league record with a status indicating that an ifa manager decision is required.",
+    "4. ifa administrator initiates the registration of a new team and, where applicable, associates the team with a league → System enables the ifa administrator to provide the necessary information for the new team and its association to a league.",
+    "5. ifa administrator provides the required team information and confirms the registration request → System verifies the completeness and basic validity of the team information and creates a team record with a status indicating that an ifa manager decision is required.",
+    "6. ifa administrator confirms completion of the current registration activities → System ensures that all newly registered leagues and teams are stored with their current statuses and are available for subsequent approval by an ifa manager."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): ifa administrator decides not to proceed with registering a new league after initiating league registration → System discards any unconfirmed league information for this action and returns the ifa administrator to the point where they may choose to register a team (Step 4) or conclude registration activities (Step 6).",
+    "AF-2 (from Step 4): ifa administrator decides not to proceed with registering a new team after initiating team registration → System discards any unconfirmed team information for this action and returns the ifa administrator to the point where they may choose to register another league (Step 2) or conclude registration activities (Step 6).",
+    "AF-3 (from Step 3): ifa administrator chooses to register multiple leagues in sequence → System completes creation of the current league record with a status indicating that an ifa manager decision is required and allows the ifa administrator to repeat Step 2 and Step 3 for additional leagues before proceeding to team registration at Step 4 or to completion at Step 6.",
+    "AF-4 (from Step 5): ifa administrator chooses to register multiple teams in sequence → System completes creation of the current team record with a status indicating that an ifa manager decision is required and allows the ifa administrator to repeat Step 4 and Step 5 for additional teams before proceeding to completion at Step 6.",
+    "AF-5 (from Step 3): ifa manager reviews a registered league outside the scope of this use case and decides to approve it → System updates the league’s status from pending to approved while retaining the league record created in this use case; the use case remains successfully completed from the ifa administrator’s perspective.",
+    "AF-6 (from Step 5): ifa manager reviews a registered team outside the scope of this use case and decides to approve it → System updates the team’s status from pending to approved while retaining the team record created in this use case; the use case remains successfully completed from the ifa administrator’s perspective.",
+    "AF-7 (from Step 3): ifa manager reviews a registered league outside the scope of this use case and decides to reject it → System updates the league’s status from pending to rejected while retaining the league record created in this use case and preventing its use as an active league; the registration aspect of this use case remains successfully completed in that the league is recorded with its final status.",
+    "AF-8 (from Step 5): ifa manager reviews a registered team outside the scope of this use case and decides to reject it → System updates the team’s status from pending to rejected while retaining the team record created in this use case and preventing its use as an active team; the registration aspect of this use case remains successfully completed in that the team is recorded with its final status."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): The system detects that the provided league information is invalid according to enforced business rules (for example, a duplicate identifier or missing mandatory attributes) → System does not create the league record, informs the ifa administrator of the validation issues, and allows the ifa administrator to correct the information and attempt Step 3 again.",
+    "EF-2 (from Step 5): The system detects that the provided team information is invalid according to enforced business rules (for example, a duplicate identifier, inconsistent league association, or missing mandatory attributes) → System does not create the team record, informs the ifa administrator of the validation issues, and allows the ifa administrator to correct the information and attempt Step 5 again.",
+    "EF-3 (from Step 3): The system experiences a failure while attempting to create or store the league record → System reports that the league registration could not be completed, ensures that no partial league record is treated as valid, and allows the ifa administrator to decide whether to retry Step 3 at a later time or to end the current registration session.",
+    "EF-4 (from Step 5): The system experiences a failure while attempting to create or store the team record → System reports that the team registration could not be completed, ensures that no partial team record is treated as valid, and allows the ifa administrator to decide whether to retry Step 5 at a later time or to end the current registration session.",
+    "EF-5 (from Step 1): The system is not available or cannot provide registration functionality when the ifa administrator attempts to start league or team registration → System indicates that registration functionality is unavailable and the use case terminates without creating or modifying any league or team records."
+  ],
+  "information_for_steps": [
+    "1. Actor identity, administrative role of ifa administrator, indication of need for a new league or team.",
+    "2. Decision to register a league, selection of league registration action, reference to the IFA League Management System’s capability to accept league information.",
+    "3. League name, league identifier, competition level if applicable, geographic or organizational attributes if required, association to IFA governance, derived league status set to indicate that an ifa manager decision is required.",
+    "4. Decision to register a team, selection of team registration action, reference to an associated league where applicable.",
+    "5. Team name, team identifier, associated league reference if applicable, any required descriptive attributes, derived team status set to indicate that an ifa manager decision is required.",
+    "6. Collection of all newly created league and team records for this session, final stored statuses for these records (typically pending at this stage), confirmation that records are available to an ifa manager for later approval decisions."
+  ]
+}

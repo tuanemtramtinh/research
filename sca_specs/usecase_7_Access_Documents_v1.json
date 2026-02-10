@@ -1,0 +1,88 @@
+{
+  "use_case_name": "Access Documents",
+  "unique_id": "UC-007",
+  "area": "Document Access and Viewing",
+  "context_of_use": "The use case describes how a user accesses and views documents stored in the system, regardless of the department in which the documents are stored.",
+  "scope": "Medical Record and Document Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user"
+  ],
+  "supporting_actors": [
+    "authentication service"
+  ],
+  "stakeholders_and_interests": [
+    "user: Wants to access any required document regardless of current department in order to have better accessibility.",
+    "system owner: Wants controlled and auditable document access across departments to ensure security and regulatory compliance.",
+    "hospital administration: Wants users to reach relevant documents efficiently to support clinical and administrative processes."
+  ],
+  "description": "This use case enables a user to authenticate and then open and view documents that are stored in the system, independent of the department in which the documents reside, thereby improving accessibility.",
+  "triggering_event": "The user decides to open a document stored in the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The system is operational and reachable by the user.",
+    "The user has a valid user account in the system.",
+    "The user has network connectivity from the device used to access the system."
+  ],
+  "postconditions": [
+    "The user has successfully viewed the content of the selected document.",
+    "The system has recorded that the user accessed the selected document, including at least user identifier, document identifier, and access timestamp."
+  ],
+  "assumptions": [
+    "It is assumed that the term \"document\" refers to any digital record or file managed by the system, including but not limited to medical records, lab reports, and related clinical or administrative documents.",
+    "It is assumed that cross-departmental access is controlled by existing authorization rules configured outside the scope of this use case, and this use case only covers the process of requesting and viewing documents that the user is already authorized to see.",
+    "It is assumed that the included \"authenticate\" use case is implemented by an external or internal authentication service that validates user credentials before access to documents is granted.",
+    "It is assumed that the system provides a means for the user to search for or select documents from a list that may span multiple departments, without introducing new search capabilities beyond listing and selecting existing documents.",
+    "It is assumed that if a user is already authenticated when initiating this use case, the authenticate step still conceptually occurs in the form of session validation without requiring the user to re-enter credentials.",
+    "It is assumed that departmental information is a document attribute used for storage and organization, and does not alter the behavior of this use case other than ensuring that documents from any department can be requested.",
+    "It is assumed that the system supports access from multiple device types as long as a supported client interface is available, but this use case focuses only on the logical process of accessing and viewing documents.",
+    "It is assumed that document access logging is required for traceability and compliance, even though it is not explicitly stated in the requirement text."
+  ],
+  "requirements_met": [
+    "The system shall allow a user to access any document that the user is authorized to view, regardless of the department in which the document is stored.",
+    "The system shall require the user to authenticate successfully before granting access to documents.",
+    "The system shall present to the authenticated user a list or other selection mechanism that allows the user to choose among documents potentially stored in different departments.",
+    "The system shall retrieve the full content of the selected document after the user selects it.",
+    "The system shall display the selected document content to the user in a readable form.",
+    "The system shall ensure that departmental boundaries do not prevent authorized users from accessing documents they are permitted to see.",
+    "The system shall record each user document access event, including at least user identifier, document identifier, and access timestamp."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Access control policies for cross-department document access (e.g., role-based or rule-based restrictions) need to be formally defined.",
+    "Maximum number of documents that can be listed or retrieved in a single request needs clarification.",
+    "Required performance constraints for document retrieval and display (e.g., maximum acceptable response time) are not specified.",
+    "Format and retention period for document access logs have not been defined.",
+    "Behavior when a document is very large (e.g., streaming, pagination, partial loading) requires clarification."
+  ],
+  "main_flow": [
+    "1. user initiates document access by opening the system interface → System presents an option to log in or proceed with authentication.",
+    "2. user provides authentication credentials or approves authentication according to the authenticate process → System validates the credentials via the authentication service and establishes an authenticated session for the user.",
+    "3. user requests to view available documents (for example, by navigating to a documents section) → System retrieves and displays a list or other selection view of documents that the user is authorized to access, regardless of their associated departments.",
+    "4. user reviews the displayed list of accessible documents → System maintains the list view and allows the user to select a specific document.",
+    "5. user selects a specific document to open → System retrieves the full content and relevant metadata of the selected document from storage.",
+    "6. user waits while the system processes the request → System displays the selected document content in a readable format to the user.",
+    "7. user views the document content on the screen → System records an access log entry capturing at least the user identifier, document identifier, and access timestamp, and keeps the document available for further user navigation actions."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): User already authenticated. Condition: The user has an active authenticated session when initiating document access. The system validates the existing session without requiring credential re-entry and proceeds directly to Step 3 of the main flow.",
+    "AF-2 (from Step 3): User narrows the list of documents. Condition: The user chooses to filter or sort the list of accessible documents using existing list controls (such as by department or date) without introducing new search capabilities. The system updates the displayed list of accessible documents according to the selected filters or sort order and the flow continues with Step 4 of the main flow.",
+    "AF-3 (from Step 6): User changes viewing options. Condition: While viewing the document, the user changes viewing options such as zoom level or page navigation using existing document viewer controls. The system updates the visual presentation of the document accordingly while keeping the same document open, and the flow continues with Step 7 of the main flow."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Authentication fails. Condition: The user provides invalid or incomplete authentication credentials. The system rejects the authentication attempt, informs the user that authentication has failed, may allow the user to retry authentication according to the authenticate use case rules, and does not proceed to document access until successful authentication occurs.",
+    "EF-2 (from Step 3): No accessible documents found. Condition: The system determines that there are no documents the user is authorized to access. The system informs the user that no accessible documents are available and provides an option to return to the main menu or exit, and the use case ends without document viewing.",
+    "EF-3 (from Step 5): Document retrieval error. Condition: The system cannot retrieve the selected document due to a technical error or because the document is no longer available. The system notifies the user that the document cannot be opened and returns the user to the list of accessible documents so that another document can be selected or the user can exit the use case.",
+    "EF-4 (from Step 6): Session expires during viewing. Condition: The user session expires while the user is waiting for the document to be displayed or while viewing it. The system stops document access, informs the user that the session has expired, and requires the user to re-authenticate according to the authenticate use case before accessing documents again."
+  ],
+  "information_for_steps": [
+    "1. User identifier (for eventual session association), client device information, initial access request parameters.",
+    "2. Authentication credentials or token, user identifier, authentication status, session identifier.",
+    "3. User identifier, authorization profile, list of accessible document identifiers and their associated departments, document summary metadata.",
+    "4. Document list view configuration, document identifiers and titles, departmental labels, basic document attributes used for display.",
+    "5. Selected document identifier, document storage location, document metadata required for retrieval.",
+    "6. Retrieved document content, document format information, rendering parameters for display to the user.",
+    "7. Access log entry including user identifier, document identifier, access timestamp, session identifier, and optionally client device information."
+  ]
+}

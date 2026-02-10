@@ -1,0 +1,109 @@
+{
+  "use_case_name": "View Match Statistics",
+  "unique_id": "UC-009",
+  "area": "Match Statistics and Live Game Reporting",
+  "context_of_use": "A fan uses the IFA league management system to view statistics for matches and players and to follow live game event reports in order to stay engaged with the league.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "fan"
+  ],
+  "supporting_actors": [
+    "match official"
+  ],
+  "stakeholders_and_interests": [
+    "Fan: Wants to easily view historical and current match and player statistics and follow live events to stay informed and engaged.",
+    "IFA: Wants fans to access accurate statistics and live reports derived directly from authorized match official reports to increase engagement and maintain data integrity.",
+    "Match official: Wants their reported match events to be accurately reflected in live reports and derived statistics without additional manual work.",
+    "Team manager: Wants statistics presented to fans to be accurate and up to date so that public perception of team performance is correct.",
+    "Team staff member: Wants consistent statistics between internal strategic tools and what fans see to avoid discrepancies.",
+    "IFA budget auditor: Wants assurance that statistics derived from match events are consistent with the underlying event data used for auditing-related analyses."
+  ],
+  "description": "This use case describes how a fan accesses and views match and player statistics and follows live game event reports through the IFA league management system, which displays information generated from authorized match event data.",
+  "triggering_event": "The fan initiates a request to view statistics or live game event reports through the IFA league management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA league management system is operational and reachable over the network.",
+    "The fan has access to the IFA league management system via a supported client (e.g., mobile or desktop).",
+    "Relevant match events have been reported by match officials for historical statistics to exist.",
+    "The system has generated statistics from reported match events for the matches and players to be viewed.",
+    "The fan is authenticated or otherwise recognized by the system according to the IFA's access policy for viewing public information."
+  ],
+  "postconditions": [
+    "The fan has successfully viewed the requested match and/or player statistics.",
+    "If requested, the fan has successfully viewed live game event reports for the selected match.",
+    "The system has recorded any statistics and live report viewing activity that it is required to log in accordance with IFA policies.",
+    "All displayed statistics and live game event reports are consistent with the underlying match events reported by match officials."
+  ],
+  "assumptions": [
+    "It is assumed that viewing match and player statistics and viewing live game event reports are public read-only operations that do not modify system data.",
+    "It is assumed that match statistics and player statistics are automatically generated from reported match events by an internal component corresponding to the included \"generate statistics\" use case.",
+    "It is assumed that live game event reports are based solely on match event data reported directly by authorized match officials, in line with the IFA requirement to prevent unauthorized data sources.",
+    "It is assumed that the fan can access the system both from mobile devices and desktop devices, as the general requirements mention both access modes for users.",
+    "It is assumed that the system supports multiple leagues and competitions, and that statistics and reports can be filtered by league and/or competition where relevant.",
+    "It is assumed that the fan does not require special authorization beyond any general access control required for public fan-facing features.",
+    "It is assumed that time-sensitive information in live game event reports is presented with minimal delay but does not require hard real-time guarantees.",
+    "It is assumed that the internal \"generate statistics\" process has already produced up-to-date statistics by the time the fan requests them, or that it can be executed on demand without noticeable delay to the fan.",
+    "It is assumed that the system ensures data reliability for high concurrency scenarios, in line with the requirement of supporting at least 50,000 concurrent users, so that statistics and live reports remain accessible under load.",
+    "It is assumed that while fans may have notification preferences for game events, in this use case the fan is actively pulling information rather than receiving push notifications."
+  ],
+  "requirements_met": [
+    "The system shall allow a fan to view statistics of different matches so that the fan can be more engaged in the respective league.",
+    "The system shall allow a fan to view statistics of different players so that the fan can be more engaged in the respective league.",
+    "The system shall allow a fan to view live game event reports for ongoing or recently completed matches so that the fan can keep track of what is happening as closely as possible.",
+    "The system shall derive player and match statistics directly from reported match events so that no extra work needs to be done and data remains consistent.",
+    "The system shall receive game event reports directly from match officials so that unauthorized data sources are not used as a basis for statistics and live reports.",
+    "The system shall make statistics and live game event reports accessible through interfaces usable on mobile devices, enabling fans to access the system wherever they are.",
+    "The system shall support multiple languages for presenting statistics and live game information so that leagues in different countries can be serviced.",
+    "The system shall maintain reliable access to statistics and live game event reports for at least 50,000 concurrent users so that the user experience is satisfactory."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise access control policy for viewing statistics and live game event reports (e.g., whether login is required for fans) needs to be defined.",
+    "The exact refresh rate and latency requirements for live game event reports have not been specified and must be clarified.",
+    "The required historical depth and retention period for match and player statistics (e.g., number of seasons) needs to be determined.",
+    "The specific set of metrics to be shown for matches and players (e.g., goals, assists, cards, minutes played) has not been defined.",
+    "The behavior when statistics have not yet been generated or are incomplete for a given match or player must be specified.",
+    "The user interface requirements for filtering and sorting statistics (by league, season, competition, team, player) remain to be detailed.",
+    "The language fallback strategy when localized data or labels are missing has not been described.",
+    "The logging and analytics requirements for fan statistics viewing behavior have not been specified."
+  ],
+  "main_flow": [
+    "1. Fan initiates statistics viewing by accessing the IFA league management system and navigating to the statistics section → System establishes a session for the fan according to access policies and displays the general statistics entry page.",
+    "2. Fan selects the desired context for statistics, such as league, competition, team, or player category → System retrieves the available leagues, competitions, teams, and players relevant to the fan's selection and presents selectable options.",
+    "3. Fan chooses one or more matches or a specific team or player for which to view statistics → System validates the selection and identifies the corresponding set of reported match events needed to derive statistics.",
+    "4. Fan requests to view statistics for the selected matches and/or players → System executes the included \"generate statistics\" functionality by aggregating and calculating match and player statistics directly from the identified reported match events.",
+    "5. Fan awaits display of statistics → System formats and presents the generated match and player statistics to the fan, using the fan's selected language where applicable.",
+    "6. Fan optionally selects a match for which to view live game event reports → System retrieves current and recent match events reported directly by match officials for that match and prepares a live events view.",
+    "7. Fan requests to follow the live game event report for the selected match → System displays a live game events interface and continuously updates the view as new match events are reported.",
+    "8. Fan reviews the displayed statistics and, if following a live report, observes live updates during the match → System maintains data consistency, ensures that all shown statistics remain aligned with the underlying match event data, and continues to serve updated live game events until the fan leaves the view.",
+    "9. Fan ends the statistics and live report viewing session by navigating away or closing the client → System stops updating the live game event view for the fan, finalizes any necessary logging of the viewing activity, and maintains the integrity of the underlying statistics data."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Fan directly searches for a specific team or player instead of selecting through league or competition filters → System performs a search over available teams and players, displays matching results, and then continues with Step 3 once the fan selects a desired match, team, or player.",
+    "AF-2 (from Step 3): Fan selects only players without specifying particular matches → System identifies all matches associated with the selected players according to the current context (e.g., league, season) and continues with Step 4 using the related reported match events to generate player-centric statistics.",
+    "AF-3 (from Step 6): Fan requests to view statistics only and does not select any match for live game event reports → System presents only historical match and player statistics without initiating live updates and proceeds directly to Step 8 for statistics viewing.",
+    "AF-4 (from Step 7): Fan joins the live game event report after the match has already started → System retrieves all previously reported match events for the current match, presents them in chronological order as part of the live view, continues updating with new events, and then proceeds with Step 8.",
+    "AF-5 (from Step 5): Fan changes the display language after viewing the initial statistics → System reapplies localization to all visible statistic labels and textual elements using the newly selected language and redisplays the same statistical data in the updated language before continuing with any subsequent actions the fan initiates."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): The system cannot retrieve leagues, competitions, teams, or players due to a data access failure → System displays an error message indicating that statistics are temporarily unavailable, logs the failure according to operational policies, and terminates the use case without displaying statistics or live reports.",
+    "EF-2 (from Step 4): No reported match events are found for the selected matches or players → System informs the fan that statistics are not yet available for the selection, offers the fan the option to select a different match, team, or player, and, if the fan declines, ends the use case without generating statistics.",
+    "EF-3 (from Step 4): The internal statistics generation process fails due to a processing error → System displays a message indicating that statistics cannot be generated at this time, logs the error for operational review, and terminates the use case without displaying statistics.",
+    "EF-4 (from Step 6): The system cannot retrieve live game event data because the match is not currently in progress or no live reporting is active → System informs the fan that live game event reports are not available for the selected match and allows the fan to continue viewing any available historical statistics from Step 5, or, if the fan chooses not to continue, ends the use case.",
+    "EF-5 (from Step 7): The live game event stream is interrupted due to connectivity loss or system failure → System notifies the fan that live updates are temporarily unavailable, attempts reconnection or recovery according to operational policies, and if recovery is unsuccessful within a reasonable time, stops live updates and retains the last known displayed events while allowing the fan to continue viewing already loaded statistics.",
+    "EF-6 (from Step 1): The fan cannot establish a session due to authentication or access issues as required by policy → System displays an appropriate access or login error message, does not allow access to statistics or live reports, and terminates the use case."
+  ],
+  "information_for_steps": [
+    "1. Fan identifier (or anonymous session identifier), client type, session metadata, localization preferences.",
+    "2. League identifiers, competition identifiers, team identifiers, player identifiers, available seasons or time ranges.",
+    "3. Selected match identifiers, selected team identifiers, selected player identifiers, associated league and competition context.",
+    "4. Reported match event data set, rules for deriving statistics, aggregation parameters, statistics generation results for matches and players.",
+    "5. Formatted statistics data (per match and per player), textual and numeric representation details, language and localization parameters.",
+    "6. Selected match identifier for live reporting, current match state, list of match officials associated with the match, authorized live event feed reference.",
+    "7. Stream of live match events (timestamps, event types, involved players and teams), update interval parameters, display state of live event timeline.",
+    "8. Combined view model containing match statistics, player statistics, and live game events; data consistency checks and presentation settings.",
+    "9. Session termination indicators, viewing activity logs, timestamps of session start and end, any preference updates made during the session."
+  ]
+}
