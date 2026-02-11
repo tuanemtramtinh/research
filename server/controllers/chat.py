@@ -1,15 +1,18 @@
 import uuid
 
-from typing import List
-from fastapi import APIRouter
+from typing import Any, Dict, List
+from fastapi import APIRouter, HTTPException
 from langgraph.types import Command
 
 from ai.graphs.main_graph import build_main_graph
 from ai.graphs.rpa_graph.state import UseCase
+from ai.graphs.sca_graph.state import ScenarioResult
 from dtos.ActorReqDTO import ActorReqDTO
+from dtos.ScaReqDTO import ScaReqDTO
 from dtos.UsecaseReqDTO import UsecaseReqDTO
 
 from helpers._to_diagram_data import _to_diagram_data
+from helpers._sca_helpers import _evaluation_to_dict, _scenario_result_to_response
 
 
 router = APIRouter(
@@ -125,3 +128,49 @@ def draw_usecases(req: UsecaseReqDTO):
         actors=actors,
         system_name="System",
     )
+
+
+# Generate Scenario Specs + Evaluation for all use cases from previous steps
+@router.post("/step-4")
+def generate_scenarios(req: ScaReqDTO):
+    """Resume the main graph so the SCA node runs.
+
+    The graph was interrupted at run_sca after step-3 completed.
+    Resuming it triggers SCA evaluation for every use case.
+    Returns all scenario results with scores and sub-criteria breakdowns.
+    """
+
+    thread_id = req.thread_id
+
+    # Verify the graph is actually paused at the SCA interrupt
+    snapshot = graph.get_state(CONFIG(thread_id))
+    if not snapshot or not getattr(snapshot, "values", None):
+        raise HTTPException(
+            status_code=404,
+            detail=f"No state found for thread_id '{thread_id}'. Run step-1 through step-3 first.",
+        )
+
+    # Resume the graph – run_sca_node continues and runs SCA for all use cases
+    result = graph.invoke(
+        Command(resume=True), config=CONFIG(thread_id=thread_id)
+    )
+
+    # Pull final state (scenario_results written by run_sca_node)
+    final_snapshot = graph.get_state(CONFIG(thread_id))
+    state_values = getattr(final_snapshot, "values", None) or {}
+    scenario_results = state_values.get("scenario_results") or []
+
+    results: List[Dict[str, Any]] = []
+    for sr in scenario_results:
+        try:
+            if not isinstance(sr, ScenarioResult):
+                sr = ScenarioResult(**sr) if isinstance(sr, dict) else sr
+            results.append(_scenario_result_to_response(sr))
+        except Exception as exc:
+            results.append({"error": str(exc)})
+
+    return {
+        "thread_id": thread_id,
+        "count": len(results),
+        "results": results,
+    }
