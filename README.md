@@ -1,6 +1,6 @@
 ## Project Overview
 
-This repository is a research framework that is split into two main parts:
+This repository is a research backend's framework that is split into two main parts:
 
 - **`src/`**: Core logic framework, **without** the _human-in-the-loop_ (HITL) implementation yet.
 - **`server/`**: Backend server with a full _human-in-the-loop_ implementation.
