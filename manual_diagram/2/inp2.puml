@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "UMD Employee" as User
+
+rectangle "Wonderland Traffic & Environment System" {
+    
+    usecase "View Real-Time Measurement\n(Traffic, Heatmaps & Environment)" as UC1
+    usecase "Predict Future Scenarios\n(AI Forecasts)" as UC2
+    usecase "Store Time-based Data\n(Snapshots & Logs)" as UC3
+    usecase "Analyze Historical Data\n(Comparative & Repeatable Analysis)" as UC4
+
+    ' User Interactions
+    User -- UC1
+    User -- UC2
+    User -- UC3
+    User -- UC4
+
+    ' Internal Dependencies
+    UC4 ..> UC3 : <<include>>
+    UC2 ..> UC4 : <<include>>
+
+    ' Notes for Clarity
+    ' note top of UC1
+    '   - Live Traffic & Heatmaps
+    '   - CO2, Noise, & Air Pollution
+    '   - Map of Streets & Obstacles
+    ' end note
+
+    ' note bottom of UC4
+    '   - Compare 2 different times
+    '   - Side-by-side analysis
+    '   - Historic data comparisons
+    ' end note
+}
+@endum

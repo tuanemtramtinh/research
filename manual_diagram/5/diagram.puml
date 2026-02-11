@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+title Sơ đồ Use Case - Hệ thống Lưu trữ Dữ liệu (Bath Data Archive)
+
+' === ĐỊNH NGHĨA ACTORS ===
+actor "Depositor" as dep
+actor "Data Reuser" as reuser
+actor "External Collaborator" as ext_collab
+actor "External Coordinator" as ext_coord
+actor "Research Facility Manager" as fac_mgr
+actor "Bath Data Archive Administrator" as admin
+actor "Research Information Manager" as info_mgr
+actor "Univ IT Service" as itserv
+actor "Developer" as dev
+actor "Academic Publisher" as pub
+actor "Funding Body" as funder
+
+' === HỆ THỐNG ===
+rectangle "Bath Data Archive System" {
+    
+    usecase "Integrate Archive Systems" as UC1
+    usecase "Manage Datasets" as UC2
+    usecase "Discover and Access Datasets" as UC3
+    usecase "Integrate Deposit Workflows" as UC4
+    usecase "Manage Dataset Governance" as UC5
+    usecase "View Dataset Impact" as UC6
+    usecase "Ensure Data Compliance" as UC7
+    usecase "Manage Deposited Data" as UC8
+
+    ' --- Mối quan hệ Include ---
+    'UC3 ..> UC2 : <<include>>
+    UC4 ..> UC2 : <<include>>
+}
+
+' === KẾT NỐI ACTORS VỚI USE CASES ===
+
+' Nhóm Quản trị và Kỹ thuật
+itserv -- UC1
+'admin -- UC1
+info_mgr -- UC1
+admin -- UC8
+
+' Nhóm Người gửi dữ liệu và Cộng tác viên
+dep -- UC2
+dep -- UC3
+dep -- UC4
+dep -- UC5
+dep -- UC6
+dep -- UC7
+
+fac_mgr -- UC2
+
+ext_collab -- UC3
+
+'ext_collab -- UC2
+'ext_collab -- UC5
+'ext_collab -- UC7
+
+
+'ext_collab -- UC3
+'ext_coord -- UC2
+'ext_coord -- UC5
+ext_coord -- UC7
+
+' Nhóm Bên ngoài và Khai thác
+reuser -- UC3
+reuser -- UC6
+dev -- UC4
+
+'pub -- UC5
+pub -- UC3
+
+funder -- UC6
+'funder -- UC7
+'info_mgr -- UC5
+info_mgr -- UC6
+
+@enduml

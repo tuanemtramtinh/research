@@ -1,0 +1,55 @@
+@startuml
+left to right direction
+
+'--- Actors ----------------------------------------------------------
+actor Visitor
+actor "IFA Administrator" as IFA
+actor Referee
+actor Fan
+actor League
+actor Team
+actor IFA_Representative
+
+'--- System ----------------------------------------------------------
+rectangle "Sports Management System" {
+
+    '--- Base use cases (light blue) ----------------------------------
+    usecase "Register Account" as UC2 
+    usecase "Manage Preferences" as UC3 
+    usecase "Manage Schedule" as UC4 
+    usecase "Report Match Event" as UC7 
+    usecase "Receive Match Updates" as UC8
+    usecase "Manage Notifications" as UC9 
+    usecase "Access Match & Team Statistics" as UC10 
+    usecase "Manage Social Media Posts" as UC11 
+    usecase "Generate Statistics" as UC13 
+    usecase "Manage Budgets" as UC17 
+    usecase "Assign Team Manager" as UC19 
+
+    '--- Included / extended use cases (light gray) ------------------
+    usecase "Manage Account" as UC22
+
+    '--- Relationships inside the rectangle -------------------------
+    UC7 <.. UC13 : "<<include>>"
+    UC3 <.. UC9 : "<<extend>>"
+}
+
+'--- Actor → Use case links -----------------------------------------
+Visitor -- UC2
+League -- UC4
+IFA_Representative -- UC4
+IFA -- UC4
+IFA -- UC13
+IFA -- UC17
+IFA -- UC22
+Referee -- UC7
+Referee -- UC8
+Fan -- UC9
+Fan -- UC10
+Fan -- UC11
+Fan -- UC3
+Team -- UC11
+Team -- UC19
+Team -- UC4
+
+@enduml

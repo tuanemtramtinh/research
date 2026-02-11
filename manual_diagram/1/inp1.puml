@@ -1,0 +1,50 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Planner" as Planner
+
+rectangle "Urban Mobility Management System" {
+    
+    (Generate Solution Reports) as UC_Reports
+    (Analyze Traffic Conditions) as UC_Analyze
+    (Report Measure Impacts) as UC_Impacts
+    (Receive Intelligent Alert) as UC_Alerts
+    (Control Traffic Measures) as UC_Configure
+    (Suggest Solutions) as UC_Suggest
+
+    ' Primary Actor Associations
+    Planner -- UC_Reports
+    Planner -- UC_Impacts
+    Planner -- UC_Alerts
+    Planner -- UC_Configure
+    Planner -- UC_Suggest
+
+    ' Internal Include Relationships
+    UC_Reports ..> UC_Analyze : <<include>>
+    UC_Impacts ..> UC_Analyze : <<include>>
+    UC_Alerts ..> UC_Analyze : <<include>>
+    UC_Alerts ..> UC_Configure : <<include>>
+    UC_Suggest ..> UC_Analyze : <<include>>
+
+    ' Descriptive Notes for Specific User Story Actions
+    ' note top of UC_Reports
+    '   - Report executive summary
+    '   - Make extensive report
+    ' end note
+
+    ' note top of UC_Analyze
+    '   - View past traffic data
+    '   - Estimate costs/emissions/noise
+    '   - Review sensor levels
+    ' end note
+
+    ' note bottom of UC_Configure
+    '   - Adjust speed limits
+    '   - Model roundabouts/lights
+    '   - Close roads/Revertible lanes
+    '   - Simulate crisis/events
+    ' end note
+}
+
+@endum

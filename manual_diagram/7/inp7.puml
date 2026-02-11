@@ -1,0 +1,73 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Patient" as pat
+actor "Doctor" as doc
+actor "Nurse" as nur
+actor "Receptionist" as rec
+actor "Laboratory Technician" as lab
+actor "Pharmacist" as pha
+actor "System Administrator" as admin
+
+rectangle "Hospital Management System" {
+    
+    usecase "Manage Laboratory Tests" as UC1
+    usecase "Authenticate" as UC2
+    usecase "Manage Prescriptions" as UC3
+    usecase "View Medical Records" as UC4a
+    usecase "Update Measurement Results" as UC4b
+    usecase "Schedule Appointments" as UC5
+    usecase "Annotate Laboratory Tests" as UC6
+    usecase "View Laboratory Test Status" as UC7
+    usecase "Manage User Permissions" as UC8
+    usecase "Control Access to Medical Data" as UC9
+    usecase "Manage Room Assignments" as UC10
+    usecase "Share Wearable Device Data" as UC11
+
+    ' Relationships: Include
+    UC1 ..> UC7 : <<include>>
+    UC1 ..> UC6 : <<include>>
+
+    ' Actor Associations
+    ' Tất cả người dùng đều phải Authenticate
+    pat -- UC2
+    doc -- UC2
+    nur -- UC2
+    rec -- UC2
+    lab -- UC2
+    pha -- UC2
+    admin -- UC2
+
+    ' Chức năng cụ thể
+    doc -- UC1
+    doc -- UC3
+    doc -- UC4a
+    doc -- UC4b
+    doc -- UC5
+    doc -- UC6
+    doc -- UC7
+    doc -- UC9
+
+    pat -- UC3
+    pat -- UC4a
+    pat -- UC5
+    pat -- UC7
+    pat -- UC9
+    pat -- UC11
+
+    nur -- UC4a
+    nur -- UC4b
+
+    rec -- UC5
+    rec -- UC10
+
+    lab -- UC1
+    lab -- UC6
+    lab -- UC7
+
+    pha -- UC3
+    
+    admin -- UC8
+}
+@enduml

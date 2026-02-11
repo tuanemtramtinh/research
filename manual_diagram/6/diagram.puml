@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor IFA
+actor Team
+actor Referee
+actor Fan
+
+rectangle "IFA Management System" {
+
+  'usecase "Scale System Capacity" as UC1
+  usecase "Access System" as UC2
+  usecase "Follow Teams and Players" as UC3
+  usecase "Manage League Policies" as UC4
+  usecase "Manage Team Finances" as UC5
+  usecase "Schedule Matches and Referees" as UC6
+  usecase "Manage and View Game Events" as UC7
+  usecase "Manage Stakeholder Communication" as UC8
+}
+
+' IFA
+'IFA --> UC1
+IFA --> UC4
+'IFA --> UC5
+IFA --> UC6
+IFA --> UC7
+IFA --> UC8
+
+' Team
+Team --> UC5
+'Team --> UC6
+Team --> UC8
+Team --> UC2
+
+' Referee
+Referee --> UC6
+Referee --> UC7
+Referee --> UC8
+Referee --> UC2
+
+' Fan
+Fan --> UC2
+Fan --> UC3
+Fan --> UC7
+
+' Relationships
+'UC6 ..> UC7 : <<extend>>
+'UC8 ..> UC3 : <<extend>>
+
+@enduml

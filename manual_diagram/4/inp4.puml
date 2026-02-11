@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+'--- Actors ------------------------------------
+actor Doctor
+actor Patient
+actor Nurse
+actor Receptionist
+actor Pharmacist
+actor "System Administrator" as SysAdmin
+actor "Systems Analyst" as Analyst
+
+'--- System ------------------------------------
+rectangle "Health‑Care Platform" {
+
+  '--- Base Use Cases (light blue) -------------
+  usecase "Manage prescription" as UC1
+  usecase "Manage personal information" as UC4 
+  usecase "Request new prescription" as UC6 
+  usecase "Schedule appointment" as UC7 
+  usecase "View medical records" as UC8 
+  usecase "View patient information" as UC5
+  usecase "Add medical notes" as UC9 
+  usecase "Dispense medication" as UC11 
+  usecase "Manage system security" as UC13 
+  usecase "Manage user access" as UC15 
+  usecase "View System Data" as UC16
+
+}
+
+'--- Actor → Use Case Relationships -------------
+Doctor -- UC1
+Doctor -- UC5
+
+Patient -- UC4
+Patient -- UC6
+Patient -- UC7
+Patient -- UC8
+
+Nurse -- UC8
+Nurse -- UC9
+Nurse -- UC5
+
+Receptionist -- UC8
+Receptionist -- UC7
+
+Pharmacist -- UC11
+
+SysAdmin -- UC13
+SysAdmin -- UC15
+
+Analyst -- UC16
+
+@enduml

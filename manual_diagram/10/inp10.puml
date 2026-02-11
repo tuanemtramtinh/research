@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' ===== ACTORS =====
+'actor User
+actor Patient
+actor Doctor
+actor "Lab Specialist" as LabSpecialist
+actor Nurse
+actor Receptionist
+
+' ===== SYSTEM =====
+rectangle "Hospital Management System" {
+
+  ' --- Core ---
+  usecase "Authenticate" as UC_Auth
+  usecase "Access Medical Records" as UC_AccessMR
+  usecase "Edit Medical Records" as UC_EditMR
+  usecase "Restrict Access" as UC_Restrict
+  usecase "Assign Doctors" as UC_AssignDoctor
+
+  ' --- Reception ---
+  usecase "Book Appointments" as UC_Book
+  usecase "Assign Patient Beds" as UC_Bed
+
+  ' --- Medical ---
+  usecase "Manage Medical Notes" as UC_Notes
+  usecase "Manage Medical Tests" as UC_Tests
+  usecase "Manage Lab Results" as UC_LabResults
+  usecase "Import Medical Records" as UC_Import
+
+  ' --- Documents ---
+  'usecase "Access Department Documents" as UC_Docs
+
+  ' --- Devices ---
+  usecase "Authorize External Devices" as UC_AuthorizeDev
+  usecase "Link External Devices" as UC_LinkDev
+  usecase "Upload Data" as UC_UploadDev
+  usecase "View Test Results" as UC_ViewResults
+}
+
+' ===== ACTOR ↔ USE CASE =====
+
+' User
+'User --> UC_Auth
+'User --> UC_Docs
+
+' Patient
+Patient --> UC_AssignDoctor
+Patient --> UC_AccessMR
+Patient --> UC_EditMR
+Patient --> UC_Auth
+Patient --> UC_AuthorizeDev
+Patient --> UC_LinkDev
+Patient --> UC_ViewResults
+Patient --> UC_UploadDev
+
+' Doctor
+Doctor --> UC_AssignDoctor
+Doctor --> UC_Restrict
+Doctor --> UC_AccessMR
+Doctor --> UC_EditMR
+Doctor --> UC_Notes
+Doctor --> UC_Tests
+'Doctor --> UC_LabResults
+Doctor --> UC_LinkDev
+Doctor --> UC_UploadDev
+Doctor --> UC_Import
+
+' Lab Specialist
+LabSpecialist --> UC_AccessMR
+LabSpecialist --> UC_EditMR
+LabSpecialist --> UC_Tests
+LabSpecialist --> UC_LabResults
+
+' Nurse
+Nurse --> UC_LinkDev
+
+' Receptionist
+Receptionist --> UC_Book
+Receptionist --> UC_Bed
+Receptionist --> UC_AssignDoctor
+
+' ===== INCLUDE RELATIONSHIPS =====
+'UC_Restrict ..> UC_AssignDoctor : <<include>>
+UC_AccessMR ..> UC_Auth : <<include>>
+UC_EditMR ..> UC_AccessMR : <<include>>
+UC_Notes ..> UC_EditMR : <<include>>
+'UC_Docs ..> UC_Auth : <<include>>
+UC_AuthorizeDev ..> UC_Auth : <<include>>
+UC_LabResults ..> UC_AccessMR : <<include>>
+UC_LinkDev ..> UC_AuthorizeDev : <<include>>
+UC_ViewResults ..> UC_AccessMR : <<include>>
+UC_UploadDev ..> UC_Auth : <<include>>
+
+@enduml
