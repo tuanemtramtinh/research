@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from controllers.auth import router as auth_router
+
+# from controllers.auth import router as auth_router  # Auth temporarily disabled
 from controllers.chat import router as chat_router
 from core.config import settings
-from core.database import close_db_connect, connect_db
+
+# from core.database import close_db_connect, connect_db  # Database temporarily disabled
 
 
 @asynccontextmanager
@@ -13,11 +15,11 @@ async def lifespan(app: FastAPI):
     _ = settings
     print("Settings loaded & validated")
 
-    await connect_db()
+    # await connect_db()  # Database connection disabled for now
 
     yield
 
-    await close_db_connect()
+    # await close_db_connect()  # Database connection disabled for now
 
     print("App shutting down")
 
@@ -31,5 +33,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router)
+# app.include_router(auth_router)  # Auth routes disabled for now
 app.include_router(chat_router)

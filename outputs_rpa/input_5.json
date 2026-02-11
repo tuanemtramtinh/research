@@ -4,110 +4,49 @@
     {
       "actor": "depositor",
       "sentence_idx": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21
       ]
     },
     {
       "actor": "data reuser",
-      "sentence_idx": [
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29
-      ]
+      "sentence_idx": [22, 23, 24, 25, 26, 27, 28, 29]
     },
     {
       "actor": "externalcollaborator",
-      "sentence_idx": [
-        30
-      ]
+      "sentence_idx": [30]
     },
     {
       "actor": "externalcoordinator",
-      "sentence_idx": [
-        31,
-        32
-      ]
+      "sentence_idx": [31, 32]
     },
     {
       "actor": "research facility manager",
-      "sentence_idx": [
-        33
-      ]
+      "sentence_idx": [33]
     },
     {
       "actor": "bath data archive administrator",
-      "sentence_idx": [
-        34,
-        35,
-        36,
-        37,
-        38,
-        39
-      ]
+      "sentence_idx": [34, 35, 36, 37, 38, 39]
     },
     {
       "actor": "research information manager",
-      "sentence_idx": [
-        40,
-        41,
-        42,
-        43,
-        44
-      ]
+      "sentence_idx": [40, 41, 42, 43, 44]
     },
     {
       "actor": "univitservice",
-      "sentence_idx": [
-        45,
-        46,
-        47,
-        48
-      ]
+      "sentence_idx": [45, 46, 47, 48]
     },
     {
       "actor": "developer",
-      "sentence_idx": [
-        49
-      ]
+      "sentence_idx": [49]
     },
     {
       "actor": "academicpublisher",
-      "sentence_idx": [
-        50
-      ]
+      "sentence_idx": [50]
     },
     {
       "actor": "fundingbody",
-      "sentence_idx": [
-        51,
-        52
-      ]
+      "sentence_idx": [51, 52]
     }
   ],
   "actor_aliases": [
@@ -115,168 +54,84 @@
       "actor": "depositor",
       "aliases": [],
       "sentence_idx": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21
       ]
     },
     {
       "actor": "data reuser",
       "aliases": [],
-      "sentence_idx": [
-        22,
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29
-      ]
+      "sentence_idx": [22, 23, 24, 25, 26, 27, 28, 29]
     },
     {
       "actor": "externalcollaborator",
       "aliases": [
         {
           "alias": "externalcoordinator",
-          "sentences": [
-            31,
-            32
-          ]
+          "sentences": [31, 32]
         }
       ],
-      "sentence_idx": [
-        30
-      ]
+      "sentence_idx": [30]
     },
     {
       "actor": "externalcoordinator",
       "aliases": [
         {
           "alias": "externalcollaborator",
-          "sentences": [
-            30
-          ]
+          "sentences": [30]
         }
       ],
-      "sentence_idx": [
-        31,
-        32
-      ]
+      "sentence_idx": [31, 32]
     },
     {
       "actor": "research facility manager",
       "aliases": [],
-      "sentence_idx": [
-        33
-      ]
+      "sentence_idx": [33]
     },
     {
       "actor": "bath data archive administrator",
       "aliases": [
         {
           "alias": "bath data archive administrator",
-          "sentences": [
-            34,
-            35,
-            36,
-            37,
-            38,
-            39
-          ]
+          "sentences": [34, 35, 36, 37, 38, 39]
         }
       ],
-      "sentence_idx": [
-        34,
-        35,
-        36,
-        37,
-        38,
-        39
-      ]
+      "sentence_idx": [34, 35, 36, 37, 38, 39]
     },
     {
       "actor": "research information manager",
       "aliases": [
         {
           "alias": "research information manager",
-          "sentences": [
-            40,
-            41,
-            42,
-            43,
-            44
-          ]
+          "sentences": [40, 41, 42, 43, 44]
         }
       ],
-      "sentence_idx": [
-        40,
-        41,
-        42,
-        43,
-        44
-      ]
+      "sentence_idx": [40, 41, 42, 43, 44]
     },
     {
       "actor": "univitservice",
       "aliases": [
         {
           "alias": "univitservice",
-          "sentences": [
-            45,
-            46,
-            47,
-            48
-          ]
+          "sentences": [45, 46, 47, 48]
         }
       ],
-      "sentence_idx": [
-        45,
-        46,
-        47,
-        48
-      ]
+      "sentence_idx": [45, 46, 47, 48]
     },
     {
       "actor": "developer",
       "aliases": [],
-      "sentence_idx": [
-        49
-      ]
+      "sentence_idx": [49]
     },
     {
       "actor": "academicpublisher",
       "aliases": [],
-      "sentence_idx": [
-        50
-      ]
+      "sentence_idx": [50]
     },
     {
       "actor": "fundingbody",
       "aliases": [],
-      "sentence_idx": [
-        51,
-        52
-      ]
+      "sentence_idx": [51, 52]
     }
   ],
   "use_cases": [
@@ -419,10 +274,7 @@
       "id": 3,
       "name": "Use Accessible Interface",
       "description": "Access the system through a simple, familiar, and language-appropriate web interface for depositing and reusing data.",
-      "participating_actors": [
-        "data reuser",
-        "depositor"
-      ],
+      "participating_actors": ["data reuser", "depositor"],
       "user_stories": [
         {
           "actor": "depositor",
@@ -454,10 +306,7 @@
       "id": 4,
       "name": "Integrate Deposit Workflows",
       "description": "Deposit and maintain datasets via integrated systems such as Pure, workflow tools, and programmatic APIs.",
-      "participating_actors": [
-        "developer",
-        "depositor"
-      ],
+      "participating_actors": ["developer", "depositor"],
       "user_stories": [
         {
           "actor": "depositor",
@@ -712,9 +561,7 @@
       "id": 8,
       "name": "Curate Deposited Data",
       "description": "Review deposited datasets, enforce minimum metadata standards, approve data disposal, query the archive, and promote open deposit standards.",
-      "participating_actors": [
-        "bath data archive administrator"
-      ],
+      "participating_actors": ["bath data archive administrator"],
       "user_stories": [
         {
           "actor": "bath data archive administrator",

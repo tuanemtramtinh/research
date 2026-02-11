@@ -1,17 +1,22 @@
-from datetime import date
-from typing import Optional
-from beanie import Document
-from pydantic import EmailStr, Field
+"""
+User model temporarily disabled.
+Kept here as commented reference for future re‑enablement.
+"""
 
-
-class User(Document):
-    # email: EmailStr
-    # first_name: str
-    # last_name: str
-    # phone: Optional[str] = Field(default=None, max_length=11)
-    # dob: date
-    username: str
-    password: str
-
-    class Settings:
-        name = "users"
+# from datetime import date
+# from typing import Optional
+# from beanie import Document
+# from pydantic import EmailStr, Field
+#
+#
+# class User(Document):
+#     # email: EmailStr
+#     # first_name: str
+#     # last_name: str
+#     # phone: Optional[str] = Field(default=None, max_length=11)
+#     # dob: date
+#     username: str
+#     password: str
+#
+#     class Settings:
+#         name = "users"

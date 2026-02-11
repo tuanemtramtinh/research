@@ -1,4 +1,6 @@
 from pathlib import Path
+from typing import Optional
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,10 +12,13 @@ if not ENV_FILE.exists():
 
 class Settings(BaseSettings):
     OPENAI_API_KEY: str
-    MONGO_URL: str
-    DB_NAME: str
-    ACCESS_TOKEN_SECRET: str
-    ACCESS_TOKEN_EXPIRES_IN: str
+
+    # Optional for now because DB/auth are disabled.
+    # When you re-enable those features, you can make them required again.
+    MONGO_URL: Optional[str] = None
+    DB_NAME: Optional[str] = None
+    ACCESS_TOKEN_SECRET: Optional[str] = None
+    ACCESS_TOKEN_EXPIRES_IN: Optional[str] = None
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

@@ -153,7 +153,17 @@ Assuming you are in the **project root directory** and the virtual environment i
 python -m src.<main_module_name>
 ```
 
-Or follow the specific entry point inside `src/` (for example: `src/main.py`, `src/app.py`, etc.).
+Or follow a specific entry point inside `src/`, for example:
+
+```bash
+python -m src.main
+```
+
+You can also run the RPA graph independently for experimentation:
+
+```bash
+python -m src.graphs.rpa_graph
+```
 
 Make sure that:
 

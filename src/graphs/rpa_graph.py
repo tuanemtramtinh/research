@@ -89,7 +89,7 @@ def should_continue_to_clustering(state: GraphState):
 
 def _get_model():
     load_dotenv()
-    model_name = os.getenv("LLM_MODEL", "gpt-5.1")
+    model_name = os.getenv("LLM_MODEL", "gpt-5-mini")
     if not os.getenv("OPENAI_API_KEY"):
         return None
     return init_chat_model(model_name, model_provider="openai")
@@ -217,10 +217,11 @@ Return a list of normalized sentences: one string per input, in the same order. 
             # Fallback an toàn (không nên xảy ra): dùng câu gốc
             final_sentences.append(cleaned[i])
 
-    # DEBUG: in kết quả sau normalize
+    # DEBUG: normalized sentence list (kept only high-level marker)
     print("\n==== normalize_sentences_node ====")
-    for i, s in enumerate(final_sentences):
-        print(f"{i}: {s}")
+    # If you need full details for debugging, uncomment the loop below.
+    # for i, s in enumerate(final_sentences):
+    #     print(f"{i}: {s}")
 
     return {"sentences": final_sentences}
 
@@ -415,10 +416,11 @@ def find_actors_node(state: GraphState):
     sentences = state.get("sentences") or []
     raw_actors = _find_actors_regex(sentences)
 
-    # DEBUG: in danh sách actor raw
+    # DEBUG: raw actors (kept only high-level marker)
     print("\n==== find_actors_node ====")
-    for a in raw_actors:
-        print(f"actor={a.actor}, sentence_idx={a.sentence_idx}")
+    # If you need full details for debugging, uncomment the loop below.
+    # for a in raw_actors:
+    #     print(f"actor={a.actor}, sentence_idx={a.sentence_idx}")
 
     return {"raw_actors": raw_actors}
 
@@ -559,13 +561,14 @@ def find_aliases_node(state: GraphState):
     actors = state.get("actors") or []
     actor_results = _find_actors_alias(model, sentences, actors)
 
-    # DEBUG: in canonical actors và alias
+    # DEBUG: canonical actors and aliases (kept only high-level marker)
     print("\n==== find_aliases_node ====")
-    for ar in actor_results:
-        print(f"canonical={ar.actor}, sentence_idx={ar.sentence_idx}")
-        if ar.aliases:
-            for al in ar.aliases:
-                print(f"  alias={al.alias}, sentences={al.sentences}")
+    # If you need full details for debugging, uncomment the loop below.
+    # for ar in actor_results:
+    #     print(f"canonical={ar.actor}, sentence_idx={ar.sentence_idx}")
+    #     if ar.aliases:
+    #         for al in ar.aliases:
+    #             print(f"  alias={al.alias}, sentences={al.sentences}")
 
     return {"actor_results": actor_results}
 
@@ -697,12 +700,12 @@ def refine_goals_node(state: GraphState):
 
     # DEBUG: in goals trước và sau refine
     print("\n==== refine_goals_node ====")
-    print("raw_goals:", json.dumps(raw_goals, indent=2, ensure_ascii=False))
-    for item in refined_goals:
-        print(f"- sentence_idx={item.sentence_idx}")
-        print(f"  original={item.original}")
-        print(f"  refined={item.refined}")
-        print(f"  added={item.added}")
+    # print("raw_goals:", json.dumps(raw_goals, indent=2, ensure_ascii=False))
+    # for item in refined_goals:
+    #     print(f"- sentence_idx={item.sentence_idx}")
+    #     print(f"  original={item.original}")
+    #     print(f"  refined={item.refined}")
+    #     print(f"  added={item.added}")
 
     return {"refined_goals": refined_goals}
 
@@ -783,6 +786,9 @@ def grouping_node(state: GraphState):
     # K_max = math.ceil(len(input_pairs) / 3)
 
     # K = range(K_min, K_max + 1)
+
+    print("\n==== grouping_node ====")
+
     K = range(3, 11)
     X = np.array(embeddings_model.embed_documents(input_pairs))
 
@@ -805,14 +811,14 @@ def grouping_node(state: GraphState):
         # Store detailed info instead of just string
         clusters[label].append(input_details[i])
 
-    print(f"\n--- CHI TIẾT PHÂN CỤM (K={best_k}) ---")
-    for label, items in sorted(clusters.items()):
-        print(f"\nCụm {label + 1}:")
-        for item in items:
-            print(f"  - [{item['actor']}] {item['goal']}")
-            if item.get("benefit"):
-                print(f"    Benefit: {item['benefit']}")
-            print(f"    Original: {item['original_sentence']}")
+    # print(f"\n--- CHI TIẾT PHÂN CỤM (K={best_k}) ---")
+    # for label, items in sorted(clusters.items()):
+    #     print(f"\nCụm {label + 1}:")
+    #     for item in items:
+    #         print(f"  - [{item['actor']}] {item['goal']}")
+    #         if item.get("benefit"):
+    #             print(f"    Benefit: {item['benefit']}")
+    #         print(f"    Original: {item['original_sentence']}")
 
     # Convert clusters dict to list format for state
     clusters_list = [
@@ -821,17 +827,17 @@ def grouping_node(state: GraphState):
     ]
 
     # DEBUG: in input_details và clusters cuối cùng
-    print("\n==== grouping_node ====")
-    print(">>> input_details:")
-    for d in input_details:
-        print(f"  - actor={d['actor']}, goal={d['goal']}, sent={d['sentence_idx']}")
-        print(f"    original={d['original_sentence']}")
-    print("\n>>> clusters_list:")
-    for c in clusters_list:
-        print(f"Cluster {c['cluster_id']}:")
-        for s in c["user_stories"]:
-            print(f"  - [{s['actor']}] {s['goal']} (sent={s['sentence_idx']})")
-            print(f'    "{s["original_sentence"]}"')
+    # print("\n==== grouping_node ====")
+    # print(">>> input_details:")
+    # for d in input_details:
+    #     print(f"  - actor={d['actor']}, goal={d['goal']}, sent={d['sentence_idx']}")
+    #     print(f"    original={d['original_sentence']}")
+    # print("\n>>> clusters_list:")
+    # for c in clusters_list:
+    #     print(f"Cluster {c['cluster_id']}:")
+    #     for s in c["user_stories"]:
+    #         print(f"  - [{s['actor']}] {s['goal']} (sent={s['sentence_idx']})")
+    #         print(f'    "{s["original_sentence"]}"')
 
     return {"grouping_done": True, "user_story_clusters": clusters_list}
 
@@ -937,11 +943,11 @@ def refine_clustering_node(state: GraphState):
         for cid, items in sorted(new_clusters.items())
     ]
 
-    print("\n--- REFINED CLUSTERS (after LLM) ---")
-    for c in clusters_list:
-        print(f"\nCluster {c['cluster_id']}:")
-        for s in c["user_stories"]:
-            print(f"  - [{s['actor']}] {s['goal']}")
+    print("\n==== refined clusters (after LLM) ====")
+    # for c in clusters_list:
+    #     print(f"\nCluster {c['cluster_id']}:")
+    #     for s in c["user_stories"]:
+    #         print(f"  - [{s['actor']}] {s['goal']}")
 
     return {"user_story_clusters": clusters_list}
 
@@ -1057,26 +1063,12 @@ For each cluster, provide:
 
     # DEBUG: in toàn bộ use_cases trước khi in summary cuối
     print("\n==== name_usecases_node (use_cases) ====")
-    for uc in use_cases:
-        print(f"UC-{uc.id}: {uc.name}")
-        print(f"  Actors: {uc.participating_actors}")
-        for s in uc.user_stories:
-            print(f"  - [{s.actor}] {s.action} (sent={s.sentence_idx})")
-            print(f'    "{s.original_sentence}"')
-
-    # # Print output
-    # print("\n" + "=" * 60)
-    # print("GENERATED USE CASES")
-    # print("=" * 60)
-
     # for uc in use_cases:
-    #     print(f"\n📌 UC-{uc.id}: [{uc.name}]")
-    #     print(f"   Description: {uc.description}")
-    #     print(f"   Actors: {', '.join(uc.participating_actors)}")
-    #     print(f"   User Stories ({len(uc.user_stories)}):")
-    #     for story in uc.user_stories:
-    #         print(f"     • [{story.actor}] {story.action}")
-    #         print(f'       └─ "{story.original_sentence}"')
+    #     print(f"UC-{uc.id}: {uc.name}")
+    #     print(f"  Actors: {uc.participating_actors}")
+    #     for s in uc.user_stories:
+    #         print(f"  - [{s.actor}] {s.action} (sent={s.sentence_idx})")
+    #         print(f'    "{s.original_sentence}"')
 
     return {"use_cases": use_cases}
 
@@ -1159,23 +1151,11 @@ Identify all «include» and «extend» relationships. Return source_use_case, r
                 }
             )
 
-    print("\n--- FIND INCLUDE/EXTEND ---")
+    print("\n==== find include/extend ====")
     for rel in include_extend_relationships:
         print(f"  {rel['source_use_case']} --{rel['type']}--> {rel['target_use_case']}")
 
     return {"include_extend_relationships": include_extend_relationships}
-
-
-def benefit_extract_node(state: GraphState):
-    # nlp = _get_nlp()
-
-    # sentences_nlp = [nlp(sent) for sent in state.get("sentences")]
-
-    benefits = [sent.split("so that")[-1].strip() for sent in state.get("sentences")]
-
-    print(benefits)
-
-    return {}
 
 
 # =============================================================================
@@ -1753,7 +1733,7 @@ def run_rpa(requirement_text: str) -> RpaState:
         "actors": out.get("actors", []),
         "actor_aliases": out.get("actor_results", []),
         "use_cases": out.get("use_cases", []),
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    }
 
 
 # =============================================================================
@@ -1886,7 +1866,7 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
     # Default: input_user_stories.txt in project root (research/)
     if requirements_file is None:
         project_root = Path(__file__).resolve().parent.parent.parent
-        requirements_file = project_root / "inputs" / "input_3.txt"
+        requirements_file = project_root / "inputs" / "input_1.txt"
     else:
         requirements_file = Path(requirements_file)
 
@@ -1911,10 +1891,10 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
     result = run_rpa(sample_requirements)
 
     # Print actors
-    print("\n👤 ACTORS:")
-    print("-" * 40)
-    for actor in result.get("actors", []):
-        print(f"  - {actor.actor}")
+    # print("\n👤 ACTORS:")
+    # print("-" * 40)
+    # for actor in result.get("actors", []):
+    #     print(f"  - {actor.actor}")
 
     # # Print use cases with relationships
     # print("\n📋 USE CASES WITH RELATIONSHIPS:")
@@ -1962,14 +1942,5 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
 
 
 if __name__ == "__main__":
-    # paths = run_rpa_batch()
-    # paths = run_rpa_batch(
-    #     input_files=[
-    #         "inputs/input_4.txt",  # HOS/g02
-    #         "inputs/input_6.txt",  # IFA/g08
-    #         "inputs/input_7.txt",  # HOS/g06
-    #         "inputs/input_8.txt",  # IFA/g14
-    #     ]
-    # )
     paths = run_rpa_batch(input_files=["inputs/input_5.txt"])
-    # test_rpa_graph()
+    test_rpa_graph()
