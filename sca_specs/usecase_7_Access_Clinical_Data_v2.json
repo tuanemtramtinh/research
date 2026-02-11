@@ -1,0 +1,98 @@
+{
+  "use_case_name": "Dispense Medication",
+  "unique_id": "UC-007",
+  "area": "Pharmacy and Medication Management",
+  "context_of_use": "A pharmacist uses the hospital management system to receive an electronic prescription, verify its validity and safety, check inventory, prepare and label the medication, optionally provide counseling, and record the dispensing transaction so that the patient can receive the prescribed medication accurately and securely.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "pharmacist"
+  ],
+  "supporting_actors": [
+    "central database",
+    "prescription management subsystem",
+    "inventory management subsystem"
+  ],
+  "stakeholders_and_interests": [
+    "Pharmacist: Wants to dispense medication safely and accurately according to valid prescriptions while complying with clinical and legal requirements.",
+    "Patients: Want to receive the correct prescribed medication in a timely manner with clear instructions and protected personal data.",
+    "Doctors: Want their prescriptions to be dispensed as intended without medication errors or unauthorized changes.",
+    "Hospital management: Wants medication dispensing to be efficient, traceable, and aligned with hospital policies and regulations.",
+    "System administrator: Wants dispensing records, prescription data, and access to be controlled, centrally stored, and consistent with security and privacy rules."
+  ],
+  "description": "This use case describes how a pharmacist uses the hospital management system to retrieve and review an electronic prescription that has been written and transferred by a doctor, verify the prescription and patient identity, confirm medication availability, prepare and label the medication, optionally provide counseling information, and record the dispensing event so that the patient can receive the appropriate medication.",
+  "triggering_event": "The pharmacist decides to dispense medication for a patient based on an available electronic prescription in the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The pharmacist has an active user account with appropriate access rights to view prescriptions and dispense medication.",
+    "The pharmacist is authenticated in the hospital management system.",
+    "A valid electronic prescription for the patient exists in the hospital management system, previously written by a doctor and transferred to the pharmacy information component through existing medical data management capabilities.",
+    "The hospital management system is operational and connected to the central database that stores prescription and medication inventory data."
+  ],
+  "postconditions": [
+    "The medication corresponding to the electronic prescription has been dispensed to the identified patient by the pharmacist.",
+    "The dispensing transaction, including prescription reference, dispensed items, quantity, and date and time, is recorded in the central database.",
+    "The prescription status is updated in the system to indicate that the medication has been dispensed.",
+    "Any applicable notes relevant to dispensing, such as counseling provided or special handling, are stored with the dispensing record."
+  ],
+  "assumptions": [
+    "It is assumed that the writing of prescriptions by doctors, the automatic transfer of prescriptions to the pharmacy, and the central storage of all data are supported by existing system functionalities that are part of medical data management capabilities referenced by the include relationship.",
+    "It is assumed that the hospital management system contains or has access to a medication inventory data structure sufficient for the pharmacist to verify stock availability but that the actual physical stock management is performed outside the system.",
+    "It is assumed that patient identity and personal information are available in the system and that access is governed by existing access control and privacy mechanisms defined elsewhere in the requirements.",
+    "It is assumed that the pharmacist can view only those prescription and patient data fields necessary for safe dispensing and that privacy-related controls, including any anonymization for non-clinical roles, are enforced by shared medical data management features.",
+    "It is assumed that drug interaction and allergy checks, if supported by the system, are part of the existing medical data management or clinical decision support capabilities and are invoked as part of the mandatory prescription retrieval and verification process without adding new standalone functions in this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a doctor to write prescriptions for patients so that appropriate medication can be provided.",
+    "The system shall automatically transfer prescriptions written by doctors to the pharmacy information components so that prescriptions can be processed efficiently by pharmacists.",
+    "The system shall allow a pharmacist to view transferred prescriptions so that the pharmacist knows what medication patients need.",
+    "The system shall store all prescription and dispensing data in a central database so that discrepancies between departments are reduced.",
+    "The system shall restrict access to prescription and patient information so that only authorized users, such as pharmacists, can view and process prescriptions for dispensing.",
+    "The system shall allow a pharmacist to record a medication dispensing transaction associated with a specific prescription so that the dispensing history is available within the electronic medical record."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The level of clinical decision support required during dispensing, such as automatic drug–drug interaction checks or allergy alerts, is not clearly specified.",
+    "The policies for partial dispensing, substitution with equivalent medications, or handling expired prescriptions are not defined.",
+    "The degree of integration with external pharmacy or insurance systems, including any authorization or reimbursement checks, is not described.",
+    "The required retention period and audit detail for dispensing records, including who accessed and modified them, are not specified."
+  ],
+  "main_flow": [
+    "1. Pharmacist logs into the hospital management system and navigates to the dispensing function → System authenticates the pharmacist and displays the pharmacy dispensing interface.",
+    "2. Pharmacist searches for or selects the patient for whom medication is to be dispensed, for example by using patient name or identifier → System retrieves and displays the patient’s basic identifying information and associated active prescriptions from the central database.",
+    "3. Pharmacist selects the relevant electronic prescription from the list of active prescriptions → System invokes the included medical data management functionality to retrieve the full prescription details, including prescribed medication, dosage, quantity, and instructions, and displays them to the pharmacist.",
+    "4. Pharmacist reviews the displayed prescription details for completeness and consistency with the patient’s identity → System presents the prescription information in a structured format and indicates that the prescription is available for dispensing.",
+    "5. Pharmacist confirms the medication, dosage, and quantity to be dispensed according to the prescription → System verifies that the selected medication, dosage form, and quantity are consistent with the prescription data stored in the central database.",
+    "6. Pharmacist requests an inventory check for the prescribed medication and quantity → System checks the medication inventory data and indicates whether the requested medication and quantity are available for dispensing.",
+    "7. Pharmacist prepares the medication according to the prescription, based on the confirmed availability → System records the intent to dispense the specified medication and quantity for the selected prescription in a pending dispensing record.",
+    "8. Pharmacist enters or confirms labeling information, including patient identification and basic usage instructions as specified by the prescription → System generates and displays label data linked to the prescription and patient record for pharmacist verification.",
+    "9. Pharmacist confirms that the dispensed medication and labeling match the prescription and prepares to hand the medication to the patient → System updates the pending dispensing record to reflect that the medication is ready for handover.",
+    "10. Pharmacist completes the dispensing by confirming handover of the medication to the patient → System finalizes and stores the dispensing record, updates the prescription status to indicate that the medication has been dispensed, and logs the pharmacist, date, and time of dispensing."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Pharmacist cannot initially locate the patient using the selected search criteria → Pharmacist refines the search criteria, such as using a different patient identifier or additional demographic attributes → System updates the search results and returns to Step 2 once the correct patient is found.",
+    "AF-2 (from Step 3): A patient has multiple active prescriptions and the pharmacist chooses to dispense more than one prescription in the same session → Pharmacist selects an additional active prescription for the same patient after completing Step 10 for the first prescription → System repeats Steps 3 through 10 for each additional selected prescription while maintaining a continuous pharmacist session.",
+    "AF-3 (from Step 8): Pharmacist updates labeling text to clarify usage instructions while keeping it consistent with the prescribed instructions → Pharmacist edits non-clinical explanatory text on the label, such as adding clarifying wording, and confirms the new label content → System updates the label data associated with the dispensing record and proceeds to Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Patient identity cannot be confidently verified, for example due to mismatched identifiers or conflicting personal information → System alerts the pharmacist to the identity mismatch and blocks access to prescriptions for that patient until identity is resolved; the pharmacist does not proceed with dispensing and the use case terminates.",
+    "EF-2 (from Step 3): The selected prescription is invalid for dispensing, for example because it is expired, cancelled, or marked as already fully dispensed → System displays a message indicating that the prescription cannot be used for dispensing and prevents continuation to later steps for that prescription; the pharmacist may select another valid prescription or end the use case.",
+    "EF-3 (from Step 5): A potential drug–drug interaction, allergy, or contraindication is detected by existing medical data management or clinical decision support functionality when the pharmacist confirms the medication → System presents an alert describing the potential safety issue and prevents automatic continuation; the pharmacist must resolve the issue outside the system or cancel dispensing, and if dispensing is cancelled the system records that the prescription was not dispensed and the use case ends for that prescription.",
+    "EF-4 (from Step 6): The requested medication or required quantity is not available in inventory according to the system’s inventory data → System displays a notification that the medication or quantity is out of stock and does not allow the pharmacist to proceed to preparation; the pharmacist may choose to adjust the quantity in accordance with existing policies, select an alternative medication as instructed by a doctor using another process, or terminate the dispensing attempt, and the system records that dispensing was not completed for that prescription in this session.",
+    "EF-5 (from Step 7): A system or database error occurs while attempting to create or update the pending dispensing record → System displays an error message indicating that the dispensing record could not be saved, logs the technical error, and reverts any partial transaction data so that no inconsistent dispensing record remains; the pharmacist may attempt the operation again starting from Step 7 or decide to end the use case.",
+    "EF-6 (from Step 10): The hospital management system becomes unavailable before the final dispensing confirmation is recorded → System fails to store the final dispensing confirmation and any unsaved changes; upon recovery, the system indicates that the prescription remains in an undispensed state and requires the pharmacist to repeat the dispensing confirmation from Step 7 through Step 10 to ensure a complete and accurate dispensing record."
+  ],
+  "information_for_steps": [
+    "1. Pharmacist credentials, authentication tokens, access role information.",
+    "2. Patient identifiers such as patient ID, name, date of birth, and list of active prescriptions linked to the patient.",
+    "3. Prescription identifier, prescribing doctor, medication name, dosage form, strength, dosage instructions, quantity, and issuance and validity dates retrieved via medical data management functionality.",
+    "4. Structured prescription details, linked patient identifier, prescription status, and any existing prescription notes.",
+    "5. Selected medication item, dosage form, strength, prescribed quantity, and system checks confirming consistency with stored prescription data.",
+    "6. Medication inventory identifiers, available stock levels, reserved quantities, and requested dispensing quantity.",
+    "7. Pending dispensing record identifier, medication item selected for dispensing, quantity to be dispensed, and linkage to the corresponding prescription and patient.",
+    "8. Label content including patient name, prescription identifier, medication name, dosage instructions, and any pharmacist-entered clarifying text.",
+    "9. Confirmation indicators that the prepared medication and label match the prescription, and updated status of the dispensing record set to ready for handover.",
+    "10. Final dispensing record including patient identifier, prescription identifier, dispensed medication details, quantity, pharmacist identifier, dispensing date and time, and updated prescription status indicating completion."
+  ]
+}

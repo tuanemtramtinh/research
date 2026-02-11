@@ -1,0 +1,99 @@
+{
+  "use_case_name": "Integrate Archive with Institutional Systems",
+  "unique_id": "UC-002",
+  "area": "Research Information and IT Systems Integration",
+  "context_of_use": "The institutional research data archive must be integrated with core university information systems and the Current Research Information System (CRIS) to enable shared data, efficient administration, and analysis of research impact and funding links.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "research information manager",
+    "univitservice"
+  ],
+  "supporting_actors": [
+    "CRIS system",
+    "existing university systems such as LDAP"
+  ],
+  "stakeholders_and_interests": [
+    "research information manager: Requires integration between the archive and CRIS so that the impact of research data publication can be analysed and funding can be linked to all associated research outputs.",
+    "univitservice: Requires integration of the archive with existing university systems such as LDAP so that the cost of administering the archive system can be kept low.",
+    "Bath Data Archive administrator: Depends on accurate and consistent identity, access, and research information data to support quality control, policy compliance checks, and reporting on archive holdings.",
+    "fundingbody: Depends on reliable impact and funding linkage information derived from integrated systems to assess effectiveness of funding strategies.",
+    "academicpublisher: Benefits from robust, linked research information that increases confidence in the quality and traceability of underlying datasets.",
+    "university management: Requires consistent, low-cost administration of institutional systems and accurate reporting on research outputs and impact."
+  ],
+  "description": "This use case describes how the research data archive is integrated with existing university systems, including identity and directory services and the CRIS, to enable shared data, reduce administration costs, analyse the impact of research data publication, and link research funding to all related outputs.",
+  "triggering_event": "The research information manager or univitservice decides that the research data archive must be integrated with institutional systems to support impact analysis and low-cost administration.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Bath Research Data Archive System is deployed and reachable on the institutional network.",
+    "The CRIS system is operational and accessible to the archive within institutional security constraints.",
+    "Existing university systems such as LDAP are operational and accessible to the archive within institutional security constraints.",
+    "The research information manager and univitservice have the necessary organisational approval to configure integrations between the archive and institutional systems.",
+    "Required technical interfaces or configuration mechanisms for integrating with CRIS and existing university systems are available in both the archive and the external systems."
+  ],
+  "postconditions": [
+    "The archive is configured to integrate with the CRIS system such that research data publication information can be exchanged in support of impact analysis and linkage of funding to outputs.",
+    "The archive is configured to integrate with existing university systems such as LDAP such that user and related institutional information can be reused to keep administration costs low.",
+    "The established integrations are stored persistently in the archive configuration and remain effective for subsequent operations until explicitly changed or disabled."
+  ],
+  "assumptions": [
+    "It is assumed that the CRIS system exposes an interface or configuration option that the archive can use for integration without requiring new functionality beyond what is implied by the user story.",
+    "It is assumed that existing university systems such as LDAP already hold the authoritative identity and role information required by the archive for low-cost administration.",
+    "It is assumed that both the CRIS system and existing university systems are managed by univitservice or equivalent institutional IT governance, enabling them to grant the necessary access for integration.",
+    "It is assumed that the archive already supports being configured to communicate with external systems and that this use case concerns configuring and enabling such existing capabilities rather than developing new ones.",
+    "It is assumed that security, privacy, and data protection policies governing data exchange between the archive, CRIS, and existing university systems have been defined outside this use case and must be adhered to during integration.",
+    "It is assumed that the research information manager is responsible for defining the research information and impact analysis requirements, while univitservice is responsible for implementing technical integration steps."
+  ],
+  "requirements_met": [
+    "The system shall provide a configurable integration with existing university systems such as LDAP to enable reuse of institutional identity and related data so that the cost of administering the archive is kept low.",
+    "The system shall provide a configurable integration with the CRIS system to enable analysis of the impact of research data publication.",
+    "The system shall support linking funding information held in CRIS to all research outputs, including datasets managed in the archive, via the established integration.",
+    "The system shall persist configuration parameters for integrations with CRIS and existing university systems such that they remain effective across system restarts until modified by authorised personnel.",
+    "The system shall use institutional authentication and directory information obtained from existing university systems such as LDAP to minimise duplicate user administration for the archive.",
+    "The system shall enable the research information manager to access or derive impact analysis data for published datasets based on information exchanged through the CRIS integration."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise technical interface specifications and protocols for integrating the archive with CRIS are not defined and must be agreed between system owners.",
+    "The exact data elements to be exchanged between the archive and CRIS for impact analysis and funding linkage have not been specified and require clarification.",
+    "The detailed list of existing university systems beyond LDAP that should be integrated with the archive has not been determined.",
+    "Policies governing security, privacy, and data protection for data exchanged between the archive, CRIS, and existing university systems have not been fully articulated in this context.",
+    "Error handling, monitoring, and alerting requirements for failures in the integrations between the archive and external systems are not specified.",
+    "Governance responsibilities for maintaining and updating the integration configurations between the archive, CRIS, and existing university systems remain to be formally assigned."
+  ],
+  "main_flow": [
+    "1. research information manager → Specifies the high-level objectives for integrating the archive with CRIS, including the need to analyse the impact of research data publication and to link funding to all associated research outputs.",
+    "2. univitservice → Reviews the integration objectives and identifies the relevant external systems, including CRIS and existing university systems such as LDAP, that must be connected to the archive.",
+    "3. univitservice → Accesses the archive administration interface to initiate configuration of integration with existing university systems such as LDAP.",
+    "4. univitservice → Enters or selects connection parameters for existing university systems such as LDAP (for example, host, port, and access credentials) and submits the configuration to the archive → The system validates the supplied connection parameters for integration with existing university systems such as LDAP.",
+    "5. univitservice → Confirms the application of the validated integration settings for existing university systems such as LDAP → The system stores the integration configuration for existing university systems such as LDAP and establishes the connection for subsequent use in archive administration.",
+    "6. univitservice → Accesses the archive administration interface to initiate configuration of integration with the CRIS system in accordance with the research information manager's objectives.",
+    "7. univitservice → Enters or selects CRIS connection parameters and any required configuration options and submits them to the archive → The system validates the supplied CRIS integration parameters.",
+    "8. univitservice → Confirms the application of the validated integration settings for CRIS → The system stores the integration configuration for CRIS and establishes the logical connection for subsequent information exchange.",
+    "9. research information manager → Requests confirmation that integrated data flows support analysis of the impact of research data publication and linkage of funding to all outputs → The system indicates that integrations with CRIS and existing university systems such as LDAP are active and available for use to support the stated objectives.",
+    "10. research information manager → Initiates or schedules use of information provided through the CRIS integration (such as publication and funding linkage data) to perform research impact analysis → The system makes integrated research data publication and funding linkage information available to the research information manager for analysis in accordance with existing capabilities."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If only one of the integrations is initially required, univitservice may choose to configure either the integration with existing university systems such as LDAP or the integration with CRIS first and defer configuration of the other integration to a later session. The main flow then resumes at the next step relevant to the chosen integration when configuration is undertaken.",
+    "AF-2 (from Step 9): If the research information manager requires additional verification that the integrations meet reporting needs, the research information manager may request a trial exchange of a limited subset of data between the archive, CRIS, and existing university systems such as LDAP. univitservice initiates the trial using the existing configurations, the system performs the trial exchange, and the main flow resumes at Step 10 once the research information manager confirms that the trial results are acceptable."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 4): If the system cannot validate the supplied connection parameters for existing university systems such as LDAP, the system rejects the configuration, records the validation error, and presents an error message describing the failure to univitservice. The use case ends without establishing integration with existing university systems such as LDAP, and previously working configurations, if any, remain unchanged.",
+    "EF-2 (from Step 7): If the system cannot validate the supplied CRIS integration parameters, the system rejects the configuration, records the validation error, and presents an error message describing the failure to univitservice. The use case ends without establishing integration with CRIS, and previously working configurations, if any, remain unchanged.",
+    "EF-3 (from Steps 5 and 8): If the system fails to store the integration configuration after validation due to internal storage or persistence issues, the system reports the failure to univitservice, rolls back any partial configuration changes, and leaves existing integration settings unchanged. The use case ends without updating the affected integration.",
+    "EF-4 (from Step 10): If, after integration, the system is temporarily unable to make integrated CRIS or existing university systems data available for analysis due to unavailability of the external systems, the system notifies the research information manager that external data is currently unavailable and advises retry at a later time. The use case is paused until external systems become available, at which point the research information manager may repeat Step 10."
+  ],
+  "information_for_steps": [
+    "1. Integration objectives description, impact analysis requirements, funding linkage requirements.",
+    "2. List of relevant institutional systems (CRIS, existing university systems such as LDAP), system identifiers.",
+    "3. Archive administration access credentials, target system selection.",
+    "4. Existing university systems such as LDAP connection parameters, access credentials, validation results.",
+    "5. Confirmed integration settings for existing university systems such as LDAP, stored configuration records.",
+    "6. Target CRIS system identification, archive integration options for CRIS.",
+    "7. CRIS connection parameters, configuration options, validation results.",
+    "8. Confirmed integration settings for CRIS, stored configuration records.",
+    "9. Integration status information for CRIS and existing university systems such as LDAP, capability description supporting impact analysis and funding linkage.",
+    "10. Integrated research data publication information, funding linkage information, analysis parameters or queries used by the research information manager."
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "use_case_name": "Schedule Appointments",
+  "unique_id": "UC-010",
+  "area": "Appointment Management",
+  "context_of_use": "This use case describes how patients and receptionists use the hospital management system to create and manage appointment bookings, including appointments that serve as requests for new prescriptions, via personal computers and mobile devices.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "patient",
+    "receptionist"
+  ],
+  "supporting_actors": [
+    "system administrator",
+    "doctor"
+  ],
+  "stakeholders_and_interests": [
+    "patient: Wants to conveniently schedule appointments via personal computer and mobile device and request new prescriptions through online appointment scheduling.",
+    "receptionist: Wants to schedule appointments so that patient visits can be organized.",
+    "doctor: Wants appointments to be properly scheduled so that patient visits and prescription-related consultations can be managed efficiently.",
+    "system administrator: Wants appointment data to be stored in a central database and protected under access control and GDPR-compliant security measures.",
+    "systems analyst: Wants appointment data, including time-related information, to be available for clinical and operational analytics."
+  ],
+  "description": "Enables patients and receptionists to create and manage appointment bookings in the hospital management system so that patient visits can be organized and patients can request new prescriptions through online appointment scheduling from both personal computers and mobile devices.",
+  "triggering_event": "A patient or receptionist decides to create a new appointment booking in the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The hospital management system is operational and connected to the central database.",
+    "The patient record to be associated with the appointment exists in the system.",
+    "The user (patient or receptionist) has a personal account in the system.",
+    "The user (patient or receptionist) is authenticated and authorized to schedule appointments according to system access control rules.",
+    "The system has access to current appointment schedule data needed to avoid conflicting bookings."
+  ],
+  "postconditions": [
+    "A new appointment booking associated with the correct patient record is stored in the central database.",
+    "The appointment time, date, and basic purpose information are persistently recorded and available for authorized users.",
+    "If the appointment is intended as a request for a new prescription, the appointment is clearly marked in the system as a prescription-related request.",
+    "The appointment is available to authorized stakeholders, such as receptionists and doctors, for further processing and analytics."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication and authorization, including limiting system access to authorized users and requiring users to log in to personal accounts, are handled by a separate security mechanism already defined for the hospital management system.",
+    "It is assumed that personal computers and mobile devices are treated as different access channels to the same hospital management system functionality for scheduling appointments.",
+    "It is assumed that scheduling appointments by a patient and scheduling appointments by a receptionist use the same core appointment data (such as patient identity, date, time, and purpose) and differ only in who performs the action.",
+    "It is assumed that an appointment used to request a new prescription is represented as an appointment attribute (for example, appointment purpose set to prescription request) rather than a separate technical process.",
+    "It is assumed that the central database stores appointment data together with other clinical and administrative data so that discrepancies between departments are reduced.",
+    "It is assumed that all appointment data is subject to GDPR standards and privacy rules defined by the system, including access restrictions and data protection.",
+    "It is assumed that clinical analytics and predictive analytics consume recorded appointment data but do not alter the behavior of the appointment scheduling process described in this use case.",
+    "It is assumed that the system enforces basic validation of appointment dates and times to ensure that only future or administratively acceptable time slots are stored.",
+    "It is assumed that the specific algorithms for conflict resolution, resource allocation, and time-slot availability are outside the scope of this use case and are handled by existing scheduling rules in the system."
+  ],
+  "requirements_met": [
+    "The system shall allow receptionists to schedule appointments so that patient visits can be organized.",
+    "The system shall allow patients to schedule appointments online on a personal computer so that patients can arrange visits conveniently.",
+    "The system shall allow patients to schedule appointments using a mobile device so that patients can manage appointments conveniently.",
+    "The system shall allow patients to request new prescriptions through online appointment scheduling by marking the appointment as a prescription-related request.",
+    "The system shall store all appointment bookings in a central database to reduce discrepancies between departments.",
+    "The system shall make appointment data available for clinical and operational analytics, including the calculation of average appointment duration when combined with recorded start and end times.",
+    "The system shall enforce access control so that only authorized users can schedule appointments and view related appointment data, in line with defined access levels.",
+    "The system shall protect stored appointment data in accordance with GDPR standards."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific business rules for handling overlapping or conflicting appointments have not been defined.",
+    "The prioritization rules for prescription-related appointment requests versus ordinary appointments have not been specified.",
+    "The exact set of appointment data fields (for example, required purpose details or department selection) has not been fully defined.",
+    "The policy for modifying or canceling existing appointments, including any time restrictions, is not addressed in the provided requirements.",
+    "The level of detail required for analytics regarding appointment types, locations, and involved staff members remains unspecified."
+  ],
+  "main_flow": [
+    "1. Patient or receptionist initiates appointment scheduling from a personal computer or mobile device → System displays the appointment scheduling interface including patient selection or confirmation options.",
+    "2. Patient identifies themselves using their authenticated session or receptionist selects the correct patient record → System retrieves and displays the selected patient’s basic identification information for confirmation.",
+    "3. Patient or receptionist selects a desired appointment date and time → System retrieves and displays available appointment time slots for the selected date and applicable constraints.",
+    "4. Patient or receptionist selects an available time slot from the displayed options → System temporarily reserves the selected time slot for the ongoing scheduling transaction.",
+    "5. Patient or receptionist specifies the appointment purpose, including optionally indicating that the appointment is a request for a new prescription → System records the specified purpose and marks the appointment as prescription-related if indicated.",
+    "6. Patient or receptionist reviews the appointment details, including patient identity, date, time, and purpose → System displays a confirmation summary of all entered appointment information.",
+    "7. Patient or receptionist confirms the appointment booking → System creates the appointment record, stores it in the central database, and marks it as successfully scheduled.",
+    "8. System finalizes the process → System makes the newly created appointment available for viewing and further processing by authorized users and for subsequent analytics."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Initiation by receptionist for walk-in or phone request: The receptionist initiates appointment scheduling for a patient who is not currently logged in. The receptionist selects the patient record using search capabilities provided elsewhere in the system, after which the flow continues from Step 2 with the selected patient’s information displayed.",
+    "AF-2 (from Step 3): Direct date and time entry: Instead of selecting a date first and then available slots, the patient or receptionist directly enters a specific date and time for the appointment. The system validates that the specified date and time are available according to existing scheduling rules, and if valid the flow continues from Step 5 with the selected time slot treated as reserved.",
+    "AF-3 (from Step 5): Non-prescription appointment: The patient or receptionist indicates that the appointment is for a general consultation or other non-prescription-related purpose. The system records the purpose without any prescription-related marker, displays the confirmation summary, and the flow continues from Step 6.",
+    "AF-4 (from Step 7): Receptionist provides immediate verbal confirmation: After confirming the appointment booking, the receptionist verbally informs the patient of the appointment details while the system stores the record and makes it available, and the flow continues to Step 8 where the appointment is available for authorized users."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Patient record cannot be confirmed: If the patient or receptionist cannot confirm or locate the correct patient record, the system does not proceed to scheduling. The system displays an error message indicating that the patient record must be identified, and the use case terminates without creating an appointment.",
+    "EF-2 (from Step 4): Selected time slot becomes unavailable before confirmation: If the selected time slot becomes unavailable due to a concurrent booking before the appointment is confirmed, the system notifies the user that the time slot is no longer available, releases the temporary reservation, and returns the user to Step 3 to select a different available time slot.",
+    "EF-3 (from Step 5): Invalid or missing appointment purpose: If the patient or receptionist does not provide a required appointment purpose or enters data that violates defined validation rules, the system displays a validation error message, highlights the missing or invalid fields, and prompts the user to correct the information before returning to Step 5.",
+    "EF-4 (from Step 7): Failure to store appointment in central database: If a technical error prevents the system from storing the appointment record in the central database, the system informs the user that the appointment could not be saved, rolls back any partial changes, releases any reserved time slot, and terminates the use case without creating an appointment."
+  ],
+  "information_for_steps": [
+    "1. User authentication state, access channel type (personal computer or mobile device), appointment scheduling interface configuration.",
+    "2. Patient identifier, patient name, basic personal identification details required for confirmation.",
+    "3. Desired appointment date, appointment scheduling rules, existing appointments and availability for the selected timeframe.",
+    "4. Selected time slot (date and time), temporary reservation status for the chosen slot.",
+    "5. Appointment purpose description, indicator for prescription-related request, association with patient identifier and selected time slot.",
+    "6. Appointment summary data including patient information, date, time, and purpose for user review.",
+    "7. Final appointment record data including unique appointment identifier, patient identifier, date, time, purpose, and prescription-related marker if applicable.",
+    "8. Persistent appointment record stored in central database, access metadata for authorized users, and data availability for analytics."
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "use_case_name": "Mint Dataset DOIs",
+  "unique_id": "UC-008",
+  "area": "Research Data Management",
+  "context_of_use": "The depositor uses the research data archive to assign Digital Object Identifiers (DOIs) to deposited datasets so that the datasets can be reliably discovered, cited, and their citation impact tracked.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor"
+  ],
+  "supporting_actors": [
+    "Bath Research Data Archive System"
+  ],
+  "stakeholders_and_interests": [
+    "depositor: Wants datasets to have DOIs so that they can be discovered and cited easily and citation counts can be tracked to support recognition and credit.",
+    "Bath Research Data Archive System owner: Wants consistent DOI assignment to support long-term discoverability and interoperability with external scholarly infrastructure.",
+    "Funding body: Wants assurance that research data outputs have persistent identifiers to support discovery, citation, and impact assessment.",
+    "Academic publisher: Wants persistent links between articles and underlying datasets via DOIs to demonstrate robustness and quality of publications.",
+    "Research Information manager: Wants datasets to have DOIs to enable accurate tracking and analysis of dataset citations and impact.",
+    "Data reuser: Wants datasets to expose DOIs so they can be easily cited and referenced correctly."
+  ],
+  "description": "This use case describes how a depositor assigns a Digital Object Identifier (DOI) to a dataset within the Bath Research Data Archive System so that the dataset becomes persistently and reliably identifiable, discoverable, and citable, enabling the tracking of citations.",
+  "triggering_event": "The depositor chooses to mint a DOI for a dataset within the dataset management functions of the archive.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The depositor is authenticated in the Bath Research Data Archive System.",
+    "The depositor has an existing dataset record in the system that they are permitted to manage.",
+    "The dataset record contains at least the minimum metadata required by the system to support DOI registration.",
+    "The Bath Research Data Archive System is connected to a configured DOI registration mechanism or service."
+  ],
+  "postconditions": [
+    "A unique DOI is associated with the specified dataset record in the Bath Research Data Archive System.",
+    "The system stores the minted DOI together with the dataset’s core citation metadata.",
+    "The system exposes the DOI on the dataset’s landing page for discovery and citation purposes.",
+    "The minted DOI can be used as a persistent identifier to access the dataset record in the system."
+  ],
+  "assumptions": [
+    "It is assumed that the Bath Research Data Archive System already provides core dataset deposit and management capabilities, as implied by the relationship that this use case extends a broader \"manage research datasets\" use case.",
+    "It is assumed that the depositor has sufficient permissions on the target dataset to request DOI minting.",
+    "It is assumed that the system has an integration with an external or internal DOI registration mechanism, but the detailed behavior of that mechanism is outside the scope of this use case.",
+    "It is assumed that the system defines and enforces the specific metadata fields and quality thresholds required before a DOI can be minted, but this use case only requires that the minimum required metadata is available.",
+    "It is assumed that citation tracking based on minted DOIs is handled by other system functions that consume the stored DOI and citation metadata and are not introduced as new functionality in this use case.",
+    "It is assumed that a DOI, once minted for a dataset, remains persistent and is not reassigned to a different dataset within the system."
+  ],
+  "requirements_met": [
+    "The system shall allow a depositor to request minting of a DOI for a dataset that they manage.",
+    "The system shall validate that the dataset has the minimum required metadata before minting a DOI.",
+    "The system shall generate or obtain a unique DOI for the dataset when the depositor requests DOI minting and validation succeeds.",
+    "The system shall store the minted DOI as part of the dataset’s metadata record.",
+    "The system shall display the minted DOI clearly on the dataset’s landing or detail page to support discovery and citation.",
+    "The system shall ensure that the minted DOI resolves to a persistent landing page for the corresponding dataset within the Bath Research Data Archive System."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific DOI registration agency or provider to be used by the system has not been defined and may affect implementation details.",
+    "The policy governing whether multiple DOIs can be minted for different versions of the same dataset has not been specified.",
+    "The rules for when a depositor is allowed to mint a DOI (for example, only after administrative checks or approvals) have not been fully defined.",
+    "The exact set of mandatory metadata fields and quality criteria required for DOI minting is not specified and must be defined by policy.",
+    "The strategy for updating DOI metadata when dataset metadata changes, while maintaining DOI persistence, remains to be clarified."
+  ],
+  "main_flow": [
+    "1. Depositor selects an existing dataset they manage within the Bath Research Data Archive System → System displays the dataset management view including DOI status and available actions.",
+    "2. Depositor chooses the option to mint a DOI for the selected dataset → System presents a summary of the dataset’s key citation metadata and indicates that this information will be used for DOI registration.",
+    "3. Depositor confirms the request to mint a DOI for the dataset → System validates that the dataset meets the minimum metadata requirements for DOI minting.",
+    "4. Depositor waits while the DOI request is processed → System generates or obtains a unique DOI for the dataset using the configured DOI registration mechanism.",
+    "5. Depositor views the updated dataset record → System stores the minted DOI in the dataset’s metadata and associates it permanently with the dataset.",
+    "6. Depositor reviews the public presentation of the dataset → System displays the minted DOI on the dataset’s public landing or detail page and ensures that the DOI resolves to this page."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Depositor reviews and updates citation-related metadata before confirming DOI minting. Condition: The depositor wishes to adjust citation metadata (such as title or contributor information) prior to minting the DOI. Flow: After the system presents the summary of key citation metadata, the depositor navigates to the dataset metadata editing interface, updates the relevant citation metadata, saves the changes, and then returns to the DOI minting action. The flow then resumes at Main Flow Step 2 with the updated metadata displayed.",
+    "AF-2 (from Step 3): Depositor cancels DOI minting before confirmation. Condition: The depositor decides not to proceed with DOI minting after viewing the citation metadata summary. Flow: Instead of confirming the request, the depositor cancels the DOI minting operation. The system closes the DOI minting interaction without requesting or assigning a DOI and returns the depositor to the standard dataset management view. The use case ends without a DOI being minted.",
+    "AF-3 (from Step 4): DOI already exists for the dataset. Condition: The dataset already has a DOI assigned when the depositor attempts to mint a DOI again. Flow: When processing the DOI request, the system detects that the dataset already has a DOI stored. The system informs the depositor that a DOI already exists for this dataset and displays the existing DOI. The system does not mint a new DOI, and control returns to the dataset management view with the current DOI visible, after which the use case ends successfully with the original DOI preserved."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Dataset does not meet minimum metadata requirements. Condition: During validation prior to DOI minting, the system detects that required metadata fields are missing or incomplete. Flow: The system cancels the DOI minting operation, presents an error message listing the missing or insufficient metadata fields, and provides guidance that these fields must be completed before a DOI can be minted. No DOI is created or modified. The depositor may update the metadata outside this flow and then reinitiate the use case.",
+    "EF-2 (from Step 4): DOI registration service is unavailable or fails to provide a DOI. Condition: While attempting to generate or obtain a DOI, the system cannot reach the DOI registration mechanism or receives an error response. Flow: The system aborts the DOI minting operation, records the failure, and informs the depositor that the DOI could not be minted due to a system or connectivity problem. No DOI is stored for the dataset as a result of this attempt. The depositor is returned to the dataset management view and may attempt the operation again later.",
+    "EF-3 (from Step 5): Storage of the minted DOI in the system fails. Condition: The system has obtained a DOI but encounters an internal error when persisting the DOI in the dataset metadata record. Flow: The system does not complete the update of the dataset record, does not expose the DOI on the dataset landing page, logs the storage error, and notifies the depositor that the DOI assignment could not be completed. The partly obtained DOI is not treated as validly assigned to the dataset. The depositor is returned to the dataset management view and may retry the operation once the underlying issue is resolved."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier, depositor identity, dataset management permissions, existing DOI status.",
+    "2. Dataset citation metadata (such as title, creators or contributors, publication year, publisher or hosting institution), indication of DOI status, confirmation option.",
+    "3. Dataset metadata completeness status, list of required metadata fields for DOI minting, depositor confirmation input.",
+    "4. DOI registration request payload (dataset identifier, citation metadata, target landing page URL), DOI registration service endpoint, DOI value returned.",
+    "5. Dataset metadata record including DOI field, dataset internal identifier, update timestamp.",
+    "6. Public dataset landing page URL, stored DOI, display template for citation information, DOI resolution configuration."
+  ]
+}

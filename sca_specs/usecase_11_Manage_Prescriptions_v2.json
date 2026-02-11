@@ -1,0 +1,86 @@
+{
+  "use_case_name": "Doctor Creates Prescription",
+  "unique_id": "UC-011",
+  "area": "Prescription Management",
+  "context_of_use": "This use case describes how a doctor creates a prescription for a patient in the hospital management system so that appropriate medication can be provided and the prescription can be transferred to the pharmacy information system.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor"
+  ],
+  "supporting_actors": [
+    "patient",
+    "pharmacist",
+    "pharmacy information system"
+  ],
+  "stakeholders_and_interests": [
+    "doctor: Wants to create accurate prescriptions for patients and have them transferred efficiently to pharmacy information systems so that appropriate medication can be provided.",
+    "patient: Wants prescriptions created by doctors to be accurate and available for use at pharmacies as part of their treatment and remote medication management.",
+    "pharmacist: Wants to receive clear and complete prescriptions from doctors via the pharmacy information system so that the correct medication can be dispensed.",
+    "hospital: Wants prescriptions to be created and transferred accurately and efficiently to support clinical workflow and reduce medication errors.",
+    "pharmacy information system provider: Wants prescriptions to be transferred in a structured form that can be processed automatically by the pharmacy information system."
+  ],
+  "description": "This use case specifies how a doctor, using the hospital management system, creates a prescription for a selected patient and causes the prescription to be stored and transferred to the pharmacy information system for later use by pharmacists and patients.",
+  "triggering_event": "The doctor decides to create a new prescription for a specific patient in the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor is an authenticated and authorized user of the hospital management system with permission to create prescriptions.",
+    "The patient for whom the prescription is being created exists in the hospital management system with sufficient identifying information to uniquely associate the prescription.",
+    "The hospital management system is operational and available to the doctor.",
+    "The hospital management system is configured with connectivity details for the target pharmacy information system required for prescription transfer."
+  ],
+  "postconditions": [
+    "A new prescription record linked to the correct patient is stored in the hospital management system with all required prescription details.",
+    "The prescription is prepared in the required format and a transfer attempt to the configured pharmacy information system has been performed.",
+    "The prescription record in the hospital management system contains a stored transfer status that reflects the outcome of the transfer attempt.",
+    "The created prescription is available within the hospital management system for subsequent viewing and processing by authorized parties according to access control rules."
+  ],
+  "assumptions": [
+    "It is assumed that user login, authentication, and role-based authorization are handled by separate security use cases and that the doctor is already logged in before initiating prescription creation.",
+    "It is assumed that the pharmacy information system is an external system capable of receiving structured electronic prescription data from the hospital management system.",
+    "It is assumed that detailed clinical validation such as drug–drug interactions, allergy checks, and dosage guideline enforcement is performed by separate decision-support mechanisms outside the scope of this use case.",
+    "It is assumed that previously defined patient records contain all demographic and identification data required to associate the prescription without additional patient creation within this use case.",
+    "It is assumed that network communication, message routing, and low-level transport error handling between the hospital management system and the pharmacy information system are addressed by infrastructure components and are only reflected in this use case via transfer status recording.",
+    "It is assumed that patient-initiated prescription requests are handled in one or more separate use cases and are only a potential source of information for the doctor when deciding to create a prescription, not part of the execution steps of this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow doctors to write prescriptions for patients so that appropriate medication can be provided.",
+    "The system shall automatically transfer doctor-created prescriptions to pharmacy information systems so that prescriptions can be processed efficiently."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The detailed business rules governing prescription content, such as mandatory clinical fields and institution-specific constraints, are not yet defined.",
+    "The interoperability standard or message format to be used for transferring prescriptions to different pharmacy information systems requires clarification.",
+    "The precise timing semantics for transfer status updates, including retries and timeouts, have not been specified.",
+    "The policies for modifying or cancelling a created prescription after transfer, and how such changes are communicated to the pharmacy information system, are not described.",
+    "The retention period, archival rules, and audit requirements for stored prescriptions and transfer logs require further definition by regulatory and hospital governance stakeholders."
+  ],
+  "main_flow": [
+    "1. doctor selects a patient and initiates creation of a new prescription in the hospital management system → System displays a prescription entry interface pre-associated with the selected patient.",
+    "2. doctor enters required prescription details for the patient, including medication, dosage, and instructions → System captures the entered data and performs basic validation for completeness and data format.",
+    "3. doctor reviews the entered prescription details and confirms creation of the prescription → System saves the prescription as a new record linked to the patient and the doctor with a timestamp.",
+    "4. System prepares the newly saved prescription for transfer to the pharmacy information system → System formats the prescription data according to the configured transfer specification and identifies the target pharmacy information system endpoint.",
+    "5. System sends the formatted prescription data to the configured pharmacy information system endpoint → System records the outcome of the transfer attempt and updates the prescription record with the corresponding transfer status and transfer timestamp.",
+    "6. System completes the prescription creation process → System makes the created prescription record and its transfer status available for subsequent viewing and processing by authorized users."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the doctor initiates prescription creation from within an existing clinical documentation or visit context where a patient is already selected, the system automatically associates the current patient and visit context with the new prescription and directly displays the prescription entry interface, after which the flow continues with Step 2.",
+    "AF-2 (from Step 2): If the doctor has access to predefined prescription templates or favorites supported by the system configuration, the doctor selects a template instead of manually entering all details, the system populates the prescription entry fields from the selected template, and the doctor may adjust any fields as needed before the flow continues with Step 3.",
+    "AF-3 (from Step 5): If the pharmacy information system is temporarily unavailable but the hospital management system is configured to queue outgoing prescription messages, the system queues the formatted prescription data for later delivery, records a queued transfer status with the prescription, and marks the prescription as pending transfer while still completing the doctor’s prescription creation process by proceeding to Step 6."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system cannot associate a valid patient record with the prescription because the selected patient does not exist or cannot be retrieved, the system displays an error message indicating that prescription creation cannot proceed, logs the failure condition, and terminates the use case without creating a prescription record.",
+    "EF-2 (from Step 2): If the entered prescription details fail validation due to missing required fields or invalid data formats, the system rejects the attempted submission, highlights the fields that must be corrected, displays a message explaining that the prescription cannot be saved until the errors are resolved, and returns control to the doctor on the prescription entry interface without creating or updating a prescription record.",
+    "EF-3 (from Step 3): If a system error occurs while saving the prescription record, such as database unavailability or write failure, the system informs the doctor that the prescription could not be saved, logs the error event for diagnostic purposes, and terminates the use case without storing a partial prescription.",
+    "EF-4 (from Step 5): If transfer of the prescription to the pharmacy information system fails and transfer queuing is not available or is disabled, the system marks the prescription record with a transfer status indicating failure, logs the transfer error with technical details, notifies the doctor that automatic transfer did not complete, and ends the use case with the prescription stored locally but not successfully transferred."
+  ],
+  "information_for_steps": [
+    "1. Doctor identifier, patient identifier, patient selection data, clinical context identifier (e.g., visit or encounter ID).",
+    "2. Prescription details including medication name, dosage, route, frequency, duration, administration instructions, and any required clinical notes or diagnosis references.",
+    "3. Prescription record identifier, creation timestamp, doctor identifier, patient identifier, prescription status.",
+    "4. Prescription record data, transfer format specification, pharmacy information system endpoint identifier, message metadata.",
+    "5. Formatted prescription message, transfer protocol parameters, transfer status code, transfer timestamp, transfer log entry identifier.",
+    "6. Persistent prescription record, transfer status information, audit trail entries, access control attributes for subsequent viewing and processing."
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "use_case_name": "Manage Prescriptions",
+  "unique_id": "UC-005",
+  "area": "Electronic Medical Record and Prescription Management",
+  "context_of_use": "The use case enables a doctor to create and manage a patient prescription within the hospital management system and have the confirmed prescription stored centrally and made available for transfer to pharmacy information systems for efficient processing.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor"
+  ],
+  "supporting_actors": [
+    "patient"
+  ],
+  "stakeholders_and_interests": [
+    "Doctor: Wants to create and manage accurate prescriptions for identified patients and have them efficiently transferred to pharmacy information systems.",
+    "Patient: Wants doctors to issue correct prescriptions that can be used as a reference when visiting a pharmacy and that can be processed efficiently.",
+    "Pharmacist: Wants to receive complete and valid prescription information electronically so that required medication can be dispensed correctly.",
+    "System Administrator: Wants prescriptions to be stored in a central database, integrated with the electronic medical record, and protected by access control and GDPR-compliant security mechanisms.",
+    "Systems Analyst: Wants prescription-related clinical data to be collected in anonymized form to support prescriptive and predictive analytics.",
+    "Receptionist: Wants the patient’s electronic medical record, including prescriptions, to remain consistent with other patient information for communication purposes.",
+    "Nurse: Wants accurately managed prescriptions in the electronic medical record to support ongoing patient care."
+  ],
+  "description": "This use case describes how a doctor selects a patient, creates and manages a prescription within the hospital management system, confirms it, and causes it to be stored centrally and prepared for automatic transfer to pharmacy information systems so that medication can be processed efficiently.",
+  "triggering_event": "The doctor decides to issue or update a prescription for a specific patient using the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor has a valid personal account in the Hospital Management System.",
+    "The doctor is authenticated in the system according to the access control and login requirements.",
+    "The doctor has prescribing privileges and is authorized to create and manage prescriptions for the selected patient.",
+    "The patient’s electronic medical record, including personal information, exists in the central database and is accessible to the doctor.",
+    "The Hospital Management System is connected to the central database and can store and retrieve prescription and medical record data.",
+    "Access control settings have been configured so that prescription data will only be visible to actors the system allows, in accordance with security and privacy rules."
+  ],
+  "postconditions": [
+    "A new prescription has been created or an existing prescription has been updated and stored in the central database as part of the patient’s electronic medical record.",
+    "The stored prescription is associated with the correct patient and prescribing doctor.",
+    "The prescription is marked as ready for processing by pharmacy information systems according to configured transfer rules.",
+    "If automatic transfer is enabled and available, the prescription has been queued for or transmitted to the appropriate pharmacy information system.",
+    "The prescription creation or update event has been recorded for auditing, access control, and anonymized clinical data analytics purposes.",
+    "Access rights for patients and other users regarding the new or updated prescription are enforced according to configured access control policies."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication, authorization, and login to personal accounts are handled by separate security use cases and are completed before the doctor begins managing prescriptions.",
+    "It is assumed that prescribing privileges for doctors are configured in the Hospital Management System and evaluated by existing access control mechanisms.",
+    "It is assumed that patient identification and selection are based on existing personal information and electronic medical records stored in the central database.",
+    "It is assumed that the electronic medical record data model already supports storing prescriptions associated with patients and prescribing doctors.",
+    "It is assumed that integration with pharmacy information systems is handled by existing system interfaces that can accept prescriptions marked as ready for transfer.",
+    "It is assumed that the system administrator has implemented GDPR standards, data anonymization for systems analysts, and restrictions that prevent patients from viewing information not intended for them.",
+    "It is assumed that mobile device access for doctors provides equivalent prescription management functionality to that on a personal computer, without changing the logical steps of this use case.",
+    "It is assumed that clinical data collection for prescriptive and predictive analytics uses anonymized or appropriately protected prescription data, separate from direct treatment workflows."
+  ],
+  "requirements_met": [
+    "The system shall allow a doctor to create prescriptions for patients so that appropriate medication can be provided.",
+    "The system shall allow a doctor to manage prescriptions, including creating new prescriptions and updating existing ones in the patient’s electronic medical record.",
+    "The system shall automatically transfer or prepare prescriptions for transfer to pharmacy information systems so that prescriptions can be processed efficiently.",
+    "The system shall store all prescription data in a central database as part of the integrated electronic medical record to reduce discrepancies between departments.",
+    "The system shall allow a doctor to view a patient’s medical history and personal information when managing prescriptions so that informed medical decisions can be made.",
+    "The system shall enforce access control such that patients cannot view prescription information or related medical record information that is not intended for them.",
+    "The system shall implement GDPR-compliant protection for stored prescription and medical record data, as configured by the system administrator.",
+    "The system shall collect prescription-related clinical data in a way that can be accessed by systems analysts in anonymized form for prescriptive and predictive analytics.",
+    "The system shall support prescription management by doctors using the hospital management system on both personal computers and mobile devices with consistent functionality.",
+    "The system shall limit prescription creation and management to authorized users who have logged into their personal accounts and have appropriate access levels."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact prescription data fields to be entered and stored (e.g., medication codes, dosage units, refill limits) are not fully specified and require definition.",
+    "The detailed business rules governing prescribing privileges, such as specialty-based restrictions or controlled substances, are not described and require clarification.",
+    "The workflow and rules for cancelling or discontinuing an existing prescription are not defined and may require a dedicated extension or separate use case.",
+    "The timing, protocol, and confirmation requirements for automatic prescription transfer to various pharmacy information systems are not specified.",
+    "Error handling behavior for partially completed transfers to pharmacy systems (e.g., retries, manual intervention) is not defined and needs agreement.",
+    "The retention period and visibility rules for historical, expired, or superseded prescriptions in the electronic medical record are not specified.",
+    "The exact logging and auditing requirements for prescription creation, modification, and transfer events, including who can review these logs, are not detailed.",
+    "The manner in which multiple pharmacies are selected, prioritized, or configured for prescription transfer is not described and requires policy decisions."
+  ],
+  "main_flow": [
+    "1. Doctor initiates prescription management for a patient from the Hospital Management System on a personal computer or mobile device → System displays the patient search or selection interface using existing electronic medical record data.",
+    "2. Doctor selects the target patient whose prescription is to be managed → System retrieves and displays the selected patient’s personal information and relevant medical history to support prescribing decisions.",
+    "3. Doctor chooses to create a new prescription or edit an existing prescription for the selected patient → System opens the prescription management interface associated with the patient’s electronic medical record.",
+    "4. Doctor enters or updates core prescription details, such as medication, dosage, frequency, and duration → System validates the entered fields for completeness and format and temporarily holds the prescription data for review.",
+    "5. Doctor optionally adds clinical notes or instructions related to the prescription that are intended to be part of the medical record but not necessarily visible to the patient → System associates the entered notes with the prescription and stores them as restricted medical record content subject to access control rules.",
+    "6. Doctor reviews the entered or updated prescription information for accuracy → System presents a summary view of the prescription, including medication details and any associated notes, for confirmation.",
+    "7. Doctor confirms the prescription and indicates that it is ready to be issued → System finalizes the prescription, stores it in the central database as part of the patient’s electronic medical record, and marks it as ready for pharmacy processing according to configured transfer rules.",
+    "8. Doctor completes the prescription management session → System records the prescribing event for auditing and analytics purposes and, where applicable, initiates or schedules automatic transfer of the confirmed prescription data to the configured pharmacy information system."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Doctor selects an existing prescription for modification instead of creating a new one → System loads the existing prescription details into the prescription management interface, after which the flow continues at Step 4 for updating the prescription.",
+    "AF-2 (from Step 4): Doctor chooses to save the partially entered prescription as a draft instead of proceeding directly to review → System validates the minimum required identification fields, stores the prescription with a draft status in the central database linked to the patient, and allows the doctor to close the interface or later resume editing the draft starting from Step 3.",
+    "AF-3 (from Step 6): Doctor identifies an error or omission in the prescription summary during review → System allows the doctor to return to the prescription entry interface so that the doctor can correct or complete the prescription details, after which the flow returns to Step 6 for another review.",
+    "AF-4 (from Step 7): Doctor chooses a specific pharmacy or pharmacy routing option for this prescription, where such configuration is available → System records the chosen pharmacy or routing preference along with the prescription and applies this preference when preparing the prescription for transfer, after which the flow continues at Step 8.",
+    "AF-5 (from Step 8): Automatic transfer to the pharmacy information system is configured as deferred (e.g., batch or scheduled transfer) instead of immediate → System queues the confirmed prescription for later transmission according to system configuration, records the scheduling information, and the use case still ends successfully for the doctor."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): The system cannot retrieve the patient’s electronic medical record due to missing data or access restrictions → System informs the doctor that the patient record cannot be accessed, provides any allowed navigation options (such as returning to patient search), and the use case ends without creating or updating a prescription.",
+    "EF-2 (from Step 3): The doctor does not have sufficient prescribing privileges for the selected patient or context → System displays a message indicating that the doctor is not authorized to create or manage prescriptions for this patient and prevents access to the prescription management interface, then the use case ends.",
+    "EF-3 (from Step 4): Mandatory prescription fields such as medication, dosage, or duration are incomplete or fail validation → System highlights the invalid or missing fields, displays appropriate validation messages, and does not allow the doctor to proceed to review until the issues are corrected; if the doctor cancels, the use case ends without saving a confirmed prescription.",
+    "EF-4 (from Step 4): The doctor enters a medication or dosage combination that violates configured clinical rules or safety constraints → System alerts the doctor to the potential issue, prevents confirmation of the current prescription data, and requires the doctor to adjust the prescription or cancel; if the doctor cancels, the use case ends without issuing a prescription.",
+    "EF-5 (from Step 7): The system fails to store the finalized prescription in the central database due to a database or connectivity error → System notifies the doctor that the prescription could not be saved, does not mark the prescription as issued, and logs the error; the doctor may retry saving after the issue is resolved or cancel, in which case the use case ends without a confirmed prescription.",
+    "EF-6 (from Step 8): Transmission or queuing of the prescription to the pharmacy information system fails due to interface or external system errors → System records the failure, informs the doctor that automatic transfer did not complete, and indicates that the prescription remains stored in the electronic medical record but is not yet successfully transferred; the use case ends for the doctor, with the expectation that separate operational procedures handle retransmission.",
+    "EF-7 (from Step 1): The doctor’s session is invalid or has expired before initiating prescription management → System prompts the doctor to log in again and does not allow further steps until successful authentication; if the doctor does not re-authenticate, the use case does not proceed."
+  ],
+  "information_for_steps": [
+    "1. Doctor identifier, session token, device type (personal computer or mobile device).",
+    "2. Patient identifier, patient personal information, patient medical history summary.",
+    "3. Patient identifier, existing prescription identifiers (if any), prescription selection or creation indicator.",
+    "4. Prescription core fields (medication, dosage, frequency, duration, start date), validation rules, prescribing doctor identifier.",
+    "5. Prescription notes or instructions, access control flags for notes, association between notes and prescription record.",
+    "6. Aggregated prescription summary data, including medication details, notes, and patient association for review.",
+    "7. Finalized prescription record, patient identifier, doctor identifier, prescription status (issued), central database write operation.",
+    "8. Audit log entries, clinical data collection attributes, pharmacy routing information, transfer or queuing metadata for the pharmacy information system."
+  ]
+}

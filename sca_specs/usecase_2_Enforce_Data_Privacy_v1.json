@@ -1,0 +1,106 @@
+{
+  "use_case_name": "Enforce Data Privacy",
+  "unique_id": "UC-002",
+  "area": "Data Privacy and Security Management",
+  "context_of_use": "The system administrator and doctor configure and apply GDPR-compliant privacy controls to ensure that stored patient data is protected, access to patient information and system components is appropriately restricted for patients, and all data viewed by systems analysts is anonymized.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "system administrator",
+    "doctor"
+  ],
+  "supporting_actors": [
+    "control user access"
+  ],
+  "stakeholders_and_interests": [
+    "system administrator: Requires the system to support configuration and enforcement of GDPR-compliant privacy controls, anonymization of data viewed by systems analysts, and restriction of patient access to specific system components to protect stored data and prevent unauthorized access.",
+    "doctor: Requires the system to support configuration of restrictions that prevent patients from viewing information that is not intended for them so that security risks are minimized.",
+    "patients: Expect their personal and medical data to be protected, accessible only to authorized users, and displayed only to the extent permitted by configured access and component restrictions.",
+    "systems analyst: Requires access to clinical and operational data that is anonymized so that analytics can be performed without exposing identifiable patient information.",
+    "hospital management: Requires compliance with GDPR and internal privacy policies to reduce legal and reputational risk and to ensure consistent enforcement of data protection rules across the system."
+  ],
+  "description": "This use case describes how the system administrator and doctor configure and enforce data privacy controls in the Hospital Management System to apply GDPR standards, anonymize all data viewed by systems analysts, and restrict patients from viewing unauthorized information and system components.",
+  "triggering_event": "The system administrator or doctor decides to configure or update data privacy settings to comply with GDPR and internal data protection requirements.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Hospital Management System is operational and reachable by authorized users.",
+    "The system administrator and doctor have successfully logged into the system using their personal accounts.",
+    "The system administrator and doctor have valid roles and permissions that allow access to privacy and access-control configuration functions.",
+    "Relevant clinical and patient-related data is stored in the central database managed by the Hospital Management System."
+  ],
+  "postconditions": [
+    "GDPR-compliant privacy settings are configured and stored in the Hospital Management System.",
+    "Data presented to systems analysts by the Hospital Management System is anonymized according to the configured anonymization rules.",
+    "Restrictions preventing patients from viewing information that is not intended for them are configured and enforced by the Hospital Management System.",
+    "Restrictions preventing patients from viewing specific system components are configured and enforced by the Hospital Management System.",
+    "User access control settings from the included control user access functionality are applied and enforced in alignment with the configured privacy rules."
+  ],
+  "assumptions": [
+    "It is assumed that the Hospital Management System already supports core user authentication and authorization capabilities provided by the separate control user access functionality referenced as an included use case.",
+    "It is assumed that GDPR compliance requirements have been defined externally in the form of organizational policies and legal guidelines that are translated into configurable settings within the system, rather than implemented as new autonomous decision-making capabilities.",
+    "It is assumed that anonymization for systems analysts is achieved by the system masking or removing direct personal identifiers and other identifying attributes before presenting data, without altering the underlying stored data beyond what is necessary for compliance.",
+    "It is assumed that the doctor and system administrator specify which categories of patient information and which system components can be viewed by patients, and the system enforces these configurations when patients access the Hospital Management System.",
+    "It is assumed that patients access the Hospital Management System only through authenticated user accounts whose access rights are governed by the control user access functionality.",
+    "It is assumed that any changes to privacy and access-control configurations take effect for subsequent data access requests once the system has confirmed successful saving and activation of the configuration."
+  ],
+  "requirements_met": [
+    "The system shall allow the system administrator to configure and apply GDPR-compliant privacy settings that govern how stored data is protected within the Hospital Management System.",
+    "The system shall anonymize all data that is presented to systems analysts in accordance with the anonymization rules configured by the system administrator.",
+    "The system shall allow the doctor to configure restrictions that prevent patients from viewing information that is not intended for them, and shall enforce these restrictions for all patient-accessible views.",
+    "The system shall allow the system administrator to configure restrictions that prevent patients from viewing specific system components, and shall enforce these restrictions for all patient-accessible interfaces.",
+    "The system shall use the control user access functionality to ensure that only authenticated and authorized users can access data and system components as permitted by the configured privacy settings.",
+    "The system shall store and maintain the configured privacy, anonymization, and component restriction settings in the central database so that they persist across sessions and system restarts."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific GDPR rules and organizational policies that must be parameterized within the system have not been detailed and require formal definition.",
+    "The exact set of data elements that must be anonymized for systems analysts, including rules for quasi-identifiers, has not been specified and requires clarification.",
+    "The categorization of patient information into types that can or cannot be shown to patients, and who defines these categories, needs to be formally established.",
+    "The list and structure of system components that may be restricted from patient view, and the granularity of such restrictions, are not yet defined.",
+    "The governance process for resolving conflicts between doctor-defined restrictions and system-administrator-defined restrictions for patient access has not been described.",
+    "Retention, logging, and audit requirements for changes to privacy and access-control configurations have not been specified and must be clarified for compliance."
+  ],
+  "main_flow": [
+    "1. system administrator initiates privacy configuration → System displays the privacy and access-control configuration interface, including options for GDPR settings, anonymization rules for systems analysts, and patient access restrictions.",
+    "2. system administrator reviews current GDPR-related settings → System retrieves the existing GDPR-related privacy settings from the central database and presents them to the system administrator.",
+    "3. system administrator updates GDPR-compliant privacy settings as required → System validates the updated GDPR-related settings against predefined configuration rules and prepares them for saving.",
+    "4. system administrator configures anonymization rules for data viewed by systems analysts → System presents available data fields and anonymization options and records the anonymization rules specified by the system administrator.",
+    "5. system administrator confirms anonymization configuration for systems analysts → System validates the anonymization configuration and associates it with data access operations for systems analysts.",
+    "6. system administrator configures restrictions on system components that patients may view → System displays the list of patient-accessible system components and records component-level visibility settings as defined by the system administrator.",
+    "7. doctor accesses patient information access-control configuration → System presents configuration options that allow the doctor to specify which categories of patient information are viewable by patients.",
+    "8. doctor configures restrictions on patient information visibility → System records the configured restrictions, linking them to the relevant patient information categories for patient access.",
+    "9. doctor confirms patient information restriction settings → System validates the restriction settings and updates the active configuration used for patient information access decisions.",
+    "10. system administrator or doctor invokes control user access settings from the included use case control user access → System applies or updates user access control configurations so that user roles and permissions operate consistently with the configured privacy and restriction rules.",
+    "11. system administrator finalizes and saves all privacy and restriction configurations → System stores the updated GDPR settings, anonymization rules, component restrictions, and patient information visibility restrictions in the central database and activates them for subsequent access requests.",
+    "12. An authorized user (such as a systems analyst or patient) later accesses the system according to their role → System enforces the active privacy configurations by anonymizing data presented to systems analysts and restricting patients from viewing non-permitted information and system components, thereby completing the enforcement of data privacy."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): If the system administrator determines that no changes to the existing GDPR-related privacy settings are necessary, the system administrator skips updating these settings and proceeds directly to Step 4, while the system retains the current GDPR configuration.",
+    "AF-2 (from Step 4): If the system administrator chooses to use predefined anonymization templates instead of configuring anonymization rules field by field, the system administrator selects an appropriate anonymization template, and the System applies the predefined anonymization rules for systems analysts and then continues at Step 5.",
+    "AF-3 (from Step 6): If the system administrator decides that all currently available patient-accessible system components should remain visible to patients, the system administrator confirms full component visibility without changes, the System retains existing component visibility settings, and the flow continues at Step 7.",
+    "AF-4 (from Step 8): If the doctor decides that patients may view all categories of their information currently allowed by hospital policy, the doctor confirms unrestricted patient information visibility within those policy bounds, the System records that no additional restrictions are applied by the doctor, and the flow continues at Step 9.",
+    "AF-5 (from Step 10): If no updates to user roles or permissions are required when invoking control user access settings, the system administrator or doctor reviews and confirms the existing access-control configuration, the System maintains current user access settings, and the flow continues at Step 11."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the System detects invalid or inconsistent GDPR-related privacy settings during validation, the System rejects the invalid changes, displays detailed error messages indicating the configuration issues, and prompts the system administrator to correct the settings; the use case resumes at Step 3 after corrections or is terminated with no configuration changes saved if the system administrator cancels.",
+    "EF-2 (from Step 5): If the System cannot validate the anonymization configuration due to conflicting or incomplete rules, the System displays the conflicts or missing elements to the system administrator, does not activate the new anonymization rules, and prompts the system administrator to revise the anonymization configuration; the flow resumes at Step 4 after corrections or ends with the previous anonymization configuration remaining active if the system administrator cancels.",
+    "EF-3 (from Step 8): If the System detects that the doctor’s configured patient information restrictions conflict with mandatory hospital or legal policies, the System prevents saving the conflicting restrictions, displays an explanation of the conflict, and requests the doctor to adjust the configuration; the flow resumes at Step 8 after adjustments or ends with existing restrictions unchanged if the doctor cancels.",
+    "EF-4 (from Step 10): If the System fails to apply control user access settings because required access-control data is unavailable or corrupted, the System reports the failure to the system administrator, logs the error, maintains the last known valid access-control configuration, and terminates the current execution of the use case without activating any new privacy-related settings.",
+    "EF-5 (from Step 11): If the System is unable to save the updated configurations to the central database due to a storage or connectivity error, the System notifies the system administrator of the failure, does not activate partial or inconsistent settings, and reverts to the last successfully stored configuration; the use case ends without applying the new configurations."
+  ],
+  "information_for_steps": [
+    "1. Administrator identity, authentication token, privacy configuration menu metadata.",
+    "2. Current GDPR privacy settings, configuration version identifiers, retrieval timestamp.",
+    "3. Updated GDPR-related settings data, configuration validation rules, configuration change metadata.",
+    "4. List of data fields available to systems analysts, anonymization options per field, selected anonymization rules.",
+    "5. Validated anonymization rule set, association of anonymization rules with systems analyst role, activation parameters.",
+    "6. List of patient-accessible system components, component visibility flags, component restriction configuration data.",
+    "7. Doctor identity, patient information category list, access-control configuration interface for patient visibility.",
+    "8. Selected patient information categories to restrict or allow, restriction rules, mapping between categories and patient views.",
+    "9. Validated patient information restriction rule set, activation scope, configuration confirmation status.",
+    "10. User roles, permissions, access-control parameters from the included control user access functionality, alignment mappings between access-control and privacy rules.",
+    "11. Combined privacy configuration dataset including GDPR settings, anonymization rules, component restrictions, and patient information visibility rules; central database storage transaction details.",
+    "12. User role (systems analyst or patient), requested data or components, applicable privacy and access-control rules, anonymized datasets for systems analysts, filtered information and components for patients."
+  ]
+}

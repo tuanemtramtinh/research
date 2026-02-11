@@ -1,0 +1,95 @@
+{
+  "use_case_name": "Access Hospital Management System on Mobile Device",
+  "unique_id": "UC-004",
+  "area": "Mobile Hospital Management Access",
+  "context_of_use": "A doctor uses a mobile device to access the hospital management system with the same authenticated functionality and medical data operations that are available on a personal computer.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor"
+  ],
+  "supporting_actors": [
+    "Authentication Service",
+    "Authorization Service",
+    "Central Database"
+  ],
+  "stakeholders_and_interests": [
+    "Doctor: Requires mobile access to the hospital management system with functionality equivalent to desktop access to maintain a consistent workflow regardless of location.",
+    "System Administrator: Requires that mobile access to the hospital management system remains secure, authenticated, and compliant with organizational policies and data protection standards.",
+    "Patient: Requires that a doctor’s mobile access to the system allows timely access to up-to-date medical information without compromising patient privacy or data security.",
+    "Hospital Management: Requires that mobile use of the hospital management system increases efficiency and flexibility while preserving data integrity and access control.",
+    "Systems Analyst: Requires that data created or modified via mobile access is recorded consistently in the central database for subsequent analytics."
+  ],
+  "description": "This use case specifies how a doctor securely accesses and uses the hospital management system on a mobile device with functionality consistent with desktop access, including user access control and medical data handling capabilities.",
+  "triggering_event": "The doctor decides to use a mobile device to access the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor has a valid user account registered in the hospital management system.",
+    "The doctor’s account has been assigned appropriate access rights by the system administrator.",
+    "The hospital management system is available and reachable from the doctor’s mobile device.",
+    "The doctor’s mobile device has a supported application or interface to access the hospital management system.",
+    "Network connectivity between the mobile device and the hospital management system is available."
+  ],
+  "postconditions": [
+    "The doctor has successfully accessed the hospital management system on the mobile device using authenticated credentials.",
+    "The doctor has been granted access on the mobile device to the same hospital management functionalities that are permitted to the doctor on a personal computer.",
+    "Any medical data or related information accessed or modified by the doctor via the mobile device has been stored consistently in the central database according to the doctor’s access rights."
+  ],
+  "assumptions": [
+    "It is assumed that the hospital management system provides an existing desktop (personal computer) interface whose available functionalities for the doctor are already defined by separate requirements.",
+    "It is assumed that the same authorization rules that apply to the doctor on the desktop interface also apply to the doctor on the mobile device, without adding or removing permissions specific to the mobile channel.",
+    "It is assumed that the Authentication Service and Authorization Service are existing components of the hospital management system used to control user access and are reused by the mobile interface without introducing new authentication mechanisms.",
+    "It is assumed that the Central Database referenced in this use case is the same central database that stores all hospital management data, including electronic medical records and related operational data.",
+    "It is assumed that the included relationship to \"control user access\" corresponds to authenticating the doctor and enforcing existing access control rules, without defining new security features beyond those described in other requirements.",
+    "It is assumed that the included relationship to \"manage medical data\" corresponds to allowing the doctor to perform only those medical data operations on mobile that the doctor is already permitted to perform on the desktop interface.",
+    "It is assumed that mobile access complies with existing organizational privacy and security standards, including GDPR implementation and access restrictions, as defined elsewhere in the overall system requirements."
+  ],
+  "requirements_met": [
+    "The system shall allow the doctor to access the hospital management system from a mobile device so that the doctor can use the system regardless of location.",
+    "The system shall provide the doctor with access on a mobile device to the same hospital management system functionalities that are available to the doctor on a personal computer, subject to the doctor’s access rights.",
+    "The system shall authenticate the doctor on the mobile device using the existing user account before granting access to any hospital management functionality.",
+    "The system shall apply the same access control and authorization rules to the doctor on the mobile interface as on the personal computer interface.",
+    "The system shall store all data accessed or modified by the doctor via the mobile device in the central database in a manner consistent with desktop operations.",
+    "The system shall restrict the doctor’s mobile access to hospital management components and medical data according to the access levels granted by the system administrator."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific list of hospital management functionalities that must be available to the doctor on both desktop and mobile interfaces has not been explicitly enumerated.",
+    "The performance and responsiveness requirements for mobile access (e.g., maximum acceptable response times) have not been defined.",
+    "The supported types of mobile devices and operating systems for accessing the hospital management system have not been specified.",
+    "The session timeout policy and re-authentication behavior for mobile access have not been detailed.",
+    "The precise logging and auditing requirements for doctor activity performed via mobile devices have not been clarified."
+  ],
+  "main_flow": [
+    "1. Doctor initiates access to the hospital management system on a mobile device → System displays the mobile access interface and prompts the doctor for authentication credentials.",
+    "2. Doctor enters authentication credentials on the mobile device and submits the login request → System validates the credentials via the Authentication Service and confirms the doctor’s identity.",
+    "3. Doctor waits for access evaluation → System retrieves the doctor’s access rights from the Authorization Service and determines the authorized system components and functionalities (include control user access).",
+    "4. Doctor is authenticated and authorized → System establishes a mobile session for the doctor and loads the main mobile dashboard reflecting the doctor’s authorized functionalities.",
+    "5. Doctor selects a hospital management function on the mobile device that involves viewing or interacting with medical data → System accesses the Central Database and retrieves or prepares the relevant medical data according to the doctor’s access rights (include manage medical data).",
+    "6. Doctor reviews the retrieved information or performs allowed actions within the selected hospital management function on the mobile device → System executes the requested operation using existing business rules and updates the Central Database if data changes occur.",
+    "7. Doctor navigates among additional authorized hospital management functionalities on the mobile device as needed → System consistently presents only those functionalities and data elements for which the doctor is authorized and maintains coherent data synchronization with the Central Database.",
+    "8. Doctor finishes using the hospital management system on the mobile device and chooses to log out → System terminates the mobile session, clears sensitive session data from the mobile interface, and confirms that the doctor is logged out."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Doctor accesses the hospital management system via a mobile web browser instead of a dedicated mobile application. Condition: The hospital management system provides a mobile-optimized web interface. Flow: Doctor opens the hospital management system URL in the mobile browser → System detects a mobile client and presents a mobile-optimized login screen → Flow continues at Step 2 of the main flow.",
+    "AF-2 (from Step 5): Doctor selects a hospital management function that does not require access to medical data (for example, viewing general announcements or non-patient-specific information). Condition: Selected function is categorized as non-medical-data functionality. Flow: Doctor selects the non-medical-data function on the mobile device → System retrieves the relevant non-medical data from the Central Database or configuration and presents it to the doctor without invoking medical data handling rules → Flow continues at Step 7 of the main flow."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Authentication fails due to invalid credentials. Condition: The Authentication Service reports that the provided credentials are incorrect or the account is locked. Flow: System denies access, displays an error message indicating that authentication failed, and prompts the doctor to re-enter valid credentials or contact the system administrator; the use case ends without granting access.",
+    "EF-2 (from Step 3): Authorization denies access to any mobile functionality. Condition: The Authorization Service indicates that the doctor has no permissions configured for mobile access. Flow: System displays an error message indicating insufficient permissions and does not establish a mobile session; the use case ends without granting access.",
+    "EF-3 (from Step 5): Retrieval or update of medical data fails due to database or connectivity error. Condition: The Central Database or network is unavailable or returns an error during data access. Flow: System displays an error message indicating that data cannot be accessed or updated at this time, logs the failure, and returns the doctor to the mobile dashboard or login screen depending on system policy; any partial operation is not committed, and the use case continues only for non-data-dependent functions.",
+    "EF-4 (from Step 7): Mobile session expires due to inactivity. Condition: Inactivity exceeds the configured session timeout period. Flow: System automatically terminates the doctor’s mobile session, clears session data, and displays a notification that the session has expired; the doctor must restart from Step 1 of the main flow to continue.",
+    "EF-5 (from Step 1): Network connectivity is not available or is lost before successful authentication. Condition: The mobile device cannot reach the hospital management system. Flow: System is unable to load the access interface or transmit the authentication request, displays a connectivity error message if possible, and does not proceed with the login process; the use case ends without access."
+  ],
+  "information_for_steps": [
+    "1. Mobile device identifier (implicit), system URL or application endpoint, login interface metadata.",
+    "2. Doctor user ID, password or equivalent credential, authentication token, authentication status.",
+    "3. Doctor role information, access rights list, authorization rules, authorized component identifiers.",
+    "4. Session identifier, mobile dashboard configuration, list of accessible functionalities for the doctor.",
+    "5. Selected function identifier, relevant patient or medical record identifiers (if applicable), query parameters for medical data retrieval.",
+    "6. Retrieved medical data elements, operation parameters (e.g., view, edit, confirm), updated data values, audit trail data for performed operations.",
+    "7. Navigation state, list of additional authorized functionalities, incremental data retrieval parameters, synchronization state with the Central Database.",
+    "8. Session identifier, logout request indicator, logout confirmation message, session termination log entry."
+  ]
+}

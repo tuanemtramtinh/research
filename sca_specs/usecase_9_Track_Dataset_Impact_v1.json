@@ -1,0 +1,94 @@
+{
+  "use_case_name": "Track Dataset Impact",
+  "unique_id": "UC-009",
+  "area": "Research Data Impact Monitoring",
+  "context_of_use": "This use case enables authorized users to monitor and analyze the impact of archived research datasets by accessing download counts, citation counts, and segmented usage statistics through the archive interface.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor",
+    "research information manager"
+  ],
+  "supporting_actors": [
+    "external citation tracking services",
+    "institutional analytics services"
+  ],
+  "stakeholders_and_interests": [
+    "depositor: wants to track downloads and citations of deposited datasets in order to demonstrate the impact of their research work.",
+    "research information manager: wants to access citation counts and segmented view/download statistics in order to demonstrate and analyze research impact within and outside academia.",
+    "fundingbody: wants to be reassured that research data outputs have demonstrable impact to justify funding decisions.",
+    "academicpublisher: wants datasets to be trackable via citations so that publications can be associated with robust, citable underlying data.",
+    "university management: wants aggregate indicators of dataset impact to support institutional reporting and strategic planning."
+  ],
+  "description": "The use case describes how a depositor and a research information manager access and review impact metrics for datasets, including download counts, citation counts, and segmented usage statistics by country and sector, in order to demonstrate and analyze the impact of research data.",
+  "triggering_event": "The depositor or research information manager initiates a request to view impact statistics for one or more datasets in the archive.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The actor is authenticated and authorized to access impact statistics for the selected dataset(s).",
+    "The dataset for which impact is to be tracked exists in the Bath Research Data Archive System.",
+    "The system has previously collected and stored download and view event data for accessible datasets.",
+    "The system has access to citation count data for datasets that can be identified through persistent identifiers such as DOIs.",
+    "The archive impact reporting functionality is operational."
+  ],
+  "postconditions": [
+    "Impact statistics for the selected dataset(s), including download counts and citation counts, are displayed to the actor.",
+    "Where available, view and download statistics are presented segmented by country and sector to the actor.",
+    "The actor has the opportunity to use the displayed information to demonstrate or analyze the impact of the dataset(s)."
+  ],
+  "assumptions": [
+    "It is assumed that the Bath Research Data Archive System integrates with at least one external citation tracking or indexing service capable of providing citation counts for datasets that have persistent identifiers.",
+    "It is assumed that the system records downloads and views of datasets in a manner that can be aggregated and reported per dataset.",
+    "It is assumed that the system is capable of deriving or receiving geographic (country) and sector information associated with usage events to support segmentation of statistics.",
+    "It is assumed that access to detailed impact statistics may be restricted to authenticated users with appropriate roles, including depositors of the datasets and research information managers.",
+    "It is assumed that the underlying dataset deposit and management processes are already completed under the related base use case \"manage research datasets\", and this use case is invoked as an extension to that process.",
+    "It is assumed that updates to impact statistics (e.g., new downloads or citations) occur on a periodic basis and that some latency between real-world events and displayed metrics is acceptable to stakeholders."
+  ],
+  "requirements_met": [
+    "The system shall allow a depositor to view the total number of downloads of each of their deposited datasets in order to demonstrate the impact of their work.",
+    "The system shall allow a depositor to view the number of citations recorded for each of their deposited datasets in order to demonstrate the impact of their work.",
+    "The system shall allow a research information manager to view citation counts for published datasets in order to demonstrate the impact of datasets within academia.",
+    "The system shall allow a research information manager to view view and download statistics for datasets segmented by country and sector in order to demonstrate the impact of datasets outside academia.",
+    "The system shall present impact statistics in a human-readable form through the archive user interface.",
+    "The system should obtain citation counts for datasets from integrated citation tracking or indexing services where possible.",
+    "The system should maintain historical counts of dataset downloads and views to support longitudinal impact assessment."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific external citation tracking and indexing services to be integrated with the system for obtaining dataset citation counts are not defined and must be specified.",
+    "The rules governing which user roles, beyond depositors and research information managers, may access detailed impact statistics are not defined and must be established.",
+    "The required refresh frequency for citation and usage statistics (real-time, daily, weekly, etc.) is not defined and must be agreed with stakeholders.",
+    "The exact method for determining country and sector information for usage events (IP geolocation, identity attributes, or other) is not specified and may have privacy and compliance implications.",
+    "The required retention period for detailed usage event data underlying aggregated statistics and compliance with data protection regulations remain to be clarified."
+  ],
+  "main_flow": [
+    "1. Depositor or research information manager requests access to impact statistics via the archive interface → System authenticates the actor and confirms that the actor is authorized to view impact statistics.",
+    "2. Actor selects one or more datasets for which they want to review impact → System retrieves the selected dataset identifiers and associated metadata.",
+    "3. Actor initiates a command to view impact metrics for the selected dataset(s) → System retrieves stored download and view counts for the selected dataset(s).",
+    "4. System retrieves stored citation count information for the selected dataset(s) from its local data store or previously synchronized citation data → System aggregates citation counts per dataset.",
+    "5. System retrieves stored view and download statistics segmented by country and sector for the selected dataset(s) → System aggregates the segmented statistics per dataset.",
+    "6. System compiles a consolidated impact view including overall download counts, citation counts, and segmented statistics for the selected dataset(s) → System prepares the impact statistics for presentation.",
+    "7. System displays the compiled impact statistics to the actor in the archive user interface → Actor reviews the presented impact statistics for the selected dataset(s)."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Actor filters the dataset list by criteria such as project, time period, or publication status before selecting datasets → System applies the filter criteria, updates the list of available datasets accordingly, and the flow continues at Step 2 with the filtered dataset list.",
+    "AF-2 (from Step 4): Citation information for one or more selected datasets is not available from integrated services, for example because the dataset has no persistent identifier or has not yet been indexed → System displays a zero or \"no citation data available\" indicator for the affected datasets while still displaying available download and segmented usage statistics, and the flow continues at Step 5.",
+    "AF-3 (from Step 5): Segmented statistics by country and sector are only partially available for a subset of the selected datasets → System displays segmented statistics where available and clearly indicates where such segmentation is unavailable for particular datasets, then the flow continues at Step 6.",
+    "AF-4 (from Step 1): This use case is invoked by the actor while managing a specific dataset in the base use case \"manage research datasets\" → System recognizes the currently selected dataset context, skips dataset selection, and the flow continues at Step 3 using the current dataset."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Authentication or authorization fails for the actor attempting to access impact statistics → System denies access to the impact statistics view, presents an error message indicating insufficient permissions or invalid credentials, and the use case terminates without displaying any impact data.",
+    "EF-2 (from Step 3): The system is temporarily unable to retrieve download and view counts due to an internal error or unavailability of the analytics data store → System logs the error, informs the actor that impact statistics are temporarily unavailable, and the use case terminates without displaying impact statistics.",
+    "EF-3 (from Step 4): The system fails to retrieve or refresh citation counts from external citation tracking services due to communication or service errors → System uses the last successfully stored citation count data if available and labels it as potentially outdated; if no prior data exist the system informs the actor that citation data are currently unavailable, and the flow continues at Step 5 with whatever data are available.",
+    "EF-4 (from Step 5): The system encounters an error while aggregating segmented statistics by country and sector for the selected dataset(s) → System logs the error, omits segmented statistics from the display for the affected dataset(s), informs the actor that segmentation is currently unavailable, and the flow continues at Step 6 with remaining impact data."
+  ],
+  "information_for_steps": [
+    "1. User credentials; actor role; authorization profile.",
+    "2. Dataset identifiers; dataset titles; actor-specific dataset list; dataset selection criteria.",
+    "3. Selected dataset identifiers; request parameters for impact metrics.",
+    "4. Citation source identifiers; persistent identifiers such as DOIs; citation count values per dataset.",
+    "5. Usage event records; geographic attributes such as country; sector attributes; aggregated view and download counts per dataset per segment.",
+    "6. Aggregated download counts; aggregated citation counts; aggregated segmented statistics; formatting parameters for presentation.",
+    "7. Rendered impact statistics view; dataset-level impact summaries; any explanatory labels or indicators about data availability or freshness."
+  ]
+}

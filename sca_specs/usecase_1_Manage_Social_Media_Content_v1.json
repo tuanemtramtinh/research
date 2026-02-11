@@ -1,0 +1,92 @@
+{
+  "use_case_name": "Manage Social Media Content",
+  "unique_id": "UC-001",
+  "area": "Social Media and Fan Engagement",
+  "context_of_use": "This use case is executed when a fan or team uses the web application to publish social media news items and add comments to existing social media content to keep fans updated and allow expression of opinions.",
+  "scope": "IFA Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "fan",
+    "team"
+  ],
+  "supporting_actors": [
+    "IFA administrator"
+  ],
+  "stakeholders_and_interests": [
+    "fan: Wants to add comments to social media content through the web application in order to express opinions and thoughts online.",
+    "team: Wants to post news on social media through the web application in order to keep fans updated.",
+    "IFA administrator: Wants fans and teams to use more features offered by the system and to improve communication and transparency among stakeholders.",
+    "CIO: Wants integrated communication and transparency by supporting social media interactions within a single merged system."
+  ],
+  "description": "The system allows teams to post news items to social media through the web application and allows fans to add comments to social media content available in the web application, supporting continuous communication between teams and fans.",
+  "triggering_event": "A fan or team accesses the web application and decides to create or interact with social media content.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The web application is operational and accessible from the fan’s or team’s device.",
+    "The fan or team can access the web application from their location.",
+    "The fan or team has an account created in the web application.",
+    "The fan or team is authenticated in the web application with a unique username and password.",
+    "The fan or team interface is available according to stakeholder-specific user interface definitions."
+  ],
+  "postconditions": [
+    "The team’s news item is stored in the system and made available as social media content through the web application.",
+    "The fan’s comment is stored in the system and displayed as part of the relevant social media content in the web application.",
+    "The created or updated social media content is available for viewing by other stakeholders according to system access rules."
+  ],
+  "assumptions": [
+    "It is assumed that only registered and logged-in fans and teams are allowed to create or modify social media content, because registration and unique credentials are explicitly required elsewhere in the requirements.",
+    "It is assumed that the social media content (team news and fan comments) is stored within the IFA web application or a logically integrated component, as the requirements state that posting and commenting occur through the web application.",
+    "It is assumed that the system provides a stakeholder-specific user interface for fans and teams, consistent with the requirement for different user interfaces for different stakeholders.",
+    "It is assumed that basic input validation (such as checking for empty text fields) is performed by the system when posting news or comments, to support reliable operation, even though detailed validation rules are not defined in the requirements.",
+    "It is assumed that the IFA administrator configures or oversees general communication capabilities, as there is a requirement for a single communication medium for all stakeholders, but the administrator does not directly participate in the execution steps of this use case.",
+    "It is assumed that access to social media features is available to all registered fans and teams without additional role approval, since no extra access control rules for these features are specified in the requirements."
+  ],
+  "requirements_met": [
+    "The system shall allow a team to post news on social media through the web application so that the team can keep its fans updated.",
+    "The system shall allow a fan to add comments to social media content on the web application so that the fan can express opinions and thoughts online.",
+    "The system shall support fans and teams as stakeholders with user interfaces suited to their needs when interacting with social media content.",
+    "The system shall provide social media content management as part of a single communication medium for all stakeholders to improve communication.",
+    "The system shall require that fans and teams creating or commenting on social media content use accounts with unique usernames and passwords."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The maximum allowed length and formatting rules of news items and comments are not specified and need to be defined.",
+    "Moderation policies for inappropriate or abusive comments are not described and need to be clarified.",
+    "It is unclear whether news and comments can be edited or deleted after creation and under which conditions.",
+    "It is not specified which other stakeholder types, beyond fans and teams, are allowed to view or interact with social media content.",
+    "No performance constraints are defined specifically for creating or loading social media content despite an overall need for fast responses."
+  ],
+  "main_flow": [
+    "1. fan or team: Initiates access to the social media section of the web application → System displays the social media interface appropriate to the actor’s role, including existing news items and associated comments.",
+    "2. team: Selects the option to create a new news item → System presents a news creation form with fields for content entry.",
+    "3. team: Enters the news content and confirms publication → System validates the provided news content and accepts the submission.",
+    "4. System: Stores the new news item as social media content → System updates the social media feed in the web application to include the newly posted news item for relevant viewers.",
+    "5. fan: Selects an existing social media content item to view details → System displays the selected content item together with any existing comments.",
+    "6. fan: Selects the option to add a comment to the selected content item → System presents a comment entry interface linked to the selected content item.",
+    "7. fan: Enters the comment text and confirms submission → System validates the provided comment text and accepts the submission.",
+    "8. System: Stores the new comment associated with the selected social media content item → System displays the newly added comment as part of the comment list for that content item."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): The fan wants to comment without posting news. Condition: The actor is a fan who only intends to comment on existing social media content. The fan skips Step 2 and Step 3 and directly performs Step 5 to select an existing content item, then continues with Step 6 onward to complete commenting successfully.",
+    "AF-2 (from Step 1): The team wants only to post news without viewing detailed content. Condition: The actor is a team who does not need to open individual content details. The team performs Step 1 and Step 2 to access the creation option, completes Step 3, and the system executes Step 4. The flow then ends successfully without executing Steps 5 to 8.",
+    "AF-3 (from Step 5): The fan or team changes selected content item. Condition: After viewing one content item, the actor decides to view another item before commenting. The actor repeats Step 5 to select another content item; the system redisplays details for the newly selected item, after which the actor may continue with Step 6 to add a comment to the new item."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The web application is not accessible. Condition: The system cannot be reached due to connectivity or availability issues. The system fails to display the social media interface and shows an error message indicating that the application is currently unavailable. The use case terminates without creating or modifying any social media content.",
+    "EF-2 (from Step 3): The team submits invalid or empty news content. Condition: The submitted news content violates validation rules such as being empty. The system rejects the submission, displays an error message describing the validation issue, and prompts the team to correct the input. The flow returns to Step 3 after correction.",
+    "EF-3 (from Step 7): The fan submits invalid or empty comment text. Condition: The submitted comment text violates validation rules such as being empty. The system rejects the submission, displays an error message describing the validation issue, and prompts the fan to correct the input. The flow returns to Step 7 after correction.",
+    "EF-4 (from Step 4): A storage or system error occurs while saving the news item. Condition: The system encounters an internal error when attempting to store the news content. The system logs the error, informs the team that the news item could not be saved, and does not update the social media feed. The use case ends for this attempt without creating the news item.",
+    "EF-5 (from Step 8): A storage or system error occurs while saving the comment. Condition: The system encounters an internal error when attempting to store the comment. The system logs the error, informs the fan that the comment could not be saved, and does not update the comment list. The use case ends for this attempt without creating the comment."
+  ],
+  "information_for_steps": [
+    "1. Actor identity, role type (fan or team), session information, list of available social media content summaries.",
+    "2. Team identity, access rights, selection of create-news function, empty news content fields.",
+    "3. News content text, optional metadata such as title or tags if supported, submission confirmation command.",
+    "4. Stored news item record, timestamp, association with team profile, updated social media feed data.",
+    "5. Identifier of selected social media content item, retrieved full content details, existing comments associated with that item.",
+    "6. Selected content item identifier, comment entry field, linkage between comment and content item.",
+    "7. Comment text, actor identity as fan, submission confirmation command.",
+    "8. Stored comment record, timestamp, association with selected content item and fan profile, updated comment list for display."
+  ]
+}

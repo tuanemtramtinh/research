@@ -1,0 +1,89 @@
+{
+  "use_case_name": "Search Archive",
+  "unique_id": "UC-017",
+  "area": "Research Data Discovery and Access",
+  "context_of_use": "A data reuser interacts with the archive via provided web-based interfaces to perform searches and locate datasets relevant to their information needs.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "data reuser"
+  ],
+  "supporting_actors": [
+    "Primo interface"
+  ],
+  "stakeholders_and_interests": [
+    "data reuser: Wants to efficiently find datasets relevant to their needs via familiar web and Primo interfaces.",
+    "Bath Research Data Archive operator: Wants the system to support effective discovery of archived datasets to maximise reuse.",
+    "University of Bath: Wants research data to be discoverable to demonstrate impact and support research visibility."
+  ],
+  "description": "This use case describes how a data reuser searches the Bath Research Data Archive via web and Primo interfaces in order to discover datasets relevant to their needs, after the archive interfaces have been accessed successfully.",
+  "triggering_event": "The data reuser decides to look for datasets relevant to their needs using the archive search facilities.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Bath Research Data Archive System is operational and reachable over the network.",
+    "The data reuser has access to a compatible web browser or Primo interface.",
+    "The data reuser has successfully accessed one of the archive interfaces as provided by the system.",
+    "At least one dataset record is stored in the Bath Research Data Archive System and is configured to be discoverable by data reusers."
+  ],
+  "postconditions": [
+    "The system has presented the data reuser with a list of search results matching the submitted search criteria, ordered according to the system's configured relevance or sorting rules.",
+    "The data reuser has an opportunity to identify one or more datasets that may be relevant to their needs based on the returned results."
+  ],
+  "assumptions": [
+    "It is assumed that the \"access archive interfaces\" included use case provides all necessary authentication and authorisation steps, where required, before this use case begins.",
+    "It is assumed that the data reuser may access the archive either via a general web interface or via the Primo interface, and both interfaces rely on the same underlying search functionality of the Bath Research Data Archive System.",
+    "It is assumed that the system already maintains a searchable index or equivalent mechanism for dataset metadata and any other searchable attributes.",
+    "It is assumed that the system is responsible for translating user-entered search criteria from the web or Primo interfaces into internal search queries and for returning corresponding result sets.",
+    "It is assumed that the system enforces all access control and visibility rules on datasets before including them in search results, but those rules are handled outside the scope of this use case.",
+    "It is assumed that the Primo interface is treated as a supporting system component or integration point rather than a separate actor, and that the data reuser remains the primary initiating actor.",
+    "It is assumed that network connectivity issues, interface availability problems, and similar technical failures are handled as exception conditions rather than as part of the normal successful flow.",
+    "It is assumed that the system may offer basic search and optional advanced search parameters (e.g., filters), but this use case only requires that at least one searchable criterion can be provided by the data reuser."
+  ],
+  "requirements_met": [
+    "The system shall allow a data reuser to search the archive through a web interface in order to find datasets relevant to their needs.",
+    "The system shall allow a data reuser to search the archive through the Primo interface in order to find datasets alongside books and articles in one place.",
+    "The system shall process the data reuser’s submitted search criteria and execute a search over the archive’s discoverable dataset records.",
+    "The system shall return a list of datasets matching the data reuser’s search criteria to the originating interface.",
+    "The system shall display the returned search results to the data reuser in the interface from which the search was initiated.",
+    "The system shall associate each search result with sufficient basic descriptive information (such as dataset title and brief description or equivalent metadata) to enable a preliminary assessment of relevance."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The required minimum set of metadata fields to be displayed in search results for effective relevance assessment is not specified and must be defined.",
+    "The exact ranking and sorting rules for ordering search results (e.g., by relevance, date, or other criteria) are not specified and must be clarified.",
+    "The maximum size of result sets to be returned and any pagination or limiting strategies are not specified and must be agreed.",
+    "The extent and behaviour of advanced search capabilities (filters, fielded search, facets) are not defined and require further specification.",
+    "It is unclear whether language-specific search features (e.g., stemming, multilingual metadata handling) are required for the data reuser audience and must be determined."
+  ],
+  "main_flow": [
+    "1. data reuser initiates archive use via a chosen interface (web or Primo) → System executes the included \"access archive interfaces\" functionality to present the appropriate initial archive interface to the data reuser.",
+    "2. data reuser selects the search function within the presented archive interface → System displays a search input area allowing the data reuser to enter search criteria.",
+    "3. data reuser enters search criteria describing the desired datasets (for example, keywords or other terms) → System captures the entered search criteria and prepares them for processing.",
+    "4. data reuser submits the search request → System receives the submitted search criteria and constructs an internal search query over the archive’s discoverable dataset records.",
+    "5. data reuser waits for results → System executes the internal search query against the archive’s searchable index or equivalent data store and retrieves matching dataset records.",
+    "6. data reuser remains on the search results view → System returns a list of matching dataset records to the originating interface and renders a search results page showing the list to the data reuser.",
+    "7. data reuser reviews the search results displayed by the system → System presents, for each dataset in the results, basic descriptive information sufficient to help the data reuser judge potential relevance."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): The data reuser chooses to access the archive via the web interface instead of Primo. Condition: The data reuser navigates to the general web-based archive interface. System behaviour: The system executes the included \"access archive interfaces\" functionality specific to the web interface and presents the web-based archive search entry page to the data reuser. The flow then continues at Step 2 of the main flow.",
+    "AF-2 (from Step 1): The data reuser chooses to access the archive via the Primo interface. Condition: The data reuser navigates to the Primo interface that integrates the archive. System behaviour: The system executes the included \"access archive interfaces\" functionality specific to Primo and presents a Primo-based search entry page that includes access to archive datasets. The flow then continues at Step 2 of the main flow.",
+    "AF-3 (from Step 3): The data reuser refines or changes search criteria before submitting. Condition: While entering search criteria, the data reuser modifies, adds, or removes terms. System behaviour: The system updates the locally captured search criteria but does not yet perform a search until the data reuser submits the request. The flow then returns to Step 3 of the main flow and proceeds to Step 4 upon submission.",
+    "AF-4 (from Step 5): The number of matching datasets is large and requires pagination. Condition: The executed search query returns more results than can be displayed on a single page according to system configuration. System behaviour: The system divides the search results into multiple pages and displays the first page of results to the data reuser, together with controls to navigate to additional pages. When the data reuser uses these controls, the system retrieves and displays the requested page of results while keeping the same search criteria. The flow then continues at Step 7 of the main flow for any displayed page."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Archive interface cannot be accessed. Condition: The system is unavailable or the chosen interface (web or Primo) cannot establish a connection to the archive. System behaviour: The system does not display the archive search interface and instead returns a technical error indication to the data reuser via the interface. The use case terminates without performing a search.",
+    "EF-2 (from Step 4): Submitted search criteria are invalid or cannot be processed. Condition: The data reuser submits search criteria that the system cannot interpret according to its configured search rules. System behaviour: The system rejects the search request, displays an error message indicating that the criteria could not be processed, and prompts the data reuser to correct the input. The flow then returns to Step 3 of the main flow if the data reuser chooses to try again; otherwise, the use case ends without returning results.",
+    "EF-3 (from Step 5): Internal search execution fails. Condition: An internal error occurs while executing the search query (such as a failure of the search index or data store). System behaviour: The system logs the failure according to operational policies, does not return any partial or inconsistent results, and displays a message informing the data reuser that the search could not be completed. The use case terminates without presenting search results.",
+    "EF-4 (from Step 6): No datasets match the search criteria. Condition: The search query executes successfully but returns zero matching dataset records. System behaviour: The system displays a message indicating that no datasets were found for the specified criteria and shows an empty results area. The data reuser may choose to modify the criteria by returning to Step 3 of the main flow; if they do not, the use case ends with no datasets located."
+  ],
+  "information_for_steps": [
+    "1. Interface selection data: chosen interface type (web archive interface or Primo interface), session identifier, high-level interface configuration parameters.",
+    "2. Search function selection data: identifier of the invoked search function, current interface context, navigation state.",
+    "3. Search criteria data: free-text keywords, phrases, and any optional structured fields or filters provided by the interface.",
+    "4. Search request data: validated and formatted search criteria, constructed internal search query representation, timestamp of request submission.",
+    "5. Search execution data: reference to searchable index or data store, applied access control and visibility constraints, identifiers of candidate dataset records.",
+    "6. Search results data: ordered list of matching dataset record identifiers, associated summary metadata for each dataset, pagination details where applicable.",
+    "7. Result presentation data: dataset titles, brief descriptions or equivalent summary metadata, any additional indicators configured to aid relevance assessment (such as publication year or project association)."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "use_case_name": "Define Budget Policies",
+  "unique_id": "UC-014",
+  "area": "Budget Management and Anti-Fraud Control",
+  "context_of_use": "The use case is executed when an IFA administrator configures and maintains budgetary policies and rules within the system to govern team budgeting processes and support fraud prevention.",
+  "scope": "IFA Budget Management Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa administrator"
+  ],
+  "supporting_actors": [
+    "Authentication Service",
+    "Audit Logging Service"
+  ],
+  "stakeholders_and_interests": [
+    "IFA administrators: Require the ability to define and manage budgetary policies and rules to enforce consistent control over team budgeting and reduce fraud risk.",
+    "Teams: Need clear, transparent, and stable budgeting rules that define acceptable financial behavior and constraints.",
+    "IFA representatives: Need confidence that budgeting processes are governed by formally defined rules that help prevent fraud in team budgeting systems.",
+    "CIO: Requires that budget policy configuration is centralized, controlled, and traceable to improve transparency and governance.",
+    "Audit and compliance functions: Require complete and accurate records of defined budget policies and rule changes to support audits and investigations related to potential fraud.",
+    "Fans and public stakeholders: Indirectly benefit from fair and fraud-resistant budgeting practices that support integrity of the competitions."
+  ],
+  "description": "This use case describes how an IFA administrator defines and maintains budgetary policies and rules in the system in order to govern team budgeting processes and support prevention of fraud in team budgeting systems.",
+  "triggering_event": "An IFA administrator decides to create or update budgetary policies and rules in the system to govern team budgeting.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA administrator has a valid user account in the system.",
+    "The IFA administrator is successfully authenticated by the system.",
+    "The IFA administrator has sufficient authorization to define and modify budgetary policies and rules.",
+    "The budget policy management functionality is available and operational in the system."
+  ],
+  "postconditions": [
+    "New budgetary policies and rules are stored in the system in a consistent state.",
+    "The defined budgetary policies and rules are associated with the relevant teams or global budgeting context as configured by the IFA administrator.",
+    "The stored budgetary policies and rules are available for use by other budgeting and monitoring functions of the system to help prevent fraud.",
+    "An audit trail entry exists recording the creation or modification of the budgetary policies and rules, including the acting IFA administrator and timestamp."
+  ],
+  "assumptions": [
+    "It is assumed that the \"IFA Budget Management Web Application\" is the component through which the IFA administrator accesses budgeting-related functionality, including defining budgetary policies and rules.",
+    "It is assumed that an \"Authentication Service\" is available and used to verify the identity of the IFA administrator before accessing budget policy management functions.",
+    "It is assumed that an \"Audit Logging Service\" is available and records all create and update operations performed on budgetary policies and rules.",
+    "It is assumed that the system already supports the concept of budgetary policies and rules as configurable entities that can be persisted and later evaluated by other budgeting processes.",
+    "It is assumed that only the actor \"ifa administrator\" has the authority to define and modify budgetary policies and rules, in line with the provided actor list.",
+    "It is assumed that the IFA administrator uses a web-based user interface to interact with the budget policy management functions.",
+    "It is assumed that the system validates budget policy and rule definitions for syntactic and basic semantic correctness before saving, without introducing any new calculation or evaluation capability beyond storing the policies.",
+    "It is assumed that any detailed enforcement of budgetary policies (e.g., applying rules to actual team transactions) is handled by other use cases and not by this use case.",
+    "It is assumed that access to budgeting information is restricted according to separate access-control requirements, and that defining policies here does not alter those access rights."
+  ],
+  "requirements_met": [
+    "The system shall allow an IFA administrator to define budgetary policies that govern team budgeting processes.",
+    "The system shall allow an IFA administrator to define detailed rules within each budgetary policy to support prevention of fraud in team budgeting systems.",
+    "The system shall require the IFA administrator to be authenticated and authorized before accessing budget policy definition functionality.",
+    "The system shall store each defined budgetary policy and its associated rules in persistent storage.",
+    "The system shall present the IFA administrator with a confirmation that budgetary policies and rules have been successfully saved.",
+    "The system shall maintain an audit trail for each creation or modification of budgetary policies and rules, including the identity of the IFA administrator and a timestamp.",
+    "The system shall make the defined budgetary policies and rules available to other budgeting-related system functions for use in fraud prevention.",
+    "The system shall enable the IFA administrator to review existing budgetary policies and rules before confirming their creation or update within the same interaction.",
+    "The system shall validate that all required fields of a budgetary policy and its rules are provided and meet basic format constraints before allowing the policy to be saved."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific structure and content required for a budgetary policy (e.g., thresholds, categories, time periods) are not defined and must be specified.",
+    "The precise rule definition language or format to be used for expressing budgetary rules (e.g., free text versus structured constraints) is not defined and must be decided.",
+    "The policy versioning and effective-dating behavior for budgetary policies and rules (e.g., how historical policies are maintained and how future-dated changes are handled) is not specified and needs clarification.",
+    "The maximum number of budgetary policies and rules that can be defined, and any performance constraints related to policy management, are not defined and must be established.",
+    "The approval workflow, if any, for newly defined or modified budgetary policies and rules (e.g., whether additional stakeholders must approve) is not specified and requires a policy decision.",
+    "Error-handling behavior for conflicting or overlapping rules within the same policy or across multiple policies is not specified and needs definition.",
+    "Localization and language requirements for budget policy names and descriptions (e.g., support for multiple languages) are not defined and must be clarified."
+  ],
+  "main_flow": [
+    "1. ifa administrator navigates to the budget management section of the web application → System displays the budget management area with an option to manage budgetary policies and rules.",
+    "2. ifa administrator selects the option to create or modify budgetary policies → System displays a list of existing budgetary policies and an option to create a new policy or edit an existing one.",
+    "3. ifa administrator chooses to create a new budgetary policy or select an existing policy for modification → System presents a budget policy definition form with fields for policy identification, description, and associated rules.",
+    "4. ifa administrator enters or updates general information for the budgetary policy, including policy name and description → System temporarily holds the entered policy information and displays input fields for defining rules linked to the policy.",
+    "5. ifa administrator defines one or more budgetary rules within the policy, including necessary parameters such as applicable teams or categories, limits, and conditions, using the provided input fields → System captures the rule definitions and associates them with the budgetary policy in the current working session.",
+    "6. ifa administrator reviews the complete budgetary policy and its associated rules on a summary view → System displays a consolidated summary of the budgetary policy and all defined rules for review.",
+    "7. ifa administrator confirms saving the budgetary policy and rules → System validates the provided policy information and rule definitions for completeness and basic correctness.",
+    "8. ifa administrator waits while the system processes the save request → System saves the validated budgetary policy and rules to persistent storage and records an audit log entry for the operation.",
+    "9. ifa administrator observes the completion of the operation → System displays a success confirmation indicating that the budgetary policy and rules have been successfully defined or updated and are now available for use by other budgeting functions."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): If the ifa administrator decides to modify an existing budgetary policy instead of creating a new one, the ifa administrator selects an existing policy from the list and confirms the intention to edit it → System retrieves the selected budgetary policy and displays its current information and rules in the policy definition form, after which the use case continues with Step 4.",
+    "AF-2 (from Step 5): If the ifa administrator wishes to remove an existing rule while defining or updating budgetary rules, the ifa administrator selects one or more existing rules in the policy and chooses the option to remove them → System marks the selected rules for removal in the current session and updates the displayed list of rules, after which the use case continues with Step 5 for further rule adjustments or with Step 6 for review.",
+    "AF-3 (from Step 6): If the ifa administrator identifies information to adjust during the review, the ifa administrator selects an option to edit the policy or specific rules from the summary view → System returns the ifa administrator to the appropriate input fields with the previously entered data prefilled, after which the use case continues with Step 4 or Step 5 as appropriate and then returns to Step 6 for a new review.",
+    "AF-4 (from Step 7): If the ifa administrator decides not to proceed with saving the budgetary policy and rules, the ifa administrator cancels the save action before confirmation → System discards any unsaved changes made during the current session or retains them only as transient data according to defined configuration and returns the ifa administrator to the budget management area without updating stored budgetary policies, ending the use case without changing the existing policies."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 7): If validation of the budgetary policy or rules fails due to missing required data or invalid formats, the system rejects the save operation and displays descriptive error messages indicating which fields or rules must be corrected → The ifa administrator corrects the indicated data and re-initiates the confirmation to save, after which the use case resumes at Step 7.",
+    "EF-2 (from Step 8): If a system error or loss of connection occurs while saving the budgetary policy and rules, the system fails to persist the changes and displays an error notification indicating that the operation could not be completed → The system does not alter existing stored budgetary policies and rules and logs the failure event for diagnostic purposes, and the use case ends without updating budgetary policies.",
+    "EF-3 (from Step 1): If the ifa administrator is not authenticated or does not have sufficient authorization to access budget policy management, the system denies access to the budget management section and displays an authorization error message → The system does not allow access to budgetary policy definition functions, and the use case is terminated without any change to budget policies.",
+    "EF-4 (from Step 2): If retrieval of the list of existing budgetary policies fails due to a data access problem, the system displays an error message indicating that existing policies cannot be loaded at this time → The system prevents creation or modification actions that depend on the unavailable data and suggests that the ifa administrator try again later, and the use case ends without changes to budget policies."
+  ],
+  "information_for_steps": [
+    "1. Administrator session identifier, administrator role information, navigation context, menu configuration.",
+    "2. List of existing budgetary policies (policy identifiers, names, brief descriptions), available actions (create new, edit existing).",
+    "3. Selected policy identifier (for modification), mode indicator (create or edit), policy definition form layout.",
+    "4. Policy name, policy description, policy scope attributes (such as applicable leagues or teams if available), temporary policy object in memory.",
+    "5. Rule identifiers (temporary), rule parameters such as applicable team or category references, numerical or categorical limits, conditions text, association between rules and the current policy.",
+    "6. Policy summary data including policy name and description, ordered list of rules with their main parameters, derived indicators needed for administrator review.",
+    "7. Complete policy object containing policy metadata and rule set, validation status, validation error messages if any.",
+    "8. Persistent storage records for the policy and rules, audit log entry containing administrator identity, timestamp, action type (create or update), and affected policy identifier.",
+    "9. Confirmation message content, reference to the saved policy identifier, updated in-memory representation of available budgetary policies."
+  ]
+}

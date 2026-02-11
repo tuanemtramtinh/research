@@ -1,0 +1,109 @@
+{
+  "use_case_name": "Share Research Data",
+  "unique_id": "UC-006",
+  "area": "Research Data Management and Sharing",
+  "context_of_use": "The use case enables depositors and research facility managers to share live and archived research data with external collaborators and coordinators by configuring dataset access in the archive so that collaborators have privileged access and designated parties can deposit data on behalf of researchers.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor"
+  ],
+  "supporting_actors": [
+    "research facility manager",
+    "externalcollaborator",
+    "externalcoordinator"
+  ],
+  "stakeholders_and_interests": [
+    "Depositor: Wants to grant collaborators privileged access to datasets, share live research data, and delegate data deposit tasks while maintaining control over who can access and manage their datasets.",
+    "External collaborator: Wants privileged access to project data for projects in which they are involved so that they can collaborate effectively.",
+    "External coordinator: Wants to access data from Bath collaborators while off campus so that they can collaborate effectively.",
+    "Research facility manager: Wants to deposit data from their facility directly into the archive on behalf of researchers so that they do not have to maintain a separate archive and researchers can access their data as needed.",
+    "Bath Data Archive administrator: Wants data sharing and delegated deposit to operate in a way that is consistent with institutional policies, access control rules, and audit requirements.",
+    "Funding body: Wants assurance that shared and delegated access to research data supports robust archival and appropriate access control so that funded data remains secure and usable.",
+    "University IT service: Wants access control and sharing flows to integrate with existing identity and access management systems so that system administration overhead is minimised and security is maintained."
+  ],
+  "description": "This use case describes how a depositor shares research data by configuring access policies that grant collaborators privileged access to live and archived datasets and how deposit on behalf is enabled so that designated parties, including research facility managers, can deposit data into the archive on behalf of researchers while preserving appropriate access control.",
+  "triggering_event": "The depositor decides to share a dataset or live research data with collaborators or to enable deposit on behalf for a project.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The depositor has an active authenticated session with the Bath Research Data Archive System.",
+    "At least one dataset or live research data collection associated with the depositor exists or is in the process of being deposited in the system.",
+    "Collaborators and delegated depositors (including any research facility managers, external collaborators, or external coordinators) have identifiable accounts or credentials recognised by the system.",
+    "The system is operational and able to apply and enforce dataset access policies."
+  ],
+  "postconditions": [
+    "The system has stored updated access policies for the selected dataset or live research data, including any privileged access granted to specified collaborators.",
+    "The system has recorded any delegation of deposit rights, allowing specified parties to deposit data on behalf of the depositor or associated researchers.",
+    "Authorized collaborators and delegated depositors can access the dataset or deposit on behalf according to the configured access policies.",
+    "An audit trail of access policy and delegation changes for the affected dataset has been recorded by the system."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication and identity management for depositors, research facility managers, external collaborators, and external coordinators are handled by the Bath Research Data Archive System or an integrated institutional identity management service, even though the detailed mechanism is not described in the requirement text.",
+    "It is assumed that the phrase \"privileged access\" refers to access that exceeds generic public access, such as the ability to view non-public data or additional files, but does not implicitly grant administrative rights beyond what the depositor intentionally configures.",
+    "It is assumed that live research data can be referenced and controlled through the same or closely related access control mechanisms as archived datasets within the system, even though the storage details of live data are not specified in the requirement text.",
+    "It is assumed that delegated deposit on behalf of a depositor or researcher is implemented purely as permission to submit or update datasets under that depositor's or researcher's context, without transferring dataset ownership or intellectual property rights, as the requirement text does not redefine ownership.",
+    "It is assumed that the included use case \"manage dataset access policies\" corresponds to system functionality that allows the depositor to define, modify, and store access rules and delegations for datasets and live research data, and that this functionality is invoked as part of the main flow.",
+    "It is assumed that deposit on behalf performed by a research facility manager uses the same dataset access policies and delegation mechanisms as deposit on behalf by any other party identified by the depositor.",
+    "It is assumed that external coordinators accessing data off campus use the same web-based interface and access policies as when on campus, with network-level access controlled outside the scope of this use case.",
+    "It is assumed that audit logging of access policy changes is a system-level non-functional requirement that is in place to support policy compliance, although it is not explicitly mentioned in the requirement text."
+  ],
+  "requirements_met": [
+    "The system shall allow a depositor to grant privileged access to specific datasets to selected collaborators so that ongoing collaboration is supported.",
+    "The system shall allow a depositor to manage and share live research data with collaborators through the archive interface so that the whole project workflow is linked together.",
+    "The system shall allow a depositor to designate other users who are permitted to deposit datasets on the depositor's behalf so that research data management tasks can be delegated appropriately.",
+    "The system shall allow an external collaborator to gain privileged access to data for projects in which they are involved, subject to access policies configured by the depositor.",
+    "The system shall allow an external coordinator to access data from Bath collaborators while off campus, subject to access policies configured by the depositor.",
+    "The system shall allow a research facility manager to deposit data from their facility directly into the archive on behalf of researchers so that researchers are not required to maintain separate archives for facility data.",
+    "The system shall provide functionality for managing dataset access policies, including assignment of privileged access and delegation of deposit rights, as an integral part of sharing research data."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact granularity of privileged access rights (e.g., view-only vs. edit vs. download) for collaborators has not been defined and requires policy clarification.",
+    "The process and approval rules, if any, for delegating deposit rights to other users, including research facility managers, have not been specified.",
+    "The retention and format requirements for audit logs of access policy and delegation changes need to be established in line with institutional and funder policies.",
+    "The security and network requirements for off-campus access by external coordinators and collaborators, including use of VPN or federated authentication, are not described and require definition.",
+    "The distinction, if any, between sharing live research data and sharing archived datasets in terms of access control and storage location has not been formalised.",
+    "The relationship between this use case and broader institutional policies on data protection, confidentiality, and intellectual property for shared data has not been fully detailed."
+  ],
+  "main_flow": [
+    "1. Depositor selects an existing dataset or live research data collection in the system to be shared → System displays the current details of the selected dataset or live research data, including existing access settings.",
+    "2. Depositor initiates the access management function for the selected dataset by choosing to manage access and delegation settings → System invokes the included \"manage dataset access policies\" functionality and presents available access policy options for the selected dataset.",
+    "3. Depositor specifies collaborators and collaborators' roles for privileged access by selecting one or more collaborators (including any external collaborators or external coordinators) and indicating that they should have privileged access to the selected dataset or live research data → System records the specified collaborators and proposed privileged access configuration in a pending access policy for the dataset.",
+    "4. Depositor defines the scope of privileged access for the selected collaborators, such as which parts of the dataset or live research data they may access and under what general conditions, using the access policy interface → System updates the pending access policy for the dataset with the defined scope of privileged access for each specified collaborator.",
+    "5. Depositor specifies any users who are allowed to deposit datasets on their behalf, including optionally designating a research facility manager or other trusted party as a delegated depositor for the dataset or associated project → System records the designated delegated depositors and associates their delegation with the depositor and the relevant dataset or project context in the pending access policy.",
+    "6. Depositor reviews the combined privileged access and delegation configuration for the dataset or live research data, including listed collaborators and delegated depositors, using the access management interface → System displays a summary of the pending access policy changes and indicates how each collaborator and delegated depositor will be able to interact with the dataset.",
+    "7. Depositor confirms and saves the configured access and delegation settings for the selected dataset or live research data → System validates the configuration, applies the access policy to the dataset or live research data, activates the specified privileged access for collaborators, enables delegated deposit for designated users, and records the change in an access control audit log.",
+    "8. Research facility manager, acting as a delegated depositor, submits a new dataset or updates an existing dataset on behalf of an associated researcher or depositor via the archive interface → System verifies the research facility manager's delegated deposit rights from the applied access policies, accepts the deposit or update on behalf of the associated researcher or depositor, and associates the resulting dataset with the correct owner and project context.",
+    "9. External collaborator accesses the archive through the web interface and navigates to the shared dataset or live research data for a project in which they are involved → System authenticates the external collaborator and grants privileged access to the dataset or live research data in accordance with the applied access policy, allowing interaction consistent with the configured permissions.",
+    "10. External coordinator accesses the archive from an off-campus location to view project data shared with them by Bath collaborators → System authenticates the external coordinator, applies the same access policies regardless of location, and grants privileged access to the project datasets that have been shared with them.",
+    "11. System maintains and enforces the configured access policies for all subsequent interactions with the shared dataset or live research data, ensuring that collaborators retain the granted privileged access and delegated depositors can continue to deposit on behalf of the depositor or associated researchers."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Depositor omits external collaborators and grants privileged access only to internal collaborators for the selected dataset. Condition: The depositor decides that only internal colleagues should have privileged access. Flow: Depositor selects only internal collaborators as privileged users in Step 3, proceeds with defining access scope in Step 4 and delegation in Step 5 as usual, and then continues with Steps 6 and 7 to save the configuration. Outcome: Only internal collaborators receive privileged access according to the applied access policy.",
+    "AF-2 (from Step 5): Depositor chooses not to enable delegated deposit for any users. Condition: The depositor wants to retain sole responsibility for depositing datasets. Flow: In Step 5, the depositor skips adding any delegated depositors and leaves delegation options unselected while still proceeding to review in Step 6 and confirm in Step 7. Outcome: No delegated deposit is enabled, but privileged access for collaborators configured in earlier steps remains active.",
+    "AF-3 (from Step 8): Research facility manager deposits facility-generated data as a new dataset for multiple researchers. Condition: The facility data pertains to more than one researcher within a project. Flow: In Step 8, the research facility manager selects a project context and associates multiple researchers with the new dataset while depositing on their behalf. The system verifies delegated rights for each associated researcher and, upon successful verification, creates a dataset linked to all specified researchers, then the flow continues to policy enforcement as implied in Step 11. Outcome: The dataset is deposited once but associated with multiple researchers while still recognising the depositor as the research facility manager acting under delegated rights.",
+    "AF-4 (from Step 9): External collaborator first logs in and then navigates via a project view. Condition: The external collaborator does not have a direct dataset link but has project-level access. Flow: Before Step 9, the external collaborator logs in to the web interface and selects the relevant project from a list of accessible projects; then Step 9 occurs with navigation to the shared dataset through the project view. The system continues as described in Step 9 and then Step 11. Outcome: Project-based navigation still results in privileged access to the same dataset under the configured policies."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Collaborator identity not found. Condition: The depositor attempts to grant privileged access to a collaborator whose account is not recognised by the system. Flow: When the depositor enters the collaborator's identifier in Step 3, the system is unable to match it to an existing user account and displays an error indicating that the collaborator cannot be added until they have a recognised account. The system prompts the depositor to correct the identifier or remove the collaborator from the access list. The depositor may retry Step 3 with corrected information or cancel the access change process, in which case no access policy changes are saved.",
+    "EF-2 (from Step 5): Invalid or unauthorised delegated depositor. Condition: The depositor designates a user as a delegated depositor who is not eligible according to system or institutional rules. Flow: In Step 5, when the depositor attempts to add the delegated depositor, the system checks eligibility and determines that delegation is not allowed for that user. The system rejects the delegation entry, informs the depositor that the selected user cannot be granted deposit-on-behalf rights, and returns to Step 5 for the depositor to select a different user or proceed without delegation.",
+    "EF-3 (from Step 7): Access policy validation failure. Condition: The configured access and delegation settings conflict with mandatory institutional rules (for example, attempting to grant privileged access where the dataset must remain restricted). Flow: During Step 7, the system validates the configuration and detects a conflict, preventing application of the new policy. The system displays validation messages describing the conflict and keeps the previous access policy in effect. The depositor may adjust the settings by returning to the relevant configuration steps (Steps 3 to 5) and then repeat Step 7, or cancel the changes entirely.",
+    "EF-4 (from Step 8): Delegated depositor attempts deposit without valid delegation. Condition: A research facility manager or other user attempts to deposit data on behalf of a researcher without an active delegation assignment. Flow: In Step 8, the system checks delegation and determines that no valid delegation exists for the asserted relationship. The system rejects the deposit-on-behalf action, informs the user that they are not currently authorised to deposit on behalf of that researcher, and does not create or modify any dataset. The user may either submit the dataset under their own account if allowed or request that the depositor configure appropriate delegation.",
+    "EF-5 (from Step 9): External collaborator lacks privileged access. Condition: An external collaborator attempts to access a dataset that has not been shared with them. Flow: In Step 9, when the external collaborator navigates to the dataset, the system evaluates the access policy and determines that the user does not have the required privileged access. The system denies access to restricted content, displays an appropriate access denied message, and does not reveal non-public data. The collaborator may contact the depositor outside the system to request access.",
+    "EF-6 (from Step 10): Off-campus access blocked by security policy. Condition: An external coordinator attempts to access shared data from off campus but institutional security settings temporarily prevent access. Flow: In Step 10, the system detects that the access attempt from the off-campus location does not meet current security requirements (for example, missing required secure connection). The system refuses to display protected dataset content and informs the user that additional security steps are required. The flow terminates without data access until the coordinator satisfies the security requirements and retries."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier; depositor identifier; current access policy summary.",
+    "2. Dataset identifier; access policy management options; list of potential access policy templates or rules.",
+    "3. Collaborator identifiers (including any external collaborators or external coordinators); role or privilege selection flags; association with the selected dataset or live research data.",
+    "4. Access scope details (e.g., which files or parts of the dataset are covered, high-level conditions for access); mapping of scope to each collaborator identifier.",
+    "5. Delegated depositor identifiers (including potential research facility managers or other users); delegation scope (e.g., deposit on behalf for specific datasets or project); association to the depositor and project context.",
+    "6. Combined configuration summary including dataset identifier, list of collaborators with their privileged access descriptions, list of delegated depositors with their delegation scope, and any warnings about configuration choices.",
+    "7. Finalised access policy object stored by the system; validation results; audit log entry containing depositor identifier, timestamp, and a description of the changes applied to access and delegation settings.",
+    "8. New or updated dataset metadata submitted by the research facility manager; reference to the associated researcher or depositor; project identifier; verification results of delegation rights; resulting dataset ownership and association records.",
+    "9. External collaborator credentials; collaborator identifier; target dataset identifier; evaluated access policy decision; resulting view of dataset metadata and files permitted under privileged access.",
+    "10. External coordinator credentials; coordinator identifier; network location information needed for security checks; list of project datasets shared with the coordinator; evaluated access policy decision for off-campus access.",
+    "11. Persisted access policy records for the dataset or live research data; ongoing policy enforcement rules; subsequent access and delegation events recorded in audit logs."
+  ]
+}
