@@ -18,7 +18,9 @@ Requirements:
 
 ### 1.1. Create a virtual environment
 
-From the `main/` directory, open a terminal (PowerShell / CMD) and run:
+From the **project root directory**, open a terminal and run:
+
+#### Windows (PowerShell / CMD)
 
 ```bash
 python -m venv .venv
@@ -26,23 +28,30 @@ python -m venv .venv
 
 Activate the virtual environment:
 
-- **PowerShell (Windows)**:
+- **PowerShell**:
 
 ```bash
 .\.venv\Scripts\Activate.ps1
 ```
 
-- **CMD (Windows)**:
+- **CMD**:
 
 ```bash
 .\.venv\Scripts\activate.bat
+```
+
+#### Linux / macOS (bash / zsh)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Every time you open a new terminal, activate the virtual environment again before running commands.
 
 ### 1.2. Install dependencies
 
-After activating the virtual environment and while in the `main/` directory, install the required packages:
+After activating the virtual environment and while in the **project root directory**, install the required packages:
 
 ```bash
 pip install -r requirements.txt
@@ -54,10 +63,10 @@ pip install -r requirements.txt
 
 ## 2. Directory Structure
 
-At a high level, the `main/` directory looks like this:
+At a high level, the **project root directory** looks like this:
 
 ```text
-main/
+root/
   ├─ src/         # Core logic framework, without HITL
   ├─ server/      # Backend with human-in-the-loop implementation
   ├─ inputs/      # Test inputs
@@ -73,7 +82,7 @@ Details:
 - **`src/`**
   - Contains the core framework logic structure (pipelines, core modules, etc.).
   - Currently **does not** include the human-in-the-loop implementation.
-  - This part uses the `.env` file at the **root of `main/`**.
+  - This part uses the `.env` file at the **project root directory**.
 
 - **`server/`**
   - Contains the backend server (API / service) with a human-in-the-loop implementation.
@@ -102,7 +111,7 @@ Details:
 
 ### 3.1. Running the `src/` part
 
-1. In the `main/` directory, create a new `.env` file:
+1. In the **project root directory**, create a new `.env` file:
 
 ```bash
 cp .env.example .env
@@ -112,7 +121,7 @@ Or create it manually and copy the content from `.env.example`.
 
 2. Open `.env` and fill in all required environment variables (API keys, paths, model parameters, etc.).
 
-> **Note**: The `src/` part **requires** the `.env` file at the **root of `main/`** to run correctly.
+> **Note**: The `src/` part **requires** the `.env` file at the **project root directory** to run correctly.
 
 ### 3.2. Running the `server/` part
 
@@ -138,7 +147,7 @@ cp .env.example .env
 
 ### 4.1. Run the framework logic in `src/`
 
-Assuming you are in the `main/` directory and the virtual environment is activated:
+Assuming you are in the **project root directory** and the virtual environment is activated:
 
 ```bash
 python -m src.<main_module_name>
@@ -148,12 +157,12 @@ Or follow the specific entry point inside `src/` (for example: `src/main.py`, `s
 
 Make sure that:
 
-- `.env` has been created at the root of `main/` from `.env.example`.
+- `.env` has been created at the **project root directory** from `.env.example`.
 - All dependencies have been installed in the virtual environment.
 
 ### 4.2. Run the backend server (with HITL)
 
-From the root `main/` directory:
+From the **project root directory**:
 
 ```bash
 cd server
