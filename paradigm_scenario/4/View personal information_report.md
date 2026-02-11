@@ -1,0 +1,85 @@
+# Use Case Description Report
+
+## 1. Use Case Name  
+**View personal information**
+
+## 2. Description  
+Patients view and edit their personal details and health information.
+
+## 3. Primary Actor  
+Patient
+
+## 4. Problem Domain Context  
+The system must:  
+
+1. Enable doctors to create, view, and electronically transfer prescriptions to pharmacies.  
+2. Allow patients to view, edit personal information, and request new prescriptions through online or mobile appointment scheduling.  
+3. Provide nurses, receptionists, and doctors with secure access to patients’ electronic medical records, including medical history, personal details, and notes.  
+4. Support mobile device synchronization for doctors and patients to maintain consistent workflow across platforms.  
+5. Allow pharmacists to view transferred prescriptions and manage medication dispensing.  
+6. Grant system administrators the ability to centrally store all data, integrate electronic medical records, enforce GDPR and privacy controls, and manage user access levels.  
+7. Supply systems analysts with anonymized clinical data, bed occupancy, room scheduling, and employee schedules for analytics.  
+8. Record appointment start and end times for duration calculations.  
+9. Support migration of data from legacy systems to the new platform.  
+10. Implement secure authentication and authorization mechanisms to restrict system component access to authorized users.
+
+## 5. Preconditions  
+- The patient is authenticated and logged into the system.  
+- The patient’s account is active and has not been locked or suspended.  
+- The patient has at least one active record in the electronic medical records (EMR) database.  
+- The system has current network connectivity and access to the EMR backend.  
+
+## 6. Postconditions  
+- The patient’s view of personal information is refreshed to reflect any changes made.  
+- If edits were made, the updated data is persisted in the EMR database with an audit trail entry.  
+- Any changes trigger appropriate notifications to relevant stakeholders (e.g., doctors, nurses) if policy dictates.  
+
+## 7. Main Flow  
+1. **Patient** logs in and navigates to the *Personal Information* section of the portal.  
+2. The system verifies authentication tokens and retrieves the patient’s profile data from the EMR.  
+3. The system displays the current personal details (name, contact, address, insurance, allergies, etc.) and health information (current medications, diagnoses, lab results).  
+4. **Patient** reviews the displayed information.  
+5. **Patient** selects the *Edit* button next to any field they wish to update.  
+6. The system presents an editable form pre‑populated with the current value.  
+7. **Patient** modifies the field(s) and clicks *Save*.  
+8. The system validates the input against business rules (e.g., required fields, format checks).  
+9. On successful validation, the system writes the changes to the EMR database and logs the operation.  
+10. The system updates the UI to show the new values and displays a confirmation message.  
+11. **Patient** can continue editing other fields or exit the section.  
+12. When the patient chooses to log out, the system terminates the session securely.  
+
+## 8. Alternative Flows  
+- **AF1 – Edit Cancelled (Step 5)**  
+  5a. The patient clicks **Cancel** instead of *Save*.  
+  5b. The system discards any changes and reverts the form to the original values.  
+
+- **AF2 – Validation Failure (Step 8)**  
+  8a. The system detects an input error (e.g., invalid date format).  
+  8b. The system highlights the problematic field(s) and displays a specific error message.  
+  8c. The patient corrects the input and attempts to save again.  
+
+- **AF3 – Unauthorized Field Edit (Step 5)**  
+  5a. The patient attempts to edit a protected field (e.g., insurance provider).  
+  5b. The system denies the edit, shows an access‑denied message, and logs the attempt.  
+
+## 9. Exceptions  
+- **E1 – Authentication Failure (Step 2)**  
+  2a. The authentication token is expired or invalid.  
+  2b. The system redirects the patient to the login page and logs the event.  
+
+- **E2 – Data Retrieval Failure (Step 2)**  
+  2a. The EMR backend is unreachable or returns an error.  
+  2b. The system displays a generic error message, offers a retry option, and logs the incident.  
+
+- **E3 – Persistence Failure (Step 9)**  
+  9a. The database write fails due to a connectivity issue or constraint violation.  
+  9b. The system rolls back the transaction, informs the patient of the failure, and logs the error for remediation.  
+
+- **E4 – Network Timeouts (Any Network‑dependent Step)**  
+  The system implements exponential back‑off retries, displays a timeout notification, and logs the event.  
+
+- **E5 – GDPR Violation Detected (Step 9)**  
+  9a. The system detects that the change would expose protected health information without proper consent.  
+  9b. The system blocks the update, prompts the patient for consent, and logs the attempt.  
+
+---

@@ -1,0 +1,31 @@
+﻿{
+    "use_case_name": "Analyze Traffic Conditions",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "The Planner is logged into the system.",
+      "Historical data or live sensor feeds are available."
+    ],
+    "postconditions": [
+      "The requested traffic data, emission levels, or cost estimates are displayed to the Planner."
+    ],
+    "main_flow": [
+      "1. Planner requests to view traffic analysis data. → System displays the analysis dashboard.",
+      "2. Planner selects the data source (Real-time Sensors, Past Date, or Current Simulation). → System retrieves the corresponding dataset.",
+      "3. Planner selects the specific metric to review (Traffic Levels, Emission Levels, Noise Levels, or Financial Cost). → System calculates or retrieves the specific values.",
+      "4. System displays the visual analysis (e.g., heat maps, graphs, or numerical estimates) to the Planner. → Planner reviews the information."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): View Past Dates.",
+      "1. At step 2, Planner selects 'Past Date'. → System prompts for a specific date and time.",
+      "2. Planner enters the date. → System loads the historical snapshot. → Proceed to Step 3.",
+      "AF-2 (from Step 3): Estimate Cost.",
+      "1. At step 3, Planner selects 'Estimate Cost of Measure'. → System computes the financial implications based on active configuration.",
+      "2. System displays the cost report. → Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Sensor Offline.",
+      "1. At step 2, System cannot connect to the external sensor network. → System displays 'Data Unavailable' and prompts to use historical data instead."
+    ]
+  },

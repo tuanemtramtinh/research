@@ -1,0 +1,90 @@
+{
+  "use_case_name": "Ensure Data Integrity",
+  "unique_id": "UC-010",
+  "area": "Research Data Archiving and Integrity Management",
+  "context_of_use": "The use case describes how the research data archive system ensures long-term integrity of deposited research data and supports robust archival planning so that depositors can reuse their data in the future and funding bodies are reassured that archival requirements are fulfilled.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor",
+    "fundingbody"
+  ],
+  "supporting_actors": [
+    "UnivITservice"
+  ],
+  "stakeholders_and_interests": [
+    "depositor: Wants guarantees about data integrity so that deposited data can be reliably reused in the future and funder archival requirements can be fulfilled.",
+    "fundingbody: Wants reassurance that researchers have robust archival plans for their data so that funding is a worthwhile investment.",
+    "UnivITservice: Wants archived data stored on existing university storage systems so that data storage is consistent, maintainable, and future availability can be guaranteed.",
+    "Bath Data Archive administrator: Wants to encourage and promote the use of open standards for deposit so that data is as reusable as possible.",
+    "Research Information manager: Wants datasets to be reliably archived so that impact and compliance reporting based on archived data remains valid over time.",
+    "University management: Wants institutional research data to remain available and trustworthy in the long term to protect institutional reputation and compliance.",
+    "External collaborators: Want confidence that shared research data will remain intact and accessible for the duration of collaboration and any required retention period."
+  ],
+  "description": "This use case specifies how the Bath Research Data Archive System provides guarantees of long-term data integrity for deposited research data and supports robust archival planning, thereby enabling depositors to reuse their data in the future and assuring funding bodies that appropriate archival measures are in place.",
+  "triggering_event": "A depositor submits or updates a dataset in the archive and requires guarantees that the data will remain intact and reusable for the long term.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The depositor has authenticated to the Bath Research Data Archive System.",
+    "The depositor has the necessary permissions to deposit or maintain the target dataset.",
+    "The Bath Research Data Archive System is connected to the designated archival storage managed by UnivITservice.",
+    "The dataset content and associated metadata to be archived have been prepared by the depositor for submission.",
+    "Applicable funder or institutional archival requirements relevant to the dataset are known to the depositor."
+  ],
+  "postconditions": [
+    "The dataset is stored on the designated archival storage in a manner that supports long-term integrity guarantees.",
+    "Integrity protection information for the dataset, such as integrity check values and storage status, is recorded and associated with the dataset record.",
+    "The depositor can rely on the system to preserve the dataset unchanged over time, subject to defined archival policies.",
+    "The fundingbody can be reassured, via the existence of an archived dataset and its integrity guarantees, that a robust archival plan for the researcher’s data is in place."
+  ],
+  "assumptions": [
+    "It is assumed that UnivITservice is responsible for providing and operating existing storage systems and any underlying object store referenced in the requirements, and that these storage systems support mechanisms that enable data integrity to be protected.",
+    "It is assumed that the Bath Research Data Archive System uses the existing university storage systems for archived data in accordance with the requirement that archived data be stored on existing storage systems.",
+    "It is assumed that integrity guarantees are provided primarily through reliable storage and system-managed integrity protection mechanisms and do not require depositors to perform technical integrity operations manually.",
+    "It is assumed that funding bodies accept the use of the Bath Research Data Archive System and its storage infrastructure as evidence of a robust archival plan when researchers deposit data there.",
+    "It is assumed that promoting open standards for deposit by the Bath Data Archive administrator contributes to long-term usability of archived data but does not itself create additional system functionality beyond storing data and metadata.",
+    "It is assumed that the act of archiving data in this use case may occur at the time of initial deposit or during maintenance of an existing dataset, provided the depositor invokes actions that result in data being committed to the archival storage.",
+    "It is assumed that any detailed retention or disposal policies for archived data are defined elsewhere and are not introduced as new functionality in this use case."
+  ],
+  "requirements_met": [
+    "The system shall provide guarantees about the integrity of deposited research data so that depositors can reuse their data in the future and can fulfil funder requirements for archival.",
+    "The system shall store archived data on existing university storage systems managed by UnivITservice so that university data storage is consistent, maintainable, and future availability of data can be guaranteed.",
+    "The system shall support robust archival planning for deposited research data such that funding bodies can be reassured that researchers have appropriate archival plans for their data.",
+    "The system shall record integrity-related information for archived datasets so that the state of data integrity can be verified over time.",
+    "The system shall include the \"store archived data\" functionality as a mandatory part of ensuring data integrity, so that long-term preservation of the dataset is technically supported."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The precise technical mechanisms used to guarantee data integrity, such as specific integrity check algorithms or replication strategies, are not defined and require architectural decisions.",
+    "The level of evidence required by different funding bodies to consider an archival plan robust is not specified and may require policy clarification.",
+    "The duration of archival retention and how it interacts with any disposal policies for archived data is not specified and must be defined at institutional level.",
+    "The extent to which integrity status information is exposed to depositors and funding bodies, and in what form, is not defined and requires user interface and reporting design.",
+    "Any requirements for periodic integrity verification operations on archived data, and how failures should be handled, are not articulated and need further specification."
+  ],
+  "main_flow": [
+    "1. depositor submits a dataset for archiving through the Bath Research Data Archive System → System accepts the dataset submission request and validates that the depositor is authenticated and authorized to archive the dataset.",
+    "2. depositor confirms that the submitted dataset content and associated metadata are ready for long-term preservation → System finalizes the dataset package to be archived and prepares it for storage.",
+    "3. System action (included use case \"store archived data\"): depositor initiates completion of the deposit or update → System stores the archived dataset on the designated existing university storage systems as part of the mandatory \"store archived data\" functionality, ensuring that storage is configured to support long-term data integrity.",
+    "4. depositor waits for confirmation of archival completion → System records integrity protection information for the stored dataset, such as integrity check values and storage status, and associates this information with the dataset record.",
+    "5. depositor views the dataset status in the archive → System presents the dataset as successfully archived and indicates that long-term integrity guarantees are in place in accordance with institutional and funder archival requirements.",
+    "6. fundingbody reviews the researcher’s archival arrangements, for example during assessment of funding compliance → System provides evidence, through the existence of the archived dataset and its recorded integrity guarantees, that a robust archival plan for the researcher’s data is in place."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the depositor identifies that additional metadata or minor corrections are needed before long-term archiving, the depositor updates the dataset content or metadata before confirming readiness → System updates the prepared dataset package accordingly and then resumes with Step 2 when the depositor reconfirms that the dataset is ready for long-term preservation.",
+    "AF-2 (from Step 6): If the fundingbody reviews archival arrangements after multiple datasets have been archived for the same project, the fundingbody may consider the presence of several archived datasets for that project → System presents the integrity-guaranteed archival status for each relevant dataset so that the overall archival plan for the project can be assessed, and the flow then ends with the fundingbody reassured about the robustness of the archival plan."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system determines that the depositor is not authenticated or not authorized to archive the dataset, the system rejects the archival request and displays an authorization error message to the depositor → The use case terminates without archiving the dataset and without providing data integrity guarantees.",
+    "EF-2 (from Step 3): If the system cannot store the archived dataset on the designated existing university storage systems due to a storage or connectivity failure, the system logs the failure, informs the depositor that archival could not be completed, and marks the dataset as not archived → The use case terminates without establishing long-term data integrity guarantees for the dataset.",
+    "EF-3 (from Step 4): If recording integrity protection information for the stored dataset fails, the system flags the dataset as having incomplete integrity information, notifies system administrators, and informs the depositor that full integrity guarantees cannot currently be provided → The use case ends with the dataset storage attempted but without confirmed integrity guarantees."
+  ],
+  "information_for_steps": [
+    "1. Depositor identity, authentication status, authorization profile, dataset identifier, dataset files, initial metadata set.",
+    "2. Dataset content version, finalized metadata set, project or funder-related information relevant to archival readiness.",
+    "3. Dataset archival package, storage system location identifiers, archival configuration parameters based on existing university storage systems.",
+    "4. Integrity check values, storage status records, timestamps for archival completion, linkage between dataset record and integrity information.",
+    "5. Dataset archival status, integrity guarantee indicators, references to applicable archival or funder requirements associated with the dataset.",
+    "6. Fundingbody view of the researcher’s datasets, indicators of archived status and integrity guarantees, project and funder associations used to assess robustness of the archival plan."
+  ]
+}

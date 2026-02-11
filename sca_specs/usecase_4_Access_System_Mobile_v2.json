@@ -1,0 +1,105 @@
+{
+  "use_case_name": "View Anonymized System Data for Analytics",
+  "unique_id": "UC-004",
+  "area": "Clinical and Operational Analytics",
+  "context_of_use": "A systems analyst accesses the hospital management system to view anonymized clinical, scheduling, occupancy, and staffing data needed to perform prescriptive and predictive analytics while protecting patient privacy.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "systems analyst"
+  ],
+  "supporting_actors": [
+    "system administrator",
+    "Central Database",
+    "Anonymization Service",
+    "Authorization Service"
+  ],
+  "stakeholders_and_interests": [
+    "Systems Analyst: Requires access to comprehensive anonymized clinical, appointment, occupancy, and staffing data to perform prescriptive and predictive analytics.",
+    "System Administrator: Requires that all data viewed by systems analysts is anonymized and protected according to GDPR and internal access control policies.",
+    "Patients: Require that any data used for analytics does not expose personally identifiable or sensitive information and that privacy is preserved.",
+    "Hospital Management: Requires reliable analytic insights based on accurate, consistent, and properly anonymized data to support decision making.",
+    "Doctors and Nurses: Require that aggregated and anonymized use of their clinical documentation and scheduling data does not interfere with operational workflows or compromise patient confidentiality."
+  ],
+  "description": "This use case describes how a systems analyst securely accesses and views anonymized data sets derived from clinical records, appointments, bed occupancy, room scheduling, and employee schedules, in order to perform prescriptive and predictive analytics while complying with privacy and access control requirements.",
+  "triggering_event": "The systems analyst decides to view anonymized system data to perform analytics.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The systems analyst has a valid user account registered in the hospital management system.",
+    "The systems analyst’s account has been granted appropriate access rights for viewing anonymized analytical data by the system administrator.",
+    "The system administrator has configured anonymization rules to ensure that data viewed by systems analysts does not contain identifiable patient information.",
+    "The Central Database is operational and contains collected clinical, appointment, occupancy, room scheduling, and employee scheduling data.",
+    "The Anonymization Service required to anonymize or pseudonymize data for systems analysts is available.",
+    "Authorization policies implementing different access levels for system users have been defined and are enforced by the Authorization Service."
+  ],
+  "postconditions": [
+    "The systems analyst has successfully viewed one or more anonymized data sets relevant to clinical, appointment, occupancy, room scheduling, or employee scheduling domains.",
+    "No identifiable patient data has been exposed to the systems analyst through the viewed data sets.",
+    "Any filters or parameters applied by the systems analyst to the viewed data have been validated and consistently applied to the anonymized data.",
+    "Access to each data set viewed by the systems analyst has been enforced according to configured access levels and has been logged for auditing."
+  ],
+  "assumptions": [
+    "It is assumed that the hospital management system already records and stores clinical data, appointment data including start and end times, bed occupancy data, room scheduling data, and employee schedules in the Central Database as part of other operational use cases.",
+    "It is assumed that the role \"systems analyst\" is configured in the system with read-only access to anonymized data sets and no capability to modify operational or clinical records.",
+    "It is assumed that the Authorization Service is an existing component used to enforce access levels granted by the system administrator to different user roles, including systems analysts.",
+    "It is assumed that the Anonymization Service implements GDPR-compliant anonymization rules defined by the system administrator and that these rules are applied consistently whenever a systems analyst requests data.",
+    "It is assumed that analytics calculations themselves (e.g., prescriptive or predictive model execution) are performed outside the scope of this use case, which focuses only on viewing anonymized input data.",
+    "It is assumed that included relationships to \"control user access\" correspond to authenticating the systems analyst and enforcing authorization and access level rules before any data is provided.",
+    "It is assumed that included relationships to \"manage medical data\" correspond to retrieving and preparing data sets from the Central Database in an anonymized form for analytical viewing without extending system functionality beyond the stated requirements."
+  ],
+  "requirements_met": [
+    "The system shall allow the systems analyst to view collected clinical data required for prescriptive and predictive analytics.",
+    "The system shall allow the systems analyst to view bed occupancy data required for analytics on hospital capacity.",
+    "The system shall allow the systems analyst to view room scheduling data required for analytics on room utilization.",
+    "The system shall allow the systems analyst to view employee schedule data required for predictive analytics on staffing needs.",
+    "The system shall ensure that all data viewed by systems analysts is anonymized so that patient privacy is protected.",
+    "The system shall implement GDPR standards for stored and viewed data, including data accessed by systems analysts.",
+    "The system shall restrict systems analysts from accessing identifiable patient information when viewing analytical data sets.",
+    "The system shall enforce access control rules defined by the system administrator so that only authorized systems analysts can view anonymized analytical data.",
+    "The system shall validate filters and parameters provided by the systems analyst before applying them to analytical data queries."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise anonymization techniques and thresholds (for example, aggregation levels or masking rules) to be applied for different data categories have not been fully specified.",
+    "The maximum time allowed for preparing and presenting anonymized data sets to the systems analyst has not been defined.",
+    "The exact list of analytical data views or predefined reports to be supported for systems analysts has not been enumerated.",
+    "The retention policies for analytic logs, including records of datasets accessed by systems analysts, have not been defined.",
+    "The behavior of the system when requested filter combinations would reduce the data set below acceptable anonymization thresholds (for example, re-identification risk) has not been fully detailed."
+  ],
+  "main_flow": [
+    "1. Systems analyst initiates access to the hospital management system → System displays the access interface and prompts the systems analyst to authenticate (include control user access).",
+    "2. Systems analyst provides authentication credentials and submits the login request → System validates the credentials via the Authorization Service, confirms the systems analyst’s identity, and establishes an authenticated session.",
+    "3. Systems analyst requests access to analytical data views → System evaluates the systems analyst’s access rights using configured roles and access levels and presents a list of available anonymized analytical data categories (clinical, bed occupancy, room scheduling, employee schedules).",
+    "4. Systems analyst selects one or more analytical data categories to view and specifies query parameters or filters (such as date ranges, departments, or units) → System validates the provided parameters for completeness, format, and allowed ranges.",
+    "5. Systems analyst confirms the data request → System retrieves relevant source data from the Central Database and invokes the Anonymization Service to apply configured anonymization rules to the retrieved data (include manage medical data).",
+    "6. Systems analyst waits for the anonymized data set → System generates anonymized data sets according to the selected categories and validated parameters and verifies that no identifiable patient information remains.",
+    "7. Systems analyst views the anonymized data sets presented by the system → System displays the anonymized data in tabular or aggregated form suitable for export or further external analysis and records an audit entry describing the data sets accessed.",
+    "8. Systems analyst optionally refines filters or selects additional anonymized data views → System reapplies validation, retrieval, and anonymization steps for each new or modified request and updates the displayed anonymized data accordingly.",
+    "9. Systems analyst finishes viewing anonymized data and logs out of the system → System terminates the session, clears session-related data from the interface, and records the logout event."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): Systems analyst chooses to load a previously saved analytical query configuration instead of manually specifying new parameters. Condition: Saved query configurations exist for the systems analyst. Flow: Systems analyst selects a saved query from the available list → System loads the stored parameters, displays them for confirmation, and proceeds directly to Step 5 of the main flow upon confirmation.",
+    "AF-2 (from Step 7): Systems analyst chooses to export the currently viewed anonymized data set for offline analysis. Condition: Export functionality is allowed for anonymized data. Flow: Systems analyst initiates an export action → System generates an export file containing only the anonymized data already displayed and provides it for secure download, then returns the systems analyst to the view in Step 7 of the main flow."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Authentication fails for the systems analyst. Condition: The provided credentials are invalid or the account is locked or disabled. Flow: System denies access, displays an error message indicating authentication failure, logs the failed attempt, and prompts the systems analyst to re-enter credentials or contact the system administrator; the use case does not proceed to Step 3 until successful authentication occurs.",
+    "EF-2 (from Step 3): Systems analyst is not authorized to view requested analytical data categories. Condition: Authorization Service indicates that the systems analyst’s role does not permit access to one or more selected data categories. Flow: System hides or disables unauthorized categories, displays a message explaining that access is restricted by configuration, logs the authorization denial, and presents only the categories for which the systems analyst is authorized; the flow continues with Step 4 limited to authorized categories.",
+    "EF-3 (from Step 4): One or more query parameters are invalid or out of the allowed range. Condition: Parameter validation fails due to incorrect format, missing mandatory fields, or values outside configured limits. Flow: System rejects the request, highlights the invalid parameters, displays a descriptive validation error message, and allows the systems analyst to correct the parameters and resubmit; the use case remains at Step 4 until a valid set of parameters is provided.",
+    "EF-4 (from Step 5): Data source is unavailable or data retrieval fails. Condition: The Central Database or relevant data source cannot be reached or returns an error during retrieval. Flow: System stops the retrieval process for the affected request, displays an error message stating that the data source is temporarily unavailable, logs the failure including technical details, and allows the systems analyst to retry the request later or adjust the selected categories; the use case may return to Step 3 or Step 4 depending on whether the analyst changes the request.",
+    "EF-5 (from Step 5): Anonymization Service fails or returns incomplete data. Condition: The Anonymization Service encounters an error, times out, or returns data that does not meet configured anonymization criteria. Flow: System discards the partially anonymized data, displays an error message indicating that anonymized data cannot be generated at this time, logs the anonymization failure with diagnostic information, and does not display any data from the failed request; the systems analyst may attempt the request again later starting from Step 4.",
+    "EF-6 (from Step 6): Anonymization check detects residual identifiable information. Condition: Post-processing verification identifies that the anonymized dataset still contains fields or combinations that could identify patients. Flow: System blocks presentation of the dataset, applies additional configured anonymization measures if available or cancels the request, logs the incident as a privacy protection event, informs the systems analyst that the requested data cannot be displayed in its current form, and returns the systems analyst to Step 4 to adjust filters or aggregation level.",
+    "EF-7 (from Step 7): Session timeout occurs while the systems analyst is viewing data. Condition: Inactivity exceeds the configured session timeout threshold. Flow: System automatically terminates the session, clears sensitive data from the interface, displays a notification that the session has expired, and requires the systems analyst to re-authenticate starting from Step 1 to continue accessing anonymized data."
+  ],
+  "information_for_steps": [
+    "1. Systems analyst user identifier (pending authentication), system endpoint information, login interface metadata.",
+    "2. Authentication credentials, authentication result status, session identifier, role assignment for systems analyst.",
+    "3. Authorized analytical data category list, access control rules, mappings between roles and data domains.",
+    "4. Selected analytical data categories, query parameters and filters (such as date ranges, departments, units, and resource identifiers), parameter validation rules.",
+    "5. Source data identifiers for clinical, appointment, occupancy, room scheduling, and employee scheduling data, anonymization rule set identifier, invocation parameters for the Anonymization Service.",
+    "6. Intermediate anonymized data sets, verification results for anonymization completeness, indicators for removal of identifiable attributes.",
+    "7. Final anonymized data sets as displayed, aggregation structures, export-ready dataset representation, audit trail details including timestamp, user, and accessed categories.",
+    "8. Updated or additional filters and parameters, history of prior requests within the same session, refreshed anonymized data sets.",
+    "9. Session identifier, logout request indicator, logout confirmation message, audit log entry for session termination."
+  ]
+}

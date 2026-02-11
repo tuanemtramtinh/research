@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Authenticate",
+"primary_actors": ["Patient", "Doctor", "Lab Specialist", "Nurse", "Receptionist"],
+"preconditions": ["User has a registered account or DigiD ID.", "System is online."],
+"postconditions": ["User is logged in and identified."],
+"main_flow": [
+"1. Actor initiates access to the system.",
+"2. System prompts for authentication method (Standard Login or DigiD).",
+"3. Actor enters unique username and password.",
+"4. System verifies credentials.",
+"5. System grants access to the user interface appropriate for the Actor's role."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): DigiD Login. 1. Actor selects DigiD option. 2. Actor enters DigiD credentials. 3. System verifies with external DigiD service. 4. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 4): Invalid Credentials. 1. System fails to verify credentials. 2. System displays error message. 3. Use Case ends."
+]
+}

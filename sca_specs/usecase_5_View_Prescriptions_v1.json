@@ -1,57 +1,98 @@
 {
   "use_case_name": "View Prescriptions",
   "unique_id": "UC-005",
-  "area": "Prescription Management",
-  "context_of_use": "This use case allows patients and pharmacists to access and review electronic prescriptions and transferred prescription data.",
+  "area": "Electronic Medical Record and Prescription Management",
+  "context_of_use": "The use case enables a patient to access and view prescriptions that have been issued and managed by doctors through the hospital management system on personal computers and mobile devices.",
   "scope": "Hospital Management System",
   "level": "User-goal",
   "primary_actors": [
-    "patient",
-    "pharmacist"
+    "patient"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "doctor"
+  ],
   "stakeholders_and_interests": [
-    "patients want to access their prescriptions for reference",
-    "pharmacists want to know what medication patients need"
+    "Patient: Wants to conveniently access and review prescriptions issued by doctors, including on mobile devices, to use them as a reference when visiting a pharmacy.",
+    "Doctor: Wants prescriptions that have been written and managed to be accurately and securely displayed to the intended patient only.",
+    "System Administrator: Wants prescription access to comply with access control, GDPR, and privacy requirements so that unauthorized viewing is prevented.",
+    "Pharmacist: Wants patients to present correct and up-to-date prescription information when visiting a pharmacy.",
+    "Systems Analyst: Wants prescription viewing events to be available as clinical data for prescriptive and predictive analytics while preserving patient anonymity."
   ],
-  "description": "This use case enables patients and pharmacists to view and review prescriptions to ensure proper medication management.",
-  "triggering_event": "A patient or pharmacist requests to view prescriptions.",
+  "description": "This use case describes how a patient views prescriptions that have been created and managed by doctors within the hospital management system, including viewing on both personal computers and mobile devices, so that prescriptions can be used as a reference when obtaining medication.",
+  "triggering_event": "The patient decides to view the prescriptions that have been issued by doctors.",
   "trigger_type": "External",
   "preconditions": [
-    "The user must be authenticated",
-    "The prescriptions must be available in the system"
+    "The patient has a valid personal account in the Hospital Management System.",
+    "The patient is authenticated in the system according to the access control and login requirements.",
+    "The system administrator has configured access levels such that the patient is allowed to view the parts of the electronic medical record containing their prescriptions.",
+    "At least one prescription for the patient has been created and stored in the central database through the prescription management process.",
+    "The system is connected to the central database and can retrieve prescription data."
   ],
   "postconditions": [
-    "The user successfully views the relevant prescriptions"
+    "The system has presented to the patient a list of prescriptions that the system allows the patient to view.",
+    "The patient has been able to view the detailed information of the selected prescription.",
+    "All accesses to prescription data have been subject to the configured access control rules.",
+    "Access to prescription data has been recorded in the system according to existing data collection practices for clinical data analytics, without exposing non-anonymized data to systems analysts."
   ],
   "assumptions": [
-    "The system has a functioning database of prescriptions",
-    "Users have the necessary permissions to view prescriptions"
+    "It is assumed that the Hospital Management System already implements a separate use case for managing prescriptions, including creation and storage by doctors, and that this functionality is referenced by the \"manage prescriptions\" include relationship.",
+    "It is assumed that user authentication and authorization, including login to personal accounts and limiting access to authorized users, are handled by separate, existing security use cases and are completed before the patient initiates viewing prescriptions.",
+    "It is assumed that the central database used by the system stores prescriptions as part of the electronic medical record in a way that associates them with individual patients.",
+    "It is assumed that patients can access the Hospital Management System via both personal computers and mobile devices using supported applications or web interfaces with equivalent viewing capabilities for prescriptions.",
+    "It is assumed that system administrators have implemented GDPR standards and anonymization mechanisms such that data provided to systems analysts does not reveal identifiable prescription information, while patients still see their own prescription details normally.",
+    "It is assumed that access control configurations defined by doctors and system administrators ensure that patients cannot view prescription-related information that is not intended for them.",
+    "It is assumed that any synchronization of prescription data between mobile devices and the central electronic medical record is performed by underlying system services prior to or during data retrieval, without changing the functional behavior of this use case.",
+    "It is assumed that the automatic transfer of prescriptions to pharmacy information systems, while present in the overall system, is not part of this use case and occurs independently of the patient viewing prescriptions."
   ],
   "requirements_met": [
-    "The system shall allow patients to view their prescriptions",
-    "The system shall allow pharmacists to view transferred prescriptions"
+    "The system shall allow a patient to view prescriptions written by doctors that the hospital allows the patient to access, so that the patient can use them as a reference when visiting a pharmacy.",
+    "The system shall allow a patient to view prescriptions on a mobile device with equivalent prescription viewing functionality to that available on a personal computer.",
+    "The system shall retrieve prescription information for the authenticated patient from the central database as part of the electronic medical record.",
+    "The system shall enforce access control such that a patient can only view prescription information that is intended for that patient and allowed by the hospital.",
+    "The system shall restrict patients from viewing prescription-related information that is not intended for them, in accordance with configured access levels.",
+    "The system shall comply with GDPR-related data protection rules when storing and retrieving prescriptions, as configured by the system administrator.",
+    "The system shall ensure that only authorized users who have logged in to their personal accounts can view prescription information.",
+    "The system shall support viewing of prescriptions as part of the patient’s electronic medical record on both personal computers and mobile devices.",
+    "The system shall log or otherwise make available clinical data about prescriptions, consistent with anonymization rules, for use by systems analysts in prescriptive and predictive analytics."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on data privacy measures for prescription viewing"
+    "The precise prescription data fields to be shown to patients (e.g., dosage details, prescribing doctor identity, instructions) are not defined and require specification.",
+    "The retention period and historical visibility of old or expired prescriptions to patients is not specified and requires a policy decision.",
+    "The behavior when the central database is temporarily unavailable while a patient attempts to view prescriptions is not defined and requires clarification.",
+    "The detailed access control rules for partially restricting prescription content (for example, sensitive notes linked to a prescription) are not specified.",
+    "The exact logging and auditing requirements for patient prescription views, beyond general clinical data collection, are not described and need to be agreed.",
+    "The visual design and usability requirements for viewing prescriptions on various mobile devices and screen sizes are not detailed.",
+    "The manner in which prescriptions transferred to external pharmacy information systems are reflected or marked in the patient’s view is not defined."
   ],
   "main_flow": [
-    "1. patient → System displays the list of prescriptions for the patient",
-    "2. pharmacist → System displays the list of transferred prescriptions for the pharmacist",
-    "3. patient → System allows the patient to select a prescription to view details",
-    "4. pharmacist → System allows the pharmacist to select a prescription to view details"
+    "1. Patient initiates prescription viewing from the Hospital Management System on a personal computer or mobile device → System displays a prescription access interface indicating that the patient can view prescriptions associated with their account.",
+    "2. Patient selects the option to view prescriptions → System invokes the included prescription management functionality to retrieve the set of prescriptions issued for the authenticated patient from the central database.",
+    "3. Patient waits while prescriptions are retrieved → System filters retrieved prescriptions according to access control rules defined by doctors and system administrators and prepares a list of viewable prescriptions for the patient.",
+    "4. Patient views the displayed list of prescriptions → System presents the list of prescriptions with key identifying information for each prescription, such as medication name and prescription date.",
+    "5. Patient selects a specific prescription from the list → System retrieves detailed information for the selected prescription from the central database.",
+    "6. Patient views the detailed prescription information → System displays the full details of the selected prescription that the patient is allowed to see, formatted appropriately for the current device (personal computer or mobile device).",
+    "7. Patient optionally returns to the list or ends the viewing session → System maintains the session state while the patient continues to view prescriptions, and upon session end, the system closes the prescription view and retains any access records according to clinical data collection practices."
   ],
   "alternative_flows": [
-    "AF-1 (from Step 1): If the patient is using a mobile device, then the system displays the mobile-friendly version of the prescription list."
+    "AF-1 (from Step 1): Patient initiates prescription viewing specifically from a mobile device application → System detects the mobile context and presents a mobile-optimized prescription access interface with equivalent prescription viewing capabilities → Flow continues at Step 2.",
+    "AF-2 (from Step 4): Patient chooses to sort or filter the displayed list of prescriptions (for example, by date or medication name) → System applies the selected sorting or filtering to the currently viewable prescriptions without changing access rights and redisplays the updated list → Flow continues at Step 5 when the patient selects a prescription.",
+    "AF-3 (from Step 7): Patient remains on the detailed prescription view without returning to the list and closes the application directly → System terminates the viewing session and retains any access records according to clinical data collection practices, and the use case ends successfully."
   ],
   "exception_flows": [
-    "EF-1 (from Step 1): If the user is not authenticated, then the system prompts the user to log in."
+    "EF-1 (from Step 2): The included prescription management functionality cannot retrieve prescriptions because no prescriptions exist for the patient → System informs the patient that there are currently no prescriptions available to view and offers navigation back to the main patient interface → The use case ends without presenting any prescription details.",
+    "EF-2 (from Step 2): The included prescription management functionality cannot retrieve prescriptions due to a database access error or system unavailability → System displays an error message indicating that prescriptions cannot be retrieved at this time and instructs the patient to try again later → The use case ends without providing prescription data.",
+    "EF-3 (from Step 3): Access control evaluation determines that the authenticated patient is not allowed to view any of the retrieved prescriptions → System displays a message indicating that no prescriptions are available for viewing under the current access permissions and offers navigation back to the main patient interface → The use case ends.",
+    "EF-4 (from Step 5): The system fails to retrieve detailed information for the selected prescription due to a data retrieval error → System notifies the patient that the selected prescription details cannot be displayed at this time and returns to the list of prescriptions if available → The use case continues at Step 4 or ends if the patient leaves the prescription viewing interface."
   ],
   "information_for_steps": [
-    "1. User credentials",
-    "2. Prescription data",
-    "3. Selected prescription details"
+    "1. Patient identifier, device type (personal computer or mobile device), session token.",
+    "2. Patient identifier, prescription identifiers, prescription management retrieval request, central database connection parameters.",
+    "3. Retrieved prescription records, access control rules, patient access level, filtered prescription list.",
+    "4. Filtered prescription list, prescription summary attributes (e.g., medication name, prescription date, status).",
+    "5. Selected prescription identifier, detailed prescription record retrieval request.",
+    "6. Detailed prescription record (e.g., medication, dosage, instructions, prescribing doctor, prescription date), device-specific presentation settings.",
+    "7. Session identifier, access log entries, clinical data collection attributes related to prescription viewing."
   ]
 }

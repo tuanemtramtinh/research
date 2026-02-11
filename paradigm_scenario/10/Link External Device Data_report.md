@@ -1,0 +1,64 @@
+## 1. Use Case Name  
+Link External Device Data  
+
+## 2. Description  
+Patient links external device data to their medical record  
+
+## 3. Primary Actor  
+Patient  
+
+## 4. Problem Domain Context  
+The system must provide secure, always‑available access for all users, enabling patients to view, edit, and manage their own medical records and linked external device data; doctors to restrict their view to assigned patient records, add, edit, and annotate records, link multiple specialists, and order and rate lab tests; lab specialists to upload results, link tests to records, and annotate results; nurses and receptionists to link external devices, record patient data, and manage appointments, beds, and doctor assignments; and administrators to authenticate via DigiD or standard credentials, manage device authorizations, and control data visibility across departments.  
+
+## 5. Preconditions  
+- Patient is authenticated and authorized to access their own medical record.  
+- The external device (e.g., wearable, home monitoring kit) is registered in the system or has a valid authorization token.  
+- The device’s data format is supported by the system’s ingestion pipeline.  
+
+## 6. Postconditions  
+- The external device’s data is successfully linked to the patient’s medical record and visible to authorized users.  
+- A record of the linkage, including timestamp and device identifier, is stored in the audit log.  
+- If applicable, a notification is sent to the patient’s assigned doctor(s) informing them of the new data.  
+
+## 7. Main Flow  
+1. **Patient** logs into the patient portal via secure authentication (DigiD or credentials).  
+2. **Patient** navigates to the “Link Device” section of their medical record.  
+3. **System** displays a list of available external devices and prompts the patient to select one.  
+4. **Patient** selects the desired device and initiates the linkage process.  
+5. **System** requests a connection token or permissions from the device’s API (OAuth flow).  
+6. **Patient** authenticates with the device provider (if required) and grants linkage permissions.  
+7. **System** receives the access token and validates it against the device registry.  
+8. **System** registers the device to the patient’s record, storing device ID, token, and linkage timestamp.  
+9. **System** initiates an initial data pull from the device to populate the patient’s record.  
+10. **System** verifies data integrity and format; if valid, stores the data in the patient’s record.  
+11. **System** updates the patient’s dashboard to display the linked device and recent data.  
+12. **System** logs the linkage event and sends an optional notification to the patient’s primary care physician.  
+
+## 8. Alternative Flows  
+- **Alternative 3.1 – Device not listed**  
+  3a. **System** offers a “Add New Device” option.  
+  3b. **Patient** enters device details manually or scans a QR code.  
+  3c. **System** validates the device against the registry; if valid, proceeds to step 4.  
+
+- **Alternative 5.1 – OAuth token acquisition fails**  
+  5a. **System** displays an error message: “Unable to connect to device provider.”  
+  5b. **Patient** may retry or cancel.  
+
+- **Alternative 9.1 – Initial data pull fails**  
+  9a. **System** logs the failure and schedules a retry.  
+  9b. **System** notifies the patient and offers to retry manually.  
+
+## 9. Exceptions  
+- **Exception 5.1 – Invalid or expired access token**  
+  5a. **System** prompts the patient to re‑authenticate with the device provider.  
+
+- **Exception 8.1 – Device registration conflict (duplicate device ID)**  
+  8a. **System** notifies the patient of the conflict and offers to merge or replace the existing linkage.  
+
+- **Exception 9.2 – Data format mismatch**  
+  9a. **System** rejects the data and logs the error.  
+  9b. **System** informs the patient that the device data could not be ingested and suggests contacting support.  
+
+- **Exception 10.1 – Data storage failure**  
+  10a. **System** rolls back the linkage transaction and restores the previous state.  
+  10b. **System** alerts the patient and technical support.

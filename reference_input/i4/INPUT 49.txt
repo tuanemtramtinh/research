@@ -1,0 +1,27 @@
+﻿{
+    "use_case_name": "Manage user access",
+    "primary_actors": ["System Administrator"],
+    "preconditions": [
+      "SysAdmin is authenticated.",
+      "Staff database is accessible."
+    ],
+    "postconditions": [
+      "User accounts are created, updated, or deactivated.",
+      "Access levels are defined for specific roles."
+    ],
+    "main_flow": [
+      "1. SysAdmin selects 'User Management'. → System lists current users and roles.",
+      "2. SysAdmin selects a user account to modify or creates a new one. → System displays role assignment options (Doctor, Nurse, etc.).",
+      "3. SysAdmin assigns a specific access level and requires login credentials. → System records the permissions.",
+      "4. SysAdmin saves the user profile. → System grants the user access to authorized functionalities only."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Deactivate User.",
+      "1. At step 2, SysAdmin selects a staff member who has left. → SysAdmin sets status to 'Inactive'.",
+      "2. System immediately revokes all access tokens. → Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Duplicate User.",
+      "1. At step 3, SysAdmin attempts to create a user with an existing username. → System rejects the input and asks for a unique identifier."
+    ]
+  },

@@ -1,0 +1,82 @@
+{
+  "use_case_name": "Capture Team Financial Transactions",
+  "unique_id": "UC-001",
+  "area": "Sports Management",
+  "context_of_use": "The system must enable the IFA to integrate existing data sources so that data duplication is eliminated, support multilingual interfaces for leagues across multiple countries, and guarantee reliability for at least 50 000 concurrent users while offering mobile access for fans and match officials and desktop access for IFA employees, team managers, and staff. It must enforce role‑based access controls that expose only relevant tools to each user type, provide centralized management of leagues, teams, and competition rules, and automatically generate unbiased schedules and match‑official allocations that respect personal preferences, rule constraints, and conflict avoidance, with a required double‑certified override mechanism. The platform must capture and audit all team financial transactions, generate real‑time budget reports, and allow teams to manage finances and delegate roles internally. It must deliver instant, uniform notifications of schedule changes to all stakeholders, with customizable notification preferences for fans, and expose live match event reporting that feeds directly into player and match statistics generation.",
+  "scope": "Target System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Team manager"
+  ],
+  "supporting_actors": [
+    "System"
+  ],
+  "stakeholders_and_interests": [
+    "Team manager: Achieve the goal described in the use case."
+  ],
+  "description": "Record all team financial activities, generate real‑time budget reports, and allow teams to manage finances and delegate roles internally.",
+  "triggering_event": "Team manager initiates 'Capture Team Financial Transactions'.",
+  "trigger_type": "External",
+  "preconditions": [
+    "- The team manager is authenticated and authorized with the *Team Manager* role.",
+    "- The team has an active financial ledger linked to the system.",
+    "- The team has at least one financial account (bank, sponsorship, etc.) configured.",
+    "- The system has current exchange rates and tax rules loaded for the relevant jurisdiction."
+  ],
+  "postconditions": [
+    "- All entered financial transactions are persisted in the ledger with audit trail.",
+    "- Updated budget reports are generated and available to the team manager and delegated users.",
+    "- Notification records are created for any stakeholders who registered for budget updates.",
+    "- The system’s audit log records the transaction creation event."
+  ],
+  "assumptions": [
+    "The actor has appropriate access to the system."
+  ],
+  "requirements_met": [
+    "Record all team financial activities, generate real‑time budget reports, and allow teams to manage finances and delegate roles internally."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. **Team manager** logs into the system and navigates to the *Team Finance* module.",
+    "2. The system displays the current financial dashboard and a *New Transaction* button.",
+    "3. **Team manager** clicks *New Transaction* and selects the transaction type (e.g., *Revenue*, *Expense*, *Transfer*, *Loan*).",
+    "4. The system presents an input form pre‑filled with default values (currency, tax rate).",
+    "5. **Team manager** enters the transaction details: date, description, amount, category, supporting document (upload), and any relevant tags.",
+    "6. The system validates the input against business rules (e.g., amount > 0, date not in future, category exists).",
+    "7. **Team manager** confirms the transaction, triggering the *Create Transaction* action.",
+    "8. The system records the transaction in the ledger, associates it with the appropriate account, and updates the running balance.",
+    "9. The system recalculates the real‑time budget, refreshes the dashboard, and displays a success confirmation.",
+    "10. If any users have subscribed to budget change notifications, the system queues a notification payload.",
+    "11. The system dispatches notifications via the configured channels (email, SMS, push) respecting each user’s preferences.",
+    "12. The transaction and all related events are logged in the audit trail with timestamps and actor details."
+  ],
+  "alternative_flows": [
+    "**A1** – *Upload Document Failure* (Step 4) 1. The system rejects the file due to unsupported format or size. 2. The system prompts the user to re‑upload or continue without a document. 3. If the user chooses to continue, the transaction proceeds without attachment; otherwise, the user corrects the file and re‑submits.",
+    "**A2** – *Insufficient Permissions* (Step 1) 1. The system detects that the actor lacks the *Financial Manager* role. 2. The system displays an access denied message and offers to request role elevation via a support ticket.",
+    "**A3** – *Duplicate Transaction* (Step 7) 1. The system detects a transaction with identical date, amount, and description within the last 30 days. 2. The system warns the user of a possible duplicate and requests confirmation to proceed or abort."
+  ],
+  "exception_flows": [
+    "**E1** – *Database Connectivity Lost* (Step 8) 1. The system fails to persist the transaction. 2. The system rolls back any in‑memory changes, displays an error message, and logs the incident in the error log. 3. The transaction is re‑queued for retry after 30 seconds; if retry fails after 3 attempts, the system alerts the support team.",
+    "**E2** – *Exchange Rate Not Available* (Step 4/6) 1. The system cannot fetch the current exchange rate for a multi‑currency transaction. 2. The system prompts the user to enter a manual rate or cancel the transaction.",
+    "**E3** – *Notification Service Unavailable* (Step 10/11) 1. The notification channel fails (e.g., SMTP server down). 2. The system logs the failure, retries up to 2 times, and if still unsuccessful, marks the notification as *failed* and records the reason for later manual follow‑up.",
+    "**E4** – *Audit Log Write Failure* (Step 12) 1. The system cannot write to the audit trail. 2. The transaction is marked as *audit‑failed* but remains visible; a background job attempts to replay the audit event, and an alert is sent to the compliance officer."
+  ],
+  "information_for_steps": [
+    "1. **Team manager** logs into the system and navigates to the *Team Finance* module.",
+    "2. The system displays the current financial dashboard and a *New Transaction* button.",
+    "3. **Team manager** clicks *New Transaction* and selects the transaction type (e.g., *Revenue*, *Expense*, *Transfer*, *Loan*).",
+    "4. The system presents an input form pre‑filled with default values (currency, tax rate).",
+    "5. **Team manager** enters the transaction details: date, description, amount, category, supporting document (upload), and any relevant tags.",
+    "6. The system validates the input against business rules (e.g., amount > 0, date not in future, category exists).",
+    "7. **Team manager** confirms the transaction, triggering the *Create Transaction* action.",
+    "8. The system records the transaction in the ledger, associates it with the appropriate account, and updates the running balance.",
+    "9. The system recalculates the real‑time budget, refreshes the dashboard, and displays a success confirmation.",
+    "10. If any users have subscribed to budget change notifications, the system queues a notification payload.",
+    "11. The system dispatches notifications via the configured channels (email, SMS, push) respecting each user’s preferences.",
+    "12. The transaction and all related events are logged in the audit trail with timestamps and actor details."
+  ]
+}

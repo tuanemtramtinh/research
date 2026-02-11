@@ -1,0 +1,34 @@
+﻿{
+    "use_case_name": "Manage Datasets",
+    "primary_actors": [
+      "Depositor",
+      "Research Facility Manager"
+    ],
+    "preconditions": [
+      "The Primary Actor is authenticated.",
+      "The Actor has permission to create or edit datasets."
+    ],
+    "postconditions": [
+      "A dataset record is created, updated, or versioned in the archive.",
+      "Files are uploaded and associated with the record."
+    ],
+    "main_flow": [
+      "1. Primary Actor initiates the 'Create New Dataset' or 'Edit Dataset' action. → System displays the dataset metadata form (web interface).",
+      "2. Primary Actor uploads files (arbitrary size/format) to the record. → System validates file integrity and attaches them.",
+      "3. Primary Actor enters or updates descriptive metadata (or confirms auto-filled data from University systems). → System saves the metadata draft.",
+      "4. Primary Actor requests to mint a DOI for the dataset. → System generates and assigns a DOI to the record.",
+      "5. Primary Actor submits the dataset for storage/publication. → System records the version and updates the status."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): Deposit on Behalf.",
+      "1. At step 1, Research Facility Manager selects a specific researcher to deposit on behalf of. → System sets the ownership context to that researcher.",
+      "2. Proceed to Step 2.",
+      "AF-2 (from Step 3): Link External Repository.",
+      "1. At step 3, Primary Actor chooses to link data stored in an external repository instead of uploading files. → System prompts for the external link/metadata.",
+      "2. Primary Actor provides the link. → Proceed to Step 5."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Upload Interrupted.",
+      "1. At step 2, The file upload connection is lost. → System pauses the upload and allows the Actor to resume later."
+    ]
+  },

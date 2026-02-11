@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "Add medical notes",
+    "primary_actors": ["Nurse"],
+    "preconditions": [
+      "The Nurse is logged in.",
+      "The Patient record is open and active."
+    ],
+    "postconditions": [
+      "New care notes are appended to the Patient's medical record.",
+      "The update time and Nurse ID are timestamped."
+    ],
+    "main_flow": [
+      "1. Nurse selects the 'Add Clinical Note' function on the patient dashboard. → System opens a text entry field.",
+      "2. Nurse inputs observations regarding patient care. → System validates that the field is not empty.",
+      "3. Nurse saves the note. → System appends the note to the patient's history in the central database.",
+      "4. System displays the updated list of notes."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): Edit before saving.",
+      "1. At step 3, Nurse reviews the text and makes corrections. → Nurse proceeds to save. → Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): System timeout.",
+      "1. At step 3, the session expires before saving. → System saves a local draft and prompts the Nurse to re-authenticate."
+    ]
+  },

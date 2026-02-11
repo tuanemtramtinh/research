@@ -1,0 +1,73 @@
+{
+  "use_case_name": "Configure and Assess Traffic Measures",
+  "unique_id": "UC-002",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "This use case allows urban mobility planners to set up and modify various traffic control measures to analyze their effects.",
+  "scope": "Traffic Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "urban mobility planner: to validate urban mobility proposals"
+  ],
+  "description": "This use case enables urban mobility planners to configure and assess the impact of different traffic measures.",
+  "triggering_event": "The urban mobility planner initiates the configuration of traffic measures.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is logged into the Traffic Management System.",
+    "The system is operational."
+  ],
+  "postconditions": [
+    "Traffic measures are configured and ready for analysis.",
+    "The urban mobility planner can review the effects of the configured measures."
+  ],
+  "assumptions": [
+    "The system has the capability to modify traffic measures.",
+    "The urban mobility planner has the necessary permissions to configure traffic measures."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to adjust speed limits.",
+    "The system shall allow the urban mobility planner to switch lane directions.",
+    "The system shall allow the urban mobility planner to model roundabouts.",
+    "The system shall allow the urban mobility planner to model adaptive traffic lights.",
+    "The system shall allow the urban mobility planner to close roads.",
+    "The system shall allow the urban mobility planner to increase traffic in certain locations.",
+    "The system shall allow the urban mobility planner to simulate traffic crises."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification needed on the specific traffic measures available for configuration."
+  ],
+  "main_flow": [
+    "1. urban mobility planner → The system displays the traffic measures configuration interface.",
+    "2. urban mobility planner adjusts speed limits → The system updates the speed limits.",
+    "3. urban mobility planner switches lane directions → The system updates the lane directions.",
+    "4. urban mobility planner models roundabouts → The system incorporates the roundabouts into the traffic model.",
+    "5. urban mobility planner models adaptive traffic lights → The system integrates the adaptive traffic lights into the traffic model.",
+    "6. urban mobility planner closes roads → The system marks the roads as closed.",
+    "7. urban mobility planner increases traffic in locations → The system simulates increased traffic in specified areas.",
+    "8. urban mobility planner simulates traffic crises → The system prepares the traffic model for crisis scenarios."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the urban mobility planner decides to cancel the speed limit adjustment, then the system retains the previous speed limits.",
+    "AF-2 (from Step 3): If the urban mobility planner encounters an invalid lane direction, then the system prompts for a valid direction before proceeding.",
+    "AF-3 (from Step 6): If the urban mobility planner attempts to close a road that is currently in use, then the system alerts the planner and suggests alternative measures."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system fails to display the traffic measures configuration interface, then the urban mobility planner receives an error message and must retry.",
+    "EF-2 (from Step 5): If the system cannot integrate the adaptive traffic lights due to a technical issue, then the urban mobility planner is notified and the integration is logged for review."
+  ],
+  "information_for_steps": [
+    "1. Traffic measures configuration interface",
+    "2. Adjusted speed limits",
+    "3. Updated lane directions",
+    "4. Modeled roundabouts data",
+    "5. Modeled adaptive traffic lights data",
+    "6. Closed roads data",
+    "7. Increased traffic locations data",
+    "8. Crisis simulation parameters"
+  ]
+}

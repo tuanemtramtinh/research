@@ -1,0 +1,87 @@
+{
+  "use_case_name": "Select Interest Topics",
+  "unique_id": "UC-003",
+  "area": "Fan Personalization and Content Filtering",
+  "context_of_use": "A logged-in fan uses the web application to configure personal interest topics so that the system can present and prioritize relevant information for that fan in subsequent interactions.",
+  "scope": "IFA Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "fan"
+  ],
+  "supporting_actors": [
+    "IFA administrator"
+  ],
+  "stakeholders_and_interests": [
+    "Fan: Wants to configure interest topics so that relevant information is easily and quickly accessible.",
+    "IFA administrator: Wants fans to be able to personalize content to increase engagement and improve usability.",
+    "CIO: Wants a unified system that supports tailored user interfaces and relevant content for stakeholders.",
+    "Team: Wants fans to be able to follow topics related to their team to improve fan engagement.",
+    "League: Wants fans to easily access league-related information that matches their interests."
+  ],
+  "description": "This use case describes how a fan configures and updates their preferred interest topics within the web application so that the system can filter and present information that is relevant to the fan.",
+  "triggering_event": "The fan decides to configure or change their preferred interest topics in the web application.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The fan has a valid account on the IFA Web Application.",
+    "The fan is successfully authenticated in the IFA Web Application.",
+    "The fan profile exists and is accessible within the system.",
+    "The system has a predefined set of interest topics that can be selected by fans."
+  ],
+  "postconditions": [
+    "The fan’s selected interest topics are stored in the system and associated with the fan’s account.",
+    "Subsequent content presentation for the fan is based on the stored interest topics.",
+    "The date and time of the last interest topic update for the fan are recorded by the system."
+  ],
+  "assumptions": [
+    "It is assumed that interest topics are predefined and managed by IFA administrators and are available for selection by fans through the web application.",
+    "It is assumed that only authenticated fans can access and modify their own interest topic preferences.",
+    "It is assumed that the system persists interest topic selections in a fan-specific profile so that the configuration is retained across sessions.",
+    "It is assumed that changing interest topics immediately affects the relevance of information displayed to the fan in subsequent views or page loads.",
+    "It is assumed that the fan interacts with the system via a user interface that can display a list of topics and capture selection inputs.",
+    "It is assumed that the web application is accessible worldwide to the fan as long as there is network connectivity, in line with the general accessibility requirement."
+  ],
+  "requirements_met": [
+    "The system shall allow a fan to view a list of available interest topics within the web application.",
+    "The system shall allow a fan to select one or more interest topics from the available list.",
+    "The system shall store the fan’s selected interest topics and associate them with the fan’s account.",
+    "The system shall allow a fan to modify previously selected interest topics by adding or removing topics.",
+    "The system shall use the stored interest topics to prioritize and present information that is relevant to the fan.",
+    "The system shall respond to fan actions related to selecting and saving interest topics within a short, acceptable time to support fast response expectations."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The acceptable system response time for displaying topics and saving selections is not formally defined and requires specification.",
+    "The maximum number of topics a fan may select concurrently is not defined and requires a business rule decision.",
+    "It is unclear whether new custom topics can be requested by fans or if the set is strictly predefined by administrators.",
+    "The categorization and structure of interest topics (e.g., by players, teams, leagues, matches) are not specified and require design decisions.",
+    "No explicit policy is defined for how long topic preference data is retained or how it is handled in case of account deletion.",
+    "It is not specified how conflicts are resolved when a fan’s interest topics overlap with globally promoted content or notifications."
+  ],
+  "main_flow": [
+    "1. Fan navigates to the interest topics configuration section of the web application → System displays the fan’s current interest topic selections and the list of available interest topics.",
+    "2. Fan reviews the available interest topics presented by the system → System clearly indicates which topics are currently selected and which are not selected.",
+    "3. Fan selects additional interest topics and/or deselects previously chosen topics according to personal preferences → System updates the displayed selection state for each affected topic to reflect the fan’s temporary choices.",
+    "4. Fan confirms the updated interest topic selections by submitting the changes → System validates the submitted selection data and verifies that it conforms to configured constraints.",
+    "5. Fan waits for the system to process the confirmation → System stores the validated interest topic selections in the fan’s profile and records the time of update.",
+    "6. Fan remains on or is returned to a confirmation or content view page → System confirms successful update of interest topics and starts using the stored interest topics to determine and display relevant information for the fan."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the fan accesses the interest topics configuration section for the first time and no topics are configured, the system displays an empty selection state and may highlight recommended default topics. After viewing this initial state, the flow continues at Step 2.",
+    "AF-2 (from Step 3): If the fan decides to revert all temporary changes before confirmation, the fan chooses a cancel or reset action and the system restores the selection state to the last saved configuration. The flow then ends with no updates applied, and the fan’s previously stored topics remain effective.",
+    "AF-3 (from Step 4): If the fan decides not to proceed with saving after reviewing the pending changes, the fan cancels the confirmation action and the system discards the unsaved changes while keeping the last stored preferences. The flow then terminates without modifying the stored interest topics."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system cannot retrieve the fan’s current interest topics or the list of available topics due to a data access error, the system displays an error message indicating that interest topics cannot be loaded and does not allow modifications. The flow ends without changing any stored fan data.",
+    "EF-2 (from Step 4): If the submitted interest topic selection violates system constraints (for example, exceeding an internally defined maximum number of topics), the system rejects the submission, displays a validation error message describing the violation, and prompts the fan to adjust the selection. The flow returns to Step 3 after the fan modifies the selection.",
+    "EF-3 (from Step 5): If the system fails to store the updated interest topic selections due to a technical failure, the system informs the fan that the update could not be completed and retains the last successfully stored preferences. The flow ends with no change to the fan’s effective interest topics."
+  ],
+  "information_for_steps": [
+    "1. Fan identifier, authentication session data, current interest topic preferences, list of available interest topics.",
+    "2. List of available interest topics, selection status for each topic, fan identifier.",
+    "3. Updated set of selected interest topics, deselected topics, fan interaction events.",
+    "4. Submitted interest topic selection payload, validation rules, fan identifier.",
+    "5. Validated interest topic selections, fan profile record, timestamp of update, storage status.",
+    "6. Confirmation message content, updated fan interest topics, filtered or prioritized content based on interest topics."
+  ]
+}

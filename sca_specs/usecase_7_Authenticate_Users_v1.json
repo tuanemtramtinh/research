@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Authenticate Users",
+  "unique_id": "UC-007",
+  "area": "User Management and Access Control",
+  "context_of_use": "The use case enables the IFA administrator to support visitor registration in the web application by ensuring that each created account is assigned a unique username and password, allowing visitors to access additional system features securely.",
+  "scope": "IFA Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa administrator"
+  ],
+  "supporting_actors": [
+    "web application visitor"
+  ],
+  "stakeholders_and_interests": [
+    "IFA administrator: Requires controlled visitor registration and secure authentication to avoid login issues and ensure proper access management.",
+    "Web application visitor: Expects to create an account to access more features and to receive unique credentials that allow reliable login.",
+    "CIO: Requires that user authentication supports secure and unified access as part of a merged system while preserving communication and transparency.",
+    "Teams: Depend on properly authenticated users so that access to team-related features and confidential information can be controlled.",
+    "IFA representative: Has an interest in ensuring that only authenticated users interact with sensitive scheduling and governance functions in the system."
+  ],
+  "description": "This use case describes how the IFA administrator supports the registration of visitors in the web application and ensures that each account receives a unique username and password to enable secure authentication and access to additional system features.",
+  "triggering_event": "The IFA administrator decides to enable or perform visitor registration so that visitors can obtain accounts with unique usernames and passwords.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA web application is operational and accessible to the IFA administrator.",
+    "The IFA administrator is authenticated and authorized to manage visitor registration and account credentials.",
+    "The web application has network connectivity required to persist and validate account data.",
+    "No other account with the same unique identifier (such as email or previously defined username) is already registered in a conflicting manner according to existing account records."
+  ],
+  "postconditions": [
+    "A new visitor account is stored in the system with a unique username and associated password.",
+    "The new account is marked as active and eligible to use additional features offered by the system that require authentication.",
+    "The assignment of the username and password does not conflict with any existing account credentials in the system.",
+    "The system is capable of authenticating the newly created account in subsequent login attempts using the assigned credentials."
+  ],
+  "assumptions": [
+    "It is assumed that a web application visitor can provide required registration details through an existing user interface, even though the interface is not described explicitly in the requirements.",
+    "It is assumed that the IFA administrator defines or configures the rules that determine what constitutes a unique username, based on the requirement to avoid login issues.",
+    "It is assumed that password data are stored and handled securely by the system, although specific security mechanisms are not described in the requirements.",
+    "It is assumed that the assignment of usernames and passwords is automated by the system under the control of rules defined by the IFA administrator, not manually typed by the IFA administrator for each visitor.",
+    "It is assumed that successful registration and credential assignment are prerequisites for visitors to access additional web application features mentioned in the requirements.",
+    "It is assumed that there is an existing role or capability within the system that allows the IFA administrator to manage user accounts as implied by the user stories.",
+    "It is assumed that visitors are distinct from IFA administrators and other stakeholders and that their registration produces visitor-level accounts only.",
+    "It is assumed that the web application enforces uniqueness of usernames at the time credentials are assigned, in direct support of the requirement to avoid login issues."
+  ],
+  "requirements_met": [
+    "The system shall allow each visitor to register in the web application so that they can use more features offered by the system.",
+    "The system shall assign a unique username to each created account so that login issues related to duplicate usernames are avoided.",
+    "The system shall assign a password to each created account so that only the corresponding visitor can authenticate using that account.",
+    "The system shall prevent completion of registration if the requested username is not unique according to existing account records.",
+    "The system shall associate each visitor account with its assigned unique username and password for subsequent authentication attempts."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The exact data elements required from visitors during registration (for example, email, name, or contact details) are not defined and require specification.",
+    "The password complexity and rotation policies are not described and need to be established to align with organizational security standards.",
+    "The process for handling forgotten passwords or credential recovery is not covered by the current requirements and must be clarified separately.",
+    "It is unclear whether email or other forms of identity verification are required before an account becomes active.",
+    "The rules that determine uniqueness of usernames (such as case sensitivity and allowed character sets) are not specified and must be decided.",
+    "It is not defined whether visitors can change their assigned usernames or passwords after initial registration.",
+    "No explicit constraints are provided regarding the maximum number of accounts per visitor, which may impact account management policies."
+  ],
+  "main_flow": [
+    "1. IFA administrator initiates visitor registration support in the web application → System displays access to the visitor registration functionality for the IFA administrator according to existing privileges.",
+    "2. IFA administrator configures or confirms the registration rules, including the requirement that each username must be unique → System records or validates the registration rules to be applied to new visitor accounts.",
+    "3. Web application visitor submits a request to create an account according to the configured registration rules → System collects the visitor’s registration details required to create an account.",
+    "4. System checks the submitted registration details against the configured rules, including verification that the chosen username is unique among all existing accounts → System confirms that the registration details satisfy all rules and that the username does not duplicate any existing username.",
+    "5. System assigns the confirmed unique username and a password to the visitor’s account based on the provided details and configured rules → System securely stores the assigned username and password together with the new account record.",
+    "6. System activates the new visitor account for use with the web application and associates it with additional features that require authentication → System confirms successful registration and availability of the account for subsequent login by the visitor."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Visitor account request through self-service interface rather than explicit administrator interaction: If the IFA administrator has already enabled and configured registration rules earlier, a web application visitor may directly access the registration page and submit a request to create an account. In this case, the flow begins with the visitor accessing the registration interface, and the system proceeds with collecting registration details and continues from Step 3 through Step 6 of the main flow without further IFA administrator interaction.",
+    "AF-2 (from Step 2): Use of predefined default registration rules: If the IFA administrator chooses to use previously defined default rules instead of explicitly reconfiguring registration rules, the IFA administrator confirms the use of default rules at Step 2, and the system validates that these rules are active. The flow then continues directly with Step 3, using the existing default rules for all subsequent registration and uniqueness checks.",
+    "AF-3 (from Step 5): Administrator-defined initial password versus system-generated password: At Step 5, if the configuration rules specify that the system generates the password automatically, the system creates a password that complies with the configured rules and stores it with the account. If the configuration rules specify an administrator-defined or visitor-defined password, the system validates the provided password against configured rules before storing it. The flow then continues with Step 6 in either case."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 4): Username is not unique: If during verification at Step 4 the system detects that the requested username already exists in the account records, the system rejects the current username and informs the visitor that the username is already taken. The system prompts the visitor to choose an alternative username that satisfies the uniqueness rule and returns to Step 3 for resubmission of registration details.",
+    "EF-2 (from Step 4): Registration details violate configured rules: If the system detects that the submitted registration details do not comply with one or more configured registration rules (for example, missing mandatory fields or invalid formats), the system rejects the registration attempt, displays the corresponding validation messages to the visitor, and prompts for correction. The flow returns to Step 3 when the visitor resubmits corrected registration details.",
+    "EF-3 (from Step 5): Credential storage failure: If, during Step 5, the system cannot securely store the new account credentials because of a technical failure such as database unavailability, the system aborts account creation, rolls back any partial data, logs the failure for the IFA administrator, and informs the visitor that registration could not be completed. The use case terminates without creating an account.",
+    "EF-4 (from Step 1): Administrator authorization failure: If at Step 1 the system determines that the authenticated IFA administrator does not have sufficient privileges to access or manage visitor registration, the system denies access to registration management functions, displays an authorization error, and logs the event. The use case terminates with no change to registration settings or accounts."
+  ],
+  "information_for_steps": [
+    "1. Administrator identity, administrator role, administrator session state, registration management access rights.",
+    "2. Registration rules configuration data, uniqueness constraint definitions for usernames, password rule settings.",
+    "3. Visitor registration request, visitor identification data, desired username if provided, contact details if required, consent flags if applicable.",
+    "4. Existing account records, requested username, validation results for uniqueness and other registration rules.",
+    "5. Final unique username, generated or provided password, account record fields, credential storage status.",
+    "6. Account activation flag, association between account and permitted features, registration confirmation message data."
+  ]
+}

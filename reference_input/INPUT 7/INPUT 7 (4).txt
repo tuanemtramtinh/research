@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "View Medical Records",
+"primary_actors": ["Doctor", "Patient", "Nurse"],
+"preconditions": ["Actor is authenticated.", "Access permissions allow viewing the record."],
+"postconditions": ["Actor views the requested medical data."],
+"main_flow": [
+"1. Actor searches for a specific patient or selects their own record.",
+"2. System verifies access permissions for the Actor.",
+"3. System retrieves and displays the medical record (measurements, test results).",
+"4. Actor reviews the information."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Patient Mobile Access. 1. Patient is accessing via mobile device. 2. System formats the display for mobile viewing of measurement and test results. 3. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 2): Access Denied. 1. System determines the Actor does not have permission to view this data (e.g., restricted by Patient). 2. System displays an 'Access Denied' message. 3. Use Case ends."
+]
+}

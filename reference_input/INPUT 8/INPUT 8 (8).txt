@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage Notifications",
+"primary_actors": ["Fan", "Match Official"],
+"preconditions": ["Actor is registered in the system."],
+"postconditions": ["Notification preferences are updated.", "Notifications are delivered based on preferences."],
+"main_flow": [
+"1. Actor accesses notification settings on their device (Phone for Fan/Official).",
+"2. Actor selects specific game events or schedule changes to follow (e.g., Kick-off delay, Goal).",
+"3. System saves the user's notification preferences.",
+"4. System detects a relevant event (e.g., Schedule Change triggered by IFA).",
+"5. System sends a simultaneous notification to the Actor."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): Unsubscribe. 1. Actor deselects specific notification categories. 2. System stops sending alerts for those categories. 3. Use Case ends."
+],
+"exception_flows": [
+"EF-1 (from Step 5): Delivery Failure. 1. System fails to reach the user's device. 2. System queues the notification for retry. 3. Use Case ends."
+]
+}

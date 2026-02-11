@@ -1,0 +1,87 @@
+{
+  "use_case_name": "Store Archived Data",
+  "unique_id": "UC-001",
+  "area": "Research Data Archiving and Storage Management",
+  "context_of_use": "This use case ensures that archived research data managed by the Bath Data Archive is persisted on designated university storage systems, including existing storage infrastructure and the HCP object store, to provide consistent, maintainable, and durable storage with guaranteed future availability.",
+  "scope": "Bath Data Archive Storage Subsystem",
+  "level": "User-goal",
+  "primary_actors": [
+    "univitservice"
+  ],
+  "supporting_actors": [
+    "Bath Data Archive system"
+  ],
+  "stakeholders_and_interests": [
+    "univitservice: Seeks to use existing university storage systems and the HCP object store to ensure consistency, ease of maintenance, and the ability to migrate data in the future.",
+    "Bath Data Archive administrator: Requires that archived datasets are reliably stored so that quality-assured deposits remain accessible over time.",
+    "Depositors: Require their deposited research datasets to be preserved and retrievable in the long term.",
+    "Data reusers: Require archived datasets to remain persistently available for access and reuse.",
+    "Research Information manager: Requires reliable storage to support accurate reporting on archived datasets and their impact.",
+    "Funding bodies: Require evidence that funded research data is stored in a robust archival environment that supports long-term availability."
+  ],
+  "description": "The use case describes how the Bath Data Archive Storage Subsystem interacts with university IT storage services to persist archived research data onto designated existing storage systems, including the HCP object store, in order to ensure consistent, maintainable, and durable storage for long-term availability.",
+  "triggering_event": "The Bath Data Archive system requests that a dataset or dataset subset be stored as archived data on designated university storage systems.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Bath Data Archive system is operational and connected to university storage systems.",
+    "The univitservice has configured and exposed access to existing storage systems and the HCP object store to the Bath Data Archive system.",
+    "The dataset to be archived has been prepared and accepted by the Bath Data Archive system for storage.",
+    "Required storage policies such as retention and access configuration have been defined within the Bath Data Archive system."
+  ],
+  "postconditions": [
+    "The archived dataset is successfully persisted on the designated university storage systems in accordance with configured policies.",
+    "The Bath Data Archive system holds a reference to the physical storage location of the archived dataset.",
+    "The archived dataset is available for future retrieval operations initiated through the Bath Data Archive system.",
+    "Storage status for the archived dataset is recorded as successfully stored within the Bath Data Archive system."
+  ],
+  "assumptions": [
+    "It is assumed that the primary interaction in this use case is system-to-system, where univitservice is responsible for provisioning and managing storage infrastructure and the Bath Data Archive system initiates specific storage operations.",
+    "It is assumed that existing storage systems and the HCP object store are already deployed and reachable over secure university networks at the time of execution of this use case.",
+    "It is assumed that data integrity verification mechanisms (such as checksums) are handled within the Bath Data Archive system or underlying storage services and that this use case focuses on the correct routing and placement of archived data onto the designated storage systems.",
+    "It is assumed that detailed access control and authentication to storage systems (e.g., credentials and authorization) are already configured and validated before this use case is executed.",
+    "It is assumed that selection of a specific storage target (existing storage systems versus HCP object store) is governed by configuration or policies maintained by univitservice and the Bath Data Archive system, and that the use case does not introduce additional decision-making capabilities beyond these policies.",
+    "It is assumed that capacity planning and monitoring of storage utilization are handled by univitservice as part of broader IT operations and are outside the detailed steps of this use case."
+  ],
+  "requirements_met": [
+    "The system shall store archived data on existing university storage systems so that university data storage is consistent and maintainable and future availability of data can be guaranteed.",
+    "The system shall support storage of archived data directly on the HCP object store as one of the designated storage systems.",
+    "The system shall ensure that archived datasets stored on designated storage systems remain logically associated with their corresponding records in the Bath Data Archive.",
+    "The system shall record the storage status and target storage system for each archived dataset after a storage operation completes.",
+    "The system shall make archived datasets available for subsequent retrieval operations once they have been stored on designated storage systems."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Criteria and rules for selecting between existing storage systems and the HCP object store for a particular archived dataset are not specified and require definition.",
+    "Policies governing data redundancy, replication, and geographic distribution on the designated storage systems are not described and require clarification.",
+    "Operational procedures for handling storage system migrations or decommissioning of specific storage platforms are not defined.",
+    "Performance requirements for storing large datasets, including acceptable latency and throughput thresholds, are not stated.",
+    "Error handling policies for partial writes, storage unavailability, or integrity check failures need to be formally specified."
+  ],
+  "main_flow": [
+    "1. Bath Data Archive system initiates an archive storage request for a specific dataset and associated metadata → Bath Data Archive Storage Subsystem validates that the dataset is ready for archival storage and identifies storage policy parameters (such as target storage class and retention).",
+    "2. Bath Data Archive Storage Subsystem evaluates configured storage policies and available university storage targets (including existing storage systems and the HCP object store) → Bath Data Archive Storage Subsystem selects the designated storage system for this archived dataset.",
+    "3. Bath Data Archive Storage Subsystem sends a storage allocation request with dataset size and policy details to univitservice-managed storage infrastructure → univitservice-managed storage infrastructure allocates storage space on the selected storage system and returns allocation details such as container, path, or object identifier.",
+    "4. Bath Data Archive Storage Subsystem streams or transfers the archived dataset content to the allocated location on the selected storage system → univitservice-managed storage infrastructure persists the received dataset content in the allocated storage location.",
+    "5. Bath Data Archive Storage Subsystem requests confirmation of successful write completion from univitservice-managed storage infrastructure → univitservice-managed storage infrastructure confirms that the dataset content has been durably written to storage.",
+    "6. Bath Data Archive Storage Subsystem records the physical storage location, selected storage system identifier, and storage status for the archived dataset in the Bath Data Archive system → Bath Data Archive system updates the dataset record to indicate that storage has completed successfully and that the dataset is available for retrieval."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If storage policies indicate that the HCP object store must be used as the preferred target, Bath Data Archive Storage Subsystem directly selects the HCP object store as the designated storage system and continues with Step 3 using HCP-specific allocation parameters, then proceeds through Steps 4 to 6 without further variation.",
+    "AF-2 (from Step 2): If storage policies indicate that an existing non-HCP storage system must be used as the preferred target, Bath Data Archive Storage Subsystem selects the appropriate existing storage system as the designated storage system and continues with Step 3 using parameters specific to that storage platform, then proceeds through Steps 4 to 6 without further variation.",
+    "AF-3 (from Step 3): If the initially selected storage system indicates that a different storage tier or sub-volume within the same system should be used based on internal configuration, univitservice-managed storage infrastructure returns adjusted allocation details for the recommended tier or sub-volume and Bath Data Archive Storage Subsystem updates its target location accordingly before proceeding with Step 4 and continuing to Steps 5 and 6."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If univitservice-managed storage infrastructure cannot allocate storage space on the selected storage system due to capacity or configuration constraints, it returns an allocation failure response, the Bath Data Archive Storage Subsystem records the failure status for the archive storage request, notifies the Bath Data Archive system that storage has failed, and the use case terminates without storing the dataset.",
+    "EF-2 (from Step 4): If the data transfer from Bath Data Archive Storage Subsystem to the selected storage system is interrupted or fails, the Bath Data Archive Storage Subsystem aborts the transfer, requests cleanup of any partially written data from univitservice-managed storage infrastructure where supported, records the failure status for the archive storage request, notifies the Bath Data Archive system that storage has failed, and the use case terminates without confirming storage of the dataset.",
+    "EF-3 (from Step 5): If univitservice-managed storage infrastructure cannot confirm durable write of the dataset (for example, due to an internal storage error), it returns a failure response, the Bath Data Archive Storage Subsystem marks the storage operation as failed, optionally flags the dataset for retry according to higher-level policies, notifies the Bath Data Archive system of the failure, and the use case terminates without marking the dataset as successfully stored."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier, dataset size estimate, archival status, storage policy parameters, basic metadata describing the dataset.",
+    "2. Configured storage policies, list of available storage targets, target selection criteria, storage system identifiers.",
+    "3. Requested storage size, retention requirements, storage class, allocation request parameters, returned allocation details such as container name, path, or object identifier.",
+    "4. Dataset content stream, transfer protocol parameters, target location information from allocation, progress indicators.",
+    "5. Write completion status, integrity check results if available, confirmation or error codes from storage infrastructure.",
+    "6. Storage location reference, storage system identifier, storage status flag, timestamps for completion, update to archived dataset record in Bath Data Archive system."
+  ]
+}

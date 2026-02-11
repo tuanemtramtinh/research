@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Simulate Traffic Scenarios",
+  "unique_id": "UC-006",
+  "area": "Urban Mobility Planning and Traffic Simulation",
+  "context_of_use": "The use case enables an urban mobility planner to configure and execute traffic simulations for historical, crowded-event, and crisis scenarios in order to analyze their impacts on urban mobility and support planning and emergency services.",
+  "scope": "Urban Traffic Simulation and Analysis System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Historical Traffic Data Repository",
+    "Simulation Engine",
+    "Scenario Configuration Service"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Wants to simulate and review different traffic scenarios to support evidence-based mobility planning.",
+    "City administration: Wants traffic simulations to validate policy and infrastructure decisions affecting urban mobility.",
+    "Emergency services: Want crisis simulations to evaluate and improve response strategies in critical traffic situations.",
+    "Citizens and road users: Want traffic policies and crisis plans that minimize congestion and improve safety and travel reliability.",
+    "Environmental and urban planning departments: Want scenario analyses that support sustainable and resilient urban development."
+  ],
+  "description": "This use case describes how an urban mobility planner configures and runs traffic simulations for historical dates, crowded events, and crisis situations, and then reviews the resulting traffic scenarios for analysis and planning.",
+  "triggering_event": "The urban mobility planner decides to analyze traffic behavior by simulating a specific historical, crowded-event, or crisis traffic scenario.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is authenticated and authorized to access the traffic simulation functionalities.",
+    "The Urban Traffic Simulation and Analysis System is operational and accessible.",
+    "Required traffic data for historical scenarios is available in the Historical Traffic Data Repository.",
+    "The Simulation Engine is available to execute configured scenarios."
+  ],
+  "postconditions": [
+    "A traffic scenario has been successfully simulated according to the planner’s selected type (historical, crowded-event, or crisis).",
+    "The simulation results are stored and remain available for subsequent review and analysis by the urban mobility planner.",
+    "The planner has visual or analytical access to the simulated traffic situation corresponding to the configured scenario parameters."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Traffic Simulation and Analysis System provides an interface for selecting scenario types such as historical, crowded-event, and crisis scenarios, consistent with the described user stories.",
+    "It is assumed that the system can access sufficient historical traffic data to reconstruct or approximate traffic situations for selected past dates.",
+    "It is assumed that increasing traffic in certain spots for crowded-event simulations is achieved by adjusting traffic demand parameters rather than by altering underlying infrastructure or control measures.",
+    "It is assumed that crisis simulations are realized by configuring disruption parameters (e.g., blocked links or reduced capacity) via the Scenario Configuration Service without introducing additional crisis-specific functionality beyond scenario configuration.",
+    "It is assumed that simulation execution may take a finite processing time, during which the planner may need to wait until the Simulation Engine completes the run.",
+    "It is assumed that the system provides some form of visualization or summary view of simulation results sufficient for the planner to review traffic situations, without specifying any new analytical features beyond viewing the simulated traffic conditions."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to configure increased traffic demand in specified locations in order to simulate crowded-event traffic scenarios.",
+    "The system shall allow the urban mobility planner to select a past date and view a simulation of the corresponding historical traffic situation.",
+    "The system shall allow the urban mobility planner to configure and run crisis traffic scenarios in order to support emergency services planning.",
+    "The system shall provide a means for the urban mobility planner to select between simulating historical traffic, crowded events, and crisis scenarios before executing a simulation.",
+    "The system shall execute the configured traffic scenario using the Simulation Engine and make the resulting traffic situation available for review.",
+    "The system shall store or register each executed traffic scenario and its results so that the urban mobility planner can subsequently access and analyze the simulation outcomes."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific types and parameters of crisis situations to be supported by crisis simulations (e.g., accidents, infrastructure failures, natural disasters) are not defined and require clarification.",
+    "The required temporal and spatial resolution of historical traffic data necessary for acceptable historical scenario reconstruction is not specified.",
+    "The acceptable simulation runtime and performance requirements for different scenario types (historical, crowded-event, crisis) are not defined.",
+    "The required level of detail for presenting simulation results (e.g., link-level flows, speeds, queues, maps, or aggregated indicators) remains to be specified.",
+    "Access control and role-based restrictions for scenario configuration and execution (e.g., who may run crisis simulations) are not yet defined."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner selects the option to simulate a traffic scenario → System displays available scenario types, including historical, crowded-event, and crisis scenarios.",
+    "2. Urban mobility planner chooses the type of traffic scenario to simulate (historical, crowded-event, or crisis) → System presents configuration options relevant to the selected scenario type.",
+    "3. Urban mobility planner configures the scenario parameters, such as time period, geographic area, and other applicable settings → System validates the entered parameters for completeness and logical consistency.",
+    "4. Urban mobility planner confirms the configured scenario and initiates the simulation run → System submits the scenario configuration to the Simulation Engine for execution.",
+    "5. Urban mobility planner waits for the simulation to complete → System executes the simulation using the Simulation Engine and tracks the simulation run status until completion.",
+    "6. Urban mobility planner requests to view the results of the completed simulation → System retrieves the simulation results and presents the simulated traffic situation for the configured scenario.",
+    "7. Urban mobility planner reviews the simulated traffic situation (e.g., traffic levels and patterns) for the selected scenario type → System maintains the simulation results and associated configuration so they remain available for further analysis or later access."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Urban mobility planner selects a historical traffic scenario type → System prompts the planner to choose a past date or date range and relevant area; after the planner selects the past date or date range and confirms, the flow continues at Step 3 with the selected historical scenario parameters.",
+    "AF-2 (from Step 2): Urban mobility planner selects a crowded-event traffic scenario type → System prompts the planner to specify locations where traffic should be increased and the magnitude and duration of increased traffic; after the planner configures the increased traffic parameters and confirms, the flow continues at Step 3 with the crowded-event scenario configuration.",
+    "AF-3 (from Step 2): Urban mobility planner selects a crisis traffic scenario type → System prompts the planner to specify the crisis time frame, affected area, and type of traffic disruption to be simulated; after the planner provides the crisis-related configuration and confirms, the flow continues at Step 3 with the crisis scenario configuration.",
+    "AF-4 (from Step 6): Urban mobility planner chooses to compare the current simulation results with results of a previously run scenario using existing stored scenarios → System retrieves the selected previous scenario results from storage and presents both scenarios in a way that allows comparative review, after which the flow continues at Step 7 where the planner reviews the scenarios."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Scenario configuration parameter validation fails (e.g., missing mandatory fields or logically inconsistent time ranges) → System displays validation error messages indicating which parameters are invalid or incomplete and requests correction; the urban mobility planner may update the configuration, after which the flow returns to Step 3 for revalidation.",
+    "EF-2 (from Step 5): Simulation Engine fails to execute the scenario due to a system error or insufficient data → System logs the failure, notifies the urban mobility planner that the simulation could not be completed, and indicates the reason if available; the flow ends without generating simulation results for this run.",
+    "EF-3 (from Step 6): Retrieval of simulation results fails due to data access or storage error → System logs the error and informs the urban mobility planner that the simulation results are temporarily unavailable; the flow ends, and the planner may later attempt to access the results again once the issue is resolved."
+  ],
+  "information_for_steps": [
+    "1. Scenario selection options (scenario_type_list, user_session_id)",
+    "2. Selected scenario type (scenario_type, historical | crowded_event | crisis)",
+    "3. Scenario parameters (time_period, geographic_area, traffic_demand_parameters, disruption_parameters, validation_status)",
+    "4. Simulation request (scenario_configuration_id, simulation_request_id)",
+    "5. Simulation execution status (simulation_request_id, start_time, end_time, run_status)",
+    "6. Simulation results reference (simulation_request_id, results_id, visualization_configuration)",
+    "7. Reviewed scenario data (traffic_flows, speeds, congestion_levels, scenario_metadata)"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "use_case_name": "Report Measure Impacts",
+  "unique_id": "UC-003",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "This use case allows planners to calculate and review various impacts of proposed mobility measures or events.",
+  "scope": "Urban Mobility Planning System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "Planner: to validate urban mobility proposals and assess their impacts"
+  ],
+  "description": "Calculate and review cost, emissions, noise levels, and sensor-based traffic metrics for proposed mobility measures or events.",
+  "triggering_event": "The planner initiates the estimation process for a proposed measure.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The planner has access to the urban mobility planning system.",
+    "Proposed measures or events are defined."
+  ],
+  "postconditions": [
+    "The estimated cost, emissions, noise levels, and traffic metrics are calculated and available for review."
+  ],
+  "assumptions": [
+    "The system has access to relevant data for cost, emissions, noise levels, and traffic metrics."
+  ],
+  "requirements_met": [
+    "The system shall provide an estimation of the cost of a measure.",
+    "The system shall provide an estimation of congestion emissions.",
+    "The system shall provide an estimation of traffic noise levels.",
+    "The system shall allow review of emission levels at pollution sensors.",
+    "The system shall allow review of traffic levels at traffic sensors."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the data sources for cost, emissions, and noise level estimations."
+  ],
+  "main_flow": [
+    "1. Planner → The system retrieves data for the proposed measure.",
+    "2. Planner → The system calculates the estimated cost of the measure.",
+    "3. Planner → The system calculates the estimated congestion emissions.",
+    "4. Planner → The system calculates the estimated traffic noise levels.",
+    "5. Planner → The system retrieves emission levels from pollution sensors.",
+    "6. Planner → The system retrieves traffic levels from traffic sensors.",
+    "7. Planner → The system presents the calculated estimates and sensor data for review."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the cost estimation fails, the system notifies the planner and allows for re-entry of measure data.",
+    "AF-2 (from Step 3): If the emission estimation fails, the system notifies the planner and allows for re-entry of measure data."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system cannot retrieve data for the proposed measure, it alerts the planner and terminates the process."
+  ],
+  "information_for_steps": [
+    "1. Proposed measure data",
+    "2. Cost estimation data",
+    "3. Emission estimation data",
+    "4. Noise level estimation data",
+    "5. Pollution sensor data",
+    "6. Traffic sensor data"
+  ]
+}

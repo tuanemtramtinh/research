@@ -1,0 +1,93 @@
+{
+  "use_case_name": "Promote Open Standards for Data Deposit",
+  "unique_id": "UC-016",
+  "area": "Research Data Archiving and Management",
+  "context_of_use": "This use case describes how a Bath Data Archive administrator promotes and supports the use of open standards for data deposit in the Bath Data Archive to maximise future data reuse.",
+  "scope": "Bath Data Archive system",
+  "level": "User-goal",
+  "primary_actors": [
+    "bath data archive administrator"
+  ],
+  "supporting_actors": [
+    "depositor"
+  ],
+  "stakeholders_and_interests": [
+    "bath data archive administrator: Seeks consistent use of open standards in deposited datasets to maximise future reuse and reduce technical debt.",
+    "depositor: Wants clear, simple guidance on acceptable open standards so that deposit effort is minimised while ensuring future usability of data.",
+    "Research Information manager: Requires reusable, well-described datasets that comply with funder and institutional expectations for long-term usability.",
+    "fundingbody: Requires assurance that deposited research data complies with good practice, including the use of open standards, to protect the value of funded research.",
+    "UnivITservice: Needs deposited data to comply with open standards to support sustainable storage, interoperability and potential system migration.",
+    "data reuser: Requires datasets deposited using open standards to increase the likelihood that data can be accessed and reused in the future without specialist or proprietary tools."
+  ],
+  "description": "The Bath Data Archive administrator guides and influences deposit behaviour so that deposited datasets conform to recommended open standards for formats and metadata, thereby maximising the potential for future data reuse.",
+  "triggering_event": "The bath data archive administrator decides to review and promote the use of open standards for current and future data deposits in the Bath Data Archive.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Bath Data Archive system is operational and accessible to the bath data archive administrator.",
+    "The bath data archive administrator is authenticated and authorised to configure deposit-related guidance and policies within the Bath Data Archive system.",
+    "The Bath Data Archive system supports the presentation of deposit guidance and policy information to depositors.",
+    "A set of institutional or community-recognised open standards for data formats and metadata exists and is available to the bath data archive administrator in some form."
+  ],
+  "postconditions": [
+    "The Bath Data Archive system holds updated and clearly presented guidance indicating recommended open standards for data deposit.",
+    "The Bath Data Archive system associates the configured open standards guidance with the relevant deposit workflows so that depositors are informed during deposit.",
+    "Depositors who initiate or perform deposits subsequently have access to the updated open standards guidance when depositing datasets.",
+    "The use of recommended open standards for new deposits is facilitated by the system configuration created or updated by the bath data archive administrator."
+  ],
+  "assumptions": [
+    "It is assumed that the Bath Data Archive system already has a mechanism for displaying deposit guidance or help text to depositors, and this use case configures that mechanism rather than creating new system capabilities.",
+    "It is assumed that the Bath Data Archive administrator does not directly modify deposited files or enforce conversion but instead promotes and encourages recommended open standards through system-managed guidance and non-mandatory indications.",
+    "It is assumed that specific open standards (for example, particular file formats or metadata schemas) are defined outside this use case by institutional or disciplinary policy and are merely referenced or described by the administrator within the system.",
+    "It is assumed that the Bath Data Archive system is used by depositors via a deposit workflow where guidance, recommendations, or informational messages can be shown before or during deposit.",
+    "It is assumed that any reporting or monitoring of adherence to open standards, beyond the presentation of guidance and recommendations, is outside the scope of this use case.",
+    "It is assumed that the bath data archive administrator has the necessary domain knowledge to interpret institutionally approved open standards and to decide which should be recommended within the system.",
+    "It is assumed that promoting open standards in this context focuses on data and metadata formats and does not introduce any new technical validation or automatic format conversion features beyond existing system capability."
+  ],
+  "requirements_met": [
+    "The system shall allow the bath data archive administrator to define or update descriptive guidance that encourages the use of institutionally or community-recognised open standards for data deposit.",
+    "The system shall associate the configured open standards guidance with relevant dataset deposit workflows so that depositors can see the recommendations during deposit.",
+    "The system shall present the latest administrator-configured open standards guidance to depositors at appropriate points in the deposit process without requiring the depositor to install additional software.",
+    "The system should enable the bath data archive administrator to indicate, within guidance text, examples of recommended open standard formats and metadata practices without altering underlying system functionality.",
+    "The system shall store and retain previous versions of open standards guidance configurations or allow the administrator to overwrite existing guidance so that current recommendations are consistently applied.",
+    "The system should display open standards guidance in a way that is accessible through the same web-based interface used for dataset deposit, maintaining a familiar environment for depositors."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific set of open standards (file formats, metadata schemas, vocabularies) to be recommended is not defined and requires institutional policy decisions.",
+    "The required level of enforcement of open standards (purely advisory versus partially mandatory) has not been clarified and may affect future system design.",
+    "It is not specified how often the open standards guidance must be reviewed or updated by the bath data archive administrator.",
+    "The placement and prominence of open standards guidance within the depositor user interface has not been determined and may impact depositor behaviour and usability.",
+    "It is unclear whether different disciplines require distinct open standards guidance, and if so, how discipline-specific recommendations will be managed in the system."
+  ],
+  "main_flow": [
+    "1. bath data archive administrator reviews existing institutional and community guidance on open standards for research data and metadata → Bath Data Archive system displays any currently stored open standards guidance and related configuration options to the administrator.",
+    "2. bath data archive administrator selects the configuration area for deposit guidance and open standards recommendations within the Bath Data Archive system → Bath Data Archive system opens the configuration interface for deposit-related guidance and displays current text or settings.",
+    "3. bath data archive administrator identifies which open standards for data formats and metadata should be highlighted as recommended for deposit within the Bath Data Archive → Bath Data Archive system allows the administrator to enter, edit, or update descriptive text or structured fields representing the chosen recommended open standards.",
+    "4. bath data archive administrator enters or updates explanatory guidance text that encourages depositors to use the identified open standards when depositing datasets → Bath Data Archive system records the updated guidance content and associates it with the relevant dataset deposit workflows.",
+    "5. bath data archive administrator reviews a system-generated preview of how the open standards guidance will be presented to depositors within the web-based deposit interface → Bath Data Archive system renders a preview of depositor-facing screens showing where and how the open standards guidance will appear.",
+    "6. bath data archive administrator confirms and saves the configured open standards guidance for data deposit → Bath Data Archive system persists the confirmed configuration and activates the new open standards guidance for subsequent dataset deposits.",
+    "7. bath data archive administrator initiates or observes a test deposit interaction to verify that the open standards guidance appears as intended for depositors → Bath Data Archive system presents the configured open standards guidance to the depositing user at the appropriate stage in the deposit workflow, making the recommendations visible.",
+    "8. bath data archive administrator confirms that the active guidance appropriately encourages the use of open standards for data deposit → Bath Data Archive system maintains the configuration so that all future depositors are consistently presented with the open standards guidance during dataset deposit."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): The bath data archive administrator decides to retain the existing list of recommended open standards without changes. Condition: During identification of open standards, the administrator concludes that current recommendations remain valid. Flow: The bath data archive administrator skips modification of the recommended open standards and proceeds directly to reviewing existing explanatory guidance text. The use case continues at Step 4, where the administrator may still adjust wording to further encourage use of the unchanged recommendations.",
+    "AF-2 (from Step 5): The bath data archive administrator adjusts the presentation order or emphasis of open standards guidance. Condition: When viewing the preview, the administrator decides that some recommendations should be emphasised or reordered for clarity. Flow: The bath data archive administrator returns to the configuration interface to adjust the guidance text or structure (e.g., reordering bullet points or adding clarifying sentences) and then requests a new preview. The use case resumes at Step 5 with the updated preview and proceeds to Step 6 after the administrator is satisfied.",
+    "AF-3 (from Step 7): The bath data archive administrator chooses to perform the verification using an existing depositor test account instead of a dedicated administrator view. Condition: The administrator prefers to experience the guidance as a depositor would. Flow: The bath data archive administrator arranges for or uses a test depositor login to initiate a trial deposit and checks that the open standards guidance is displayed appropriately. After verification, the use case continues at Step 8, where the administrator confirms that the guidance effectively promotes open standards."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Configuration interface unavailable. Condition: When attempting to access the configuration area for deposit guidance, the Bath Data Archive system fails to load the configuration interface due to a system error or connectivity issue. Flow: The Bath Data Archive system displays an error message indicating that configuration functions are temporarily unavailable and does not allow changes to open standards guidance. The bath data archive administrator cannot proceed with updating guidance and must retry once the system is restored. The use case terminates without changes to the existing open standards guidance.",
+    "EF-2 (from Step 6): Saving configuration fails. Condition: When the bath data archive administrator attempts to confirm and save updated open standards guidance, the Bath Data Archive system encounters an error and cannot persist the configuration. Flow: The Bath Data Archive system displays an explicit failure notification and retains the previously active configuration without applying the new guidance. The bath data archive administrator may choose to reattempt saving after addressing the cause of the failure or to exit the configuration process. The use case ends with the prior open standards guidance still in effect.",
+    "EF-3 (from Step 7): Test deposit interaction cannot be initiated. Condition: The bath data archive administrator attempts to initiate or observe a test deposit, but the Bath Data Archive system is not accepting new deposits due to maintenance or other operational limitations. Flow: The Bath Data Archive system informs the administrator that deposit functions are temporarily unavailable and does not allow execution of a test deposit. The bath data archive administrator must defer verification of guidance display until deposit functionality is restored. The use case pauses and is considered incomplete until a successful verification is later performed."
+  ],
+  "information_for_steps": [
+    "1. Existing open standards guidance content, institutional open standards documentation references.",
+    "2. Administrator authentication credentials, configuration interface identifiers.",
+    "3. List of recommended open standard data formats, list of recommended open standard metadata practices.",
+    "4. Guidance text content, descriptive explanations of benefits of open standards, mapping between recommendations and deposit steps.",
+    "5. Preview layout parameters, depositor-facing page templates, configured open standards guidance text.",
+    "6. Finalised open standards guidance configuration, activation flags for updated guidance.",
+    "7. Test deposit metadata fields, test dataset selection indicators, displayed open standards guidance messages.",
+    "8. Confirmation record that guidance is active, linkage of open standards guidance to ongoing and future deposit workflows."
+  ]
+}

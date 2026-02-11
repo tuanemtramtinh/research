@@ -1,0 +1,101 @@
+{
+  "use_case_name": "Manage Medical Data",
+  "unique_id": "UC-001",
+  "area": "Hospital Information Management",
+  "context_of_use": "The use case is executed when the system administrator configures the hospital management system to store all system data in a central database and to integrate electronic medical records into the management system so that patient medical information is digitally available and discrepancies between departments are reduced.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "system administrator"
+  ],
+  "supporting_actors": [
+    "Central Database",
+    "Electronic Medical Record System"
+  ],
+  "stakeholders_and_interests": [
+    "System Administrator: Wants all system data to be stored in a central database and electronic medical records to be integrated into the management system to reduce discrepancies between departments and ensure that patient medical information is digitally available.",
+    "Doctors: Want consistent and accurate medical data to be accessible through the management system to support medical decision-making.",
+    "Nurses: Want up-to-date and consistent patient information to support patient care activities.",
+    "Receptionists: Want unified patient data access through the management system to support scheduling and communication with patients.",
+    "Patients: Want their medical and personal data to be stored reliably and consistently so that their care is based on accurate information.",
+    "Systems Analysts: Want centrally stored clinical and operational data to support prescriptive and predictive analytics.",
+    "Hospital Management: Wants centralized, consistent data storage to minimize discrepancies between departments and support operational oversight."
+  ],
+  "description": "This use case describes how the system administrator configures and operates the hospital management system to store all system data in a central database and to integrate electronic medical records into the management system, ensuring that patient medical information is digitally available and that discrepancies between departments are reduced.",
+  "triggering_event": "The system administrator decides to configure or update the hospital management system to use a central database and to integrate electronic medical records into the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The system administrator has valid authenticated access to the hospital management system with configuration privileges.",
+    "The central database is available and reachable from the hospital management system environment.",
+    "The electronic medical record system is available and capable of being connected to the hospital management system.",
+    "Network connectivity between the hospital management system, the central database, and the electronic medical record system is operational."
+  ],
+  "postconditions": [
+    "All system data managed by the hospital management system is configured to be stored in the central database.",
+    "The hospital management system is integrated with the electronic medical record system such that patient medical information is digitally available within the management system.",
+    "Subsequent data created or updated by the hospital management system is persisted in the central database in accordance with the configured data storage rules.",
+    "The hospital management system can retrieve patient medical information from the integrated electronic medical record data stored in the central database."
+  ],
+  "assumptions": [
+    "It is assumed that a central database already exists or is provisioned outside the scope of this use case and can be configured as the storage target by the hospital management system.",
+    "It is assumed that an electronic medical record system or equivalent data source is available and provides an interface that can be integrated by the hospital management system without requiring new business functionality beyond configuration and data connection.",
+    "It is assumed that detailed database schema design, backup, and replication mechanisms are handled by database administration processes and are not created as new capabilities by this use case.",
+    "It is assumed that data migration from old management systems to the new system is handled by separate dedicated use cases and is not part of the Manage Medical Data use case.",
+    "It is assumed that access control, anonymization, and GDPR-compliant data protection mechanisms are implemented elsewhere in the system and are applied to data stored in the central database as part of existing system security functionality.",
+    "It is assumed that only users with the system administrator role can perform configuration actions on data storage and electronic medical record integration described in this use case.",
+    "It is assumed that the hospital management system already has built-in capabilities to configure connection parameters to external data stores and to enable or disable integration features via administrative interfaces.",
+    "It is assumed that all participating subsystems (hospital management system, central database, and electronic medical record system) use compatible data formats or mapping mechanisms provided by the existing system configuration functionality."
+  ],
+  "requirements_met": [
+    "The system shall allow the system administrator to configure the hospital management system so that all system data is stored in a central database to reduce discrepancies between departments.",
+    "The system shall store all new and updated system data in the configured central database once central storage is enabled by the system administrator.",
+    "The system shall allow the system administrator to integrate electronic medical records with the hospital management system so that patient medical information is digitally available within the management system.",
+    "The system shall retrieve patient medical information from the integrated electronic medical record data stored in or accessible through the central database for use by authorized system components.",
+    "The system shall provide the system administrator with configuration options to define connection parameters for the central database used to store system data.",
+    "The system shall provide the system administrator with configuration options to enable or disable the integration of electronic medical records with the hospital management system."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Rules for handling existing decentralized data when enabling central database storage (e.g., whether and how legacy data must be consolidated) are not specified.",
+    "The required performance, latency, and availability levels of the central database for clinical and administrative operations are not defined.",
+    "Specific technical standards or protocols for integrating electronic medical records with the management system are not defined.",
+    "The responsibilities and procedures for monitoring, maintaining, and scaling the central database over time are not clarified.",
+    "Policies for rollback or configuration changes if central database connectivity or electronic medical record integration fails after deployment are not specified."
+  ],
+  "main_flow": [
+    "1. System administrator accesses the hospital management system administrative interface → System displays the administrative dashboard with configuration options, including data storage and integration settings.",
+    "2. System administrator selects the data storage configuration option to configure central database usage → System displays current data storage settings and fields for central database connection parameters.",
+    "3. System administrator enters or updates central database connection parameters and specifies that all system data shall be stored in the central database → System validates the entered central database configuration parameters for format and completeness.",
+    "4. System administrator submits the central database configuration → System attempts to connect to the specified central database using the provided parameters.",
+    "5. System successfully establishes a connection to the specified central database → System enables central database storage and updates internal configuration so that all system data is stored in the central database.",
+    "6. System administrator selects the electronic medical record integration configuration option → System displays electronic medical record integration settings, including options for enabling integration and specifying connection or source parameters.",
+    "7. System administrator enables electronic medical record integration and provides the required connection or source parameters → System validates the provided electronic medical record integration parameters for format and completeness.",
+    "8. System administrator submits the electronic medical record integration configuration → System attempts to establish a connection or data link with the electronic medical record system using the provided parameters.",
+    "9. System successfully establishes the electronic medical record integration connection or data link → System activates electronic medical record integration so that patient medical information becomes digitally available through the hospital management system using data stored in or accessed via the central database.",
+    "10. System administrator reviews a summary of the applied configurations for central database storage and electronic medical record integration → System presents a confirmation message indicating that all system data is now configured to be stored in the central database and that electronic medical records are integrated with the management system."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Central database configuration already defined and only needs verification. Condition: The system administrator determines that existing central database connection parameters are already configured and correct. Flow: At Step 3, the system administrator reviews the displayed central database configuration without changing the parameters → The system revalidates the existing configuration and confirms that the central database connection remains available → The flow continues at Step 6.",
+    "AF-2 (from Step 7): Electronic medical record integration parameters are partially preconfigured. Condition: The system already contains default or previously saved electronic medical record integration parameters. Flow: At Step 7, the system administrator reviews and confirms the preconfigured parameters without modification → The system validates the existing parameters and, if valid, proceeds directly to attempt integration at Step 8.",
+    "AF-3 (from Step 9): Electronic medical record integration is logically enabled through existing central database views. Condition: The electronic medical record data is already replicated or exposed through the central database, and no direct external connection is required. Flow: At Step 9, instead of establishing a new external connection, the system activates integration by enabling predefined views or mappings in the central database to electronic medical record data → The system confirms that patient medical information is digitally available through these views → The flow continues at Step 10."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 4): Central database connection attempt fails. Condition: The system cannot connect to the specified central database using the provided parameters. Flow: At Step 4, the system detects a connection error (for example, due to network failure or invalid host information) → The system displays an error message describing that the central database connection could not be established and indicates which parameters may require correction → The system does not enable central database storage and retains the prior data storage configuration → The use case ends without changing data storage behavior.",
+    "EF-2 (from Step 5): Central database becomes unavailable after configuration. Condition: The central database connection was initially successful but becomes unavailable during subsequent verification actions related to this use case. Flow: After Step 5, the system detects loss of connectivity to the central database during configuration verification → The system logs the connectivity failure and displays a warning to the system administrator that central database storage cannot be guaranteed → The system maintains the configuration state but flags the storage subsystem as degraded and instructs the system administrator to resolve the issue before relying on central storage → The use case ends with central storage configuration pending effective operation.",
+    "EF-3 (from Step 8): Electronic medical record integration connection attempt fails. Condition: The system cannot establish a connection or data link with the electronic medical record system using the provided parameters. Flow: At Step 8, the system detects a failure to connect or validate the electronic medical record integration → The system displays an error message indicating that electronic medical record integration could not be activated and requests that the system administrator review the integration parameters → The system does not activate electronic medical record integration and preserves the previous integration state, if any → The use case ends with the system continuing to operate without new electronic medical record integration.",
+    "EF-4 (from Step 9): Electronic medical record data mapping validation fails. Condition: The system establishes technical connectivity but detects inconsistencies or incompatibilities in electronic medical record data mapping required for integration. Flow: At Step 9, the system validates the structure and mapping of electronic medical record data and identifies incompatible or missing fields → The system logs the validation errors and displays a detailed error summary to the system administrator → The system does not finalize activation of electronic medical record integration until the mapping issues are resolved → The use case ends without enabling electronic medical record integration."
+  ],
+  "information_for_steps": [
+    "1. Administrator credentials, administrative role identification, configuration menu options.",
+    "2. Current data storage settings, central database host name, port, database name, authentication mode, and related connection parameter fields.",
+    "3. Central database host address, port, database identifier, username, password or authentication token, selection indicating that all system data shall be stored in the central database.",
+    "4. Central database connection parameters, network configuration details used for connectivity verification.",
+    "5. Confirmation status of central database connection, internal configuration flags indicating that central database storage is enabled.",
+    "6. Electronic medical record integration configuration options, identifiers or endpoints for the electronic medical record system.",
+    "7. Electronic medical record integration enablement flag, connection or source parameters such as service endpoint, database schema or view name, authentication credentials.",
+    "8. Electronic medical record integration parameters, connectivity and authorization details required to access electronic medical record data.",
+    "9. Electronic medical record integration status, mapping definitions between management system entities and electronic medical record data structures, indicators that patient medical data is accessible through the central database or defined interfaces.",
+    "10. Summary of central database configuration, summary of electronic medical record integration status, confirmation message content, timestamp of configuration changes, identifier of the system administrator who applied the configuration."
+  ]
+}

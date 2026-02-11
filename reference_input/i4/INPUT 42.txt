@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "Manage personal information",
+    "primary_actors": ["Patient"],
+    "preconditions": [
+      "The Patient is logged into the system via a personal account.",
+      "The Patient allows editing of their specific demographic data."
+    ],
+    "postconditions": [
+      "The Patient's personal information is updated in the central database.",
+      "The updated information is visible across departments."
+    ],
+    "main_flow": [
+      "1. Patient navigates to the 'My Profile' section. → System displays current personal details (address, contact info, emergency contact).",
+      "2. Patient modifies the editable fields (e.g., new address). → System validates the format of the new data.",
+      "3. Patient clicks 'Save'. → System updates the database with the new values.",
+      "4. System confirms the update was successful. → System displays the updated profile."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): No changes made.",
+      "1. At step 2, Patient decides not to change any information and clicks 'Cancel'. → System discards changes and reverts to Step 1."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Invalid data format.",
+      "1. At step 2, Patient enters data in an invalid format (e.g., letters in a phone number). → System highlights the error and requests correction."
+    ]
+  },

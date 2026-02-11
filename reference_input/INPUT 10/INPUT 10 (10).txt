@@ -1,0 +1,16 @@
+﻿{
+"use_case_name": "Manage Lab Results",
+"primary_actors": ["Lab Specialist"],
+"preconditions": ["Test has been performed."],
+"postconditions": ["Results are linked to the medical record."],
+"main_flow": [
+"1. Include Use Case: Access Medical Records.",
+"2. Lab Specialist selects the pending test order.",
+"3. Lab Specialist uploads the lab results.",
+"4. Lab Specialist adds a note to the results for context.",
+"5. Lab Specialist links the test result to the medical record.",
+"6. System saves the result and makes it visible to the Doctor and Patient."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

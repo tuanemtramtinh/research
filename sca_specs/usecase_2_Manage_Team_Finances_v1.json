@@ -1,0 +1,93 @@
+{
+  "use_case_name": "Manage Team Finances",
+  "unique_id": "UC-002",
+  "area": "Team Financial Management",
+  "context_of_use": "The use case describes how a team manager manages the team’s financial information directly within the system to avoid unnecessary manual work and to ensure that all financial activities are handled in one place.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "team manager"
+  ],
+  "supporting_actors": [
+    "IFA budget auditor"
+  ],
+  "stakeholders_and_interests": [
+    "team manager: Wants to manage the team’s finances directly within the system to reduce unnecessary work and minimize errors.",
+    "IFA budget auditor: Wants team financial data to be consistently managed in the system so that budget control and auditing can be performed efficiently and accurately.",
+    "IFA: Wants every team transaction to be tracked in the system to ensure compliance with league financial rules and to maintain integrity.",
+    "Team staff member: Wants team finances to be accurately maintained so that strategic and operational decisions are based on reliable financial information."
+  ],
+  "description": "This use case enables a team manager to manage the team’s financial information directly within the system, including entering, updating, and reviewing financial records so that all team financial activities are recorded and accessible in a centralized manner.",
+  "triggering_event": "The team manager decides to manage the team’s finances using the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The team manager has an active user account in the IFA League Management System.",
+    "The team manager is authenticated and authorized to access the team finance management functions.",
+    "The team associated with the team manager exists and is registered in the system.",
+    "The system is operational and reachable from the team manager’s client device."
+  ],
+  "postconditions": [
+    "The team’s financial records in the system are updated to reflect the actions performed by the team manager during the use case.",
+    "All newly recorded or modified team financial transactions are stored persistently in the system.",
+    "The updated financial information is available for subsequent review and audit by authorized stakeholders, including IFA budget auditors."
+  ],
+  "assumptions": [
+    "It is assumed that the IFA League Management System already provides user authentication and authorization mechanisms that determine the team manager’s access rights, although these mechanisms are not described in the requirement text.",
+    "It is assumed that the team manager has an existing association with exactly one team or a defined set of teams within the system, allowing the system to determine which team’s finances can be managed.",
+    "It is assumed that basic financial data structures (such as budget entries and transactions) are already defined in the system, since the requirement text refers to managing finances but does not describe data models.",
+    "It is assumed that any financial rule enforcement specific to leagues (for example, compliance with league budget rules) is handled elsewhere in the system and is not extended or altered by this use case.",
+    "It is assumed that the team manager accesses the system through supported devices (such as desktop or mobile) as implied by general system access requirements, but this use case itself does not extend device-specific functionality.",
+    "It is assumed that the system maintains an audit trail of financial changes for later inspection by IFA budget auditors, as the requirement text states that every team transaction should be tracked, even though the precise audit format is not specified."
+  ],
+  "requirements_met": [
+    "The system shall allow a team manager to view the current financial overview of the team within the system.",
+    "The system shall allow a team manager to create new financial records for the team, such as income and expense entries, within the system.",
+    "The system shall allow a team manager to update existing team financial records within the system.",
+    "The system shall allow a team manager to review previously entered team financial transactions in a consolidated view within the system.",
+    "The system shall store all financial data entered or modified by the team manager in a persistent manner so that it can be accessed later.",
+    "The system shall associate each financial record managed by the team manager with the correct team.",
+    "The system shall track each team financial transaction in a manner that supports later auditing and verification by authorized stakeholders.",
+    "The system shall restrict access to team financial management functions so that only authorized team managers can manage the finances of their respective teams."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific financial data elements to be managed by the team manager (for example, transaction categories, currencies, and tax-related fields) are not defined and require clarification.",
+    "The required level of detail and retention period for tracking each team transaction for auditing purposes is not specified.",
+    "The rules for resolving conflicts when multiple authorized users potentially update the same team financial information concurrently are not defined.",
+    "The extent to which league-specific budget rules must be visibly enforced or indicated to the team manager within this use case is unclear.",
+    "It is not specified whether the team manager should have access to any financial reporting or export features beyond on-screen review of financial records."
+  ],
+  "main_flow": [
+    "1. Team manager initiates team finance management from the system’s user interface → System displays the team finance management section associated with the team manager’s team.",
+    "2. Team manager selects the option to view the team’s current financial overview → System retrieves and displays the team’s existing financial records and summarized financial status.",
+    "3. Team manager chooses to add a new financial record for the team → System presents a data entry form for creating a new team financial record.",
+    "4. Team manager enters required financial details and confirms the creation of the new financial record → System validates the provided financial details and confirms that the record can be stored.",
+    "5. Team manager submits the new financial record → System stores the new financial record, links it to the appropriate team, and updates the displayed financial overview.",
+    "6. Team manager selects an existing financial record that requires modification → System displays the selected financial record with its current details.",
+    "7. Team manager updates the financial details of the selected record and confirms the changes → System validates the updated financial details and prepares the record for storage.",
+    "8. Team manager submits the updated financial record → System stores the updated financial record, maintains traceability of the change for auditing, and refreshes the financial overview.",
+    "9. Team manager reviews the updated financial overview to verify that the team finances reflect the intended changes → System displays the latest consolidated financial overview of the team."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Team manager chooses to navigate directly to a detailed list of team financial transactions instead of a summarized financial overview → System displays a detailed list of the team’s financial transactions while still allowing navigation back to the summarized overview; the use case then continues with Step 3 when the team manager decides to add a new financial record.",
+    "AF-2 (from Step 6): Team manager decides not to modify the selected financial record after viewing its details → System returns to displaying the existing financial overview without applying any changes, and the use case continues with Step 9 when the team manager reviews the overall financial situation."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The system cannot display the team finance management section due to missing authorization for the team manager → System informs the team manager that access to team finance management is not permitted and logs the authorization failure; the use case terminates without changing any financial data.",
+    "EF-2 (from Step 4): The entered financial details fail validation (for example, mandatory fields are missing or formats are invalid) → System highlights the invalid or missing data fields, displays appropriate validation messages, and does not proceed to store the record; the flow returns to Step 4 so the team manager can correct the data.",
+    "EF-3 (from Step 5): A system error occurs while storing a new financial record (for example, a persistence failure) → System displays an error message indicating that the financial record could not be stored and ensures that no partial financial data is committed; the use case terminates without updating the financial overview.",
+    "EF-4 (from Step 8): A system error occurs while storing an updated financial record → System displays an error message indicating that the financial record could not be updated and preserves the previous version of the record; the flow returns to Step 6 if the team manager wishes to attempt the modification again or the use case terminates without changing stored financial data."
+  ],
+  "information_for_steps": [
+    "1. Actor identity, team manager role, team association, authorization token, navigation context.",
+    "2. Team identifier, existing financial records, summary metrics (for example, total income and total expenses), display configuration.",
+    "3. Team identifier, available transaction categories, default financial settings.",
+    "4. New financial record details (for example, amount, date, description, category), validation rules, user confirmation flag.",
+    "5. Persisted financial record data, transaction identifier, team identifier, updated financial summary.",
+    "6. Selected financial record identifier, current record details, team identifier.",
+    "7. Updated financial record details, validation rules, modification metadata (such as modification timestamp and modifying user).",
+    "8. Persisted updated financial record data, audit trail entry, team identifier, updated financial summary.",
+    "9. Consolidated financial overview data, updated list of financial records, summary metrics for review."
+  ]
+}

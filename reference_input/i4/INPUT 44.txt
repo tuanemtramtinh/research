@@ -1,0 +1,29 @@
+﻿{
+    "use_case_name": "Schedule appointment",
+    "primary_actors": ["Patient", "Receptionist"],
+    "preconditions": [
+      "The Actor is logged into the system.",
+      "The System has access to the current room and Doctor schedules."
+    ],
+    "postconditions": [
+      "An appointment slot is reserved in the system.",
+      "Room scheduling data is updated.",
+      "The Patient and Doctor schedules are synchronized."
+    ],
+    "main_flow": [
+      "1. Actor initiates the 'Schedule Appointment' workflow. → System prompts to select a Department and Doctor.",
+      "2. Actor selects the desired Department and Doctor. → System retrieves and displays available time slots based on room and staff availability.",
+      "3. Actor selects a specific date and time slot. → System holds the slot temporarily.",
+      "4. Actor confirms the booking details. → System records the appointment start and end times in the central database.",
+      "5. System sends a confirmation notification to the Patient. → System updates the Doctor's schedule."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): No availability.",
+      "1. At step 2, System displays no available slots for the selected Doctor. → System suggests alternative Doctors in the same Department or the next available dates.",
+      "2. Actor selects an alternative. → Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Slot taken.",
+      "1. At step 4, System detects the slot was taken by another concurrent process. → System displays an error and refreshes the available slots list."
+    ]
+  },

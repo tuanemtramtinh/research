@@ -1,0 +1,29 @@
+﻿{
+    "use_case_name": "Ensure Data Compliance",
+    "primary_actors": [
+      "Depositor",
+      "External Coordinator"
+    ],
+    "preconditions": [
+      "A dataset is being prepared for deposit or review.",
+      "Regulatory or IP requirements exist."
+    ],
+    "postconditions": [
+      "The dataset is compliant with embargoes, disposal policies, and IP rights."
+    ],
+    "main_flow": [
+      "1. Primary Actor accesses the compliance settings for a dataset. → System displays Embargo and Disposal options.",
+      "2. Primary Actor sets an embargo period to protect first use rights. → System locks public access until the specified date.",
+      "3. Primary Actor specifies a disposal policy (e.g., destroy after 10 years). → System schedules the disposal action.",
+      "4. System runs integrity checks to ensure file validity. → System confirms compliance settings are saved."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): IP Protection.",
+      "1. At step 2, External Coordinator verifies IP rights settings. → System records the IP verification.",
+      "2. Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Policy Breach.",
+      "1. At step 3, The requested disposal date violates funder archival requirements (e.g., too soon). → System flags the error and prevents saving."
+    ]
+  },

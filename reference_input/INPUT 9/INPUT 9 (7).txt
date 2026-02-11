@@ -1,0 +1,13 @@
+﻿{
+"use_case_name": "Notify Patient of Invoice",
+"primary_actors": ["Patient"],
+"preconditions": ["Bill has been generated (from Use Case: Generate Patient Bill)."],
+"postconditions": ["Patient receives the bill."],
+"main_flow": [
+"1. System sends the generated bill to the Patient.",
+"2. Patient receives the notification within 30 days of the appointment.",
+"3. Patient accesses the bill to view details."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

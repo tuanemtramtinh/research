@@ -1,0 +1,29 @@
+﻿{
+    "use_case_name": "Manage Dataset Governance",
+    "primary_actors": [
+      "Depositor"
+    ],
+    "preconditions": [
+      "The Depositor is logged in and owns the dataset.",
+      "The dataset record exists."
+    ],
+    "postconditions": [
+      "Licensing, access rights, and project links are applied to the dataset."
+    ],
+    "main_flow": [
+      "1. Depositor selects a dataset to configure. → System displays governance options (Licenses, Access, Links).",
+      "2. Depositor applies a specific license to the dataset. → System updates the copyright metadata.",
+      "3. Depositor grants privileged access to specific collaborators. → System updates the access control list.",
+      "4. Depositor links the dataset to a Data Management Plan (DMP) or Publication. → System saves the relationships.",
+      "5. Depositor saves the changes. → System confirms the governance settings are active."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): Delegate Rights.",
+      "1. At step 3, Depositor delegates management rights to another user. → System records the new permissions.",
+      "2. Proceed to Step 5."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Invalid License.",
+      "1. At step 2, Depositor attempts to apply a license incompatible with the data type. → System warns the user and requests a valid selection."
+    ]
+  },

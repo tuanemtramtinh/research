@@ -1,0 +1,111 @@
+{
+  "use_case_name": "Control User Access",
+  "unique_id": "UC-003",
+  "area": "User and Access Management",
+  "context_of_use": "The hospital management system must allow the system administrator to configure and enforce user access control so that only authorized users can log in and use functionalities according to their granted access levels.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "system administrator"
+  ],
+  "supporting_actors": [
+    "User Account Repository",
+    "Authentication Service",
+    "Authorization Service",
+    "Audit Logging Service"
+  ],
+  "stakeholders_and_interests": [
+    "System Administrator: Needs to configure and manage user access levels so that system functionalities are appropriately restricted.",
+    "Patients: Need their medical and personal data to be protected from unauthorized access.",
+    "Doctors: Require secure but appropriate access to system functionalities necessary for medical treatment.",
+    "Nurses: Require secure access to functionalities and patient information necessary for care delivery.",
+    "Pharmacists: Require secure access to prescription-related data only as needed for dispensing medication.",
+    "Receptionists: Require controlled access to appointment and contact information only.",
+    "Systems Analysts: Require controlled and anonymized access to data for analytics while preserving privacy.",
+    "Hospital Management: Requires compliance with security and privacy regulations and minimization of data breaches.",
+    "Regulatory Authorities: Require that access control complies with standards such as GDPR."
+  ],
+  "description": "This use case allows the system administrator to define and maintain user access levels, enforce user login to personal accounts, and ensure that only authorized users can access the hospital management system and its functionalities.",
+  "triggering_event": "The system administrator decides to configure, review, or update user access control settings within the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The hospital management system is operational and reachable by the system administrator.",
+    "The system administrator has a valid administrative user account.",
+    "The system administrator is successfully authenticated with administrative privileges.",
+    "The user account repository and access control configuration storage are available."
+  ],
+  "postconditions": [
+    "User access levels are stored in the system according to the administrator’s configuration.",
+    "The system enforces login to personal user accounts before granting access to functionalities.",
+    "Only users with valid credentials and authorized access levels can access the system and its functionalities.",
+    "All changes to user access control configuration are recorded in the audit logging service."
+  ],
+  "assumptions": [
+    "It is assumed that a user account repository exists in the hospital management system to store user identities and access level configurations, because the system administrator must grant different access levels to system users.",
+    "It is assumed that an authentication service is available to validate user credentials when users log in to personal accounts, because the requirement states that users must log in so that access can be controlled.",
+    "It is assumed that an authorization service evaluates user access levels against requested functionalities to limit system access to authorized users only.",
+    "It is assumed that the hospital management system supports multiple predefined or configurable access levels (for example, roles such as doctor, nurse, patient, systems analyst, pharmacist, receptionist, and system administrator), because the requirements reference different user types with different access needs.",
+    "It is assumed that access level changes take effect for subsequent user sessions after configuration is saved, and that currently active sessions are not forcibly terminated unless explicitly re-authenticated, as this behavior is not specified in the requirements.",
+    "It is assumed that the system records access control configuration changes and administrative actions in an audit logging service to support accountability and security monitoring, consistent with GDPR-related requirements.",
+    "It is assumed that login to personal accounts requires at least a unique user identifier and an authentication secret (such as a password), although the exact authentication method is not specified in the requirements.",
+    "It is assumed that the system administrator can only modify access levels of existing user accounts and cannot create or delete user accounts within this use case, because such functionality is not stated in the provided requirements.",
+    "It is assumed that patients may only access the parts of their electronic medical record that the hospital allows because doctors and system administrators can restrict information and components from being viewed by patients, and access control must support this restriction.",
+    "It is assumed that system access restriction to authorized users applies to both personal computer and mobile device access, because the requirements describe usage of both device types with the same underlying system."
+  ],
+  "requirements_met": [
+    "The system shall allow the system administrator to grant different access levels to system users so that functionalities can be restricted appropriately.",
+    "The system shall restrict access to system functionalities based on the user’s configured access level.",
+    "The system shall limit system access to authorized users only so that patient data is protected.",
+    "The system shall require all users to log in to personal accounts before accessing system functionalities so that access can be controlled.",
+    "The system shall prevent patients from viewing information that is not intended for them based on configured access restrictions.",
+    "The system shall allow the system administrator to restrict system components from being viewed by patients so that unauthorized access is prevented.",
+    "The system shall support granting patients access only to the parts of their electronic medical record that the hospital allows, consistent with configured access levels.",
+    "The system shall record user access control configuration changes performed by the system administrator for audit purposes.",
+    "The system shall enforce that access rules apply uniformly across supported client types, including personal computers and mobile devices."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The exact set of access levels or roles (for example, detailed permissions for doctors, nurses, patients, systems analysts, and other staff) has not been specified and must be defined by hospital policy.",
+    "The required authentication strength for user login (for example, password complexity, multi-factor authentication) has not been defined and must be decided in coordination with security and compliance stakeholders.",
+    "Session management policies, including maximum session duration, idle timeout, and concurrent session limits, have not been specified and must be clarified.",
+    "The behavior of the system for currently active user sessions when the system administrator changes access levels (for example, whether users are forced to re-authenticate) remains undefined.",
+    "The exact granularity of access control over electronic medical record components (for example, specific document types, data fields, or time ranges) has not been detailed.",
+    "Procedures for handling locked or disabled accounts after repeated failed login attempts have not been specified and must be determined.",
+    "The integration approach and interface requirements for the audit logging service have not been described and require further specification.",
+    "Policies for delegation of administrative privileges and separation of duties for access control management have not been defined."
+  ],
+  "main_flow": [
+    "1. System administrator initiates the user access control configuration function → System displays the access control management interface including user list and current access levels.",
+    "2. System administrator selects a specific user account to review or modify → System retrieves and displays the selected user’s current access level and associated permissions.",
+    "3. System administrator defines or updates the access level for the selected user account according to hospital policy → System validates the requested access level against available configurations and displays a confirmation of the proposed changes.",
+    "4. System administrator confirms and saves the access level configuration for the selected user account → System stores the updated access level for the user account in the user account repository and records the change in the audit logging service.",
+    "5. System administrator opens the login configuration section → System displays parameters related to user login requirements for personal accounts.",
+    "6. System administrator configures that all users must log in to personal accounts before accessing system functionalities → System updates the authentication policy to require successful login for all user types and records the configuration change in the audit logging service.",
+    "7. System administrator configures that system access shall be limited to users with valid credentials and authorized access levels → System updates authorization rules so that only authenticated users with permitted access levels may access system components and records the configuration change.",
+    "8. System administrator saves the overall access control configuration → System confirms that access control configuration has been successfully applied and that future user sessions will be governed by the updated access levels and login requirements, completing the use case."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the system administrator needs to configure access levels for multiple user accounts in a single session, the system administrator repeats Steps 2–4 for each additional user account before proceeding to Step 5. After the final user account is configured, the flow continues with Step 5.",
+    "AF-2 (from Step 6): If the system administrator decides to differentiate login requirements for specific user categories (such as requiring stronger authentication for administrators and systems analysts), the system administrator selects the desired user categories and applies category-specific login policies. The system updates authentication policies per category and records the changes in the audit logging service, after which the flow continues with Step 7.",
+    "AF-3 (from Step 7): If the system administrator decides to refine authorization rules for particular system components (such as restricting patient access to sensitive medical record sections), the system administrator selects those components and adjusts the allowed access levels. The system stores the refined authorization rules and records the update in the audit logging service, then the flow proceeds to Step 8."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the system cannot retrieve the selected user account due to repository unavailability or data error, the system displays an error message indicating that user details cannot be loaded and logs the failure. The use case is suspended until the repository issue is resolved, and no access level changes are applied.",
+    "EF-2 (from Step 3): If the system administrator attempts to assign an invalid or unsupported access level, the system rejects the change, displays a validation error describing that the selected access level is not permitted, and prompts the system administrator to select a valid access level. The flow resumes at Step 3 after correction.",
+    "EF-3 (from Step 4): If the system fails to store the updated access level due to a storage or network error, the system displays an error notification stating that the configuration could not be saved and logs the incident in the audit logging service if available. The system retains the previous access level configuration, and the flow returns to Step 2 if the system administrator chooses to retry, or the use case terminates without changes.",
+    "EF-4 (from Step 6): If the system cannot update the authentication policy due to configuration service failure, the system displays an error indicating that login requirements cannot be modified at this time and logs the failure. Existing login requirements remain in effect, and the use case ends without applying the new configuration.",
+    "EF-5 (from Step 7): If the system cannot update authorization rules due to internal errors, the system displays an error message and logs the problem. Existing authorization rules remain active, and the use case terminates without applying the new authorization configuration.",
+    "EF-6 (from Step 8): If the final save of the overall access control configuration fails, the system displays a summary error stating that the configuration was not fully applied and logs the failure. The system maintains the last successfully stored configuration, and the use case ends with partial or no updates."
+  ],
+  "information_for_steps": [
+    "1. Administrator identity, session token, administrative privileges, navigation command to access control management, list of user accounts, current access levels summary.",
+    "2. Selected user account identifier, retrieved user profile, current access level, associated permissions.",
+    "3. Proposed new access level, mapping between access level and permissions, hospital access control policy constraints, validation rules for access levels.",
+    "4. Updated user access level record, timestamp of change, administrator identifier, audit log entry for access level modification, confirmation status.",
+    "5. Login configuration parameters, current authentication policy settings, available authentication options.",
+    "6. Global login requirement flag for all users, user category definitions, authentication policy update, audit log entry for login configuration change.",
+    "7. Authorization policy parameters, mapping between user access levels and system components or functionalities, updated authorization rules, audit log entry for authorization configuration change.",
+    "8. Consolidated access control configuration snapshot, confirmation message, effective time for new policies, reference to stored configuration and audit entries."
+  ]
+}

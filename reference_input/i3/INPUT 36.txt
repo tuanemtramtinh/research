@@ -1,0 +1,14 @@
+﻿{
+"use_case_name": "Receive Match Updates",
+"primary_actors": ["Referee"],
+"preconditions": ["Referee is assigned to matches.", "A schedule change or event has occurred."],
+"postconditions": ["Referee is informed of the update."],
+"main_flow": [
+"1. System identifies a change in the match schedule (e.g., postponement).",
+"2. System sends a notification to the assigned Referee.",
+"3. Referee receives the update on their device.",
+"4. Referee acknowledges the rescheduling to adjust their plans."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

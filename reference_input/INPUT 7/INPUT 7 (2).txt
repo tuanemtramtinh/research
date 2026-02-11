@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Authenticate",
+"primary_actors": ["Patient", "Doctor", "Nurse", "Receptionist", "Laboratory Technician", "Pharmacist", "System Administrator"],
+"preconditions": ["User has a registered account.", "System is online."],
+"postconditions": ["User is logged in and directed to their role-specific dashboard."],
+"main_flow": [
+"1. Actor initiates the login process.",
+"2. Actor enters their unique identifier and password.",
+"3. System validates the credentials.",
+"4. System prompts for two-step authentication code.",
+"5. Actor enters the code received on their device.",
+"6. System grants access and displays the dashboard."
+],
+"alternative_flows": [
+"AF-1 (from Step 6): Doctor Login. 1. Actor is identified as a Doctor. 2. System loads the agenda view immediately to save time. 3. Use Case ends."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Invalid Credentials. 1. System rejects the login attempt. 2. System displays an error message. 3. Actor retries."
+]
+}

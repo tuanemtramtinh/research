@@ -1,0 +1,107 @@
+{
+  "use_case_name": "Link Datasets to Research Outputs",
+  "unique_id": "UC-007",
+  "area": "Research Data Management and Discovery",
+  "context_of_use": "The use case enables authorized users to create and manage logical links between archived datasets and related research outputs, including publications, project metadata, project data management plans, and records of data stored in external repositories, in order to provide a connected and discoverable research record.",
+  "scope": "Bath Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor",
+    "academicpublisher",
+    "research information manager"
+  ],
+  "supporting_actors": [
+    "Bath Data Archive administrator"
+  ],
+  "stakeholders_and_interests": [
+    "depositor: Wants datasets to be linked to publications in Opus so that both data and publications are more easily discovered and research impact can be demonstrated.",
+    "depositor: Wants datasets to be linked to data stored in external repositories so that data can be stored in appropriate repositories while still being registered with the University without multiple deposits.",
+    "depositor: Wants datasets to be linked with the project DMP so that compliance with the DMP is demonstrated and project workflow is linked together.",
+    "academicpublisher: Wants persistent web links between articles and underlying datasets so that journals are perceived as containing robust, high quality research.",
+    "research information manager: Wants datasets to be linked to metadata about projects so that reporting on project compliance with funder requirements is possible.",
+    "research information manager: Wants the university's record of data holdings to be complete, including externally held data, so that institutional reporting is accurate.",
+    "fundingbody: Wants reassurance that researchers have robust archival plans and that research outputs, including datasets, are appropriately connected to projects and publications for impact analysis.",
+    "Bath Data Archive administrator: Wants consistent, policy-compliant metadata for linked datasets and outputs so that archive quality and compliance obligations are maintained.",
+    "data reuser: Wants a connected record of datasets, publications, and project information so that relevant data can be more easily discovered and correctly cited.",
+    "UnivITservice: Wants integration with existing university systems so that links to outputs and related metadata can be maintained reliably and administered efficiently."
+  ],
+  "description": "This use case describes how a depositor, academic publisher, or research information manager creates and maintains logical associations between datasets in the Bath Data Archive and related research outputs such as publications in Opus, external repository records, project data management plans, and project metadata, thereby providing a connected, discoverable research record and supporting reporting on compliance and impact.",
+  "triggering_event": "An authorized actor decides to associate a dataset in the Bath Data Archive with one or more related research outputs or external data records.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The actor is authenticated in the Bath Data Archive System using valid credentials.",
+    "The actor has sufficient authorization within the Bath Data Archive System to modify metadata and linkage information for the target dataset or output record according to institutional roles and policies.",
+    "At least one dataset record exists in the Bath Data Archive System for which linkages to research outputs or related records can be defined.",
+    "Core descriptive metadata for the dataset has been captured in the Bath Data Archive System in accordance with the included manage dataset metadata functionality."
+  ],
+  "postconditions": [
+    "The dataset record in the Bath Data Archive System contains stored references to one or more linked research outputs or related records, such as publications in Opus, project metadata, project DMPs, or external repository records.",
+    "Any linked publication or project metadata record that is managed within integrated University systems contains or can resolve a persistent web reference back to the associated dataset record in the Bath Data Archive System, where such reciprocal linking is supported.",
+    "The Bath Data Archive System updates its internal indexes so that linked relationships between datasets and related outputs are available for search, discovery, and reporting functions.",
+    "The stored linkage information is persisted in the Bath Data Archive System so that it can be used for later discovery, citation, and reporting on compliance with funder and institutional requirements."
+  ],
+  "assumptions": [
+    "It is assumed that the Bath Data Archive System provides user interface functions for managing dataset metadata as referenced by the include relationship to the manage dataset metadata use case; this assumption does not introduce additional capabilities beyond metadata management.",
+    "It is assumed that the Bath Data Archive System can store identifiers and descriptive metadata for external systems such as Opus, project information systems, project DMP records, and external data repositories without managing those external resources themselves.",
+    "It is assumed that the Bath Data Archive System can store and present persistent web links (e.g., URLs or DOIs) as metadata fields associated with dataset records and related outputs, without itself minting or managing those identifiers in this use case.",
+    "It is assumed that the actor initiating the use case already knows or can obtain the necessary identifiers or references (such as publication identifiers, project identifiers, DMP references, or external repository links) from the relevant external systems.",
+    "It is assumed that validation of identifiers or references entered by the actor is limited to format and basic consistency checks and does not require real-time verification against every external system.",
+    "It is assumed that relationships between a dataset and multiple outputs or records are many-to-many and that creating or updating a linkage does not delete or invalidate existing linkages unless the actor explicitly performs a remove or overwrite action within the same metadata management context.",
+    "It is assumed that integration with University systems such as Opus and project metadata sources is already configured at the infrastructure level, and this use case only records link information within the Bath Data Archive System.",
+    "It is assumed that publishers and research information managers who act within this use case do so via interfaces or channels that allow them to edit or supply linkage metadata in the Bath Data Archive System, aligned with their roles."
+  ],
+  "requirements_met": [
+    "The system shall allow a depositor to record and maintain links between a dataset and one or more publications in Opus so that the dataset and publications can be jointly discovered.",
+    "The system shall allow a depositor to record and maintain links between a dataset and data stored in external repositories so that the dataset can be registered with the University without requiring multiple deposits of the same data.",
+    "The system shall allow a depositor to record and maintain links between a dataset and the corresponding project data management plan so that compliance with the data management plan can be demonstrated.",
+    "The system shall allow an academicpublisher to record or expose persistent web links between journal articles and underlying datasets stored or registered in the Bath Data Archive System so that the relationship between articles and datasets is visible.",
+    "The system shall allow a research information manager to record and maintain links between datasets and project metadata so that reporting on dataset deposition in relation to funder requirements is supported.",
+    "The system shall store linkage information as part of the dataset metadata managed through the manage dataset metadata functionality so that linked relationships persist across sessions and can be used for discovery and reporting.",
+    "The system shall update its search and reporting indexes when dataset-to-output links are created or modified so that users and administrators can query and analyze linked datasets and outputs.",
+    "The system shall present stored links to related publications, project metadata, DMPs, and external repository records on the dataset record view so that data reusers and stakeholders can navigate between related research outputs."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific formats and identifier schemes for publications in Opus, project metadata records, project DMPs, and external repository entries have not been defined and may affect how links are stored and validated.",
+    "The rules for who is authorized to create, update, or remove links between datasets and outputs for datasets owned by others have not been specified and may require institutional policy decisions.",
+    "The extent and method of technical integration with external systems such as Opus, project information systems, and external repositories (e.g., manual entry versus automated lookup) remain undefined.",
+    "The retention and versioning strategy for linkage metadata, particularly when datasets or related outputs have multiple versions, has not been clarified.",
+    "Requirements for reciprocal updates when links are changed in external systems (for example, when a publication is withdrawn or a project record is updated) have not been addressed.",
+    "Policies governing how broken or obsolete external links should be detected and handled by the Bath Data Archive System are not described.",
+    "The expected performance characteristics and limits on the number of linked outputs per dataset and the number of datasets per output have not been specified."
+  ],
+  "main_flow": [
+    "1. Actor selects an existing dataset record to manage linkages → System retrieves and displays the current dataset metadata using the manage dataset metadata functionality.",
+    "2. Actor chooses to manage links to publications and related outputs for the selected dataset → System presents a linkage management interface showing existing links to publications, project metadata, project DMPs, and external repositories.",
+    "3. Actor initiates adding or updating a link between the dataset and one or more publications in Opus by providing publication identifiers or references → System records the provided publication identifiers in the dataset metadata and displays the updated list of linked publications.",
+    "4. Actor initiates adding or updating a link between the dataset and one or more external repository records by providing persistent URLs or repository identifiers → System records the external repository references in the dataset metadata and displays the updated list of linked external data records.",
+    "5. Actor initiates adding or updating a link between the dataset and the related project data management plan by providing the DMP reference or identifier → System records the DMP reference in the dataset metadata and displays the updated DMP linkage.",
+    "6. Actor initiates adding or updating a link between the dataset and project metadata by providing or selecting the relevant project identifier or metadata reference → System records the project metadata reference in the dataset metadata and displays the updated project linkage.",
+    "7. Actor reviews all newly added or modified links between the dataset and related outputs and confirms the changes → System validates the linkage data for required fields and basic format consistency and prepares the updated dataset metadata for saving.",
+    "8. Actor submits the updated metadata and linkage information for the dataset → System saves the updated dataset metadata, including all linkage information, updates internal indexes for discovery and reporting, and displays a confirmation that the dataset has been successfully linked to the specified outputs and records."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Actor chooses to link the dataset only to a subset of intended publications at this time and leaves additional publications to be linked later → System records the provided publication identifiers, leaves other potential publication links unset, and allows the actor to proceed to Step 4 or Step 7 as appropriate.",
+    "AF-2 (from Step 4): Actor records only external repository links for the dataset without linking to any publications in Opus → System records the external repository references as the only current linkage type and allows the actor to proceed directly to Step 5, Step 6, or Step 7.",
+    "AF-3 (from Step 5): Actor indicates that no formal project DMP exists for the dataset and skips adding a DMP link → System accepts the absence of a DMP linkage, retains any other linkage information entered, and allows the actor to proceed to Step 6 or Step 7.",
+    "AF-4 (from Step 6): Research information manager adds only project metadata links without modifying existing publication or external repository links → System records the new project metadata references, retains existing linkages unchanged, and the actor continues with Step 7.",
+    "AF-5 (from Step 2): Academicpublisher accesses the linkage management interface focused on connecting an article to an existing dataset by specifying the article identifier and the dataset identifier → System records the linkage between the article and the dataset within the dataset metadata context and then resumes with Step 7 for confirmation of the updated link set."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): System cannot retrieve the selected dataset metadata due to access restrictions or missing records → System informs the actor that the dataset cannot be accessed for linkage management, logs the incident according to operational procedures, and terminates the use case without making any changes.",
+    "EF-2 (from Step 3): The publication identifier provided by the actor fails validation checks for mandatory fields or allowed formats → System rejects the invalid publication identifier, displays an error message indicating the validation issue, prompts the actor to correct the identifier, and does not proceed to Step 4 until a valid identifier is provided or the actor cancels adding that publication link.",
+    "EF-3 (from Step 4): The external repository link entered by the actor is syntactically invalid or exceeds allowed length constraints → System rejects the external repository link, informs the actor of the format problem, and requests correction before proceeding; if the actor cancels the entry, the system discards the invalid link and allows continuation with remaining steps.",
+    "EF-4 (from Step 8): A system error occurs while saving the updated dataset linkage metadata, such as a database failure or timeout → System rolls back the attempted metadata changes, preserves the previously stored state of the dataset record, notifies the actor that saving has failed, and terminates the use case; no partial linkage updates are committed."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier, dataset descriptive metadata, actor identifier, authorization state.",
+    "2. Dataset identifier, existing linked publication identifiers, existing project metadata references, existing DMP references, existing external repository references.",
+    "3. Publication identifiers (e.g., Opus identifiers or equivalent), linkage type (dataset-to-publication), actor identifier, timestamp of linkage modification.",
+    "4. External repository persistent URLs or repository-specific identifiers, repository name or code, linkage type (dataset-to-external-data), actor identifier, timestamp of linkage modification.",
+    "5. Project DMP identifier or reference, linkage type (dataset-to-DMP), actor identifier, timestamp of linkage modification.",
+    "6. Project identifier or project metadata record reference, linkage type (dataset-to-project-metadata), actor identifier, timestamp of linkage modification.",
+    "7. Current set of linkage records for the dataset, validation status for each linkage field, confirmation flag from actor.",
+    "8. Updated dataset metadata record including all linkage fields, system audit log entries, search and reporting index entries reflecting new linkages, confirmation message content."
+  ]
+}

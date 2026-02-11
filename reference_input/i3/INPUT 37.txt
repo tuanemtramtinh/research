@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Access Match & Team Statistics",
+"primary_actors": ["Fan"],
+"preconditions": ["Fan is on the web application.", "Statistics have been generated."],
+"postconditions": ["Fan views the requested information."],
+"main_flow": [
+"1. Fan navigates to the statistics section.",
+"2. Fan selects a specific match or favourite team.",
+"3. System retrieves match statistics (e.g., events, outcomes) and team analytics.",
+"4. System displays the information to the Fan.",
+"5. Fan reviews the data to predict upcoming matches or understand match events."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 3): Data Unavailable. 1. System has no stats for the selected match. 2. System displays a 'Statistics Pending' message. 3. Use Case ends."
+]
+}

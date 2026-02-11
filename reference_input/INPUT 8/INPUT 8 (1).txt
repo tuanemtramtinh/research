@@ -1,0 +1,22 @@
+﻿{
+"use_case_name": "Manage Leagues And Teams",
+"primary_actors": ["IFA Manager", "IFA Administrator"],
+"preconditions": ["Actors are authenticated with appropriate privileges."],
+"postconditions": ["New leagues or teams are registered and approved in the system.", "Rulesets are applied."],
+"main_flow": [
+"1. IFA Administrator selects the option to add a new league or register a new team.",
+"2. IFA Administrator enters the details (e.g., league name, team assets).",
+"3. System validates the input and flags the entry for approval.",
+"4. IFA Manager reviews the pending league or team registration.",
+"5. IFA Manager approves the registration.",
+"6. IFA Administrator inputs specific rulesets for the competition (e.g., leaderboard updates, budget rules).",
+"7. System saves the configuration and updates the central database."
+],
+"alternative_flows": [
+"AF-1 (from Step 5): Rejection. 1. IFA Manager rejects the registration due to integrity concerns. 2. System notifies the Administrator. 3. Use Case ends.",
+"AF-2 (from Step 6): Update Existing Rules. 1. IFA Administrator selects an existing competition. 2. Administrator modifies the ruleset. 3. Resume Step 7."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Duplicate Entry. 1. System detects the league or team already exists. 2. System displays an error message. 3. IFA Administrator modifies the entry."
+]
+}

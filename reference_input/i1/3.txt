@@ -1,0 +1,30 @@
+﻿{
+    "use_case_name": "Receive Intelligent Alert",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "The simulation is active.",
+      "Alert thresholds are defined in the system."
+    ],
+    "postconditions": [
+      "The Planner is notified of specific issues (congestion or unfairness).",
+      "The alert details are displayed."
+    ],
+    "main_flow": [
+      "1. Planner activates the monitoring mode. → System begins evaluating traffic metrics.",
+      "2. System triggers the 'Analyze Traffic Conditions' use case to calculate real-time metrics. → (Include Use Case: Analyze Traffic Conditions).",
+      "3. System detects a threshold breach (e.g., high congestion or neighborhood disadvantage). → System references the active configuration to identify the cause.",
+      "4. System triggers the 'Control Traffic Measures' use case to identify the active measure causing the alert. → (Include Use Case: Control Traffic Measures).",
+      "5. System generates and displays a specific notification (Congestion Warning or Fairness Alert) to the Planner. → Planner acknowledges the alert."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): Fairness Violation Detected.",
+      "1. At step 3, System detects that a specific neighborhood is experiencing disproportionate delays (Unfairness). → System flags the neighborhood.",
+      "2. Proceed to Step 5."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Analysis Failure.",
+      "1. At step 2, The included analysis fails to return valid metrics. → System logs the error and suppresses the alert generation."
+    ]
+  },

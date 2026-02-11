@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Manage Medical Tests",
+"primary_actors": ["Doctor", "Lab Specialist"],
+"preconditions": ["Patient record exists."],
+"postconditions": ["Test is ordered or status is updated."],
+"main_flow": [
+"1. Doctor selects a patient and orders a specific medical test.",
+"2. Doctor rates the importance (e.g., Urgent) to help Lab Specialists manage time.",
+"3. System records the order and places it in the lab queue.",
+"4. Lab Specialist views the requested medical tests.",
+"5. Lab Specialist updates the status (e.g., In Progress)."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

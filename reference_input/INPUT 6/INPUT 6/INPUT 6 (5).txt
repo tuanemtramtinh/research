@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage Team Finances",
+"primary_actors": ["Team"],
+"preconditions": ["Team is logged in.", "IFA Budget Policy is active."],
+"postconditions": ["Financial transaction is recorded.", "Budget status is updated."],
+"main_flow": [
+"1. Team accesses the resource and finance management section.",
+"2. Team inputs details for a new transaction (income or expenditure).",
+"3. System validates the transaction against the IFA budget policy.",
+"4. System records the transaction in the ledger.",
+"5. System updates the Team's budget status for transparency."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Manage Resources. 1. Team selects to manage non-financial resources. 2. Team updates resource allocation. 3. System saves changes. 4. Use Case ends."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Policy Violation. 1. System detects the transaction violates budget regulations. 2. System flags the transaction and warns the Team. 3. Resume Step 2."
+]
+}

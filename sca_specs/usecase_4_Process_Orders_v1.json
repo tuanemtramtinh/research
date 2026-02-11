@@ -1,0 +1,67 @@
+{
+  "use_case_name": "Process Orders",
+  "unique_id": "UC-004",
+  "area": "E-commerce",
+  "context_of_use": "This use case supports customers in managing their shopping experience and allows managers to oversee order approvals.",
+  "scope": "Order Processing System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "manager"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to purchase items easily",
+    "manager: wants to ensure timely order approvals"
+  ],
+  "description": "This use case enables customers to add products to their cart, checkout, and track their orders, while allowing managers to approve those orders.",
+  "triggering_event": "Customer initiates the order process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "Customer has selected products to purchase.",
+    "Customer is logged into their account."
+  ],
+  "postconditions": [
+    "Customer's order is successfully placed and tracked.",
+    "Manager has approved the order."
+  ],
+  "assumptions": [
+    "Customers have access to the product catalog.",
+    "Managers have the necessary permissions to approve orders."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to add products to their cart.",
+    "The system shall enable customers to checkout using multiple payment methods.",
+    "The system shall allow customers to track their orders.",
+    "The system shall permit managers to approve orders."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification needed on the payment methods supported during checkout."
+  ],
+  "main_flow": [
+    "1. Customer adds products to cart → System updates cart with selected products.",
+    "2. Customer initiates checkout → System presents payment options.",
+    "3. Customer selects payment method → System processes payment.",
+    "4. System confirms order placement → Customer receives order confirmation.",
+    "5. Customer tracks order status → System provides current delivery status.",
+    "6. Manager reviews order → System displays order details for approval.",
+    "7. Manager approves order → System updates order status to approved."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Customer decides to browse products → System redirects to product catalog."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Payment processing fails → System notifies customer of payment failure."
+  ],
+  "information_for_steps": [
+    "1. Product details",
+    "2. Payment options",
+    "3. Payment information",
+    "4. Order confirmation details",
+    "5. Order tracking information",
+    "6. Order details for approval",
+    "7. Approval status"
+  ]
+}

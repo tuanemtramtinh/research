@@ -1,0 +1,30 @@
+﻿{
+    "use_case_name": "View Dataset Impact",
+    "primary_actors": [
+      "Depositor",
+      "Data Reuser",
+      "Funding Body",
+      "Research Information Manager"
+    ],
+    "preconditions": [
+      "The dataset has been published.",
+      "Usage data is available."
+    ],
+    "postconditions": [
+      "Impact statistics (citations, downloads) are displayed to the Actor."
+    ],
+    "main_flow": [
+      "1. Primary Actor requests the impact report for a dataset or the entire archive. → System retrieves usage logs and citation counts.",
+      "2. System segments the statistics by country and sector (if applicable). → System generates the impact visualization.",
+      "3. Primary Actor views the download counts and citation tracking data. → Goal Achieved."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): Funder Report.",
+      "1. At step 1, Funding Body requests metadata harvesting for analysis. → System provides an aggregated report of outputs linked to their funding.",
+      "2. Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): No Data Available.",
+      "1. At step 1, The dataset is new and has no metrics. → System displays 'No impact data available yet'."
+    ]
+  },

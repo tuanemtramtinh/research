@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Manage Deposited Data",
+    "primary_actors": [
+      "Bath Data Archive Administrator"
+    ],
+    "preconditions": [
+      "The Administrator is logged in.",
+      "Datasets are in a 'Pending' or 'Active' state."
+    ],
+    "postconditions": [
+      "Datasets are approved, rejected, or disposed of according to policy."
+    ],
+    "main_flow": [
+      "1. Administrator queries the archive for datasets requiring attention. → System displays a list of pending deposits or disposal requests.",
+      "2. Administrator selects a dataset to review. → System presents the metadata and compliance details.",
+      "3. Administrator performs checks on metadata quality, licensing, and policy compliance. → System records the check results.",
+      "4. Administrator approves the dataset for publication (or disposal). → System updates the dataset status and notifies the Depositor."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): Request Changes.",
+      "1. At step 3, Administrator finds metadata insufficient. → Administrator marks the dataset as 'Returned' with comments.",
+      "2. System notifies the Depositor to make corrections. → Goal Achieved."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): System Error.",
+      "1. At step 4, System fails to update the status in the central index. → System displays a 'Transaction Failed' error."
+    ]
+  }

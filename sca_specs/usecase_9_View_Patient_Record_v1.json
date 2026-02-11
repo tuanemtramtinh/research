@@ -1,0 +1,111 @@
+{
+  "use_case_name": "View Patient Record",
+  "unique_id": "UC-009",
+  "area": "Hospital Management – Clinical Information Access",
+  "context_of_use": "Authorized clinical and administrative staff access patient records through the hospital management system to view patient personal information, medical history, notes, and electronic medical records while privacy and medical data management rules are enforced.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "nurse",
+    "doctor",
+    "receptionist"
+  ],
+  "supporting_actors": [
+    "system administrator",
+    "patient"
+  ],
+  "stakeholders_and_interests": [
+    "Doctor: Wants to view accurate and complete patient personal information and medical history to make informed medical decisions and correctly identify and treat the patient.",
+    "Nurse: Wants to view patient personal information and medical history and record notes so that patient care is correctly identified, supported, and documented.",
+    "Receptionist: Wants to view a patient’s electronic medical record so that the patient can be contacted using up-to-date information.",
+    "Patient: Wants only the intended parts of the electronic medical record to be viewable by staff and self so that privacy and safety are maintained.",
+    "System administrator: Wants all data stored centrally and GDPR standards, access levels, and anonymization enforced so that data is protected and unauthorized access is prevented.",
+    "Systems analyst: Wants reliable, well-managed clinical data resulting from record management so that analytics can be performed.",
+    "Hospital management: Wants secure, compliant, and efficient access to patient records to support clinical care and operations while minimizing security risks."
+  ],
+  "description": "This use case describes how authorized nurses, doctors, and receptionists access and view patient records, including personal information, medical history, notes, and electronic medical records, while the system enforces configured data privacy and medical data management rules.",
+  "triggering_event": "An authorized nurse, doctor, or receptionist attempts to open a patient record in the hospital management system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Hospital Management System is operational and connected to the central database.",
+    "The primary actor has a valid personal user account registered in the system.",
+    "The primary actor is successfully authenticated in the system according to the login and access control mechanisms.",
+    "The primary actor has been granted an access level that permits viewing patient records according to configured access control rules.",
+    "The patient whose record is to be viewed exists in the system with stored personal information and at least an electronic medical record shell.",
+    "Data privacy enforcement rules and role-based access policies configured by the system administrator are active in the system.",
+    "Medical data management rules for storing and retrieving personal information, medical history, notes, and electronic medical records are active in the system."
+  ],
+  "postconditions": [
+    "The system has presented the patient record view to the primary actor according to the actor’s access level and data privacy rules.",
+    "Only patient data fields allowed for the actor’s role and the specific patient are displayed to the primary actor.",
+    "Any access to the patient record during the interaction is registered in the system’s audit or access log.",
+    "The underlying patient data in the central database remains consistent with medical data management rules.",
+    "If the nurse records or updates notes as part of the interaction, the updated notes are stored in the electronic medical record according to data management rules."
+  ],
+  "assumptions": [
+    "It is assumed that the Hospital Management System implements a user authentication and authorization mechanism configured by the system administrator, in line with the requirement that system access is limited to authorized users and requires login to personal accounts.",
+    "It is assumed that the \"enforce data privacy\" included use case corresponds to the system’s enforcement of GDPR standards, anonymization policies, and role-based access restrictions configured by the system administrator, without adding new privacy capabilities beyond those described in the requirements.",
+    "It is assumed that the \"manage medical data\" included use case corresponds to storing, retrieving, and organizing patient personal information, medical history, notes, and electronic medical records in a central database, including data migrated from old management systems.",
+    "It is assumed that the receptionist’s access to the patient’s electronic medical record is limited to the subset of information required to contact the patient and perform reception duties, in alignment with access level restrictions defined by the system administrator and the doctor’s requirement to restrict information not intended for patients or unauthorized users.",
+    "It is assumed that viewing patient notes is permitted only to roles that have been granted access rights to that information through the configured access levels, and that the nurse’s ability to record notes is handled in coordination with the same medical data management mechanisms.",
+    "It is assumed that mobile and personal computer access use the same underlying record-viewing functionality and access control rules, so that this use case is agnostic to client device while still respecting security requirements.",
+    "It is assumed that anonymization of data for systems analysts applies only to analytics views and does not alter the clinical views of patient records used by nurses, doctors, or receptionists in this use case.",
+    "It is assumed that data migration from old management systems has been completed or is functionally transparent to the primary actors such that migrated historical data is available in the same way as natively stored data when viewing medical history.",
+    "It is assumed that patient-specific restrictions on what a patient can see in their own electronic medical record are separate from this use case and that here only staff roles (nurse, doctor, receptionist) are considered as primary actors."
+  ],
+  "requirements_met": [
+    "The system shall allow a doctor to view a patient’s medical history so that the doctor can make informed medical decisions.",
+    "The system shall allow a doctor to view a patient’s personal information so that the doctor can correctly identify and treat the patient.",
+    "The system shall allow a nurse to view a patient’s medical history so that the nurse can support medical treatment.",
+    "The system shall allow a nurse to view a patient’s personal information so that the nurse can correctly identify patients.",
+    "The system shall allow a nurse to view and, when permitted by role, record notes about patients so that patient care information is documented as part of the electronic medical record.",
+    "The system shall allow a receptionist to view a patient’s electronic medical record to the extent required so that the receptionist has the information needed to contact the patient.",
+    "The system shall store all data related to patient personal information, medical history, notes, and electronic medical records in a central database so that discrepancies between departments are reduced.",
+    "The system shall integrate electronic medical records with the management system so that patient medical information is digitally available for viewing by authorized staff.",
+    "The system shall enforce the restriction that patients cannot view information that is not intended for them and shall enforce access levels such that staff can only view data allowed for their role, thereby minimizing security risks.",
+    "The system shall implement GDPR standards, including appropriate access control and data protection measures, when presenting patient records so that stored data is protected.",
+    "The system shall implement access control configured by the system administrator to limit system access to authorized users only and require users to log in to personal accounts before viewing patient records."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The exact mapping between staff roles (nurse, doctor, receptionist) and the specific patient data fields that each role may view has not been fully specified and requires detailed access policy definition.",
+    "The level of detail and structure of \"medical history\" and \"notes\" (e.g., diagnoses, procedures, allergies, time-stamped entries) is not fully defined and requires further clarification for data modeling.",
+    "The retention, audit logging granularity, and reporting requirements for access to patient records remain to be specified to fully satisfy security and regulatory needs.",
+    "The behavior when a patient record is partially unavailable or when certain components are offline (e.g., due to data migration in progress) has not been clarified.",
+    "Policies for concurrent access and potential locking or conflict handling when nurses update notes while others are viewing the record have not been defined."
+  ],
+  "main_flow": [
+    "1. Primary actor selects the option to view a patient record in the Hospital Management System user interface → System displays a search or selection interface for patient records and confirms that the actor is currently authenticated.",
+    "2. Primary actor identifies the patient whose record is to be viewed, for example by searching or selecting from a list according to available identifiers → System retrieves the corresponding patient identifier and prepares to access the patient’s record data.",
+    "3. Primary actor confirms the selected patient for record viewing → System invokes the included \"enforce data privacy\" functionality to evaluate the primary actor’s role, access level, and relevant privacy rules for the selected patient.",
+    "4. System, as part of the included \"enforce data privacy\" functionality, determines which sections and data fields of the patient record are permitted to be displayed to the primary actor based on configured access control, GDPR standards, and restrictions on viewing information not intended for the actor.",
+    "5. System invokes the included \"manage medical data\" functionality to retrieve the permitted patient data (including personal information, medical history, notes, and electronic medical record content) from the central database, using the patient identifier and access control decisions from Step 4.",
+    "6. System composes a structured patient record view containing the allowed personal information, medical history, notes, and electronic medical record segments and presents this view on the actor’s device.",
+    "7. Primary actor reviews the displayed patient record content to support identification, treatment, patient care, or contacting the patient → System maintains the view and allows standard navigation within the permitted sections without altering the underlying data.",
+    "8. If the primary actor is a nurse and has permission to record or update patient notes from within the patient record view, the nurse enters or edits notes in the provided notes section → System validates the entered notes according to medical data management rules and temporarily highlights the pending changes.",
+    "9. Primary actor confirms completion of viewing (and, if applicable, notes entry) for the patient record view → System saves any validated note changes to the central database, finalizes the medical record update if changes were made, records an access log entry for the viewing session, and returns the actor to the previous navigation context or main menu."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Primary actor selects a patient from a predefined list instead of performing a search. Condition: The system presents a list of recently accessed or scheduled patients relevant to the actor. The actor selects a patient from the list → System treats the selected patient as the identified patient and continues at Step 3.",
+    "AF-2 (from Step 7): Primary actor navigates between different sections of the patient record, such as switching between personal information, medical history, notes, and electronic medical record subsections. Condition: Multiple sections are available according to the actor’s access rights. The actor selects a different section tab or link → System updates the displayed section using previously retrieved permitted data or retrieves additional permitted data via the \"manage medical data\" functionality as needed, then returns to continue Step 7.",
+    "AF-3 (from Step 8): Nurse decides not to save newly entered or edited notes. Condition: After entering or modifying notes, the nurse cancels or closes the notes editor without confirming changes → System discards the unsaved note changes, keeps the previously stored notes unchanged, and returns to the patient record view so the interaction can continue at Step 7 or proceed to Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Actor is not authenticated or the session has expired. Condition: The primary actor attempts to access the patient record view option without a valid authenticated session. System behavior: System denies access to the patient record functionality, displays a message indicating that login is required, redirects the actor to the login process, and does not proceed with Step 2.",
+    "EF-2 (from Step 3): Actor has insufficient access rights to view the selected patient record. Condition: The \"enforce data privacy\" functionality determines that the actor’s role or access level does not permit viewing this patient’s record. System behavior: System does not retrieve patient data, displays an authorization error message indicating that access is restricted, records the failed access attempt in the audit log, and returns the actor to the previous screen without proceeding to Step 4 or later steps.",
+    "EF-3 (from Step 5): Patient data cannot be retrieved due to data unavailability or technical failure. Condition: The \"manage medical data\" functionality cannot access required patient data from the central database (for example due to connectivity issues or missing records). System behavior: System stops the retrieval operation, displays an error message indicating that the patient record is temporarily unavailable, records the failure event, and offers the actor an option to retry the operation or return to the previous screen instead of continuing to Step 6.",
+    "EF-4 (from Step 8): Validation of entered notes fails. Condition: The nurse enters notes that violate data validation rules defined by medical data management (for example, exceeding allowed length or containing disallowed characters as defined by system rules). System behavior: System rejects saving the invalid notes, highlights the problematic fields, displays validation error messages, and allows the nurse to correct the notes or cancel the changes; the system does not update stored notes or proceed to Step 9 until the nurse successfully corrects or cancels the entry."
+  ],
+  "information_for_steps": [
+    "1. Actor identifier, authentication status, patient record view function selection.",
+    "2. Patient search criteria or selected patient entry, patient identifier.",
+    "3. Confirmed patient identifier, actor role and access level parameters for privacy evaluation.",
+    "4. Privacy policy rules, role-based access control rules, GDPR configuration, allowed record sections and fields for the actor-patient combination.",
+    "5. Patient personal information data, medical history entries, patient notes, electronic medical record segments, central database connection parameters.",
+    "6. Structured patient record view model, section labels and layout metadata, filtered data subsets based on access rules.",
+    "7. User interface navigation state, currently viewed section identifier, interaction logs for viewing activities.",
+    "8. Nurse-entered note text or structured note data, validation constraints for notes, temporary note state prior to persistence.",
+    "9. Finalized note data (if changed), audit log entry including actor identifier, patient identifier, timestamp, accessed sections, and outcome status, navigation context for returning to previous screen."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "use_case_name": "Manage Social Media Pages",
+  "unique_id": "UC-008",
+  "area": "Team Social Media Management",
+  "context_of_use": "The team uses the system to create and administer social media pages for the team, players, and coaches, and to assign responsible managers for those pages in order to communicate with fans and manage content.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "team"
+  ],
+  "supporting_actors": [
+    "System Authentication Service"
+  ],
+  "stakeholders_and_interests": [
+    "Team: Wants to create and manage official social media pages to communicate with fans and control published content.",
+    "Players: Want official social media pages managed by the team so they can keep in touch with fans through accurate, authorized content.",
+    "Coaches: Want official social media pages managed by the team so they can keep in touch with fans through accurate, authorized content.",
+    "Fans: Want reliable and up-to-date information about teams, players, and coaches through official social media pages.",
+    "IFA: Wants teams to use the system for fan communication so that information is consistent, reliable, and traceable in the league ecosystem."
+  ],
+  "description": "This use case describes how a team creates and administers social media pages for the team, players, and coaches within the system, and assigns social media managers responsible for managing the content of those pages.",
+  "triggering_event": "The team decides to create or administer social media pages for the team, players, or coaches within the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The team has a valid account in the IFA League Management System.",
+    "The team has access rights to manage its own social media pages within the system.",
+    "The system is operational and reachable by the team."
+  ],
+  "postconditions": [
+    "Requested team, player, and coach social media pages are created in the system according to the team’s input.",
+    "Selected social media pages are updated or administered as requested by the team.",
+    "At least one social media manager is assigned to each page for which the team has chosen to assign a manager.",
+    "All changes to social media pages and assignments are stored persistently in the system."
+  ],
+  "assumptions": [
+    "It is assumed that authentication is performed by an existing System Authentication Service, corresponding to the included \"authenticate\" use case.",
+    "It is assumed that only authorized team representatives can perform social media management actions for their own team within the system.",
+    "It is assumed that social media pages exist only within the IFA League Management System and do not represent external social media platforms.",
+    "It is assumed that the team can select which players and coaches are associated with the team in order to create their social media pages.",
+    "It is assumed that the concept of a \"social media manager\" refers to a user account within the system that can be assigned administrative rights over specific social media pages.",
+    "It is assumed that the system enforces that each social media page can have zero or more managers and that assigning a manager does not create new user types beyond those implied by the team role.",
+    "It is assumed that the team can only manage, create, or assign managers to social media pages linked to that same team.",
+    "It is assumed that all operations in this use case occur through a graphical user interface provided by the IFA League Management System."
+  ],
+  "requirements_met": [
+    "The system shall allow a team to create a social media page for the team so that the team can create personal content.",
+    "The system shall allow a team to create social media pages for different players associated with the team so that they can keep in touch with the fans.",
+    "The system shall allow a team to create social media pages for different coaches associated with the team so that they can keep in touch with the fans.",
+    "The system shall allow a team to manage the content and settings of its own team social media page so that the team can update fans about what they find important.",
+    "The system shall allow a team to assign a manager for each social media page so that the team can handle the management of its content.",
+    "The system shall require the team to authenticate successfully before performing any social media page creation, management, or manager assignment actions."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The rules and constraints for who can be assigned as a social media manager (e.g., must be a member of the team organization) are not defined.",
+    "The maximum number of social media pages per team, player, or coach is not specified.",
+    "The detailed structure of social media page content (e.g., posts, images, comments) is not defined in the current requirements.",
+    "The authorization model for differentiating between full managers and other page contributors is not specified.",
+    "The required audit trail or logging level for changes to social media pages and manager assignments is not described."
+  ],
+  "main_flow": [
+    "1. Team → System Authentication Service: The team initiates access to the social media management functions and provides authentication credentials; the System Authentication Service validates the credentials and establishes an authenticated session.",
+    "2. Team → System: The team navigates to the social media management area within the system; the system displays the social media management dashboard, including existing social media pages for the team, players, and coaches, if any.",
+    "3. Team → System: The team chooses to create a new team social media page and enters required team page details; the system validates the input and creates the team social media page linked to the team account.",
+    "4. Team → System: The team chooses to create new player social media pages and selects one or more players along with page details for each selected player; the system validates the input and creates the player social media pages linked to the corresponding players and the team.",
+    "5. Team → System: The team chooses to create new coach social media pages and selects one or more coaches along with page details for each selected coach; the system validates the input and creates the coach social media pages linked to the corresponding coaches and the team.",
+    "6. Team → System: The team selects an existing social media page (team, player, or coach) to administer and updates page information or configuration as desired; the system validates the updates and applies the changes to the selected social media page.",
+    "7. Team → System: The team selects a social media page (team, player, or coach) and selects one or more user accounts to act as social media managers for that page; the system validates the selections and assigns manager roles to the chosen user accounts for the selected page.",
+    "8. Team → System: The team reviews the list of social media pages and associated managers to confirm that the configuration is correct; the system displays the updated overview and confirms successful completion of social media page creation, administration, and manager assignment."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): The team decides not to create a team social media page and skips directly to creating player or coach social media pages. The system allows the team to proceed to Step 4 or Step 5 without creating a team page and continues the flow from the selected subsequent step.",
+    "AF-2 (from Step 4): The team decides to create player social media pages only for a subset of available players or for none at this time. The system creates player pages only for the selected players or, if none are selected, records no new player pages and allows the team to proceed to Step 5.",
+    "AF-3 (from Step 5): The team decides to create coach social media pages only for a subset of available coaches or for none at this time. The system creates coach pages only for the selected coaches or, if none are selected, records no new coach pages and allows the team to proceed to Step 6.",
+    "AF-4 (from Step 6): The team chooses to review existing pages without making any changes. The system presents the current configuration, registers no updates, and allows the team to continue to Step 7.",
+    "AF-5 (from Step 7): The team chooses not to assign any social media manager to a specific page and retains existing assignments. The system leaves manager assignments unchanged for that page and allows the team to proceed to Step 8."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The team provides invalid authentication credentials. The System Authentication Service rejects the credentials, the system informs the team of the failed authentication, and the use case is terminated without granting access to social media management functions.",
+    "EF-2 (from Step 3): The team enters invalid or incomplete data for the team social media page (such as missing required fields). The system rejects the creation request, displays validation error messages, and prompts the team to correct the data before retrying Step 3.",
+    "EF-3 (from Step 4): The team selects players that are not associated with the team or provides invalid page details. The system rejects the invalid selections or details, informs the team about the issue, and returns the team to Step 4 to adjust the input.",
+    "EF-4 (from Step 5): The team selects coaches that are not associated with the team or provides invalid page details. The system rejects the invalid selections or details, informs the team about the issue, and returns the team to Step 5 to adjust the input.",
+    "EF-5 (from Step 6): The team attempts to perform an update to a social media page that violates system rules (such as exceeding allowed field lengths). The system does not apply the invalid update, displays appropriate validation messages, and returns the team to Step 6 to correct the data.",
+    "EF-6 (from Step 7): The team attempts to assign a social media manager using a user account that does not have sufficient rights or does not exist. The system rejects the assignment, informs the team of the invalid selection, and returns the team to Step 7 to select valid manager accounts.",
+    "EF-7 (from any step): A system error or loss of connectivity occurs while processing social media page operations. The system stops the current operation, informs the team that an error has occurred, and preserves the last consistent state of social media pages and assignments; the use case is terminated or may be restarted by the team later."
+  ],
+  "information_for_steps": [
+    "1. Team credentials, authentication token, session identifier",
+    "2. Team identifier, list of existing social media pages (team, player, coach), page metadata",
+    "3. Team page details (page name, description, visual settings, team identifier), validation status, created team page identifier",
+    "4. Player identifiers, player page details for each selected player (page name, description, visual settings), validation status, created player page identifiers",
+    "5. Coach identifiers, coach page details for each selected coach (page name, description, visual settings), validation status, created coach page identifiers",
+    "6. Selected page identifier, current page configuration, updated page data, validation status, updated timestamp",
+    "7. Selected page identifier, candidate manager user identifiers, chosen manager user identifiers, manager role assignments, validation status",
+    "8. Summary list of social media pages with associated page identifiers, page types (team, player, coach), and assigned managers per page"
+  ]
+}

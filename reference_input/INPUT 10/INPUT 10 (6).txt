@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Book Appointments",
+"primary_actors": ["Receptionist"],
+"preconditions": ["Receptionist is logged in.", "Doctor schedules are available."],
+"postconditions": ["Appointment is booked."],
+"main_flow": [
+"1. Receptionist selects a patient.",
+"2. Receptionist views available time slots for the assigned doctor.",
+"3. Receptionist selects a date and time.",
+"4. System reserves the slot.",
+"5. System confirms the booking."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 4): Slot Taken. 1. System detects the slot was just filled. 2. System alerts Receptionist. 3. Resume Step 2."
+]
+}

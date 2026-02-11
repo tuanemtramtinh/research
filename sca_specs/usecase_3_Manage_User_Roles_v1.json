@@ -1,0 +1,89 @@
+{
+  "use_case_name": "Manage User Roles and Access Privileges",
+  "unique_id": "UC-003",
+  "area": "User and Access Management",
+  "context_of_use": "This use case describes how authorized organizational representatives configure roles and system privileges for users so that each user only has access to the tools and functions relevant to their responsibilities.",
+  "scope": "IFA Integrated League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "team manager",
+    "ifa"
+  ],
+  "supporting_actors": [
+    "Authentication Service",
+    "Authorization Service"
+  ],
+  "stakeholders_and_interests": [
+    "team manager: Wants to assign roles and system privileges to different team members to delegate operational tasks and save time.",
+    "ifa: Wants to restrict user access to only relevant tools so that the system is less confusing and more secure.",
+    "team staff member: Wants to receive appropriate access privileges that enable efficient collaboration without unnecessary restrictions or excessive access.",
+    "system security administrator: Wants clearly defined and enforced access privileges to reduce the risk of misuse or unauthorized operations.",
+    "ifa management: Wants consistent, controlled access to system tools to protect data integrity and ensure regulatory and organizational policy compliance."
+  ],
+  "description": "The use case enables authorized actors to assign, modify, and revoke user roles and associated system privileges so that each user’s access is limited to tools and functions relevant to their role within the IFA ecosystem.",
+  "triggering_event": "An authorized actor decides to configure or update user roles and associated system privileges.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The authorized actor is successfully authenticated in the IFA Integrated League Management System.",
+    "The authorized actor has sufficient privileges to manage user roles and access privileges.",
+    "The user accounts to be configured exist in the system.",
+    "The system has a defined set of configurable roles and associated privilege options."
+  ],
+  "postconditions": [
+    "The selected users have updated roles and associated system privileges stored and enforced by the system.",
+    "The affected users can access only the tools and functions that correspond to their assigned roles and privileges.",
+    "An audit record of the role and privilege changes is stored by the system for traceability."
+  ],
+  "assumptions": [
+    "The term \"IFA\" in the requirements includes one or more authorized IFA representatives who can configure global role and access policies.",
+    "The term \"team manager\" refers to an authenticated manager for a specific team with authority to manage roles and privileges for that team’s members only.",
+    "The system maintains a predefined catalog of roles and privileges that can be assigned and does not allow free-form creation of new capabilities through this use case.",
+    "The system enforces access restrictions based on configured roles and privileges at login and during feature invocation.",
+    "The system maintains an internal user directory in which each user can be uniquely identified and selected for role assignment.",
+    "Access restriction to \"only relevant tools\" is implemented purely through configuration of existing tool access, without adding new tools or altering tool behavior."
+  ],
+  "requirements_met": [
+    "The system shall allow a team manager to assign roles and system privileges to different members on their team.",
+    "The system shall allow an authorized IFA representative to configure role-based access so that users only see and can use tools relevant to their responsibilities.",
+    "The system shall store and enforce configured roles and associated system privileges for each user at every access attempt.",
+    "The system shall record changes to user roles and privileges for audit and traceability purposes.",
+    "The system shall ensure that users without assigned privileges to a tool cannot access or invoke that tool."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific mapping between organizational positions and system roles has not been defined.",
+    "The level of granularity for system privileges (per feature, per module, per action) has not been specified.",
+    "It is unclear whether changes to roles and privileges must be reviewed or approved by another actor before taking effect.",
+    "The required retention period and detail level for audit records of role and privilege changes have not been specified.",
+    "The policy for resolving conflicts when multiple roles with differing privileges are assigned to the same user has not been defined."
+  ],
+  "main_flow": [
+    "1. team manager or ifa → The actor authenticates to the system and navigates to the user role management area; the system displays the role management interface with available users and existing role configurations according to the actor’s permissions.",
+    "2. team manager or ifa → The actor selects a specific user or group of users to manage; the system retrieves and displays current roles and associated privileges for the selected user or users.",
+    "3. team manager or ifa → The actor selects one or more existing roles to assign, modify, or remove for the selected user or users; the system highlights the selected roles and shows the associated default privilege set for each selected role.",
+    "4. team manager or ifa → The actor reviews and, where permitted, adjusts the detailed privilege options associated with the selected roles (such as enabling or disabling access to specific tools or functions); the system updates the pending configuration to reflect the requested privilege changes without yet committing them.",
+    "5. team manager or ifa → The actor confirms and submits the updated role and privilege configuration for the selected user or users; the system validates the configuration against predefined access control rules and organizational constraints.",
+    "6. system → Upon successful validation, the system stores the updated roles and privileges for the affected user or users and records an audit entry describing the change.",
+    "7. system → The system activates the updated access configuration so that, on subsequent interactions, each affected user can access only the tools and functions associated with their assigned roles and privileges, and the system displays a confirmation of successful update to the actor."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): The actor wants to search or filter users before selection. The actor specifies search or filter criteria such as name, team, or existing role; the system filters and presents the matching subset of users. The actor then selects a user from the filtered list and continues with Step 3.",
+    "AF-2 (from Step 3): The actor decides to remove all roles from a user to effectively revoke their access. The actor deselects all roles for the chosen user; the system indicates that the user will have no accessible tools after confirmation. The actor confirms the configuration in Step 5, and the flow continues with Step 6, resulting in a user with no active tool access.",
+    "AF-3 (from Step 4): The actor chooses to revert privilege adjustments to role defaults before confirmation. The actor selects an option to reset privileges to the role’s default configuration; the system restores the default privilege set for the selected roles and displays the reset configuration. The flow then continues with Step 5."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The actor fails authentication or lacks access to the role management area. The system denies access, displays an appropriate error message indicating insufficient permissions or failed login, does not display the role management interface, and the use case terminates without changes.",
+    "EF-2 (from Step 5): The submitted configuration violates access control rules or organizational constraints. The system rejects the configuration, displays validation error messages indicating which role or privilege assignments are not allowed, keeps the current stored roles and privileges unchanged, and returns the actor to the configuration view so they can adjust the settings or cancel the operation.",
+    "EF-3 (from Step 6): A system error occurs while storing the updated roles and privileges or writing the audit record. The system rolls back the attempted changes, preserves the previous role and privilege configuration, logs the error for technical review, informs the actor that the update could not be completed due to a system problem, and the use case ends without applying any changes."
+  ],
+  "information_for_steps": [
+    "1. Actor identity credentials, session token, list of accessible administration modules.",
+    "2. User identifier, user profile summary, current roles, current privileges.",
+    "3. Available role catalog, selected roles, default privilege sets per role.",
+    "4. Privilege options per role, selected privilege flags for tools and functions, pending configuration state.",
+    "5. Submitted role and privilege configuration, organizational access control rules, validation constraints.",
+    "6. Updated role-to-user mappings, updated privilege-to-user mappings, audit log entry details (actor, timestamp, changed values).",
+    "7. Effective access control list for each affected user, confirmation message content, status of configuration activation."
+  ]
+}

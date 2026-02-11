@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Suggest Solutions",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "Congestion is detected in the current model.",
+      "The Planner requests assistance."
+    ],
+    "postconditions": [
+      "A list of automated traffic solutions is presented to the Planner."
+    ],
+    "main_flow": [
+      "1. Planner identifies a problem area and clicks 'Get Suggestions'. → System scans the area.",
+      "2. System triggers the 'Analyze Traffic Conditions' use case to understand the current congestion severity. → (Include Use Case: Analyze Traffic Conditions).",
+      "3. System processes the analysis against known traffic patterns and mathematical models. → System generates a list of potential measures (e.g., adaptive lights, rerouting).",
+      "4. System presents the suggested solutions to the Planner for inspiration. → Planner reviews the suggestions."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): No Solution Found.",
+      "1. At step 3, System cannot calculate a viable improvement within constraints. → System returns an empty list with a message 'No automated solutions available'.",
+      "2. Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Model Error.",
+      "1. At step 2, The analysis encounters a calculation error. → System aborts the suggestion process and notifies the Planner."
+    ]
+  }

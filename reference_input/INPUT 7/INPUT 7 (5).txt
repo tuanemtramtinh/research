@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Share Wearable Device Data",
+"primary_actors": ["Patient"],
+"preconditions": ["Patient has a wearable device connected to the system."],
+"postconditions": ["Data is shared with healthcare professionals."],
+"main_flow": [
+"1. Patient initiates the process to share wearable data.",
+"2. System retrieves data collected from the device.",
+"3. Patient confirms the data to be shared with healthcare professionals.",
+"4. System uploads the data to the patient's medical record.",
+"5. System notifies the Doctor of new external data."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Select Data Types. 1. Patient filters specific metrics (e.g., heart rate only) to share. 2. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 2): Device Sync Error. 1. System cannot connect to the wearable device. 2. System prompts Patient to reconnect. 3. Use Case ends."
+]
+}

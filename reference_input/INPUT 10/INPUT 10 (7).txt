@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Assign Patient Beds",
+"primary_actors": ["Receptionist"],
+"preconditions": ["Patient requires admission.", "Bed availability is known."],
+"postconditions": ["Patient is assigned to a specific bed."],
+"main_flow": [
+"1. Receptionist identifies a patient needing hospitalization.",
+"2. Receptionist checks the system for available beds.",
+"3. Receptionist selects an available bed.",
+"4. System assigns the patient to the bed.",
+"5. System updates the bed status to 'Occupied'."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 2): No Beds Available. 1. System shows zero availability. 2. Receptionist triggers overflow protocol (manual). 3. Use Case ends."
+]
+}

@@ -1,0 +1,45 @@
+{
+  "use_case_name": "Analyze historical data report",
+  "unique_id": "UC-002",
+  "area": "Requirements Domain",
+  "context_of_use": "The primary actor performs the use case within the system's operational context.",
+  "scope": "Target System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Primary Actor"
+  ],
+  "supporting_actors": [
+    "System"
+  ],
+  "stakeholders_and_interests": [
+    "Primary Actor: Achieve the goal described in the use case."
+  ],
+  "description": "Enable Primary Actor to perform .",
+  "triggering_event": "Primary Actor initiates ''.",
+  "trigger_type": "External",
+  "preconditions": [
+    "None"
+  ],
+  "postconditions": [
+    "Outcome recorded by system"
+  ],
+  "assumptions": [
+    "The actor has appropriate access to the system."
+  ],
+  "requirements_met": [
+    "The system shall support ''."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Actor input",
+    "2. System response",
+    "3. Confirmation"
+  ]
+}

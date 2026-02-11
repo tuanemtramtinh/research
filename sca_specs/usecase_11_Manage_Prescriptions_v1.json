@@ -1,0 +1,102 @@
+{
+  "use_case_name": "Manage Prescriptions",
+  "unique_id": "UC-011",
+  "area": "Prescription Management",
+  "context_of_use": "This use case describes how doctors create and transfer prescriptions and how patients and pharmacists interact with those prescriptions through the hospital management system.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor",
+    "patient",
+    "pharmacist"
+  ],
+  "supporting_actors": [
+    "pharmacy information system"
+  ],
+  "stakeholders_and_interests": [
+    "doctor: Wants to create accurate prescriptions and transfer them efficiently to pharmacy information systems to provide appropriate medication.",
+    "patient: Wants to request and later use prescriptions conveniently as part of remote medication management.",
+    "pharmacist: Wants to view transferred prescriptions to identify required medication for patients.",
+    "hospital: Wants prescriptions to be handled accurately and efficiently to support clinical workflow and reduce errors.",
+    "pharmacy information system provider: Wants prescriptions to be transferred in a form that can be processed automatically."
+  ],
+  "description": "This use case specifies how a doctor creates prescriptions for patients, how the system transfers those prescriptions to pharmacy information systems, and how patients and pharmacists subsequently interact with these prescriptions for viewing and requesting purposes.",
+  "triggering_event": "A doctor decides to prescribe medication for a patient, or a patient decides to request a new prescription through the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor is an authorized user of the hospital management system with permission to create prescriptions.",
+    "The patient exists in the hospital management system with at least minimal identifying information.",
+    "The pharmacist is an authorized user of the pharmacy information system that can receive prescription data from the hospital management system.",
+    "The hospital management system is connected to the pharmacy information system for prescription transfer.",
+    "The patient has access credentials to the hospital management system to submit prescription requests."
+  ],
+  "postconditions": [
+    "A prescription created by the doctor is stored in the hospital management system and is associated with the correct patient.",
+    "The prescription is transferred to the pharmacy information system for subsequent processing by pharmacists.",
+    "The prescription is available for viewing by authorized patients through the hospital management system.",
+    "The prescription is available for viewing by authorized pharmacists through the pharmacy information system.",
+    "Patient-submitted prescription requests are recorded in the hospital management system and are available to doctors for further action."
+  ],
+  "assumptions": [
+    "It is assumed that user authentication and authorization are handled by another use case and that only authenticated actors can access prescription-related functionality.",
+    "It is assumed that the pharmacy information system is an external system capable of receiving structured prescription data from the hospital management system.",
+    "It is assumed that the detailed medical content and validation of prescription items (such as dosage rules and drug interactions) are handled outside this use case.",
+    "It is assumed that patient prescription requests created through online appointment scheduling or mobile devices are represented to the doctor as prescription request records within the hospital management system.",
+    "It is assumed that the act of a patient requesting a new prescription does not itself create a finalized prescription but initiates a request that requires later doctor approval handled by another use case.",
+    "It is assumed that all data transfers between the hospital management system and the pharmacy information system comply with applicable privacy and security regulations, which are addressed by separate security and compliance use cases."
+  ],
+  "requirements_met": [
+    "The system shall allow doctors to write prescriptions for patients so that appropriate medication can be provided.",
+    "The system shall automatically transfer doctor-created prescriptions to pharmacy information systems so that prescriptions can be processed efficiently.",
+    "The system shall allow pharmacists to view prescriptions that have been transferred from the hospital management system so that they know what medication patients need.",
+    "The system shall allow patients to request new prescriptions through online appointment scheduling so that they can manage their medication remotely.",
+    "The system shall allow patients to request new prescriptions on a mobile device so that they can manage their medication remotely."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The business rules for approving or rejecting patient prescription requests by doctors are not defined.",
+    "The detailed prescription data format and interoperability requirements with different pharmacy information systems are not specified.",
+    "The retention period and archival rules for stored prescriptions are not described.",
+    "The specific access control rules determining which prescriptions a patient can view are not fully detailed in this context.",
+    "The error handling behavior in case of failed transfers to the pharmacy information system requires clarification from stakeholders."
+  ],
+  "main_flow": [
+    "1. doctor initiates prescription creation for a selected patient → System displays an interface for entering prescription details linked to the chosen patient.",
+    "2. doctor enters prescription details for the patient → System validates the entered prescription data for completeness and format.",
+    "3. doctor confirms the prescription entry → System saves the prescription as a new record associated with the patient.",
+    "4. System prepares the saved prescription for transfer → System formats the prescription data for the connected pharmacy information system.",
+    "5. System sends the formatted prescription data to the pharmacy information system → pharmacy information system receives the prescription for further processing by pharmacists.",
+    "6. System stores a record of the transfer status with the prescription → System marks the prescription as transferred and keeps it available for audit and viewing.",
+    "7. patient submits a new prescription request through the system interface → System records the patient’s prescription request and associates it with the patient’s profile for later review by a doctor.",
+    "8. pharmacist accesses the pharmacy information system to review prescriptions → pharmacy information system displays the list of transferred prescriptions and their details for the pharmacist to view.",
+    "9. patient accesses the hospital management system to review prescription-related information → System displays to the patient the prescription-related information that is available to the patient according to configured access rules.",
+    "10. System confirms completion of prescription management actions → System ensures that created prescriptions, transfer records, and patient requests are stored and retrievable according to the defined data model."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the doctor initiates prescription creation immediately following entry of clinical information in another workflow, the system may prepopulate patient identification and visit context fields on the prescription entry interface and then continue with Step 2.",
+    "AF-2 (from Step 5): If the pharmacy information system is temporarily unavailable but marked as supporting queued transfers, the system queues the formatted prescription data for later transmission, records the queued status with the prescription, and then proceeds directly to Step 6 when the queue record is created.",
+    "AF-3 (from Step 7): If the patient submits a prescription request using a mobile device interface, the system processes the request using the same business logic as for other channels, records the source as mobile in the request metadata, and then continues with Step 8 when a pharmacist later accesses transferred prescriptions.",
+    "AF-4 (from Step 8): If the pharmacist filters prescriptions by patient or by date range, the pharmacy information system applies the requested filters and then displays the filtered list of transferred prescriptions, after which the flow continues within Step 8 for detailed viewing.",
+    "AF-5 (from Step 9): If the patient accesses prescription-related information immediately after submitting a new prescription request, the system displays the newly created request with a status indicating that it is pending doctor review, and then resumes the normal viewing behavior of Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the entered prescription details are incomplete or contain invalid values according to system validation rules, the system rejects the current input, highlights the invalid or missing fields, displays an error message indicating that the prescription cannot be saved, and returns the doctor to the prescription entry interface without creating a prescription record.",
+    "EF-2 (from Step 5): If transfer of the prescription to the pharmacy information system fails and queuing is not available, the system marks the prescription as not transferred, logs the failure event, informs the doctor that the automatic transfer did not complete, and leaves the prescription stored locally for later manual or automated retry initiated outside this use case.",
+    "EF-3 (from Step 7): If the patient loses connectivity or the session expires while submitting a new prescription request, the system does not save a partial request, discards any incomplete data that cannot be validated, and requires the patient to restart the request submission process upon next login.",
+    "EF-4 (from Step 8): If the pharmacist cannot be authenticated in the pharmacy information system, the system denies access to transferred prescriptions, displays an authorization error, and terminates the pharmacist’s interaction with prescription data in this flow.",
+    "EF-5 (from Step 9): If the patient attempts to access prescription-related information without appropriate authorization or if the patient session is invalid, the system prevents access to the requested prescription-related data, displays an access denied or session invalid message, and terminates the viewing attempt."
+  ],
+  "information_for_steps": [
+    "1. Patient identifier, doctor identifier, patient selection data.",
+    "2. Prescription details, medication name, dosage information, administration instructions, duration, diagnosis or indication reference.",
+    "3. Prescription record identifier, timestamp of creation, doctor identifier, patient identifier.",
+    "4. Prescription record data, transfer format specification, destination pharmacy system identifier.",
+    "5. Formatted prescription message, transfer protocol information, pharmacy information system endpoint.",
+    "6. Transfer status flag, transfer timestamp, transfer log entry identifier, audit data.",
+    "7. Patient prescription request details, patient identifier, channel information (e.g., online scheduling or mobile), request timestamp.",
+    "8. List of transferred prescriptions, prescription identifiers, patient identifiers, prescription content for viewing by pharmacists.",
+    "9. Patient-accessible prescription-related information, prescription identifiers, request status indicators, access control attributes.",
+    "10. Aggregated prescription records, transfer status records, patient request records, audit trail entries."
+  ]
+}

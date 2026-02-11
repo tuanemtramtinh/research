@@ -1,0 +1,98 @@
+{
+  "use_case_name": "Manage Dataset Metadata",
+  "unique_id": "UC-011",
+  "area": "Research Data Management",
+  "context_of_use": "A depositor manages descriptive and subject-specific metadata for a dataset record through a web-based deposit interface to improve discoverability while minimising manual data entry.",
+  "scope": "Bath Research Data Archive System",
+  "level": "User-goal",
+  "primary_actors": [
+    "depositor"
+  ],
+  "supporting_actors": [
+    "External University Systems Providing Metadata",
+    "Previous Deposits Metadata Store"
+  ],
+  "stakeholders_and_interests": [
+    "Depositor: Wants to minimise time spent on metadata entry while ensuring datasets are easily discoverable within their discipline.",
+    "Researchers in the depositor's discipline: Want subject-specific discoverability metadata so that relevant datasets can be located easily.",
+    "Bath Research Data Archive administrator: Wants consistent and sufficiently rich metadata to support discovery and reporting.",
+    "Research Information manager: Wants reliable metadata to support analysis of research outputs and impact.",
+    "Funding bodies: Want assurance that datasets are described and discoverable to maximise the impact of funded research."
+  ],
+  "description": "This use case allows a depositor to manage metadata for a dataset record, including automatic population of metadata fields from other University systems and previous deposits, and manual addition of subject-specific discoverability metadata, to improve dataset discoverability and reduce repeated manual entry.",
+  "triggering_event": "The depositor initiates creation or editing of a dataset record in the Bath Research Data Archive System.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The depositor has valid access to the Bath Research Data Archive System.",
+    "The depositor has started a dataset deposit or opened an existing dataset record for editing within the system.",
+    "The dataset record has a unique internal identifier within the system.",
+    "Connectivity between the Bath Research Data Archive System and the relevant University systems providing metadata is available for automatic metadata retrieval."
+  ],
+  "postconditions": [
+    "The dataset record in the Bath Research Data Archive System stores the completed descriptive and subject-specific discoverability metadata entered or confirmed by the depositor.",
+    "Any metadata automatically retrieved from other University systems and previous deposits that is accepted by the depositor is persistently stored with the dataset record.",
+    "Stored metadata for the dataset record is available to the system's discovery and search functions according to existing indexing mechanisms."
+  ],
+  "assumptions": [
+    "It is assumed that the depositor is already authenticated by the Bath Research Data Archive System before initiating this use case, as authentication is handled by another use case.",
+    "It is assumed that the Bath Research Data Archive System has configured integrations with one or more University systems capable of providing metadata about the depositor and their research outputs.",
+    "It is assumed that the system maintains a history or template of metadata from previous deposits that can be used for auto-population.",
+    "It is assumed that automatic metadata population may provide partial metadata, which the depositor can review, edit, or supplement manually.",
+    "It is assumed that the format and structure of subject-specific discoverability metadata fields are predefined and presented by the system, and this use case does not define new metadata schemas.",
+    "It is assumed that saving metadata updates does not immediately publish or change the public visibility of the dataset, which is controlled by separate use cases.",
+    "It is assumed that any failures to connect to external University systems will be handled within this use case as exception flows without adding new system capabilities beyond error reporting and fallback to manual entry."
+  ],
+  "requirements_met": [
+    "The system shall allow the depositor to attach subject-specific discoverability metadata to dataset records so that researchers in the depositor's discipline can find the data more easily.",
+    "The system shall automatically fill available metadata fields for a dataset record using information obtained from other configured University systems, where such information exists.",
+    "The system shall present metadata automatically filled from other University systems to the depositor for review and possible modification before it is saved with the dataset record.",
+    "The system shall reuse and propose metadata values remembered from the depositor's previous deposits to reduce repeated manual data entry.",
+    "The system shall allow the depositor to manually add, edit, and confirm all metadata fields, including subject-specific discoverability metadata, regardless of whether auto-populated values are available.",
+    "The system shall persistently store the final set of metadata values confirmed by the depositor with the corresponding dataset record."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific University systems from which metadata is to be automatically retrieved have not been identified and may affect integration behaviour and latency.",
+    "The mapping rules between metadata in external University systems and metadata fields in the Bath Research Data Archive System have not been defined.",
+    "The exact structure, vocabularies, and controlled terms for subject-specific discoverability metadata are not specified and require definition.",
+    "The policy for when and how metadata from previous deposits is remembered and suggested (e.g., per depositor, per project, or global templates) has not been clarified.",
+    "No rule is specified for conflict resolution when metadata from different external University systems provides differing values for the same field."
+  ],
+  "main_flow": [
+    "1. Depositor selects to create a new dataset record or edit an existing dataset record in the web interface → System opens the dataset metadata form associated with the selected dataset record.",
+    "2. Depositor requests to manage metadata by navigating to the metadata section of the dataset form → System displays all available descriptive and subject-specific metadata fields for the dataset record.",
+    "3. Depositor initiates automatic metadata population by opening the metadata form for the current dataset → System retrieves available metadata related to the dataset and depositor from configured University systems and from the depositor's previous deposits.",
+    "4. Depositor waits while the system processes automatic population → System pre-fills relevant metadata fields with retrieved values and clearly indicates which fields were auto-populated and their sources.",
+    "5. Depositor reviews the auto-populated metadata values displayed on the form → System allows modification of any auto-populated value and maintains the edited values in the form state.",
+    "6. Depositor adds or edits general descriptive metadata fields as needed (for example, title, description, keywords, and related information already defined by the system) → System records the depositor's input in the corresponding metadata fields in the form state.",
+    "7. Depositor navigates to the subject-specific discoverability metadata section of the form → System presents fields or controls for entering subject-specific discoverability metadata according to the predefined structure.",
+    "8. Depositor enters or updates subject-specific discoverability metadata for the dataset record → System records the subject-specific discoverability metadata values in the form state.",
+    "9. Depositor reviews all metadata sections to ensure completeness and accuracy → System displays a consolidated view of all metadata values currently entered for the dataset record.",
+    "10. Depositor confirms the metadata by submitting or saving the dataset record metadata → System validates the metadata according to existing validation rules and, upon successful validation, saves the confirmed metadata to persistent storage associated with the dataset record.",
+    "11. Depositor observes confirmation that metadata changes have been applied → System presents a confirmation message and updates any internal indexes so that the stored metadata is available for subsequent discovery operations."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): If the depositor chooses to ignore some or all auto-populated metadata values because they are not suitable, the depositor manually clears or overwrites those values before proceeding. The system accepts the depositor-entered values, replaces the auto-populated values in the form state, and the flow continues with Step 5.",
+    "AF-2 (from Step 7): If subject-specific discoverability metadata is not applicable to the dataset as determined by the depositor, the depositor leaves the subject-specific metadata fields empty or minimal and proceeds directly to review. The system accepts the current state of the metadata without requiring subject-specific entries, and the flow continues with Step 9.",
+    "AF-3 (from Step 9): If, during review, the depositor identifies additional metadata to refine (for example, updating keywords or subject categories), the depositor navigates back to the relevant metadata section and edits the fields. The system updates the form state with the new values, and the flow returns to Step 9 for a repeated review before proceeding to Step 10."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): If the system cannot retrieve metadata from one or more configured University systems due to connectivity or service errors, the system logs the failure, informs the depositor that automatic metadata retrieval from those systems is temporarily unavailable, and displays empty or previously stored values for the affected fields. The depositor may then proceed to enter metadata manually starting from Step 5, and no auto-populated values from the unavailable systems are used.",
+    "EF-2 (from Step 10): If metadata validation fails because required metadata fields are missing or contain invalid values according to existing validation rules, the system highlights the fields with issues, displays validation messages describing the problems, and does not save the metadata. The depositor corrects the highlighted fields and resubmits the metadata, returning to Step 10 upon resubmission.",
+    "EF-3 (from Step 10): If an internal system error occurs while saving the metadata to persistent storage, the system displays an error message indicating that the metadata could not be saved, preserves the depositor's current metadata entries in the session where technically feasible, and does not change the previously stored metadata for the dataset record. The use case terminates with the dataset metadata remaining in its prior stored state until the depositor retries the operation in a new attempt."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier, depositor identity, existing dataset metadata (if editing).",
+    "2. List of metadata fields, including descriptive metadata fields and subject-specific discoverability fields as configured in the system.",
+    "3. External system identifiers for the depositor and their outputs, metadata records from other University systems, metadata templates from previous deposits.",
+    "4. Auto-populated metadata field values, indicators of data source for each auto-populated field.",
+    "5. Reviewed and possibly modified metadata field values, field-level change status.",
+    "6. Descriptive metadata entered by depositor such as title, description, keywords, and related dataset information already defined in the system.",
+    "7. Configuration of subject-specific discoverability metadata fields, such as subject categories or discipline-specific descriptors defined by the system.",
+    "8. Subject-specific discoverability metadata values entered or updated by the depositor.",
+    "9. Consolidated metadata view composed of all descriptive and subject-specific metadata values currently in the form state.",
+    "10. Full metadata record for the dataset, including all fields to be validated, validation rules and their outcomes, persistent storage structures for the dataset metadata.",
+    "11. Confirmation message content, updated dataset metadata record as stored, references used for internal indexing and discovery mechanisms."
+  ]
+}

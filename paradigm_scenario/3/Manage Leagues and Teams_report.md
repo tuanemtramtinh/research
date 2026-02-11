@@ -1,0 +1,66 @@
+## Use Case Name
+**Manage Leagues and Teams**
+
+## Description
+Enables IFA administrators to create, update, and delete leagues and teams, including schedules and budgets.
+
+## Primary Actor
+IFA Administrator
+
+## Problem Domain Context
+The IT system must enable secure user registration and authentication for all stakeholders, provide a role‑based dashboard for IFA administrators to view and manage leagues, teams, schedules, budgets, and referee assignments, support public, real‑time access to game, team, and league data, allow users to subscribe to and receive notifications about matches, tickets, and social media events, support multilingual interfaces and fast response times, facilitate referees’ mobile reporting of match events and automatic data updates, enable teams to post and comment on social media content within the application, allow IFA administrators to generate and view analytics from live referee data, and maintain a single, secure communication channel for all stakeholders while ensuring budgetary rules and scheduling constraints are enforced.
+
+## Preconditions
+None.
+
+## Postconditions
+* The league and/or team data are stored in the system database.
+* Relevant stakeholders are notified of changes.
+* Updated schedules and budgets are reflected in the dashboard.
+
+## Main Flow
+1. **IFA Administrator logs in** to the secure dashboard.  
+2. Administrator **navigates to the “Leagues & Teams” module.**  
+3. System **displays a list of existing leagues** with options to add, edit, or delete.  
+4. Administrator selects **“Create New League.”**  
+5. System **presents a form** for league details (name, sport, season, budget, etc.).  
+6. Administrator **fills in league details** and submits the form.  
+7. System **validates input** against business rules (unique name, budget limits).  
+8. If valid, system **creates the league record** and returns a success message.  
+9. Administrator selects **“Create New Team”** within the chosen league.  
+10. System presents a form for team details (name, coach, budget, roster, etc.).  
+11. Administrator **fills in team details** and submits.  
+12. System **validates the input** (unique team name, budget compliance, roster size).  
+13. If valid, system **creates the team record** and links it to the league.  
+14. Administrator **sets up the schedule** by selecting dates, venues, and opponents.  
+15. System **checks scheduling constraints** (no double‑booking, venue availability).  
+16. If constraints pass, system **stores the schedule** and updates the league’s timeline.  
+17. Administrator **reviews the league and team dashboards**, confirming all data.  
+18. System **sends notifications** to relevant stakeholders (teams, referees, fans).  
+19. **Use case completes.**
+
+## Alternative Flows
+1. *Alternative to Step 7*  
+   1.1. If validation fails (e.g., duplicate league name), system **displays error messages** and prompts the administrator to correct the input.  
+2. *Alternative to Step 12*  
+   2.1. If team budget exceeds the league’s allocated budget, system **alerts the administrator** and offers options to adjust the budget or reject the creation.  
+3. *Alternative to Step 15*  
+   3.1. If a scheduling conflict is detected, system **provides conflict details** and suggests alternative dates or venues.  
+4. *Alternative to Step 18*  
+   4.1. If notification delivery fails (e.g., email server down), system **queues the message** and retries automatically, logging the failure.
+
+## Exceptions
+1. **Authentication Failure** (Step 1)  
+   *System logs the attempt, displays an error, and terminates the session.*  
+
+2. **Database Connectivity Loss** (any step involving data persistence)  
+   *System rolls back the transaction, alerts the administrator, and queues the operation for retry.*  
+
+3. **Budget Exceeded** (Step 12 or 15)  
+   *System aborts the current operation, shows a detailed budget violation message, and requires administrator intervention.*  
+
+4. **Schedule Conflict** (Step 15)  
+   *System aborts scheduling, presents conflict details, and allows the administrator to resolve the issue.*  
+
+5. **Notification Failure** (Step 18)  
+   *System logs the failure, retries after a configurable interval, and notifies the administrator if the notification remains unsent after N attempts.*

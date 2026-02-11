@@ -1,0 +1,30 @@
+﻿
+{
+    "use_case_name": "View Real-Time Measurement (Traffic, Heatmaps & Environment)",
+    "primary_actors": [
+      "UMD Employee"
+    ],
+    "preconditions": [
+      "The UMD Employee is logged into the system.",
+      "The system is connected to the real-time sensor network in Wonderland."
+    ],
+    "postconditions": [
+      "Real-time traffic, heatmaps, and environmental measures are displayed on the map.",
+      "The UMD Employee is informed of the current situation."
+    ],
+    "main_flow": [
+      "1. UMD Employee selects the 'Real-Time Monitoring' dashboard. → System loads the up-to-date map of Wonderland including streets and obstacles.",
+      "2. System retrieves data from traffic sensors. → System overlays a heat map indicating crowdedness and traffic congestion.",
+      "3. UMD Employee enables the environmental view. → System retrieves data from environmental measure points.",
+      "4. System displays real-time CO2 emissions, noise levels, and air pollution on the map. → UMD Employee monitors the situation."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): View Specific Environmental Measure.",
+      "1. At step 3, UMD Employee selects to view only 'Noise Levels'. → System filters the map to show only noise data points.",
+      "2. Proceed to Step 4."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Sensor Data Unavailable.",
+      "1. At step 2, System fails to retrieve data from a specific sector. → System flags the area as 'Data Unavailable' and displays the last known state with a warning timestamp."
+    ]
+  },

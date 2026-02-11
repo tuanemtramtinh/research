@@ -1,0 +1,90 @@
+{
+  "use_case_name": "Assign Profile Manager",
+  "unique_id": "UC-011",
+  "area": "Team Profile Management",
+  "context_of_use": "A team designates a responsible person within the system to manage the team’s profile so that the team’s needs are represented accurately.",
+  "scope": "IFA Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "team"
+  ],
+  "supporting_actors": [
+    "IFA Web Application"
+  ],
+  "stakeholders_and_interests": [
+    "Team: Wants a responsible person to manage the team’s profile so that team needs are represented accurately in the system.",
+    "Team Profile Manager (as part of the team organization): Wants clear and exclusive responsibility for managing and updating the team’s profile information.",
+    "IFA administrator: Wants reliable, up-to-date team profile information to support scheduling, budgeting, and communication processes.",
+    "Fans: Want accurate and current team information so that they can follow and understand team-related news and data.",
+    "CIO: Wants consistent, centrally managed team profiles to improve communication and transparency among stakeholders."
+  ],
+  "description": "This use case describes how a team designates a responsible person in the IFA Web Application to manage the team’s profile, ensuring that the team’s needs and information are correctly represented in the system.",
+  "triggering_event": "The team decides to designate or change the responsible person for managing the team’s profile in the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA Web Application is operational and accessible to the team.",
+    "The team has an existing team profile in the system.",
+    "An authorized representative of the team is authenticated in the IFA Web Application.",
+    "The system maintains a list of persons or user accounts that can be associated with the team as responsible persons."
+  ],
+  "postconditions": [
+    "The system has recorded the designated responsible person as the profile manager for the team.",
+    "The designated responsible person has the granted capability within the system to manage the team’s profile according to existing system rules.",
+    "The team profile record is associated with the assigned profile manager in the system’s data.",
+    "Any previously assigned profile manager for the team, if different, is no longer marked as the active responsible person for that team’s profile."
+  ],
+  "assumptions": [
+    "It is assumed that the team interacts with the IFA Web Application through an authenticated representative authorized to make profile management decisions.",
+    "It is assumed that the system already supports user identification (e.g., via existing user accounts or contact records) that can be designated as the responsible person; this use case only assigns such a person and does not create new authentication mechanisms.",
+    "It is assumed that the responsible person is part of or formally associated with the team and is recognized by the team as having authority to manage the team’s profile.",
+    "It is assumed that the system enforces existing access control rules so that only authorized team representatives can assign or change the profile manager.",
+    "It is assumed that only one active profile manager is associated with a single team profile at a given time, and assigning a new one implicitly replaces the previous one.",
+    "It is assumed that the system provides a way for the team’s representative to view and select from eligible candidates (e.g., existing users linked to the team) without introducing any new user roles beyond what is implied.",
+    "It is assumed that assigning a profile manager does not, by itself, expose confidential budgeting or administrative data beyond permissions already defined elsewhere in the system."
+  ],
+  "requirements_met": [
+    "The system shall allow a team to designate a responsible person to manage the team’s profile in the system.",
+    "The system shall record the association between the team and the designated responsible person as the team’s profile manager.",
+    "The system shall ensure that the designated responsible person can manage the team’s profile information according to the system’s existing access control rules.",
+    "The system shall allow an authorized team representative to change the assigned profile manager for the team’s profile.",
+    "The system shall ensure that when a new profile manager is assigned, any previous profile manager is no longer treated as the active responsible person for that team’s profile."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The authorization policy for who within the team may assign or change the profile manager requires clarification.",
+    "The maximum number of times the team can reassign the profile manager over a given period is not defined.",
+    "Whether the previously assigned profile manager should receive a notification upon reassignment is not defined.",
+    "Whether the newly assigned profile manager must explicitly accept the responsibility before activation is not specified.",
+    "The exact data set and permissions granted to the assigned profile manager when managing the team’s profile are not fully specified."
+  ],
+  "main_flow": [
+    "1. Team → The team’s authorized representative logs into the IFA Web Application and accesses the team profile management area.",
+    "2. Team → The team’s authorized representative initiates the action to assign or update the responsible person for managing the team’s profile.",
+    "3. System → The system displays the current profile manager, if any, and shows available eligible candidates who can be designated as the responsible person.",
+    "4. Team → The team’s authorized representative selects one eligible candidate to be the responsible person for managing the team’s profile.",
+    "5. System → The system validates the selected candidate as eligible to be assigned as the profile manager for the team.",
+    "6. System → The system records the selected candidate as the team’s profile manager and, if applicable, replaces any previously assigned profile manager for that team.",
+    "7. System → The system confirms to the team’s authorized representative that the responsible person has been successfully assigned as the team’s profile manager."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If the team’s authorized representative is already authenticated and is currently viewing the team profile management area, the use case continues directly from Step 2 without requiring a new login or navigation.",
+    "AF-2 (from Step 4): If the team’s authorized representative decides to retain the currently assigned profile manager after viewing the available candidates, the representative cancels the assignment change, and the system keeps the existing profile manager and shows a confirmation that no changes were made; the use case then ends successfully.",
+    "AF-3 (from Step 3): If there is no previously assigned profile manager for the team, the system indicates that no current profile manager is set and proceeds to Step 4 with only the list of eligible candidates for initial assignment."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system cannot authenticate the team’s representative (e.g., invalid credentials or access denied according to existing rules), the system refuses access to the team profile management area, displays an appropriate error message, and the use case terminates without assigning a profile manager.",
+    "EF-2 (from Step 3): If no eligible candidates are available for selection as a responsible person, the system informs the team’s representative that no assignable candidates exist and does not allow the assignment to proceed; the use case terminates without changes to the profile manager.",
+    "EF-3 (from Step 5): If the system determines that the selected candidate is not eligible to be a profile manager based on existing access control rules, the system displays a validation error message, does not update the profile manager assignment, and returns the flow to Step 4 for a new selection.",
+    "EF-4 (from Step 6): If a technical failure occurs while recording the new profile manager (such as a database error), the system reports that the assignment could not be completed, rolls back any partial changes to the profile manager association, and the use case terminates without updating the profile manager."
+  ],
+  "information_for_steps": [
+    "1. Team identifier, team representative user credentials, session token.",
+    "2. Team identifier, action type (assign or update profile manager), team profile context.",
+    "3. Team identifier, current profile manager identifier (if any), list of eligible candidate identifiers and display names.",
+    "4. Selected candidate identifier, team identifier, selection timestamp.",
+    "5. Selected candidate identifier, eligibility rules and role assignments, access control data.",
+    "6. Team identifier, new profile manager identifier, previous profile manager identifier (if any), audit log entry details.",
+    "7. Team identifier, confirmation status, updated profile manager identifier, confirmation message content."
+  ]
+}

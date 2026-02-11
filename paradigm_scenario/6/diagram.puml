@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+' Define primary actors {outside system boundary}
+actor IFA
+actor Referee
+actor Fan
+actor "Team manager"
+
+' Define system and use cases
+rectangle "Football Management System" {
+
+    ' Base use cases (color #ADD8E6)
+    usecase "Define league policy" as UC1 #ADD8E6
+    usecase "Generate match schedule" as UC2 #ADD8E6
+    usecase "Log game event" as UC3 #ADD8E6
+    usecase "View live updates" as UC4 #ADD8E6
+    usecase "Monitor team budget" as UC5 #ADD8E6
+
+    ' Additional include / extend use cases (color #EAEAEA)
+    usecase "Send real‑time notifications" as UC6 #EAEAEA
+    usecase "Validate schedule constraints" as UC7 #EAEAEA
+
+    ' Relationships inside the system rectangle
+    UC1 <.. UC7 : "<<includes>>"
+    UC2 <.. UC7 : "<<includes>>"
+    UC3 ..> UC6 : "<<extends>>"
+    UC4 ..> UC6 : "<<extends>>"
+}
+
+' Actor–use case relationships
+IFA -- UC1
+IFA -- UC2
+Referee -- UC3
+Fan -- UC4
+"Team manager" -- UC5
+
+@enduml

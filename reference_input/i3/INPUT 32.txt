@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Manage Preferences",
+"primary_actors": ["Fan"],
+"preconditions": ["Fan is logged into the system."],
+"postconditions": ["Fan preferences (topics, language) are updated."],
+"main_flow": [
+"1. Fan navigates to the preferences settings.",
+"2. Fan selects the option to choose interested topics (e.g., specific teams, leagues).",
+"3. Fan selects their native language for the application interface.",
+"4. System saves the preferences.",
+"5. System updates the displayed content and language immediately."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Manage Notifications. 1. Fan chooses to configure notification alerts. 2. Include Use Case: Manage Notifications. 3. Resume Step 4."
+],
+"exception_flows": []
+}

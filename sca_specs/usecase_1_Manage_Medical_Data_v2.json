@@ -1,0 +1,98 @@
+{
+  "use_case_name": "Add Clinical Notes to Patient Record",
+  "unique_id": "UC-001",
+  "area": "Electronic Medical Records",
+  "context_of_use": "The use case is executed when a nurse uses the hospital management system to open a patient’s electronic medical record and add new clinical notes so that patient care information is documented and available to support medical treatment.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "nurse"
+  ],
+  "supporting_actors": [
+    "Electronic Medical Record System"
+  ],
+  "stakeholders_and_interests": [
+    "Nurse: Wants to be able to record notes about patients so that patient care information is documented.",
+    "Doctors: Want newly recorded nursing notes to be available in the patient’s medical record to support informed medical decisions.",
+    "Patients: Want their care information to be accurately and promptly documented so that treatment is based on current information.",
+    "Receptionists: Want patient records to contain up-to-date information that may support communication and coordination of care.",
+    "Systems Analysts: Want clinical data, including nursing notes, to be available in a structured form for prescriptive and predictive analytics.",
+    "Hospital Management: Wants consistent, complete, and timely documentation in electronic medical records to support quality of care and compliance.",
+    "System Administrator: Wants nursing notes to be stored in the central database and integrated with electronic medical records to reduce discrepancies between departments."
+  ],
+  "description": "This use case describes how a nurse records new clinical notes in a patient’s electronic medical record within the hospital management system so that patient care information is documented and becomes part of the patient’s medical history for subsequent clinical use.",
+  "triggering_event": "The nurse needs to document new patient care information or observations in the patient’s electronic medical record.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The nurse has authenticated access to the hospital management system with permissions to view and record notes in patient electronic medical records.",
+    "The patient has an existing electronic medical record in the hospital management system.",
+    "The hospital management system is connected to the electronic medical record data storage so that patient records can be retrieved and updated."
+  ],
+  "postconditions": [
+    "The patient’s electronic medical record contains the newly added clinical notes recorded by the nurse.",
+    "The newly recorded notes are stored persistently in the electronic medical record data storage and are available for authorized users in subsequent clinical workflows.",
+    "The system associates the new notes with the correct patient record, authoring nurse, and recording time."
+  ],
+  "assumptions": [
+    "It is assumed that the hospital management system already implements authentication and role-based access control so that only authorized nurses can record notes on patient records.",
+    "It is assumed that the structure of the electronic medical record, including where clinical notes are stored, is already defined and available within the system.",
+    "It is assumed that patient identifiers used by the nurse to locate patient records (such as patient ID, name, or appointment information) are consistently managed and uniquely identify patient records within the system.",
+    "It is assumed that any integration with central databases or other subsystems required for storing and retrieving patient records has been configured outside the scope of this use case.",
+    "It is assumed that the system records metadata for each note, such as author and timestamp, as part of the existing electronic medical record capabilities.",
+    "It is assumed that validation rules for required note content fields (for example, subject or body text) are already defined in the system configuration."
+  ],
+  "requirements_met": [
+    "The system shall allow a nurse to locate and open a patient’s electronic medical record for whom the nurse is authorized to record notes.",
+    "The system shall provide the nurse with an interface to enter new clinical notes associated with the currently opened patient record.",
+    "The system shall validate required fields of a clinical note before allowing it to be saved to the patient’s record.",
+    "The system shall store the newly entered clinical notes in the patient’s electronic medical record upon successful save.",
+    "The system shall associate each recorded note with the patient identifier, the nurse who entered the note, and the date and time of recording.",
+    "The system shall display the newly saved clinical notes as part of the patient’s medical history to authorized users after saving.",
+    "The system shall prevent saving of clinical notes when validation fails and shall inform the nurse about missing or invalid information."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific format and structure of clinical notes (free text only versus structured fields) are not defined.",
+    "Policies regarding who may edit or delete previously saved clinical notes and under what circumstances are not specified.",
+    "The required maximum time within which new notes must become visible across all relevant system views after saving is not defined.",
+    "Rules for handling concurrent updates when multiple users attempt to add or view notes for the same patient simultaneously are not specified.",
+    "Any legal or regulatory requirements for audit trails of modifications to clinical notes are not described."
+  ],
+  "main_flow": [
+    "1. Nurse logs into the hospital management system → System authenticates the nurse and displays the main dashboard with access to patient electronic medical records.",
+    "2. Nurse selects the option to search for a patient → System displays the patient search interface with available search criteria (for example, patient ID or name).",
+    "3. Nurse enters patient search criteria and submits the search → System searches existing patient electronic medical records and displays a list of matching patients.",
+    "4. Nurse selects the correct patient from the list of search results → System opens the selected patient’s electronic medical record overview.",
+    "5. Nurse chooses the function to add a new clinical note within the patient’s record → System displays a clinical note entry form associated with the selected patient.",
+    "6. Nurse enters clinical note content and any required related details into the note entry form → System dynamically validates input format where applicable and keeps the entered note data in the current session.",
+    "7. Nurse reviews the entered clinical note content for accuracy and completeness → System continues to display the note entry form with the entered data for confirmation.",
+    "8. Nurse submits the clinical note for saving → System performs validation of required fields and business rules for the clinical note.",
+    "9. System verifies that all required information is present and valid → System saves the clinical note to the patient’s electronic medical record with associated metadata such as author and timestamp.",
+    "10. Nurse views the updated patient record including the newly added clinical note → System refreshes the patient’s record view and displays the new clinical note as part of the patient’s medical history."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Patient list already filtered by context. Condition: The nurse accessed the patient search from a context where the patient is pre-identified (for example, from a current appointment list). Flow: At Step 3, the nurse confirms the pre-selected patient instead of performing a manual search → The system skips displaying multiple search results and opens the pre-identified patient’s electronic medical record directly → The flow continues at Step 4.",
+    "AF-2 (from Step 7): Nurse decides to discard entered note before saving. Condition: After reviewing the content, the nurse determines that the note should not be recorded. Flow: At Step 7, the nurse selects a cancel or discard option instead of submitting the note → The system discards the unsaved note data from the current session and returns to the patient’s electronic medical record overview without adding a new note → The use case ends successfully without changes to the record."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 3): Patient record not found. Condition: The system finds no patient records matching the search criteria entered by the nurse. Flow: At Step 3, after the nurse submits the search, the system determines that no matching records exist → The system displays a message indicating that no patient records were found for the given criteria and prompts the nurse to revise the search → The system returns the nurse to the patient search interface → The main flow may resume at Step 3 when the nurse re-enters search criteria.",
+    "EF-2 (from Step 4): Nurse is not authorized to access the selected patient record. Condition: Access control rules prevent the nurse from viewing or editing the selected patient’s electronic medical record. Flow: At Step 4, after the nurse selects a patient, the system checks access permissions and determines that the nurse is not authorized → The system displays an access denied message and does not open the patient’s record → The system returns the nurse to the list of search results or the search interface → The use case ends without accessing the patient record.",
+    "EF-3 (from Step 6): Session timeout or connection lost while entering note. Condition: The nurse’s session expires or network connectivity is lost before the note is submitted. Flow: At Step 6, while the nurse is entering note content, the system detects session timeout or connection loss → The system is unable to retain unsaved note data and redirects the nurse to the login screen with a message indicating that the session has expired or the connection was lost → After successful re-authentication, the nurse must repeat the steps to locate the patient and re-enter the note → The original attempt ends without saving the note.",
+    "EF-4 (from Step 8): Required fields missing or invalid when submitting the note. Condition: One or more required fields in the note entry form are empty or contain invalid data. Flow: At Step 8, when the nurse submits the note, the system validates the input and detects missing or invalid required information → The system displays validation error messages indicating which fields need correction and preserves the entered data in the form → The system returns the nurse to the note entry form → The main flow resumes at Step 6 when the nurse corrects the information.",
+    "EF-5 (from Step 9): System error while saving the clinical note. Condition: An internal error or data storage failure occurs when the system attempts to save the note. Flow: At Step 9, during the save operation, the system encounters an error preventing successful storage of the note → The system logs the error and displays a message to the nurse indicating that the note could not be saved and advising to try again later or contact support → The system does not create a new note entry in the patient’s record → The use case ends without the note being saved.",
+    "EF-6 (from Step 1): Nurse authentication fails. Condition: The nurse provides invalid login credentials or is not recognized as an authorized user. Flow: At Step 1, the system validates the supplied credentials and determines they are invalid or the account is not permitted to access patient records → The system displays an authentication error message and does not display the main dashboard → After a configured number of failed attempts, the system may temporarily block further login attempts according to existing security policies → The use case ends without allowing access to patient records."
+  ],
+  "information_for_steps": [
+    "1. Nurse user identifier, authentication credentials, user role information, access permissions.",
+    "2. Patient search option selection, available search filters such as patient ID, name, or other identifying attributes.",
+    "3. Entered patient search criteria, search request parameters, list of matching patient identifiers and basic demographic data.",
+    "4. Selected patient identifier, reference to the patient’s electronic medical record, patient overview data.",
+    "5. Command to add a new clinical note, linkage between the note entry form and the selected patient record.",
+    "6. Clinical note content fields such as note text and any structured attributes, temporary in-session representation of the note data.",
+    "7. Complete clinical note draft as entered by the nurse, including all text and structured elements displayed for review.",
+    "8. Submitted clinical note payload, validation rules for required fields and data formats.",
+    "9. Validated clinical note data, metadata including nurse identifier, timestamp, and patient identifier, persistent storage records for the note.",
+    "10. Updated set of clinical notes for the patient, including the newly saved note, display configuration for the patient’s medical history view."
+  ]
+}

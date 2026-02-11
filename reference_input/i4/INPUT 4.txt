@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Manage prescription",
+    "primary_actors": ["Doctor"],
+    "preconditions": [
+      "The Doctor is logged into the Hospital Management System.",
+      "The Patient is registered in the system.",
+      "The Patient has an active consultation or visit record."
+    ],
+    "postconditions": [
+      "A new prescription record is created and stored in the central database.",
+      "The prescription details are automatically transmitted to the pharmacy information system."
+    ],
+    "main_flow": [
+      "1. Doctor selects the 'Write Prescription' function for a specific Patient. → System displays the prescription entry form.",
+      "2. Doctor enters medication details (name, dosage, frequency) and instructions. → System validates the input against the drug database.",
+      "3. Doctor confirms the prescription. → System saves the prescription to the Patient's medical record.",
+      "4. System automatically transfers the prescription data to the external pharmacy system. → System displays a success confirmation to the Doctor."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Medication interaction detected.",
+      "1. At step 2, Doctor enters a medication that interacts with the Patient's existing meds. → System displays a warning alert listing the interaction risks.",
+      "2. Doctor acknowledges the warning and provides a justification override. → System records the justification and proceeds to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Pharmacy system unavailable.",
+      "1. At step 4, System attempts to transfer data but fails to connect to the pharmacy system. → System flags the prescription as 'Pending Transmission' and notifies the Doctor to print a physical copy."
+    ]
+  },

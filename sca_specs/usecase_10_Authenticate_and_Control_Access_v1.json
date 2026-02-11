@@ -1,0 +1,95 @@
+{
+  "use_case_name": "Authenticate and Control Access",
+  "unique_id": "UC-010",
+  "area": "User Authentication and Authorization Management",
+  "context_of_use": "The system authenticates users and allows authorized system administrators to configure user access rights and security mechanisms, including mandatory two-step authentication for all users, so that clinical users such as doctors can access the system efficiently and securely.",
+  "scope": "Healthcare Information System",
+  "level": "User-goal",
+  "primary_actors": [
+    "doctor",
+    "system administrator"
+  ],
+  "supporting_actors": [
+    "Authentication Service"
+  ],
+  "stakeholders_and_interests": [
+    "Doctor: Requires fast and reliable authentication to avoid delays during patient appointments.",
+    "System administrator: Requires the ability to configure and manage user access rights and security mechanisms to maintain appropriate access control.",
+    "Patients: Require that only appropriately authorized users access their medical data to protect privacy and confidentiality.",
+    "Healthcare organization: Requires secure and efficient access control to support clinical workflows and comply with security and privacy regulations."
+  ],
+  "description": "This use case describes how a doctor logs in to the system and how a system administrator configures user access rights and enforces two-step authentication for all users, ensuring secure and role-appropriate access to the Healthcare Information System.",
+  "triggering_event": "A registered doctor attempts to access the system or a system administrator decides to configure user access rights or security mechanisms.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The doctor and the system administrator have valid user accounts registered in the Healthcare Information System.",
+    "User roles and associated access right structures are defined in the Healthcare Information System.",
+    "The Authentication Service is operational and reachable by the Healthcare Information System.",
+    "Two-step authentication capability is technically available in the Healthcare Information System."
+  ],
+  "postconditions": [
+    "Upon successful login, the doctor has an authenticated session with access limited to permissions configured for the doctor role and the doctor’s individual account.",
+    "User access rights are stored in the system according to the configurations made by the system administrator.",
+    "Two-step authentication is enforced for all users as configured by the system administrator, and successful authentication requires both primary credentials and the configured second factor.",
+    "Audit-relevant data for login and access-rights changes is recorded in the Healthcare Information System."
+  ],
+  "assumptions": [
+    "It is assumed that user registration and initial account creation are handled by a separate process outside the scope of this use case.",
+    "It is assumed that the Authentication Service supports credential-based login and two-step authentication without requiring the Healthcare Information System to implement cryptographic algorithms directly.",
+    "It is assumed that the system administrator has the highest level of authorization required to change user access rights and security settings.",
+    "It is assumed that all users, including doctors and system administrators, are required to use two-step authentication once it is enforced by the system administrator.",
+    "It is assumed that roles such as doctor and system administrator are already defined and associated with a set of configurable access rights in the Healthcare Information System.",
+    "It is assumed that any time-related performance expectations for logging in quickly are satisfied by the underlying infrastructure and are not altered by this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow doctors to log in to the system using their user credentials.",
+    "The system shall authenticate doctors in a manner that minimizes login time to avoid delays during patient appointments.",
+    "The system shall allow system administrators to view and modify user access rights.",
+    "The system shall apply updated user access rights immediately after they are saved by the system administrator.",
+    "The system shall allow system administrators to enable or disable two-step authentication configuration parameters.",
+    "The system shall enforce two-step authentication for all users when configured as mandatory by the system administrator.",
+    "The system shall prevent access to protected functionality until a user has successfully completed all required authentication steps.",
+    "The system shall store configuration changes to user access rights and two-step authentication settings in an auditable manner."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "Specific performance targets for how quickly the doctor must be able to log in (for example, response time thresholds) are not defined.",
+    "Detailed password and credential policies, such as length and complexity requirements, are not described.",
+    "The exact method and technology for the second authentication factor (for example, SMS code, authenticator application, hardware token) is not specified.",
+    "Policies for how frequently access rights and two-step authentication settings should be reviewed by the system administrator are not defined.",
+    "Error messaging and usability guidelines for failed authentication attempts and access denial are not described."
+  ],
+  "main_flow": [
+    "1. Doctor initiates login by providing primary credentials to the system → System receives the provided credentials and forwards them to the Authentication Service for verification.",
+    "2. Authentication Service verifies the doctor’s credentials and returns the verification result → System validates the successful verification and, if two-step authentication is enforced, prompts the doctor for the second authentication factor.",
+    "3. Doctor provides the required second authentication factor when prompted → System submits the second authentication factor to the Authentication Service for validation.",
+    "4. Authentication Service validates the second authentication factor and returns the validation result → System establishes an authenticated session for the doctor and grants access according to the doctor’s configured access rights.",
+    "5. System administrator selects the user access-rights management function → System displays a list of existing users and their associated roles and access rights.",
+    "6. System administrator selects a user or role and modifies access rights according to organizational policy → System validates the modifications and updates the stored access-rights configuration for the selected user or role.",
+    "7. System administrator selects the security configuration function for two-step authentication → System displays the current two-step authentication settings and applicable user groups.",
+    "8. System administrator configures two-step authentication as mandatory for all users and confirms the configuration → System stores the updated two-step authentication configuration and enforces two-step authentication for all subsequent user logins.",
+    "9. System records log entries for the doctor’s successful authentication and for all changes to user access rights and two-step authentication settings → System confirms completion of the use case with secure, role-appropriate access enforced."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Two-step authentication not yet enforced. Condition: The system administrator has not yet configured two-step authentication as mandatory. The system receives successful primary credential verification from the Authentication Service and determines that two-step authentication is not required → System skips the second-factor prompt, establishes an authenticated session for the doctor, grants access according to the doctor’s configured access rights, records the successful authentication event, and then continues directly to Step 5.",
+    "AF-2 (from Step 6): System administrator updates role-level access rights only. Condition: The system administrator decides to manage access rights at role level instead of for individual users. The system administrator selects a role, adjusts the role’s access rights, and saves the changes → System applies the updated role access rights to all users assigned to that role, records the configuration change, and then continues with Step 7."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Invalid primary credentials. Condition: The doctor provides incorrect or invalid credentials. The system receives the credentials, the Authentication Service rejects the credentials, and the system receives a failed verification result → System denies access, informs the doctor that authentication has failed, records the failed attempt, and terminates the login attempt without establishing a session.",
+    "EF-2 (from Step 3): Invalid or missing second authentication factor. Condition: Two-step authentication is enforced and the doctor provides an incorrect or expired second factor, or fails to provide it within a defined time window. The system sends the factor to the Authentication Service and receives a failed validation result → System denies access, informs the doctor that the second factor verification has failed, records the failed attempt, and terminates the login attempt without establishing a session.",
+    "EF-3 (from Step 5): Unauthorized system administrator attempt. Condition: The currently authenticated user does not have system administrator privileges but attempts to access the user access-rights management function. The system receives the request and determines insufficient privileges → System denies access to the configuration function, informs the user that they are not authorized to perform this operation, records the unauthorized access attempt, and prevents any configuration changes.",
+    "EF-4 (from Step 8): Failure saving two-step authentication configuration. Condition: A technical error occurs while the system attempts to store updated two-step authentication settings. The system cannot persist the new configuration → System rolls back the attempted configuration change, keeps the previous two-step authentication settings active, informs the system administrator of the failure, records the error event, and terminates the configuration action without enabling inconsistent settings."
+  ],
+  "information_for_steps": [
+    "1. Doctor identifier, primary credentials (for example, username and password), authentication request data.",
+    "2. Credential verification result, two-step authentication enforcement flag, system login policy parameters.",
+    "3. Second authentication factor value, association between doctor account and second-factor mechanism.",
+    "4. Second-factor validation result, authenticated session identifier, doctor role and access-rights set.",
+    "5. User list, role assignments, current access-rights configuration data.",
+    "6. Selected user or role identifier, modified access-rights configuration, validation rules for access-rights changes.",
+    "7. Current two-step authentication settings, eligible user groups, security configuration parameters.",
+    "8. Updated two-step authentication configuration, confirmation data from the system administrator, enforcement scope for all users.",
+    "9. Audit log entries containing timestamps, user identifiers, action types (login, configuration change), and outcome statuses."
+  ]
+}

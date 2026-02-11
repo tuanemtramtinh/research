@@ -1,0 +1,16 @@
+﻿{
+"use_case_name": "View Appointment Slot",
+"primary_actors": ["Receptionist"],
+"preconditions": ["Scheduling system is online."],
+"postconditions": ["Available slots and schedules are displayed."],
+"main_flow": [
+"1. Receptionist requests to view schedules.",
+"2. System displays the schedule of all doctors, nurses, and rooms.",
+"3. Receptionist filters for availability.",
+"4. System presents open time slots."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Tablet View. 1. Receptionist accesses schedule via tablet while mobile. 2. System optimizes display for tablet. 3. Resume Step 2."
+],
+"exception_flows": []
+}

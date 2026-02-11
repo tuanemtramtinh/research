@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Schedule Matches and Referees",
+"primary_actors": ["IFA", "Referee"],
+"preconditions": ["League policies are defined.", "Teams and Referees are registered in the system."],
+"postconditions": ["Matches are scheduled.", "Referees are assigned and notified."],
+"main_flow": [
+"1. IFA triggers the automated match scheduling process.",
+"2. System retrieves league policies, referee restrictions, and team constraints.",
+"3. System generates a match schedule and assigns referees to leagues to avoid biases.",
+"4. System publishes the schedule and notifies assigned Referees.",
+"5. Referee accesses the system to sync their schedule.",
+"6. System updates the Referee's personal calendar with assigned matches."
+],
+"alternative_flows": [
+"AF-1 (from Step 5): Update Restrictions. 1. Referee updates their availability restrictions. 2. System verifies if current assignments are affected. 3. Resume Step 6."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Scheduling Conflict. 1. System cannot find a valid slot for a match due to constraints. 2. System flags the unassigned match for manual review. 3. Use Case ends."
+]
+}

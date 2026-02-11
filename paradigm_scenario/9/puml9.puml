@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+'--- Actors (outside system boundary) ---
+actor Patient
+actor Staff
+actor Nurse
+
+'--- System and Use Cases (inside system boundary) ---
+rectangle "UHOPE EMR System" {
+    ' Base use cases (light blue)
+    usecase "View Medical History" as UC1 #ADD8E6
+    usecase "Enter Edit Patient Info" as UC2 #ADD8E6
+    usecase "Schedule Appointment" as UC3 #ADD8E6
+    usecase "Generate Billing Data" as UC4 #ADD8E6
+    usecase "Analyze Aggregated Data" as UC5 #ADD8E6
+    usecase "Upload Measurements" as UC6 #ADD8E6
+    usecase "Authenticate User" as UC7 #ADD8E6
+
+    ' New include / extend use cases (light gray)
+    usecase "Validate Appointment Slot" as UC8 #EAEAEA
+    usecase "Notify Patient of Invoice" as UC9 #EAEAEA
+}
+
+'--- Actor – Use Case relationships ---
+Patient -- UC1
+Patient -- UC7
+Staff -- UC2
+Staff -- UC3
+Staff -- UC4
+Staff -- UC5
+Staff -- UC7
+Nurse -- UC6
+Nurse -- UC7
+
+'--- Use Case relationships (inside the rectangle) ---
+' 1. Schedule Appointment includes Validate Appointment Slot
+UC3 <.. UC8 : "<<includes>>"
+
+' 2. Generate Billing Data extends Notify Patient of Invoice
+UC4 ..> UC9 : "<<extends>>"
+
+'--- End of diagram ---
+@enduml

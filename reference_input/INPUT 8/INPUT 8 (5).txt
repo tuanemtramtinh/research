@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Audit Financial Transactions",
+"primary_actors": ["Budget Auditor"],
+"preconditions": ["Financial data exists for the team."],
+"postconditions": ["Audit report is generated.", "Compliance is verified."],
+"main_flow": [
+"1. Budget Auditor selects a team to audit.",
+"2. Budget Auditor requests a budget management report.",
+"3. System generates a report aggregating all tracked transactions and current status.",
+"4. Budget Auditor reviews the report to control compliance.",
+"5. System records the completion of the audit."
+],
+"alternative_flows": [
+"AF-1 (from Step 4): Detect Irregularity. 1. Budget Auditor flags a suspicious transaction. 2. System sends a notification to the IFA Administrator. 3. Resume Step 5.",
+“AF-2 (from Step 4): Adjust Financial Records. 1. Budget Auditor identifies a need to correct or update a transaction. 2. System triggers Use Case: Manage Team Finances to allow the Auditor to input or modify transactions. 3. Once the management task is complete, the system returns to Step 4 of the main flow to re-verify the updated report.”
+],
+"exception_flows": [
+"EF-1 (from Step 3): Data Unavailable. 1. System finds no financial records for the selected team. 2. System displays 'No Data' message. 3. Use Case ends."
+]
+}

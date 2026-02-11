@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage user Role",
+"primary_actors": ["IFA Administrator", "Team Manager"],
+"preconditions": ["Actor is logged in.", "Target users exist in the system."],
+"postconditions": ["User roles and privileges are updated."],
+"main_flow": [
+"1. Actor selects a specific user account (e.g., team staff member).",
+"2. Actor assigns a role or specific system privileges (e.g., asset management access).",
+"3. System validates the permissions against the Actor's authority level.",
+"4. System applies the new role to the user.",
+"5. System restricts the user's access to only the relevant tools defined by the role."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): Revoke Privileges. 1. Actor removes specific privileges from a team member. 2. Resume Step 3."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Unauthorized Action. 1. System detects Actor is trying to assign a role level higher than allowed. 2. System denies the action. 3. Use Case ends."
+]
+}

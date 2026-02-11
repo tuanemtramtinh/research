@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+' Actors (outside the system boundary)
+actor "IFA employee" as IF
+actor "Team manager" as TM
+actor "Fan" as FN
+
+' System boundary
+rectangle "IFA Sports Platform" {
+
+  ' Primary use‑cases (light blue)
+  usecase "Integrate Data Sources" as UC1 #ADD8E6
+  usecase "Generate Match Schedule" as UC2 #ADD8E6
+  usecase "Capture Team Financial Transactions" as UC3 #ADD8E6
+  usecase "Send Schedule Change Notifications" as UC4 #ADD8E6
+  usecase "Provide Live Match Reporting" as UC5 #ADD8E6
+  usecase "Manage Leagues And Teams" as UC6 #ADD8E6
+
+  ' Derived use‑cases (gray)
+  usecase "Authenticate User" as UC7 #EAEAEA
+  usecase "Audit Financial Transactions" as UC8 #EAEAEA
+}
+
+' Actor → Use‑case relationships
+IF -- UC1
+IF -- UC2
+IF -- UC5
+IF -- UC6
+
+TM -- UC3
+
+FN -- UC4
+
+' Include / Extend relationships (inside the rectangle)
+UC1 <.. UC7 : "<<includes>>"
+UC3 ..> UC8 : "<<extends>>"
+
+' (No actor links are shown for UC7 and UC8 – they are system‑level helpers)
+
+@enduml

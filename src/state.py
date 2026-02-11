@@ -222,6 +222,14 @@ class ScenarioResult(BaseModel):
         description="Structured Use Case Specification as a JSON object (one field per schema key)",
     )
     evaluation: UseCaseEvaluation | None = None
+    comparison_spec_path: Optional[str] = Field(
+        default=None,
+        description="Optional path to an external use case spec to evaluate with the same rubric.",
+    )
+    comparison_evaluation: UseCaseEvaluation | None = Field(
+        default=None,
+        description="Scores for comparison_spec_path (content is not stored).",
+    )
     validation: UseCaseSpecValidation
 
 
@@ -229,6 +237,10 @@ class CompletenessEvaluation(BaseModel):
     score: int = Field(description="0-100")
     result: Literal["PASS", "FAIL"]
     rationale: str
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion scores (e.g., 'Primary Actor': 15).",
+    )
     missing_or_weak_fields: List[str] = Field(default_factory=list)
 
 
@@ -236,6 +248,10 @@ class SimpleCriterionEvaluation(BaseModel):
     score: int = Field(description="0-100")
     result: Literal["PASS", "FAIL"]
     rationale: str
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion scores (e.g., 'Use Case Name ↔ Main Flow': 25).",
+    )
 
 
 class CorrectnessEvaluation(BaseModel):
@@ -248,6 +264,10 @@ class CorrectnessEvaluation(BaseModel):
     result: Literal["PASS", "FAIL", "N/A"]
     rationale: str
     reference_path: Optional[str] = None
+    sub_scores: Dict[str, int] = Field(
+        default_factory=dict,
+        description="Per-sub-criterion correctness scores; empty when result is N/A.",
+    )
 
 
 class UseCaseEvaluation(BaseModel):
@@ -300,6 +320,9 @@ class ScaState(TypedDict, total=False):
 
     # Optional: per-use-case reference file for Correctness evaluation
     reference_spec_path: str | None
+
+    # Optional: per-use-case comparison spec path for additional evaluation
+    comparison_spec_path: str | None
 
     # New judging: 3 judge results then combiner
     judge_results: Annotated[List[UseCaseSpecJudgeResult], operator.add]

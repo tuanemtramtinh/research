@@ -1,0 +1,74 @@
+{
+  "use_case_name": "Monitor team budget",
+  "unique_id": "UC-004",
+  "area": "Sports Management",
+  "context_of_use": "The IT system must enable the IFA to define, change, and enforce league and budget policies; automatically generate match schedules and assign referees while respecting stakeholder constraints; record and display real‑time game event data; provide real‑time budget and resource monitoring for teams; support team management of finances, social media pages, and content; allow referees to log events, sync schedules, receive notifications, and communicate; allow fans to register, follow teams/players, view schedules and live updates, receive notifications, and use the system via mobile in local language and currency; and provide a scalable, concurrent communication channel for all stakeholders to receive immediate updates about cancellations and rescheduling.",
+  "scope": "Target System",
+  "level": "User-goal",
+  "primary_actors": [
+    "Team manager"
+  ],
+  "supporting_actors": [
+    "System"
+  ],
+  "stakeholders_and_interests": [
+    "Team manager: Achieve the goal described in the use case."
+  ],
+  "description": "Team manager tracks real‑time financial and resource usage for their squad.",
+  "triggering_event": "Team manager initiates 'Monitor team budget'.",
+  "trigger_type": "External",
+  "preconditions": [
+    "None"
+  ],
+  "postconditions": [
+    "The team budget dashboard reflects the latest financial and resource data, and the team manager has received any relevant alerts or notifications."
+  ],
+  "assumptions": [
+    "The actor has appropriate access to the system."
+  ],
+  "requirements_met": [
+    "Team manager tracks real‑time financial and resource usage for their squad."
+  ],
+  "priority": "Medium",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "None identified."
+  ],
+  "main_flow": [
+    "1. **[Team manager]** logs into the system and navigates to the “Team Budget” dashboard.",
+    "2. The system **authenticates** the manager and retrieves the manager’s assigned team.",
+    "3. The system **queries** the latest financial transactions, resource allocations, and budget limits from the database.",
+    "4. The system **calculates** current spend, remaining budget, and resource usage percentages.",
+    "5. The system **renders** a real‑time dashboard displaying: - Total budget vs. spent amount - Category breakdown (travel, equipment, staff, etc.) - Upcoming invoices and due dates - Resource utilization charts (e.g., stadium hours, training facilities).",
+    "6. **[Team manager]** can filter data by date range, category, or project.",
+    "7. The system **updates** the dashboard in real time using websockets or polling to reflect new transactions or allocations.",
+    "8. If a budget threshold (e.g., 90 % spent) is crossed, the system **generates** a notification banner and sends an email to the manager.",
+    "9. **[Team manager]** reviews the data, verifies entries, and may **add** or **edit** expense records through the interface.",
+    "10. Upon confirming changes, the system **validates** the input against policy rules (e.g., maximum per‑expense limits).",
+    "11. The system **updates** the database and **refreshes** the dashboard to show the new totals.",
+    "12. **[Team manager]** can export the dashboard data to CSV or PDF for reporting purposes.",
+    "13. The use case **terminates** when the manager exits the dashboard or logs out."
+  ],
+  "alternative_flows": [
+    "1. **Budget Threshold Exceeded (Alternative to step 8)** 1.1. The system detects that spending has exceeded the predefined threshold. 1.2. Instead of a simple banner, the system opens a modal dialog prompting the manager to approve a budget increase or to cancel the transaction. 1.3. If the manager approves, the system updates the budget limit and continues flow step 9. 1.4. If the manager cancels, the transaction is rolled back and the manager is notified.",
+    "2. **Data Retrieval Failure (Alternative to step 3)** 2.1. The system cannot connect to the finance service. 2.2. It displays an error message and offers a “Retry” button. 2.3. If retry fails after three attempts, the system logs the incident and suggests contacting support."
+  ],
+  "exception_flows": [
+    "4.1. If the system cannot render charts due to memory limits, it displays a simplified list view instead. 4.2. The manager receives a notification that full analytics are temporarily unavailable but can still view raw numbers."
+  ],
+  "information_for_steps": [
+    "1. **[Team manager]** logs into the system and navigates to the “Team Budget” dashboard.",
+    "2. The system **authenticates** the manager and retrieves the manager’s assigned team.",
+    "3. The system **queries** the latest financial transactions, resource allocations, and budget limits from the database.",
+    "4. The system **calculates** current spend, remaining budget, and resource usage percentages.",
+    "5. The system **renders** a real‑time dashboard displaying: - Total budget vs. spent amount - Category breakdown (travel, equipment, staff, etc.) - Upcoming invoices and due dates - Resource utilization charts (e.g., stadium hours, training facilities).",
+    "6. **[Team manager]** can filter data by date range, category, or project.",
+    "7. The system **updates** the dashboard in real time using websockets or polling to reflect new transactions or allocations.",
+    "8. If a budget threshold (e.g., 90 % spent) is crossed, the system **generates** a notification banner and sends an email to the manager.",
+    "9. **[Team manager]** reviews the data, verifies entries, and may **add** or **edit** expense records through the interface.",
+    "10. Upon confirming changes, the system **validates** the input against policy rules (e.g., maximum per‑expense limits).",
+    "11. The system **updates** the database and **refreshes** the dashboard to show the new totals.",
+    "12. **[Team manager]** can export the dashboard data to CSV or PDF for reporting purposes.",
+    "13. The use case **terminates** when the manager exits the dashboard or logs out."
+  ]
+}

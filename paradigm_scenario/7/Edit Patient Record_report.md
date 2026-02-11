@@ -1,0 +1,62 @@
+## Use Case Name
+**Edit Patient Record**
+
+## Description
+Permits a doctor to view, edit, and annotate patient records, ensuring up‑to‑date clinical information.
+
+## Primary Actor
+Doctor
+
+## Problem Domain Context
+Develop an integrated patient‑care platform that:
+1. Provides patients with secure mobile access to their full medical record, including measurement, test results, and prescription renewal.  
+2. Enables patients to share wearable‑device data and selectively grant or revoke access to healthcare providers.  
+3. Allows doctors to view, edit, and annotate patient records, schedule appointments, request and track laboratory tests, and issue prescriptions while managing pharmacy inventory visibility.  
+4. Permits nurses to edit and review records for clinical preparation.  
+5. Supports receptionists with patient identification, appointment scheduling, and room assignment using doctor and lab availability.  
+6. Equips laboratory technicians with a dashboard of pending tests, urgency, and requester details, along with the ability to input results and attach notes.  
+7. Offers pharmacists the ability to verify patient ID, dosage, and prescription details.  
+8. Gives system administrators the capability to configure user roles, enforce two‑step authentication, and adjust access rights across the system.
+
+## Preconditions
+1. The doctor is authenticated and authorized to edit the specific patient record.  
+2. The patient record exists and is accessible in the system.  
+3. The doctor has selected the patient from the patient list or search function.  
+
+## Postconditions
+1. The patient record is updated with the new data, annotations, or prescription details.  
+2. A timestamp and the editing doctor’s identifier are logged.  
+3. Relevant stakeholders (e.g., pharmacist, lab technician) receive notifications of the update if configured.
+
+## Main Flow
+1. **Doctor** logs into the system and navigates to the patient list.  
+2. **Doctor** selects a patient and opens the patient’s record.  
+3. The system loads the current patient data, including vitals, history, lab results, and existing prescriptions.  
+4. **Doctor** reviews the data and identifies sections that need updating.  
+5. **Doctor** edits the necessary fields (e.g., diagnosis, medication dosage, notes).  
+6. **Doctor** adds any new annotations or comments relevant to the patient’s care.  
+7. **Doctor** reviews the changes for accuracy and completeness.  
+8. **Doctor** submits the updated record for saving.  
+9. The system validates the input, checks for conflicts (e.g., medication interactions), and saves the changes.  
+10. The system logs the edit action and updates the record’s version history.  
+11. The system notifies relevant stakeholders (pharmacy, lab, nurses) if notifications are enabled.  
+12. **Doctor** receives a confirmation that the record has been successfully updated.  
+
+## Alternative Flows
+1. **(Step 5) Doctor chooses to cancel the edit**  
+   1.1. **Doctor** clicks “Cancel” during editing.  
+   1.2. System discards unsaved changes and returns to the patient record view.  
+2. **(Step 5) Doctor encounters a data conflict**  
+   2.1. System detects a conflict (e.g., duplicate medication entry).  
+   2.2. System prompts the doctor to resolve the conflict (edit or remove the conflicting entry).  
+   2.3. Doctor resolves and proceeds to Step 8.  
+
+## Exceptions
+1. **(Step 3) Patient record not found**  
+   - The system displays an error message and prompts the doctor to verify the patient selection.  
+2. **(Step 9) Validation failure (e.g., missing required field, invalid dosage)**  
+   - The system highlights the problematic field, displays an explanatory message, and prevents the record from being saved until corrected.  
+3. **(Step 9) System outage or database error**  
+   - The system shows a generic error notification, logs the incident, and offers the doctor the option to retry or save locally for later submission.  
+4. **(Step 9) Unauthorized edit attempt**  
+   - The system blocks the action, logs the attempt, and notifies the security administrator.

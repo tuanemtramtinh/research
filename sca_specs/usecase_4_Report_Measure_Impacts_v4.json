@@ -1,0 +1,65 @@
+{
+  "use_case_name": "Generate Impact Reports for Mobility Measures",
+  "unique_id": "UC-004",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "The urban mobility planner generates comprehensive reports on the pollution, fairness, cost, and congestion effects of a mobility measure to support proposal validation.",
+  "scope": "Urban Mobility Planning System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "urban mobility planner: to validate urban mobility proposals",
+    "city officials: to ensure effective urban planning and resource allocation",
+    "local residents: to understand the impacts of mobility measures on their community"
+  ],
+  "description": "Generate comprehensive reports on the pollution, fairness, cost, and congestion effects of a mobility measure to support proposal validation.",
+  "triggering_event": "The urban mobility planner initiates the reporting process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner has access to relevant data on the mobility measure.",
+    "The mobility measure has been defined and is ready for analysis."
+  ],
+  "postconditions": [
+    "Reports on pollution effects, fairness, cost, and congestion effects are generated and available for review.",
+    "The urban mobility planner has validated the impacts of the mobility measure through comprehensive reports."
+  ],
+  "assumptions": [
+    "The system has the capability to estimate measure impacts as part of the reporting process."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to report on the pollution effects of a measure.",
+    "The system shall allow the urban mobility planner to report on the fairness of a measure.",
+    "The system shall allow the urban mobility planner to report on the cost of a measure.",
+    "The system shall allow the urban mobility planner to report on the congestion effects of a measure."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the data sources for pollution, fairness, cost, and congestion effects."
+  ],
+  "main_flow": [
+    "1. urban mobility planner → System retrieves data on the mobility measure.",
+    "2. urban mobility planner → System estimates measure impacts.",
+    "3. urban mobility planner → System generates report on pollution effects.",
+    "4. urban mobility planner → System generates report on fairness effects.",
+    "5. urban mobility planner → System generates report on cost effects.",
+    "6. urban mobility planner → System generates report on congestion effects.",
+    "7. urban mobility planner → System presents the reports for review."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the system cannot estimate measure impacts, then the urban mobility planner is notified of the failure and can choose to re-enter data or cancel the process."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system fails to retrieve data on the mobility measure, then the urban mobility planner is notified of the error and the process is halted."
+  ],
+  "information_for_steps": [
+    "1. Measure data",
+    "2. Estimated impacts",
+    "3. Pollution report",
+    "4. Fairness report",
+    "5. Cost report",
+    "6. Congestion report"
+  ]
+}

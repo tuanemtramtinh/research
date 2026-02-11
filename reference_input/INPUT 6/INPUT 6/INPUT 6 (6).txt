@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Access System",
+"primary_actors": ["Team", "Fan", “Referee”],
+"preconditions": ["System is online and capable of supporting concurrent users."],
+"postconditions": ["Actor is successfully authenticated and authorized."],
+"main_flow": [
+"1. Actor initiates access to the system (via Mobile App or Web).",
+"2. Actor enters login credentials.",
+"3. System authenticates the Actor.",
+"4. System grants access to the role-specific dashboard (e.g., Team Dashboard, Fan Feed)."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Fan Registration. 1. Fan selects option to register. 2. Fan provides registration details. 3. System creates a new user account. 4. Resume Step 4.",
+"AF-2 (from Step 1): Localization. 1. Fan selects local language and currency preference. 2. System updates interface locale. 3. Resume Step 2."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Authentication Failed. 1. System rejects credentials. 2. System displays error message. 3. Actor retries."
+]
+}

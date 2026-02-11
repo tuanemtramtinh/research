@@ -1,0 +1,29 @@
+﻿{
+    "use_case_name": "Store Time-based Data (Snapshots & Logs)",
+    "primary_actors": [
+      "UMD Employee"
+    ],
+    "preconditions": [
+      "The simulator is active or receiving real-time data.",
+      "Storage capacity is available on the premise server."
+    ],
+    "postconditions": [
+      "A snapshot of the map, traffic, and environmental data is saved to the historical database.",
+      "The data is coupled with a specific timestamp."
+    ],
+    "main_flow": [
+      "1. UMD Employee identifies a scenario to preserve and clicks 'Take Snapshot'. → System prompts for a description or label.",
+      "2. UMD Employee enters a label (e.g., 'Morning Peak Hour'). → System captures the current state of the map, traffic flow, and heatmap.",
+      "3. System captures current environmental measures (CO2, noise, pollution). → System couples the data to the current timestamp.",
+      "4. System saves the package to the historical database. → System confirms the snapshot is saved."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): Automated Logging.",
+      "1. At step 1, UMD Employee configures 'Continuous Logging'. → System sets up an interval (e.g., every 5 minutes).",
+      "2. System automatically executes Steps 2-4 at the defined interval. → Proceed to Postcondition."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Storage Error.",
+      "1. At step 4, System fails to write to the database due to a permission or space error. → System displays 'Save Failed' and prompts the user to retry or free up space."
+    ]
+  },

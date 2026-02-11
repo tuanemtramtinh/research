@@ -1,0 +1,81 @@
+## Use Case Name
+**Enter Edit Patient Info**
+
+## Description
+Enables authorized UHOPE staff, doctors, nurses, or receptionists to enter, edit, and search patient information once, while restricting access to permitted records.
+
+## Primary Actor
+Staff
+
+## Problem Domain Context
+The system must provide a unified Electronic Medical Record Database that allows patients to securely view their own medical histories, test results and treatment details, while enabling authorized UHOPE staff, doctors, nurses, and receptionists to:
+
+- enter, edit, and search patient information only once and see only the records they are permitted to access;  
+- support appointment scheduling, including automatic approvals, cancellations, time‑adjustments, and integration with room and staff calendars;  
+- generate billing data automatically from appointment start/end times and treatment codes, and send invoices to patients within a specified window;  
+- offer a self‑service analytics portal for employees to query and analyze aggregated patient data;  
+- support mobile device integration for nurses to receive and upload measurements directly to the record;  
+- provide secure authentication (unique ID/password plus optional two‑factor) and role‑based access control for all users.
+
+## Preconditions
+- The actor is authenticated and has the appropriate role‑based permissions.  
+- The patient record to be edited or searched exists in the database.  
+- The system is connected to the network and all required services (authentication, billing, calendar, analytics) are operational.
+
+## Postconditions
+- Patient record is created or updated in the database.  
+- Search results are displayed to the actor.  
+- Audit log entries are created for the action.  
+- If applicable, notifications (e.g., appointment confirmation, invoice) are queued for delivery.
+
+## Main Flow
+1. **Actor initiates action** – The staff member selects “Enter/Edit Patient Info” from the system menu.  
+2. **System verifies permissions** – The system checks the actor’s role and permissions; if unauthorized, it displays an error and terminates the flow.  
+3. **Actor enters patient identifier** – The staff member inputs the patient’s unique ID or selects from a search list.  
+4. **System retrieves patient record** – The system queries the EMR database and displays the patient’s current information.  
+5. **Actor selects operation** – The staff member chooses to create a new record, edit an existing record, or search for specific data.  
+6. **For creation** –  
+   6.1. Actor fills in required fields (demographics, medical history, etc.).  
+   6.2. System validates mandatory fields and data formats.  
+   6.3. Actor submits the form.  
+   6.4. System writes the new record to the database and logs the creation event.  
+7. **For editing** –  
+   7.1. Actor modifies the desired fields.  
+   7.2. System validates changes and checks for concurrent modifications.  
+   7.3. Actor submits the updates.  
+   7.4. System updates the record in the database and logs the modification event.  
+8. **For searching** –  
+   8.1. Actor enters search criteria (e.g., diagnosis code, date range).  
+   8.2. System performs the query, applying role‑based access filters.  
+   8.3. Search results are displayed; the actor can drill down into individual records.  
+9. **System confirms completion** – A success message is shown, and the actor can choose to perform another operation or exit.
+
+## Alternative Flows
+- **AF1 – Duplicate Record Prevention** (Branch at step 6.1):  
+  1. System detects an existing record with identical key fields.  
+  2. System prompts the actor to confirm whether to overwrite, merge, or cancel.  
+  3. Actor selects the desired action; system proceeds accordingly.  
+
+- **AF2 – Concurrent Edit Conflict** (Branch at step 7.2):  
+  1. System identifies that the record has been modified since it was loaded.  
+  2. System alerts the actor and presents the latest record for review.  
+  3. Actor can reapply changes or discard them.
+
+## Exceptions
+- **E1 – Unauthorized Access** (Occurs at step 2):  
+  - The system displays an “Access Denied” message and logs the attempt.  
+
+- **E2 – Validation Failure** (Occurs at steps 6.2, 7.2, 8.2):  
+  - The system highlights invalid fields, provides error messages, and prevents submission until resolved.  
+
+- **E3 – Database Connectivity Loss** (Occurs at any data access step):  
+  - The system informs the actor of the failure, retries the operation automatically (up to 3 attempts), and logs the incident.  
+
+- **E4 – Network Timeout** (Occurs during search or data retrieval):  
+  - The system notifies the actor of a timeout, offers to retry, and records the event.  
+
+- **E5 – Duplicate Entry Detected** (Occurs at step 6.1):  
+  - The system prompts for confirmation as described in AF1 and logs the decision.  
+
+- **E6 – Audit Log Failure** (Occurs after any create/edit operation):  
+  - The system alerts the actor of the audit logging issue, retries, and escalates if persistent; the primary action is still considered successful.

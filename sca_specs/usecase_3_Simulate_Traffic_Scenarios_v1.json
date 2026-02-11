@@ -1,0 +1,52 @@
+{
+  "use_case_name": "Simulate Traffic Scenarios",
+  "unique_id": "UC-003",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "The urban mobility planner creates and runs traffic load and crisis scenarios to analyze the effects of increased traffic and emergencies.",
+  "scope": "Traffic Simulation System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "urban mobility planner: to validate urban mobility proposals and analyze traffic scenarios"
+  ],
+  "description": "The urban mobility planner creates and runs traffic load and crisis scenarios, including increased traffic at locations and simulated emergencies.",
+  "triggering_event": "The urban mobility planner initiates the simulation process.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is logged into the Traffic Simulation System.",
+    "The system has access to traffic data and simulation parameters."
+  ],
+  "postconditions": [
+    "Traffic scenarios are successfully simulated.",
+    "Results of the simulations are available for review."
+  ],
+  "assumptions": [
+    "The Traffic Simulation System has the capability to simulate increased traffic and crisis scenarios.",
+    "The urban mobility planner has the necessary permissions to run simulations."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to increase traffic at specific locations.",
+    "The system shall allow the urban mobility planner to simulate crisis scenarios."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of traffic scenarios that can be simulated."
+  ],
+  "main_flow": [
+    "1. urban mobility planner initiates the simulation process → Traffic Simulation System prepares for simulation.",
+    "2. urban mobility planner specifies locations for increased traffic → Traffic Simulation System updates traffic parameters.",
+    "3. urban mobility planner runs the simulation → Traffic Simulation System executes the traffic scenario.",
+    "4. urban mobility planner reviews the simulation results → Traffic Simulation System displays the outcomes of the simulation."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Simulation parameters",
+    "2. Traffic data",
+    "3. Simulation results"
+  ]
+}

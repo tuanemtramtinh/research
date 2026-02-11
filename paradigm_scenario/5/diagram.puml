@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+' Define primary actors {outside system boundary}
+actor Depositor
+actor Reuser
+actor Administrator
+
+' Define system and use cases
+rectangle "Unified Research Data Archive" {
+
+  ' Define base use cases with color in hex: #ADD8E6
+  usecase "Upload Dataset" as UC1 #ADD8E6
+  usecase "Browse and Search Datasets" as UC2 #ADD8E6
+  usecase "Validate and Approve Metadata" as UC3 #ADD8E6
+
+  ' Define additional use case for includes/extends with color in hex: #EAEAEA
+  usecase "Harvest Metadata" as UC4 #EAEAEA
+  usecase "Compare Versions" as UC5 #EAEAEA
+}
+
+' Define relationships between actor and use cases
+Depositor -- UC1
+Reuser -- UC2
+Administrator -- UC3
+
+' Define use case relationships: THIS SECTION SHOULD BE WITH IN THE RECTANGLE SCOPE INSIDE THE BRACKET
+UC1 <.. UC4 : "<<includes>>"
+UC2 ..> UC5 : "<<extends>>"
+
+@enduml

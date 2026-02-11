@@ -1,0 +1,48 @@
+{
+  "use_case_name": "Review Sensor Data",
+  "unique_id": "UC-003",
+  "area": "Urban Mobility Planning",
+  "context_of_use": "The urban mobility planner reviews emission and traffic levels from sensors to understand current and past conditions.",
+  "scope": "Urban Mobility Planning System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "urban mobility planner: To understand environmental and traffic conditions for better planning."
+  ],
+  "description": "The urban mobility planner reviews emission and traffic levels from sensors to understand current and past conditions.",
+  "triggering_event": "The urban mobility planner initiates a review of sensor data.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is logged into the Urban Mobility Planning System.",
+    "Sensor data is available and up-to-date."
+  ],
+  "postconditions": [
+    "The urban mobility planner has reviewed the emission and traffic levels from the sensors."
+  ],
+  "assumptions": [
+    "The system has access to real-time and historical sensor data.",
+    "The urban mobility planner has the necessary permissions to access sensor data."
+  ],
+  "requirements_met": [
+    "The system shall allow the urban mobility planner to review emission levels at pollution sensors.",
+    "The system shall allow the urban mobility planner to review traffic levels at traffic sensors."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of sensors and data available for review."
+  ],
+  "main_flow": [
+    "1. urban mobility planner → The system displays the available emission levels from pollution sensors.",
+    "2. urban mobility planner → The system displays the available traffic levels from traffic sensors."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. Emission levels data",
+    "2. Traffic levels data"
+  ]
+}

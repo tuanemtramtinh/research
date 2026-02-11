@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Schedule Appointments",
+"primary_actors": ["Doctor", "Patient", "Receptionist"],
+"preconditions": ["Doctor schedules are available."],
+"postconditions": ["Appointment is confirmed and recorded."],
+"main_flow": [
+"1. Receptionist identifies a patient via their unique number.",
+"2. Receptionist views the Doctor's schedule.",
+"3. Receptionist matches the patient to the Doctor and selects an available time slot.",
+"4. System books the appointment.",
+"5. System updates the Doctor's agenda."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Patient Remote Scheduling. 1. Patient accesses their customer account. 2. Patient selects a Doctor and time slot. 3. System confirms the booking. 4. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Slot Unavailable. 1. System detects the selected slot was just taken. 2. System refreshes the view. 3. Actor selects a new slot."
+]
+}

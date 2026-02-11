@@ -1,0 +1,21 @@
+﻿{
+"use_case_name": "Manage Stakeholder Communication",
+"primary_actors": ["IFA", "Referee", "Team"],
+"preconditions": ["The Actor is logged in.", "Recipient lists or channels exist."],
+"postconditions": ["Message or update is distributed to stakeholders."],
+"main_flow": [
+"1. Actor initiates a communication request.",
+"2. Actor selects the communication type (e.g., Game Cancellation, Social Media Update) and target audience.",
+"3. Actor inputs the message content.",
+"4. System validates the content.",
+"5. System broadcasts the notification to the selected stakeholders immediately.",
+"6. System confirms successful transmission."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): Manage Social Media. 1. Team selects to update their Social Media Page (Team, Player, or Coach page). 2. Team posts content to update fans. 3. Resume Step 6.",
+"AF-2 (from Step 2): Contact Specific Stakeholder. 1. Referee selects a specific team or administrator to contact. 2. Resume Step 3."
+],
+"exception_flows": [
+"EF-1 (from Step 5): Delivery Failure. 1. System fails to send the notification to one or more recipients. 2. System logs the error and notifies the Actor. 3. Use Case ends."
+]
+}

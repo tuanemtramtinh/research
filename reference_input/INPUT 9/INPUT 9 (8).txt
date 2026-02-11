@@ -1,0 +1,14 @@
+﻿{
+"use_case_name": "Manage User Access",
+"primary_actors": ["System_Admin"],
+"preconditions": ["System_Admin is authenticated."],
+"postconditions": ["User access rights are updated."],
+"main_flow": [
+"1. System_Admin selects a user or user group.",
+"2. System_Admin modifies the access rights.",
+"3. System_Admin saves the configuration.",
+"4. System enforces new permissions."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

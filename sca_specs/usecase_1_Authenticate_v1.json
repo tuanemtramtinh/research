@@ -1,53 +1,86 @@
 {
-  "use_case_name": "Authenticate",
+  "use_case_name": "Authenticate Fan",
   "unique_id": "UC-001",
-  "area": "User Account Management",
-  "context_of_use": "This use case allows users to register, log in, and reset passwords to securely access their accounts.",
-  "scope": "User Account System",
+  "area": "Fan Access and Authentication",
+  "context_of_use": "The use case enables a fan to register an account and subsequently authenticate to access the system, including via mobile applications, in order to follow teams and use fan-related features.",
+  "scope": "IFA Stakeholder Management System",
   "level": "User-goal",
   "primary_actors": [
-    "user"
+    "fan"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "Authentication Service",
+    "Mobile Application Client"
+  ],
   "stakeholders_and_interests": [
-    "user: access personalized features",
-    "user: securely access account"
+    "Fan: Wants to register and access the system seamlessly, including via mobile app, to follow favorite teams and players.",
+    "IFA: Wants only authorized fans to access the system to protect data and ensure controlled access to fan-facing functionality.",
+    "System Operator: Wants reliable and scalable authentication to support large numbers of concurrent fan sessions without system instability."
   ],
-  "description": "Allow users to register, log in, and reset passwords to securely access their accounts.",
-  "triggering_event": "User initiates account registration, login, or password reset.",
+  "description": "This use case describes how a fan registers and authenticates to access the system, including through a mobile application client, so that the fan can use fan-related features such as following teams and viewing game information.",
+  "triggering_event": "A fan decides to use the system and initiates registration or attempts to log in through a web or mobile client.",
   "trigger_type": "External",
   "preconditions": [
-    "User has internet access.",
-    "User is on the account management interface."
+    "The IFA Stakeholder Management System is operational and reachable by the fan.",
+    "The fan has access to a compatible client interface (web or mobile application).",
+    "The fan has not already registered with the same unique identifier (for new registration)."
   ],
   "postconditions": [
-    "User account is created successfully.",
-    "User is logged in successfully.",
-    "User password is reset successfully."
+    "The fan has a uniquely identifiable account stored in the system with associated authentication credentials.",
+    "The fan is authenticated and has an active session that allows access to authorized fan-facing functionality.",
+    "The system has recorded the time of the most recent successful authentication for the fan."
   ],
   "assumptions": [
-    "User has valid information for registration or password reset."
+    "It is assumed that the system requires a minimal set of registration data (such as name, unique username or email, and authentication credential) to create a fan account, even though the exact fields are not specified in the requirement text.",
+    "It is assumed that the system maintains a secure store for authentication credentials and performs credential verification during login, although the requirement text does not explicitly describe security mechanisms.",
+    "It is assumed that the mobile application communicates with the same backend authentication service as any web client, because the requirement text states that the fan accesses the same system through a mobile app.",
+    "It is assumed that fans must successfully authenticate before they can follow teams and access fan-specific functionalities mentioned elsewhere in the requirements.",
+    "It is assumed that the system enforces uniqueness of fan identifiers (such as username or email) during registration to avoid duplicate fan accounts.",
+    "It is assumed that the system supports session management so that, after successful authentication, the fan remains logged in for a defined duration or until explicit logout, although session duration is not specified.",
+    "It is assumed that basic input validation is performed on registration and login data to prevent malformed requests from being processed as valid, even though specific validation rules are not provided.",
+    "It is assumed that error messages returned by the system during authentication are generic and do not expose sensitive information, even though this behavior is not specified in the requirement text."
   ],
   "requirements_met": [
-    "The system shall allow users to register an account.",
-    "The system shall allow users to log in to their accounts.",
-    "The system shall allow users to reset their passwords."
+    "The system shall allow a fan to register in the system so that the fan can subsequently follow different teams.",
+    "The system shall allow a fan to access the system through a mobile application client so that the fan can access the system from any location where network connectivity is available.",
+    "The system shall create and persist a unique fan account upon successful completion of the registration process initiated by a fan.",
+    "The system shall require a fan to provide valid authentication credentials in order to establish an authenticated session.",
+    "The system shall allow an already registered fan to authenticate using the mobile application client with the same credentials used through other client interfaces."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "The exact data fields required for fan registration (for example, mandatory versus optional attributes) have not been defined.",
+    "The specific authentication method (for example, password-based, multi-factor authentication) and associated security policies have not been determined.",
+    "The maximum allowed number of concurrent authenticated sessions per fan account has not been specified.",
+    "The rules governing session timeout and automatic logout for authenticated fans have not been agreed.",
+    "The policy for account recovery and credential reset for fans who lose access to their credentials has not been specified."
   ],
   "main_flow": [
-    "1. user registers account → system creates user account and confirms registration.",
-    "2. user logs in → system verifies credentials and grants access.",
-    "3. user resets password → system verifies identity and updates password."
+    "1. Fan initiates registration through the client interface (web or mobile) → System displays a registration form requesting required fan account details and credentials.",
+    "2. Fan enters the requested registration data and submits the registration form → System validates the provided data for completeness, format, and uniqueness of the fan identifier.",
+    "3. Fan waits while the system processes the registration request → System creates a new fan account, securely stores the associated credentials, and confirms successful registration to the fan.",
+    "4. Fan initiates login through the client interface (web or mobile) using the registered credentials → System displays a login interface for credential entry.",
+    "5. Fan enters authentication credentials and submits the login form → System validates the submitted credentials against stored fan account data.",
+    "6. Fan waits for authentication to complete → System establishes an authenticated session for the fan upon successful credential verification and presents the fan home or dashboard view with authorized access options."
   ],
-  "alternative_flows": [],
-  "exception_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Fan initiates registration from a mobile application client instead of a web client. The mobile application presents the registration form adapted to the mobile interface, and Steps 2 through 3 proceed as described using the mobile application as the client interface.",
+    "AF-2 (from Step 4): Fan remains logged in from a previous session on the mobile application and opens the application without explicitly initiating login. The mobile application automatically checks the existing valid session token, the system verifies the token, and, if still valid, the system re-establishes the authenticated session and displays the fan home or dashboard view, then the flow continues as per the outcome of Step 6 without requiring Steps 4 and 5."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): The system detects that the fan identifier provided during registration is already in use. The system rejects the registration attempt, informs the fan that the identifier is already registered, and prompts the fan to choose a different identifier or to log in with the existing account. The use case terminates without creating a new account unless the fan restarts the registration or proceeds to login.",
+    "EF-2 (from Step 2): The system detects invalid or incomplete registration data (such as missing mandatory fields or improperly formatted values). The system rejects the registration submission, displays validation error messages indicating the fields requiring correction, and allows the fan to correct the data and resubmit. The use case continues from Step 2 upon resubmission.",
+    "EF-3 (from Step 5): The system determines that the submitted authentication credentials do not match any registered fan account. The system denies access, informs the fan that the credentials are invalid, and provides the option to retry login. The use case returns to Step 4 if the fan chooses to attempt login again; otherwise, the use case ends without an authenticated session.",
+    "EF-4 (from Step 1): The client interface cannot reach the system due to connectivity or service unavailability. The system cannot display the registration form, and the client indicates that the service is temporarily unavailable. The use case is suspended until connectivity is restored and the fan re-initiates the process from Step 1.",
+    "EF-5 (from Step 4): During login, the system is available but the authentication service fails internally while processing credentials. The system reports a generic authentication error to the fan without exposing internal details and instructs the fan to try again later. The use case ends without an authenticated session."
+  ],
   "information_for_steps": [
-    "1. User registration details.",
-    "2. User login credentials.",
-    "3. User identity verification information."
+    "1. Client type (web or mobile), initial registration request, fan intent to create an account.",
+    "2. Fan registration data (such as name, unique identifier, contact information, chosen credentials), validation status, uniqueness check results.",
+    "3. Fan account record, stored authentication credentials reference, registration confirmation message.",
+    "4. Fan login request, client type (web or mobile), presentation of login interface.",
+    "5. Submitted authentication credentials, retrieved fan account data, credential verification result.",
+    "6. Authenticated session identifier or token, fan profile reference, access rights, fan home or dashboard view content."
   ]
 }

@@ -1,0 +1,100 @@
+{
+  "use_case_name": "Manage Team Finances",
+  "unique_id": "UC-003",
+  "area": "Financial Management and Auditing",
+  "context_of_use": "The use case enables authorized team managers and IFA budget auditors to manage, control, and review team financial activities within the IFA system in order to reduce manual workload and ensure compliance with league rules.",
+  "scope": "IFA League Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "team manager",
+    "ifa budget auditor"
+  ],
+  "supporting_actors": [
+    "ifa employee"
+  ],
+  "stakeholders_and_interests": [
+    "team manager: wants to manage the team’s finances directly within the system to avoid unnecessary work and reduce manual effort.",
+    "ifa budget auditor: wants to control and audit a team’s budget management in the system and quickly obtain system-generated reports to reduce workload and review the team’s financial situation efficiently.",
+    "ifa employee: wants automation features around financial-related activities to relieve workload associated with supporting financial oversight.",
+    "ifa: wants to track every team transaction in the system so that teams follow their league’s rules and financial activities are transparent and auditable.",
+    "league organizers: want assurance that team financial activities comply with competition rules and budget constraints.",
+    "teams: want clear visibility of their financial status and transactions within the system to support sound financial management."
+  ],
+  "description": "This use case describes how a team manager records and manages team financial activities within the IFA system and how an IFA budget auditor controls, audits, and obtains system-generated reports about a team’s budget management to ensure rule compliance and reduce manual workload.",
+  "triggering_event": "The team manager or IFA budget auditor decides to manage or review a team’s finances using the IFA system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA League Management System is operational and available to users.",
+    "The actor has successfully authenticated to the system.",
+    "The actor has been granted access rights relevant to team financial management within the system.",
+    "The target team exists and is registered in the IFA system.",
+    "League rules governing team financial management and allowable transactions are already configured in the system."
+  ],
+  "postconditions": [
+    "Team financial transactions entered during the use case are stored in the system and associated with the correct team.",
+    "The team’s budget management state is updated based on the recorded financial activities.",
+    "System-generated financial views and reports reflect the latest recorded transactions.",
+    "All newly recorded or updated financial activities are available for subsequent auditing and compliance checks."
+  ],
+  "assumptions": [
+    "The IFA League Management System already supports user authentication and authorization, and these capabilities are outside the scope of this use case.",
+    "The team manager has the necessary permissions within the system to record and update financial transactions for their own team only.",
+    "The IFA budget auditor has read and control permissions on team financial data for all teams that fall under their auditing responsibility.",
+    "League financial rules and constraints, including budget limits and allowable expense categories, are configured elsewhere in the system and are available for use when managing finances.",
+    "The automation of allocating match officials to games, while mentioned in the same requirement group, is treated as a supporting background function and does not change the visible steps of this financial management interaction.",
+    "All monetary values are expressed in currencies and formats that the system is already configured to handle.",
+    "Network connectivity and client devices (desktop or other) used by the actors are functioning correctly while executing this use case."
+  ],
+  "requirements_met": [
+    "The system shall allow a team manager to manage their team’s finances directly within the system to prevent unnecessary external work.",
+    "The system shall allow an IFA budget auditor to control and audit a team’s budget management within the system to reduce the auditor’s workload.",
+    "The system shall allow an IFA budget auditor to quickly obtain a system-generated report about a team’s budget management to facilitate fast review of the team’s financial situation.",
+    "The system shall track every team financial transaction so that the IFA can ensure that each team follows its league’s rules related to financial management."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific structure, level of detail, and format of the system-generated budget management report for the IFA budget auditor require definition.",
+    "The exact financial transaction types (for example, income categories, expense categories, transfers) that must be supported are not yet specified.",
+    "The rules for how league-specific financial constraints are applied to team financial transactions need to be formally defined.",
+    "The precise authorization matrix detailing which financial operations each actor role may perform requires clarification.",
+    "Error-handling behavior for inconsistent or rule-violating financial transactions (for example, exceeding budget limits) needs detailed specification."
+  ],
+  "main_flow": [
+    "1. team manager → The team manager selects the option in the system to manage finances for a specific team.",
+    "2. System → The system displays the selected team’s current financial overview, including existing recorded transactions and budget status based on league rules.",
+    "3. team manager → The team manager initiates the creation of a new financial transaction or the update of an existing financial transaction for the team.",
+    "4. System → The system prompts the team manager to provide required financial details such as transaction category, amount, date, and any relevant descriptive information, and presents available options that comply with configured league rules.",
+    "5. team manager → The team manager enters the requested financial details for the transaction and confirms the entry or update.",
+    "6. System → The system validates the provided financial details against basic data validation and currently configured league financial rules and then records the transaction or updates the existing transaction for the team.",
+    "7. System → The system recalculates and updates the team’s budget management state, including balances and any derived metrics affected by the new or updated transaction.",
+    "8. ifa budget auditor → The IFA budget auditor selects the option in the system to review and audit the budget management of a chosen team.",
+    "9. System → The system presents the selected team’s detailed financial information, including the list of transactions and the current budget status for audit purposes.",
+    "10. ifa budget auditor → The IFA budget auditor requests a system-generated report summarizing the team’s budget management over a chosen period or scope.",
+    "11. System → The system generates a structured budget management report based on the stored financial data and displays or makes the report available to the IFA budget auditor.",
+    "12. System → The system persists all financial data and the current budget status so that it is available for subsequent audits and reporting."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): The IFA budget auditor performs direct financial record review without initiating new or updated transactions. Condition: The actor is an IFA budget auditor whose intent is read-only review. The IFA budget auditor selects the same team financial management option as in Step 8 instead of performing Step 3. The system proceeds directly to present the detailed financial information as described in Step 9, and the flow then continues with Step 10.",
+    "AF-2 (from Step 8): The IFA budget auditor chooses to filter or limit the financial information by a specific time period or transaction type before review. Condition: The auditor wants a focused subset of data. After Step 8, the IFA budget auditor specifies filter criteria such as date range or transaction category. The system applies the filters and then presents the filtered financial information in place of the full list in Step 9, after which the use case continues with Step 10 using the filtered data."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 6): Financial details fail validation or conflict with league financial rules. Condition: The entered transaction data is incomplete, improperly formatted, or violates configured league financial constraints. The system rejects the transaction, displays appropriate validation or rule-violation messages to the team manager, and does not apply any change to the stored financial data or budget status. The use case ends for the attempted transaction, and the team manager may initiate the main flow again to correct the data.",
+    "EF-2 (from Step 10): System-generated budget report cannot be produced. Condition: Required financial data is unavailable or an internal processing error occurs during report generation. The system informs the IFA budget auditor that the report cannot be generated at this time and provides an error message. No report is produced, and previously stored financial information remains unchanged. The use case ends for the reporting attempt while allowing the auditor to try again later.",
+    "EF-3 (from Step 1): The actor does not have sufficient permissions to manage or review the selected team’s financial data. Condition: Access control checks fail for the requested operation. The system denies access to the financial management functions for the selected team, informs the actor of insufficient permissions, and does not display any sensitive financial information. The use case terminates without changing any financial data."
+  ],
+  "information_for_steps": [
+    "1. Team identifier, actor identity, financial management menu options.",
+    "2. Team identifier, existing transaction list, current budget status, league financial rule references.",
+    "3. Team identifier, selected operation type (create or update transaction), selected transaction record (if updating).",
+    "4. Transaction category list, required input fields definition, league rule-driven constraints for categories and amounts.",
+    "5. Transaction amount, transaction date, transaction category, transaction description, confirmation command.",
+    "6. Validation rules, league financial rules, transaction record data, system status of operation (accepted or rejected).",
+    "7. Updated budget balances, derived financial metrics, linkage between team and transactions.",
+    "8. Auditor identity, selected team identifier, audit access scope, audit view options.",
+    "9. Detailed transaction records, current and historical budget status, indicators needed for audit review.",
+    "10. Report request parameters such as date range, transaction types, and aggregation preferences.",
+    "11. Generated report content, including summarized figures, transaction listings per criteria, and compliance indicators.",
+    "12. Persisted financial records, updated budget status snapshot, audit trail entries for financial actions."
+  ]
+}

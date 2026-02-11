@@ -1,0 +1,22 @@
+﻿{
+"use_case_name": "Manage Laboratory Tests",
+"primary_actors": ["Doctor", "Laboratory Technician"],
+"preconditions": ["Doctor and Laboratory Technician are authenticated.", "Patient record exists."],
+"postconditions": ["Laboratory test is requested, performed, and results are stored."],
+"main_flow": [
+"1. Doctor selects a patient and requests a specific laboratory test.",
+"2. System records the request and sets the status to pending.",
+"3. System notifies the Laboratory Technician of the new request.",
+"4. Laboratory Technician accesses the test request list.",
+"5. Laboratory Technician View Laboratory Test Status.",
+"6. Laboratory Technician performs the test and enters the results into the system.",
+"7. Laboratory Technician annotate Laboratory Tests.",
+"8. System saves the results and notifies the Doctor."
+],
+"alternative_flows": [
+"AF-1 (from Step 6): Doctor Reviews Results. 1. Doctor receives notification. 2. Doctor accesses the system to review the test results. 3. Use Case ends."
+],
+"exception_flows": [
+"EF-1 (from Step 1): Invalid Patient ID. 1. System cannot find the patient. 2. System displays an error message. 3. Doctor re-enters patient details."
+]
+}

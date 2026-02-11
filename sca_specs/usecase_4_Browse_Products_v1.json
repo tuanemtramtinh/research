@@ -2,7 +2,7 @@
   "use_case_name": "Browse Products",
   "unique_id": "UC-004",
   "area": "E-commerce",
-  "context_of_use": "The customer wants to browse, search, and view product listings to find items more easily.",
+  "context_of_use": "This use case allows customers to browse, search, view product details, and add products to their cart within the e-commerce platform.",
   "scope": "E-commerce System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,40 +10,47 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "customer: wants to find and view products easily."
+    "customer: wants to find and purchase products easily"
   ],
-  "description": "The customer can browse, search, and view product listings and detailed product information.",
-  "triggering_event": "The customer initiates a product browsing session.",
+  "description": "Enables customers to browse, search, view product details, and add products to their cart.",
+  "triggering_event": "Customer initiates browsing products.",
   "trigger_type": "External",
   "preconditions": [
-    "The customer is logged into the system."
+    "Customer is logged into the system."
   ],
   "postconditions": [
-    "The customer has viewed product listings and details."
+    "Customer has successfully browsed products and added items to the cart."
   ],
   "assumptions": [
-    "The customer has an active account to log in."
+    "The customer has an active account and is logged in."
   ],
   "requirements_met": [
     "The system shall allow customers to browse products by category.",
     "The system shall allow customers to search for products by keyword.",
-    "The system shall allow customers to view product details."
+    "The system shall allow customers to view product details.",
+    "The system shall allow customers to add products to their cart."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None."
+    "No outstanding issues identified."
   ],
   "main_flow": [
-    "1. Customer browses products by category → System displays product listings by category.",
+    "1. Customer browses products by category → System displays products in the selected category.",
     "2. Customer searches for products by keyword → System displays search results matching the keyword.",
-    "3. Customer views product details → System displays detailed information about the selected product."
+    "3. Customer views product details → System shows detailed information about the selected product.",
+    "4. Customer adds products to cart → System confirms the product has been added to the cart."
   ],
-  "alternative_flows": [],
-  "exception_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If no products match the search keyword, then System displays a message indicating no results found."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): If the system fails to load products, then System displays an error message and prompts the customer to try again."
+  ],
   "information_for_steps": [
-    "1. Category selection data.",
-    "2. Search keyword data.",
-    "3. Product selection data."
+    "1. Category selection",
+    "2. Search keyword",
+    "3. Product ID",
+    "4. Cart ID"
   ]
 }

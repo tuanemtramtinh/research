@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Authorize External Devices",
+"primary_actors": ["Patient"],
+"preconditions": ["Patient is authenticated."],
+"postconditions": ["Device authorization is granted or rejected."],
+"main_flow": [
+"1. Include Use Case: Authenticate.",
+"2. Patient receives a request to link an external device (or initiates it).",
+"3. System asks Patient to give or reject authorization.",
+"4. Patient grants authorization.",
+"5. System updates privacy settings to allow device connection."
+],
+"alternative_flows": [
+"AF-1 (from Step 4): Reject Authorization. 1. Patient rejects the request to maintain privacy. 2. System blocks the device connection. 3. Use Case ends."
+],
+"exception_flows": []
+}

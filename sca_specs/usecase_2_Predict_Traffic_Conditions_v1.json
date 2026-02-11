@@ -1,0 +1,99 @@
+{
+  "use_case_name": "Predict Traffic Conditions",
+  "unique_id": "UC-002",
+  "area": "Traffic Simulation and Prediction",
+  "context_of_use": "The use case describes how a UMD employee uses the traffic simulation platform to generate, view, and assess predictions of future traffic conditions and related environmental impacts in Wonderland, based on managed and available historical and real-time data sources.",
+  "scope": "Wonderland Traffic Simulation and Prediction Platform",
+  "level": "User-goal",
+  "primary_actors": [
+    "umd employee"
+  ],
+  "supporting_actors": [
+    "managed traffic data sources"
+  ],
+  "stakeholders_and_interests": [
+    "UMD employee: Wants reliable, understandable predictions of future traffic and environmental conditions to support informed decision-making.",
+    "UMD management: Wants data-driven insight into current and future traffic and environmental impacts to support policy and planning decisions.",
+    "City planning department: Wants predictions of the consequences of urban planning changes to reduce congestion and environmental harm.",
+    "Environmental oversight bodies: Want accurate comparisons between predicted and actual environmental levels to ensure that environmental impacts are monitored and controlled.",
+    "System operations team: Wants the platform to execute prediction workflows reliably based on the managed data sources without manual intervention during normal use."
+  ],
+  "description": "This use case specifies how a UMD employee initiates and executes prediction workflows to forecast future traffic conditions, detect expected crowding, assess the impact of proposed urban planning changes, review the credibility of the prediction simulator, and compare predicted environmental levels to actual measurements, using already managed traffic and environmental data sources.",
+  "triggering_event": "A UMD employee decides to obtain predictions of future traffic and related environmental conditions for a selected scenario or planning question.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The UMD employee has access rights to use the traffic simulation and prediction platform.",
+    "The traffic simulation and prediction platform is running and reachable by the UMD employee.",
+    "Relevant traffic and environmental data sources have been previously configured and are available to the platform via the manage traffic data sources functionality.",
+    "The platform has access to sufficient historical data to execute prediction calculations for at least one requested scenario."
+  ],
+  "postconditions": [
+    "The platform has produced and displayed predictions of traffic conditions for the requested future situation.",
+    "If requested by the UMD employee, the platform has highlighted areas expected to become too crowded within the predicted period.",
+    "If requested by the UMD employee, the platform has produced and displayed predicted impacts of specified urban planning changes.",
+    "The platform has displayed an indication of the prediction simulator credibility for the generated predictions.",
+    "The platform has, when corresponding actual environmental measurements exist, computed and displayed a comparison between predicted and actual environmental levels for the selected scenario or period."
+  ],
+  "assumptions": [
+    "It is assumed that the \"manage traffic data sources\" included use case is responsible only for registering, updating, and making data sources available to the platform, and not for any additional processing beyond what is implied by the requirement text.",
+    "It is assumed that the platform already stores or can retrieve historical traffic and environmental data earlier saved by other functionalities, as mentioned in the requirement text about saving historical data.",
+    "It is assumed that the UMD employee selects prediction parameters such as time frame, area of interest, and type of scenario (baseline future traffic, expected crowding, or urban planning change) using existing user interface mechanisms implied by the intuitive system requirement.",
+    "It is assumed that the prediction simulator credibility is represented as a quantitative or qualitative metric derived from existing system logic, and that this metric is displayed together with the prediction results without additional user calculations.",
+    "It is assumed that actual environmental levels measured by sensors are already accessible to the platform as part of the managed traffic data sources, enabling comparison with predicted environmental levels.",
+    "It is assumed that the platform executes prediction calculations automatically once the UMD employee confirms the prediction request, without requiring external actors beyond those specified.",
+    "It is assumed that the platform uses the same spatial representation of Wonderland (map and areas) as used by the traffic simulator so that predicted traffic and environmental information can be presented in a consistent visual context."
+  ],
+  "requirements_met": [
+    "The system shall allow a UMD employee to make predictions about future traffic situations based on similar situations in the past, in order to support more informed decisions.",
+    "The system shall enable a UMD employee to identify when a specific area is expected to be too crowded in the predicted future period, so that solutions can be considered to avoid the problem.",
+    "The system shall allow a UMD employee to make predictions about the consequences of changing the urban planning of Wonderland, to support data-driven planning decisions.",
+    "The system shall present to the UMD employee an indication of the credibility of the prediction simulator for the generated predictions.",
+    "The system shall allow a UMD employee to compare predicted environmental levels of the simulator with actual environmental levels measured by sensors for corresponding time periods and locations.",
+    "The system shall use available managed traffic and environmental data sources as input for the calculation of traffic and environmental predictions."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The method and scale for expressing prediction simulator credibility (for example, confidence intervals, scores, or qualitative labels) are not defined and must be specified.",
+    "The exact criteria for determining when an area is considered \"too crowded\" are not defined and must be agreed (e.g., thresholds for vehicle count, speed, or density).",
+    "The detailed rules for constructing prediction scenarios for urban planning changes (e.g., new roads, closed streets, lane changes) are not described and require clarification.",
+    "The alignment between prediction time horizons and the availability of actual environmental measurements for comparison needs to be clarified (e.g., how far into the future predictions can be compared once data is available)."
+  ],
+  "main_flow": [
+    "1. UMD employee initiates prediction workflow from the platform interface → System displays available prediction options and prompts for scenario configuration.",
+    "2. UMD employee requests to use available traffic and environmental data sources for prediction → System invokes the manage traffic data sources functionality to retrieve and validate configured data sources required for prediction.",
+    "3. UMD employee selects the prediction type (e.g., future traffic situation, expected crowding, or urban planning change) and specifies relevant parameters such as time frame and geographic area → System records the selected prediction type and parameters for the current prediction request.",
+    "4. UMD employee confirms the configured prediction request → System starts processing the prediction using historical and other available managed data sources according to the selected parameters.",
+    "5. UMD employee waits while the prediction is executed → System generates predicted traffic conditions for the selected time frame and area based on similar situations in the past.",
+    "6. UMD employee views the prediction results on the platform → System presents predicted traffic conditions visually in the existing map or simulator view, including indication of overall congestion patterns for the requested period.",
+    "7. UMD employee reviews potential crowding in specific areas within the prediction results → System highlights areas within the selected region and period that are predicted to become crowded according to predefined internal criteria.",
+    "8. UMD employee requests predicted environmental impact information associated with the prediction results → System calculates and displays predicted environmental levels related to the predicted traffic conditions for the selected time frame and area.",
+    "9. UMD employee requests to see the prediction simulator credibility for the generated results → System computes and displays a credibility indication associated with the current prediction results.",
+    "10. UMD employee requests a comparison between predicted environmental levels and actual measured environmental levels for the same locations and time periods where data exists → System retrieves corresponding actual environmental measurements from available data sources and presents a comparison view showing both predicted and actual environmental levels.",
+    "11. UMD employee completes review of prediction and comparison results → System keeps the generated prediction and comparison results available in the current session for further user inspection or decision-making."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): UMD employee configures an urban planning change scenario instead of a baseline future traffic scenario. Condition: The UMD employee chooses a prediction type that includes consequences of changing urban planning (for example, modified street layouts or capacities) and specifies corresponding planning change parameters using existing configuration controls. System response: The system records the urban planning change parameters together with the time frame and geographic area, and then proceeds to Step 4 where the prediction is executed using these modified planning conditions.",
+    "AF-2 (from Step 7): UMD employee focuses on a specific sub-area for crowding analysis. Condition: After viewing the general prediction results, the UMD employee selects a smaller region of interest within the overall area. System response: The system updates the display to emphasize predicted crowding information only for the selected sub-area and then resumes at Step 8 for environmental impact review using the refined spatial focus.",
+    "AF-3 (from Step 8): UMD employee chooses to review only traffic predictions without environmental impact details. Condition: The UMD employee does not request predicted environmental impact information. System response: The system skips the calculations and display described in Step 8 and proceeds directly from Step 7 to Step 9 to show the prediction simulator credibility for the traffic prediction results.",
+    "AF-4 (from Step 10): UMD employee opts not to perform a comparison with actual environmental levels. Condition: The UMD employee is satisfied with predicted environmental levels and does not issue a comparison request. System response: The system omits the retrieval and comparison of actual environmental measurements and proceeds from Step 9 directly to Step 11, keeping the prediction results available for inspection."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Required data sources are unavailable or invalid. Condition: During invocation of the manage traffic data sources functionality, the system determines that necessary traffic or environmental data sources are missing, inaccessible, or invalid for the requested prediction. System response: The system displays an error message to the UMD employee indicating that required data sources are not available for prediction, cancels the current prediction workflow, and returns to the initial prediction options screen without generating results.",
+    "EF-2 (from Step 4): Prediction processing fails. Condition: While starting or executing the prediction calculations, the system encounters an internal error that prevents completion of the prediction. System response: The system logs the failure, informs the UMD employee that the prediction could not be completed, discards partial prediction results if any, and returns the user to the configuration screen so that a new prediction request can be initiated.",
+    "EF-3 (from Step 10): Actual environmental measurements for the requested comparison are not available. Condition: When retrieving actual environmental measurements for comparison, the system does not find corresponding data for the specified locations or time periods. System response: The system notifies the UMD employee that actual environmental data for the selected comparison scope is not available, does not display a comparison view, and keeps the predicted environmental levels visible so that the UMD employee can continue reviewing predictions without comparison."
+  ],
+  "information_for_steps": [
+    "1. Available prediction options list; scenario configuration parameters prompt.",
+    "2. Traffic and environmental data source identifiers; validation status of each managed data source.",
+    "3. Prediction type selection; time frame; geographic area; urban planning change indicator when applicable.",
+    "4. Confirmed prediction request; consolidated scenario configuration parameters.",
+    "5. Historical traffic records; historical environmental measurements; similarity criteria used internally for prediction computations.",
+    "6. Predicted traffic conditions dataset; map visualization parameters; congestion indicators.",
+    "7. Derived crowding metrics per area; thresholds for crowding classification; highlighted area identifiers.",
+    "8. Predicted environmental level values per location and time; mapping between traffic conditions and environmental impact indicators.",
+    "9. Prediction credibility metrics associated with the current prediction (e.g., confidence value, reliability score); explanatory label or description for credibility indication.",
+    "10. Predicted environmental level values; actual environmental measurement values from sensors; comparison metrics per location and time; comparison visualization parameters.",
+    "11. Session-level prediction result identifiers; retained datasets for traffic predictions, crowding information, environmental predictions, credibility metrics, and any generated comparison data."
+  ]
+}

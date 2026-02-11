@@ -1,0 +1,64 @@
+{
+  "use_case_name": "View and Download Reports",
+  "unique_id": "UC-005",
+  "area": "Reporting",
+  "context_of_use": "This use case allows users to view and download sales and other business reports for analysis.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "power user",
+    "customer",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "power user: Analyze data offline",
+    "customer: Access reports for personal use",
+    "admin: Monitor business performance"
+  ],
+  "description": "Allows users to view and download sales and other business reports for analysis.",
+  "triggering_event": "User requests to view or download reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "User is authenticated",
+    "User has the necessary permissions to view reports"
+  ],
+  "postconditions": [
+    "User successfully views or downloads the requested reports"
+  ],
+  "assumptions": [
+    "Users have access to the reporting system",
+    "Reports are available for viewing and downloading"
+  ],
+  "requirements_met": [
+    "The system shall allow users to view reports",
+    "The system shall allow users to download reports"
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for each user role"
+  ],
+  "main_flow": [
+    "1. power user requests to view reports → System displays available reports.",
+    "2. power user selects a report to download → System initiates download of the selected report.",
+    "3. customer requests to view reports → System displays available reports.",
+    "4. customer selects a report to download → System initiates download of the selected report.",
+    "5. admin requests to view sales reports → System displays sales reports.",
+    "6. admin selects a sales report to download → System initiates download of the selected sales report."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no reports are available, System displays a message indicating no reports are available.",
+    "AF-2 (from Step 3): If the customer cancels the download, System stops the download process and returns to the report selection screen."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the download fails, System displays an error message and suggests retrying.",
+    "EF-2 (from Step 4): If the selected report is not found, System displays an error message indicating the report is unavailable."
+  ],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Report selection",
+    "3. Report data",
+    "4. Download status"
+  ]
+}

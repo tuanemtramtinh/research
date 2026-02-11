@@ -1,0 +1,93 @@
+{
+  "use_case_name": "Access Clinical and Operational Data",
+  "unique_id": "UC-007",
+  "area": "Analytics and Reporting",
+  "context_of_use": "A systems analyst uses the hospital management system to collect, record, and access clinical and operational data in order to perform prescriptive and predictive analytics while relying on centrally managed medical data.",
+  "scope": "Hospital Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "systems analyst"
+  ],
+  "supporting_actors": [
+    "central database",
+    "medical data management subsystem"
+  ],
+  "stakeholders_and_interests": [
+    "Systems analyst: Wants complete, accurate, and timely clinical and operational data to perform prescriptive and predictive analytics.",
+    "Hospital management: Wants analytics results based on reliable data to support operational and strategic decisions.",
+    "Medical staff: Wants that access to clinical data for analytics does not interfere with clinical workflows or compromise data integrity.",
+    "Patients: Want their clinical and operational data to be protected and used appropriately for analytics without exposing identifiable information.",
+    "IT operations: Wants consistent data storage and retrieval performance while supporting analytics workloads."
+  ],
+  "description": "This use case describes how a systems analyst collects, records, and accesses clinical and operational data, including bed occupancy data, room scheduling data, employee schedules, and appointment start and end times, by using the hospital management system, which relies on existing medical data management capabilities, so that prescriptive and predictive analytics can be performed.",
+  "triggering_event": "The systems analyst decides to perform analytics that require up-to-date clinical and operational data.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The systems analyst has an active user account with appropriate access rights to view and record clinical and operational data for analytics.",
+    "The hospital management system is operational and connected to the central database.",
+    "Relevant clinical and operational data are being stored in the central database through existing medical data management capabilities.",
+    "The systems analyst is authenticated in the hospital management system."
+  ],
+  "postconditions": [
+    "The systems analyst has successfully accessed the required clinical and operational data for analytics.",
+    "Recorded appointment start and end times are stored in the central database and are available for analytics.",
+    "The system has provided consistent views of bed occupancy data, room scheduling data, and employee schedules based on centrally managed medical data."
+  ],
+  "assumptions": [
+    "It is assumed that all clinical and operational data, including bed occupancy, room scheduling, employee schedules, and appointment times, are already collected and stored in a central database by other existing system functionalities described as medical data management.",
+    "It is assumed that the relationship of type \"include\" to the target use case \"manage medical data\" means that this use case relies on existing mechanisms for centralized storage and management of medical and operational data and does not itself implement additional data collection or migration capabilities.",
+    "It is assumed that the systems analyst has read access to anonymized clinical and operational data in accordance with privacy and security controls defined elsewhere.",
+    "It is assumed that the systems analyst can initiate recording of appointment start and end times within the constraints of existing appointment data structures without modifying clinical content.",
+    "It is assumed that data required for analytics can be retrieved through the hospital management system user interface without requiring direct database access."
+  ],
+  "requirements_met": [
+    "The system shall allow the systems analyst to collect clinical data so that prescriptive and predictive analytics can be performed.",
+    "The system shall allow the systems analyst to access clinical data that has been collected so that prescriptive and predictive analytics can be performed.",
+    "The system shall allow the systems analyst to view bed occupancy data so that analytics can be performed on hospital capacity.",
+    "The system shall allow the systems analyst to view room scheduling data so that analytics can be performed.",
+    "The system shall allow the systems analyst to view employee schedules so that predictive analytics can be used to estimate staffing needs.",
+    "The system shall allow the systems analyst to record appointment start and end times so that the average appointment duration can be calculated.",
+    "The system shall provide the systems analyst with access to clinical and operational data that are stored and managed using existing medical data management capabilities."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The specific anonymization and privacy rules governing which clinical data fields are visible to the systems analyst are not defined.",
+    "The exact data retention and historical range of clinical and operational data available for analytics are not specified.",
+    "The performance expectations and response time requirements for retrieving large volumes of clinical and operational data are not described.",
+    "The detailed structure and granularity of bed occupancy, room scheduling, employee schedule, and appointment time data required for analytics are not fully specified."
+  ],
+  "main_flow": [
+    "1. Systems analyst requests access to analytics workspace within the hospital management system → System authenticates the systems analyst session and displays the analytics or data access interface.",
+    "2. Systems analyst selects the option to load centrally managed clinical and operational data required for analytics → System invokes the included medical data management functionality to retrieve relevant data from the central database.",
+    "3. Systems analyst specifies the clinical data scope and time range for analysis (for example, selecting clinical datasets related to patient encounters) → System retrieves the requested clinical data from the central database and prepares it for viewing by the systems analyst.",
+    "4. Systems analyst selects to view bed occupancy data within the chosen scope → System displays bed occupancy data based on centrally stored information for the requested period.",
+    "5. Systems analyst selects to view room scheduling data within the chosen scope → System displays room scheduling data based on centrally stored information for the requested period.",
+    "6. Systems analyst selects to view employee schedules within the chosen scope → System displays employee schedule data based on centrally stored information for the requested period.",
+    "7. Systems analyst initiates recording of appointment start and end times for the selected set of appointments or time window → System records the provided appointment start and end times in the central database and associates them with the corresponding appointments.",
+    "8. Systems analyst reviews the collected and accessed clinical and operational data in the interface for completeness and suitability for analytics → System confirms that the requested datasets are available and consistently displayed for the systems analyst.",
+    "9. Systems analyst confirms completion of data access for analytics preparation → System finalizes the data access session and maintains stored data so that it can be used by external analytics tools or processes."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): Systems analyst changes the clinical data scope or time range before viewing any specific dataset; the systems analyst adjusts filters for clinical data selection → System updates the selected clinical data scope and time range and then returns to Step 4 for subsequent viewing actions.",
+    "AF-2 (from Step 7): Systems analyst chooses to import existing appointment start and end times that have already been captured by other subsystems instead of manually recording them → System retrieves the existing appointment start and end times from the central database via medical data management functionality and then proceeds directly to Step 8."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): The system cannot retrieve centrally managed data because the central database is temporarily unavailable → System displays an error message indicating that data cannot be loaded at this time, logs the failure, and terminates the use case without providing data for analytics.",
+    "EF-2 (from Step 4): The requested bed occupancy data are not available for the selected period → System informs the systems analyst that no bed occupancy data were found for the specified criteria, allows the systems analyst to modify the selection parameters, and returns to Step 3.",
+    "EF-3 (from Step 5): The requested room scheduling data are not available for the selected period → System informs the systems analyst that no room scheduling data were found for the specified criteria, allows the systems analyst to modify the selection parameters, and returns to Step 3.",
+    "EF-4 (from Step 6): The requested employee schedule data are not available for the selected period → System informs the systems analyst that no employee schedule data were found for the specified criteria, allows the systems analyst to modify the selection parameters, and returns to Step 3.",
+    "EF-5 (from Step 7): The system encounters a validation or storage error while recording appointment start and end times → System displays an error message describing that appointment times could not be saved, does not commit invalid data, logs the error, and returns to Step 7 to allow the systems analyst to attempt the recording again or cancel the recording operation."
+  ],
+  "information_for_steps": [
+    "1. Systems analyst credentials, session token, access role information.",
+    "2. Data retrieval parameters, link to medical data management functionality, identifiers for clinical and operational datasets in the central database.",
+    "3. Clinical data scope, time range, dataset filters, encounter identifiers.",
+    "4. Bed occupancy records, bed identifiers, occupancy status, timestamps, ward or department identifiers.",
+    "5. Room scheduling records, room identifiers, scheduled events, start and end times, associated department or service identifiers.",
+    "6. Employee schedule records, employee identifiers, shift start and end times, role or position information.",
+    "7. Appointment identifiers, appointment start times, appointment end times, data quality or validation flags.",
+    "8. Aggregated view of selected clinical and operational datasets, completeness indicators, data availability status.",
+    "9. Session metadata, confirmation of data availability for analytics, references or links to datasets stored in the central database."
+  ]
+}

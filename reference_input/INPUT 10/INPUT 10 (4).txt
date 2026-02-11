@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Restrict Access",
+"primary_actors": ["Doctor"],
+"preconditions": ["Doctor is logged in.", "Doctor is viewing patient lists or records."],
+"postconditions": ["View restrictions are applied to maintain confidentiality."],
+"main_flow": [
+"1. Doctor accesses their dashboard settings.",
+"2. Doctor selects the option to restrict their view.",
+"3. System filters the list to show only assigned patient medical records.",
+"4. System hides unassigned records to maintain patient confidentiality.",
+"5. System confirms the view settings are updated."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

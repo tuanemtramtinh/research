@@ -1,0 +1,17 @@
+﻿{
+"use_case_name": "Manage Budgets",
+"primary_actors": ["IFA Administrator"],
+"preconditions": ["IFA Administrator is authenticated.", "Teams exist in the system."],
+"postconditions": ["Budget rules are defined.", "Budgets are monitored."],
+"main_flow": [
+"1. IFA Administrator defines budgetary policies and rules to prevent fraud.",
+"2. IFA Administrator accesses the budgeting section.",
+"3. System displays an overview of team budgets and transaction reports.",
+"4. IFA Administrator reviews the reports for compliance.",
+"5. System alerts the Administrator if any deviations from the rules are detected."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): Restrict Access. 1. System verifies the user is IFA Admin or Team. 2. System denies access to unauthorized users to maintain confidentiality. 3. Resume Step 3."
+],
+"exception_flows": []
+}

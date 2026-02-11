@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Assign Doctors",
+"primary_actors": ["Patient", "Doctor", "Receptionist"],
+"preconditions": ["Patient profile exists.", "Doctor profile exists."],
+"postconditions": ["Doctor is assigned to the Patient's medical profile."],
+"main_flow": [
+"1. Actor selects a patient profile.",
+"2. Actor searches for a specific doctor.",
+"3. Actor selects the doctor to assign to the medical record.",
+"4. System links the doctor to the patient's record.",
+"5. System grants the doctor access to the patient's profile."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Doctor Assigns Colleague. 1. Actor (Doctor) identifies a need for a specialist. 2. Doctor assigns another doctor to the record. 3. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 2): Doctor Not Found. 1. System cannot find the requested doctor. 2. System displays error. 3. Use Case ends."
+]
+}

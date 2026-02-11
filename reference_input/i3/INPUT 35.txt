@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Report Match Event",
+"primary_actors": ["Referee"],
+"preconditions": ["Referee is logged in via a mobile device.", "Match is currently active."],
+"postconditions": ["Match event is recorded and data is transmitted."],
+"main_flow": [
+"1. Referee accesses the application on a mobile device.",
+"2. Referee selects the current match.",
+"3. Referee selects a match event from the predefined list (e.g., goal, foul).",
+"4. Referee submits the event information digitally.",
+"5. System records the event and updates match data continuously.",
+"6. System confirms successful data transmission."
+],
+"alternative_flows": [],
+"exception_flows": [
+"EF-1 (from Step 4): Transmission Fail. 1. System fails to receive data due to connectivity issues. 2. System alerts Referee. 3. System queues data for retry. 4. Resume Step 6."
+]
+}

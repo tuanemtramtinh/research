@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage Room Assignments",
+"primary_actors": ["Receptionist"],
+"preconditions": ["Patient requires a room.", "Room availability data is current."],
+"postconditions": ["Patient is assigned to a room."],
+"main_flow": [
+"1. Receptionist reviews the patient's relevant medical info to determine room requirements.",
+"2. Receptionist requests an overview of available rooms.",
+"3. System displays list of empty and suitable rooms.",
+"4. Receptionist assigns a specific room to the patient.",
+"5. System updates the room status to 'Occupied'."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): No Rooms Available. 1. System shows zero availability. 2. Receptionist checks expected discharge times. 3. Use Case ends."
+],
+"exception_flows": [
+"EF-1 (from Step 4): Simultaneous Booking. 1. System detects the room was assigned by another user. 2. System alerts Receptionist. 3. Resume Step 2."
+]
+}

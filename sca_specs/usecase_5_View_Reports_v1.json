@@ -1,0 +1,52 @@
+{
+  "use_case_name": "View Reports",
+  "unique_id": "UC-005",
+  "area": "Reporting",
+  "context_of_use": "This use case allows customers and admins to view and download general and sales-related reports.",
+  "scope": "Reporting System",
+  "level": "User-goal",
+  "primary_actors": [
+    "customer",
+    "admin"
+  ],
+  "supporting_actors": [],
+  "stakeholders_and_interests": [
+    "customer: wants to analyze data offline",
+    "admin: wants to monitor business performance"
+  ],
+  "description": "This use case enables customers and admins to view and download reports for analysis.",
+  "triggering_event": "The user requests to view reports.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The user is authenticated.",
+    "The user has permission to view reports."
+  ],
+  "postconditions": [
+    "The user successfully views and downloads the requested reports."
+  ],
+  "assumptions": [
+    "The system has reports available for viewing and downloading.",
+    "The user has the necessary permissions to access the reports."
+  ],
+  "requirements_met": [
+    "The system shall allow customers to view and download reports.",
+    "The system shall allow admins to view sales reports."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "Clarification on the types of reports available for viewing and downloading."
+  ],
+  "main_flow": [
+    "1. customer/admin requests to view reports → system displays available reports.",
+    "2. customer/admin selects a report to view → system retrieves and displays the report.",
+    "3. customer/admin chooses to download the report → system initiates the download process."
+  ],
+  "alternative_flows": [],
+  "exception_flows": [],
+  "information_for_steps": [
+    "1. User credentials",
+    "2. Report selection",
+    "3. Download request"
+  ]
+}

@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Manage Prescriptions",
+"primary_actors": ["Doctor", "Patient", "Pharmacist"],
+"preconditions": ["Patient record is accessible.", "Medication database is available."],
+"postconditions": ["Prescription is created, renewed, or reviewed."],
+"main_flow": [
+"1. Doctor selects a patient and initiates a new prescription.",
+"2. Doctor reviews intake prescriptions to advise the patient.",
+"3. Doctor selects medication and checks external pharmacy stock.",
+"4. Doctor sends the prescription to the selected pharmacy.",
+"5. System notifies the Pharmacist.",
+"6. Pharmacist reviews the patient ID, dosage, and prescribed medication."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Patient Renews Prescription. 1. Patient views their current medications. 2. Patient requests a renewal for a specific prescription. 3. System forwards request to Doctor. 4. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Medication Out of Stock. 1. System indicates the medication is unavailable at the selected pharmacy. 2. Doctor selects a different pharmacy or medication. 3. Resume Step 4."
+]
+}

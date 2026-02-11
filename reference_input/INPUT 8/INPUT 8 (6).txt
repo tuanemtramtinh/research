@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "View Statistics",
+"primary_actors": ["IFA Administrator", "IFA Employee"],
+"preconditions": ["Match data has been reported.", "Actor is logged in."],
+"postconditions": ["Statistics are displayed to the user."],
+"main_flow": [
+"1. Actor requests to view statistics for a specific league, match, or player.",
+"2. System initiates data aggregation.",
+"3. The system integrates data processed during match event reporting.",
+"4. System derives specific metrics (e.g., player performance, match summaries).",
+"5. System displays the statistics dashboard to the Actor."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): View Leaderboard. 1. Actor selects league leaderboard view. 2. System calculates standings based on rulesets. 3. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Data Incomplete. 1. System detects missing event reports for a finalized game. 2. System flags the statistics as 'Preliminary'. 3. Resume Step 5."
+]
+}

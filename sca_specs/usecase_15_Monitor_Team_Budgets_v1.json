@@ -1,0 +1,91 @@
+{
+  "use_case_name": "Monitor Team Budgets",
+  "unique_id": "UC-015",
+  "area": "Budget Monitoring and Compliance",
+  "context_of_use": "This use case describes how an IFA administrator monitors teams’ budgets through the web application using predefined budgetary policies and rules, manages access to budgeting information, and is informed about deviations from these rules to prevent fraud.",
+  "scope": "IFA Web Application",
+  "level": "User-goal",
+  "primary_actors": [
+    "ifa administrator"
+  ],
+  "supporting_actors": [
+    "team"
+  ],
+  "stakeholders_and_interests": [
+    "IFA administrator: Requires continuous visibility into teams’ budgets and enforcement of budgetary policies to prevent fraud and maintain financial integrity.",
+    "Team: Requires access to its own budgeting information while ensuring that confidential financial data is not exposed to unauthorized parties.",
+    "CIO: Requires that budget monitoring capabilities support overall communication and transparency goals among stakeholders without compromising confidentiality.",
+    "IFA representative: Requires that budget monitoring supports unbiased financial oversight aligned with IFA rules and policies."
+  ],
+  "description": "The IFA administrator uses the web application to monitor team budgets based on previously defined budgetary policies and rules, restricts budgeting information access to authorized parties, and receives alerts when deviations from budget rules occur, enabling timely investigation and potential fraud prevention.",
+  "triggering_event": "The IFA administrator decides to review and monitor team budgets in the web application according to the defined budgetary policies and rules.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The IFA web application is operational and accessible to the IFA administrator.",
+    "The IFA administrator is authenticated in the IFA web application with appropriate administrative permissions.",
+    "Teams’ budgeting data is available in the system for access and monitoring.",
+    "Budgetary policies and rules for teams’ budgeting have been defined in the system prior to budget monitoring.",
+    "Access restrictions for budgeting information limiting visibility to IFA administration and teams have been configured in the system."
+  ],
+  "postconditions": [
+    "The IFA administrator has accessed up-to-date budgeting information for one or more teams through the web application.",
+    "Budgeting information has only been accessible to the IFA administration and corresponding teams in accordance with configured access restrictions.",
+    "The system has evaluated teams’ budget data against defined budget rules and is prepared to generate alerts for any detected deviations.",
+    "Any detected deviations from budget rules have been recorded by the system and made available for alerting and further review by the IFA administrator."
+  ],
+  "assumptions": [
+    "It is assumed that all budgetary policies and rules relevant for fraud prevention are defined through a separate use case referred to as \"define budget policies\" and are already stored in the system before this use case starts.",
+    "It is assumed that the configuration of access restrictions limiting budgeting information to IFA administration and teams is performed through administrative functionality that is part of the same overall budgeting domain but not detailed within this use case.",
+    "It is assumed that only authenticated IFA administrators can initiate the Monitor Team Budgets use case, and that user authentication is handled by a separate system function.",
+    "It is assumed that teams’ budgeting data is regularly provided and updated in the system from existing financial processes external to this use case.",
+    "It is assumed that the system continuously or periodically evaluates budgeting information against the defined budget rules in order to detect deviations that can be alerted to the IFA administrator.",
+    "It is assumed that the term \"alerted about deviations from budget rules\" implies that the system presents visible notifications within the web application to the IFA administrator when reviewing budget information.",
+    "It is assumed that the team actor can only access its own budgeting information and not the budgeting information of other teams, in line with budget confidentiality requirements."
+  ],
+  "requirements_met": [
+    "The system shall allow the IFA administrator to access teams’ budgets through the web application in order to continuously monitor them.",
+    "The system shall restrict access to budgeting information to IFA administration and the respective teams to maintain budget confidentiality.",
+    "The system shall use predefined budgetary policies and rules when evaluating teams’ budgets.",
+    "The system shall detect deviations of teams’ budgets from the defined budget rules.",
+    "The system shall alert the IFA administrator about detected deviations from budget rules so that potential fraud can be prevented.",
+    "The system shall present team budget information in a manner that enables the IFA administrator to review and monitor budgets efficiently.",
+    "The system shall ensure that only users with IFA administrator rights can access the monitoring functionality for all teams’ budgets."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The specific types and formats of alerts (e.g., on-screen notifications, emails, or other channels) for budget rule deviations have not been defined.",
+    "The exact structure, level of detail, and time granularity of team budgeting information to be displayed to the IFA administrator is not specified.",
+    "The frequency and method by which the system evaluates budgets against defined rules (real-time, scheduled batch, or on-demand) requires clarification.",
+    "The precise configuration process and user interface for defining and maintaining access restrictions to budgeting information is not described.",
+    "Criteria for classifying the severity or priority of budget rule deviations, and any escalation mechanisms, have not been established."
+  ],
+  "main_flow": [
+    "1. ifa administrator reviews that budget policies are defined → System retrieves and confirms availability of existing budgetary policies and rules for monitoring purposes.",
+    "2. ifa administrator requests access to the budget monitoring module → System displays the budget monitoring interface constrained to the ifa administrator’s permissions.",
+    "3. ifa administrator selects one or more teams whose budgets are to be monitored → System retrieves the selected teams’ budgeting information from stored financial data.",
+    "4. ifa administrator views the displayed budgeting information for the selected teams → System presents detailed budget data according to the defined budgetary policies and rules and applicable access restrictions.",
+    "5. ifa administrator requests evaluation of the displayed budgets against existing budget rules → System evaluates the selected teams’ budgeting information against the defined budgetary policies and rules.",
+    "6. ifa administrator observes the evaluation results for the selected teams → System highlights any segments of the budgeting information that deviate from the defined budget rules and prepares corresponding alerts for the ifa administrator.",
+    "7. ifa administrator reviews the identified deviations and associated alerts → System records the review activity and maintains a consistent monitoring state for the selected teams’ budgets, completing the monitoring task."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 3): ifa administrator filters teams by league or other existing grouping before selecting → System applies the selected filters to the list of teams, displays only teams matching the criteria, and the flow continues with Step 3 when the ifa administrator selects one or more teams.",
+    "AF-2 (from Step 4): ifa administrator chooses to adjust the time period of budgeting information being viewed → System reloads and displays teams’ budgeting information for the newly selected time period and the flow continues with Step 5 for evaluation of the updated data.",
+    "AF-3 (from Step 6): ifa administrator chooses to focus only on teams with deviations from budget rules → System filters the monitoring view to display only teams and budget items with detected deviations and the flow continues with Step 7 for review of deviations and alerts."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): System cannot retrieve budgetary policies and rules due to missing configuration → System informs the ifa administrator that budgetary policies and rules must be defined before monitoring can proceed and terminates the use case without allowing access to budget monitoring.",
+    "EF-2 (from Step 3): System cannot retrieve budgeting information for the selected teams due to data unavailability or access error → System displays an error message to the ifa administrator indicating that budgeting information for the affected teams is temporarily unavailable and stops progression for those teams while allowing the ifa administrator to cancel the operation or select other teams.",
+    "EF-3 (from Step 5): System encounters an internal error while evaluating budgets against rules → System notifies the ifa administrator that evaluation could not be completed, logs the error, and terminates the evaluation process for the current monitoring session without updating deviation or alert information."
+  ],
+  "information_for_steps": [
+    "1. Budgetary policies and rules identifiers, rule definitions, rule activation status.",
+    "2. IFA administrator identity, role and permission set, budget monitoring module configuration.",
+    "3. List of teams, team identifiers, selection filters, selected teams set.",
+    "4. Team budgeting data, budget line items, time period parameters, access restriction parameters.",
+    "5. Budget rule definitions, evaluation criteria, thresholds, selected teams’ budgeting data for evaluation.",
+    "6. Evaluation results, deviation indicators, deviation descriptions, prepared alert records.",
+    "7. Deviation details, alert summaries, administrator review metadata (timestamp, administrator identifier)."
+  ]
+}

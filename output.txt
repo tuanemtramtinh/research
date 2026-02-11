@@ -1,1022 +1,1713 @@
-=== INPUT FILE: input_user_stories.txt ===
-Loaded 22 user stories
+=== INPUT FILE: inputs/input_2.txt ===
+Loaded 31 user stories
 
 
 === ACTORS ALIASES ===
-[ActorResult(actor='customer', aliases=[ActorAliasItem(alias='shopper', sentences=[1, 2, 3, 4, 5, 6])], sentence_idx=[0]), ActorResult(actor='user', aliases=[], sentence_idx=[7, 8, 9, 10, 11]), ActorResult(actor='admin', aliases=[ActorAliasItem(alias='system operator', sentences=[14])], sentence_idx=[12, 16, 17, 18, 19]), ActorResult(actor='manager', aliases=[], sentence_idx=[13]), ActorResult(actor='power user', aliases=[], sentence_idx=[15])]
+[ActorResult(actor='umd employee', aliases=[], sentence_idx=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])]
 
 === USE CASES ===
-[1] Browse Products (actors: customer)
-  description: Allows customers to browse product listings by category and other criteria to discover items.
-  - As a shopper, I want to browse products by category, so that I can find items more easily.
-[2] Search Products (actors: customer)
-  description: Allows customers to search for products using keywords and filters to quickly locate items.
-  - As a shopper, I want to search for products by keyword, so that I can quickly locate specific items.
-[3] View Product Details (actors: customer)
-  description: Allows customers to view detailed product information such as descriptions, images, and specifications.
-  - As a shopper, I want to view product details, so that I can decide whether the product meets my needs.
-[4] Manage Cart (actors: customer)
-  description: Allows customers to add, update, and remove products in their shopping cart prior to checkout.
-  - As a shopper, I want to add products to my cart, so that I can purchase multiple items at once.
-[5] Manage Profile (actors: user)
-  description: Allows users to update and maintain their account profile information and preferences.
-  - As a user, I want to update my profile information, so that my account details remain accurate.
-[6] Manage Users (actors: admin)
-  description: Allows admins to create, update, deactivate, and delete user accounts and manage access.
-  - As an admin, I want to be allowed to manage user accounts, so that I can control system access.
-[7] Configure System (actors: admin)
-  description: Allows admins to configure application settings and system parameters for customization and operation.
-  - As a system operator, I want to be permitted to configure system settings, so that the system can be customized.
-[8] Perform Bulk Operations (actors: power user)
-  description: Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.
-  - As a power user, I want to be capable of handling bulk operations, so that I can work more efficiently.
-[9] Manage Products (actors: admin)
-  description: Allows admins to create and maintain the product catalog, including inventory levels and pricing.
-  - As an admin, I want to manage inventory levels, so that products do not go out of stock.
-  - As an admin, I want to create new products, so that they are available for customers to purchase.
-  - As an admin, I want to update product prices, so that pricing information stays current.
-[10] View Reports (actors: customer, user)
-  description: Allows customers and users to view report content and download or export reports for offline use.
-  - As a customer, I want to view and download reports so that I sleep
-  - As a customer, I want to view and download reports so that I sleep
-  - As a user, I want to be able to download reports, so that I can analyze my data offline.
-[11] View Sales Reports (actors: admin)
-  description: Allows admins to view sales performance reports and analytics to monitor business metrics.
-  - As an admin, I want to view sales reports, so that I can monitor business performance.
-[12] Checkout Order (actors: customer)
-  description: Allows customers to complete purchases by selecting payment and delivery options and finalizing orders.
-  - As a shopper, I want to checkout using multiple payment methods, so that I can choose the most convenient option.
-[13] Track Orders (actors: customer)
-  description: Allows customers to view order status and shipment tracking information until delivery.
-  - As a shopper, I want to track my orders, so that I know the delivery status.
-[14] Approve Orders (actors: manager)
-  description: Allows managers to review, approve, or reject orders as part of the order approval workflow.
-  - As a manager, I want to be authorized to approve orders, so that business processes are not delayed.
-[15] Authenticate (actors: user)
-  description: Allows users to register, log in, and reset passwords to securely access the system.
-  - As a user, I want to register an account, so that I can access personalized features.
-  - As a user, I want to log in to the system, so that I can securely access my account.
-  - As a user, I want to reset my password, so that I can regain access if I forget it.
+[1] View Real-Time Traffic (actors: umd employee)
+  description: UMD employees view real-time traffic, maps, and environmental conditions on an interactive city map for situational awareness.
+  - As a UMD employee, I want to see a real-time simulation of the current traffic situation of Wonderland, so that I can take more informed decisions
+  - As a UMD employee, I want to have an up-to-date map of the streets of Wonderland (including different road types and obstacles), so that I have an accurate background for the traffic simulator.
+  - As a UMD employee, I want to see the current traffic on the map (gathered from the sensors in Wonderland), so that I can monitor the current situation including busy areas and congestions
+[2] Analyze and Predict Traffic (actors: umd employee)
+  description: UMD employees analyze historical traffic and environmental data to generate predictions, compare scenarios, and assess expected impacts.
+  - As a UMD employee, I want to be able to make predictions about future traffic situations based on similar situations in the past, so that I can take more informed decisions
+  - As a UMD employee, I want to know when an area is expected to be too crowded, so that i can work on a solution to avoid the problem
+  - As a UMD employee, I want to be able to compare historical traffic data, so that I can use the data to create meaningful analyses
+[3] Manage Traffic Data (actors: umd employee)
+  description: UMD employees collect, enrich, and store sensor, simulator, and environmental data over time for later analysis and visualization.
+  - As a UMD employee, I want to add new sensor measurements to the map when they become available, so that my simulator is as accurate as possible
+  - As a UMD employee, I want to save all historical data, so that I am able to create meaningful insights about this data at a later moment.
+  - As a UMD employee, I want to save the simulator data (map, traffic and heatmap) of every moment coupled to that specific time, so that I can look into them at a later moment
+[4] Access Simulation Platform (actors: umd employee)
+  description: UMD employees access and operate the traffic simulation platform reliably, remotely, and across devices using an intuitive interface.
+  - As a UMD employee, I want to use an intuitive system, so that I can quickly understand all the functions in the system.
+  - As a UMD employee, I want to use new data sources as they become available, so that my simulator is as accurate as possible.As a UMD employee, I want the system to always be available, so that I can access it whenever I need
+  - As a UMD employee, I want to be able to access the system 24/7, so that I can work flexible shifts
 
 === SCENARIOS ===
 
 --- SCENARIO 1 ---
-Use case: [1] Browse Products
+Use case: [1] View Real-Time Traffic
 
 --- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: alternative_flows, exception_flows
+- Completeness: 98/100 (PASS)
+- Correctness: 95/100 (PASS)
+- Relevance: 95/100 (PASS)
+- Overall (avg): 96/100
+
+--- COMPARISON SCENARIO SCORES (FILE) ---
+C:\Users\kyluo\research\paradigm_scenario\2\Display Traffic and Environmental Heat Maps_report.json
+- Completeness: 87/100 (PASS)
+- Correctness: 93/100 (PASS)
+- Relevance: 78/100 (PASS)
+- Overall (avg): 86/100
+
+--- COMPLETENESS SUB-SCORES ---
+- Primary Actor: 15
+- Use Case Name: 10
+- Preconditions: 10
+- Postconditions: 10
+- Stakeholders & Interests: 5
+- Main Flow: 25
+- Alternative Flows: 15
+- Exception Flows: 10
+
+--- CORRECTNESS SUB-SCORES ---
+- Primary Actor: 20
+- Use Case Name: 17
+- Main Success Scenario (MSS): 25
+- Alternative Flows: 15
+- Exception Flows: 10
+- Preconditions: 5
+- Postconditions: 5
+
+--- RELEVANCE SUB-SCORES ---
+- Primary Actor ↔ Use Case Name: 15
+- Use Case Name ↔ Main Flow: 25
+- Main Flow ↔ Alternative Flows: 20
+- Preconditions & Trigger ↔ Main Flow: 10
+- (Main Flow & Alternative Flows) ↔ Postconditions: 13
+- Stakeholders & Interests ↔ Postconditions: 13
 
 --- CONTENT ---
 {
-  "use_case_name": "Browse Products",
+  "use_case_name": "View Real-Time Traffic",
   "unique_id": "UC-001",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to browse product listings by category and other criteria to discover items.",
-  "scope": "E-commerce System",
+  "area": "Traffic Monitoring and Environmental Visualization",
+  "context_of_use": "UMD employees use the traffic simulation platform to view an interactive, real-time representation of Wonderland’s street network, traffic conditions, and environmental measurements to support informed operational and planning decisions.",
+  "scope": "Wonderland Traffic Simulation and Monitoring Platform",
   "level": "User-goal",
   "primary_actors": [
-    "customer"
+    "umd employee"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "sensors in Wonderland"
+  ],
   "stakeholders_and_interests": [
-    "customer: wants to find items more easily"
+    "UMD employee: Wants to obtain an accurate, real-time overview of traffic and environmental conditions in Wonderland to make informed decisions.",
+    "UMD management: Wants staff to have reliable situational awareness to improve traffic management and environmental compliance.",
+    "City residents: Expect that traffic and environmental conditions are monitored so that congestion and pollution can be mitigated.",
+    "Regulatory authorities: Require monitoring of noise and air pollution levels to ensure compliance with legal limits."
   ],
-  "description": "Allows customers to browse product listings by category and other criteria to discover items.",
-  "triggering_event": "Customer initiates a browsing session.",
+  "description": "This use case describes how a UMD employee accesses the simulation platform and views a real-time interactive map of Wonderland that displays an up-to-date street map, current traffic, traffic heat map, and real-time environmental measures including CO2 emissions, noise levels, and air pollution at overall and per-point levels.",
+  "triggering_event": "A UMD employee decides to view the current real-time traffic and environmental situation in Wonderland using the simulation platform.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into the system."
+    "The Wonderland Traffic Simulation and Monitoring Platform is operational.",
+    "The UMD employee has network access to the platform.",
+    "Sensors in Wonderland are actively providing traffic and environmental data to the platform.",
+    "The platform has an up-to-date digital street map of Wonderland, including different road types and obstacles.",
+    "The UMD employee has any required credentials or access rights to use the platform."
   ],
   "postconditions": [
-    "Customer can view a list of products by category."
+    "The UMD employee has an up-to-date visual overview of real-time traffic conditions on the map of Wonderland.",
+    "The UMD employee can see a traffic heat map indicating crowdedness across Wonderland.",
+    "The UMD employee can see real-time environmental measurements (CO2, noise levels, air pollution levels) on the map.",
+    "The UMD employee can see overall real-time CO2 emissions and overall real-time air pollution levels for Wonderland.",
+    "The system continues to update the displayed map and data in real time while the session remains active."
   ],
   "assumptions": [
-    "The customer has an active account to log in."
+    "The term \"simulation platform\" refers to the Wonderland Traffic Simulation and Monitoring Platform specified in the scope.",
+    "Real-time data means that traffic and environmental data are updated with a delay that is operationally acceptable for monitoring but not necessarily instantaneous.",
+    "The included use case \"access simulation platform\" covers user authentication, authorization, and basic platform startup, and is already defined elsewhere.",
+    "The system aggregates sensor data from multiple physical sensors in Wonderland into coherent traffic and environmental indicators before visualization.",
+    "The up-to-date map, traffic data, and environmental data are already preprocessed and stored in formats directly usable by the platform for visualization.",
+    "The user interface is graphical and map-based, allowing panning and zooming of the Wonderland map, even though detailed UI behavior is outside the scope of this use case.",
+    "Noise and air pollution legal limits are defined externally and are not configured or modified within this use case.",
+    "The system continuously refreshes the displayed information without requiring the UMD employee to manually reload the page, unless explicitly requested.",
+    "Environmental measures \"taken at points in the city\" are associated with identifiable geographic measurement points that can be displayed as markers on the map.",
+    "Overall CO2 emissions and overall air pollution levels are presented as aggregate indicators derived from sensor data and optionally simulation models."
   ],
   "requirements_met": [
-    "The system shall allow customers to browse products by category."
+    "The system shall provide an up-to-date digital map of the streets of Wonderland, including different road types and obstacles, as a background for the traffic simulator.",
+    "The system shall display a real-time simulation of the current traffic situation of Wonderland on the map.",
+    "The system shall display current traffic on the map, gathered from the sensors in Wonderland, enabling monitoring of busy areas and congestions.",
+    "The system shall provide a traffic heat map that visualizes how traffic crowdedness is spread across Wonderland in real time.",
+    "The system shall display real-time environmental measures taken at points in the city on the map.",
+    "The system shall display the overall real-time CO2 emissions related to the current traffic situation.",
+    "The system shall display the real-time level of noise per measurement point on the map.",
+    "The system shall display the real-time overall level of air pollution.",
+    "The system shall display real-time levels of air pollution per measurement point on the map.",
+    "The system shall obtain real-time traffic and environmental data from sensors in Wonderland for use in the visualization."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "The required maximum delay for data to still be considered real-time (e.g., seconds vs. minutes) has not been specified.",
+    "The required spatial resolution and coverage of the digital street map and measurement points have not been defined.",
+    "The exact visualization method and color scales for the traffic heat map and environmental indicators have not been specified.",
+    "Thresholds and detailed rules for highlighting areas with high congestion, excessive noise, or high pollution levels are not defined.",
+    "The required frequency and mechanism of automatic refresh for real-time data updates are not specified."
   ],
   "main_flow": [
-    "1. Customer selects a product category → System displays a list of products in that category.",
-    "2. Customer scrolls through the product listings → System updates the display with the selected products."
+    "1. umd employee initiates access to the simulation platform → System executes the included use case \"access simulation platform\" and establishes an interactive session for the umd employee.",
+    "2. umd employee requests to view the real-time map of Wonderland → System loads and displays the up-to-date street map of Wonderland, including different road types and obstacles.",
+    "3. umd employee views the base map view → System overlays current traffic information on the map using data gathered from sensors in Wonderland.",
+    "4. umd employee requests visualization of traffic crowdedness → System displays a real-time traffic heat map on top of the street map, indicating crowdedness across Wonderland.",
+    "5. umd employee requests environmental information → System overlays real-time environmental measurement points on the map, showing current values at each measurement point.",
+    "6. umd employee reviews CO2 indicators → System displays the overall real-time CO2 emissions associated with the current traffic situation.",
+    "7. umd employee reviews noise indicators → System displays the real-time noise level for each measurement point on the map.",
+    "8. umd employee reviews air pollution indicators → System displays the real-time overall air pollution level for Wonderland and the real-time air pollution level per measurement point on the map.",
+    "9. umd employee continues monitoring as the situation evolves → System continuously refreshes and updates the displayed traffic, heat map, and environmental data on the map in real time for the duration of the session."
   ],
-  "alternative_flows": [],
-  "exception_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 4): umd employee chooses to temporarily hide the traffic heat map layer and focus on raw traffic data only → System hides the traffic heat map overlay while continuing to display individual current traffic information on the map; the flow continues with Step 5.",
+    "AF-2 (from Step 5): umd employee chooses to view only a subset of environmental measurement points (e.g., specific districts) → System filters the displayed environmental measurement points on the map according to the selected subset; the flow continues with Step 6.",
+    "AF-3 (from Step 8): umd employee adjusts the zoom level or map region to focus on a particular area of Wonderland → System updates the map viewport and continues to display real-time traffic, heat map (if enabled), and environmental indicators for the visible area; the flow continues with Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): The system cannot complete the included use case \"access simulation platform\" due to authentication failure or platform unavailability → System denies access or shows an error message indicating that the platform cannot be accessed; the use case terminates without displaying real-time traffic or environmental information.",
+    "EF-2 (from Step 3): Real-time traffic data from sensors is temporarily unavailable or incomplete → System displays the base street map and an explicit indication that current traffic information is unavailable or partially unavailable, and does not render missing traffic data; the use case continues with Step 4 if the umd employee still chooses to view available visualizations.",
+    "EF-3 (from Step 5): Real-time environmental measurement data from one or more measurement points is unavailable → System displays available environmental measurement points and clearly indicates which points or indicators lack current data; the use case continues with Step 6 using only the available data.",
+    "EF-4 (from Step 9): The connection between the client and the platform is interrupted during real-time monitoring → System stops updating the displayed data, indicates loss of connection to the umd employee, and attempts no further updates until connectivity is restored; the current execution of the use case ends."
+  ],
   "information_for_steps": [
-    "1. Product category selection",
-    "2. Product listings"
+    "1. User credentials, session token, platform URL, access rights.",
+    "2. Wonderland street map data, road type information, obstacle information, map rendering configuration.",
+    "3. Real-time traffic sensor data, traffic simulation state, vehicle density per road segment, congestion indicators.",
+    "4. Aggregated traffic intensity per map cell or segment, heat map color scale parameters, crowdedness thresholds.",
+    "5. Environmental measurement point identifiers, geographic coordinates, real-time environmental values per point.",
+    "6. Aggregated CO2 emission data, emission calculation parameters, current overall CO2 emission value.",
+    "7. Noise level data per measurement point, legal noise limit reference values, timestamp of each measurement.",
+    "8. Aggregated air pollution indicators, air pollutant concentration data per measurement point, overall air pollution index values.",
+    "9. Data refresh interval settings, latest timestamps for traffic and environmental data, session status information."
   ]
 }
 
 --- VALIDATION: PASSED ---
+
+--- RAW SCENARIO RESULT JSON ---
+{
+  "use_case": {
+    "id": 1,
+    "name": "View Real-Time Traffic",
+    "description": "UMD employees view real-time traffic, maps, and environmental conditions on an interactive city map for situational awareness.",
+    "participating_actors": [
+      "umd employee"
+    ],
+    "user_stories": [
+      {
+        "actor": "umd employee",
+        "action": "view real-time traffic simulation",
+        "original_sentence": "As a UMD employee, I want to see a real-time simulation of the current traffic situation of Wonderland, so that I can take more informed decisions",
+        "sentence_idx": 0
+      },
+      {
+        "actor": "umd employee",
+        "action": "view up-to-date street map",
+        "original_sentence": "As a UMD employee, I want to have an up-to-date map of the streets of Wonderland (including different road types and obstacles), so that I have an accurate background for the traffic simulator.",
+        "sentence_idx": 1
+      },
+      {
+        "actor": "umd employee",
+        "action": "view current traffic on map",
+        "original_sentence": "As a UMD employee, I want to see the current traffic on the map (gathered from the sensors in Wonderland), so that I can monitor the current situation including busy areas and congestions",
+        "sentence_idx": 2
+      },
+      {
+        "actor": "umd employee",
+        "action": "view traffic heat map",
+        "original_sentence": "As a UMD employee, I want to be able to see a heat map of the traffic, so that I can quickly see how the crowdedness is spread in Wonderland at the moment",
+        "sentence_idx": 3
+      },
+      {
+        "actor": "umd employee",
+        "action": "view real-time environmental measures on map",
+        "original_sentence": "As a UMD employee, I want to see environmental measures (taken at points in the city), real-time on the map, so that I know how the current traffic situation is affecting the environment",
+        "sentence_idx": 4
+      },
+      {
+        "actor": "umd employee",
+        "action": "view real-time overall co2 emissions",
+        "original_sentence": "As a UMD employee, I want to see the overall real-time co2 emissions, so that I know how harmful the traffic situation is to the environment",
+        "sentence_idx": 5
+      },
+      {
+        "actor": "umd employee",
+        "action": "view real-time noise levels per point",
+        "original_sentence": "As a UMD employee, I want to see the real-time level of noise per measure point in the map, so that I can see if the noise levels do not exceed the legal limits",
+        "sentence_idx": 6
+      },
+      {
+        "actor": "umd employee",
+        "action": "view real-time overall air pollution",
+        "original_sentence": "As a UMD employee, I want to see the real-time overall level of air pollution, so that I know how harmful the traffic situation is to the environment",
+        "sentence_idx": 7
+      },
+      {
+        "actor": "umd employee",
+        "action": "view real-time air pollution per point",
+        "original_sentence": "As a UMD employee, I want to see the real-time levels of air pollution per measure point in the map, so that I can see it when a certain area is getting too polluted",
+        "sentence_idx": 8
+      }
+    ],
+    "relationships": [
+      {
+        "type": "include",
+        "target_use_case": "access simulation platform"
+      }
+    ]
+  },
+  "use_case_spec_json": {
+    "use_case_name": "View Real-Time Traffic",
+    "unique_id": "UC-001",
+    "area": "Traffic Monitoring and Environmental Visualization",
+    "context_of_use": "UMD employees use the traffic simulation platform to view an interactive, real-time representation of Wonderland’s street network, traffic conditions, and environmental measurements to support informed operational and planning decisions.",
+    "scope": "Wonderland Traffic Simulation and Monitoring Platform",
+    "level": "User-goal",
+    "primary_actors": [
+      "umd employee"
+    ],
+    "supporting_actors": [
+      "sensors in Wonderland"
+    ],
+    "stakeholders_and_interests": [
+      "UMD employee: Wants to obtain an accurate, real-time overview of traffic and environmental conditions in Wonderland to make informed decisions.",
+      "UMD management: Wants staff to have reliable situational awareness to improve traffic management and environmental compliance.",
+      "City residents: Expect that traffic and environmental conditions are monitored so that congestion and pollution can be mitigated.",
+      "Regulatory authorities: Require monitoring of noise and air pollution levels to ensure compliance with legal limits."
+    ],
+    "description": "This use case describes how a UMD employee accesses the simulation platform and views a real-time interactive map of Wonderland that displays an up-to-date street map, current traffic, traffic heat map, and real-time environmental measures including CO2 emissions, noise levels, and air pollution at overall and per-point levels.",
+    "triggering_event": "A UMD employee decides to view the current real-time traffic and environmental situation in Wonderland using the simulation platform.",
+    "trigger_type": "External",
+    "preconditions": [
+      "The Wonderland Traffic Simulation and Monitoring Platform is operational.",
+      "The UMD employee has network access to the platform.",
+      "Sensors in Wonderland are actively providing traffic and environmental data to the platform.",
+      "The platform has an up-to-date digital street map of Wonderland, including different road types and obstacles.",
+      "The UMD employee has any required credentials or access rights to use the platform."
+    ],
+    "postconditions": [
+      "The UMD employee has an up-to-date visual overview of real-time traffic conditions on the map of Wonderland.",
+      "The UMD employee can see a traffic heat map indicating crowdedness across Wonderland.",
+      "The UMD employee can see real-time environmental measurements (CO2, noise levels, air pollution levels) on the map.",
+      "The UMD employee can see overall real-time CO2 emissions and overall real-time air pollution levels for Wonderland.",
+      "The system continues to update the displayed map and data in real time while the session remains active."
+    ],
+    "assumptions": [
+      "The term \"simulation platform\" refers to the Wonderland Traffic Simulation and Monitoring Platform specified in the scope.",
+      "Real-time data means that traffic and environmental data are updated with a delay that is operationally acceptable for monitoring but not necessarily instantaneous.",
+      "The included use case \"access simulation platform\" covers user authentication, authorization, and basic platform startup, and is already defined elsewhere.",
+      "The system aggregates sensor data from multiple physical sensors in Wonderland into coherent traffic and environmental indicators before visualization.",
+      "The up-to-date map, traffic data, and environmental data are already preprocessed and stored in formats directly usable by the platform for visualization.",
+      "The user interface is graphical and map-based, allowing panning and zooming of the Wonderland map, even though detailed UI behavior is outside the scope of this use case.",
+      "Noise and air pollution legal limits are defined externally and are not configured or modified within this use case.",
+      "The system continuously refreshes the displayed information without requiring the UMD employee to manually reload the page, unless explicitly requested.",
+      "Environmental measures \"taken at points in the city\" are associated with identifiable geographic measurement points that can be displayed as markers on the map.",
+      "Overall CO2 emissions and overall air pollution levels are presented as aggregate indicators derived from sensor data and optionally simulation models."
+    ],
+    "requirements_met": [
+      "The system shall provide an up-to-date digital map of the streets of Wonderland, including different road types and obstacles, as a background for the traffic simulator.",
+      "The system shall display a real-time simulation of the current traffic situation of Wonderland on the map.",
+      "The system shall display current traffic on the map, gathered from the sensors in Wonderland, enabling monitoring of busy areas and congestions.",
+      "The system shall provide a traffic heat map that visualizes how traffic crowdedness is spread across Wonderland in real time.",
+      "The system shall display real-time environmental measures taken at points in the city on the map.",
+      "The system shall display the overall real-time CO2 emissions related to the current traffic situation.",
+      "The system shall display the real-time level of noise per measurement point on the map.",
+      "The system shall display the real-time overall level of air pollution.",
+      "The system shall display real-time levels of air pollution per measurement point on the map.",
+      "The system shall obtain real-time traffic and environmental data from sensors in Wonderland for use in the visualization."
+    ],
+    "priority": "High",
+    "risk": "Medium",
+    "outstanding_issues": [
+      "The required maximum delay for data to still be considered real-time (e.g., seconds vs. minutes) has not been specified.",
+      "The required spatial resolution and coverage of the digital street map and measurement points have not been defined.",
+      "The exact visualization method and color scales for the traffic heat map and environmental indicators have not been specified.",
+      "Thresholds and detailed rules for highlighting areas with high congestion, excessive noise, or high pollution levels are not defined.",
+      "The required frequency and mechanism of automatic refresh for real-time data updates are not specified."
+    ],
+    "main_flow": [
+      "1. umd employee initiates access to the simulation platform → System executes the included use case \"access simulation platform\" and establishes an interactive session for the umd employee.",
+      "2. umd employee requests to view the real-time map of Wonderland → System loads and displays the up-to-date street map of Wonderland, including different road types and obstacles.",
+      "3. umd employee views the base map view → System overlays current traffic information on the map using data gathered from sensors in Wonderland.",
+      "4. umd employee requests visualization of traffic crowdedness → System displays a real-time traffic heat map on top of the street map, indicating crowdedness across Wonderland.",
+      "5. umd employee requests environmental information → System overlays real-time environmental measurement points on the map, showing current values at each measurement point.",
+      "6. umd employee reviews CO2 indicators → System displays the overall real-time CO2 emissions associated with the current traffic situation.",
+      "7. umd employee reviews noise indicators → System displays the real-time noise level for each measurement point on the map.",
+      "8. umd employee reviews air pollution indicators → System displays the real-time overall air pollution level for Wonderland and the real-time air pollution level per measurement point on the map.",
+      "9. umd employee continues monitoring as the situation evolves → System continuously refreshes and updates the displayed traffic, heat map, and environmental data on the map in real time for the duration of the session."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 4): umd employee chooses to temporarily hide the traffic heat map layer and focus on raw traffic data only → System hides the traffic heat map overlay while continuing to display individual current traffic information on the map; the flow continues with Step 5.",
+      "AF-2 (from Step 5): umd employee chooses to view only a subset of environmental measurement points (e.g., specific districts) → System filters the displayed environmental measurement points on the map according to the selected subset; the flow continues with Step 6.",
+      "AF-3 (from Step 8): umd employee adjusts the zoom level or map region to focus on a particular area of Wonderland → System updates the map viewport and continues to display real-time traffic, heat map (if enabled), and environmental indicators for the visible area; the flow continues with Step 9."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): The system cannot complete the included use case \"access simulation platform\" due to authentication failure or platform unavailability → System denies access or shows an error message indicating that the platform cannot be accessed; the use case terminates without displaying real-time traffic or environmental information.",
+      "EF-2 (from Step 3): Real-time traffic data from sensors is temporarily unavailable or incomplete → System displays the base street map and an explicit indication that current traffic information is unavailable or partially unavailable, and does not render missing traffic data; the use case continues with Step 4 if the umd employee still chooses to view available visualizations.",
+      "EF-3 (from Step 5): Real-time environmental measurement data from one or more measurement points is unavailable → System displays available environmental measurement points and clearly indicates which points or indicators lack current data; the use case continues with Step 6 using only the available data.",
+      "EF-4 (from Step 9): The connection between the client and the platform is interrupted during real-time monitoring → System stops updating the displayed data, indicates loss of connection to the umd employee, and attempts no further updates until connectivity is restored; the current execution of the use case ends."
+    ],
+    "information_for_steps": [
+      "1. User credentials, session token, platform URL, access rights.",
+      "2. Wonderland street map data, road type information, obstacle information, map rendering configuration.",
+      "3. Real-time traffic sensor data, traffic simulation state, vehicle density per road segment, congestion indicators.",
+      "4. Aggregated traffic intensity per map cell or segment, heat map color scale parameters, crowdedness thresholds.",
+      "5. Environmental measurement point identifiers, geographic coordinates, real-time environmental values per point.",
+      "6. Aggregated CO2 emission data, emission calculation parameters, current overall CO2 emission value.",
+      "7. Noise level data per measurement point, legal noise limit reference values, timestamp of each measurement.",
+      "8. Aggregated air pollution indicators, air pollutant concentration data per measurement point, overall air pollution index values.",
+      "9. Data refresh interval settings, latest timestamps for traffic and environmental data, session status information."
+    ]
+  },
+  "evaluation": {
+    "Completeness": {
+      "score": 98,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 10,
+        "Preconditions": 10,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 5,
+        "Main Flow": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10
+      },
+      "missing_or_weak_fields": []
+    },
+    "Correctness": {
+      "score": 95,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "/use_case_name: View Real-Time Measurement (Traffic, Heatmaps & Environment)",
+      "sub_scores": {
+        "Primary Actor": 20,
+        "Use Case Name": 17,
+        "Main Success Scenario (MSS)": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10,
+        "Preconditions": 5,
+        "Postconditions": 5
+      }
+    },
+    "Relevance": {
+      "score": 95,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 25,
+        "Main Flow ↔ Alternative Flows": 20,
+        "Preconditions & Trigger ↔ Main Flow": 10,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 13,
+        "Stakeholders & Interests ↔ Postconditions": 13
+      }
+    }
+  },
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Display Traffic and Environmental Heat Maps_report.json",
+  "comparison_evaluation": {
+    "Completeness": {
+      "score": 87,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 10,
+        "Preconditions": 5,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 2,
+        "Main Flow": 25,
+        "Alternative Flows": 10,
+        "Exception Flows": 15
+      },
+      "missing_or_weak_fields": [
+        "Preconditions",
+        "Stakeholders & Interests",
+        "Alternative Flows",
+        "Exception Flows"
+      ]
+    },
+    "Correctness": {
+      "score": 93,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 2.txt",
+      "sub_scores": {
+        "Primary Actor": 19,
+        "Use Case Name": 20,
+        "Main Success Scenario (MSS)": 24,
+        "Alternative Flows": 14,
+        "Exception Flows": 8,
+        "Preconditions": 3,
+        "Postconditions": 5
+      }
+    },
+    "Relevance": {
+      "score": 78,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 25,
+        "Main Flow ↔ Alternative Flows": 10,
+        "Preconditions & Trigger ↔ Main Flow": 8,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 9,
+        "Stakeholders & Interests ↔ Postconditions": 11
+      }
+    }
+  },
+  "validation": {
+    "passed": true,
+    "failed_criteria": {},
+    "regen_rationale": ""
+  }
+}
 
 --- SCENARIO 2 ---
-Use case: [2] Search Products
+Use case: [2] Analyze and Predict Traffic
 
 --- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: alternative_flows, exception_flows
+- Completeness: 97/100 (PASS)
+- Correctness: 95/100 (PASS)
+- Relevance: 96/100 (PASS)
+- Overall (avg): 96/100
+
+--- COMPARISON SCENARIO SCORES (FILE) ---
+C:\Users\kyluo\research\paradigm_scenario\2\Run Predictive Modeling_report.json
+- Completeness: 90/100 (PASS)
+- Correctness: 93/100 (PASS)
+- Relevance: 83/100 (PASS)
+- Overall (avg): 89/100
+
+--- COMPLETENESS SUB-SCORES ---
+- Primary Actor: 15
+- Use Case Name: 8
+- Preconditions: 10
+- Postconditions: 10
+- Stakeholders & Interests: 5
+- Main Flow: 25
+- Alternative Flows: 15
+- Exception Flows: 10
+
+--- CORRECTNESS SUB-SCORES ---
+- Primary Actor: 20
+- Use Case Name: 18
+- Main Success Scenario (MSS): 25
+- Alternative Flows: 15
+- Exception Flows: 10
+- Preconditions: 5
+- Postconditions: 5
+
+--- RELEVANCE SUB-SCORES ---
+- Primary Actor ↔ Use Case Name: 15
+- Use Case Name ↔ Main Flow: 25
+- Main Flow ↔ Alternative Flows: 20
+- Preconditions & Trigger ↔ Main Flow: 10
+- (Main Flow & Alternative Flows) ↔ Postconditions: 15
+- Stakeholders & Interests ↔ Postconditions: 11
+- Missing/weak fields: Use Case Name
 
 --- CONTENT ---
 {
-  "use_case_name": "Search Products",
+  "use_case_name": "Analyze and Predict Traffic",
   "unique_id": "UC-002",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to search for products using keywords and filters to quickly locate items within the e-commerce platform.",
-  "scope": "E-commerce System",
+  "area": "Traffic Analysis and Prediction",
+  "context_of_use": "UMD employees use the traffic simulation platform to analyze historical and current traffic and environmental data in order to generate predictions, compare situations, and assess expected impacts on traffic conditions and environmental measures in Wonderland.",
+  "scope": "Wonderland Traffic Simulation and Analysis Platform",
   "level": "User-goal",
   "primary_actors": [
-    "customer"
+    "umd employee"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "traffic data management subsystem",
+    "simulation access subsystem"
+  ],
   "stakeholders_and_interests": [
-    "customer: wants to quickly locate specific items"
+    "UMD employee: Wants to efficiently analyze and compare traffic and environmental situations to support informed operational and planning decisions.",
+    "UMD traffic management department: Wants reliable predictions of traffic conditions and crowding to proactively manage congestion and public safety.",
+    "UMD urban planning department: Wants data-driven insight into the consequences of urban planning changes on traffic and environmental quality.",
+    "UMD environmental monitoring department: Wants accurate comparison of predicted and actual environmental levels to assess the impact of traffic and planned interventions.",
+    "UMD IT operations: Wants the platform to operate reliably and support analysis and prediction tasks without service interruptions.",
+    "UMD management: Wants decisions regarding traffic policies and urban planning to be based on traceable analyses and predictions."
   ],
-  "description": "This use case enables customers to search for products by keyword to facilitate quick item location.",
-  "triggering_event": "Customer initiates a search for products.",
+  "description": "This use case describes how a UMD employee accesses the simulation platform, retrieves and manages relevant traffic and environmental data, performs comparative and repeatable analyses, generates traffic and impact predictions, evaluates prediction credibility, and compares predicted environmental levels with actual measured levels to support informed decision-making.",
+  "triggering_event": "A UMD employee decides to analyze past traffic and environmental data in order to understand patterns and generate predictions for future or planned situations.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into the e-commerce system."
+    "The Wonderland Traffic Simulation and Analysis Platform is operational and reachable by the UMD employee.",
+    "The UMD employee has valid access credentials and authorization to use analysis and prediction functionality.",
+    "Historical traffic and environmental data relevant to Wonderland have been collected and stored by the system.",
+    "The simulation and prediction models have been configured and are available in the platform."
   ],
   "postconditions": [
-    "Customer receives a list of products matching the search criteria."
+    "A traffic and environmental analysis has been performed for the selected time periods and scenarios.",
+    "Predictions for future or hypothetical traffic situations and their environmental impacts have been generated and presented to the UMD employee.",
+    "If the UMD employee chooses to do so, the results of the analysis and predictions have been retained in the platform in association with the executed scenario and time period parameters.",
+    "The UMD employee has been shown information about the credibility of the prediction simulator for the executed predictions.",
+    "If comparison is requested, the system has displayed differences between predicted and actual environmental levels for the analyzed periods or scenarios."
   ],
   "assumptions": [
-    "The customer has access to the internet and the e-commerce platform."
+    "It is assumed that user authentication and authorization are handled by the platform and are part of the included 'access simulation platform' use case, and this use case starts after the employee initiates access.",
+    "It is assumed that the 'manage traffic data' use case provides functionality to retrieve, store, and organize historical traffic and environmental data but does not define new analysis or prediction algorithms.",
+    "It is assumed that the prediction simulator and its models are already implemented within the platform and that this use case only invokes those existing capabilities rather than defining new predictive methods.",
+    "It is assumed that the term 'data' referred to in the user stories includes traffic flow data, congestion indicators, environmental measures (including CO2, air pollution, and noise levels), and any directly related time-series information already stored by the platform.",
+    "It is assumed that selecting a period of time involves specifying one continuous time range with a start and end timestamp within the bounds of available data.",
+    "It is assumed that comparing data from two different times means presenting the two selected periods or points in time in a side-by-side or otherwise clearly differentiated visual or tabular form within the same session.",
+    "It is assumed that 'multiple situations' for comparing results of different solutions refers to different previously recorded or simulated traffic and environmental scenarios already stored as historical data or simulation snapshots.",
+    "It is assumed that repeatable analysis is achieved by allowing the UMD employee to reuse previously defined analysis parameters such as selected time ranges, areas, metrics, and comparison configurations.",
+    "It is assumed that predictions about the consequences of changing urban planning are made by applying existing prediction models to modified scenario parameters, such as altered road layouts or capacity values, as supported by the simulation platform.",
+    "It is assumed that the credibility of the prediction simulator is expressed through quantitative or qualitative indicators, such as accuracy metrics or confidence levels, computed by the platform based on historical comparisons of predictions with actual outcomes.",
+    "It is assumed that comparison of predicted and actual environmental levels is limited to those environmental measures that are both predicted by the simulator and measured by the sensors and stored in the platform.",
+    "It is assumed that the UMD employee operates the platform via a graphical user interface that supports time selection, scenario configuration, and visualization of analysis and prediction results, but the exact user interface design is outside the scope of this use case."
   ],
   "requirements_met": [
-    "The system shall allow customers to search for products using keywords."
+    "The system shall allow a UMD employee to select a specific period of time for which traffic and environmental data are to be displayed and analyzed.",
+    "The system shall allow a UMD employee to compare historical traffic data to support the creation of meaningful analyses.",
+    "The system shall allow a UMD employee to view data from two different times next to each other in order to compare the two situations.",
+    "The system shall allow a UMD employee to use historical data to compare multiple situations to compare the results of different solutions that have been implemented.",
+    "The system shall support repeatable analysis by allowing a UMD employee to reuse or reapply the same analysis configuration to similar situations.",
+    "The system shall allow a UMD employee to generate predictions about future traffic situations based on similar situations in the past.",
+    "The system shall allow a UMD employee to identify when an area is expected to be too crowded based on prediction results.",
+    "The system shall allow a UMD employee to generate predictions about the consequences of changing the urban planning of Wonderland.",
+    "The system shall provide a UMD employee with information about the credibility of the prediction simulator for the generated predictions.",
+    "The system shall allow a UMD employee to compare predicted environmental levels with actual environmental levels measured by sensors for corresponding locations and times.",
+    "The system shall ensure that all analysis and prediction functions operate on traffic and environmental data managed by the included data management functionality.",
+    "The system shall require that the UMD employee has successfully accessed the simulation platform before performing traffic analysis and prediction."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "The exact metrics and methods for calculating the credibility of the prediction simulator (for example, statistical accuracy measures or confidence intervals) have not been specified and require definition.",
+    "The required spatial granularity for areas that are expected to be too crowded (for example, street segment, neighborhood, or sensor zone) has not been specified.",
+    "The performance expectations and maximum acceptable response times for complex comparative and predictive analyses have not been defined.",
+    "The rules for retention, versioning, and reuse of analysis configurations and prediction scenarios require clarification.",
+    "The precise set of environmental measures that must be supported for prediction and comparison, and how they are prioritized, has not been formally specified."
   ],
   "main_flow": [
-    "1. Customer enters a keyword into the search bar → System processes the search query.",
-    "2. System retrieves matching products from the database → System displays the list of products to the customer."
+    "1. UMD employee initiates access to the simulation platform → System authenticates the UMD employee and establishes an authorized analysis session in accordance with the included 'access simulation platform' use case.",
+    "2. UMD employee requests access to historical traffic and environmental data for analysis → System invokes the included 'manage traffic data' functionality to retrieve available historical traffic and environmental data and presents an overview of accessible datasets and time ranges.",
+    "3. UMD employee selects one or more time periods and, if supported by configuration, relevant geographic areas or scenarios for analysis → System records the selected time periods and any associated spatial or scenario filters and loads the corresponding traffic and environmental data into the analysis workspace.",
+    "4. UMD employee requests comparative analysis of historical traffic data for the selected periods or scenarios → System processes the underlying data and displays comparative views of historical traffic data, including indicators such as congestion or flow levels, for the chosen periods or scenarios.",
+    "5. UMD employee configures and executes repeatable analysis parameters for similar situations, such as reusing or saving the current analysis configuration → System applies the repeatable analysis configuration to the selected similar situations and presents consistent analysis results, enabling accelerated workflow.",
+    "6. UMD employee requests side-by-side comparison of data from two different selected times or scenarios → System displays the data from the two selected times or scenarios next to each other, clearly distinguishing them to facilitate direct comparison.",
+    "7. UMD employee selects historical situations and associated solution scenarios to compare the results of different implemented solutions → System processes and displays comparative results, showing differences in traffic and environmental outcomes between the selected solution scenarios.",
+    "8. UMD employee configures prediction parameters based on selected historical data, situations, or planned changes (including possible urban planning modifications) → System validates the configuration, prepares the input for the prediction simulator, and confirms the prediction setup to the UMD employee.",
+    "9. UMD employee initiates the prediction run for future traffic situations and potential urban planning change scenarios → System executes the prediction simulator, generates predicted traffic conditions and associated environmental levels for the configured scenarios, and presents the prediction results.",
+    "10. UMD employee requests information about the credibility of the prediction simulator for the executed prediction results → System calculates or retrieves credibility indicators associated with the prediction results and displays them together with appropriate explanatory information.",
+    "11. UMD employee requests comparison between predicted environmental levels and actual measured environmental levels for corresponding locations and timeframes where available → System aligns the predicted environmental levels with the actual measured sensor data and presents a comparison view showing similarities and deviations.",
+    "12. UMD employee reviews the analysis, comparisons, and prediction results and chooses to retain the current analysis and prediction configuration and outputs for future reference within the session context → System stores references to the executed analysis and prediction configuration and associated output in the session or persistent storage as supported by the platform and confirms completion of the analysis and prediction task."
   ],
-  "alternative_flows": [],
-  "exception_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 3): UMD employee adjusts selected time periods or geographic areas after reviewing initial data availability. Condition: The employee decides that the initially selected periods or areas are not suitable. The system allows the employee to modify the selections, reloads the corresponding data into the analysis workspace, and then the flow continues with Step 4.",
+    "AF-2 (from Step 5): UMD employee applies a previously saved repeatable analysis configuration without redefining parameters. Condition: An earlier analysis configuration exists and is appropriate for the current situation. The system loads the stored configuration, applies it directly to the selected data, presents the results, and then the flow continues with Step 6.",
+    "AF-3 (from Step 8): UMD employee focuses prediction only on future traffic situations without including urban planning changes. Condition: The employee does not wish to evaluate alternative planning scenarios. The system configures prediction parameters solely based on historical patterns and current network configuration, confirms the prediction setup, and then the flow continues with Step 9.",
+    "AF-4 (from Step 8): UMD employee focuses prediction only on the consequences of urban planning changes without generating baseline future traffic predictions. Condition: The employee is analyzing hypothetical planning options only. The system configures prediction parameters for the modified planning scenarios using existing models, confirms the prediction setup, and then the flow continues with Step 9."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Authentication or authorization fails. Condition: The UMD employee provides invalid credentials or lacks required permissions for analysis and prediction functions. The system denies access, displays an authorization failure message, logs the event, and terminates the use case without granting access to analysis or prediction features.",
+    "EF-2 (from Step 2): Required historical data are unavailable or incomplete for the requested scope. Condition: The system cannot retrieve sufficient traffic or environmental data for the requested analysis range. The system informs the UMD employee that data for some or all of the requested periods or areas are unavailable or incomplete, provides details on the missing data, and allows the employee to return to Step 3 to adjust selections or to terminate the use case.",
+    "EF-3 (from Step 9): Prediction processing fails. Condition: The prediction simulator encounters an error or cannot complete the computation. The system notifies the UMD employee of the failure, logs diagnostic information for support, and allows the employee to either revise prediction parameters and return to Step 8 or terminate the prediction part of the use case.",
+    "EF-4 (from Step 11): Comparison between predicted and actual environmental levels cannot be fully performed. Condition: Corresponding actual sensor measurements are missing for some predicted locations or times. The system indicates which parts of the comparison lack actual data, displays available partial comparisons, and allows the employee to continue reviewing partial results or adjust the comparison scope and repeat Step 11."
+  ],
   "information_for_steps": [
-    "1. Search keyword",
-    "2. List of matching products"
+    "1. User identity credentials, authorization profile, analysis session identifier.",
+    "2. Historical traffic datasets, historical environmental datasets, available time range metadata, dataset identifiers.",
+    "3. Selected start and end timestamps, selected geographic areas or zones, selected scenarios, applied filters.",
+    "4. Processed traffic metrics (for example, flow, speed, congestion indicators), comparative statistics, visualization configuration parameters.",
+    "5. Analysis configuration parameters (time periods, areas, metrics, filters), stored analysis templates or profiles, references to similar situations.",
+    "6. Two sets of time or scenario identifiers, corresponding traffic and environmental data subsets, side-by-side visualization parameters.",
+    "7. Solution scenario identifiers, associated historical or simulated outcome datasets, comparison metrics between solution scenarios.",
+    "8. Prediction parameters (selected historical periods, reference scenarios, planned changes, model options), validated model input datasets.",
+    "9. Prediction results for traffic conditions (for example, predicted flows and congestion) and environmental levels, scenario identifiers, predicted time horizons.",
+    "10. Credibility indicators (for example, accuracy metrics, confidence scores, validation results), mapping of indicators to specific predictions or scenarios.",
+    "11. Predicted environmental level values, actual environmental sensor measurements, alignment mappings between predicted and actual data by time and location, computed differences or error measures.",
+    "12. Analysis session summary, stored configuration references, output report or visualization references, timestamps of completion."
   ]
 }
 
 --- VALIDATION: PASSED ---
+
+--- RAW SCENARIO RESULT JSON ---
+{
+  "use_case": {
+    "id": 2,
+    "name": "Analyze and Predict Traffic",
+    "description": "UMD employees analyze historical traffic and environmental data to generate predictions, compare scenarios, and assess expected impacts.",
+    "participating_actors": [
+      "umd employee"
+    ],
+    "user_stories": [
+      {
+        "actor": "umd employee",
+        "action": "predict future traffic situations",
+        "original_sentence": "As a UMD employee, I want to be able to make predictions about future traffic situations based on similar situations in the past, so that I can take more informed decisions",
+        "sentence_idx": 17
+      },
+      {
+        "actor": "umd employee",
+        "action": "detect expected crowding",
+        "original_sentence": "As a UMD employee, I want to know when an area is expected to be too crowded, so that i can work on a solution to avoid the problem",
+        "sentence_idx": 18
+      },
+      {
+        "actor": "umd employee",
+        "action": "compare historical traffic data",
+        "original_sentence": "As a UMD employee, I want to be able to compare historical traffic data, so that I can use the data to create meaningful analyses",
+        "sentence_idx": 12
+      },
+      {
+        "actor": "umd employee",
+        "action": "select time period for data",
+        "original_sentence": "As a UMD employee, I want to be able to select a specific period of time to see the “data” from",
+        "sentence_idx": 13
+      },
+      {
+        "actor": "umd employee",
+        "action": "compare data from different times",
+        "original_sentence": "As a UMD employee, I want to be able to see compare the data from 2 different times next to each other, so that I can compare the 2 situations with each other",
+        "sentence_idx": 14
+      },
+      {
+        "actor": "umd employee",
+        "action": "compare results of different solutions",
+        "original_sentence": "As a UMD employee, I want to use historic data to compare multiple situations to compare the results of 2 different solutions that we have built",
+        "sentence_idx": 15
+      },
+      {
+        "actor": "umd employee",
+        "action": "perform repeatable analysis of similar situations",
+        "original_sentence": "As a UMD employee, I want to be able to perform repeatable analysis for situations that are similar, so that the workflow is accelerated",
+        "sentence_idx": 16
+      },
+      {
+        "actor": "umd employee",
+        "action": "predict consequences of urban planning changes",
+        "original_sentence": "As a UMD employee, I want to make predictions about the consequences of changing the urban planning of Wonderland, so that I can rely on data when making a decision",
+        "sentence_idx": 19
+      },
+      {
+        "actor": "umd employee",
+        "action": "view prediction simulator credibility",
+        "original_sentence": "As a UMD employee, I want to see the credibility of the prediction simulator, so that I know how much I can rely on the data of the system",
+        "sentence_idx": 20
+      },
+      {
+        "actor": "umd employee",
+        "action": "compare predicted and actual environmental levels",
+        "original_sentence": "As a UMD employee, I want to compare the predicted environmental levels of the simulator to the actual levels measured by the sensors",
+        "sentence_idx": 21
+      }
+    ],
+    "relationships": [
+      {
+        "type": "include",
+        "target_use_case": "manage traffic data"
+      },
+      {
+        "type": "include",
+        "target_use_case": "access simulation platform"
+      }
+    ]
+  },
+  "use_case_spec_json": {
+    "use_case_name": "Analyze and Predict Traffic",
+    "unique_id": "UC-002",
+    "area": "Traffic Analysis and Prediction",
+    "context_of_use": "UMD employees use the traffic simulation platform to analyze historical and current traffic and environmental data in order to generate predictions, compare situations, and assess expected impacts on traffic conditions and environmental measures in Wonderland.",
+    "scope": "Wonderland Traffic Simulation and Analysis Platform",
+    "level": "User-goal",
+    "primary_actors": [
+      "umd employee"
+    ],
+    "supporting_actors": [
+      "traffic data management subsystem",
+      "simulation access subsystem"
+    ],
+    "stakeholders_and_interests": [
+      "UMD employee: Wants to efficiently analyze and compare traffic and environmental situations to support informed operational and planning decisions.",
+      "UMD traffic management department: Wants reliable predictions of traffic conditions and crowding to proactively manage congestion and public safety.",
+      "UMD urban planning department: Wants data-driven insight into the consequences of urban planning changes on traffic and environmental quality.",
+      "UMD environmental monitoring department: Wants accurate comparison of predicted and actual environmental levels to assess the impact of traffic and planned interventions.",
+      "UMD IT operations: Wants the platform to operate reliably and support analysis and prediction tasks without service interruptions.",
+      "UMD management: Wants decisions regarding traffic policies and urban planning to be based on traceable analyses and predictions."
+    ],
+    "description": "This use case describes how a UMD employee accesses the simulation platform, retrieves and manages relevant traffic and environmental data, performs comparative and repeatable analyses, generates traffic and impact predictions, evaluates prediction credibility, and compares predicted environmental levels with actual measured levels to support informed decision-making.",
+    "triggering_event": "A UMD employee decides to analyze past traffic and environmental data in order to understand patterns and generate predictions for future or planned situations.",
+    "trigger_type": "External",
+    "preconditions": [
+      "The Wonderland Traffic Simulation and Analysis Platform is operational and reachable by the UMD employee.",
+      "The UMD employee has valid access credentials and authorization to use analysis and prediction functionality.",
+      "Historical traffic and environmental data relevant to Wonderland have been collected and stored by the system.",
+      "The simulation and prediction models have been configured and are available in the platform."
+    ],
+    "postconditions": [
+      "A traffic and environmental analysis has been performed for the selected time periods and scenarios.",
+      "Predictions for future or hypothetical traffic situations and their environmental impacts have been generated and presented to the UMD employee.",
+      "If the UMD employee chooses to do so, the results of the analysis and predictions have been retained in the platform in association with the executed scenario and time period parameters.",
+      "The UMD employee has been shown information about the credibility of the prediction simulator for the executed predictions.",
+      "If comparison is requested, the system has displayed differences between predicted and actual environmental levels for the analyzed periods or scenarios."
+    ],
+    "assumptions": [
+      "It is assumed that user authentication and authorization are handled by the platform and are part of the included 'access simulation platform' use case, and this use case starts after the employee initiates access.",
+      "It is assumed that the 'manage traffic data' use case provides functionality to retrieve, store, and organize historical traffic and environmental data but does not define new analysis or prediction algorithms.",
+      "It is assumed that the prediction simulator and its models are already implemented within the platform and that this use case only invokes those existing capabilities rather than defining new predictive methods.",
+      "It is assumed that the term 'data' referred to in the user stories includes traffic flow data, congestion indicators, environmental measures (including CO2, air pollution, and noise levels), and any directly related time-series information already stored by the platform.",
+      "It is assumed that selecting a period of time involves specifying one continuous time range with a start and end timestamp within the bounds of available data.",
+      "It is assumed that comparing data from two different times means presenting the two selected periods or points in time in a side-by-side or otherwise clearly differentiated visual or tabular form within the same session.",
+      "It is assumed that 'multiple situations' for comparing results of different solutions refers to different previously recorded or simulated traffic and environmental scenarios already stored as historical data or simulation snapshots.",
+      "It is assumed that repeatable analysis is achieved by allowing the UMD employee to reuse previously defined analysis parameters such as selected time ranges, areas, metrics, and comparison configurations.",
+      "It is assumed that predictions about the consequences of changing urban planning are made by applying existing prediction models to modified scenario parameters, such as altered road layouts or capacity values, as supported by the simulation platform.",
+      "It is assumed that the credibility of the prediction simulator is expressed through quantitative or qualitative indicators, such as accuracy metrics or confidence levels, computed by the platform based on historical comparisons of predictions with actual outcomes.",
+      "It is assumed that comparison of predicted and actual environmental levels is limited to those environmental measures that are both predicted by the simulator and measured by the sensors and stored in the platform.",
+      "It is assumed that the UMD employee operates the platform via a graphical user interface that supports time selection, scenario configuration, and visualization of analysis and prediction results, but the exact user interface design is outside the scope of this use case."
+    ],
+    "requirements_met": [
+      "The system shall allow a UMD employee to select a specific period of time for which traffic and environmental data are to be displayed and analyzed.",
+      "The system shall allow a UMD employee to compare historical traffic data to support the creation of meaningful analyses.",
+      "The system shall allow a UMD employee to view data from two different times next to each other in order to compare the two situations.",
+      "The system shall allow a UMD employee to use historical data to compare multiple situations to compare the results of different solutions that have been implemented.",
+      "The system shall support repeatable analysis by allowing a UMD employee to reuse or reapply the same analysis configuration to similar situations.",
+      "The system shall allow a UMD employee to generate predictions about future traffic situations based on similar situations in the past.",
+      "The system shall allow a UMD employee to identify when an area is expected to be too crowded based on prediction results.",
+      "The system shall allow a UMD employee to generate predictions about the consequences of changing the urban planning of Wonderland.",
+      "The system shall provide a UMD employee with information about the credibility of the prediction simulator for the generated predictions.",
+      "The system shall allow a UMD employee to compare predicted environmental levels with actual environmental levels measured by sensors for corresponding locations and times.",
+      "The system shall ensure that all analysis and prediction functions operate on traffic and environmental data managed by the included data management functionality.",
+      "The system shall require that the UMD employee has successfully accessed the simulation platform before performing traffic analysis and prediction."
+    ],
+    "priority": "High",
+    "risk": "Medium",
+    "outstanding_issues": [
+      "The exact metrics and methods for calculating the credibility of the prediction simulator (for example, statistical accuracy measures or confidence intervals) have not been specified and require definition.",
+      "The required spatial granularity for areas that are expected to be too crowded (for example, street segment, neighborhood, or sensor zone) has not been specified.",
+      "The performance expectations and maximum acceptable response times for complex comparative and predictive analyses have not been defined.",
+      "The rules for retention, versioning, and reuse of analysis configurations and prediction scenarios require clarification.",
+      "The precise set of environmental measures that must be supported for prediction and comparison, and how they are prioritized, has not been formally specified."
+    ],
+    "main_flow": [
+      "1. UMD employee initiates access to the simulation platform → System authenticates the UMD employee and establishes an authorized analysis session in accordance with the included 'access simulation platform' use case.",
+      "2. UMD employee requests access to historical traffic and environmental data for analysis → System invokes the included 'manage traffic data' functionality to retrieve available historical traffic and environmental data and presents an overview of accessible datasets and time ranges.",
+      "3. UMD employee selects one or more time periods and, if supported by configuration, relevant geographic areas or scenarios for analysis → System records the selected time periods and any associated spatial or scenario filters and loads the corresponding traffic and environmental data into the analysis workspace.",
+      "4. UMD employee requests comparative analysis of historical traffic data for the selected periods or scenarios → System processes the underlying data and displays comparative views of historical traffic data, including indicators such as congestion or flow levels, for the chosen periods or scenarios.",
+      "5. UMD employee configures and executes repeatable analysis parameters for similar situations, such as reusing or saving the current analysis configuration → System applies the repeatable analysis configuration to the selected similar situations and presents consistent analysis results, enabling accelerated workflow.",
+      "6. UMD employee requests side-by-side comparison of data from two different selected times or scenarios → System displays the data from the two selected times or scenarios next to each other, clearly distinguishing them to facilitate direct comparison.",
+      "7. UMD employee selects historical situations and associated solution scenarios to compare the results of different implemented solutions → System processes and displays comparative results, showing differences in traffic and environmental outcomes between the selected solution scenarios.",
+      "8. UMD employee configures prediction parameters based on selected historical data, situations, or planned changes (including possible urban planning modifications) → System validates the configuration, prepares the input for the prediction simulator, and confirms the prediction setup to the UMD employee.",
+      "9. UMD employee initiates the prediction run for future traffic situations and potential urban planning change scenarios → System executes the prediction simulator, generates predicted traffic conditions and associated environmental levels for the configured scenarios, and presents the prediction results.",
+      "10. UMD employee requests information about the credibility of the prediction simulator for the executed prediction results → System calculates or retrieves credibility indicators associated with the prediction results and displays them together with appropriate explanatory information.",
+      "11. UMD employee requests comparison between predicted environmental levels and actual measured environmental levels for corresponding locations and timeframes where available → System aligns the predicted environmental levels with the actual measured sensor data and presents a comparison view showing similarities and deviations.",
+      "12. UMD employee reviews the analysis, comparisons, and prediction results and chooses to retain the current analysis and prediction configuration and outputs for future reference within the session context → System stores references to the executed analysis and prediction configuration and associated output in the session or persistent storage as supported by the platform and confirms completion of the analysis and prediction task."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 3): UMD employee adjusts selected time periods or geographic areas after reviewing initial data availability. Condition: The employee decides that the initially selected periods or areas are not suitable. The system allows the employee to modify the selections, reloads the corresponding data into the analysis workspace, and then the flow continues with Step 4.",
+      "AF-2 (from Step 5): UMD employee applies a previously saved repeatable analysis configuration without redefining parameters. Condition: An earlier analysis configuration exists and is appropriate for the current situation. The system loads the stored configuration, applies it directly to the selected data, presents the results, and then the flow continues with Step 6.",
+      "AF-3 (from Step 8): UMD employee focuses prediction only on future traffic situations without including urban planning changes. Condition: The employee does not wish to evaluate alternative planning scenarios. The system configures prediction parameters solely based on historical patterns and current network configuration, confirms the prediction setup, and then the flow continues with Step 9.",
+      "AF-4 (from Step 8): UMD employee focuses prediction only on the consequences of urban planning changes without generating baseline future traffic predictions. Condition: The employee is analyzing hypothetical planning options only. The system configures prediction parameters for the modified planning scenarios using existing models, confirms the prediction setup, and then the flow continues with Step 9."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): Authentication or authorization fails. Condition: The UMD employee provides invalid credentials or lacks required permissions for analysis and prediction functions. The system denies access, displays an authorization failure message, logs the event, and terminates the use case without granting access to analysis or prediction features.",
+      "EF-2 (from Step 2): Required historical data are unavailable or incomplete for the requested scope. Condition: The system cannot retrieve sufficient traffic or environmental data for the requested analysis range. The system informs the UMD employee that data for some or all of the requested periods or areas are unavailable or incomplete, provides details on the missing data, and allows the employee to return to Step 3 to adjust selections or to terminate the use case.",
+      "EF-3 (from Step 9): Prediction processing fails. Condition: The prediction simulator encounters an error or cannot complete the computation. The system notifies the UMD employee of the failure, logs diagnostic information for support, and allows the employee to either revise prediction parameters and return to Step 8 or terminate the prediction part of the use case.",
+      "EF-4 (from Step 11): Comparison between predicted and actual environmental levels cannot be fully performed. Condition: Corresponding actual sensor measurements are missing for some predicted locations or times. The system indicates which parts of the comparison lack actual data, displays available partial comparisons, and allows the employee to continue reviewing partial results or adjust the comparison scope and repeat Step 11."
+    ],
+    "information_for_steps": [
+      "1. User identity credentials, authorization profile, analysis session identifier.",
+      "2. Historical traffic datasets, historical environmental datasets, available time range metadata, dataset identifiers.",
+      "3. Selected start and end timestamps, selected geographic areas or zones, selected scenarios, applied filters.",
+      "4. Processed traffic metrics (for example, flow, speed, congestion indicators), comparative statistics, visualization configuration parameters.",
+      "5. Analysis configuration parameters (time periods, areas, metrics, filters), stored analysis templates or profiles, references to similar situations.",
+      "6. Two sets of time or scenario identifiers, corresponding traffic and environmental data subsets, side-by-side visualization parameters.",
+      "7. Solution scenario identifiers, associated historical or simulated outcome datasets, comparison metrics between solution scenarios.",
+      "8. Prediction parameters (selected historical periods, reference scenarios, planned changes, model options), validated model input datasets.",
+      "9. Prediction results for traffic conditions (for example, predicted flows and congestion) and environmental levels, scenario identifiers, predicted time horizons.",
+      "10. Credibility indicators (for example, accuracy metrics, confidence scores, validation results), mapping of indicators to specific predictions or scenarios.",
+      "11. Predicted environmental level values, actual environmental sensor measurements, alignment mappings between predicted and actual data by time and location, computed differences or error measures.",
+      "12. Analysis session summary, stored configuration references, output report or visualization references, timestamps of completion."
+    ]
+  },
+  "evaluation": {
+    "Completeness": {
+      "score": 97,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 8,
+        "Preconditions": 10,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 5,
+        "Main Flow": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10
+      },
+      "missing_or_weak_fields": [
+        "Use Case Name"
+      ]
+    },
+    "Correctness": {
+      "score": 95,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 5.txt",
+      "sub_scores": {
+        "Primary Actor": 20,
+        "Use Case Name": 18,
+        "Main Success Scenario (MSS)": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10,
+        "Preconditions": 5,
+        "Postconditions": 5
+      }
+    },
+    "Relevance": {
+      "score": 96,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 25,
+        "Main Flow ↔ Alternative Flows": 20,
+        "Preconditions & Trigger ↔ Main Flow": 10,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 15,
+        "Stakeholders & Interests ↔ Postconditions": 11
+      }
+    }
+  },
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Run Predictive Modeling_report.json",
+  "comparison_evaluation": {
+    "Completeness": {
+      "score": 90,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 10,
+        "Preconditions": 10,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 2,
+        "Main Flow": 25,
+        "Alternative Flows": 10,
+        "Exception Flows": 10
+      },
+      "missing_or_weak_fields": [
+        "Stakeholders & Interests",
+        "Alternative Flows",
+        "Alternative Flows step linkage",
+        "Exception Flows step linkage"
+      ]
+    },
+    "Correctness": {
+      "score": 93,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "$.use_case_name='Predict Future Scenarios (AI Forecasts)'",
+      "sub_scores": {
+        "Primary Actor": 19,
+        "Use Case Name": 19,
+        "Main Success Scenario (MSS)": 24,
+        "Alternative Flows": 14,
+        "Exception Flows": 10,
+        "Preconditions": 5,
+        "Postconditions": 2
+      }
+    },
+    "Relevance": {
+      "score": 83,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 25,
+        "Main Flow ↔ Alternative Flows": 10,
+        "Preconditions & Trigger ↔ Main Flow": 10,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 10,
+        "Stakeholders & Interests ↔ Postconditions": 13
+      }
+    }
+  },
+  "validation": {
+    "passed": true,
+    "failed_criteria": {},
+    "regen_rationale": ""
+  }
+}
 
 --- SCENARIO 3 ---
-Use case: [3] View Product Details
+Use case: [3] Manage Traffic Data
 
 --- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, alternative_flows
+- Completeness: 65/100 (FAIL)
+- Correctness: 75/100 (PASS)
+- Relevance: 75/100 (PASS)
+- Overall (avg): 72/100
+
+--- COMPARISON SCENARIO SCORES (FILE) ---
+C:\Users\kyluo\research\paradigm_scenario\2\Ingest Sensor Data_report.json
+- Completeness: 87/100 (PASS)
+- Correctness: 80/100 (PASS)
+- Relevance: 84/100 (PASS)
+- Overall (avg): 84/100
+
+--- COMPLETENESS SUB-SCORES ---
+- Primary Actor: 10
+- Use Case Name: 5
+- Preconditions: 7
+- Postconditions: 7
+- Stakeholders & Interests: 5
+- Main Flow: 17
+- Alternative Flows: 10
+- Exception Flows: 7
+
+--- CORRECTNESS SUB-SCORES ---
+- Primary Actor: 17
+- Use Case Name: 12
+- Main Success Scenario (MSS): 18
+- Alternative Flows: 12
+- Exception Flows: 8
+- Preconditions: 4
+- Postconditions: 4
+
+--- RELEVANCE SUB-SCORES ---
+- Primary Actor ↔ Use Case Name: 13
+- Use Case Name ↔ Main Flow: 15
+- Main Flow ↔ Alternative Flows: 20
+- Preconditions & Trigger ↔ Main Flow: 8
+- (Main Flow & Alternative Flows) ↔ Postconditions: 9
+- Stakeholders & Interests ↔ Postconditions: 10
+- Missing/weak fields: use_case_name, Primary Actor, Use Case Name, Preconditions, Postconditions, Main Flow, Alternative Flows, Exception Flows
 
 --- CONTENT ---
 {
-  "use_case_name": "View Product Details",
+  "use_case_name": "Manage Traffic Data",
   "unique_id": "UC-003",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to view detailed product information to make informed purchasing decisions.",
-  "scope": "E-commerce System",
+  "area": "Traffic Data Management and Persistence",
+  "context_of_use": "UMD employees manage traffic-related data within the simulation platform in order to keep the simulator and analyses based on it accurate and complete over time.",
+  "scope": "Wonderland Traffic Simulation Platform",
   "level": "User-goal",
   "primary_actors": [
-    "customer"
+    "umd employee"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "time source"
+  ],
   "stakeholders_and_interests": [
-    "customer: wants to make informed purchasing decisions"
+    "UMD employee: Wants accurate, complete, and timely traffic and environmental data to support monitoring, simulation, and decision making.",
+    "UMD management: Wants reliable, durable data storage to enable long-term analyses and evidence-based urban planning decisions.",
+    "Urban planners: Want trustworthy historical and snapshot data to compare different planning and solution scenarios.",
+    "IT operations: Wants predictable data growth and robust data handling to ensure system availability and performance."
   ],
-  "description": "Allows customers to view detailed product information such as descriptions, images, and specifications.",
-  "triggering_event": "Customer selects a product to view details.",
+  "description": "This use case describes how a UMD employee uses the traffic simulation platform to access the platform, add new sensor measurements and data sources, and persist simulator and environmental data over time (including time-coupled states and snapshots) so that the simulator remains accurate and historical data is available for later analysis and simulations.",
+  "triggering_event": "A UMD employee decides to manage traffic-related data within the simulation platform, such as adding new sensor measurements, adding a new data source, or persisting simulator or environmental data for later use.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into the system.",
-    "Product exists in the system."
+    "The Wonderland Traffic Simulation Platform is deployed and operational.",
+    "The UMD employee has valid access rights to use the simulation platform.",
+    "Required connectivity to underlying data storage is available.",
+    "Existing sensor and simulator data, if any, have been previously ingested or configured according to organizational procedures."
   ],
   "postconditions": [
-    "Customer views detailed product information."
+    "The selected traffic and environmental data are stored in the platform with an association to the relevant time information.",
+    "Any newly added sensor measurements are associated with their corresponding map locations within the platform.",
+    "Any newly added data sources are registered in the platform and available for subsequent data collection and storage operations.",
+    "Any created snapshots of specific days or parts of days are stored and marked for later simulation use."
   ],
   "assumptions": [
-    "The customer has access to the internet.",
-    "The product details are available in the system."
+    "It is assumed that user authentication and authorization are handled by the included 'access simulation platform' use case and are successful before data management actions are performed.",
+    "It is assumed that the platform has an internal concept of the current time or can obtain time information from a time source when storing time-coupled data.",
+    "It is assumed that the UMD employee provides sensor measurements and configuration details for new data sources in a format supported by the platform.",
+    "It is assumed that the act of saving 'all historical data' refers to persisting data that the platform currently holds at or over time, without retroactively importing data from external systems not interfaced through this platform.",
+    "It is assumed that taking snapshots of specific days or parts of days means persisting the simulator state for the specified period in a way that can later be referenced for running simulations.",
+    "It is assumed that adding new data sources and adding new sensor measurements do not alter or bypass any existing data validation or integrity rules implemented in the platform.",
+    "It is assumed that the relationships field specifying an 'include' of 'access simulation platform' implies that successful platform access is a mandatory part of this use case before any manage-data actions are executed."
   ],
   "requirements_met": [
-    "The system shall allow customers to view product details."
+    "The system shall allow a UMD employee to add new sensor measurements to the map when they become available so that the simulator remains as accurate as possible.",
+    "The system shall allow a UMD employee to save all available historical traffic and environmental data so that the employee can create meaningful insights about this data at a later moment.",
+    "The system shall allow a UMD employee to save the simulator data, including map, traffic, and heatmap, at each relevant moment coupled to that specific time so that the employee can inspect those simulator states at a later moment.",
+    "The system shall allow a UMD employee to save environmental measures at each relevant moment coupled to that specific time so that the employee can inspect those measurements at a later moment.",
+    "The system shall allow a UMD employee to independently add additional data sources so that the platform can keep up to date with the most complete data.",
+    "The system shall allow a UMD employee to take snapshots of specific days or parts of days so that simulations can later be executed against those scenarios.",
+    "The system shall associate all stored simulator data and environmental measurements with time information that can be used for later retrieval and analysis.",
+    "The system shall ensure that newly added data sources and sensor measurements become available for inclusion in subsequent simulator states and stored datasets."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None"
+    "The policy for how frequently simulator data and environmental measures must be saved (e.g., sampling interval) has not been defined.",
+    "The retention period and archival strategy for historical and snapshot data have not been specified.",
+    "The validation rules and quality thresholds for accepting new sensor measurements and newly added data sources are not yet defined.",
+    "The expected maximum volume of historical and snapshot data and any limits on storage growth are not clarified.",
+    "The required time precision and time zone handling for time-coupled data storage are not specified."
   ],
   "main_flow": [
-    "1. Customer selects a product → System displays detailed product information."
+    "1. umd employee initiates the management of traffic data by opening the simulation platform user interface → System invokes the included 'access simulation platform' behavior to authenticate and authorize the umd employee and displays the main data management functions available to the employee.",
+    "2. umd employee chooses to add new sensor measurements to the map and provides the measurement values and corresponding locations → System validates the provided sensor measurement data and associates each measurement with the specified map locations.",
+    "3. umd employee confirms storing the new sensor measurements → System stores the validated sensor measurements in persistent storage and updates the map representation to reflect the new measurements.",
+    "4. umd employee chooses to save all currently available historical data maintained by the platform → System collects the currently available historical traffic, simulator, and environmental data and prepares it for persistent storage as historical records.",
+    "5. umd employee confirms the historical data storage operation → System persists the assembled historical data set and records metadata indicating the scope and time range of the stored historical data.",
+    "6. umd employee chooses to save the current simulator data, including map, traffic, and heatmap, coupled to the current time → System captures the current simulator state (map, traffic, and heatmap) and associates this state with the current time obtained from the time source.",
+    "7. umd employee confirms storing the captured simulator state → System stores the time-coupled simulator state in persistent storage, making it available for later inspection.",
+    "8. umd employee chooses to save the current environmental measures coupled to the current time → System captures the current environmental measurement values and associates them with the current time obtained from the time source.",
+    "9. umd employee confirms storing the captured environmental measures → System stores the time-coupled environmental measurement set in persistent storage, making it available for later inspection.",
+    "10. umd employee chooses to independently add a new data source by providing the required configuration details → System validates the provided configuration for the new data source and registers the data source in the platform.",
+    "11. umd employee confirms activation of the new data source → System activates the registered data source so that its data can be collected and included in subsequent storage operations.",
+    "12. umd employee chooses to take a snapshot of a specific day or part of a day by specifying the desired time period → System identifies the simulator and environmental data corresponding to the specified time period and assembles a snapshot definition.",
+    "13. umd employee confirms creating the snapshot for the specified time period → System stores the snapshot associated with the specified time period in persistent storage and marks it as available for use in later simulations.",
+    "14. umd employee ends the data management session → System closes the data management functions and maintains all previously stored data and snapshots for future access."
   ],
   "alternative_flows": [
-    "AF-1 (from Step 1): If the customer browses products, then the customer selects a product from the list."
+    "AF-1 (from Step 2): The umd employee decides to skip adding new sensor measurements and proceed directly to storing historical or time-coupled data. Condition: The employee navigates away from the add-sensor-measurements function without providing or confirming new measurements. The flow continues at Step 4.",
+    "AF-2 (from Step 4): The umd employee decides to store only a selected subset of historical data rather than all currently available historical data. Condition: The employee filters or selects a subset of historical data before confirmation. The system collects and prepares only the selected subset for storage, and the flow continues with Step 5 treating the subset as the historical data to be persisted.",
+    "AF-3 (from Step 6): The umd employee chooses to capture simulator data corresponding to a specific past time rather than the current time. Condition: The employee selects a past time from available stored states before confirmation. The system retrieves the simulator state for the selected time and associates it with that specified time for the new storage operation, and the flow continues at Step 7.",
+    "AF-4 (from Step 8): The umd employee chooses to capture environmental measures corresponding to a specific past time rather than the current time. Condition: The employee selects a past time from available stored measurements. The system retrieves the environmental measures for the selected time and prepares them for storage as a new time-coupled record, and the flow continues at Step 9.",
+    "AF-5 (from Step 12): The umd employee chooses to define multiple snapshots for several non-contiguous time periods in one operation. Condition: The employee specifies more than one distinct time period before confirmation. The system assembles snapshot definitions for each specified period and, upon confirmation in Step 13, stores each snapshot associated with its respective time period before proceeding to Step 14."
   ],
   "exception_flows": [
-    "EF-1 (from Step 1): If the product does not exist, then the system displays an error message."
+    "EF-1 (from Step 1): The system fails to complete the included 'access simulation platform' behavior due to authentication or authorization failure. The system denies access to the data management functions, displays an error message indicating that access is not permitted, and the use case terminates without performing any data management actions.",
+    "EF-2 (from Step 2): The system detects invalid or incomplete sensor measurement data (such as missing values or invalid locations). The system rejects the invalid sensor measurements, displays validation feedback to the umd employee, and prompts the employee to correct the data or cancel the operation. If the employee corrects the data, the flow resumes at Step 2; if the employee cancels, the flow continues at Step 4.",
+    "EF-3 (from Step 4): The system cannot collect the currently available historical data due to a data storage access error. The system informs the umd employee that historical data cannot be retrieved at this time, logs the error, and returns to displaying the main data management functions without performing the historical data storage operation. The use case may continue with other management actions such as Steps 6, 8, 10, or 12.",
+    "EF-4 (from Step 7): The system encounters a failure while storing the time-coupled simulator state (for example, insufficient storage capacity or write failure). The system reports that saving the simulator state has failed, logs the failure, and maintains the system in a consistent state without partial storage of the simulator state. The flow returns to displaying the option to attempt the simulator state storage again or proceed to another action such as Step 8, 10, or 12.",
+    "EF-5 (from Step 9): The system encounters a failure while storing the time-coupled environmental measures. The system reports the failure to the umd employee, logs the failure, and ensures that no partial environmental measurement record is committed. The flow returns to displaying the option to retry environmental measures storage or to perform other actions such as Step 10 or 12.",
+    "EF-6 (from Step 10): The system detects invalid configuration details for a new data source (such as unreachable endpoint or missing required parameters). The system rejects the data source configuration, displays validation feedback to the umd employee, and prompts for correction or cancellation. If corrected, the flow resumes at Step 10; if canceled, the use case continues with other available actions such as Step 12.",
+    "EF-7 (from Step 13): The system fails to store one or more snapshots for the specified time period or periods due to a storage or processing error. The system informs the umd employee that snapshot creation has failed, logs the error, and does not mark the failed snapshots as available. The flow returns to displaying the option to recreate the snapshots or to perform other actions before termination at Step 14."
   ],
   "information_for_steps": [
-    "1. Product ID",
-    "2. Customer ID"
+    "1. User credentials; access rights; platform main menu configuration.",
+    "2. Sensor identifiers; measurement values; measurement timestamps if provided by the employee; map location references (such as coordinates or street segments).",
+    "3. Persisted sensor measurement records; map layer update information; confirmation status.",
+    "4. References to historical traffic, simulator, and environmental datasets; time ranges of available data.",
+    "5. Historical data records; metadata describing scope, data types, and time range of stored historical data.",
+    "6. Current simulator state including map configuration, traffic data, and heatmap values; current time obtained from the time source.",
+    "7. Time-coupled simulator state records; storage identifiers and associated timestamps.",
+    "8. Current environmental measurement values per measurement point; current time obtained from the time source.",
+    "9. Time-coupled environmental measurement records; storage identifiers and associated timestamps.",
+    "10. New data source configuration details such as identifiers, connection information, and supported data types; validation status.",
+    "11. Data source activation status; association of the data source with relevant data collection processes.",
+    "12. Selected date or time interval defining the specific day or part of the day; references to simulator and environmental data within that interval.",
+    "13. Snapshot definitions linking selected time periods to stored simulator and environmental data; snapshot identifiers and metadata for later simulation use.",
+    "14. Session state closure information; references to all data and snapshots stored during the session."
   ]
 }
 
 --- VALIDATION: PASSED ---
+
+--- RAW SCENARIO RESULT JSON ---
+{
+  "use_case": {
+    "id": 3,
+    "name": "Manage Traffic Data",
+    "description": "UMD employees collect, enrich, and store sensor, simulator, and environmental data over time for later analysis and visualization.",
+    "participating_actors": [
+      "umd employee"
+    ],
+    "user_stories": [
+      {
+        "actor": "umd employee",
+        "action": "add sensor measurements to map",
+        "original_sentence": "As a UMD employee, I want to add new sensor measurements to the map when they become available, so that my simulator is as accurate as possible",
+        "sentence_idx": 24
+      },
+      {
+        "actor": "umd employee",
+        "action": "store historical data",
+        "original_sentence": "As a UMD employee, I want to save all historical data, so that I am able to create meaningful insights about this data at a later moment.",
+        "sentence_idx": 9
+      },
+      {
+        "actor": "umd employee",
+        "action": "store simulator state by time",
+        "original_sentence": "As a UMD employee, I want to save the simulator data (map, traffic and heatmap) of every moment coupled to that specific time, so that I can look into them at a later moment",
+        "sentence_idx": 10
+      },
+      {
+        "actor": "umd employee",
+        "action": "store environmental measurements by time",
+        "original_sentence": "As a UMD employee, I want to save the environmental measures of every moment coupled to that specific time, so that I can look into them at a later moment",
+        "sentence_idx": 11
+      },
+      {
+        "actor": "umd employee",
+        "action": "add new data sources",
+        "original_sentence": "As a UMD employee, I want to be able to independently add more data sources later, so that I can keep up to date with the most complete data",
+        "sentence_idx": 23
+      },
+      {
+        "actor": "umd employee",
+        "action": "take snapshots of time periods",
+        "original_sentence": "As a UMD employee, I want to be able to take snapshots of specific days, or parts of the day, so that I can execute simulations against those scenarios.",
+        "sentence_idx": 30
+      }
+    ],
+    "relationships": [
+      {
+        "type": "include",
+        "target_use_case": "access simulation platform"
+      }
+    ]
+  },
+  "use_case_spec_json": {
+    "use_case_name": "Manage Traffic Data",
+    "unique_id": "UC-003",
+    "area": "Traffic Data Management and Persistence",
+    "context_of_use": "UMD employees manage traffic-related data within the simulation platform in order to keep the simulator and analyses based on it accurate and complete over time.",
+    "scope": "Wonderland Traffic Simulation Platform",
+    "level": "User-goal",
+    "primary_actors": [
+      "umd employee"
+    ],
+    "supporting_actors": [
+      "time source"
+    ],
+    "stakeholders_and_interests": [
+      "UMD employee: Wants accurate, complete, and timely traffic and environmental data to support monitoring, simulation, and decision making.",
+      "UMD management: Wants reliable, durable data storage to enable long-term analyses and evidence-based urban planning decisions.",
+      "Urban planners: Want trustworthy historical and snapshot data to compare different planning and solution scenarios.",
+      "IT operations: Wants predictable data growth and robust data handling to ensure system availability and performance."
+    ],
+    "description": "This use case describes how a UMD employee uses the traffic simulation platform to access the platform, add new sensor measurements and data sources, and persist simulator and environmental data over time (including time-coupled states and snapshots) so that the simulator remains accurate and historical data is available for later analysis and simulations.",
+    "triggering_event": "A UMD employee decides to manage traffic-related data within the simulation platform, such as adding new sensor measurements, adding a new data source, or persisting simulator or environmental data for later use.",
+    "trigger_type": "External",
+    "preconditions": [
+      "The Wonderland Traffic Simulation Platform is deployed and operational.",
+      "The UMD employee has valid access rights to use the simulation platform.",
+      "Required connectivity to underlying data storage is available.",
+      "Existing sensor and simulator data, if any, have been previously ingested or configured according to organizational procedures."
+    ],
+    "postconditions": [
+      "The selected traffic and environmental data are stored in the platform with an association to the relevant time information.",
+      "Any newly added sensor measurements are associated with their corresponding map locations within the platform.",
+      "Any newly added data sources are registered in the platform and available for subsequent data collection and storage operations.",
+      "Any created snapshots of specific days or parts of days are stored and marked for later simulation use."
+    ],
+    "assumptions": [
+      "It is assumed that user authentication and authorization are handled by the included 'access simulation platform' use case and are successful before data management actions are performed.",
+      "It is assumed that the platform has an internal concept of the current time or can obtain time information from a time source when storing time-coupled data.",
+      "It is assumed that the UMD employee provides sensor measurements and configuration details for new data sources in a format supported by the platform.",
+      "It is assumed that the act of saving 'all historical data' refers to persisting data that the platform currently holds at or over time, without retroactively importing data from external systems not interfaced through this platform.",
+      "It is assumed that taking snapshots of specific days or parts of days means persisting the simulator state for the specified period in a way that can later be referenced for running simulations.",
+      "It is assumed that adding new data sources and adding new sensor measurements do not alter or bypass any existing data validation or integrity rules implemented in the platform.",
+      "It is assumed that the relationships field specifying an 'include' of 'access simulation platform' implies that successful platform access is a mandatory part of this use case before any manage-data actions are executed."
+    ],
+    "requirements_met": [
+      "The system shall allow a UMD employee to add new sensor measurements to the map when they become available so that the simulator remains as accurate as possible.",
+      "The system shall allow a UMD employee to save all available historical traffic and environmental data so that the employee can create meaningful insights about this data at a later moment.",
+      "The system shall allow a UMD employee to save the simulator data, including map, traffic, and heatmap, at each relevant moment coupled to that specific time so that the employee can inspect those simulator states at a later moment.",
+      "The system shall allow a UMD employee to save environmental measures at each relevant moment coupled to that specific time so that the employee can inspect those measurements at a later moment.",
+      "The system shall allow a UMD employee to independently add additional data sources so that the platform can keep up to date with the most complete data.",
+      "The system shall allow a UMD employee to take snapshots of specific days or parts of days so that simulations can later be executed against those scenarios.",
+      "The system shall associate all stored simulator data and environmental measurements with time information that can be used for later retrieval and analysis.",
+      "The system shall ensure that newly added data sources and sensor measurements become available for inclusion in subsequent simulator states and stored datasets."
+    ],
+    "priority": "High",
+    "risk": "Medium",
+    "outstanding_issues": [
+      "The policy for how frequently simulator data and environmental measures must be saved (e.g., sampling interval) has not been defined.",
+      "The retention period and archival strategy for historical and snapshot data have not been specified.",
+      "The validation rules and quality thresholds for accepting new sensor measurements and newly added data sources are not yet defined.",
+      "The expected maximum volume of historical and snapshot data and any limits on storage growth are not clarified.",
+      "The required time precision and time zone handling for time-coupled data storage are not specified."
+    ],
+    "main_flow": [
+      "1. umd employee initiates the management of traffic data by opening the simulation platform user interface → System invokes the included 'access simulation platform' behavior to authenticate and authorize the umd employee and displays the main data management functions available to the employee.",
+      "2. umd employee chooses to add new sensor measurements to the map and provides the measurement values and corresponding locations → System validates the provided sensor measurement data and associates each measurement with the specified map locations.",
+      "3. umd employee confirms storing the new sensor measurements → System stores the validated sensor measurements in persistent storage and updates the map representation to reflect the new measurements.",
+      "4. umd employee chooses to save all currently available historical data maintained by the platform → System collects the currently available historical traffic, simulator, and environmental data and prepares it for persistent storage as historical records.",
+      "5. umd employee confirms the historical data storage operation → System persists the assembled historical data set and records metadata indicating the scope and time range of the stored historical data.",
+      "6. umd employee chooses to save the current simulator data, including map, traffic, and heatmap, coupled to the current time → System captures the current simulator state (map, traffic, and heatmap) and associates this state with the current time obtained from the time source.",
+      "7. umd employee confirms storing the captured simulator state → System stores the time-coupled simulator state in persistent storage, making it available for later inspection.",
+      "8. umd employee chooses to save the current environmental measures coupled to the current time → System captures the current environmental measurement values and associates them with the current time obtained from the time source.",
+      "9. umd employee confirms storing the captured environmental measures → System stores the time-coupled environmental measurement set in persistent storage, making it available for later inspection.",
+      "10. umd employee chooses to independently add a new data source by providing the required configuration details → System validates the provided configuration for the new data source and registers the data source in the platform.",
+      "11. umd employee confirms activation of the new data source → System activates the registered data source so that its data can be collected and included in subsequent storage operations.",
+      "12. umd employee chooses to take a snapshot of a specific day or part of a day by specifying the desired time period → System identifies the simulator and environmental data corresponding to the specified time period and assembles a snapshot definition.",
+      "13. umd employee confirms creating the snapshot for the specified time period → System stores the snapshot associated with the specified time period in persistent storage and marks it as available for use in later simulations.",
+      "14. umd employee ends the data management session → System closes the data management functions and maintains all previously stored data and snapshots for future access."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): The umd employee decides to skip adding new sensor measurements and proceed directly to storing historical or time-coupled data. Condition: The employee navigates away from the add-sensor-measurements function without providing or confirming new measurements. The flow continues at Step 4.",
+      "AF-2 (from Step 4): The umd employee decides to store only a selected subset of historical data rather than all currently available historical data. Condition: The employee filters or selects a subset of historical data before confirmation. The system collects and prepares only the selected subset for storage, and the flow continues with Step 5 treating the subset as the historical data to be persisted.",
+      "AF-3 (from Step 6): The umd employee chooses to capture simulator data corresponding to a specific past time rather than the current time. Condition: The employee selects a past time from available stored states before confirmation. The system retrieves the simulator state for the selected time and associates it with that specified time for the new storage operation, and the flow continues at Step 7.",
+      "AF-4 (from Step 8): The umd employee chooses to capture environmental measures corresponding to a specific past time rather than the current time. Condition: The employee selects a past time from available stored measurements. The system retrieves the environmental measures for the selected time and prepares them for storage as a new time-coupled record, and the flow continues at Step 9.",
+      "AF-5 (from Step 12): The umd employee chooses to define multiple snapshots for several non-contiguous time periods in one operation. Condition: The employee specifies more than one distinct time period before confirmation. The system assembles snapshot definitions for each specified period and, upon confirmation in Step 13, stores each snapshot associated with its respective time period before proceeding to Step 14."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): The system fails to complete the included 'access simulation platform' behavior due to authentication or authorization failure. The system denies access to the data management functions, displays an error message indicating that access is not permitted, and the use case terminates without performing any data management actions.",
+      "EF-2 (from Step 2): The system detects invalid or incomplete sensor measurement data (such as missing values or invalid locations). The system rejects the invalid sensor measurements, displays validation feedback to the umd employee, and prompts the employee to correct the data or cancel the operation. If the employee corrects the data, the flow resumes at Step 2; if the employee cancels, the flow continues at Step 4.",
+      "EF-3 (from Step 4): The system cannot collect the currently available historical data due to a data storage access error. The system informs the umd employee that historical data cannot be retrieved at this time, logs the error, and returns to displaying the main data management functions without performing the historical data storage operation. The use case may continue with other management actions such as Steps 6, 8, 10, or 12.",
+      "EF-4 (from Step 7): The system encounters a failure while storing the time-coupled simulator state (for example, insufficient storage capacity or write failure). The system reports that saving the simulator state has failed, logs the failure, and maintains the system in a consistent state without partial storage of the simulator state. The flow returns to displaying the option to attempt the simulator state storage again or proceed to another action such as Step 8, 10, or 12.",
+      "EF-5 (from Step 9): The system encounters a failure while storing the time-coupled environmental measures. The system reports the failure to the umd employee, logs the failure, and ensures that no partial environmental measurement record is committed. The flow returns to displaying the option to retry environmental measures storage or to perform other actions such as Step 10 or 12.",
+      "EF-6 (from Step 10): The system detects invalid configuration details for a new data source (such as unreachable endpoint or missing required parameters). The system rejects the data source configuration, displays validation feedback to the umd employee, and prompts for correction or cancellation. If corrected, the flow resumes at Step 10; if canceled, the use case continues with other available actions such as Step 12.",
+      "EF-7 (from Step 13): The system fails to store one or more snapshots for the specified time period or periods due to a storage or processing error. The system informs the umd employee that snapshot creation has failed, logs the error, and does not mark the failed snapshots as available. The flow returns to displaying the option to recreate the snapshots or to perform other actions before termination at Step 14."
+    ],
+    "information_for_steps": [
+      "1. User credentials; access rights; platform main menu configuration.",
+      "2. Sensor identifiers; measurement values; measurement timestamps if provided by the employee; map location references (such as coordinates or street segments).",
+      "3. Persisted sensor measurement records; map layer update information; confirmation status.",
+      "4. References to historical traffic, simulator, and environmental datasets; time ranges of available data.",
+      "5. Historical data records; metadata describing scope, data types, and time range of stored historical data.",
+      "6. Current simulator state including map configuration, traffic data, and heatmap values; current time obtained from the time source.",
+      "7. Time-coupled simulator state records; storage identifiers and associated timestamps.",
+      "8. Current environmental measurement values per measurement point; current time obtained from the time source.",
+      "9. Time-coupled environmental measurement records; storage identifiers and associated timestamps.",
+      "10. New data source configuration details such as identifiers, connection information, and supported data types; validation status.",
+      "11. Data source activation status; association of the data source with relevant data collection processes.",
+      "12. Selected date or time interval defining the specific day or part of the day; references to simulator and environmental data within that interval.",
+      "13. Snapshot definitions linking selected time periods to stored simulator and environmental data; snapshot identifiers and metadata for later simulation use.",
+      "14. Session state closure information; references to all data and snapshots stored during the session."
+    ]
+  },
+  "evaluation": {
+    "Completeness": {
+      "score": 65,
+      "result": "FAIL",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 10,
+        "Use Case Name": 5,
+        "Preconditions": 7,
+        "Postconditions": 7,
+        "Stakeholders & Interests": 5,
+        "Main Flow": 17,
+        "Alternative Flows": 10,
+        "Exception Flows": 7
+      },
+      "missing_or_weak_fields": [
+        "use_case_name",
+        "Primary Actor",
+        "Use Case Name",
+        "Preconditions",
+        "Postconditions",
+        "Main Flow",
+        "Alternative Flows",
+        "Exception Flows"
+      ]
+    },
+    "Correctness": {
+      "score": 75,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 3.txt",
+      "sub_scores": {
+        "Primary Actor": 17,
+        "Use Case Name": 12,
+        "Main Success Scenario (MSS)": 18,
+        "Alternative Flows": 12,
+        "Exception Flows": 8,
+        "Preconditions": 4,
+        "Postconditions": 4
+      }
+    },
+    "Relevance": {
+      "score": 75,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 13,
+        "Use Case Name ↔ Main Flow": 15,
+        "Main Flow ↔ Alternative Flows": 20,
+        "Preconditions & Trigger ↔ Main Flow": 8,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 9,
+        "Stakeholders & Interests ↔ Postconditions": 10
+      }
+    }
+  },
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Ingest Sensor Data_report.json",
+  "comparison_evaluation": {
+    "Completeness": {
+      "score": 87,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 10,
+        "Preconditions": 10,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 2,
+        "Main Flow": 22,
+        "Alternative Flows": 10,
+        "Exception Flows": 8
+      },
+      "missing_or_weak_fields": [
+        "Stakeholders & Interests",
+        "Alternative Flows formatting and explicit step linkage",
+        "Main Flow includes some low-level technical implementation details",
+        "Alternative Flows",
+        "Exception Flows"
+      ]
+    },
+    "Correctness": {
+      "score": 80,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "use_case_name: 'Store Time-based Data (Snapshots & Logs)' vs. 'Ingest Sensor Data'",
+      "sub_scores": {
+        "Primary Actor": 11,
+        "Use Case Name": 11,
+        "Main Success Scenario (MSS)": 22,
+        "Alternative Flows": 14,
+        "Exception Flows": 9,
+        "Preconditions": 5,
+        "Postconditions": 9
+      }
+    },
+    "Relevance": {
+      "score": 84,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 24,
+        "Main Flow ↔ Alternative Flows": 12,
+        "Preconditions & Trigger ↔ Main Flow": 10,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 9,
+        "Stakeholders & Interests ↔ Postconditions": 14
+      }
+    }
+  },
+  "validation": {
+    "passed": true,
+    "failed_criteria": {},
+    "regen_rationale": ""
+  }
+}
 
 --- SCENARIO 4 ---
-Use case: [4] Manage Cart
+Use case: [4] Access Simulation Platform
 
 --- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: alternative_flows, exception_flows
+- Completeness: 98/100 (PASS)
+- Correctness: 98/100 (PASS)
+- Relevance: 96/100 (PASS)
+- Overall (avg): 97/100
+
+--- COMPARISON SCENARIO SCORES ---
+N/A
+
+--- COMPLETENESS SUB-SCORES ---
+- Primary Actor: 15
+- Use Case Name: 10
+- Preconditions: 10
+- Postconditions: 10
+- Stakeholders & Interests: 5
+- Main Flow: 25
+- Alternative Flows: 15
+- Exception Flows: 10
+
+--- CORRECTNESS SUB-SCORES ---
+- Primary Actor: 20
+- Use Case Name: 20
+- Main Success Scenario (MSS): 25
+- Alternative Flows: 15
+- Exception Flows: 10
+- Preconditions: 5
+- Postconditions: 5
+
+--- RELEVANCE SUB-SCORES ---
+- Primary Actor ↔ Use Case Name: 15
+- Use Case Name ↔ Main Flow: 25
+- Main Flow ↔ Alternative Flows: 20
+- Preconditions & Trigger ↔ Main Flow: 10
+- (Main Flow & Alternative Flows) ↔ Postconditions: 15
+- Stakeholders & Interests ↔ Postconditions: 13
 
 --- CONTENT ---
 {
-  "use_case_name": "Manage Cart",
+  "use_case_name": "View Real-Time Measurements on Map",
   "unique_id": "UC-004",
-  "area": "Shopping",
-  "context_of_use": "This use case allows customers to manage their shopping cart by adding products before proceeding to checkout.",
-  "scope": "Shopping Cart System",
+  "area": "Real-Time Traffic and Environmental Monitoring",
+  "context_of_use": "A UMD employee uses the monitoring map interface to view real-time traffic, heatmap, and environmental measurements for Wonderland in order to support informed monitoring and decision-making.",
+  "scope": "Wonderland Traffic Simulation and Monitoring Platform",
   "level": "User-goal",
   "primary_actors": [
-    "customer"
+    "umd employee"
   ],
-  "supporting_actors": [],
+  "supporting_actors": [
+    "IT infrastructure",
+    "Network services"
+  ],
   "stakeholders_and_interests": [
-    "customer: wants to purchase multiple items easily"
+    "UMD employee: Wants to monitor real-time traffic, heatmap, and environmental measurements on an up-to-date map so that they can quickly understand the current situation and make informed decisions.",
+    "UMD management: Wants staff to effectively monitor traffic and environmental impact in Wonderland using real-time visualizations to support operational and planning decisions.",
+    "IT operations: Wants the monitoring and map application, along with its data connections, to function reliably so that real-time measurements can be displayed without interruption."
   ],
-  "description": "Allows customers to add products to their shopping cart prior to checkout.",
-  "triggering_event": "Customer decides to add a product to the cart.",
+  "description": "This use case describes how a UMD employee opens the monitoring map interface and views real-time traffic conditions, traffic heatmaps, and environmental measurements visualized on an up-to-date street map of Wonderland, using intuitive controls to select and combine different measurement layers for monitoring and decision-making.",
+  "triggering_event": "A UMD employee decides to monitor the current traffic and environmental situation in Wonderland using the map-based interface.",
   "trigger_type": "External",
   "preconditions": [
-    "Customer is logged into their account.",
-    "Customer is browsing products."
+    "The Wonderland Traffic Simulation and Monitoring Platform is deployed and operational.",
+    "The UMD employee has access to the monitoring map interface of the platform.",
+    "The monitoring map application is connected to the configured live data sources for traffic and environmental measurements.",
+    "The base street map of Wonderland is available and up to date in the system."
   ],
   "postconditions": [
-    "The selected product is added to the customer's shopping cart."
+    "The UMD employee has successfully viewed up-to-date traffic data visualized on the map.",
+    "The UMD employee has successfully viewed up-to-date traffic heatmap information visualized on the map.",
+    "The UMD employee has successfully viewed up-to-date environmental measurements (including CO2, noise, and air pollution levels) visualized on the map.",
+    "Any selected layers and filters for traffic, heatmap, and environmental data are applied and visible on the map.",
+    "The UMD employee can base monitoring and subsequent decisions on the displayed real-time measurements and selected visualizations."
   ],
   "assumptions": [
-    "The customer has access to the product catalog.",
-    "The system is operational and can process cart updates."
+    "User access to the monitoring map interface is already established before this use case begins; authentication details are handled by separate mechanisms and are outside the scope of this use case.",
+    "Live traffic and environmental measurements are continuously provided to the platform by external sensors and data sources, and this use case focuses only on their visualization.",
+    "The system processes incoming live data quickly enough that it can be considered real time or near real time for monitoring purposes.",
+    "The intuitive nature of the monitoring map interface is ensured through usability design but does not introduce capabilities beyond selecting, filtering, and viewing the described measurement layers.",
+    "The structure and semantics of traffic and environmental parameters (e.g., which pollutants are measured) are predefined elsewhere and are simply presented as selectable options in this use case."
   ],
   "requirements_met": [
-    "The system shall allow customers to add products to their cart."
+    "The system shall present an up-to-date map of the streets of Wonderland, including relevant road types and obstacles, as the background for visualizing real-time measurements.",
+    "The system shall display current traffic conditions on the map using data gathered from sensors in Wonderland so that a UMD employee can monitor busy areas and congestions.",
+    "The system shall provide a traffic heatmap view on the map so that a UMD employee can quickly see how traffic crowdedness is spatially distributed in Wonderland.",
+    "The system shall display real-time environmental measurements on the map at measurement points so that a UMD employee can assess how the current traffic situation affects the environment.",
+    "The system shall show the overall real-time CO2 emissions derived from current measurements so that a UMD employee can understand how harmful the current situation is to the environment.",
+    "The system shall show real-time noise levels per measurement point on the map so that a UMD employee can determine whether noise levels exceed legal limits.",
+    "The system shall show the real-time overall level of air pollution so that a UMD employee can understand how harmful the current situation is to the environment.",
+    "The system shall show real-time air pollution levels per measurement point on the map so that a UMD employee can identify areas that are becoming too polluted.",
+    "The system shall provide intuitive controls for a UMD employee to select and view traffic, heatmap, and environmental data layers on the map for real-time monitoring."
   ],
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "None identified."
+    "The exact set of environmental parameters to be displayed (e.g., specific pollutants, noise metrics) has not been fully defined.",
+    "Visualization conventions for thresholds (such as legal noise or pollution limits) and how exceedances are highlighted on the map have not been specified.",
+    "Update frequency and latency limits for data to still be considered real-time or sufficiently up to date for monitoring purposes have not been formalized.",
+    "The required spatial resolution and coverage of sensors across Wonderland, and how gaps in coverage should be represented on the map, remain to be clarified.",
+    "Detailed usability and accessibility criteria for the intuitive monitoring interface (e.g., color schemes, support for color-blind users) have not been established."
   ],
   "main_flow": [
-    "1. Customer selects a product → System displays product details.",
-    "2. Customer clicks 'Add to Cart' → System adds the product to the shopping cart and confirms the action."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. Product details",
-    "2. Confirmation message"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 5 ---
-Use case: [5] Manage Profile
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows
-
---- CONTENT ---
-{
-  "use_case_name": "Manage Profile",
-  "unique_id": "UC-005",
-  "area": "User Account Management",
-  "context_of_use": "This use case allows users to update and maintain their account profile information and preferences within the system.",
-  "scope": "User Account Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "user"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "user: To maintain accurate account details"
-  ],
-  "description": "This use case enables users to update their profile information to ensure their account details remain accurate.",
-  "triggering_event": "User initiates a request to update profile information.",
-  "trigger_type": "External",
-  "preconditions": [
-    "User is logged into the system.",
-    "User has valid account credentials."
-  ],
-  "postconditions": [
-    "User's profile information is updated successfully.",
-    "User receives confirmation of the update."
-  ],
-  "assumptions": [
-    "User has previously authenticated their account."
-  ],
-  "requirements_met": [
-    "The system shall allow users to update their profile information.",
-    "The system shall authenticate users before allowing profile updates."
-  ],
-  "priority": "Medium",
-  "risk": "Low",
-  "outstanding_issues": [
-    "None identified."
-  ],
-  "main_flow": [
-    "1. User requests to update profile information → System prompts for authentication.",
-    "2. User provides authentication credentials → System verifies credentials.",
-    "3. System confirms authentication → User submits updated profile information.",
-    "4. User submits updated profile information → System updates the profile and confirms the update."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. User credentials",
-    "2. Updated profile information",
-    "3. Confirmation of update"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 6 ---
-Use case: [6] Manage Users
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows
-
---- CONTENT ---
-{
-  "use_case_name": "Manage Users",
-  "unique_id": "UC-006",
-  "area": "User Management",
-  "context_of_use": "This use case allows admins to manage user accounts to control system access.",
-  "scope": "User Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: control system access"
-  ],
-  "description": "Allows admins to create, update, deactivate, and delete user accounts and manage access.",
-  "triggering_event": "Admin initiates user management.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is logged into the system."
-  ],
-  "postconditions": [
-    "User accounts are successfully managed."
-  ],
-  "assumptions": [
-    "Admin has the necessary permissions to manage user accounts."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to create user accounts.",
-    "The system shall allow admins to update user accounts.",
-    "The system shall allow admins to deactivate user accounts.",
-    "The system shall allow admins to delete user accounts."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the specific user account attributes that can be managed."
-  ],
-  "main_flow": [
-    "1. Admin selects the option to manage user accounts → System displays user management interface.",
-    "2. Admin chooses to authenticate → System prompts for admin credentials.",
-    "3. Admin enters credentials → System verifies credentials.",
-    "4. Admin selects to create, update, deactivate, or delete a user account → System performs the selected action."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [
-    "EF-1 (from Step 3): If credentials are invalid, System displays an error message and prompts for re-entry."
-  ],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. User account details",
-    "3. Action type (create, update, deactivate, delete)"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 7 ---
-Use case: [7] Configure System
-
---- SCORES ---
-- Completeness: 90/100 (PASS)
-- Correctness: N/A
-- Relevance: 85/100 (PASS)
-- Missing/weak fields: outstanding_issues
-
---- CONTENT ---
-{
-  "use_case_name": "Configure System",
-  "unique_id": "UC-007",
-  "area": "System Configuration",
-  "context_of_use": "This use case allows an admin to configure application settings and system parameters for customization and operation.",
-  "scope": "System Configuration Module",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: Control system settings for effective operation."
-  ],
-  "description": "This use case enables admins to configure application settings and system parameters for customization and operation.",
-  "triggering_event": "Admin initiates the configuration process.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is logged into the system.",
-    "Admin has the necessary permissions to configure system settings."
-  ],
-  "postconditions": [
-    "System settings are updated according to admin specifications."
-  ],
-  "assumptions": [
-    "The admin has valid credentials to access the system.",
-    "The system is operational and accessible."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to configure system settings.",
-    "The system shall authenticate admins before allowing configuration."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on specific settings available for configuration."
-  ],
-  "main_flow": [
-    "1. Admin initiates the configuration process → System prompts for authentication.",
-    "2. Admin provides authentication credentials → System verifies credentials.",
-    "3. System confirms successful authentication → Admin accesses configuration settings.",
-    "4. Admin modifies system settings → System saves the updated settings.",
-    "5. System confirms settings have been updated → Admin receives confirmation message."
+    "1. UMD employee opens the monitoring map interface of the platform on a supported device → System loads and displays the up-to-date street map of Wonderland as the primary view.",
+    "2. UMD employee selects the option to display real-time traffic data on the map → System retrieves current traffic measurements from live data sources and overlays traffic indicators (such as flow, speed, and congestion) on the street map in real time.",
+    "3. UMD employee reviews the displayed traffic information on the map → System continuously updates the traffic visualization as new measurements arrive, keeping the displayed traffic situation current.",
+    "4. UMD employee selects the option to display a traffic heatmap layer → System generates and overlays a real-time traffic heatmap on top of the street map, visually representing crowdedness across Wonderland.",
+    "5. UMD employee reviews the traffic heatmap visualization → System maintains and updates the heatmap using incoming traffic measurements so that areas of varying crowdedness remain accurately represented.",
+    "6. UMD employee selects options to display environmental measurement layers on the map (such as CO2 emissions, noise levels, and air pollution levels) → System retrieves the latest environmental measurements from live data sources and overlays them on the map at the corresponding measurement points and as overall indicators where applicable.",
+    "7. UMD employee reviews the environmental measurements on the map, including overall indicators and per-measurement-point values → System keeps the environmental data visualizations up to date as new measurements are received.",
+    "8. UMD employee adjusts the visible combination of traffic, heatmap, and environmental layers to focus on the current monitoring need → System applies the selection, updates the composite visualization on the map, and continues to reflect real-time measurements for all visible layers.",
+    "9. UMD employee uses the presented real-time visualizations to assess the current traffic and environmental situation and, when finished, closes the monitoring map interface → System stops updating the view for that session while keeping data feeds and services available for subsequent monitoring sessions."
   ],
   "alternative_flows": [
-    "AF-1 (from Step 1): If the admin fails to authenticate, the system displays an error message and prompts for re-entry of credentials."
+    "AF-1 (from Step 2): UMD employee chooses to view only traffic data without heatmap or environmental layers. Condition: The employee is focused solely on current traffic flow and congestion. The employee enables only the traffic layer on the map. The system overlays and updates only traffic indicators on the street map. The flow continues with Step 3 for reviewing traffic data, and the employee may later proceed to Step 8 if additional layers are enabled.",
+    "AF-2 (from Step 4): UMD employee chooses to view only the traffic heatmap without detailed traffic indicators. Condition: The employee prefers a simplified, aggregated view. The employee disables the detailed traffic indicators and leaves only the heatmap layer active. The system shows and updates only the heatmap on the street map. The flow continues with Step 5 for reviewing the heatmap, and the employee may later proceed to Step 8 to adjust layers again.",
+    "AF-3 (from Step 6): UMD employee chooses to view only specific environmental parameters (for example, noise levels only or air pollution only). Condition: The employee is interested in a subset of environmental measurements. The employee selects a subset of environmental layers in the interface. The system overlays and updates only the selected environmental parameters on the map. The flow then continues with Step 7 for reviewing the selected environmental measurements.",
+    "AF-4 (from Step 8): UMD employee changes filters such as region of interest or parameter-specific thresholds while viewing the map. Condition: The employee needs to focus on a particular area or value range. The employee adjusts map filters (for example, zooming to a district or setting value thresholds). The system reapplies the filters, updates the visible subset of traffic, heatmap, and environmental visualizations accordingly, and continues with Step 9 when the employee has finished monitoring.",
+    "AF-5 (from Step 1): UMD employee switches between different map views or layouts (for example, standard map view versus satellite-style or schematic view). Condition: The employee wants an alternative visual context. The employee selects a different map view or layout from the interface. The system reloads the base map using the selected view while keeping any active measurement layers overlaid and updated. The flow then continues with Step 2 or the next relevant selection step depending on what the employee chooses to view."
   ],
   "exception_flows": [
-    "EF-1 (from Step 3): If the system fails to verify credentials, the system displays an error message and denies access to configuration settings."
+    "EF-1 (from Step 2): Real-time traffic data is temporarily unavailable from live sources. The system cannot retrieve current traffic measurements and therefore does not overlay traffic indicators on the map. The system displays a notification indicating that traffic data is temporarily unavailable while keeping the base map and any other active layers visible. The use case continues with any remaining available layers (such as environmental data) or ends after the employee acknowledges the limitation.",
+    "EF-2 (from Step 4): Data needed for generating the traffic heatmap is incomplete or temporarily delayed. The system cannot reliably compute the heatmap from current traffic measurements. The system displays a message that the heatmap view is currently limited or unavailable and hides or dims the heatmap layer while maintaining other active layers. The flow may return to Step 3 or Step 6 for the employee to focus on other available visualizations, or the use case ends if the employee chooses to stop monitoring.",
+    "EF-3 (from Step 6): Some environmental measurements (such as certain CO2, noise, or air pollution sensors) are not providing current data. The system retrieves only partial environmental data and can display measurements for a subset of points or parameters. The system overlays the available environmental data on the map, visually indicates missing or stale measurement points, and informs the employee that coverage is partial. The flow continues with Step 7, with the employee reviewing the partially available environmental data.",
+    "EF-4 (from Step 7): Environmental or traffic measurements are older than an acceptable real-time threshold, resulting in outdated data being displayed. The system detects that the most recent data for one or more layers exceeds the configured freshness threshold. The system flags the affected layers or measurements as outdated on the map and shows a warning that the data is no longer current. The employee may choose to continue viewing with awareness of the limitation, adjust filters or layers (returning to Step 8), or close the interface, in which case the use case ends.",
+    "EF-5 (from Step 1): The monitoring map interface cannot retrieve the base map of Wonderland due to a mapping service issue. The system fails to load the street map and displays an error notification indicating that the base map is unavailable. No measurement layers can be meaningfully displayed. The use case ends without successful visualization, and the employee may try again once the mapping service is restored."
   ],
   "information_for_steps": [
-    "1. Admin credentials",
-    "2. Authentication status",
-    "3. Configuration settings data"
+    "1. Base street map data for Wonderland, device display characteristics, current zoom and pan settings.",
+    "2. Live traffic measurement data (e.g., flow, speed, occupancy, congestion indicators), mapping between sensors and road segments.",
+    "3. Updated traffic measurement values, timestamp of last traffic update, visual encoding parameters for congestion.",
+    "4. Aggregated traffic intensity values per map region or grid cell, color scale definitions for heatmap visualization.",
+    "5. Continuous heatmap updates, hotspot locations, time of last heatmap refresh.",
+    "6. Environmental measurement data per point (e.g., CO2 levels, noise levels, air pollutant concentrations), overall aggregated indicators, measurement locations.",
+    "7. Updated environmental measurement values, timestamps of environmental updates, threshold markers for legal or recommended limits.",
+    "8. Layer visibility flags (traffic, heatmap, environmental parameters), selected filters (region of interest, parameter ranges), current map view configuration.",
+    "9. Summary of currently visible layers and filters, overall assessment context for decision-making, session end state for the monitoring view."
   ]
 }
 
 --- VALIDATION: PASSED ---
 
---- SCENARIO 8 ---
-Use case: [8] Perform Bulk Operations
-
---- SCORES ---
-- Completeness: 82/100 (PASS)
-- Correctness: N/A
-- Relevance: 83/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows
-
---- CONTENT ---
+--- RAW SCENARIO RESULT JSON ---
 {
-  "use_case_name": "Perform Bulk Operations",
-  "unique_id": "UC-008",
-  "area": "Bulk Operations Management",
-  "context_of_use": "This use case allows power users to execute bulk actions to process many records efficiently.",
-  "scope": "Bulk Operations System",
-  "level": "User-goal",
-  "primary_actors": [
-    "power user"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "power user: Efficient processing of records"
-  ],
-  "description": "Allows power users to execute bulk actions (e.g., import, update, delete) to process many records efficiently.",
-  "triggering_event": "Power user initiates a bulk operation.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Power user is authenticated."
-  ],
-  "postconditions": [
-    "Bulk operations are successfully executed."
-  ],
-  "assumptions": [
-    "The power user has the necessary permissions to perform bulk operations."
-  ],
-  "requirements_met": [
-    "The system shall allow power users to perform bulk operations efficiently."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of bulk operations supported."
-  ],
-  "main_flow": [
-    "1. Power user initiates authentication → System verifies user credentials.",
-    "2. Power user selects bulk operation type → System displays available options.",
-    "3. Power user provides necessary data for the operation → System processes the data.",
-    "4. System confirms successful execution of the bulk operation."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. User credentials",
-    "2. Selected bulk operation type",
-    "3. Data for the operation"
-  ]
+  "use_case": {
+    "id": 4,
+    "name": "Access Simulation Platform",
+    "description": "UMD employees access and operate the traffic simulation platform reliably, remotely, and across devices using an intuitive interface.",
+    "participating_actors": [
+      "umd employee"
+    ],
+    "user_stories": [
+      {
+        "actor": "umd employee",
+        "action": "use intuitive system",
+        "original_sentence": "As a UMD employee, I want to use an intuitive system, so that I can quickly understand all the functions in the system.",
+        "sentence_idx": 22
+      },
+      {
+        "actor": "umd employee",
+        "action": "use new data sources",
+        "original_sentence": "As a UMD employee, I want to use new data sources as they become available, so that my simulator is as accurate as possible.As a UMD employee, I want the system to always be available, so that I can access it whenever I need",
+        "sentence_idx": 25
+      },
+      {
+        "actor": "umd employee",
+        "action": "access system",
+        "original_sentence": "As a UMD employee, I want to be able to access the system 24/7, so that I can work flexible shifts",
+        "sentence_idx": 26
+      },
+      {
+        "actor": "umd employee",
+        "action": "start system",
+        "original_sentence": "As a UMD employee, I want to start up the system within 2 minutes, so that I can go to action fast when it is required.",
+        "sentence_idx": 27
+      },
+      {
+        "actor": "umd employee",
+        "action": "operate platform independently",
+        "original_sentence": "As a UMD employee, I want to operate the platform independently without needing an expert, so that I don’t have to ask for assistance.",
+        "sentence_idx": 28
+      },
+      {
+        "actor": "umd employee",
+        "action": "use system remotely",
+        "original_sentence": "As a UMD employee, I want to use the system remotely, so that my employees can work from home.",
+        "sentence_idx": 29
+      }
+    ],
+    "relationships": []
+  },
+  "use_case_spec_json": {
+    "use_case_name": "View Real-Time Measurements on Map",
+    "unique_id": "UC-004",
+    "area": "Real-Time Traffic and Environmental Monitoring",
+    "context_of_use": "A UMD employee uses the monitoring map interface to view real-time traffic, heatmap, and environmental measurements for Wonderland in order to support informed monitoring and decision-making.",
+    "scope": "Wonderland Traffic Simulation and Monitoring Platform",
+    "level": "User-goal",
+    "primary_actors": [
+      "umd employee"
+    ],
+    "supporting_actors": [
+      "IT infrastructure",
+      "Network services"
+    ],
+    "stakeholders_and_interests": [
+      "UMD employee: Wants to monitor real-time traffic, heatmap, and environmental measurements on an up-to-date map so that they can quickly understand the current situation and make informed decisions.",
+      "UMD management: Wants staff to effectively monitor traffic and environmental impact in Wonderland using real-time visualizations to support operational and planning decisions.",
+      "IT operations: Wants the monitoring and map application, along with its data connections, to function reliably so that real-time measurements can be displayed without interruption."
+    ],
+    "description": "This use case describes how a UMD employee opens the monitoring map interface and views real-time traffic conditions, traffic heatmaps, and environmental measurements visualized on an up-to-date street map of Wonderland, using intuitive controls to select and combine different measurement layers for monitoring and decision-making.",
+    "triggering_event": "A UMD employee decides to monitor the current traffic and environmental situation in Wonderland using the map-based interface.",
+    "trigger_type": "External",
+    "preconditions": [
+      "The Wonderland Traffic Simulation and Monitoring Platform is deployed and operational.",
+      "The UMD employee has access to the monitoring map interface of the platform.",
+      "The monitoring map application is connected to the configured live data sources for traffic and environmental measurements.",
+      "The base street map of Wonderland is available and up to date in the system."
+    ],
+    "postconditions": [
+      "The UMD employee has successfully viewed up-to-date traffic data visualized on the map.",
+      "The UMD employee has successfully viewed up-to-date traffic heatmap information visualized on the map.",
+      "The UMD employee has successfully viewed up-to-date environmental measurements (including CO2, noise, and air pollution levels) visualized on the map.",
+      "Any selected layers and filters for traffic, heatmap, and environmental data are applied and visible on the map.",
+      "The UMD employee can base monitoring and subsequent decisions on the displayed real-time measurements and selected visualizations."
+    ],
+    "assumptions": [
+      "User access to the monitoring map interface is already established before this use case begins; authentication details are handled by separate mechanisms and are outside the scope of this use case.",
+      "Live traffic and environmental measurements are continuously provided to the platform by external sensors and data sources, and this use case focuses only on their visualization.",
+      "The system processes incoming live data quickly enough that it can be considered real time or near real time for monitoring purposes.",
+      "The intuitive nature of the monitoring map interface is ensured through usability design but does not introduce capabilities beyond selecting, filtering, and viewing the described measurement layers.",
+      "The structure and semantics of traffic and environmental parameters (e.g., which pollutants are measured) are predefined elsewhere and are simply presented as selectable options in this use case."
+    ],
+    "requirements_met": [
+      "The system shall present an up-to-date map of the streets of Wonderland, including relevant road types and obstacles, as the background for visualizing real-time measurements.",
+      "The system shall display current traffic conditions on the map using data gathered from sensors in Wonderland so that a UMD employee can monitor busy areas and congestions.",
+      "The system shall provide a traffic heatmap view on the map so that a UMD employee can quickly see how traffic crowdedness is spatially distributed in Wonderland.",
+      "The system shall display real-time environmental measurements on the map at measurement points so that a UMD employee can assess how the current traffic situation affects the environment.",
+      "The system shall show the overall real-time CO2 emissions derived from current measurements so that a UMD employee can understand how harmful the current situation is to the environment.",
+      "The system shall show real-time noise levels per measurement point on the map so that a UMD employee can determine whether noise levels exceed legal limits.",
+      "The system shall show the real-time overall level of air pollution so that a UMD employee can understand how harmful the current situation is to the environment.",
+      "The system shall show real-time air pollution levels per measurement point on the map so that a UMD employee can identify areas that are becoming too polluted.",
+      "The system shall provide intuitive controls for a UMD employee to select and view traffic, heatmap, and environmental data layers on the map for real-time monitoring."
+    ],
+    "priority": "High",
+    "risk": "Medium",
+    "outstanding_issues": [
+      "The exact set of environmental parameters to be displayed (e.g., specific pollutants, noise metrics) has not been fully defined.",
+      "Visualization conventions for thresholds (such as legal noise or pollution limits) and how exceedances are highlighted on the map have not been specified.",
+      "Update frequency and latency limits for data to still be considered real-time or sufficiently up to date for monitoring purposes have not been formalized.",
+      "The required spatial resolution and coverage of sensors across Wonderland, and how gaps in coverage should be represented on the map, remain to be clarified.",
+      "Detailed usability and accessibility criteria for the intuitive monitoring interface (e.g., color schemes, support for color-blind users) have not been established."
+    ],
+    "main_flow": [
+      "1. UMD employee opens the monitoring map interface of the platform on a supported device → System loads and displays the up-to-date street map of Wonderland as the primary view.",
+      "2. UMD employee selects the option to display real-time traffic data on the map → System retrieves current traffic measurements from live data sources and overlays traffic indicators (such as flow, speed, and congestion) on the street map in real time.",
+      "3. UMD employee reviews the displayed traffic information on the map → System continuously updates the traffic visualization as new measurements arrive, keeping the displayed traffic situation current.",
+      "4. UMD employee selects the option to display a traffic heatmap layer → System generates and overlays a real-time traffic heatmap on top of the street map, visually representing crowdedness across Wonderland.",
+      "5. UMD employee reviews the traffic heatmap visualization → System maintains and updates the heatmap using incoming traffic measurements so that areas of varying crowdedness remain accurately represented.",
+      "6. UMD employee selects options to display environmental measurement layers on the map (such as CO2 emissions, noise levels, and air pollution levels) → System retrieves the latest environmental measurements from live data sources and overlays them on the map at the corresponding measurement points and as overall indicators where applicable.",
+      "7. UMD employee reviews the environmental measurements on the map, including overall indicators and per-measurement-point values → System keeps the environmental data visualizations up to date as new measurements are received.",
+      "8. UMD employee adjusts the visible combination of traffic, heatmap, and environmental layers to focus on the current monitoring need → System applies the selection, updates the composite visualization on the map, and continues to reflect real-time measurements for all visible layers.",
+      "9. UMD employee uses the presented real-time visualizations to assess the current traffic and environmental situation and, when finished, closes the monitoring map interface → System stops updating the view for that session while keeping data feeds and services available for subsequent monitoring sessions."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): UMD employee chooses to view only traffic data without heatmap or environmental layers. Condition: The employee is focused solely on current traffic flow and congestion. The employee enables only the traffic layer on the map. The system overlays and updates only traffic indicators on the street map. The flow continues with Step 3 for reviewing traffic data, and the employee may later proceed to Step 8 if additional layers are enabled.",
+      "AF-2 (from Step 4): UMD employee chooses to view only the traffic heatmap without detailed traffic indicators. Condition: The employee prefers a simplified, aggregated view. The employee disables the detailed traffic indicators and leaves only the heatmap layer active. The system shows and updates only the heatmap on the street map. The flow continues with Step 5 for reviewing the heatmap, and the employee may later proceed to Step 8 to adjust layers again.",
+      "AF-3 (from Step 6): UMD employee chooses to view only specific environmental parameters (for example, noise levels only or air pollution only). Condition: The employee is interested in a subset of environmental measurements. The employee selects a subset of environmental layers in the interface. The system overlays and updates only the selected environmental parameters on the map. The flow then continues with Step 7 for reviewing the selected environmental measurements.",
+      "AF-4 (from Step 8): UMD employee changes filters such as region of interest or parameter-specific thresholds while viewing the map. Condition: The employee needs to focus on a particular area or value range. The employee adjusts map filters (for example, zooming to a district or setting value thresholds). The system reapplies the filters, updates the visible subset of traffic, heatmap, and environmental visualizations accordingly, and continues with Step 9 when the employee has finished monitoring.",
+      "AF-5 (from Step 1): UMD employee switches between different map views or layouts (for example, standard map view versus satellite-style or schematic view). Condition: The employee wants an alternative visual context. The employee selects a different map view or layout from the interface. The system reloads the base map using the selected view while keeping any active measurement layers overlaid and updated. The flow then continues with Step 2 or the next relevant selection step depending on what the employee chooses to view."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 2): Real-time traffic data is temporarily unavailable from live sources. The system cannot retrieve current traffic measurements and therefore does not overlay traffic indicators on the map. The system displays a notification indicating that traffic data is temporarily unavailable while keeping the base map and any other active layers visible. The use case continues with any remaining available layers (such as environmental data) or ends after the employee acknowledges the limitation.",
+      "EF-2 (from Step 4): Data needed for generating the traffic heatmap is incomplete or temporarily delayed. The system cannot reliably compute the heatmap from current traffic measurements. The system displays a message that the heatmap view is currently limited or unavailable and hides or dims the heatmap layer while maintaining other active layers. The flow may return to Step 3 or Step 6 for the employee to focus on other available visualizations, or the use case ends if the employee chooses to stop monitoring.",
+      "EF-3 (from Step 6): Some environmental measurements (such as certain CO2, noise, or air pollution sensors) are not providing current data. The system retrieves only partial environmental data and can display measurements for a subset of points or parameters. The system overlays the available environmental data on the map, visually indicates missing or stale measurement points, and informs the employee that coverage is partial. The flow continues with Step 7, with the employee reviewing the partially available environmental data.",
+      "EF-4 (from Step 7): Environmental or traffic measurements are older than an acceptable real-time threshold, resulting in outdated data being displayed. The system detects that the most recent data for one or more layers exceeds the configured freshness threshold. The system flags the affected layers or measurements as outdated on the map and shows a warning that the data is no longer current. The employee may choose to continue viewing with awareness of the limitation, adjust filters or layers (returning to Step 8), or close the interface, in which case the use case ends.",
+      "EF-5 (from Step 1): The monitoring map interface cannot retrieve the base map of Wonderland due to a mapping service issue. The system fails to load the street map and displays an error notification indicating that the base map is unavailable. No measurement layers can be meaningfully displayed. The use case ends without successful visualization, and the employee may try again once the mapping service is restored."
+    ],
+    "information_for_steps": [
+      "1. Base street map data for Wonderland, device display characteristics, current zoom and pan settings.",
+      "2. Live traffic measurement data (e.g., flow, speed, occupancy, congestion indicators), mapping between sensors and road segments.",
+      "3. Updated traffic measurement values, timestamp of last traffic update, visual encoding parameters for congestion.",
+      "4. Aggregated traffic intensity values per map region or grid cell, color scale definitions for heatmap visualization.",
+      "5. Continuous heatmap updates, hotspot locations, time of last heatmap refresh.",
+      "6. Environmental measurement data per point (e.g., CO2 levels, noise levels, air pollutant concentrations), overall aggregated indicators, measurement locations.",
+      "7. Updated environmental measurement values, timestamps of environmental updates, threshold markers for legal or recommended limits.",
+      "8. Layer visibility flags (traffic, heatmap, environmental parameters), selected filters (region of interest, parameter ranges), current map view configuration.",
+      "9. Summary of currently visible layers and filters, overall assessment context for decision-making, session end state for the monitoring view."
+    ]
+  },
+  "evaluation": {
+    "Completeness": {
+      "score": 98,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor": 15,
+        "Use Case Name": 10,
+        "Preconditions": 10,
+        "Postconditions": 10,
+        "Stakeholders & Interests": 5,
+        "Main Flow": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10
+      },
+      "missing_or_weak_fields": []
+    },
+    "Correctness": {
+      "score": 98,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 2.txt",
+      "sub_scores": {
+        "Primary Actor": 20,
+        "Use Case Name": 20,
+        "Main Success Scenario (MSS)": 25,
+        "Alternative Flows": 15,
+        "Exception Flows": 10,
+        "Preconditions": 5,
+        "Postconditions": 5
+      }
+    },
+    "Relevance": {
+      "score": 96,
+      "result": "PASS",
+      "rationale": "Average across 3 judge(s).",
+      "sub_scores": {
+        "Primary Actor ↔ Use Case Name": 15,
+        "Use Case Name ↔ Main Flow": 25,
+        "Main Flow ↔ Alternative Flows": 20,
+        "Preconditions & Trigger ↔ Main Flow": 10,
+        "(Main Flow & Alternative Flows) ↔ Postconditions": 15,
+        "Stakeholders & Interests ↔ Postconditions": 13
+      }
+    }
+  },
+  "comparison_spec_path": null,
+  "comparison_evaluation": null,
+  "validation": {
+    "passed": true,
+    "failed_criteria": {},
+    "regen_rationale": ""
+  }
 }
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 9 ---
-Use case: [9] Manage Products
-
---- SCORES ---
-- Completeness: 80/100 (PASS)
-- Correctness: N/A
-- Relevance: 82/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows
-
---- CONTENT ---
-{
-  "use_case_name": "Manage Products",
-  "unique_id": "UC-009",
-  "area": "Product Management",
-  "context_of_use": "This use case allows admins to manage the product catalog, including inventory levels and pricing.",
-  "scope": "Product Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: Control product availability and pricing"
-  ],
-  "description": "This use case enables admins to create and maintain the product catalog, ensuring accurate inventory levels and pricing.",
-  "triggering_event": "Admin initiates product management actions.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is authenticated and logged into the system."
-  ],
-  "postconditions": [
-    "Product catalog is updated with new products, prices, and inventory levels."
-  ],
-  "assumptions": [
-    "Admin has the necessary permissions to manage products."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to create new products.",
-    "The system shall allow admins to update product prices.",
-    "The system shall allow admins to manage inventory levels."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the specific fields required for product creation and updates."
-  ],
-  "main_flow": [
-    "1. Admin initiates authentication → System verifies admin credentials.",
-    "2. Admin creates a new product → System adds the product to the catalog.",
-    "3. Admin updates product prices → System updates the pricing information.",
-    "4. Admin manages inventory levels → System adjusts inventory accordingly."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. Product details",
-    "3. Price information",
-    "4. Inventory levels"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 10 ---
-Use case: [10] View Reports
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows
-
---- CONTENT ---
-{
-  "use_case_name": "View Reports",
-  "unique_id": "UC-010",
-  "area": "Reporting",
-  "context_of_use": "This use case allows customers and users to view report content and download or export reports for offline use.",
-  "scope": "Reporting System",
-  "level": "User-goal",
-  "primary_actors": [
-    "customer",
-    "user"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "customer: wants to access reports for personal use",
-    "user: wants to analyze data offline"
-  ],
-  "description": "This use case enables customers and users to view and download reports for offline analysis.",
-  "triggering_event": "The customer or user requests to view reports.",
-  "trigger_type": "External",
-  "preconditions": [
-    "The customer or user is authenticated in the system.",
-    "Reports are available for viewing."
-  ],
-  "postconditions": [
-    "The customer or user has successfully viewed and downloaded the reports."
-  ],
-  "assumptions": [
-    "The system has the capability to generate and store reports.",
-    "The customer and user have the necessary permissions to access reports."
-  ],
-  "requirements_met": [
-    "The system shall allow customers to view reports.",
-    "The system shall allow users to download reports."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of reports available for viewing and downloading."
-  ],
-  "main_flow": [
-    "1. customer → System displays available reports.",
-    "2. customer → System allows customer to select a report to view.",
-    "3. customer → System displays the selected report content.",
-    "4. customer → System provides an option to download the report.",
-    "5. customer → System downloads the report for offline use.",
-    "6. user → System allows user to select a report to download.",
-    "7. user → System downloads the report for offline analysis."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. Report list",
-    "2. Selected report",
-    "3. Report content",
-    "4. Download option",
-    "5. Downloaded report",
-    "6. User request for report",
-    "7. Downloaded report for user"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 11 ---
-Use case: [11] View Sales Reports
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 90/100 (PASS)
-- Missing/weak fields: outstanding_issues
-
---- CONTENT ---
-{
-  "use_case_name": "View Sales Reports",
-  "unique_id": "UC-011",
-  "area": "Sales Management",
-  "context_of_use": "This use case allows an admin to view sales performance reports and analytics to monitor business metrics.",
-  "scope": "Sales Reporting System",
-  "level": "User-goal",
-  "primary_actors": [
-    "admin"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "admin: Monitor business performance"
-  ],
-  "description": "This use case enables admins to view sales reports to analyze business performance.",
-  "triggering_event": "Admin requests to view sales reports.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Admin is authenticated.",
-    "Admin has permission to view sales reports."
-  ],
-  "postconditions": [
-    "Admin successfully views the sales reports."
-  ],
-  "assumptions": [
-    "The admin has a valid account.",
-    "The system has up-to-date sales data."
-  ],
-  "requirements_met": [
-    "The system shall allow admins to view sales reports.",
-    "The system shall authenticate admins before accessing reports."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on report formats and data granularity."
-  ],
-  "main_flow": [
-    "1. Admin requests to view sales reports → System authenticates the admin.",
-    "2. Admin is authenticated → System retrieves sales reports.",
-    "3. Admin views sales reports → System displays the sales performance reports."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If the admin is not authenticated, the system prompts for login credentials."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 2): If the system fails to retrieve sales reports, the system displays an error message."
-  ],
-  "information_for_steps": [
-    "1. Admin credentials",
-    "2. Sales report data",
-    "3. Display format for sales reports"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 12 ---
-Use case: [12] Checkout Order
-
---- SCORES ---
-- Completeness: 83/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: alternative_flows, exception_flows
-
---- CONTENT ---
-{
-  "use_case_name": "Checkout Order",
-  "unique_id": "UC-012",
-  "area": "E-commerce",
-  "context_of_use": "This use case allows customers to complete purchases by selecting payment and delivery options and finalizing orders.",
-  "scope": "E-commerce System",
-  "level": "User-goal",
-  "primary_actors": [
-    "customer"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "customer: wants to choose the most convenient payment option"
-  ],
-  "description": "This use case enables customers to finalize their purchases by selecting payment and delivery options.",
-  "triggering_event": "Customer initiates the checkout process.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Customer has items in the cart.",
-    "Customer is logged into the system."
-  ],
-  "postconditions": [
-    "Order is successfully placed.",
-    "Customer receives confirmation of the order."
-  ],
-  "assumptions": [
-    "Customer has a valid payment method available.",
-    "Customer has selected delivery options."
-  ],
-  "requirements_met": [
-    "The system shall allow customers to checkout using multiple payment methods."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on supported payment methods."
-  ],
-  "main_flow": [
-    "1. Customer initiates checkout → System displays checkout options.",
-    "2. Customer selects payment method → System processes payment.",
-    "3. Customer selects delivery options → System confirms delivery details.",
-    "4. Customer finalizes order → System places the order and sends confirmation."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. Payment method details",
-    "2. Delivery options",
-    "3. Order confirmation details"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 13 ---
-Use case: [13] Track Orders
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
-
---- CONTENT ---
-{
-  "use_case_name": "Track Orders",
-  "unique_id": "UC-013",
-  "area": "Order Management",
-  "context_of_use": "This use case allows customers to view order status and shipment tracking information until delivery.",
-  "scope": "Order Tracking System",
-  "level": "User-goal",
-  "primary_actors": [
-    "customer"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "customer wants to know the delivery status of their orders."
-  ],
-  "description": "This use case enables customers to track their orders and view shipment status.",
-  "triggering_event": "Customer requests to track an order.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Customer has placed an order.",
-    "Customer is logged into their account."
-  ],
-  "postconditions": [
-    "Customer successfully views the order status and tracking information."
-  ],
-  "assumptions": [
-    "The customer has access to the internet.",
-    "The order tracking system is operational."
-  ],
-  "requirements_met": [
-    "The system shall allow customers to track their orders."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on the types of tracking information provided."
-  ],
-  "main_flow": [
-    "1. Customer requests to track an order → System displays the order tracking interface.",
-    "2. Customer selects the order to track → System retrieves and displays the current status and tracking information."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. Order ID",
-    "2. Customer account information",
-    "3. Tracking information"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 14 ---
-Use case: [14] Approve Orders
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Outstanding issues
-
---- CONTENT ---
-{
-  "use_case_name": "Approve Orders",
-  "unique_id": "UC-014",
-  "area": "Order Management",
-  "context_of_use": "This use case allows managers to review and approve or reject orders within the order approval workflow.",
-  "scope": "Order Management System",
-  "level": "User-goal",
-  "primary_actors": [
-    "manager"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "manager: Ensure timely approval of orders to avoid delays in business processes."
-  ],
-  "description": "This use case enables managers to approve or reject orders, facilitating the order approval workflow.",
-  "triggering_event": "Manager initiates the order approval process.",
-  "trigger_type": "External",
-  "preconditions": [
-    "Manager is logged into the system.",
-    "Orders are available for review."
-  ],
-  "postconditions": [
-    "Selected orders are approved or rejected.",
-    "Order status is updated accordingly."
-  ],
-  "assumptions": [
-    "The manager has the necessary permissions to approve orders."
-  ],
-  "requirements_met": [
-    "The system shall allow managers to approve orders.",
-    "The system shall update order status upon approval or rejection."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification needed on the criteria for order approval or rejection."
-  ],
-  "main_flow": [
-    "1. Manager initiates the order approval process → System displays pending orders for review.",
-    "2. Manager selects an order to review → System presents order details.",
-    "3. Manager approves or rejects the order → System updates the order status accordingly."
-  ],
-  "alternative_flows": [
-    "AF-1 (from Step 1): If no pending orders are available, the system informs the manager that there are no orders to review."
-  ],
-  "exception_flows": [
-    "EF-1 (from Step 3): If the system encounters an error while updating the order status, it notifies the manager of the failure."
-  ],
-  "information_for_steps": [
-    "1. Order list",
-    "2. Selected order details",
-    "3. Order status"
-  ]
-}
-
---- VALIDATION: PASSED ---
-
---- SCENARIO 15 ---
-Use case: [15] Authenticate
-
---- SCORES ---
-- Completeness: 85/100 (PASS)
-- Correctness: N/A
-- Relevance: 80/100 (PASS)
-- Missing/weak fields: Alternative Flows, Exception Flows, alternative_flows, exception_flows
-
---- CONTENT ---
-{
-  "use_case_name": "Authenticate",
-  "unique_id": "UC-015",
-  "area": "User Management",
-  "context_of_use": "This use case allows users to securely access the system by registering, logging in, and resetting passwords.",
-  "scope": "User Authentication System",
-  "level": "User-goal",
-  "primary_actors": [
-    "user"
-  ],
-  "supporting_actors": [],
-  "stakeholders_and_interests": [
-    "user: access personalized features"
-  ],
-  "description": "Allows users to register, log in, and reset passwords to securely access the system.",
-  "triggering_event": "User initiates account registration, login, or password reset.",
-  "trigger_type": "External",
-  "preconditions": [
-    "User must have internet access.",
-    "User must have valid information for registration or login."
-  ],
-  "postconditions": [
-    "User account is created successfully.",
-    "User is logged in to the system.",
-    "User password is reset successfully."
-  ],
-  "assumptions": [
-    "User has a device capable of accessing the system.",
-    "User understands the registration and login process."
-  ],
-  "requirements_met": [
-    "The system shall allow users to register an account.",
-    "The system shall allow users to log in to their accounts.",
-    "The system shall allow users to reset their passwords."
-  ],
-  "priority": "High",
-  "risk": "Medium",
-  "outstanding_issues": [
-    "Clarification on password complexity requirements."
-  ],
-  "main_flow": [
-    "1. user registers account → system creates user account and confirms registration.",
-    "2. user logs in → system verifies credentials and grants access.",
-    "3. user resets password → system updates password and confirms reset."
-  ],
-  "alternative_flows": [],
-  "exception_flows": [],
-  "information_for_steps": [
-    "1. User registration details",
-    "2. User login credentials",
-    "3. User password reset information"
-  ]
-}
-
---- VALIDATION: PASSED ---

@@ -1,0 +1,21 @@
+﻿{
+"use_case_name": "Manage Schedule",
+"primary_actors": ["League", "IFA Representative", "IFA Administrator", "Team"],
+"preconditions": ["User has appropriate scheduling permissions.", "Draft schedule or existing schedule exists."],
+"postconditions": ["Schedule is updated, validated, and approved."],
+"main_flow": [
+"1. Actor views the current scheduling platform.",
+"2. Actor proposes a schedule or a change to an existing game.",
+"3. Actor provides an explicit reason for the schedule change (if modifying).",
+"4. System validates the schedule against rules (e.g., matches 4 days apart, league time zone adjustments).",
+"5. IFA Representative reviews the proposed changes and reasons.",
+"6. IFA Representative confirms and approves the change.",
+"7. System updates the schedule and notifies relevant stakeholders (Teams, Referees)."
+],
+"alternative_flows": [
+"AF-1 (from Step 4): Rule Violation. 1. System detects a match is scheduled less than four days after the previous one. 2. System flags the error to the Actor. 3. Actor adjusts the date. 4. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 6): Approval Denied. 1. IFA Representative rejects the change due to insufficient reasons or bias concerns. 2. System reverts the schedule to the previous state. 3. Use Case ends."
+]
+}

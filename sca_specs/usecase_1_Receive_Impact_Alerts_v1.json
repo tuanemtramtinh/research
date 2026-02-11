@@ -1,0 +1,85 @@
+{
+  "use_case_name": "Receive Impact Alerts",
+  "unique_id": "UC-001",
+  "area": "Urban Mobility Planning – Impact Monitoring",
+  "context_of_use": "The use case enables the system to automatically monitor the neighborhood impact of configured mobility measures and notify the urban mobility planner when a measure disproportionately disadvantages a neighborhood, so that the planner can consider fairness in planning decisions.",
+  "scope": "Urban Mobility Planning Decision Support System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Configured Impact Analysis Engine"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Wants to be notified when a measure disadvantages a neighborhood to increase fairness in urban mobility planning.",
+    "City administration: Wants planning decisions to be fair and defensible with respect to neighborhood impacts.",
+    "Residents of affected neighborhoods: Want mobility measures that do not unfairly disadvantage their neighborhood.",
+    "System owner: Wants the system to reliably detect and communicate disadvantageous neighborhood impacts to support trust in planning tools."
+  ],
+  "description": "This use case describes how the system monitors the effects of a mobility measure on neighborhoods and notifies the urban mobility planner when the measure disproportionately disadvantages a neighborhood, thereby supporting fair and balanced planning decisions.",
+  "triggering_event": "The system detects, based on an executed or simulated mobility measure, that one or more neighborhoods are disproportionately disadvantaged according to configured impact criteria.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner has access to the Urban Mobility Planning Decision Support System.",
+    "At least one mobility measure has been defined and is being evaluated or monitored by the system.",
+    "Neighborhood impact evaluation rules and thresholds for what constitutes a disadvantaged neighborhood are configured in the system.",
+    "Notification channels for the urban mobility planner are configured and operational.",
+    "The system is actively monitoring or recalculating neighborhood impacts for the relevant mobility measures."
+  ],
+  "postconditions": [
+    "The system has generated and delivered at least one impact alert concerning a disadvantaged neighborhood to the urban mobility planner.",
+    "The urban mobility planner can view the details of the impact alert within the system.",
+    "The alert is recorded in the system for later review and traceability.",
+    "The impacted neighborhood or neighborhoods associated with the triggering measure are clearly identified in the system’s alert information."
+  ],
+  "assumptions": [
+    "It is assumed that the Urban Mobility Planning Decision Support System is the software platform through which the urban mobility planner evaluates and monitors mobility measures.",
+    "It is assumed that the determination of whether a neighborhood is disadvantaged is performed by an existing impact analysis engine using previously defined rules and thresholds, and that this use case does not define new analysis capabilities.",
+    "It is assumed that at least one notification mechanism (such as an in-application notification panel or similar channel) is available to present alerts to the urban mobility planner.",
+    "It is assumed that measures and their spatial association with neighborhoods are already modeled in the system before this use case is executed.",
+    "It is assumed that impact alerts are generated based solely on the measures and fairness criteria referenced in the requirements, without introducing additional impact types beyond neighborhood disadvantage.",
+    "It is assumed that the urban mobility planner is the only human actor who receives these alerts in the context of this use case."
+  ],
+  "requirements_met": [
+    "The system shall notify the urban mobility planner if a mobility measure disproportionately disadvantages a neighborhood so that fairness can be increased.",
+    "The system shall continuously or periodically evaluate the impact of active or simulated mobility measures on neighborhoods against configured fairness criteria.",
+    "The system shall create an impact alert when the evaluation identifies that at least one neighborhood is disadvantaged by a measure according to the configured criteria.",
+    "The system shall present the impact alert to the urban mobility planner, including identification of the affected measure and the disadvantaged neighborhood or neighborhoods.",
+    "The system shall record generated impact alerts to allow the urban mobility planner to review past neighborhood disadvantage notifications."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise quantitative or qualitative criteria that define when a neighborhood is considered disadvantaged by a measure have not been specified and require policy decision.",
+    "The required timeliness and frequency of neighborhood impact evaluations (e.g., real-time, near real-time, or batch intervals) are not defined.",
+    "The preferred notification channels for the urban mobility planner (e.g., dashboard alerts, email, external messaging) are not specified.",
+    "The required level of detail in the alert content, such as whether explanatory metrics or only summary information must be shown, is not defined.",
+    "The retention period and archival behavior for historical neighborhood impact alerts are not specified."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner defines or activates a mobility measure for monitoring → System registers the mobility measure and associates it with the relevant neighborhoods for impact evaluation.",
+    "2. System schedules or performs neighborhood impact evaluations for the registered mobility measure → System retrieves current and projected impact data relevant to neighborhood fairness criteria.",
+    "3. System evaluates the mobility measure’s effects on all associated neighborhoods against configured fairness criteria → System determines whether any neighborhood meets the configured conditions for being disadvantaged.",
+    "4. System detects that one or more neighborhoods are disadvantaged by the mobility measure → System generates an impact alert object containing the affected measure, disadvantaged neighborhoods, and evaluation summary.",
+    "5. System delivers the generated impact alert to the urban mobility planner through the configured notification mechanism → System presents the impact alert in the planner’s user interface with clear identification of the disadvantaged neighborhoods.",
+    "6. Urban mobility planner reviews the received impact alert → System displays detailed information about the disadvantaged neighborhoods and the associated mobility measure, confirming completion of the notification."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): If the mobility measure is already under continuous monitoring when the urban mobility planner activates it for evaluation, the system uses existing monitoring configuration and proceeds directly to Step 3 without creating a new evaluation schedule.",
+    "AF-2 (from Step 5): If multiple impact alerts concerning different measures or neighborhoods are generated before the urban mobility planner reviews them, the system groups the alerts in a consolidated notification list, and the flow continues with the planner selecting a specific alert to review as described in Step 6."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): If the system cannot access required impact data to perform neighborhood evaluations, the system logs the failure, marks the evaluation attempt as incomplete, and notifies the urban mobility planner that neighborhood impact could not be evaluated for the affected measure; the use case then ends without generating a neighborhood disadvantage alert.",
+    "EF-2 (from Step 4): If an internal error occurs while generating the impact alert object, the system logs the error, does not create the alert, and displays a generic system error message to the urban mobility planner at the next interaction related to the affected measure; the use case then terminates unsuccessfully.",
+    "EF-3 (from Step 5): If delivery of the impact alert through the configured notification mechanism fails, the system records the non-delivery status, retries delivery according to system-wide retry rules, and if retries are exhausted, marks the alert as undelivered and displays a notification failure status in the planner’s alert list; the use case then ends with the alert existing in the system but not successfully delivered through the primary channel."
+  ],
+  "information_for_steps": [
+    "1. Mobility measure identifier, measure configuration data, associated neighborhoods list.",
+    "2. Evaluation schedule parameters, impact input data sources, monitoring configuration.",
+    "3. Neighborhood identifiers, fairness criteria, threshold values, computed impact metrics per neighborhood.",
+    "4. List of disadvantaged neighborhoods, triggering criteria, evaluation timestamp, measure identifier.",
+    "5. Impact alert identifier, alert message content, notification channel information, planner identifier.",
+    "6. Detailed alert information, including disadvantaged neighborhoods, measure details, impact metrics summary and evaluation context."
+  ]
+}

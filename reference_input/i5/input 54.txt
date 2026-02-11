@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Integrate Deposit Workflows",
+    "primary_actors": [
+      "Depositor",
+      "Developer"
+    ],
+    "preconditions": [
+      "The Actor is using an external tool (Pure, VRE, or SWORD2 API client).",
+      "API credentials are valid."
+    ],
+    "postconditions": [
+      "A dataset is successfully deposited into the archive via the external interface."
+    ],
+    "main_flow": [
+      "1. Primary Actor triggers a deposit action from an external environment (e.g., Pure, VRE, or API). → System authenticates the request.",
+      "2. System initiates the 'Manage Datasets' use case to process the incoming metadata and files. → (Include Use Case: Manage Datasets).",
+      "3. System confirms the successful deposit to the external tool. → Primary Actor receives a confirmation (e.g., deposit receipt or DOI)."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): Workflow Linkage.",
+      "1. At step 1, Primary Actor links the deposit to a project workflow or DMP tool. → System associates the incoming data with the specified project ID.",
+      "2. Proceed to Step 2."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): Authentication Failure.",
+      "1. At step 1, The API key or User Token is invalid. → System returns a 401 Unauthorized error to the external tool."
+    ]
+  },

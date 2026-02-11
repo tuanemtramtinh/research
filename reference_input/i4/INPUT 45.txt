@@ -1,0 +1,26 @@
+﻿{
+    "use_case_name": "View patient information",
+    "primary_actors": ["Doctor", "Nurse"],
+    "preconditions": [
+      "The Actor is logged in with clinical privileges.",
+      "The Patient is registered in the hospital database."
+    ],
+    "postconditions": [
+      "The Patient's identity and demographic details are displayed.",
+      "The viewing action is logged."
+    ],
+    "main_flow": [
+      "1. Actor scans a patient wristband or searches by ID. → System identifies the Patient record.",
+      "2. Actor requests to view patient details to verify identity. → System retrieves personal information (Name, DOB, Gender, Photo) from the central database.",
+      "3. System displays the patient information summary. → Actor verifies the patient identity."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 1): Search by Name.",
+      "1. At step 1, Actor enters a patient name. → System displays a list of matching patients.",
+      "2. Actor selects the correct patient from the list. → Proceed to Step 2."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 1): Patient not found.",
+      "1. At step 1, System finds no record matching the ID. → System displays a 'Record Not Found' error."
+    ]
+  },

@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "View Test Results",
+"primary_actors": ["Patient"],
+"preconditions": ["Results are available."],
+"postconditions": ["Patient has viewed their results."],
+"main_flow": [
+"1. Include Use Case: Access Medical Records.",
+"2. Patient navigates to the test results section.",
+"3. Patient selects a specific result (e.g., external device data or lab test).",
+"4. System displays the results/progress over time.",
+"5. Patient monitors their progress."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

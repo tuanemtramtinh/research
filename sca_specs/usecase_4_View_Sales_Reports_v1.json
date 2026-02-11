@@ -2,7 +2,7 @@
   "use_case_name": "View Sales Reports",
   "unique_id": "UC-004",
   "area": "Sales Management",
-  "context_of_use": "The admin wants to view sales reports to monitor business performance.",
+  "context_of_use": "This use case allows an admin to view sales reports to monitor business performance.",
   "scope": "Sales Reporting System",
   "level": "User-goal",
   "primary_actors": [
@@ -10,21 +10,21 @@
   ],
   "supporting_actors": [],
   "stakeholders_and_interests": [
-    "admin: Monitor business performance"
+    "admin: Monitor business performance through sales reports."
   ],
-  "description": "Enable admins to view sales reports to monitor business performance.",
+  "description": "Enables admins to view sales reports to monitor business performance.",
   "triggering_event": "Admin requests to view sales reports.",
   "trigger_type": "External",
   "preconditions": [
-    "Admin is authenticated.",
-    "Sales reports are available."
+    "Admin is logged into the system.",
+    "Admin has the necessary permissions to view sales reports."
   ],
   "postconditions": [
-    "Admin successfully views the sales reports."
+    "Sales reports are displayed to the admin."
   ],
   "assumptions": [
-    "The admin has the necessary permissions to view sales reports.",
-    "Sales data is up-to-date."
+    "The admin has access to the sales reporting functionality.",
+    "Sales reports are available for viewing."
   ],
   "requirements_met": [
     "The system shall allow admins to view sales reports."
@@ -32,17 +32,21 @@
   "priority": "High",
   "risk": "Medium",
   "outstanding_issues": [
-    "Clarification on the format of sales reports."
+    "Clarification on the types of sales reports available for viewing."
   ],
   "main_flow": [
-    "1. Admin requests to view sales reports → System retrieves and displays the sales reports."
+    "1. Admin requests to view sales reports → System displays available sales reports.",
+    "2. Admin selects a specific sales report → System retrieves and displays the selected sales report."
   ],
-  "alternative_flows": [],
+  "alternative_flows": [
+    "AF-1 (from Step 1): If no sales reports are available, then the system displays a message indicating that no reports are available."
+  ],
   "exception_flows": [
-    "EF-1 (from Step 1): If the admin is not authenticated, the system displays an error message."
+    "EF-1 (from Step 1): If the admin does not have permission to view sales reports, then the system displays an error message."
   ],
   "information_for_steps": [
     "1. Admin credentials",
-    "2. Sales report data"
+    "2. List of available sales reports",
+    "3. Selected sales report data"
   ]
 }

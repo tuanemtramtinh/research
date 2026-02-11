@@ -1,0 +1,107 @@
+{
+  "use_case_name": "Receive Impact Notifications",
+  "unique_id": "UC-005",
+  "area": "Urban Mobility Planning and Simulation",
+  "context_of_use": "The urban mobility planner uses the urban mobility planning system to monitor the effects of proposed measures and receive notifications about congestion, neighborhood disadvantage, and suggested solutions for traffic congestion.",
+  "scope": "Urban Mobility Planning System",
+  "level": "User-goal",
+  "primary_actors": [
+    "urban mobility planner"
+  ],
+  "supporting_actors": [
+    "Existing traffic and pollution sensing infrastructure",
+    "Municipal planning department",
+    "Emergency services coordination units"
+  ],
+  "stakeholders_and_interests": [
+    "Urban mobility planner: Wants timely and accurate notifications about congestion and neighborhood impacts caused by measures, and suggestions for resolving traffic congestion, in order to design better proposals.",
+    "Municipal planning department: Wants planners to consider congestion and fairness impacts so that mobility measures align with policy objectives.",
+    "Residents and neighborhoods: Want to avoid disproportionate negative impacts from mobility measures, such as increased congestion or reduced fairness.",
+    "City leadership (e.g., mayor): Wants mobility proposals that have been checked for congestion and fairness impacts before decision-making.",
+    "Emergency services: Want traffic measures and crisis simulations that do not create unmanaged congestion that could hinder emergency response.",
+    "Environmental agencies: Want that congestion and its related emissions and noise are identified so that mitigation can be incorporated in planning."
+  ],
+  "description": "This use case describes how the urban mobility planner receives automatic notifications from the urban mobility planning system when a simulated or configured measure leads to congestion, when a measure disadvantages a neighborhood, and when the system provides suggested solutions for a traffic congestion.",
+  "triggering_event": "The urban mobility planner executes or configures a measure in the system or a relevant traffic situation evolves in the simulation, causing the system to detect congestion or neighborhood disadvantage conditions.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The urban mobility planner is authenticated in the urban mobility planning system.",
+    "At least one measure or traffic scenario is configured or executed in the system for evaluation.",
+    "The system has access to or contains traffic and neighborhood impact data sufficient to evaluate congestion and neighborhood disadvantage.",
+    "Notification evaluation rules for congestion and neighborhood disadvantage are configured in the system."
+  ],
+  "postconditions": [
+    "The urban mobility planner has received at least one notification about congestion, neighborhood disadvantage, or suggested solutions for a traffic congestion when corresponding conditions were met.",
+    "The system has recorded that specific notifications were generated and delivered for the evaluated measure or traffic congestion.",
+    "Any suggested solutions provided for a detected traffic congestion are accessible to the urban mobility planner for subsequent review."
+  ],
+  "assumptions": [
+    "It is assumed that the urban mobility planning system continuously or periodically evaluates the effects of configured measures and simulated traffic situations to determine if congestion or neighborhood disadvantage conditions are present.",
+    "It is assumed that the system has predefined, configurable criteria for what constitutes congestion and what constitutes a disadvantaged neighborhood, although these criteria are outside the scope of this use case.",
+    "It is assumed that the system is capable of delivering notifications through at least the user interface used by the urban mobility planner during normal operation.",
+    "It is assumed that the generation of suggested solutions for traffic congestion is based on existing system capabilities and predefined solution patterns and does not require additional user input at notification time.",
+    "It is assumed that the urban mobility planner can identify which configured measure or traffic situation a notification refers to based on information included in the notification.",
+    "It is assumed that notifications pertain to measures or traffic congestions within the geographical and temporal scope of the current planning project managed in the system."
+  ],
+  "requirements_met": [
+    "The system shall notify the urban mobility planner if a configured or simulated measure leads to congestion so that the planner does not overlook the congestion.",
+    "The system shall notify the urban mobility planner if a configured or simulated measure disadvantages a neighborhood so that fairness can be increased.",
+    "The system shall provide suggested solutions for a detected traffic congestion to the urban mobility planner so that the planner can be inspired to solve the problem.",
+    "The system shall associate each impact notification with the corresponding measure or traffic congestion scenario that triggered it.",
+    "The system shall present congestion impact details in the notification in a form that allows the urban mobility planner to recognize the severity and location of the congestion.",
+    "The system shall present neighborhood disadvantage impact details in the notification in a form that allows the urban mobility planner to identify the affected neighborhood or area.",
+    "The system shall allow the urban mobility planner to view all suggested solutions that are associated with a specific detected traffic congestion.",
+    "The system shall record the time of generation for each notification so that the sequence of notifications can be reviewed.",
+    "The system shall generate impact notifications only when the configured congestion or neighborhood disadvantage criteria are met for a measure or simulated traffic congestion.",
+    "The system should present impact notifications without requiring the urban mobility planner to manually refresh or re-run the evaluation while actively working with a measure or scenario."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The precise thresholds and metrics that define when a measure \"leads to congestion\" are not defined and must be established by policy or domain experts.",
+    "The criteria for determining that a measure \"disadvantages a neighborhood\" are not specified and require a fairness or equity framework to be defined.",
+    "The ranking, selection, and generation logic for suggested solutions for a traffic congestion are not described and must be clarified.",
+    "The channels and user interface patterns for delivering notifications (e.g., pop-up, inbox, dashboard indicator) are not specified and must be decided.",
+    "The expected response actions of the urban mobility planner upon receiving a notification (e.g., acknowledgment, dismissal, or follow-up analysis) are not defined.",
+    "Retention periods and audit requirements for notification logs have not been specified.",
+    "It is unclear whether notifications should also be generated for historical simulations or only for newly created or modified measures."
+  ],
+  "main_flow": [
+    "1. Urban mobility planner initiates or loads a measure or traffic scenario in the system for evaluation → System loads the selected measure or scenario and prepares it for simulation or analysis.",
+    "2. Urban mobility planner starts or confirms the execution of the simulation or evaluation for the selected measure or traffic scenario → System executes or updates the simulation or evaluation of the selected measure or scenario.",
+    "3. Urban mobility planner continues working within the system while the simulation or evaluation progresses → System continuously or periodically analyzes the simulation or evaluation results for congestion and neighborhood disadvantage conditions associated with the active measure or scenario.",
+    "4. Urban mobility planner remains available in the system session as analysis results become available → System detects that the active measure or simulated traffic situation meets the configured criteria for congestion and generates a congestion notification linked to that measure or situation.",
+    "5. Urban mobility planner views the congestion notification presented by the system → System displays the congestion notification with information such as the affected area, measure identifier, and summary of congestion effects.",
+    "6. Urban mobility planner reviews any additional details related to the congestion impact from the notification context → System provides access from the congestion notification to detailed congestion impact information associated with the evaluated measure or scenario.",
+    "7. Urban mobility planner continues working with the same measure or scenario or opens another relevant view within the system → System detects that the active measure or simulated traffic situation meets the configured criteria for neighborhood disadvantage and generates a neighborhood impact notification linked to that measure or situation.",
+    "8. Urban mobility planner views the neighborhood impact notification presented by the system → System displays the neighborhood impact notification with information such as the affected neighborhood or area, measure identifier, and summary of disadvantage effects.",
+    "9. Urban mobility planner reviews any additional details related to the neighborhood impact from the notification context → System provides access from the neighborhood impact notification to detailed neighborhood disadvantage information associated with the evaluated measure or scenario.",
+    "10. Urban mobility planner continues analyzing the traffic situation when a significant congestion problem remains or emerges in the simulation → System evaluates the detected congestion and generates one or more suggested solutions for the traffic congestion based on its existing solution suggestion capabilities.",
+    "11. Urban mobility planner opens or focuses on the notification or view that indicates suggested solutions for the congestion → System presents the suggested congestion solutions together with references to the originating congestion situation and measure.",
+    "12. Urban mobility planner reviews the suggested solutions for the traffic congestion to support further planning decisions → System keeps the generated notifications and suggested solutions accessible within the current planning context for future reference."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 4): System detects neighborhood disadvantage before congestion. Condition: During analysis the system first identifies that the active measure or scenario disadvantages a neighborhood before any congestion condition is met. Flow: At Step 3, while analyzing the results, the system detects that the neighborhood disadvantage criteria are met and generates a neighborhood impact notification linked to the measure or scenario. The urban mobility planner views the neighborhood impact notification, and the system displays the notification with affected neighborhood and disadvantage summary. The planner may review detailed neighborhood impact information, after which the flow rejoins at Step 10 when the system later detects any remaining or emerging congestion that may warrant suggested solutions.",
+    "AF-2 (from Step 10): Congestion notifications without suggested solutions. Condition: The system detects congestion but, according to its internal capabilities or rules, no suggested solutions are generated for the detected congestion. Flow: After Step 9, the system continues analysis and may generate additional congestion or neighborhood impact notifications as appropriate. No suggested solutions are generated; therefore, Steps 10 through 12 are not executed. The use case concludes after all relevant impact notifications for the evaluated measure or scenario have been delivered and viewed.",
+    "AF-3 (from Step 1): Planner monitors previously configured measure without starting a new simulation. Condition: The urban mobility planner opens a measure or scenario whose evaluation and notifications are already available from prior analysis. Flow: At Step 1, the system loads the existing measure or scenario together with already generated notifications. The urban mobility planner directly views existing congestion and neighborhood impact notifications and any associated suggested solutions, following the interactions described in Steps 5, 6, 8, 9, 11, and 12 as applicable, without re-executing Step 2."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): Simulation or evaluation fails. Condition: The system cannot complete the simulation or evaluation of the selected measure or scenario due to invalid data, missing parameters, or internal error. Flow: After the urban mobility planner starts the simulation in Step 2, the system detects the failure, stops the evaluation process, and displays an error message indicating that the simulation or evaluation could not be completed. No impact notifications or suggested solutions are generated for that execution. The system logs the failure event for diagnostic purposes, and the use case terminates for this attempt.",
+    "EF-2 (from Step 4): Notification delivery interruption. Condition: The system detects congestion or neighborhood disadvantage but cannot deliver a notification to the urban mobility planner because the session has ended or the notification channel is unavailable. Flow: After the analysis in Step 3, when the system is ready to generate a notification, it records the notification in its data store and flags it as undelivered due to the interruption. The system attempts delivery again when the urban mobility planner next establishes a session, at which time the planner can view the delayed notification. If repeated delivery attempts fail, the event remains logged for administrative review, and real-time notification for that condition is considered unsuccessful.",
+    "EF-3 (from Step 10): Suggested solution generation failure. Condition: The system detects congestion but encounters an error while generating suggested solutions. Flow: After Step 9, when the system attempts to evaluate possible solutions, it fails to compute suggestions and records the error internally. The system still maintains any previously generated congestion or neighborhood impact notifications but informs the urban mobility planner via an error message that suggested solutions could not be generated for this congestion event. The use case continues with access to existing notifications but without new suggested solutions for this congestion case."
+  ],
+  "information_for_steps": [
+    "1. Measure identifier, scenario identifier, project identifier, planner identity, measure configuration parameters.",
+    "2. Simulation parameters, evaluation time frame, network topology data, traffic demand data, execution status.",
+    "3. Real-time or periodic simulation results, intermediate congestion indicators, neighborhood impact indicators, analysis state.",
+    "4. Congestion detection criteria, congestion level metrics, affected network segments, timestamp of detection, associated measure or scenario reference.",
+    "5. Notification content for congestion, affected area description, severity summary, links or references to detailed congestion results.",
+    "6. Detailed congestion metrics, congestion duration, queue lengths, speed reductions, geographical visualization references.",
+    "7. Neighborhood identification data, demographic or equity-related indicators, analysis time window for neighborhood impact.",
+    "8. Notification content for neighborhood disadvantage, affected neighborhood or area name, disadvantage summary, links to detailed impact results.",
+    "9. Detailed neighborhood impact metrics, distribution of benefits and burdens, comparison between neighborhoods, associated measure or scenario references.",
+    "10. Congestion characterization data for solution generation, rule sets or patterns for solution suggestion, list of candidate solution strategies.",
+    "11. Suggested solution descriptions, each solution's reference identifier, rationale summary, linkage to originating congestion event and measure.",
+    "12. Notification records, planner review timestamps, association of notifications and suggested solutions with the current planning project."
+  ]
+}

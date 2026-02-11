@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+
+'--- Actors ------------------------------------
+actor Doctor
+actor Patient
+actor Nurse
+actor Receptionist
+actor Pharmacist
+actor "System Administrator" as SysAdmin
+actor "Systems Analyst" as Analyst
+
+'--- System ------------------------------------
+rectangle "Health‑Care Platform" {
+
+  '--- Base Use Cases (light blue) -------------
+  usecase "Create prescription" as UC1 #ADD8E6
+  usecase "View prescription" as UC2 #ADD8E6
+  usecase "Transfer prescription" as UC3 #ADD8E6
+  usecase "View personal information" as UC4 #ADD8E6
+  usecase "Edit personal information" as UC5 #ADD8E6
+  usecase "Request prescription" as UC6 #ADD8E6
+  usecase "Schedule appointment" as UC7 #ADD8E6
+  usecase "View medical records" as UC8 #ADD8E6
+  usecase "Add medical notes" as UC9 #ADD8E6
+  usecase "Synchronize mobile device" as UC10 #ADD8E6
+  usecase "Dispense medication" as UC11 #ADD8E6
+  usecase "Store data centrally" as UC12 #ADD8E6
+  usecase "Integrate EMR" as UC13 #ADD8E6
+  usecase "Enforce GDPR" as UC14 #ADD8E6
+  usecase "Manage user access" as UC15 #ADD8E6
+  usecase "Provide analytics" as UC16 #ADD8E6
+  usecase "Record appointment time" as UC17 #ADD8E6
+  usecase "Migrate legacy data" as UC18 #ADD8E6
+  usecase "Authenticate" as UC19 #ADD8E6
+  usecase "Authorize" as UC20 #ADD8E6
+
+  '--- Included / Extended Use Cases (gray) ----
+  usecase "Log in" as UC21 #EAEAEA
+  usecase "Logout" as UC22 #EAEAEA
+}
+
+'--- Actor → Use Case Relationships -------------
+Doctor -- UC1
+Doctor -- UC2
+Doctor -- UC3
+Doctor -- UC10
+Doctor -- UC19
+Doctor -- UC20
+
+Patient -- UC4
+Patient -- UC5
+Patient -- UC6
+Patient -- UC7
+Patient -- UC10
+Patient -- UC19
+Patient -- UC20
+
+Nurse -- UC8
+Nurse -- UC9
+Nurse -- UC10
+Nurse -- UC19
+Nurse -- UC20
+
+Receptionist -- UC8
+Receptionist -- UC10
+Receptionist -- UC19
+Receptionist -- UC20
+
+Pharmacist -- UC3
+Pharmacist -- UC11
+Pharmacist -- UC10
+Pharmacist -- UC19
+Pharmacist -- UC20
+
+SysAdmin -- UC12
+SysAdmin -- UC13
+SysAdmin -- UC14
+SysAdmin -- UC15
+SysAdmin -- UC19
+SysAdmin -- UC20
+
+Analyst -- UC16
+Analyst -- UC19
+Analyst -- UC20
+
+'--- Use‑Case Relationships (inside the rectangle) ----
+UC1 <.. UC21 : "<<includes>>"
+UC3 <.. UC21 : "<<includes>>"
+UC1 ..> UC22 : "<<extends>>"
+
+'--- Authentication / Authorization includes -------------
+UC19 <.. UC21 : "<<includes>>"
+UC20 <.. UC21 : "<<includes>>"
+UC19 ..> UC22 : "<<extends>>"
+UC20 ..> UC22 : "<<extends>>"
+@enduml

@@ -1,0 +1,15 @@
+﻿{
+"use_case_name": "Assign Team Manager",
+"primary_actors": ["Team"],
+"preconditions": ["Team is logged in."],
+"postconditions": ["A responsible person is assigned to the team profile."],
+"main_flow": [
+"1. Team accesses their system profile.",
+"2. Team selects the option to assign a manager.",
+"3. Team inputs the details of the responsible person.",
+"4. System assigns management privileges to the designated person.",
+"5. System saves the team profile settings."
+],
+"alternative_flows": [],
+"exception_flows": []
+}

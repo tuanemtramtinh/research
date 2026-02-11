@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "View Laboratory Test Status",
+"primary_actors": ["Doctor", "Patient", "Laboratory Technician"],
+"preconditions": ["Lab tests have been requested."],
+"postconditions": ["Actor is informed of the test status."],
+"main_flow": [
+"1. Actor requests to view laboratory tests.",
+"2. System displays a list of tests associated with the patient or doctor.",
+"3. System shows the current status (e.g., Requested, In Progress, Completed) and urgency level.",
+"4. Actor reviews the estimated availability of results."
+],
+"alternative_flows": [
+"AF-1 (from Step 3): Technician Review. 1. Laboratory Technician filters by urgency and requesting doctor. 2. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 2): No Tests Found. 1. System finds no records for the criteria. 2. System displays 'No records found'. 3. Use Case ends."
+]
+}

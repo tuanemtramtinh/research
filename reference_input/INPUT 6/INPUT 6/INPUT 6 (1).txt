@@ -1,0 +1,20 @@
+﻿{
+"use_case_name": "Manage League Policies",
+"primary_actors": ["IFA"],
+"preconditions": ["IFA Administrator is logged into the system."],
+"postconditions": ["League policies and budget specifications are updated in the system."],
+"main_flow": [
+"1. IFA selects the option to manage league regulations.",
+"2. System displays current league policies and budget rules.",
+"3. IFA defines or updates the budget policy specifications per season.",
+"4. System validates the budget specifications.",
+"5. IFA defines or updates the league policies for game running (e.g., placement rules).",
+"6. System saves the changes and updates the active policy registry."
+],
+"alternative_flows": [
+"AF-1 (from Step 2): Monitor Budget Compliance. 1. IFA requests to view real-time budget specifications of teams. 2. System displays a compliance report based on current policies. 3. Resume Step 3."
+],
+"exception_flows": [
+"EF-1 (from Step 4): Validation Error. 1. System detects inconsistencies in the defined budget policy. 2. System displays an error message describing the conflict. 3. IFA modifies the input."
+]
+}

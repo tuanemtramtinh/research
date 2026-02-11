@@ -1,0 +1,89 @@
+{
+  "use_case_name": "View Dataset Citation Details",
+  "unique_id": "UC-019",
+  "area": "Research Data Discovery and Access",
+  "context_of_use": "A data reuser is interacting with the Bath Data Archive via a web interface after having located a specific dataset record and needs to view citation-related information for that dataset in order to reference it correctly and return to it in the future.",
+  "scope": "Bath Data Archive web application",
+  "level": "User-goal",
+  "primary_actors": [
+    "data reuser"
+  ],
+  "supporting_actors": [
+    "manage research datasets"
+  ],
+  "stakeholders_and_interests": [
+    "data reuser: Wants to obtain accurate, ready-to-use citation information, DOIs, and persistent URLs for datasets so that they can correctly reference and reliably return to the data.",
+    "Bath Data Archive administrator: Wants citation details to be consistently presented so that datasets are easily citable and discoverable and so that archive usage and impact can be demonstrated.",
+    "Research Information manager: Wants dataset DOIs and persistent URLs to support tracking of dataset citations and impact across outputs.",
+    "academicpublisher: Wants persistent, reliable identifiers and example citations so that articles can link robustly to underlying datasets.",
+    "fundingbody: Wants clear, persistent identification of datasets to support assurance that data outputs are accessible and citable over time.",
+    "UnivITservice: Wants the citation information (including DOIs and persistent URLs) to remain technically resolvable and stable so that service reliability is maintained."
+  ],
+  "description": "This use case allows a data reuser to view example citation details, including example citation text, DOI, and persistent URL, for a selected dataset in the Bath Data Archive so that the dataset can be correctly referenced and reliably accessed in the future.",
+  "triggering_event": "The data reuser selects a specific dataset record in the Bath Data Archive interface and requests to view its citation details.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Bath Data Archive system is operational and accessible via the web interface.",
+    "The data reuser has network access to the Bath Data Archive web interface.",
+    "The dataset record to be viewed already exists in the Bath Data Archive.",
+    "The dataset record has been made visible to the data reuser according to applicable access controls.",
+    "The dataset record includes, or can be associated with, stored citation-related metadata, which may include citation text, DOI, and persistent URL."
+  ],
+  "postconditions": [
+    "The data reuser has been presented with citation-related details for the selected dataset, including example citation text where available.",
+    "If available for the dataset, the DOI has been displayed to the data reuser.",
+    "If available for the dataset, the persistent URL has been displayed to the data reuser.",
+    "The data reuser is able to copy citation details, the DOI, and the persistent URL from the interface for use in external tools or publications."
+  ],
+  "assumptions": [
+    "It is assumed that the Bath Data Archive web interface provides a way for a data reuser to select a specific dataset record before invoking this use case, as this selection mechanism is part of the broader \"manage research datasets\" functionality which this use case extends.",
+    "It is assumed that at least one citation format or example citation string is stored or can be generated from dataset metadata without requiring additional user input during this use case.",
+    "It is assumed that any DOI associated with a dataset has already been registered and stored in the Bath Data Archive prior to execution of this use case.",
+    "It is assumed that any persistent URL for a dataset is preconfigured by the Bath Data Archive and is stored as part of the dataset record.",
+    "It is assumed that resolving DOIs and persistent URLs is handled by external infrastructure or services and is outside the scope of this use case, which only displays the identifiers and links.",
+    "It is assumed that viewing citation details does not require the data reuser to authenticate beyond whatever authentication, if any, is already required to view the dataset record.",
+    "It is assumed that the relationship \"extend manage research datasets\" indicates that citation viewing is invoked from within a broader dataset viewing or management context and does not itself create or modify datasets or citations."
+  ],
+  "requirements_met": [
+    "The system shall allow a data reuser to view an example citation for a dataset so that the dataset can be referenced correctly.",
+    "The system shall display the DOI associated with a dataset to a data reuser so that the data reuser can return to the data in future and can import the dataset into reference management software.",
+    "The system shall provide a persistent URL for each dataset record to a data reuser so that the data reuser can return to the dataset in future using that URL.",
+    "The system shall present citation-related information for a dataset in a single interface view so that the data reuser can easily identify and copy the citation information, DOI, and persistent URL."
+  ],
+  "priority": "High",
+  "risk": "Medium",
+  "outstanding_issues": [
+    "The required citation format(s) for example citations (e.g., specific referencing styles) have not been defined and need to be agreed.",
+    "It is unclear whether all datasets must have DOIs or whether DOIs are optional and only available for some datasets.",
+    "The governance rules for generating and maintaining persistent URLs for datasets, including their lifetime and redirection behavior, need to be clarified.",
+    "The access policy regarding whether unauthenticated users can view citation details for restricted datasets needs to be specified.",
+    "The behavior when citation-related metadata is incomplete or missing (e.g., no DOI, no persistent URL, no example citation text) must be defined at policy level."
+  ],
+  "main_flow": [
+    "1. data reuser selects a dataset record in the Bath Data Archive interface and chooses the option to view citation details → System accepts the request and identifies the selected dataset record.",
+    "2. data reuser waits while the citation details are prepared → System retrieves citation-related metadata for the selected dataset, including any stored example citation text, DOI, and persistent URL.",
+    "3. data reuser views the citation information on the dataset page → System displays the example citation text for the selected dataset in a clearly identifiable citation section.",
+    "4. data reuser reviews the dataset DOI as part of the citation details → System displays the DOI associated with the selected dataset and, where supported, renders it as a clickable link.",
+    "5. data reuser reviews the persistent URL for the dataset → System displays the persistent URL associated with the selected dataset and, where supported, renders it as a clickable link.",
+    "6. data reuser optionally copies the citation text, DOI, or persistent URL for use outside the system → System maintains display of all citation-related details without modification to the dataset record, confirming the successful completion of the use case."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 2): Citation text unavailable but DOI and persistent URL present – If the system determines that no example citation text is stored for the selected dataset while a DOI and/or persistent URL exist, the system omits example citation text in Step 3 and instead displays a message indicating that a formatted citation is not available, while still proceeding to Step 4 and Step 5 to display the DOI and persistent URL; the use case then continues with Step 6.",
+    "AF-2 (from Step 4): DOI not available for dataset – If during Step 2 the system determines that no DOI is associated with the selected dataset, the system omits the DOI field in Step 4 and displays a clear indication that no DOI is available for this dataset, then continues directly to Step 5 and Step 6.",
+    "AF-3 (from Step 5): Persistent URL not available for dataset – If during Step 2 the system determines that no persistent URL is associated with the selected dataset, the system omits the persistent URL field in Step 5 and displays a clear indication that no persistent URL is available for this dataset, then proceeds to Step 6.",
+    "AF-4 (from Step 1): Invocation as an extension of manage research datasets – When the data reuser is already viewing a dataset record as part of the broader \"manage research datasets\" context and selects an inline \"Citation details\" control, the system skips any additional dataset selection in Step 1, treats the currently viewed dataset as the selected dataset, and proceeds directly with Step 2 through Step 6 as normal."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 1): Dataset record no longer available – If the system cannot locate the selected dataset record when the data reuser requests citation details, the system displays an error message indicating that the dataset is unavailable or has been removed and does not proceed with further steps; the use case terminates without displaying citation details.",
+    "EF-2 (from Step 2): Failure retrieving citation metadata – If an internal error occurs while retrieving citation-related metadata for the selected dataset, the system logs the error, displays a generic failure message to the data reuser indicating that citation details cannot be shown at this time, and the use case ends without completing subsequent steps.",
+    "EF-3 (from Step 1): Insufficient permission to view dataset – If access control checks determine that the data reuser is not permitted to view details of the selected dataset, the system denies the request, displays an appropriate access denied message, and does not reveal any citation-related information; the use case terminates."
+  ],
+  "information_for_steps": [
+    "1. Dataset identifier; user session identifier; selected dataset context.",
+    "2. Dataset identifier; citation metadata fields; DOI field; persistent URL field; system configuration for citation display.",
+    "3. Example citation text; dataset title; creators; publication year; additional citation elements derived from metadata.",
+    "4. DOI string; DOI resolver base URL; rendered DOI hyperlink.",
+    "5. Persistent URL string; URL resolver configuration; rendered persistent URL hyperlink.",
+    "6. Citation details as displayed; clipboard interaction (outside system responsibility); dataset record remains unchanged."
+  ]
+}

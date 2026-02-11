@@ -1,0 +1,93 @@
+{
+  "use_case_name": "Authenticate User",
+  "unique_id": "UC-006",
+  "area": "User Access Management",
+  "context_of_use": "This use case enables a user or patient to authenticate securely to the system using unique credentials or DigiD in order to gain access to the system at any time and from supported devices.",
+  "scope": "Medical Record Management System",
+  "level": "User-goal",
+  "primary_actors": [
+    "user",
+    "patient"
+  ],
+  "supporting_actors": [
+    "DigiD authentication service"
+  ],
+  "stakeholders_and_interests": [
+    "User: Requires secure and convenient access to the system using unique credentials from various devices at any time.",
+    "Patient: Requires convenient authentication using DigiD and secure access to personal medical information.",
+    "System Owner: Requires that access to the system is restricted to authenticated users to protect data confidentiality and integrity.",
+    "Security Administrator: Requires that authentication mechanisms enforce unique credentials and minimize unauthorized access risks.",
+    "Healthcare Organization: Requires reliable 24/7 access for users to support continuity of care while maintaining security."
+  ],
+  "description": "The use case describes how a user or patient authenticates to the Medical Record Management System using unique credentials or DigiD in order to gain secure, continuous, and multi-device access to system functionality.",
+  "triggering_event": "The user or patient initiates a login request to access the system.",
+  "trigger_type": "External",
+  "preconditions": [
+    "The Medical Record Management System is operational and reachable from the user’s device.",
+    "The user or patient has been registered in the system with a unique username and password.",
+    "The DigiD authentication service is available for patients who choose to log in using DigiD.",
+    "The user or patient has network connectivity sufficient to reach the system and, if applicable, the DigiD authentication service."
+  ],
+  "postconditions": [
+    "The user or patient is authenticated and an active session is established for the user or patient on the current device.",
+    "The system records the successful authentication event including timestamp and device context.",
+    "The authenticated user or patient can access authorized system functionality in accordance with their role and permissions."
+  ],
+  "assumptions": [
+    "It is assumed that the Medical Record Management System supports a role-based access model in which users and patients have predefined access rights that are enforced after successful authentication.",
+    "It is assumed that each user or patient is issued exactly one unique login consisting of a username and password, as implied by the requirement for a unique login.",
+    "It is assumed that the DigiD authentication process is handled by an external trusted DigiD authentication service and that the system only consumes the result of this process.",
+    "It is assumed that supported devices (such as mobile phones, tablets, and computers) can access the system through a common interface (e.g., web or app) without changing the authentication logic.",
+    "It is assumed that 24/7 availability refers to the intended operational availability target, while temporary downtime or maintenance windows are handled by operational procedures outside this use case.",
+    "It is assumed that password management processes (such as password reset and change password) are handled in separate use cases and are not part of this Authenticate User use case.",
+    "It is assumed that multi-factor authentication other than DigiD is not required, because the requirements explicitly mention only DigiD and unique username and password.",
+    "It is assumed that logging of authentication attempts (successful or failed) is performed to support security monitoring, even though explicit logging requirements are not detailed in the text."
+  ],
+  "requirements_met": [
+    "The system shall allow a user to initiate authentication at any time in order to access the system.",
+    "The system shall provide each user with a unique login consisting of a username and password to improve system security.",
+    "The system shall authenticate users and patients using their unique username and password before granting access to system functionality.",
+    "The system shall allow a patient to authenticate to the software using DigiD as an alternative to username and password credentials.",
+    "The system shall allow authenticated users to access the system from supported devices including, at a minimum, mobile phones, tablets, and computers.",
+    "The system shall be designed to support user authentication 24 hours per day, 7 days per week, subject to operational availability.",
+    "The system shall establish an authenticated session for the user or patient upon successful authentication and associate that session with the current device.",
+    "The system shall record the outcome of each authentication attempt, including whether it was successful or failed, for security and audit purposes."
+  ],
+  "priority": "High",
+  "risk": "High",
+  "outstanding_issues": [
+    "The password complexity and expiration policies for the unique username and password are not defined and require clarification.",
+    "The maximum number of failed login attempts allowed before temporary account lockout or additional security measures is not specified.",
+    "The precise list of supported device types and required browsers or operating systems for accessing the system is not specified.",
+    "The behavior of the system during planned maintenance or unexpected downtime, in relation to the 24/7 access requirement, is not defined.",
+    "Session timeout duration and automatic logout behavior for authenticated sessions are not specified.",
+    "The detailed integration method and security protocol for interacting with the external DigiD authentication service are not defined.",
+    "It is not specified whether users other than patients are allowed or required to use DigiD for authentication.",
+    "The required audit detail level for authentication events (e.g., IP address, device identifier, geolocation) is not specified."
+  ],
+  "main_flow": [
+    "1. User or patient accesses the system login interface from a supported device → System displays the login options, including username/password login and DigiD login for patients.",
+    "2. User or patient chooses the username/password login option and enters their unique username and password → System receives the submitted credentials.",
+    "3. System validates the submitted username and password against stored authentication data → System determines that the credentials are valid for an existing user or patient account.",
+    "4. System establishes an authenticated session for the user or patient on the current device → System records the successful authentication event with timestamp and device context.",
+    "5. System presents the initial post-login view appropriate to the authenticated user or patient role → User or patient gains access to authorized system functionality from the current device."
+  ],
+  "alternative_flows": [
+    "AF-1 (from Step 1): Patient selects the DigiD login option instead of username/password. The system redirects the patient to the DigiD authentication service and displays the DigiD authentication interface. The patient authenticates using DigiD credentials through the DigiD authentication service. Upon successful DigiD authentication, the DigiD authentication service returns a positive authentication assertion to the system, including the patient identifier. The system validates the received assertion and matches it to an existing patient account. The system then continues at Step 4 of the main flow.",
+    "AF-2 (from Step 1): User or patient accesses the system login interface from a different supported device type than previously used (for example, from a mobile phone instead of a computer). The system adapts the login interface to the capabilities of the current device while preserving the same authentication options. The user or patient proceeds with either username/password login as in Steps 2 and 3 or DigiD login as in AF-1, after which the system continues at Step 4 of the main flow.",
+    "AF-3 (from Step 4): The same authenticated user or patient later initiates a new authentication from another supported device while the original session is still active. The system allows the user or patient to authenticate on the new device using the standard authentication sequence, creates a new authenticated session for the second device, and maintains or terminates the existing session on the first device according to defined security policies. The flow then continues at Step 5 of the main flow for the new device."
+  ],
+  "exception_flows": [
+    "EF-1 (from Step 2): The user or patient submits an incorrect or incomplete username or password. The system detects that the credentials do not match any existing account or are incomplete. The system records the failed authentication attempt and displays an error message indicating that the login attempt was unsuccessful without revealing which part of the credentials was incorrect. The system returns the user or patient to the login interface to allow another attempt or to cancel the login process.",
+    "EF-2 (from Step 3): The system cannot reach internal authentication services or required data stores due to a technical failure while validating credentials. The system records the technical failure event and displays a message indicating that the login service is temporarily unavailable. The system does not authenticate the user or patient and provides an option to retry later.",
+    "EF-3 (from AF-1): During DigiD login, the DigiD authentication service returns a failure, or the patient cancels the DigiD authentication process. The system receives an indication of authentication failure or cancellation from the DigiD authentication service. The system does not create an authenticated session, records the failed DigiD authentication event, and returns the patient to the system login interface with a message indicating that the DigiD login was not completed successfully.",
+    "EF-4 (from Step 1): The user or patient attempts to access the system during an unplanned outage or when the system is not operational. The system fails to present the login interface or returns an error response indicating that the service is currently unavailable. The user or patient is unable to authenticate, and the flow terminates without establishing a session."
+  ],
+  "information_for_steps": [
+    "1. Device type, network connection parameters, login interface options, user or patient role indicator (if known prior to login).",
+    "2. Username, password, login option selection, timestamp of submission, device identifier (if available).",
+    "3. Submitted credentials, stored authentication records, account status data, authentication rules, validation result.",
+    "4. User or patient identifier, session identifier, device identifier, authentication timestamp, audit log entry data.",
+    "5. User or patient role, authorized permissions, initial dashboard or home page configuration, session context data."
+  ]
+}

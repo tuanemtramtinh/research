@@ -1,0 +1,19 @@
+﻿{
+"use_case_name": "Manage and View Game Events",
+"primary_actors": ["Referee", "Team", "Fan"],
+"preconditions": ["A match is currently active or scheduled.", "Referee is authenticated."],
+"postconditions": ["Game events are recorded.", "Stakeholders are updated in real-time."],
+"main_flow": [
+"1. Referee initiates the event recording interface for the active game.",
+"2. Referee records a specific game event (e.g., Goal, Card, Substitution) efficiently in real-time.",
+"3. System validates and digitally records the event data.",
+"4. System updates the match status and statistics.",
+"5. Team and Fan view the updated game events and statistics via their interfaces."
+],
+"alternative_flows": [
+"AF-1 (from Step 5): View Schedule. 1. Fan requests to see game schedules. 2. System displays upcoming games. 3. Resume Step 5."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Data Error. 1. System detects inconsistent event data (e.g., invalid time). 2. System rejects the entry and prompts Referee for correction. 3. Resume Step 2."
+]
+}

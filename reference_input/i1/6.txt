@@ -1,0 +1,28 @@
+﻿{
+    "use_case_name": "Generate Solution Reports",
+    "primary_actors": [
+      "Planner"
+    ],
+    "preconditions": [
+      "A solution scenario has been finalized.",
+      "The Planner needs to communicate results to external stakeholders."
+    ],
+    "postconditions": [
+      "A formal document (Executive Summary or Extensive Report) is created."
+    ],
+    "main_flow": [
+      "1. Planner selects 'Generate Report' for the current solution. → System prompts for the report format.",
+      "2. Planner selects the report type (Executive Summary for Mayor or Extensive Report for Consultancy). → System gathers all relevant simulation data.",
+      "3. System triggers the 'Analyze Traffic Conditions' use case to ensure all metrics are up to date. → (Include Use Case: Analyze Traffic Conditions).",
+      "4. System formats the data into the selected document template. → System exports the file for the Planner."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Extensive Report.",
+      "1. At step 2, Planner selects 'Extensive Report'. → System includes detailed logs, sensor data, and granular cost breakdowns.",
+      "2. Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 4): Export Failure.",
+      "1. At step 4, System fails to write the file to the local drive. → System displays 'Export Failed' and allows the Planner to retry."
+    ]
+  },

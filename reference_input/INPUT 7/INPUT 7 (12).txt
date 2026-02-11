@@ -1,0 +1,18 @@
+﻿{
+"use_case_name": "Update Measurement Results",
+"primary_actors": ["Doctor", "Nurse"],
+"preconditions": ["Patient medical record is open."],
+"postconditions": ["New measurement data is added to the patient record."],
+"main_flow": [
+"1. Nurse selects the option to enter measurement results.",
+"2. Nurse manually inputs the vital signs and other metrics.",
+"3. System validates the data format.",
+"4. System saves the updated record."
+],
+"alternative_flows": [
+"AF-1 (from Step 1): Doctor Imports Results. 1. Doctor selects option to import results automatically. 2. System retrieves data from connected medical devices. 3. System populates the record. 4. Resume Step 4."
+],
+"exception_flows": [
+"EF-1 (from Step 3): Invalid Data. 1. System detects out-of-range or malformed input. 2. System flags the error. 3. Actor corrects the input."
+]
+}

@@ -1,0 +1,34 @@
+﻿{
+    "use_case_name": "Integrate Archive Systems",
+    "primary_actors": [
+      "Univ IT Service",
+      "Research Information Manager",
+      "Bath Data Archive Administrator"
+    ],
+    "preconditions": [
+      "The Primary Actor is logged into the system with administrative privileges.",
+      "The external system (e.g., LDAP, CRIS, HCP) is operational and accessible."
+    ],
+    "postconditions": [
+      "The Bath Data Archive is successfully configured to communicate with the external system.",
+      "Data exchange or storage integration is active."
+    ],
+    "main_flow": [
+      "1. Primary Actor navigates to the 'System Integration' settings. → System displays available integration modules (LDAP, CRIS, Storage, Export).",
+      "2. Primary Actor selects a specific system to integrate (e.g., LDAP for authentication or CRIS for research linking). → System prompts for configuration details (endpoints, credentials).",
+      "3. Primary Actor enters the required configuration parameters. → System tests the connection to the external service.",
+      "4. Primary Actor enables the integration. → System saves the configuration and activates the synchronization service."
+    ],
+    "alternative_flows": [
+      "AF-1 (from Step 2): Export Data.",
+      "1. At step 2, Primary Actor selects 'Export All Data'. → System prompts for the destination format and target system details.",
+      "2. Primary Actor confirms export. → System initiates the bulk export process. → Proceed to Step 4.",
+      "AF-2 (from Step 2): Configure Storage.",
+      "1. At step 2, Primary Actor selects 'HCP Object Store'. → System requests storage path and access keys.",
+      "2. Proceed to Step 3."
+    ],
+    "exception_flows": [
+      "EF-1 (from Step 3): Connection Failed.",
+      "1. At step 3, System fails to connect to the external system. → System displays an error message 'Connection Refused' and retains the previous settings."
+    ]
+  },
