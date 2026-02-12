@@ -353,7 +353,7 @@ N/A
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 46.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 46.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -758,7 +758,7 @@ Use case: [3] Control User Access
 - Overall (avg): 80/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\4\Manage user access_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\4\Manage user access_report.json
 - Completeness: 75/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 78/100 (PASS)
@@ -1072,7 +1072,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Manage user access_report.json
       "score": 80,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 49.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 49.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 18,
@@ -1097,7 +1097,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Manage user access_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\4\\Manage user access_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\4\\Manage user access_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 75,
@@ -1127,7 +1127,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Manage user access_report.json
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 49.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 49.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1470,7 +1470,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 410.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 410.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1822,7 +1822,7 @@ N/A
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 4.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 4.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -2146,7 +2146,7 @@ N/A
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 411.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 411.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -2497,7 +2497,7 @@ N/A
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 47.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 47.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -2541,7 +2541,7 @@ Use case: [8] Manage Personal Information
 - Overall (avg): 98/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\4\View personal information_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\4\View personal information_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 91/100 (PASS)
 - Relevance: 82/100 (PASS)
@@ -2813,7 +2813,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\View personal information_report.jso
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 42.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 42.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -2838,7 +2838,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\View personal information_report.jso
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\4\\View personal information_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\4\\View personal information_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -2865,7 +2865,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\View personal information_report.jso
       "score": 91,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 42.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 42.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 17,
@@ -3246,7 +3246,7 @@ N/A
       "score": 88,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 45.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 45.txt",
       "sub_scores": {
         "Primary Actor": 15,
         "Use Case Name": 15,
@@ -3632,7 +3632,7 @@ Use case: [11] Manage Prescriptions
 - Overall (avg): 99/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\4\Create Prescription_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\4\Create Prescription_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 96/100 (PASS)
 - Relevance: 85/100 (PASS)
@@ -3907,7 +3907,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Create Prescription_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 4.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 4.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3932,7 +3932,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Create Prescription_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\4\\Create Prescription_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\4\\Create Prescription_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -3961,7 +3961,7 @@ C:\Users\kyluo\research\paradigm_scenario\4\Create Prescription_report.json
       "score": 96,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i4\\INPUT 4.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i4\\INPUT 4.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 19,

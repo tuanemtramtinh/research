@@ -75,7 +75,7 @@ Use case: [1] Manage Record Access
 - Overall (avg): 51/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Restrict View To Assigned Patients_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Restrict View To Assigned Patients_report.json
 - Completeness: 92/100 (PASS)
 - Correctness: 98/100 (PASS)
 - Relevance: 90/100 (PASS)
@@ -350,7 +350,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Restrict View To Assigned Patients_
       "score": 36,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (4).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (4).txt",
       "sub_scores": {
         "Primary Actor": 5,
         "Use Case Name": 5,
@@ -375,7 +375,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Restrict View To Assigned Patients_
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Restrict View To Assigned Patients_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Restrict View To Assigned Patients_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 92,
@@ -444,7 +444,7 @@ Use case: [2] Access Medical Records
 - Overall (avg): 93/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\View Medical Records_report.json
 - Completeness: 89/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 77/100 (PASS)
@@ -741,7 +741,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (2).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -766,7 +766,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\View Medical Records_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\View Medical Records_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 89,
@@ -792,7 +792,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (2).txt",
       "sub_scores": {
         "Primary Actor": 19,
         "Use Case Name": 20,
@@ -834,7 +834,7 @@ Use case: [3] Order Medical Tests
 - Overall (avg): 97/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Order And Rate Lab Tests_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Order And Rate Lab Tests_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 80/100 (PASS)
@@ -1098,7 +1098,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Order And Rate Lab Tests_report.jso
       "score": 92,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (9).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (9).txt",
       "sub_scores": {
         "Primary Actor": 17,
         "Use Case Name": 17,
@@ -1123,7 +1123,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Order And Rate Lab Tests_report.jso
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Order And Rate Lab Tests_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Order And Rate Lab Tests_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -1191,7 +1191,7 @@ Use case: [4] Manage Lab Results
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\View Medical Records_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 80/100 (PASS)
@@ -1519,7 +1519,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\View Medical Records_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\View Medical Records_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -1546,7 +1546,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (15).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (15).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 15,
@@ -1588,7 +1588,7 @@ Use case: [5] Link External Devices
 - Overall (avg): 95/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Link External Device Data_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Link External Device Data_report.json
 - Completeness: 85/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 81/100 (PASS)
@@ -1931,7 +1931,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Link External Device Data_report.js
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Link External Device Data_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Link External Device Data_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 85,
@@ -2001,7 +2001,7 @@ Use case: [6] Authenticate
 - Overall (avg): 75/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Authenticate Via Digi D_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Authenticate Via Digi D_report.json
 - Completeness: 78/100 (PASS)
 - Correctness: 58/100 (FAIL)
 - Relevance: 60/100 (FAIL)
@@ -2292,7 +2292,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Authenticate Via Digi D_report.json
       "score": 100,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (1).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (1).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -2317,7 +2317,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Authenticate Via Digi D_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Authenticate Via Digi D_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Authenticate Via Digi D_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 78,
@@ -2336,7 +2336,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Authenticate Via Digi D_report.json
       "score": 58,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (1).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (1).txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 10,
@@ -2378,7 +2378,7 @@ Use case: [7] Access Documents
 - Overall (avg): 82/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\View Medical Records_report.json
 - Completeness: 88/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 80/100 (PASS)
@@ -2639,7 +2639,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       "score": 87,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (2).txt",
       "sub_scores": {
         "Primary Actor": 12,
         "Use Case Name": 15,
@@ -2664,7 +2664,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\View Medical Records_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\View Medical Records_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\View Medical Records_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 88,
@@ -3311,7 +3311,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (7).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (7).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3701,7 +3701,7 @@ Use case: [11] Control Device Authorization
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Manage Device Authorizations_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Manage Device Authorizations_report.json
 - Completeness: 88/100 (PASS)
 - Correctness: 60/100 (FAIL)
 - Relevance: 82/100 (PASS)
@@ -3995,7 +3995,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Manage Device Authorizations_report
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Manage Device Authorizations_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Manage Device Authorizations_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 88,
@@ -4021,7 +4021,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Manage Device Authorizations_report
       "score": 60,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (12).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (12).txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 8,
@@ -4315,7 +4315,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (11).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (11).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -4359,7 +4359,7 @@ Use case: [13] Edit Medical Records
 - Overall (avg): 56/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\10\Edit Medical Records_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\10\Edit Medical Records_report.json
 - Completeness: 89/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 81/100 (PASS)
@@ -4680,7 +4680,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Edit Medical Records_report.json
       "score": 50,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 10\\INPUT 10 (3).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 10\\INPUT 10 (3).txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 20,
@@ -4705,7 +4705,7 @@ C:\Users\kyluo\research\paradigm_scenario\10\Edit Medical Records_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\10\\Edit Medical Records_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\10\\Edit Medical Records_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 89,

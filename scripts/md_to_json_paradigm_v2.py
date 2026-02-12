@@ -1,5 +1,5 @@
 """
-Convert paradigm_scenario markdown reports to JSON format.
+Convert paradigm_diagram_and_scenario markdown reports to JSON format.
 Handles multiple MD formatting styles:
   - ## Header sections
   - **Bold Key:** Value inline pairs
@@ -459,7 +459,7 @@ def process_folder(folder_path):
 
 
 def main():
-    base_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'paradigm_scenario')
+    base_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'paradigm_diagram_and_scenario')
 
     for folder_name in sorted(os.listdir(base_dir), key=lambda x: int(x) if x.isdigit() else 999):
         folder_path = os.path.join(base_dir, folder_name)

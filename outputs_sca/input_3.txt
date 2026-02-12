@@ -82,7 +82,7 @@ Use case: [1] Manage Social Media Content
 - Overall (avg): 92/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Report Match Events_report.json
 - Completeness: 88/100 (PASS)
 - Correctness: 23/100 (FAIL)
 - Relevance: 79/100 (PASS)
@@ -357,7 +357,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 38.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 38.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -382,7 +382,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Report Match Events_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Report Match Events_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 88,
@@ -410,7 +410,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
       "score": 23,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 38.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 38.txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 0,
@@ -1400,7 +1400,7 @@ N/A
       "score": 92,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 34.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 34.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1996,7 +1996,7 @@ Use case: [7] Authenticate Users
 - Overall (avg): 90/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Register and Authenticate User_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Register and Authenticate User_report.json
 - Completeness: 84/100 (PASS)
 - Correctness: N/A
 - Relevance: 78/100 (PASS)
@@ -2272,7 +2272,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Register and Authenticate User_repor
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Register and Authenticate User_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Register and Authenticate User_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 84,
@@ -2334,7 +2334,7 @@ Use case: [8] Access Match Analytics
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Report Match Events_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 20/100 (FAIL)
 - Relevance: 80/100 (PASS)
@@ -2647,7 +2647,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Report Match Events_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Report Match Events_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -3281,7 +3281,7 @@ Use case: [11] Assign Profile Manager
 - Overall (avg): 98/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Manage Leagues and Teams_report.json
 - Completeness: 83/100 (PASS)
 - Correctness: 27/100 (FAIL)
 - Relevance: 78/100 (PASS)
@@ -3538,7 +3538,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 311.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 311.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3563,7 +3563,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Manage Leagues and Teams_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Manage Leagues and Teams_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 83,
@@ -3590,7 +3590,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
       "score": 27,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 311.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 311.txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 0,
@@ -3632,7 +3632,7 @@ Use case: [12] Report Match Events
 - Overall (avg): 97/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Report Match Events_report.json
 - Completeness: 85/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 78/100 (PASS)
@@ -3968,7 +3968,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Report Match Events_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Report Match Events_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Report Match Events_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 85,
@@ -4961,7 +4961,7 @@ N/A
       "score": 88,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i3\\INPUT 310.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i3\\INPUT 310.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -5005,7 +5005,7 @@ Use case: [16] Integrate Stakeholder Systems
 - Overall (avg): 98/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\3\Manage Leagues and Teams_report.json
 - Completeness: 86/100 (PASS)
 - Correctness: N/A
 - Relevance: 84/100 (PASS)
@@ -5278,7 +5278,7 @@ C:\Users\kyluo\research\paradigm_scenario\3\Manage Leagues and Teams_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\3\\Manage Leagues and Teams_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\3\\Manage Leagues and Teams_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 86,

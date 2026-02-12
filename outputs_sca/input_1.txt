@@ -54,7 +54,7 @@ Use case: [1] Generate Solution Reports
 - Overall (avg): 97/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\Generate customizable reports_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\Generate customizable reports_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 88/100 (PASS)
@@ -338,7 +338,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Generate customizable reports_report
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i1\\6.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i1\\6.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -363,7 +363,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Generate customizable reports_report
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\Generate customizable reports_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\Generate customizable reports_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -433,7 +433,7 @@ Use case: [2] Estimate Measure Impacts
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\Estimate financial and environmental impacts_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\Estimate financial and environmental impacts_report.json
 - Completeness: 52/100 (FAIL)
 - Correctness: N/A
 - Relevance: 50/100 (FAIL)
@@ -718,7 +718,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Estimate financial and environmental
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\Estimate financial and environmental impacts_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\Estimate financial and environmental impacts_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 52,
@@ -781,7 +781,7 @@ Use case: [3] Configure Traffic Measures
 - Overall (avg): 97/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\Adjust traffic measures_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\Adjust traffic measures_report.json
 - Completeness: 67/100 (FAIL)
 - Correctness: 93/100 (PASS)
 - Relevance: 63/100 (FAIL)
@@ -1095,7 +1095,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Adjust traffic measures_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i1\\1.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i1\\1.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1120,7 +1120,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Adjust traffic measures_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\Adjust traffic measures_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\Adjust traffic measures_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 67,
@@ -1147,7 +1147,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Adjust traffic measures_report.json
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i1\\1.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i1\\1.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 19,
@@ -1464,7 +1464,7 @@ N/A
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i1\\4.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i1\\4.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1508,7 +1508,7 @@ Use case: [5] Receive Congestion Insights
 - Overall (avg): 93/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\View predictive analytics_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\View predictive analytics_report.json
 - Completeness: 33/100 (FAIL)
 - Correctness: 7/100 (FAIL)
 - Relevance: 26/100 (FAIL)
@@ -1818,7 +1818,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\View predictive analytics_report.jso
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\View predictive analytics_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\View predictive analytics_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 33,
@@ -1851,7 +1851,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\View predictive analytics_report.jso
       "score": 7,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i1\\7.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i1\\7.txt",
       "sub_scores": {
         "Primary Actor": 0,
         "Use Case Name": 0,
@@ -1893,7 +1893,7 @@ Use case: [6] Simulate Traffic Scenarios
 - Overall (avg): 97/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\Simulate crisis scenarios_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\Simulate crisis scenarios_report.json
 - Completeness: 68/100 (FAIL)
 - Correctness: N/A
 - Relevance: 66/100 (FAIL)
@@ -2172,7 +2172,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Simulate crisis scenarios_report.jso
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\Simulate crisis scenarios_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\Simulate crisis scenarios_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 68,
@@ -2234,7 +2234,7 @@ Use case: [7] Receive Fairness Alerts
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\1\Trigger congestion alerts_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\1\Trigger congestion alerts_report.json
 - Completeness: 68/100 (FAIL)
 - Correctness: 91/100 (PASS)
 - Relevance: 70/100 (PASS)
@@ -2520,7 +2520,7 @@ C:\Users\kyluo\research\paradigm_scenario\1\Trigger congestion alerts_report.jso
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\1\\Trigger congestion alerts_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\1\\Trigger congestion alerts_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 68,

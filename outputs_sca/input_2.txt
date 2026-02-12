@@ -39,7 +39,7 @@ Use case: [1] View Real-Time Traffic
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\2\Display Traffic and Environmental Heat Maps_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\2\Display Traffic and Environmental Heat Maps_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 78/100 (PASS)
@@ -400,7 +400,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Display Traffic and Environmental He
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Display Traffic and Environmental Heat Maps_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\2\\Display Traffic and Environmental Heat Maps_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -427,7 +427,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Display Traffic and Environmental He
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 2.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i2\\INPUT 2.txt",
       "sub_scores": {
         "Primary Actor": 19,
         "Use Case Name": 20,
@@ -469,7 +469,7 @@ Use case: [2] Analyze and Predict Traffic
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\2\Run Predictive Modeling_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\2\Run Predictive Modeling_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 83/100 (PASS)
@@ -844,7 +844,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Run Predictive Modeling_report.json
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 5.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i2\\INPUT 5.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 18,
@@ -869,7 +869,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Run Predictive Modeling_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Run Predictive Modeling_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\2\\Run Predictive Modeling_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -938,7 +938,7 @@ Use case: [3] Manage Traffic Data
 - Overall (avg): 72/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\2\Ingest Sensor Data_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\2\Ingest Sensor Data_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 80/100 (PASS)
 - Relevance: 84/100 (PASS)
@@ -1282,7 +1282,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Ingest Sensor Data_report.json
       "score": 75,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 3.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i2\\INPUT 3.txt",
       "sub_scores": {
         "Primary Actor": 17,
         "Use Case Name": 12,
@@ -1307,7 +1307,7 @@ C:\Users\kyluo\research\paradigm_scenario\2\Ingest Sensor Data_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\2\\Ingest Sensor Data_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\2\\Ingest Sensor Data_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -1678,7 +1678,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i2\\INPUT 2.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i2\\INPUT 2.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,

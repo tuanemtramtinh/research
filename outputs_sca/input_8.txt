@@ -412,7 +412,7 @@ Use case: [2] Manage Team Finances
 - Overall (avg): 92/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Capture Team Financial Transactions_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 82/100 (PASS)
@@ -679,7 +679,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_
       "score": 90,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (4).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (4).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -704,7 +704,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Capture Team Financial Transactions_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Capture Team Financial Transactions_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -720,7 +720,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (4).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (4).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 18,
@@ -762,7 +762,7 @@ Use case: [3] Manage User Roles
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Manage Leagues And Teams_report.json
 - Completeness: 84/100 (PASS)
 - Correctness: 55/100 (FAIL)
 - Relevance: 67/100 (FAIL)
@@ -1028,7 +1028,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (2).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -1053,7 +1053,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Manage Leagues And Teams_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Manage Leagues And Teams_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 84,
@@ -1083,7 +1083,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
       "score": 55,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (2).txt",
       "sub_scores": {
         "Primary Actor": 5,
         "Use Case Name": 0,
@@ -1125,7 +1125,7 @@ Use case: [4] Schedule Games
 - Overall (avg): 93/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Generate Match Schedule_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Generate Match Schedule_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 83/100 (PASS)
@@ -1503,7 +1503,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Generate Match Schedule_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Generate Match Schedule_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Generate Match Schedule_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -1858,7 +1858,7 @@ Use case: [6] Manage Leagues
 - Overall (avg): 86/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Manage Leagues And Teams_report.json
 - Completeness: 75/100 (PASS)
 - Correctness: 90/100 (PASS)
 - Relevance: 78/100 (PASS)
@@ -2180,7 +2180,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Manage Leagues And Teams_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Manage Leagues And Teams_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Manage Leagues And Teams_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 75,
@@ -2252,7 +2252,7 @@ Use case: [7] View Match Statistics
 - Overall (avg): 89/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Provide Live Match Reporting_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Provide Live Match Reporting_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 76/100 (PASS)
 - Relevance: 82/100 (PASS)
@@ -2533,7 +2533,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Provide Live Match Reporting_report.
       "score": 87,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (6).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (6).txt",
       "sub_scores": {
         "Primary Actor": 14,
         "Use Case Name": 15,
@@ -2558,7 +2558,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Provide Live Match Reporting_report.
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Provide Live Match Reporting_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Provide Live Match Reporting_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -3506,7 +3506,7 @@ Use case: [11] Audit Team Budgets
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\8\Capture Team Financial Transactions_report.json
 - Completeness: 92/100 (PASS)
 - Correctness: 86/100 (PASS)
 - Relevance: 84/100 (PASS)
@@ -3810,7 +3810,7 @@ C:\Users\kyluo\research\paradigm_scenario\8\Capture Team Financial Transactions_
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\8\\Capture Team Financial Transactions_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\8\\Capture Team Financial Transactions_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 92,
@@ -4163,7 +4163,7 @@ N/A
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 8\\INPUT 8 (7).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 8\\INPUT 8 (7).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 15,

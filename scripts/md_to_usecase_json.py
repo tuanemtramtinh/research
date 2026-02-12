@@ -236,12 +236,12 @@ def convert_md_to_json(md_path: Path, uid: str) -> dict:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Convert paradigm_scenario markdown files to use case JSON.")
+    parser = argparse.ArgumentParser(description="Convert paradigm_diagram_and_scenario markdown files to use case JSON.")
     parser.add_argument(
         "--input-dir",
         "-i",
         type=str,
-        default=r"C:\Users\kyluo\research\paradigm_scenario\1",
+        default=r"C:\Users\kyluo\research\paradigm_diagram_and_scenario\1",
         help="Directory containing markdown files",
     )
     parser.add_argument(

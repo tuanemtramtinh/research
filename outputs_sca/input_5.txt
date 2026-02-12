@@ -105,7 +105,7 @@ Use case: [1] Store Archived Data
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\5\Upload Dataset_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\5\Upload Dataset_report.json
 - Completeness: 92/100 (PASS)
 - Correctness: N/A
 - Relevance: 91/100 (PASS)
@@ -370,7 +370,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Upload Dataset_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\5\\Upload Dataset_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\5\\Upload Dataset_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 92,
@@ -712,7 +712,7 @@ N/A
       "score": 94,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 5.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 5.txt",
       "sub_scores": {
         "Primary Actor": 19,
         "Use Case Name": 20,
@@ -1383,7 +1383,7 @@ N/A
       "score": 100,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 5(2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 5(2).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3022,7 +3022,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 56.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 56.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3337,7 +3337,7 @@ N/A
       "score": 23,
       "result": "FAIL",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 57.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 57.txt",
       "sub_scores": {
         "Primary Actor": 10,
         "Use Case Name": 10,
@@ -3381,7 +3381,7 @@ Use case: [11] Manage Dataset Metadata
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\5\Validate and Approve Metadata_report.json
 - Completeness: 90/100 (PASS)
 - Correctness: N/A
 - Relevance: 88/100 (PASS)
@@ -3672,7 +3672,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\5\\Validate and Approve Metadata_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\5\\Validate and Approve Metadata_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 90,
@@ -4033,7 +4033,7 @@ Use case: [13] Review Deposited Datasets
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\5\Validate and Approve Metadata_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 84/100 (PASS)
@@ -4295,7 +4295,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report
       "score": 86,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 58.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 58.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 15,
@@ -4320,7 +4320,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\5\\Validate and Approve Metadata_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\5\\Validate and Approve Metadata_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -4347,7 +4347,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Validate and Approve Metadata_report
       "score": 93,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 58.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 58.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 18,
@@ -5322,7 +5322,7 @@ Use case: [17] Search Archive
 - Overall (avg): 89/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\5\Browse and Search Datasets_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\5\Browse and Search Datasets_report.json
 - Completeness: 69/100 (FAIL)
 - Correctness: 91/100 (PASS)
 - Relevance: 58/100 (FAIL)
@@ -5592,7 +5592,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Browse and Search Datasets_report.js
       "score": 83,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 53.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 53.txt",
       "sub_scores": {
         "Primary Actor": 18,
         "Use Case Name": 17,
@@ -5617,7 +5617,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Browse and Search Datasets_report.js
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\5\\Browse and Search Datasets_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\5\\Browse and Search Datasets_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 69,
@@ -5646,7 +5646,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Browse and Search Datasets_report.js
       "score": 91,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 53.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 53.txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 19,
@@ -6582,7 +6582,7 @@ Use case: [21] Deposit Datasets via API
 - Overall (avg): 96/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\5\Upload Dataset_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\5\Upload Dataset_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: 91/100 (PASS)
 - Relevance: 86/100 (PASS)
@@ -6860,7 +6860,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Upload Dataset_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\5\\Upload Dataset_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\5\\Upload Dataset_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -6890,7 +6890,7 @@ C:\Users\kyluo\research\paradigm_scenario\5\Upload Dataset_report.json
       "score": 91,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\i5\\input 54.txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\i5\\input 54.txt",
       "sub_scores": {
         "Primary Actor": 19,
         "Use Case Name": 17,

@@ -325,7 +325,7 @@ N/A
       "score": 95,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (6).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (6).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -650,7 +650,7 @@ N/A
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (7).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (7).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -694,7 +694,7 @@ Use case: [3] View Game Schedules
 - Overall (avg): 94/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\6\View live updates_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\6\View live updates_report.json
 - Completeness: 87/100 (PASS)
 - Correctness: N/A
 - Relevance: 80/100 (PASS)
@@ -962,7 +962,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\View live updates_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\6\\View live updates_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\6\\View live updates_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 87,
@@ -1336,7 +1336,7 @@ Use case: [5] Schedule Matches
 - Overall (avg): 92/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\6\Generate match schedule_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\6\Generate match schedule_report.json
 - Completeness: 85/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 82/100 (PASS)
@@ -1656,7 +1656,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Generate match schedule_report.json
       "score": 89,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (2).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (2).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 15,
@@ -1681,7 +1681,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Generate match schedule_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\6\\Generate match schedule_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\6\\Generate match schedule_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 85,
@@ -1749,7 +1749,7 @@ Use case: [6] Manage Team Budgets
 - Overall (avg): 86/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\6\Monitor team budget_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\6\Monitor team budget_report.json
 - Completeness: 85/100 (PASS)
 - Correctness: 93/100 (PASS)
 - Relevance: 82/100 (PASS)
@@ -2087,7 +2087,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Monitor team budget_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\6\\Monitor team budget_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\6\\Monitor team budget_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 85,
@@ -2782,7 +2782,7 @@ Use case: [9] Record Game Events
 - Overall (avg): 92/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\6\Log game event_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\6\Log game event_report.json
 - Completeness: 82/100 (PASS)
 - Correctness: 96/100 (PASS)
 - Relevance: 80/100 (PASS)
@@ -3082,7 +3082,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Log game event_report.json
       "score": 87,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (4).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (4).txt",
       "sub_scores": {
         "Primary Actor": 17,
         "Use Case Name": 16,
@@ -3107,7 +3107,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Log game event_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\6\\Log game event_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\6\\Log game event_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 82,
@@ -3136,7 +3136,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Log game event_report.json
       "score": 96,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (4).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (4).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 19,
@@ -3768,7 +3768,7 @@ N/A
       "score": 94,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (3).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (3).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -3812,7 +3812,7 @@ Use case: [12] Manage League Policies
 - Overall (avg): 98/100
 
 --- COMPARISON SCENARIO SCORES (FILE) ---
-C:\Users\kyluo\research\paradigm_scenario\6\Define league policy_report.json
+C:\Users\kyluo\research\paradigm_diagram_and_scenario\6\Define league policy_report.json
 - Completeness: 80/100 (PASS)
 - Correctness: 95/100 (PASS)
 - Relevance: 74/100 (PASS)
@@ -4100,7 +4100,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Define league policy_report.json
       "score": 98,
       "result": "PASS",
       "rationale": "Average across 3 judge(s).",
-      "reference_path": "C:\\Users\\kyluo\\research\\reference_input\\INPUT 6\\INPUT 6\\INPUT 6 (1).txt",
+      "reference_path": "C:\\Users\\kyluo\\research\\manual_scenario\\INPUT 6\\INPUT 6\\INPUT 6 (1).txt",
       "sub_scores": {
         "Primary Actor": 20,
         "Use Case Name": 20,
@@ -4125,7 +4125,7 @@ C:\Users\kyluo\research\paradigm_scenario\6\Define league policy_report.json
       }
     }
   },
-  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_scenario\\6\\Define league policy_report.json",
+  "comparison_spec_path": "C:\\Users\\kyluo\\research\\paradigm_diagram_and_scenario\\6\\Define league policy_report.json",
   "comparison_evaluation": {
     "Completeness": {
       "score": 80,
