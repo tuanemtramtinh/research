@@ -104,126 +104,126 @@ def _get_nlp():
 # =============================================================================
 
 
-def normalize_sentences_node(state: GraphState):
-    """Chuẩn hóa mỗi câu user story thành dạng chuẩn:
-    'As a/an/the <actor>, I want to <goal> so that <benefit>'.
+# def normalize_sentences_node(state: GraphState):
+#     """Chuẩn hóa mỗi câu user story thành dạng chuẩn:
+#     'As a/an/the <actor>, I want to <goal> so that <benefit>'.
 
-    Đặc biệt: câu dạng "As a X, I want NOUN to <goal> so that ..." được chuyển thành
-    "As a NOUN, I want to <goal> so that ..." (actor thực hiện goal là NOUN).
-    """
-    raw = state.get("sentences") or []
-    if not raw and state.get("requirement_text"):
-        raw = state["requirement_text"].strip().split("\n")
+#     Đặc biệt: câu dạng "As a X, I want NOUN to <goal> so that ..." được chuyển thành
+#     "As a NOUN, I want to <goal> so that ..." (actor thực hiện goal là NOUN).
+#     """
+#     raw = state.get("sentences") or []
+#     if not raw and state.get("requirement_text"):
+#         raw = state["requirement_text"].strip().split("\n")
 
-    # Light cleanup: strip, remove empty, collapse spaces
-    cleaned: List[str] = []
-    for line in raw:
-        s = line.strip()
-        if not s:
-            continue
-        s = re.sub(r"\s+", " ", s)
-        cleaned.append(s)
+#     # Light cleanup: strip, remove empty, collapse spaces
+#     cleaned: List[str] = []
+#     for line in raw:
+#         s = line.strip()
+#         if not s:
+#             continue
+#         s = re.sub(r"\s+", " ", s)
+#         cleaned.append(s)
 
-    if not cleaned:
-        return {"sentences": []}
+#     if not cleaned:
+#         return {"sentences": []}
 
-    llm = state.get("llm")
-    if llm is None:
-        return {"sentences": cleaned}
+#     llm = state.get("llm")
+#     if llm is None:
+#         return {"sentences": cleaned}
 
-    # Only normalize sentences that are NOT already in standard form.
-    # Các câu đã đúng dạng "As a/an/the <actor>, I want to <goal> [so that <benefit>]" sẽ được giữ nguyên.
+#     # Only normalize sentences that are NOT already in standard form.
+#     # Các câu đã đúng dạng "As a/an/the <actor>, I want to <goal> [so that <benefit>]" sẽ được giữ nguyên.
 
-    standard_pattern = re.compile(
-        r"^As\s+(?:a|an|the)\s+.+?,\s*I\s+want\s+to\s+.+?(?:\s+so\s+that\s+.+)?$",
-        re.IGNORECASE,
-    )
+#     standard_pattern = re.compile(
+#         r"^As\s+(?:a|an|the)\s+.+?,\s*I\s+want\s+to\s+.+?(?:\s+so\s+that\s+.+)?$",
+#         re.IGNORECASE,
+#     )
 
-    def _is_standard_form(sentence: str) -> bool:
-        return bool(standard_pattern.match(sentence))
+#     def _is_standard_form(sentence: str) -> bool:
+#         return bool(standard_pattern.match(sentence))
 
-    standard_indices = {}
-    nonstandard_sentences: List[str] = []
-    nonstandard_map: List[int] = []  # map local index -> original index
+#     standard_indices = {}
+#     nonstandard_sentences: List[str] = []
+#     nonstandard_map: List[int] = []  # map local index -> original index
 
-    for idx, sent in enumerate(cleaned):
-        if _is_standard_form(sent):
-            standard_indices[idx] = sent
-        else:
-            nonstandard_map.append(idx)
-            nonstandard_sentences.append(sent)
+#     for idx, sent in enumerate(cleaned):
+#         if _is_standard_form(sent):
+#             standard_indices[idx] = sent
+#         else:
+#             nonstandard_map.append(idx)
+#             nonstandard_sentences.append(sent)
 
-    # Nếu tất cả câu đều đã đúng form thì trả về nguyên trạng
-    if not nonstandard_sentences:
-        return {"sentences": cleaned}
+#     # Nếu tất cả câu đều đã đúng form thì trả về nguyên trạng
+#     if not nonstandard_sentences:
+#         return {"sentences": cleaned}
 
-    structured_llm = llm.with_structured_output(NormalizedUserStoriesResponse)
-    indexed = "\n".join(f"{i}: {s}" for i, s in enumerate(nonstandard_sentences))
+#     structured_llm = llm.with_structured_output(NormalizedUserStoriesResponse)
+#     indexed = "\n".join(f"{i}: {s}" for i, s in enumerate(nonstandard_sentences))
 
-    system_prompt = """**System Prompt:**
-You are a Business Analyst AI. Your task is to normalize user story sentences into the STANDARD form:
+#     system_prompt = """**System Prompt:**
+# You are a Business Analyst AI. Your task is to normalize user story sentences into the STANDARD form:
 
-**Standard form:** "As a/an/the <actor>, I want to <goal> [so that <benefit>]"
+# **Standard form:** "As a/an/the <actor>, I want to <goal> [so that <benefit>]"
 
-RULES:
-1. **Actor Redirection**: If the input is "As a X, I want [Actor Y] to <goal>", the true performer is Y. Output: "As a/an/the [actor y], I want to <goal>...". 
-   - Example: "As an ifa, I want team managers to add players" → "As a team manager, I want to add players".
+# RULES:
+# 1. **Actor Redirection**: If the input is "As a X, I want [Actor Y] to <goal>", the true performer is Y. Output: "As a/an/the [actor y], I want to <goal>...".
+#    - Example: "As an ifa, I want team managers to add players" → "As a team manager, I want to add players".
 
-2. **Grammar & Case**: Use lowercase for actor names. Ensure "a/an/the" is grammatically correct. Keep the goal and benefit in natural language.
+# 2. **Grammar & Case**: Use lowercase for actor names. Ensure "a/an/the" is grammatically correct. Keep the goal and benefit in natural language.
 
-3. **Handle Missing Benefits**: If the input does not provide a "so that" or "in order to" clause, DO NOT invent one. End the sentence after the <goal>. 
-   - *RATIONALE*: This prevents False Positives in requirement analysis.
+# 3. **Handle Missing Benefits**: If the input does not provide a "so that" or "in order to" clause, DO NOT invent one. End the sentence after the <goal>.
+#    - *RATIONALE*: This prevents False Positives in requirement analysis.
 
-4. **Relationship Awareness**: If the input mentions an "include" or "extend" relationship from a Use Case diagram, treat the primary action as the goal.
-   - Example: "As a user, I want to login (including password encryption)" → "As a user, I want to login with password encryption".
+# 4. **Relationship Awareness**: If the input mentions an "include" or "extend" relationship from a Use Case diagram, treat the primary action as the goal.
+#    - Example: "As a user, I want to login (including password encryption)" → "As a user, I want to login with password encryption".
 
-5. **Strict Output Mapping**: 
-   - Return exactly one normalized sentence per input.
-   - Maintain the EXACT original order.
-   - Output format: A simple list of strings. Do not add introductory or concluding remarks."""
+# 5. **Strict Output Mapping**:
+#    - Return exactly one normalized sentence per input.
+#    - Maintain the EXACT original order.
+#    - Output format: A simple list of strings. Do not add introductory or concluding remarks."""
 
-    human_prompt = f"""Normalize each of the following user story sentences into the standard form "As a/an/the <actor>, I want to <goal> so that <benefit>".
+#     human_prompt = f"""Normalize each of the following user story sentences into the standard form "As a/an/the <actor>, I want to <goal> so that <benefit>".
 
-Input sentences (index: sentence):
-{indexed}
+# Input sentences (index: sentence):
+# {indexed}
 
-Return a list of normalized sentences: one string per input, in the same order. Output list length must be {len(nonstandard_sentences)}.
-"""
+# Return a list of normalized sentences: one string per input, in the same order. Output list length must be {len(nonstandard_sentences)}.
+# """
 
-    response: NormalizedUserStoriesResponse = structured_llm.invoke(
-        [("system", system_prompt), ("human", human_prompt)]
-    )
+#     response: NormalizedUserStoriesResponse = structured_llm.invoke(
+#         [("system", system_prompt), ("human", human_prompt)]
+#     )
 
-    normalized_partial = list(response.sentences)
+#     normalized_partial = list(response.sentences)
 
-    # Đảm bảo độ dài khớp số câu non-standard; nếu thiếu/thừa thì fallback một phần
-    if len(normalized_partial) < len(nonstandard_sentences):
-        normalized_partial += nonstandard_sentences[len(normalized_partial) :]
-    elif len(normalized_partial) > len(nonstandard_sentences):
-        normalized_partial = normalized_partial[: len(nonstandard_sentences)]
+#     # Đảm bảo độ dài khớp số câu non-standard; nếu thiếu/thừa thì fallback một phần
+#     if len(normalized_partial) < len(nonstandard_sentences):
+#         normalized_partial += nonstandard_sentences[len(normalized_partial) :]
+#     elif len(normalized_partial) > len(nonstandard_sentences):
+#         normalized_partial = normalized_partial[: len(nonstandard_sentences)]
 
-    # Ghép lại theo thứ tự gốc: câu standard giữ nguyên, câu non-standard dùng bản normalized
-    final_sentences: List[str] = []
-    ns_idx = 0
-    ns_set = set(nonstandard_map)
+#     # Ghép lại theo thứ tự gốc: câu standard giữ nguyên, câu non-standard dùng bản normalized
+#     final_sentences: List[str] = []
+#     ns_idx = 0
+#     ns_set = set(nonstandard_map)
 
-    for i in range(len(cleaned)):
-        if i in standard_indices:
-            final_sentences.append(standard_indices[i])
-        elif i in ns_set:
-            final_sentences.append(normalized_partial[ns_idx])
-            ns_idx += 1
-        else:
-            # Fallback an toàn (không nên xảy ra): dùng câu gốc
-            final_sentences.append(cleaned[i])
+#     for i in range(len(cleaned)):
+#         if i in standard_indices:
+#             final_sentences.append(standard_indices[i])
+#         elif i in ns_set:
+#             final_sentences.append(normalized_partial[ns_idx])
+#             ns_idx += 1
+#         else:
+#             # Fallback an toàn (không nên xảy ra): dùng câu gốc
+#             final_sentences.append(cleaned[i])
 
-    # DEBUG: normalized sentence list (kept only high-level marker)
-    print("\n==== normalize_sentences_node ====")
-    # If you need full details for debugging, uncomment the loop below.
-    # for i, s in enumerate(final_sentences):
-    #     print(f"{i}: {s}")
+#     # DEBUG: normalized sentence list (kept only high-level marker)
+#     print("\n==== normalize_sentences_node ====")
+#     # If you need full details for debugging, uncomment the loop below.
+#     # for i, s in enumerate(final_sentences):
+#     #     print(f"{i}: {s}")
 
-    return {"sentences": final_sentences}
+#     return {"sentences": final_sentences}
 
 
 # =============================================================================
@@ -1654,7 +1654,7 @@ def build_rpa_graph():
 
     # Add nodes
     # Chuẩn hóa câu thành "As a/an/the <actor>, I want to <goal> so that <benefit>"
-    workflow.add_node("normalize_sentences", normalize_sentences_node)
+    # workflow.add_node("normalize_sentences", normalize_sentences_node)
 
     # Branch 1: Actor pipeline
     workflow.add_node("find_actors", find_actors_node)
@@ -1674,16 +1674,17 @@ def build_rpa_graph():
     workflow.add_node("merge_relationships", merge_relationships_node)
 
     # Define edges: chuẩn hóa câu trước, rồi hai nhánh song song
-    workflow.add_edge(START, "normalize_sentences")
+    workflow.add_edge(START, "find_actors")
+    workflow.add_edge(START, "find_goals")
 
     # Branch 1: normalize_sentences -> find_actors -> synonym_check -> find_aliases -> grouping
-    workflow.add_edge("normalize_sentences", "find_actors")
+    # workflow.add_edge("normalize_sentences", "find_actors")
     workflow.add_edge("find_actors", "synonym_check")
     workflow.add_edge("synonym_check", "find_aliases")
     workflow.add_edge("find_aliases", "grouping")
 
     # Branch 2: normalize_sentences -> find_goals -> refine_goals -> grouping
-    workflow.add_edge("normalize_sentences", "find_goals")
+    # workflow.add_edge("normalize_sentences", "find_goals")
     workflow.add_edge("find_goals", "refine_goals")
     workflow.add_edge("refine_goals", "grouping")
 
@@ -1866,7 +1867,7 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
     # Default: input_user_stories.txt in project root (research/)
     if requirements_file is None:
         project_root = Path(__file__).resolve().parent.parent.parent
-        requirements_file = project_root / "inputs" / "input_1.txt"
+        requirements_file = project_root / "inputs" / "input_5.txt"
     else:
         requirements_file = Path(requirements_file)
 
@@ -1942,5 +1943,5 @@ def test_rpa_graph(requirements_file: str | Path | None = None):
 
 
 if __name__ == "__main__":
-    paths = run_rpa_batch(input_files=["inputs/input_5.txt"])
+    # paths = run_rpa_batch(input_files=["inputs/input_5.txt"])
     test_rpa_graph()
