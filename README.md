@@ -1,4 +1,59 @@
-## Project Overview
+# Multi-Agent Use Case and Scenario Generation Framework
+
+This repository implements a web-based multi-agent pipeline that transforms natural language requirements into structured use case models and detailed use case scenarios.
+
+By integrating Large Language Models (LLMs) with rule-based validation and multi-agent orchestration, the system ensures structural consistency and semantic quality through automated refinement and evaluation.
+
+The framework is designed for research purposes and supports usecase and scenario generation, multi-criteria evaluation, and human-in-the-loop validation.
+
+---
+
+## System Overview
+
+The system operates as a state-based graph pipeline with a shared Pool Data repository.
+
+It consists of two sequential agents:
+
+- Requirement Parsing Agent
+- Scenario Generation Agent
+
+---
+
+## Workflow
+
+The overall workflow includes three major stages:
+
+### 1. Requirement Parsing and Use Case Generation
+
+- Analyze natural language user stories
+- Extract:
+  - Actors
+  - Use cases
+  - Inter-use-case relationships (e.g., `<<include>>`, `<<extend>>`)
+- Produce structured use case specifications
+
+### 2. Scenario Generation and Multi-Criteria Evaluation
+
+- Generate detailed use case scenarios
+- Evaluate scenarios using multi-judge reasoning across:
+  - Completeness
+  - Correctness
+  - Relevance
+- Trigger controlled regeneration when quality thresholds are not satisfied
+
+### 3. Human-in-the-Loop (HITL) Interaction
+
+- Users review generated use cases and scenarios via a web interface
+- Validate correctness and domain alignment
+- Provide feedback before final approval
+
+---
+
+## Research Objective
+
+This framework aims to improve automated understanding of natural language requirements and enhance the quality of generated use case specifications and scenarios through multi-agent reasoning and structured evaluation.
+
+## Setup and Repository Structure
 
 This repository is a research backend's framework that is split into two main parts:
 
